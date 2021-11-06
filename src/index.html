@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="width=320, initial-scale=0.72" />
+    <meta name="viewport" content="width=720, initial-scale=0.5" />
+    <title>New Tab</title>
+    <link rel="stylesheet" href="https://use.typekit.net/jdu8dws.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifestWeb.json" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7E2FFF" />
+    <meta name="apple-mobile-web-app-title" content="Launch Tab" />
+    <meta name="application-name" content="Launch Tab" />
+    <meta name="msapplication-TileColor" content="#7E2FFF" />
+    <meta
+      name="theme-color"
+      content="#FFFFFF"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#211F22"
+      media="(prefers-color-scheme: dark)"
+    />
+    <!-- Facebook Pixel Code -->
+    <!-- Отслеживает события (клики/переходы) на сайте после перехода с рекламного поста или сторис фейсбука и инстаграма  -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "3118426438433281");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=3118426438433281&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- Messenger Плагин чата Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Плагин чата code -->
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+    <script>
+      var chatbox = document.getElementById("fb-customer-chat");
+      chatbox.setAttribute("page_id", "102914022206976");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function () {
+        FB.init({
+          xfbml: true,
+          version: "v12.0",
+        });
+      };
+
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/ru_RU/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
+    </script>
+    <!--End of Messenger Плагин чата Code -->
+  </body>
+</html>

@@ -20,7 +20,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
   height: 3.5rem;
   padding: 0 32px;
   background: transparent;
-  border-radius: 16px;
+  border-radius: 22px;
   z-index: 20;
   transition: 0.08s ease-in-out;
   box-shadow: ${({ active, theme, isColorsStatic }) => {
@@ -78,7 +78,7 @@ export const Btn: FC<Button> = ({
       type={type}
       onClick={handler}
     >
-      <Shape borderRadius={16} />
+      <Shape borderRadius={18} />
 
       {leftIcon && icons[leftIcon]}
 

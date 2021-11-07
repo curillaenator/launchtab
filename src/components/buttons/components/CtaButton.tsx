@@ -93,7 +93,7 @@ export const BtnCta: FC<Button> = ({
       type={type}
       onClick={handler}
     >
-      <Shape borderRadius={16} />
+      <Shape borderRadius={12} />
 
       {leftIcon && icons[leftIcon]}
 

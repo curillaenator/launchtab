@@ -116,7 +116,7 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
   return (
     <SettingsStyled>
       <div className="form">
-        <Shape className="form-shape" borderRadius={32} isAdaptive />
+        <Shape className="form-shape" borderRadius={24} isAdaptive />
 
         <div className="form-title">
           <Typography type="RoundedHeavy36">Design & profile</Typography>

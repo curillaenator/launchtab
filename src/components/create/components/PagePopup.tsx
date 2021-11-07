@@ -66,7 +66,7 @@ export const PagePopup: FC<IPagePopup> = ({
   return (
     <PagePopupStyled>
       <div className="popup">
-        <Shape className="popup-shape" borderRadius={32} />
+        <Shape className="popup-shape" borderRadius={16} />
 
         <div className="popup-title">
           <Typography type="RoundedHeavy24">New page</Typography>

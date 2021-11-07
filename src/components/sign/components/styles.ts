@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FormStyled = styled.form`
   width: 100%;
   background-color: transparent;
-  border-radius: 2rem;
+  border-radius: 24px;
   box-shadow: ${({ theme }) => theme.shadows.basic};
 
   .form {

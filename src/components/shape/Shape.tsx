@@ -14,7 +14,6 @@ export const ShapeStyled = styled.svg`
 
 interface IShape {
   borderRadius?: number;
-  smoothQ?: number;
   isAdaptive?: boolean;
   height?: number;
   className?: string;
@@ -22,17 +21,11 @@ interface IShape {
 
 export const Shape: FC<IShape> = ({
   borderRadius = 24,
-  smoothQ = 98,
   isAdaptive = false,
   height,
   className = "rounded-shape",
 }) => {
-  const [W, H, path, ref] = useShapeParams(
-    isAdaptive,
-    borderRadius,
-    smoothQ,
-    height
-  );
+  const [W, H, path, ref] = useShapeParams(isAdaptive, borderRadius, height);
 
   return (
     <ShapeStyled

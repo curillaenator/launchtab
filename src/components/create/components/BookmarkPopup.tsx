@@ -17,7 +17,7 @@ import type { States, Handlers } from "../hooks/useCreateForm";
 const BookmarkPopupStyled = styled.div`
   width: 458px;
   padding: 32px 40px;
-  border-radius: 24px;
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.shapes.hover};
   box-shadow: ${({ theme }) => theme.shadows.basic};
 

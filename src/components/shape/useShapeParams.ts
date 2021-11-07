@@ -10,16 +10,10 @@ import {
 type TUseShapeParams = (
   isAdaptive: boolean,
   radius: number,
-  smoothQ: number,
   height?: number
 ) => [number, number, string, MutableRefObject<SVGSVGElement | null>];
 
-export const useShapeParams: TUseShapeParams = (
-  isAdaptive,
-  radius,
-  smoothQ,
-  height
-) => {
+export const useShapeParams: TUseShapeParams = (isAdaptive, radius, height) => {
   const ref = useRef<SVGSVGElement | null>(null);
   const [WH, setWH] = useState([0, 0]);
 
@@ -39,8 +33,10 @@ export const useShapeParams: TUseShapeParams = (
 
   const shapeData: [number, number, string] = useMemo(() => {
     const [W, H] = WH;
-    const R = radius > Math.min(W / 2, H / 2) ? Math.min(W / 2, H / 2) : radius;
-    const S = (0.08 + R * 0.000012) * smoothQ - 4 / smoothQ - 3;
+    const minHalf = Math.min(W / 2, H / 2);
+
+    const R = 1.25 * radius > minHalf ? minHalf : 1.25 * radius;
+    const S = 0.19 * R;
 
     const path = `M ${W - R} 0 C ${W - S} 0 ${W} ${S} ${W} ${R}
     V ${H - R} C ${W} ${H - S} ${W - S} ${H} ${W - R} ${H}
@@ -52,3 +48,5 @@ export const useShapeParams: TUseShapeParams = (
 
   return [...shapeData, ref];
 };
+
+// const S = (0.08 + R * 0.000012) * smoothQ - 4 / smoothQ - 3;

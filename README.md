@@ -6,11 +6,25 @@ Start page with bookmarks for web browsers.
 
 ## Description
 
-This is customizible start page with grouped bookmarks leading to your favorite sites.
+This webapp is customizible start page with grouped bookmarks leading to your favorite sites.
 Bookmarks are easy to setup + drag&drop support.
 
-## Локальный запуск:
+## Stack
 
-### `npm i`
+- React/Redux-toolkit
+- Firebase
+- Styled-components (no UI libs used)
+- Webpack
 
-### `npm start`
+## Screenshots
+
+<div align="center">
+  <img src="/screens/image1.png">
+  <img src="/screens/image2.png">
+  <img src="/screens/image3.png">
+</div>
+
+## Local start:
+
+- npm install
+- npm start

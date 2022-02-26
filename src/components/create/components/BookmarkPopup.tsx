@@ -26,11 +26,11 @@ const BookmarkPopupStyled = styled.div`
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 24px;
-    color: ${({ theme }) => theme.texts.title.base};
+    color: ${({ theme }) => theme.texts.body.paragraph};
 
-    /* &-themed {
+    &-themed {
       color: ${({ theme }) => theme.primary[500]};
-    } */
+    }
   }
 
   .popup-inputs {
@@ -123,10 +123,10 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({
   return (
     <BookmarkPopupStyled>
       <div className="popup-title">
-        <Typography type="RoundedHeavy24">New bookmark</Typography>
-        {/* <Typography type="RoundedHeavy24" className="popup-title-themed">
+        <Typography type="RoundedHeavy24">New</Typography>
+        <Typography type="RoundedHeavy24" className="popup-title-themed">
           bookmark
-        </Typography> */}
+        </Typography>
       </div>
 
       <div className="popup-inputs">

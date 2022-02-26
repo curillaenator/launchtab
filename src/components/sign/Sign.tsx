@@ -19,7 +19,7 @@ const SignStyled = styled.div`
   gap: 1rem;
   width: 100%;
   height: 72px;
-  background-color: #F3F3F7B8;
+  background-color: #f3f3f7b8;
   backdrop-filter: blur(12px);
 
   & .sign-text {
@@ -35,7 +35,7 @@ export const Sign: FC = () => {
   return (
     <SignStyled>
       <Typography type="RoundedBold14" className="sign-text">
-        Get access to your bookmarks from any device with
+        Get access to your bookmarks with
       </Typography>
 
       <BtnCta
@@ -44,16 +44,11 @@ export const Sign: FC = () => {
         handler={() => setIsSignUpOpen(true)}
       />
 
-      <BtnGhost
-        title="See all features"
-        colorPreset="secondary-colors"
-        handler={() => setIsFeaturesOpen(true)}
-      />
+      <Typography type="RoundedBold14" className="sign-text">
+        or
+      </Typography>
 
-      <BtnGhost
-        title="Sign In"
-        handler={() => setIsSignInOpen(true)}
-      />
+      <BtnGhost title="Sign In" handler={() => setIsSignInOpen(true)} />
 
       <Modal open={isSignInOpen} onClose={() => setIsSignInOpen(false)}>
         <SignIn close={() => setIsSignInOpen(false)} />

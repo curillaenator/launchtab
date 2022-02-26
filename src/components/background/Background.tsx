@@ -15,10 +15,7 @@ const BackgroundStyled = styled.div`
   .background {
     width: 120%;
     height: 120%;
-    margin-left: -10%;
-    margin-top: -10%;
     object-fit: cover;
-    filter: blur(24px) opacity(0.4) brightness(0.92);
   }
 `;
 

@@ -91,10 +91,10 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
   const [state, dispatch] = useReducer(r.reducer, r.initialState);
   const { currentTab, lookfeel, profile, other } = state;
 
-  const tabs = [
+  const TABS = [
     { title: LOOKFEEL, handler: () => dispatch(r.setCurrentTab(LOOKFEEL)) },
     { title: PROFILE, handler: () => dispatch(r.setCurrentTab(PROFILE)) },
-    { title: OTHER, handler: () => dispatch(r.setCurrentTab(OTHER)) },
+    // { title: OTHER, handler: () => dispatch(r.setCurrentTab(OTHER)) },
   ];
 
   useEffect(() => dispatch(r.setInitialState(userSettings)), []);
@@ -127,7 +127,7 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
 
         <div className="form-settings">
           <div className="form-settings-menu">
-            {tabs.map((tab) => (
+            {TABS.map((tab) => (
               <BtnGhost
                 {...tab}
                 active={currentTab === tab.title}
@@ -154,9 +154,9 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
                 />
               )}
 
-              {currentTab === OTHER && (
+              {/* {currentTab === OTHER && (
                 <Other values={other} dispatch={dispatch} />
-              )}
+              )} */}
             </div>
           </Scrollbars>
         </div>

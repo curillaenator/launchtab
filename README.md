@@ -4,6 +4,11 @@ Start page with bookmarks for web browsers.
 
 [watch deployed app in browser](https://launchtab-81b06.web.app)
 
+### Test account
+
+login: test_account@mail.com
+password: testaccount
+
 ## Description
 
 This webapp is customizible start page with grouped bookmarks leading to your favorite sites.

@@ -7,6 +7,7 @@ Start page with bookmarks for web browsers.
 ### Test account
 
 login: test_account@mail.com
+
 password: testaccount
 
 ## Description

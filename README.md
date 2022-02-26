@@ -2,7 +2,7 @@
 
 Start page with bookmarks for web browsers.
 
-[watch deployed app in browser](https://launchtab.app/)
+[watch deployed app in browser](https://launchtab-81b06.web.app)
 
 ## Description
 

@@ -2,6 +2,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "development",
@@ -9,7 +10,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "[name].bundle.[fullhash].js",
-    // filename: "launchtabs.js",
     publicPath: "/",
     clean: true,
   },
@@ -34,6 +34,7 @@ module.exports = {
         },
       ],
     }),
+    new Dotenv(),
   ],
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".tsx"],

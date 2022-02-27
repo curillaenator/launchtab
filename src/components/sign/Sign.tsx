@@ -39,7 +39,7 @@ export const Sign: FC = () => {
       </Typography>
 
       <BtnCta
-        title="Pro account"
+        title="Sign Up"
         leftIcon="star"
         handler={() => setIsSignUpOpen(true)}
       />
@@ -48,7 +48,7 @@ export const Sign: FC = () => {
         or
       </Typography>
 
-      <BtnGhost title="Sign In" handler={() => setIsSignInOpen(true)} />
+      <BtnCta title="Sign In" handler={() => setIsSignInOpen(true)} />
 
       <Modal open={isSignInOpen} onClose={() => setIsSignInOpen(false)}>
         <SignIn close={() => setIsSignInOpen(false)} />

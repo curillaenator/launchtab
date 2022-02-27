@@ -23,12 +23,12 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
 
         <div className="form-title">
           <Typography type="RoundedHeavy56" className="form-title-main">
-            Pro
+            Sign Up
           </Typography>
 
-          <Typography type="RoundedBold20" className="form-title-add">
+          {/* <Typography type="RoundedBold20" className="form-title-add">
             Create an account
-          </Typography>
+          </Typography> */}
 
           <Typography type="TextRegular12" className="form-title-addsub">
             Any changes you made prior to registration will be saved into this
@@ -94,7 +94,11 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
         <div className="form-buttons">
           <BtnGhost type="button" title="Close" handler={close} />
 
-          <BtnCta title="Buy Pro" rightIcon="signUp" type="submit" />
+          <BtnCta
+            title="I want my workspace"
+            rightIcon="signUp"
+            type="submit"
+          />
         </div>
       </div>
     </FormStyled>

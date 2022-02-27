@@ -27,14 +27,14 @@ export const FormStyled = styled.form`
       &-add {
         margin-top: 7px;
         margin-left: 2px;
-        color: ${({ theme }) => theme.texts.title.base};
+        color: ${({ theme }) => theme.texts.body.caption};
       }
 
       &-addsub {
         max-width: 244px;
         margin-top: 5px;
         margin-left: 3px;
-        color: ${({ theme }) => theme.primary[300]};
+        color: ${({ theme }) => theme.texts.body.caption};
       }
     }
 

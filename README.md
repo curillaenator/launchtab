@@ -25,9 +25,9 @@ Bookmarks are easy to setup + drag&drop support.
 ## Screenshots
 
 <div align="center">
-  <img src="/screens/image1.png">
-  <img src="/screens/image2.png">
-  <img src="/screens/image3.png">
+  <img src="/screens/image1.jpg">
+  <img src="/screens/image2.jpg">
+  <img src="/screens/image3.jpg">
 </div>
 
 ## Local start:

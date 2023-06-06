@@ -3,5 +3,6 @@
     "default": "launchtab-81b06",
     "launchtab": "launchtab-81b06"
   },
-  "targets": {}
+  "targets": {},
+  "etags": {}
 }

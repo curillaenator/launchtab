@@ -65,12 +65,20 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
-      // {
-      //   test: /\.woff2/,
-      //   exclude: /node_modules/,
-      //   type: "asset/inline",
-      // },
     ],
   },
+
   devtool: 'source-map', // turn off on final production
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };

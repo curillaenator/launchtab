@@ -1,4 +1,4 @@
-import React, { FC, useState, type MouseEvent } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
@@ -106,12 +106,7 @@ export const Card: FC<CardProps> = (props) => {
       className={className}
       hasBorder={hasBorder}
       onMouseDown={() => setNoAnimation(true)}
-      // @ts-expect-error need types fix
-      onClick={(e: MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setNoAnimation(true);
-      }}
+      onClick={() => setNoAnimation(true)}
     >
       {!!wallpapper && as !== 'div' && <div className='card-darkener' />}
 

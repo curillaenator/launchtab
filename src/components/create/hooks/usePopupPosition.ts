@@ -8,10 +8,14 @@ export const usePopupPosition = (initialPos: PopupPosition): [PopupPosition, num
   const onTriggerClick = (e: MouseEvent) => {
     if (window.innerWidth <= 1024) return setPos('bottom center');
 
-    if (e.clientY < window.innerHeight / 2) {
-      setOffsetY(0);
+    if (e.clientY > window.innerHeight * (3 / 4)) {
+      setOffsetY(-288);
+    } else if (e.clientY > window.innerHeight * (2 / 4)) {
+      setOffsetY(-96);
+    } else if (e.clientY > window.innerHeight * (1 / 4)) {
+      setOffsetY(96);
     } else {
-      setOffsetY(-128);
+      setOffsetY(288);
     }
 
     if (e.clientX < window.innerWidth / 2) return setPos('right center');

@@ -14,12 +14,12 @@ import { ButtonsIcons } from '../buttons';
 const appear = keyframes`
   from {
     opacity: 0;
-    transform: translateY(32px);
+    transform: scale(0.95);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 `;
 
@@ -45,12 +45,18 @@ export const Create: FC<ICreate> = ({ create, iconName = 'addSmallIcon' }) => {
 
   return (
     <PopupStyled
-      offsetY={create === 'new-bookmark' ? offsetY : 0}
+      offsetY={create === 'new-bookmark' ? offsetY : 74}
+      offsetX={create === 'new-bookmark' ? 38 : 32}
       arrow={false}
       onClose={() => resetStates()}
       position={position}
       trigger={(open) => (
-        <div>
+        <div
+          style={{
+            width: 'fit-content',
+            height: 'fit-content',
+          }}
+        >
           <BtnIcon
             iconName={iconName}
             active={open}

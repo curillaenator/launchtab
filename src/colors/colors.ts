@@ -208,7 +208,7 @@ export const colorsStaticLightMode = {
   background: colorsLib.white,
 
   modals: {
-    matte: `#F4F2F5B8`,
+    matte: `rgba(244, 242, 245, 0.4)`,
   },
 };
 
@@ -275,6 +275,6 @@ export const colorsStaticDarkMode = {
   background: '#211F22',
 
   modals: {
-    matte: '#13121348',
+    matte: 'rgba(19, 18, 19, 0.4)',
   },
 };

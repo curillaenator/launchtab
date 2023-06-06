@@ -54,8 +54,9 @@ const SettingsStyled = styled.div`
       }
 
       &-framework {
+        position: relative;
         width: 100%;
-        padding: 0 16px 0 58px;
+        padding: 56px;
         border-left: 1px solid ${({ theme }) => theme.borderLines};
       }
     }
@@ -132,17 +133,13 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
             ))}
           </div>
 
-          <Scrollbars height={320}>
+          <Scrollbars height={320} hasFades>
             <div className='form-settings-framework'>
               {currentTab === LOOKFEEL && (
                 <LookFeel values={lookfeel} setters={r.LookFeelActions} dispatch={dispatch} />
               )}
 
               {currentTab === PROFILE && <Profile values={profile} setters={r.ProfileActions} dispatch={dispatch} />}
-
-              {/* {currentTab === OTHER && (
-                <Other values={other} dispatch={dispatch} />
-              )} */}
             </div>
           </Scrollbars>
         </div>

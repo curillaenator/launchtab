@@ -21,7 +21,7 @@ import { getCurBookmarks } from '../../redux/reducers/bookmarks';
 const AppStyled = styled.div`
   position: relative;
   width: 100%;
-  min-width: 320px;
+  min-width: 1280px;
   padding: 3.5rem 1rem;
   margin: 0 auto;
   color: ${({ theme }) => theme.texts.body.paragraph};

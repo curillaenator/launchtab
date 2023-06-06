@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import { BtnGhost } from '../buttons';
@@ -26,14 +26,14 @@ const AccordionStyled = styled.div<IAccordionStyled>`
   }
 `;
 
-interface Accordion {
+interface AccordionProps extends PropsWithChildren {
   title: string;
   disabled: boolean;
   open: boolean;
   openHandler: () => void;
 }
 
-export const Accordion: FC<Accordion> = ({ title, open, disabled, children, openHandler }) => {
+export const Accordion: FC<AccordionProps> = ({ title, open, disabled, children, openHandler }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   return (

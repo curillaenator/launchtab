@@ -171,7 +171,7 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
       </div>
 
       <div className='popup-preview'>
-        <Card bookmark={bookmark} as='div' />
+        <Card bookmark={bookmark} as='div' hasBorder />
       </div>
 
       <div className='popup-buttons'>

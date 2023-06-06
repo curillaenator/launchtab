@@ -16,7 +16,7 @@ const iconsCss = {
       transition: 0.12s linear;
 
       &-light {
-        fill: ${({ theme }) => theme.icons.light};
+        fill: ${({ theme }) => theme.white};
       }
 
       &-dark {
@@ -24,18 +24,18 @@ const iconsCss = {
       }
 
       &-bg {
-        fill: ${({ theme }) => theme.shapes.base};
+        fill: ${({ theme }) => theme.modals.matte};
       }
     }
 
     &:hover {
       .settings-icon {
         &-light {
-          fill: ${({ theme }) => theme.icons.lightHover};
+          fill: ${({ theme }) => theme.primary[500]};
         }
 
         &-dark {
-          fill: ${({ theme }) => theme.icons.darkHover};
+          fill: ${({ theme }) => theme.white};
         }
       }
     }
@@ -44,14 +44,18 @@ const iconsCss = {
   addIcon: css<IBtnStyled>`
     .addIcon {
       &-light {
-        fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.texts.button.base)};
+        fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.white)};
+      }
+
+      &-bg {
+        fill: ${({ active, theme }) => (active ? theme.white : theme.modals.matte)};
       }
     }
 
     &:hover {
       .addIcon {
         &-light {
-          fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.texts.button.hover)};
+          fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.primary[500])};
         }
       }
     }
@@ -75,10 +79,6 @@ const BtnStyled = styled.button<IBtnStyled>`
 
     &-dark {
       transition: 0.08s linear;
-    }
-
-    &-bg {
-      fill: ${({ theme }) => theme.shapes.base};
     }
   }
 

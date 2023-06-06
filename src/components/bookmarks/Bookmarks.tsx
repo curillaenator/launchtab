@@ -25,6 +25,10 @@ const SortableListStyled = styled(SortableList)`
     justify-content: center;
     align-items: center;
     min-height: 186px;
+    width: 100%;
+
+    border-radius: 18px;
+    border: 2px dashed ${({ theme }) => theme.modals.matte};
   }
 
   @media (min-width: 480px) {
@@ -49,6 +53,10 @@ const SortableListStyled = styled(SortableList)`
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(7, 1fr);
+  }
+
+  @media (min-width: 2560px) {
+    grid-template-columns: repeat(8, 1fr);
   }
 `;
 

@@ -56,7 +56,7 @@ const PagesJSX: FC<IPages> = ({ pages, curPage }) => {
         );
       })}
 
-      <Create create='new-page' />
+      <Create create='new-page' iconName='addBigIcon' />
     </SortableListStyled>
   );
 };

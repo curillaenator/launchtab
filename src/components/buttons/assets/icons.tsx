@@ -3,7 +3,12 @@ import React from 'react';
 export const icons = {
   settings: (
     <svg className='settings-icon defaultIcon' width='56' height='56' fill='none' viewBox='0 0 56 56'>
-      <rect className='settings-icon-bg defaultIcon-bg' width='56' height='56' fill='#F9F9FB' rx='16' />
+      <path
+        // className='settings-icon-bg defaultIcon-bg'
+        className='settings-icon-bg'
+        d='M0 16c0-5.6 0-8.4 1.09-10.54a10 10 0 014.37-4.37C7.6 0 10.4 0 16 0c5.6 0 8.4 0 10.54 1.09a10 10 0 014.37 4.37C32 7.6 32 10.4 32 16c0 5.6 0 8.4-1.09 10.54a10.001 10.001 0 01-4.37 4.37C24.4 32 21.6 32 16 32c-5.6 0-8.4 0-10.54-1.09a10 10 0 01-4.37-4.37C0 24.4 0 21.6 0 16z'
+        style={{ transform: 'scale(1.75)' }}
+      />
       <path
         className='settings-icon-light defaultIcon-light'
         fill='#E2E2E5'
@@ -16,6 +21,7 @@ export const icons = {
       />
     </svg>
   ),
+
   addSmallIcon: (
     <svg className='addIcon defaultIcon' width='32' height='32' fill='none' viewBox='0 0 32 32'>
       <path
@@ -28,8 +34,9 @@ export const icons = {
       />
     </svg>
   ),
+
   addBigIcon: (
-    <svg className='addIcon defaultIcon' width='48' height='48' fill='none' viewBox='0 0 48 48'>
+    <svg className='addIcon defaultIcon' width='56' height='56' fill='none' viewBox='0 0 48 48'>
       <path
         className='addIcon-bg defaultIcon-bg'
         d='M0 24C0 14.644 0 9.967 2.146 6.552a14 14 0 014.406-4.406C9.967 0 14.644 0 24 0s14.033 0 17.448 2.146a13.999 13.999 0 014.406 4.406C48 9.967 48 14.644 48 24s0 14.033-2.146 17.448a13.997 13.997 0 01-4.406 4.406C38.033 48 33.356 48 24 48S9.967 48 6.552 45.854a13.999 13.999 0 01-4.406-4.406C0 38.033 0 33.356 0 24z'
@@ -40,6 +47,7 @@ export const icons = {
       />
     </svg>
   ),
+
   star: (
     <svg
       className='button-icon'

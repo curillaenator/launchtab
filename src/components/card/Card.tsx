@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, type MouseEvent } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
@@ -15,6 +15,7 @@ interface ICardStyled {
   isOpaque: boolean;
   isDeleted?: boolean;
   noAnimation: boolean;
+  hasBorder?: boolean;
 }
 
 const CardStyled = styled.a<ICardStyled>`
@@ -24,11 +25,11 @@ const CardStyled = styled.a<ICardStyled>`
   width: 100%;
   height: 100%;
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
   will-change: transform;
   backdrop-filter: blur(5px);
-  border: ${({ theme, isOpaque }) => (isOpaque ? `0px solid ${theme.borderLines}` : 'none')};
+  border: ${({ theme, hasBorder }) => (hasBorder ? `2px solid ${theme.borderLines}` : 'none')};
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
   animation: 0.6s ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
   transition: box-shadow 0.08s ease-in-out, transform 0.08s ease-in-out, opacity 0.2s ease-in-out;
@@ -80,21 +81,19 @@ const CardStyled = styled.a<ICardStyled>`
   }
 `;
 
-interface ICard {
+interface CardProps {
   bookmark: IBookmark;
   className?: string;
   as?: 'a' | 'div';
+  hasBorder?: boolean;
 }
 
-export const Card: FC<ICard> = ({ bookmark, className = 'class-bookmark', as = 'a' }) => {
+export const Card: FC<CardProps> = (props) => {
+  const { bookmark, className = 'class-bookmark', as = 'a', hasBorder = false } = props;
+
   const wallpapper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
 
   const [noAnimation, setNoAnimation] = useState(false);
-
-  const fadeFix = {
-    onMouseDown: () => setNoAnimation(true),
-    onClick: () => setNoAnimation(true),
-  };
 
   return (
     <CardStyled
@@ -105,7 +104,14 @@ export const Card: FC<ICard> = ({ bookmark, className = 'class-bookmark', as = '
       as={as}
       draggable={false}
       className={className}
-      {...fadeFix}
+      hasBorder={hasBorder}
+      onMouseDown={() => setNoAnimation(true)}
+      // @ts-expect-error need types fix
+      onClick={(e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setNoAnimation(true);
+      }}
     >
       {!!wallpapper && as !== 'div' && <div className='card-darkener' />}
 

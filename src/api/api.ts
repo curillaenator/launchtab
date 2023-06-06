@@ -1,14 +1,11 @@
-import firebase from "firebase/app";
-import { auth, fsdb } from "./firebase";
+/* eslint-disable no-throw-literal */
 
-import { initiateAnon } from "./apiHelpers";
-import type { ISettings } from "../redux/reducers/settings";
-import type {
-  ISignUpCreds,
-  ISignInCreds,
-  IUpdate,
-  IData,
-} from "../types/types";
+import firebase from 'firebase/app';
+import { auth, fsdb } from './firebase';
+
+import { initiateAnon } from './apiHelpers';
+import type { ISettings } from '../redux/reducers/settings';
+import type { ISignUpCreds, ISignInCreds, IUpdate, IData } from '../types/types';
 
 export const authApi = {
   signUpAnon(): Promise<string> {
@@ -16,12 +13,12 @@ export const authApi = {
       .signInAnonymously()
       .then((anon) => {
         if (!anon.user) {
-          throw "Failed";
+          throw 'Failed';
         }
 
         const initial = initiateAnon(anon.user.uid);
 
-        fsdb.collection("users").doc(anon.user.uid).set(initial);
+        fsdb.collection('users').doc(anon.user.uid).set(initial);
 
         return anon.user.uid;
       })
@@ -31,24 +28,16 @@ export const authApi = {
   signUp(creds: ISignUpCreds): Promise<firebase.User | string | null> {
     const { email, password, displayName } = creds;
 
-    const credential = firebase.auth.EmailAuthProvider.credential(
-      email,
-      password
-    );
+    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
 
     if (!auth.currentUser) {
-      return new Promise((resolve) =>
-        resolve("Something went wrong, try reload page")
-      );
+      return new Promise((resolve) => resolve('Something went wrong, try reload page'));
     }
 
     return auth.currentUser
       .linkWithCredential(credential)
       .then((linked) => {
-        fsdb
-          .collection("users")
-          .doc(linked.user?.uid)
-          .update({ displayName, email });
+        fsdb.collection('users').doc(linked.user?.uid).update({ displayName, email });
 
         auth.currentUser?.updateProfile({ displayName });
         return auth.signInWithCredential(linked.credential!);
@@ -67,7 +56,7 @@ export const authApi = {
   logoOut(): Promise<string> {
     return auth
       .signOut()
-      .then(() => "Signout successful")
+      .then(() => 'Signout successful')
       .catch((e) => `Code: ${e.code}, message ${e.message}`);
   },
 
@@ -75,7 +64,7 @@ export const authApi = {
     return auth
       .sendPasswordResetEmail(email)
       .then(() => `Password Reset Email sent to ${email}`)
-      .catch(() => "Something went wrong, try reload page");
+      .catch(() => 'Something went wrong, try reload page');
   },
 
   // deleteAnonymousUser() {
@@ -84,35 +73,33 @@ export const authApi = {
 };
 
 export const pagesApi = {
-  getData(
-    userID: string
-  ): Promise<firebase.firestore.DocumentData | string | undefined> {
+  getData(userID: string): Promise<firebase.firestore.DocumentData | string | undefined> {
     return fsdb
-      .collection("users")
+      .collection('users')
       .doc(userID)
       .get()
       .then((doc) => doc.data())
-      .catch(() => "Something went wrong, try reload page");
+      .catch(() => 'Something went wrong, try reload page');
   },
 
   updateData(data: IUpdate): Promise<string> {
     return fsdb
-      .collection("users")
+      .collection('users')
       .doc(data.uid)
       .update({ pages: data.tabs })
-      .then(() => "Update successful!")
-      .catch(() => "Something went wrong, try reload page");
+      .then(() => 'Update successful!')
+      .catch(() => 'Something went wrong, try reload page');
   },
 };
 
 export const settingsApi = {
   updateSettings(userID: string, settings: ISettings): Promise<string> {
     return fsdb
-      .collection("users")
+      .collection('users')
       .doc(userID)
       .update({ settings: settings })
-      .then(() => "Update successful!")
-      .catch(() => "Something went wrong, try reload page");
+      .then(() => 'Update successful!')
+      .catch(() => 'Something went wrong, try reload page');
   },
 };
 
@@ -125,20 +112,18 @@ interface LocalStorageAPI {
 }
 
 export const localStorageApi: LocalStorageAPI = {
-  setSettings: (object) =>
-    localStorage.setItem("settings", JSON.stringify(object)),
+  setSettings: (object) => localStorage.setItem('settings', JSON.stringify(object)),
 
   getSettings: () => {
-    const localSettings = localStorage.getItem("settings");
+    const localSettings = localStorage.getItem('settings');
     if (!!localSettings) return JSON.parse(localSettings);
     return null;
   },
 
-  setBookmarks: (object) =>
-    localStorage.setItem("bookmarks", JSON.stringify(object)),
+  setBookmarks: (object) => localStorage.setItem('bookmarks', JSON.stringify(object)),
 
   getBookmarks: () => {
-    const localBookmarks = localStorage.getItem("bookmarks");
+    const localBookmarks = localStorage.getItem('bookmarks');
     if (!!localBookmarks) return JSON.parse(localBookmarks);
     return null;
   },

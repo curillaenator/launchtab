@@ -1,11 +1,6 @@
-// ЭТО ФАЙЛ МЕНЯТЬ НЕЛЬЗЯ!!!! НИКАК!!! НИ ПОД КАКИМ ПРЕДЛОГОМ!!! КАТЕГОРИЧЕСКИ НЕЛЬЗЯ!!!!!!!
-// ЭТО ФАЙЛ МЕНЯТЬ НЕЛЬЗЯ!!!! НИКАК!!! НИ ПОД КАКИМ ПРЕДЛОГОМ!!! КАТЕГОРИЧЕСКИ НЕЛЬЗЯ!!!!!!!
-// ЭТО ФАЙЛ МЕНЯТЬ НЕЛЬЗЯ!!!! НИКАК!!! НИ ПОД КАКИМ ПРЕДЛОГОМ!!! КАТЕГОРИЧЕСКИ НЕЛЬЗЯ!!!!!!!
-// ЭТО ФАЙЛ МЕНЯТЬ НЕЛЬЗЯ!!!! НИКАК!!! НИ ПОД КАКИМ ПРЕДЛОГОМ!!! КАТЕГОРИЧЕСКИ НЕЛЬЗЯ!!!!!!!
-
-import type { SyntheticEvent, ReactNode } from "react";
-import type { AnyAction, ThunkAction } from "@reduxjs/toolkit";
-import type { TState } from "../redux/store";
+import type { SyntheticEvent } from 'react';
+import type { AnyAction, ThunkAction } from '@reduxjs/toolkit';
+import type { TState } from '../redux/store';
 
 // API
 

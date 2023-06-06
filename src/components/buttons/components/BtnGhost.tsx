@@ -1,10 +1,10 @@
-import React, { forwardRef } from "react";
-import styled from "styled-components";
+import React, { forwardRef } from 'react';
+import styled from 'styled-components';
 
-import { Typography } from "../../typography/Typography";
+import { Typography } from '../../typography/Typography';
 
-import { icons } from "../assets/icons";
-import type { IBtnGhost } from "./interfaces";
+import { icons } from '../assets/icons';
+import type { IBtnGhost } from './interfaces';
 
 interface IButtonStyled {
   active: boolean;
@@ -95,41 +95,38 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 `;
 
-export const BtnGhost = forwardRef<HTMLButtonElement, IBtnGhost>(
-  (props, ref) => {
-    const {
-      title,
-      leftIcon,
-      active = false,
-      danger = false,
-      disabled = false,
-      type = "button",
-      colorPreset = "primary-colors",
-      className = "ghost-button",
-      handler,
-    } = props;
+export const BtnGhost = forwardRef<HTMLButtonElement, IBtnGhost>((props, ref) => {
+  const {
+    title,
+    leftIcon,
+    active = false,
+    danger = false,
+    disabled = false,
+    type = 'button',
+    colorPreset = 'primary-colors',
+    className = 'ghost-button',
+    handler,
+  } = props;
 
-    return (
-      <ButtonStyled
-        ref={ref}
-        className={className}
-        active={active}
-        disabled={disabled}
-        danger={danger}
-        type={type}
-        onClick={handler}
-      >
-        {!!leftIcon && icons[leftIcon]}
+  return (
+    <ButtonStyled
+      ref={ref}
+      className={className}
+      active={active}
+      disabled={disabled}
+      danger={danger}
+      type={type}
+      onClick={handler}
+    >
+      {!!leftIcon && icons[leftIcon]}
 
-        {title && (
-          <Typography
-            type="RoundedBold14"
-            className={`${colorPreset} common-title`}
-          >
-            {title}
-          </Typography>
-        )}
-      </ButtonStyled>
-    );
-  }
-);
+      {title && (
+        <Typography type='RoundedBold14' className={`${colorPreset} common-title`}>
+          {title}
+        </Typography>
+      )}
+    </ButtonStyled>
+  );
+});
+
+BtnGhost.displayName = 'BtnGhost';

@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
-import styled, { css } from "styled-components";
+import React, { forwardRef } from 'react';
+import styled, { css } from 'styled-components';
 
-import { icons } from "../assets/icons";
-import type { IBtnIcon } from "./interfaces";
+import { icons } from '../assets/icons';
+import type { IBtnIcon } from './interfaces';
 
 interface IBtnStyled {
   active: boolean;
@@ -44,16 +44,14 @@ const iconsCss = {
   addIcon: css<IBtnStyled>`
     .addIcon {
       &-light {
-        fill: ${({ active, theme }) =>
-          active ? theme.primary[500] : theme.texts.button.base};
+        fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.texts.button.base)};
       }
     }
 
     &:hover {
       .addIcon {
         &-light {
-          fill: ${({ active, theme }) =>
-            active ? theme.primary[500] : theme.texts.button.hover};
+          fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.texts.button.hover)};
         }
       }
     }
@@ -99,15 +97,7 @@ const BtnStyled = styled.button<IBtnStyled>`
 `;
 
 export const BtnIcon = forwardRef<HTMLButtonElement, IBtnIcon>((props, ref) => {
-  const {
-    iconName,
-    imageURL,
-    active = false,
-    isLoading = false,
-    disabled = false,
-    handler,
-    imageHandler,
-  } = props;
+  const { iconName, imageURL, active = false, isLoading = false, disabled = false, handler, imageHandler } = props;
 
   return (
     <BtnStyled
@@ -119,14 +109,9 @@ export const BtnIcon = forwardRef<HTMLButtonElement, IBtnIcon>((props, ref) => {
     >
       {iconName && icons[iconName]}
 
-      {imageURL && (
-        <img
-          key={imageURL}
-          className="button-image"
-          src={imageURL}
-          alt={imageURL}
-        />
-      )}
+      {imageURL && <img key={imageURL} className='button-image' src={imageURL} alt={imageURL} />}
     </BtnStyled>
   );
 });
+
+BtnIcon.displayName = 'BtnIcon';

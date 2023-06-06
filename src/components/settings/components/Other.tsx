@@ -1,13 +1,9 @@
-import React, { FC, Dispatch } from "react";
-import { AnyAction } from "@reduxjs/toolkit";
-import styled, { keyframes } from "styled-components";
-import { fadeIn } from "react-animations";
+import React, { FC, Dispatch } from 'react';
+import { AnyAction } from '@reduxjs/toolkit';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
 
-import { TextInput } from "../../inputs/TextInput";
-
-import { icons } from "../../../assets/icons";
-
-import type { ILookFeelActions, ISettingsState } from "../reducer";
+import type { ISettingsState } from '../reducer';
 
 const animation = keyframes`${fadeIn}`;
 const OtherStyled = styled.div`
@@ -17,8 +13,7 @@ const OtherStyled = styled.div`
 `;
 
 interface IOther {
-  values: ISettingsState["other"];
-  // setters: ILookFeelActions;
+  values: ISettingsState['other'];
   dispatch: Dispatch<AnyAction>;
 }
 

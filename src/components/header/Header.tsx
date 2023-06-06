@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from '../../hooks/hooks';
 
-import { SearchField } from "./components/SearchField";
-import { BtnIcon } from "../buttons";
+import { SearchField } from './components/SearchField';
+import { BtnIcon } from '../buttons';
 
 const HeaderStyled = styled.header`
   position: relative;
@@ -30,12 +30,8 @@ export const Header: FC<IHeader> = ({ isAnon, setSettingsModal }) => {
       <SearchField />
 
       {!isAnon && (
-        <div className="header-button">
-          <BtnIcon
-            iconName="settings"
-            handler={setSettingsModal}
-            isLoading={isDataSyncing}
-          />
+        <div className='header-button'>
+          <BtnIcon iconName='settings' handler={setSettingsModal} isLoading={isDataSyncing} />
         </div>
       )}
     </HeaderStyled>

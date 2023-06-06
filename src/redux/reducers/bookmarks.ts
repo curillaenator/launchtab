@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { batch } from "react-redux";
-import shortid from "shortid";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { batch } from 'react-redux';
+import shortid from 'shortid';
 
-import { pagesApi, localStorageApi } from "../../api/api";
+import { pagesApi, localStorageApi } from '../../api/api';
 
-import type { IBookmark, IData, IUpdate, TThunk } from "../../types/types";
+import type { IBookmark, IData, IUpdate, TThunk } from '../../types/types';
 
 export interface IBookmarks {
   pages: string[];
@@ -16,14 +16,14 @@ export interface IBookmarks {
 
 const initialState: IBookmarks = {
   pages: [],
-  curPage: "",
+  curPage: '',
   data: [],
   curBookmarks: [],
-  message: "",
+  message: '',
 };
 
 const bmSlice = createSlice({
-  name: "bookmarks",
+  name: 'bookmarks',
   initialState,
   reducers: {
     setPages: (state, action: PayloadAction<string[]>) => {
@@ -49,8 +49,7 @@ const bmSlice = createSlice({
 });
 export const bookmarks = bmSlice.reducer;
 
-export const { setPages, setCurPage, setCurBookmarks, setData, setMessage } =
-  bmSlice.actions;
+export const { setPages, setCurPage, setCurBookmarks, setData, setMessage } = bmSlice.actions;
 
 // THUNKS
 
@@ -113,12 +112,7 @@ export const createPage = (pageName: string): TThunk => {
   };
 };
 
-export const createBookmark = (
-  name: string,
-  link: string,
-  imageURL: string | null,
-  iconURL: string | null
-): TThunk => {
+export const createBookmark = (name: string, link: string, imageURL: string | null, iconURL: string | null): TThunk => {
   return async (dispatch, getState) => {
     const { curPage, data, curBookmarks } = getState().bookmarks;
     const user = getState().auth.user;
@@ -127,10 +121,7 @@ export const createBookmark = (
     const curBookmarksIndex = data.findIndex((page) => page.name === curPage);
 
     const updData = [...data];
-    const updBookmars = [
-      ...curBookmarks,
-      { id, name, link, imageURL, iconURL },
-    ];
+    const updBookmars = [...curBookmarks, { id, name, link, imageURL, iconURL }];
 
     const updCurBookmarks = { name: curPage, pages: updBookmars };
 
@@ -157,21 +148,16 @@ export const updatePagesOrder = (pagesOrder: string[]): TThunk => {
     const data = getState().bookmarks.data;
     const user = getState().auth.user;
 
-    const updData = pagesOrder.map((knob) =>
-      data.find((tab) => tab.name === knob)
-    );
+    const updData = pagesOrder.map((knob) => data.find((tab) => tab.name === knob));
 
     batch(() => {
-      //@ts-ignore
-      dispatch(setData(updData));
+      dispatch(setData(updData as IData[]));
       dispatch(setPages(pagesOrder));
     });
 
     if (user) {
-      //@ts-ignore
-      !user.isAnonymous && localStorageApi.setBookmarks(updData);
-      //@ts-ignore
-      const userData: IUpdate = { uid: user.uid, tabs: updData };
+      !user.isAnonymous && localStorageApi.setBookmarks(updData as IData[]);
+      const userData: IUpdate = { uid: user.uid, tabs: updData as IData[] };
       const message = await pagesApi.updateData(userData);
 
       dispatch(setMessage(message));
@@ -211,9 +197,9 @@ export const deletePage = (pageName: string): TThunk => {
   return async (dispatch, getState) => {
     const { curPage, data, pages } = getState().bookmarks;
 
-    if (pageName === "Home") return alert("This bookmark can not be deleted");
+    if (pageName === 'Home') return alert('This bookmark can not be deleted');
 
-    const confirm = window.confirm("Delete bookmark?");
+    const confirm = window.confirm('Delete bookmark?');
 
     if (confirm) {
       const user = getState().auth.user;
@@ -247,10 +233,7 @@ export const deletePage = (pageName: string): TThunk => {
   };
 };
 
-export const deleteBookmark = (
-  bookmarkName: string,
-  pageID?: string
-): TThunk => {
+export const deleteBookmark = (bookmarkName: string, pageID?: string): TThunk => {
   return (dispatch, getState) => {
     const { curPage, data, curBookmarks } = getState().bookmarks;
 
@@ -259,9 +242,7 @@ export const deleteBookmark = (
 
       const curBookmarksIndex = data.findIndex((item) => item.name === curPage);
 
-      const updCurBookmarks = curBookmarks.filter(
-        (page) => page.name !== bookmarkName
-      );
+      const updCurBookmarks = curBookmarks.filter((page) => page.name !== bookmarkName);
       const updCurBookmarkObj = { name: curPage, pages: updCurBookmarks };
 
       const updData = [...data];
@@ -282,11 +263,11 @@ export const deleteBookmark = (
       }
     };
 
-    const confirm = window.confirm("Delete bookmark?");
+    const confirm = window.confirm('Delete bookmark?');
 
     if (confirm) {
       const curBookmarksPredelete = curBookmarks.map((page) =>
-        page.name === bookmarkName ? { ...page, deleted: true } : page
+        page.name === bookmarkName ? { ...page, deleted: true } : page,
       );
 
       dispatch(setCurBookmarks(curBookmarksPredelete));

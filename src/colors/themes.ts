@@ -1,11 +1,11 @@
-import { colorsLib } from "./colors";
+import { colorsLib } from './colors';
 
 export const themeNames: { [title: string]: string } = {
-  defaultTheme: "Default",
-  fireOrangeTheme: "Fire Orange",
-  classicBlueTheme: "Classic Blue",
-  radioactiveGreenTheme: "Radioactive Green",
-  sunnyOrange: "Sunset Orange",
+  defaultTheme: 'Default',
+  fireOrangeTheme: 'Fire Orange',
+  classicBlueTheme: 'Classic Blue',
+  radioactiveGreenTheme: 'Radioactive Green',
+  sunnyOrange: 'Sunset Orange',
 };
 
 export const themes = {

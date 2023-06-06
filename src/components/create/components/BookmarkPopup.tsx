@@ -1,18 +1,18 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { useCreateBookmark } from "../hooks/useCreateBookmark";
+import { useCreateBookmark } from '../hooks/useCreateBookmark';
 
-import { TextInput } from "../../inputs/TextInput";
-import { BtnCta, BtnGhost, BtnIcon } from "../../buttons";
-import { Accordion } from "../../accordion/Accordion";
-import { Scrollbars } from "../../scrollbars/Scrollbars";
-import { Card } from "../../card/Card";
-import { Typography } from "../../typography";
+import { TextInput } from '../../inputs/TextInput';
+import { BtnCta, BtnGhost, BtnIcon } from '../../buttons';
+import { Accordion } from '../../accordion/Accordion';
+import { Scrollbars } from '../../scrollbars/Scrollbars';
+import { Card } from '../../card/Card';
+import { Typography } from '../../typography';
 
-import { checkImageURL } from "../../../helpers/helpers";
+import { checkImageURL } from '../../../helpers/helpers';
 
-import type { States, Handlers } from "../hooks/useCreateForm";
+import type { States, Handlers } from '../hooks/useCreateForm';
 
 const BookmarkPopupStyled = styled.div`
   width: 458px;
@@ -85,21 +85,13 @@ interface IBookmarkPopup {
   close: () => void;
 }
 
-export const BookmarkPopup: FC<IBookmarkPopup> = ({
-  values,
-  handlers,
-  handleCreate,
-  close,
-}) => {
-  const [
-    iconsWithGoodLinks,
-    iconisFetchedIconsOpenOpen,
-    setIsFetchedIconsOpen,
-    fetchIcons,
-  ] = useCreateBookmark(values.name);
+export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCreate, close }) => {
+  const [iconsWithGoodLinks, iconisFetchedIconsOpenOpen, setIsFetchedIconsOpen, fetchIcons] = useCreateBookmark(
+    values.name,
+  );
 
   const bookmark = {
-    name: values.name || "Title",
+    name: values.name || 'Title',
     link: values.link,
     imageURL: values.imageURL,
     iconURL: values.iconURL,
@@ -107,13 +99,13 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({
 
   const handleIconsSelect = (iconURL: string) => {
     handlers.handleIconURL(iconURL);
-    handlers.handleImageURL("");
+    handlers.handleImageURL('');
   };
 
   const handleImagePasteURL = (imageURL: string) => {
     checkImageURL(imageURL).then((response) => {
       handlers.handleImageURL(imageURL);
-      handlers.handleIconURL("");
+      handlers.handleIconURL('');
 
       if (response.ok) return handlers.handleImageURLerror(false);
       if (!response.ok) return handlers.handleImageURLerror(true);
@@ -122,79 +114,69 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({
 
   return (
     <BookmarkPopupStyled>
-      <div className="popup-title">
-        <Typography type="RoundedHeavy24">New</Typography>
-        <Typography type="RoundedHeavy24" className="popup-title-themed">
+      <div className='popup-title'>
+        <Typography type='RoundedHeavy24'>New</Typography>
+        <Typography type='RoundedHeavy24' className='popup-title-themed'>
           bookmark
         </Typography>
       </div>
 
-      <div className="popup-inputs">
+      <div className='popup-inputs'>
         <TextInput
-          type="text"
-          iconName="pencil"
-          name="new-bookmark"
+          type='text'
+          iconName='pencil'
+          name='new-bookmark'
           limitSymbols={24}
           value={values.name}
           onChange={handlers.handleName}
           onFocusOut={fetchIcons}
-          placeholder="Title"
+          placeholder='Title'
         />
 
         <TextInput
-          type="url"
-          iconName="link"
-          name="new-link"
+          type='url'
+          iconName='link'
+          name='new-link'
           value={values.link}
           onChange={handlers.handleLink}
-          placeholder="Site link"
+          placeholder='Site link'
         />
 
         <TextInput
-          type="url"
-          iconName="image"
-          name="new-image"
+          type='url'
+          iconName='image'
+          name='new-image'
           value={values.imageURL}
           onChange={handleImagePasteURL}
-          placeholder="Paste here image link"
+          placeholder='Paste here image link'
           // error={values.imageURLerror}
         />
       </div>
 
-      <div className="popup-icons">
+      <div className='popup-icons'>
         <Accordion
-          title={
-            iconisFetchedIconsOpenOpen
-              ? "hide icons"
-              : "...or select from icons"
-          }
+          title={iconisFetchedIconsOpenOpen ? 'hide icons' : '...or select from icons'}
           disabled={iconsWithGoodLinks.length === 0}
           open={iconisFetchedIconsOpenOpen}
           openHandler={() => setIsFetchedIconsOpen((open) => !open)}
         >
           <Scrollbars height={172}>
-            <div className="popup-icons-array">
+            <div className='popup-icons-array'>
               {iconsWithGoodLinks.map((icon) => {
-                return (
-                  <BtnIcon
-                    key={icon.url}
-                    imageURL={icon.url}
-                    imageHandler={handleIconsSelect}
-                  />
-                );
+                return <BtnIcon key={icon.url} imageURL={icon.url} imageHandler={handleIconsSelect} />;
               })}
             </div>
           </Scrollbars>
         </Accordion>
       </div>
 
-      <div className="popup-preview">
-        <Card bookmark={bookmark} as="div" />
+      <div className='popup-preview'>
+        <Card bookmark={bookmark} as='div' />
       </div>
 
-      <div className="popup-buttons">
-        <BtnCta title="Create" handler={() => handleCreate(close)} />
-        <BtnGhost title="Cancel" handler={() => close()} />
+      <div className='popup-buttons'>
+        <BtnCta title='Create' handler={() => handleCreate(close)} />
+        <BtnGhost title='Cancel' handler={() => close()} />
       </div>
     </BookmarkPopupStyled>
   );

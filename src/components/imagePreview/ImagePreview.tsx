@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import styled from "styled-components";
-import { Typography } from "../typography";
+import React, { FC } from 'react';
+import styled from 'styled-components';
+import { Typography } from '../typography';
 
 const ImagePreviewStyled = styled.div`
   display: flex;
@@ -27,18 +27,9 @@ interface ImagePreviewProps {
 export const ImagePreview: FC<ImagePreviewProps> = ({ imageURL }) => {
   return (
     <ImagePreviewStyled>
-      {imageURL && (
-        <img
-          className="preview-image"
-          src={imageURL}
-          alt="Wallpaper"
-          draggable={false}
-        />
-      )}
+      {imageURL && <img className='preview-image' src={imageURL} alt='Wallpaper' draggable={false} />}
 
-      {!imageURL && (
-        <Typography type="RoundedBold16">Wallpaper preview</Typography>
-      )}
+      {!imageURL && <Typography type='RoundedBold16'>Wallpaper preview</Typography>}
     </ImagePreviewStyled>
   );
 };

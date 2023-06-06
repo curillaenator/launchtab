@@ -1,12 +1,12 @@
-import React, { FormEvent, useEffect, useReducer } from "react";
+import { FormEvent, useEffect, useReducer } from 'react';
 
-import { useAppDispatch } from "../../../hooks/hooks";
-import * as r from "../reducer/reducer";
+import { useAppDispatch } from '../../../hooks/hooks';
+import * as r from '../reducer/reducer';
 
-import { proSignUp, signIn } from "../../../redux/reducers/auth";
-import { IFormState } from "../reducer/reducer";
+import { proSignUp, signIn } from '../../../redux/reducers/auth';
+import { IFormState } from '../reducer/reducer';
 
-import { signInErrorsMessages, signUpErrorsMesages } from "./errors";
+import { signInErrorsMessages, signUpErrorsMesages } from './errors';
 
 interface StateHandlers {
   handleEmail: (email: string) => void;
@@ -14,9 +14,7 @@ interface StateHandlers {
   handleConfirmPass: (confirmPassword: string) => void;
 }
 
-export const useSignForm = (
-  type: "signin" | "signup"
-): [IFormState, StateHandlers, (e: FormEvent) => void] => {
+export const useSignForm = (type: 'signin' | 'signup'): [IFormState, StateHandlers, (e: FormEvent) => void] => {
   const appDispatch = useAppDispatch();
 
   const [formStates, formDispatch] = useReducer(r.reducer, r.initialState);
@@ -41,11 +39,11 @@ export const useSignForm = (
 
     e.preventDefault();
 
-    if (type === "signup") {
+    if (type === 'signup') {
       const signUpCreds = {
         email: emailTrimed,
         password: passwordTrimed,
-        displayName: "not needed",
+        displayName: 'not needed',
       };
 
       if (!emailTrimed.length) {
@@ -57,25 +55,17 @@ export const useSignForm = (
       }
 
       if (!confirmPasswordTrimed.length) {
-        formDispatch(
-          r.setConfirmPasswordMes(
-            signUpErrorsMesages.confirmPasswordMes.required
-          )
-        );
+        formDispatch(r.setConfirmPasswordMes(signUpErrorsMesages.confirmPasswordMes.required));
       }
 
       if (passwordTrimed.length < 8) {
         formDispatch(r.setPasswordMes(signUpErrorsMesages.paswordMes.minChar));
-        formDispatch(
-          r.setConfirmPasswordMes(signUpErrorsMesages.paswordMes.minChar)
-        );
+        formDispatch(r.setConfirmPasswordMes(signUpErrorsMesages.paswordMes.minChar));
       }
 
       if (!okPassword) {
         formDispatch(r.setPasswordMes(signUpErrorsMesages.paswordMes.match));
-        formDispatch(
-          r.setConfirmPasswordMes(signUpErrorsMesages.paswordMes.match)
-        );
+        formDispatch(r.setConfirmPasswordMes(signUpErrorsMesages.paswordMes.match));
       }
 
       if (
@@ -91,7 +81,7 @@ export const useSignForm = (
       appDispatch(proSignUp(signUpCreds));
     }
 
-    if (type === "signin") {
+    if (type === 'signin') {
       if (!emailTrimed) {
         formDispatch(r.setEmailMes(signInErrorsMessages.emailMes));
       }
@@ -112,17 +102,17 @@ export const useSignForm = (
 
   const handlers: StateHandlers = {
     handleEmail: (email: string) => {
-      if (emailMes) formDispatch(r.setEmailMes(""));
+      if (emailMes) formDispatch(r.setEmailMes(''));
       formDispatch(r.setEmail(email));
     },
 
     handlePass: (pass: string) => {
-      if (passwordMes) formDispatch(r.setPasswordMes(""));
+      if (passwordMes) formDispatch(r.setPasswordMes(''));
       formDispatch(r.setPassword(pass));
     },
 
     handleConfirmPass: (pass: string) => {
-      if (confirmPasswordMes) formDispatch(r.setConfirmPasswordMes(""));
+      if (confirmPasswordMes) formDispatch(r.setConfirmPasswordMes(''));
       formDispatch(r.setConfirmPassword(pass));
     },
   };
@@ -131,8 +121,7 @@ export const useSignForm = (
     const passwordCheck = password.trim();
     const confirmPasswordCheck = confirmPassword.trim();
 
-    if (!passwordCheck || !confirmPasswordCheck)
-      return formDispatch(r.setOkPassword(false));
+    if (!passwordCheck || !confirmPasswordCheck) return formDispatch(r.setOkPassword(false));
 
     if (passwordCheck && confirmPasswordCheck) {
       passwordCheck === confirmPasswordCheck && passwordCheck.length > 7

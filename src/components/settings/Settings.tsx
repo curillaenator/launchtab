@@ -1,20 +1,20 @@
-import React, { FC, useReducer, useEffect } from "react";
-import styled from "styled-components";
+import React, { FC, useReducer, useEffect } from 'react';
+import styled from 'styled-components';
 
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-import * as r from "./reducer";
-import { updateSettings } from "../../redux/reducers/settings";
-import { logOut } from "../../redux/reducers/auth";
+import * as r from './reducer';
+import { updateSettings } from '../../redux/reducers/settings';
+import { logOut } from '../../redux/reducers/auth';
 
-import { BtnCta, BtnGhost } from "../buttons";
-import { Typography } from "../typography";
-import { Shape } from "../shape/Shape";
-import { Scrollbars } from "../scrollbars/Scrollbars";
+import { BtnCta, BtnGhost } from '../buttons';
+import { Typography } from '../typography';
+import { Shape } from '../shape/Shape';
+import { Scrollbars } from '../scrollbars/Scrollbars';
 
-import { LookFeel, Profile, Other } from "./components";
+import { LookFeel, Profile } from './components';
 
-import { LOOKFEEL, PROFILE, OTHER } from "./constants";
+import { LOOKFEEL, PROFILE } from './constants';
 
 const SettingsStyled = styled.div`
   width: 100%;
@@ -115,44 +115,30 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
 
   return (
     <SettingsStyled>
-      <div className="form">
-        <Shape className="form-shape" borderRadius={24} isAdaptive />
+      <div className='form'>
+        <Shape className='form-shape' borderRadius={24} isAdaptive />
 
-        <div className="form-title">
-          <Typography type="RoundedHeavy36">Design & profile</Typography>
-          <Typography type="RoundedHeavy36" className="form-title-themed">
+        <div className='form-title'>
+          <Typography type='RoundedHeavy36'>Design & profile</Typography>
+          <Typography type='RoundedHeavy36' className='form-title-themed'>
             settings
           </Typography>
         </div>
 
-        <div className="form-settings">
-          <div className="form-settings-menu">
+        <div className='form-settings'>
+          <div className='form-settings-menu'>
             {TABS.map((tab) => (
-              <BtnGhost
-                {...tab}
-                active={currentTab === tab.title}
-                key={tab.title}
-              />
+              <BtnGhost {...tab} active={currentTab === tab.title} key={tab.title} />
             ))}
           </div>
 
           <Scrollbars height={320}>
-            <div className="form-settings-framework">
+            <div className='form-settings-framework'>
               {currentTab === LOOKFEEL && (
-                <LookFeel
-                  values={lookfeel}
-                  setters={r.LookFeelActions}
-                  dispatch={dispatch}
-                />
+                <LookFeel values={lookfeel} setters={r.LookFeelActions} dispatch={dispatch} />
               )}
 
-              {currentTab === PROFILE && (
-                <Profile
-                  values={profile}
-                  setters={r.ProfileActions}
-                  dispatch={dispatch}
-                />
-              )}
+              {currentTab === PROFILE && <Profile values={profile} setters={r.ProfileActions} dispatch={dispatch} />}
 
               {/* {currentTab === OTHER && (
                 <Other values={other} dispatch={dispatch} />
@@ -161,14 +147,14 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
           </Scrollbars>
         </div>
 
-        <div className="form-buttons">
-          <div className="form-buttons-block">
-            <BtnGhost title="Log Out" handler={hadleLogOut} />
+        <div className='form-buttons'>
+          <div className='form-buttons-block'>
+            <BtnGhost title='Log Out' handler={hadleLogOut} />
           </div>
 
-          <div className="form-buttons-block">
-            <BtnGhost title="Close" handler={closeSettings} />
-            <BtnCta title="Save changes" handler={submitSettings} />
+          <div className='form-buttons-block'>
+            <BtnGhost title='Close' handler={closeSettings} />
+            <BtnCta title='Save changes' handler={submitSettings} />
           </div>
         </div>
       </div>

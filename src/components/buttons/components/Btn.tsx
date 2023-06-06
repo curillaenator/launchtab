@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { Shape } from "../../shape/Shape";
-import { Typography } from "../../typography/Typography";
+import { Shape } from '../../shape/Shape';
+import { Typography } from '../../typography/Typography';
 
-import { icons } from "../assets/icons";
-import type { Button } from "./interfaces";
+import { icons } from '../assets/icons';
+import type { Button } from './interfaces';
 
 interface IButtonStyled {
   active: boolean;
@@ -30,7 +30,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
       case active && !isColorsStatic:
         return theme.shadows.largeCtaButton;
       default:
-        return "none";
+        return 'none';
     }
   }};
 
@@ -41,22 +41,19 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 
   .ctabutton-title {
-    color: ${({ active, theme }) =>
-      active ? theme.primary[500] : theme.texts.button.base};
+    color: ${({ active, theme }) => (active ? theme.primary[500] : theme.texts.button.base)};
     transition: 0.08s ease-in-out;
     user-select: none;
     white-space: nowrap;
   }
 
   .rounded-shape {
-    fill: ${({ theme, active }) =>
-      active ? theme.shapes.hover : theme.shapes.base};
+    fill: ${({ theme, active }) => (active ? theme.shapes.hover : theme.shapes.base)};
   }
 
   &:hover {
     .ctabutton-title {
-      color: ${({ theme, active }) =>
-        active ? theme.primary[500] : theme.texts.button.hover};
+      color: ${({ theme, active }) => (active ? theme.primary[500] : theme.texts.button.hover)};
     }
   }
 `;
@@ -67,23 +64,17 @@ export const Btn: FC<Button> = ({
   isColorsStatic = true,
   active = false,
   disabled = false,
-  type = "button",
+  type = 'button',
   handler,
 }) => {
   return (
-    <ButtonStyled
-      isColorsStatic={isColorsStatic}
-      active={active}
-      disabled={disabled}
-      type={type}
-      onClick={handler}
-    >
+    <ButtonStyled isColorsStatic={isColorsStatic} active={active} disabled={disabled} type={type} onClick={handler}>
       <Shape borderRadius={18} />
 
       {leftIcon && icons[leftIcon]}
 
       {title && (
-        <Typography type="RoundedBold14" className="ctabutton-title">
+        <Typography type='RoundedBold14' className='ctabutton-title'>
           {title}
         </Typography>
       )}

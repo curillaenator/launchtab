@@ -1,13 +1,13 @@
-import React, { FC, useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { fadeIn } from "react-animations";
+import React, { FC, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
 
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from '../../hooks/hooks';
 
-import { CardImage } from "./CardImage";
-import { Typography } from "../typography";
+import { CardImage } from './CardImage';
+import { Typography } from '../typography';
 
-import type { IBookmark } from "../../types/types";
+import type { IBookmark } from '../../types/types';
 
 const animation = keyframes`${fadeIn}`;
 
@@ -28,14 +28,11 @@ const CardStyled = styled.a<ICardStyled>`
   overflow: hidden;
   will-change: transform;
   backdrop-filter: blur(5px);
-  border: ${({ theme, isOpaque }) =>
-    isOpaque ? `0px solid ${theme.borderLines}` : "none"};
+  border: ${({ theme, isOpaque }) => (isOpaque ? `0px solid ${theme.borderLines}` : 'none')};
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
-  animation: 0.6s ${({ noAnimation }) => (noAnimation ? "none" : animation)};
-  transition: box-shadow 0.08s ease-in-out, transform 0.08s ease-in-out,
-    opacity 0.2s ease-in-out;
-  background-color: ${({ theme, isOpaque }) =>
-    isOpaque ? theme.shapes.base20 : theme.shapes.base};
+  animation: 0.6s ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
+  transition: box-shadow 0.08s ease-in-out, transform 0.08s ease-in-out, opacity 0.2s ease-in-out;
+  background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.shapes.base)};
 
   .card-darkener {
     position: absolute;
@@ -59,15 +56,13 @@ const CardStyled = styled.a<ICardStyled>`
     width: 100%;
     height: 44px;
     padding: 0 1rem;
-    color: ${({ theme, isOpaque }) =>
-    isOpaque ? theme.search.text : theme.texts.button.base};
+    color: ${({ theme, isOpaque }) => (isOpaque ? theme.texts.title.sub : theme.texts.button.base)};
   }
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.card};
     transform: scale(1.042);
-    background-color: ${({ theme, isOpaque }) =>
-      isOpaque ? theme.shapes.hover20 : theme.shapes.hover};
+    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.hover20 : theme.shapes.hover)};
 
     .card-image {
       filter: ${({ theme }) => theme.imageEffects.cardImageDarkModeHover};
@@ -81,25 +76,18 @@ const CardStyled = styled.a<ICardStyled>`
   &:active {
     box-shadow: ${({ theme }) => theme.shadows.card};
     transform: scale(1);
-    background-color: ${({ theme, isOpaque }) =>
-      isOpaque ? theme.shapes.base20 : theme.shapes.base};
+    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.shapes.base)};
   }
 `;
 
 interface ICard {
   bookmark: IBookmark;
   className?: string;
-  as?: "a" | "div";
+  as?: 'a' | 'div';
 }
 
-export const Card: FC<ICard> = ({
-  bookmark,
-  className = "class-bookmark",
-  as = "a",
-}) => {
-  const wallpapper = useAppSelector(
-    (state) => state.settings.lookfeel.wallpaper
-  );
+export const Card: FC<ICard> = ({ bookmark, className = 'class-bookmark', as = 'a' }) => {
+  const wallpapper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
 
   const [noAnimation, setNoAnimation] = useState(false);
 
@@ -119,11 +107,11 @@ export const Card: FC<ICard> = ({
       className={className}
       {...fadeFix}
     >
-      {!!wallpapper && as !== "div" && <div className="card-darkener" />}
+      {!!wallpapper && as !== 'div' && <div className='card-darkener' />}
 
       <CardImage {...bookmark} />
 
-      <Typography type="TextRegular12" className="card-title">
+      <Typography type='RoundedBold14' className='card-title'>
         {bookmark.name}
       </Typography>
     </CardStyled>

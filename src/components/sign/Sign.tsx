@@ -1,12 +1,12 @@
-import React, { FC, useState } from "react";
-import styled from "styled-components";
+import React, { FC, useState } from 'react';
+import styled from 'styled-components';
 
-import { Modal } from "../modal/Modal";
-import { Typography } from "../typography/Typography";
-import { BtnCta, BtnGhost } from "../buttons";
-import { SignIn } from "./components/SignIn";
-import { SignUp } from "./components/SignUp";
-import { Features } from "./components/Features";
+import { Modal } from '../modal/Modal';
+import { Typography } from '../typography/Typography';
+import { BtnCta } from '../buttons';
+import { SignIn } from './components/SignIn';
+import { SignUp } from './components/SignUp';
+import { Features } from './components/Features';
 
 const SignStyled = styled.div`
   position: fixed;
@@ -34,21 +34,17 @@ export const Sign: FC = () => {
 
   return (
     <SignStyled>
-      <Typography type="RoundedBold14" className="sign-text">
+      <Typography type='RoundedBold14' className='sign-text'>
         Get access to your bookmarks with
       </Typography>
 
-      <BtnCta
-        title="Sign Up"
-        leftIcon="star"
-        handler={() => setIsSignUpOpen(true)}
-      />
+      <BtnCta title='Sign Up' leftIcon='star' handler={() => setIsSignUpOpen(true)} />
 
-      <Typography type="RoundedBold14" className="sign-text">
+      <Typography type='RoundedBold14' className='sign-text'>
         or
       </Typography>
 
-      <BtnCta title="Sign In" handler={() => setIsSignInOpen(true)} />
+      <BtnCta title='Sign In' handler={() => setIsSignInOpen(true)} />
 
       <Modal open={isSignInOpen} onClose={() => setIsSignInOpen(false)}>
         <SignIn close={() => setIsSignInOpen(false)} />

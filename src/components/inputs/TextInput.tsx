@@ -1,12 +1,12 @@
-import React, { FC, useState, useRef, useCallback, ChangeEvent } from "react";
-import styled from "styled-components";
+import React, { FC, useState, useRef, useCallback, ChangeEvent } from 'react';
+import styled from 'styled-components';
 
-import { BtnGhost } from "../buttons";
-import { Typography } from "../typography";
+import { BtnGhost } from '../buttons';
+import { Typography } from '../typography';
 
-import { inputIcons, InputIconsType } from "./assets/inputIcons";
+import { inputIcons, InputIconsType } from './assets/inputIcons';
 
-type IInputState = "normal" | "success" | "error";
+type IInputState = 'normal' | 'success' | 'error';
 
 interface IFieldStyled {
   state: IInputState;
@@ -33,14 +33,12 @@ const FieldStyled = styled.div<IFieldStyled>`
 
       &-light {
         transition: 0.08s ease-in-out;
-        fill: ${({ theme, isFocused }) =>
-          isFocused ? theme.primary[200] : theme.icons.light};
+        fill: ${({ theme, isFocused }) => (isFocused ? theme.primary[200] : theme.icons.light)};
       }
 
       &-dark {
         transition: 0.08s ease-in-out;
-        fill: ${({ theme, isFocused }) =>
-          isFocused ? theme.primary[500] : theme.icons.dark};
+        fill: ${({ theme, isFocused }) => (isFocused ? theme.primary[500] : theme.icons.dark)};
       }
     }
 
@@ -54,11 +52,11 @@ const FieldStyled = styled.div<IFieldStyled>`
     &-input {
       width: 100%;
       height: 36px;
-      padding: 4px
-        ${({ buttonWidth }) => (buttonWidth ? `${buttonWidth + 4}px` : "4px")}
-        8px 4px;
+      padding: 4px ${({ buttonWidth }) => (buttonWidth ? `${buttonWidth + 4}px` : '4px')} 8px 4px;
       transition: 0.08s ease-in-out;
-      font-style: normal; font-variation-settings: "GRAD" 400, "wght" 500; letter-spacing: 0.002em;
+      font-style: normal;
+      font-variation-settings: 'GRAD' 400, 'wght' 500;
+      letter-spacing: 0.002em;
       font-size: 14px;
       line-height: 24px;
       background: none;
@@ -68,7 +66,7 @@ const FieldStyled = styled.div<IFieldStyled>`
           switch (true) {
             case isFocused:
               return theme.primary[200];
-            case state === "error":
+            case state === 'error':
               return theme.texts.input.error;
             default:
               return theme.borderLines;
@@ -78,7 +76,7 @@ const FieldStyled = styled.div<IFieldStyled>`
       &::placeholder {
         color: ${({ theme, state }) => {
           switch (true) {
-            case state === "error":
+            case state === 'error':
               return theme.texts.input.error;
             default:
               return theme.texts.input.placeholder;
@@ -93,12 +91,12 @@ const FieldStyled = styled.div<IFieldStyled>`
     justify-content: space-between;
     align-items: center;
     min-height: 1rem;
-    padding-left: ${({ isIcon }) => (isIcon ? "40px" : "none")};
+    padding-left: ${({ isIcon }) => (isIcon ? '40px' : 'none')};
 
     &-text {
       color: ${({ theme, state }) => {
         switch (true) {
-          case state === "error":
+          case state === 'error':
             return theme.texts.input.error;
           default:
             return theme.texts.input.placeholder;
@@ -112,7 +110,7 @@ const FieldStyled = styled.div<IFieldStyled>`
 export interface ITextInput {
   state?: IInputState;
   iconName?: InputIconsType;
-  type?: "text" | "email" | "password" | "url";
+  type?: 'text' | 'email' | 'password' | 'url';
   name: string;
   description?: string;
   placeholder?: string;
@@ -125,12 +123,12 @@ export interface ITextInput {
 }
 
 export const TextInput: FC<ITextInput> = ({
-  state = "normal",
+  state = 'normal',
   iconName,
-  type = "text",
+  type = 'text',
   name,
   description,
-  placeholder = "",
+  placeholder = '',
   value,
   limitSymbols,
   buttonTitle,
@@ -161,7 +159,7 @@ export const TextInput: FC<ITextInput> = ({
 
   const getIcon = useCallback(() => {
     const iconSet = {
-      normal: iconName ? inputIcons[iconName] : "",
+      normal: iconName ? inputIcons[iconName] : '',
       success: inputIcons.success,
       error: inputIcons.error,
     };
@@ -180,39 +178,39 @@ export const TextInput: FC<ITextInput> = ({
       onFocus={handleFocus}
       onBlur={handleBlur}
     >
-      <div className="input">
+      <div className='input'>
         {!!iconName && getIcon()}
-      
+
         <input
           ref={inputRef}
-          className="input-input"
+          className='input-input'
           type={type}
           name={name}
           placeholder={placeholder}
-          autoComplete="off"
+          autoComplete='off'
           value={value}
           onChange={handleChange}
         />
 
         {withButton && (
-          <div className="input-button">
+          <div className='input-button'>
             <BtnGhost
               ref={inputButtonRef}
-              title={buttonTitle || ""}
-              colorPreset="secondary-colors"
+              title={buttonTitle || ''}
+              colorPreset='secondary-colors'
               handler={() => {}}
             />
           </div>
         )}
       </div>
 
-      <div className="subinput">
-        <Typography type="TextRegular11" className="subinput-text">
-          {description || ""}
+      <div className='subinput'>
+        <Typography type='TextRegular11' className='subinput-text'>
+          {description || ''}
         </Typography>
 
         {limitSymbols && (
-          <Typography type="TextRegular11" className="subinput-text">
+          <Typography type='TextRegular11' className='subinput-text'>
             {`${value.length}/${limitSymbols}`}
           </Typography>
         )}

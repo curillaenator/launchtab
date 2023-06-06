@@ -1,15 +1,15 @@
-import React, { FC } from "react";
-import Popup from "reactjs-popup";
-import styled, { keyframes } from "styled-components";
+import React, { FC } from 'react';
+import Popup from 'reactjs-popup';
+import styled, { keyframes } from 'styled-components';
 
-import { useCreateForm } from "./hooks/useCreateForm";
-import { usePopupPosition } from "./hooks/usePopupPosition";
+import { useCreateForm } from './hooks/useCreateForm';
+import { usePopupPosition } from './hooks/usePopupPosition';
 
-import { BtnIcon } from "../buttons";
-import { PagePopup } from "./components/PagePopup";
-import { BookmarkPopup } from "./components/BookmarkPopup";
+import { BtnIcon } from '../buttons';
+import { PagePopup } from './components/PagePopup';
+import { BookmarkPopup } from './components/BookmarkPopup';
 
-import { ButtonsIcons } from "../buttons";
+import { ButtonsIcons } from '../buttons';
 
 const appear = keyframes`
   from {
@@ -35,17 +35,17 @@ const PopupStyled = styled(Popup)`
 `;
 
 interface ICreate {
-  create: "new-page" | "new-bookmark";
+  create: 'new-page' | 'new-bookmark';
   iconName?: ButtonsIcons;
 }
 
-export const Create: FC<ICreate> = ({ create, iconName = "addSmallIcon" }) => {
+export const Create: FC<ICreate> = ({ create, iconName = 'addSmallIcon' }) => {
   const [states, handlers, handleCreate, resetStates] = useCreateForm(create);
-  const [position, offsetY, onTriggerClick] = usePopupPosition("bottom center");
+  const [position, offsetY, onTriggerClick] = usePopupPosition('bottom center');
 
   return (
     <PopupStyled
-      offsetY={create === "new-bookmark" ? offsetY : 0}
+      offsetY={create === 'new-bookmark' ? offsetY : 0}
       arrow={false}
       onClose={() => resetStates()}
       position={position}
@@ -54,33 +54,31 @@ export const Create: FC<ICreate> = ({ create, iconName = "addSmallIcon" }) => {
           <BtnIcon
             iconName={iconName}
             active={open}
-            //@ts-ignore
+            // @ts-expect-error need fix types
             handler={onTriggerClick}
           />
         </div>
       )}
     >
-      {(close: () => void) => (
-        <>
-          {create === "new-page" && (
-            <PagePopup
-              pageName={states.name}
-              handlePageName={handlers.handleName}
-              handleCreate={handleCreate}
-              close={close}
-            />
-          )}
+      {
+        // @ts-expect-error need fix types
+        (close: () => void) => (
+          <>
+            {create === 'new-page' && (
+              <PagePopup
+                pageName={states.name}
+                handlePageName={handlers.handleName}
+                handleCreate={handleCreate}
+                close={close}
+              />
+            )}
 
-          {create === "new-bookmark" && (
-            <BookmarkPopup
-              values={states}
-              handlers={handlers}
-              handleCreate={handleCreate}
-              close={close}
-            />
-          )}
-        </>
-      )}
+            {create === 'new-bookmark' && (
+              <BookmarkPopup values={states} handlers={handlers} handleCreate={handleCreate} close={close} />
+            )}
+          </>
+        )
+      }
     </PopupStyled>
   );
 };

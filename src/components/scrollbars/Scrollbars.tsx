@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC, PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
-interface IScrollbars {
+interface ScrollbarsProps extends PropsWithChildren {
   height: number;
 }
 
-const ScrollbarsStyled = styled.div<IScrollbars>`
+const ScrollbarsStyled = styled.div<ScrollbarsProps>`
   overflow-y: auto;
   width: 100%;
   max-height: ${({ height }) => height}px;
@@ -23,6 +23,6 @@ const ScrollbarsStyled = styled.div<IScrollbars>`
   }
 `;
 
-export const Scrollbars: FC<IScrollbars> = ({ height, children }) => {
+export const Scrollbars: FC<ScrollbarsProps> = ({ height, children }) => {
   return <ScrollbarsStyled height={height}>{children}</ScrollbarsStyled>;
 };

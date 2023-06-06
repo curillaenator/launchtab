@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 // Правила написания названий стилей шрифтов
 // 1. Название должно быть буквенным, написанным через CamelCase
@@ -13,19 +13,18 @@ import { css } from "styled-components";
 export const fontStyles = {
   RoundedHeavy56: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 770;
+    font-variation-settings: 'GRAD' 400, 'wght' 770;
     font-size: 56px;
     line-height: 60px;
     letter-spacing: -0.016em;
-    font-feature-settings: "pnum" on, "lnum" on, "case" on, "liga" off,
-      "calt" off;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'case' on, 'liga' off, 'calt' off;
     margin-block-start: 0em;
     margin-block-end: 0em;
   `,
 
   RoundedHeavy52: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 800;
+    font-variation-settings: 'GRAD' 400, 'wght' 800;
     font-size: 52px;
     line-height: 64px;
     letter-spacing: -0.026em;
@@ -33,14 +32,14 @@ export const fontStyles = {
 
   RoundedHeavy48: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 800;
+    font-variation-settings: 'GRAD' 400, 'wght' 800;
     font-size: 48px;
     line-height: 60px;
     letter-spacing: -0.021em;
   `,
   RoundedHeavy36: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 800;
+    font-variation-settings: 'GRAD' 400, 'wght' 800;
     font-size: 36px;
     line-height: 43px;
     letter-spacing: -0.021em;
@@ -48,7 +47,7 @@ export const fontStyles = {
 
   RoundedHeavy24: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 720;
+    font-variation-settings: 'GRAD' 400, 'wght' 720;
     font-size: 24px;
     line-height: 32px;
     letter-spacing: -0.012em;
@@ -56,7 +55,7 @@ export const fontStyles = {
 
   RoundedBold20: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 640;
+    font-variation-settings: 'GRAD' 400, 'wght' 640;
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.0054em;
@@ -64,14 +63,14 @@ export const fontStyles = {
 
   RoundedBold16: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 700;
+    font-variation-settings: 'GRAD' 400, 'wght' 700;
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 0.03em;
   `,
   RoundedMedium16: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 500;
+    font-variation-settings: 'GRAD' 400, 'wght' 500;
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 0.025em;
@@ -94,7 +93,7 @@ export const fontStyles = {
 
   RoundedBold14: css`
     font-style: normal;
-    font-variation-settings: "GRAD" 400, "wght" 580;
+    font-variation-settings: 'GRAD' 400, 'wght' 580;
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0.004em;
@@ -140,9 +139,7 @@ export const fontStyles = {
 };
 
 export const fonts = {
-  common:
-    'Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-  sfRounded:
-    'system-ui-rounded, ui-rounded, "SF Pro Rounded", "SanFrancisco", proxima-soft',
+  common: 'Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+  sfRounded: 'system-ui-rounded, ui-rounded, "SF Pro Rounded", "SanFrancisco", proxima-soft',
   sfPro: 'system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text"',
 };

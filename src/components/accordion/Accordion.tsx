@@ -1,7 +1,7 @@
-import React, { FC, useRef } from "react";
-import styled from "styled-components";
+import React, { FC, useRef } from 'react';
+import styled from 'styled-components';
 
-import { BtnGhost } from "../buttons";
+import { BtnGhost } from '../buttons';
 
 interface IAccordionStyled {
   open: boolean;
@@ -33,22 +33,16 @@ interface Accordion {
   openHandler: () => void;
 }
 
-export const Accordion: FC<Accordion> = ({
-  title,
-  open,
-  disabled,
-  children,
-  openHandler,
-}) => {
+export const Accordion: FC<Accordion> = ({ title, open, disabled, children, openHandler }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <AccordionStyled open={open} height={ref.current?.scrollHeight || 0}>
-      <div className="trigger">
+      <div className='trigger'>
         <BtnGhost title={title} disabled={disabled} handler={openHandler} />
       </div>
 
-      <div className="accordion" ref={ref}>
+      <div className='accordion' ref={ref}>
         {children}
       </div>
     </AccordionStyled>

@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { icons } from "../../assets/icons";
-import { pagesIcons } from "../../assets/pagesIcons";
+import { icons } from '../../assets/icons';
+import { pagesIcons } from '../../assets/pagesIcons';
 
-import type { IBookmark } from "../../types/types";
+import type { IBookmark } from '../../types/types';
 
 const CardImageStyled = styled.div`
   display: flex;
@@ -55,43 +55,29 @@ export const CardImage: FC<IBookmark> = ({ name, link, imageURL, iconURL }) => {
   if (iconURL)
     return (
       <CardImageStyled>
-        <img className="card-icon" src={iconURL} alt={name} draggable={false} />
+        <img className='card-icon' src={iconURL} alt={name} draggable={false} />
       </CardImageStyled>
     );
 
   if (imageURL)
     return (
       <CardImageStyled>
-        <img
-          className="card-image"
-          src={imageURL}
-          alt={name}
-          draggable={false}
-        />
+        <img className='card-image' src={imageURL} alt={name} draggable={false} />
       </CardImageStyled>
     );
 
   if (link)
     return (
       <CardImageStyled>
-        {isInBookmarkIcons && (
-          <div className="card-icon">{pagesIcons[link]}</div>
-        )}
+        {isInBookmarkIcons && <div className='card-icon'>{pagesIcons[link]}</div>}
 
-        {!isInBookmarkIcons && (
-          <img
-            className="card-image"
-            src={generatedSitePreview}
-            alt={name}
-            draggable={false}
-          />
-        )}
+        {!isInBookmarkIcons && <img className='card-image' src={generatedSitePreview} alt={name} draggable={false} />}
       </CardImageStyled>
     );
 
   return (
     <CardImageStyled>
-      <div className="card-icon">{icons.image}</div>
+      <div className='card-icon'>{icons.image}</div>
     </CardImageStyled>
   );
 };

@@ -1,13 +1,13 @@
-import firebase from "firebase/app";
-import { auth as fbauth } from "../../api/firebase";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { batch } from "react-redux";
+import firebase from 'firebase/app';
+import { auth as fbauth } from '../../api/firebase';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { batch } from 'react-redux';
 
-import { authApi } from "../../api/api";
-import { resetSettings } from "./settings";
-import { setIsAppLoading } from "./loadings";
+import { authApi } from '../../api/api';
+import { resetSettings } from './settings';
+import { setIsAppLoading } from './loadings';
 
-import type { ISignUpCreds, ISignInCreds, TThunk } from "../../types/types";
+import type { ISignUpCreds, ISignInCreds, TThunk } from '../../types/types';
 
 interface IAuth {
   user: firebase.User | null;
@@ -20,7 +20,7 @@ const initialState: IAuth = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<firebase.User | null>) => {
@@ -42,7 +42,7 @@ export const checkUserIsAuthed = (): TThunk => {
   return (dispatch) => {
     dispatch(setIsAppLoading(true));
 
-    if ("settings" in localStorage && "bookmarks" in localStorage) {
+    if ('settings' in localStorage && 'bookmarks' in localStorage) {
       dispatch(setIsAppLoading(false));
     }
 
@@ -51,9 +51,7 @@ export const checkUserIsAuthed = (): TThunk => {
         return authApi.signUpAnon();
       }
 
-      user.isAnonymous
-        ? dispatch(setAnonymousID(user.uid))
-        : dispatch(setAnonymousID(null));
+      user.isAnonymous ? dispatch(setAnonymousID(user.uid)) : dispatch(setAnonymousID(null));
 
       batch(() => {
         dispatch(setUser(user));

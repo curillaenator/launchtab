@@ -1,14 +1,14 @@
-import React, { FC, Dispatch } from "react";
-import { AnyAction } from "@reduxjs/toolkit";
-import styled, { keyframes } from "styled-components";
-import { fadeIn } from "react-animations";
+import React, { FC, Dispatch } from 'react';
+import { AnyAction } from '@reduxjs/toolkit';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
 
-import { TextInput, Dropdown, Switch, Titlewrap } from "../../inputs";
-import { ImagePreview } from "../../imagePreview/ImagePreview";
+import { TextInput, Dropdown, Switch, Titlewrap } from '../../inputs';
+import { ImagePreview } from '../../imagePreview/ImagePreview';
 
-import { themeNames } from "../../../colors/themes";
+import { themeNames } from '../../../colors/themes';
 
-import type { ILookFeelActions, ISettingsState } from "../reducer";
+import type { ILookFeelActions, ISettingsState } from '../reducer';
 
 const animation = keyframes`${fadeIn}`;
 const LookFeelStyled = styled.div`
@@ -21,7 +21,7 @@ const LookFeelStyled = styled.div`
 `;
 
 interface ILookFeel {
-  values: ISettingsState["lookfeel"];
+  values: ISettingsState['lookfeel'];
   setters: ILookFeelActions;
   dispatch: Dispatch<AnyAction>;
 }
@@ -34,7 +34,7 @@ export const LookFeel: FC<ILookFeel> = ({ values, setters, dispatch }) => {
 
   return (
     <LookFeelStyled>
-      <Titlewrap title="Theme">
+      <Titlewrap title='Theme'>
         <Dropdown
           selected={values.themeName}
           options={themeOptions}
@@ -42,25 +42,22 @@ export const LookFeel: FC<ILookFeel> = ({ values, setters, dispatch }) => {
         />
       </Titlewrap>
 
-      <Titlewrap title="Dark Mode">
-        <Switch
-          value={values.darkMode}
-          onChange={() => dispatch(setters.setDarkMode(!values.darkMode))}
-        />
+      <Titlewrap title='Dark Mode'>
+        <Switch value={values.darkMode} onChange={() => dispatch(setters.setDarkMode(!values.darkMode))} />
       </Titlewrap>
 
-      <Titlewrap title="Wallpaper">
+      <Titlewrap title='Wallpaper'>
         <TextInput
-          iconName="link"
-          type="url"
-          name="background"
-          placeholder="full link to any image"
-          value={values.wallpaper || ""}
+          iconName='link'
+          type='url'
+          name='background'
+          placeholder='full link to any image'
+          value={values.wallpaper || ''}
           onChange={(url) => dispatch(setters.setWallpaper(url))}
         />
       </Titlewrap>
 
-      <ImagePreview imageURL={values.wallpaper || ""} />
+      <ImagePreview imageURL={values.wallpaper || ''} />
     </LookFeelStyled>
   );
 };

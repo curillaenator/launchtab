@@ -1,10 +1,10 @@
-import React, { FC, useState } from "react";
-import styled from "styled-components";
+import React, { FC, useState } from 'react';
+import styled from 'styled-components';
 
-import { Typography } from "../typography/Typography";
-import { BtnGhost } from "../buttons";
+import { Typography } from '../typography/Typography';
+import { BtnGhost } from '../buttons';
 
-import { icons } from "../../assets/icons";
+import { icons } from '../../assets/icons';
 
 interface IDropdownStyled {
   open: boolean;
@@ -36,10 +36,9 @@ const DropdownStyled = styled.div<IDropdownStyled>`
     }
 
     &-shevron {
-      transform: ${({ open }) => (open ? "rotate(-180deg)" : "rotate(0)")};
+      transform: ${({ open }) => (open ? 'rotate(-180deg)' : 'rotate(0)')};
       transition: 0.08s linear;
-      fill: ${({ theme, open }) =>
-        open ? theme.primary[500] : theme.texts.button.base};
+      fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.button.base)};
     }
 
     &:hover {
@@ -48,8 +47,7 @@ const DropdownStyled = styled.div<IDropdownStyled>`
       }
 
       .dropdown-title-shevron {
-        fill: ${({ theme, open }) =>
-          open ? theme.primary[500] : theme.texts.button.hover};
+        fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.button.hover)};
       }
     }
   }
@@ -87,12 +85,7 @@ interface IDropdown {
   onChange: (value: string) => void;
 }
 
-export const Dropdown: FC<IDropdown> = ({
-  optionHeight = 56,
-  selected,
-  options,
-  onChange,
-}) => {
+export const Dropdown: FC<IDropdown> = ({ optionHeight = 56, selected, options, onChange }) => {
   const [open, setOpen] = useState(false);
 
   const getTitle = () => options.find((opt) => opt.value === selected)?.title;
@@ -104,21 +97,17 @@ export const Dropdown: FC<IDropdown> = ({
 
   return (
     <DropdownStyled open={open} bodyHeight={options.length * optionHeight}>
-      <button
-        className="dropdown-title"
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-      >
-        <Typography type="RoundedBold14" className="dropdown-title-text">
+      <button className='dropdown-title' type='button' onClick={() => setOpen((o) => !o)}>
+        <Typography type='RoundedBold14' className='dropdown-title-text'>
           {getTitle() as string}
         </Typography>
 
         {icons.dropdownShevron}
       </button>
 
-      <div className="dropdown-body">
+      <div className='dropdown-body'>
         {options.map((option) => (
-          <div className="dropdown-body-option" key={option.value}>
+          <div className='dropdown-body-option' key={option.value}>
             <BtnGhost
               title={option.title}
               handler={() => optionHandler(option.value)}

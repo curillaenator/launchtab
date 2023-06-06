@@ -1,12 +1,12 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { useAppSelector } from "../../../hooks/hooks";
-import { useSearch } from "./useSearch";
+import { useAppSelector } from '../../../hooks/hooks';
+import { useSearch } from './useSearch';
 
-import { Typography } from "../../typography/Typography";
+import { Typography } from '../../typography/Typography';
 
-import { icons } from "../../../assets/icons";
+import { icons } from '../../../assets/icons';
 
 const SearchFormStyled = styled.form`
   display: flex;
@@ -16,7 +16,7 @@ const SearchFormStyled = styled.form`
 
   .subInput {
     text-align: center;
-    color: ${({ theme }) => theme.texts.input.caption};
+    color: ${({ theme }) => theme.texts.title.searchSub};
   }
 `;
 
@@ -44,8 +44,7 @@ const InputStyled = styled.div<IInputStyled>`
   .searchInput {
     width: 100%;
     height: 3.75rem;
-    background-color: ${({ theme, isOpaque }) =>
-      isOpaque ? theme.shapes.base20 : theme.background};
+    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.background)};
     border-radius: 1.85rem;
     border: 0.5px solid ${({ theme }) => theme.search.border};
     backdrop-filter: blur(5px);
@@ -87,31 +86,26 @@ const InputStyled = styled.div<IInputStyled>`
 export const SearchField: FC = () => {
   const [value, setValue, onSubmit] = useSearch();
 
-  const wallpapper = useAppSelector(
-    (state) => state.settings.lookfeel.wallpaper
-  );
+  const wallpapper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
 
   return (
-    <SearchFormStyled
-      action="https://www.google.com/search"
-      onSubmit={onSubmit}
-    >
+    <SearchFormStyled action='https://www.google.com/search' onSubmit={onSubmit}>
       <InputStyled isOpaque={!!wallpapper}>
         {icons.searchEngines.google}
 
         <input
-          className="searchInput"
-          id="search"
-          type="search"
-          name="q"
-          autoComplete="off"
+          className='searchInput'
+          id='search'
+          type='search'
+          name='q'
+          autoComplete='off'
           autoFocus
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
       </InputStyled>
 
-      <Typography type="TextRegular11" className="subInput">
+      <Typography type='TextRegular11' className='subInput'>
         Type URL or search query and press Enter
       </Typography>
     </SearchFormStyled>

@@ -1,2 +1,2 @@
-export { Typography } from "./Typography";
-export * from "./interfaces";
+export { Typography } from './Typography';
+export * from './interfaces';

@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from '../../hooks/hooks';
 
 const BackgroundStyled = styled.div`
   position: fixed;
@@ -26,7 +26,7 @@ export const Background: FC = () => {
 
   return (
     <BackgroundStyled>
-      <img className="background" src={wallpaper} alt="" />
+      <img className='background' src={wallpaper} alt='' />
     </BackgroundStyled>
   );
 };

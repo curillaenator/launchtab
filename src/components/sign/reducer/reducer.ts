@@ -1,16 +1,15 @@
-import { TReducer, TAction } from "../../../types/types";
+import { TReducer, TAction } from '../../../types/types';
 
-const SET_USER_EMAIL = "sign/SET_USER_EMAIL";
-const SET_USER_EMAIL_MESSAGE = "sign/SET_USER_EMAIL_MESSAGE";
+const SET_USER_EMAIL = 'sign/SET_USER_EMAIL';
+const SET_USER_EMAIL_MESSAGE = 'sign/SET_USER_EMAIL_MESSAGE';
 
-const SET_USER_PASSWORD = "sign/SET_USER_PASSWORD";
-const SET_USER_PASSWORD_MESSAGE = "sign/SET_USER_PASSWORD_MESSAGE";
+const SET_USER_PASSWORD = 'sign/SET_USER_PASSWORD';
+const SET_USER_PASSWORD_MESSAGE = 'sign/SET_USER_PASSWORD_MESSAGE';
 
-const SET_USER_CONFIRM_PASSWORD = "sign/SET_USER_CONFIRM_PASSWORD";
-const SET_USER_CONFIRM_PASSWORD_MESSAGE =
-  "sign/SET_USER_CONFIRM_PASSWORD_MESSAGE";
+const SET_USER_CONFIRM_PASSWORD = 'sign/SET_USER_CONFIRM_PASSWORD';
+const SET_USER_CONFIRM_PASSWORD_MESSAGE = 'sign/SET_USER_CONFIRM_PASSWORD_MESSAGE';
 
-const SET_USER_OK_PASSWORD = "sign/SET_USER_OK_PASSWORD";
+const SET_USER_OK_PASSWORD = 'sign/SET_USER_OK_PASSWORD';
 
 export interface IFormState {
   email: string;
@@ -26,14 +25,14 @@ export interface IFormState {
 }
 
 export const initialState: IFormState = {
-  email: "",
-  emailMes: "",
+  email: '',
+  emailMes: '',
 
-  password: "",
-  passwordMes: "",
+  password: '',
+  passwordMes: '',
 
-  confirmPassword: "",
-  confirmPasswordMes: "",
+  confirmPassword: '',
+  confirmPasswordMes: '',
 
   okPassword: false,
 };

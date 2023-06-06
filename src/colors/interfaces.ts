@@ -1,5 +1,5 @@
-import { colorsLib, colorsStaticLightMode } from "./colors";
-import { getThemeShadowsWithColors } from "./colorGetters/getShadow";
+import { colorsLib, colorsStaticLightMode } from './colors';
+import { getThemeShadowsWithColors } from './colorGetters/getShadow';
 
 const themeTemplate = {
   white: colorsLib.white,

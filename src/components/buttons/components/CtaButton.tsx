@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { Typography } from "../../typography/Typography";
-import { Shape } from "../../shape/Shape";
+import { Typography } from '../../typography/Typography';
+import { Shape } from '../../shape/Shape';
 
-import { icons } from "./../assets/icons";
-import type { Button } from "./interfaces";
+import { icons } from './../assets/icons';
+import type { Button } from './interfaces';
 
 // TODO size variations
 
@@ -23,8 +23,8 @@ const ButtonStyled = styled.button<IButtonStyled>`
   align-items: center;
   gap: 0.5rem;
   height: 40px;
-  padding-left: ${({ isLeftIcon }) => (isLeftIcon ? "14px" : "16px")};
-  padding-right: ${({ isRightIcon }) => (isRightIcon ? "8px" : "16px")};
+  padding-left: ${({ isLeftIcon }) => (isLeftIcon ? '14px' : '16px')};
+  padding-right: ${({ isRightIcon }) => (isRightIcon ? '8px' : '16px')};
   background: transparent;
   border-radius: 16px;
   z-index: 20;
@@ -80,7 +80,7 @@ export const BtnCta: FC<Button> = ({
   active = false,
   disabled = false,
   danger = false,
-  type = "button",
+  type = 'button',
   handler,
 }) => {
   return (
@@ -98,7 +98,7 @@ export const BtnCta: FC<Button> = ({
       {leftIcon && icons[leftIcon]}
 
       {title && (
-        <Typography type="RoundedBold14" className="btn_title">
+        <Typography type='RoundedBold14' className='btn_title'>
           {title}
         </Typography>
       )}

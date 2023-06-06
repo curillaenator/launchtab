@@ -1,22 +1,22 @@
-import React, { FC, useEffect, useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import GlobalFonts from "../../assets/fonts/fonts";
+import React, { FC, useEffect, useState } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import GlobalFonts from '../../assets/fonts/fonts';
 
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { useDataQuery } from "./useDataQuery";
-import { useThemeComposer } from "./useThemeComposer";
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { useDataQuery } from './useDataQuery';
+import { useThemeComposer } from './useThemeComposer';
 
-import { Header } from "../header/Header";
-import { Loader } from "../loader/Loader";
-import { Background } from "../background/Background";
-import { Pages } from "../pages/Pages";
-import { Bookmarks } from "../bookmarks/Bookmarks";
-import { Sign } from "../sign";
-import { Modal } from "../modal/Modal";
-import { Settings } from "../settings/Settings";
+import { Header } from '../header/Header';
+import { Loader } from '../loader/Loader';
+import { Background } from '../background/Background';
+import { Pages } from '../pages/Pages';
+import { Bookmarks } from '../bookmarks/Bookmarks';
+import { Sign } from '../sign';
+import { Modal } from '../modal/Modal';
+import { Settings } from '../settings/Settings';
 
-import { checkUserIsAuthed } from "../../redux/reducers/auth";
-import { getCurBookmarks } from "../../redux/reducers/bookmarks";
+import { checkUserIsAuthed } from '../../redux/reducers/auth';
+import { getCurBookmarks } from '../../redux/reducers/bookmarks';
 
 const AppStyled = styled.div`
   position: relative;
@@ -69,10 +69,7 @@ export const App: FC = () => {
 
         {data && (
           <>
-            <Header
-              isAnon={isAnon}
-              setSettingsModal={() => setSettingsModal(true)}
-            />
+            <Header isAnon={isAnon} setSettingsModal={() => setSettingsModal(true)} />
 
             <Pages pages={pages} curPage={curPage} />
 

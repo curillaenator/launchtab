@@ -1,11 +1,11 @@
-import { useState, FormEvent, Dispatch } from "react";
+import { useState, FormEvent, Dispatch } from 'react';
 
 export const useSearch = (): [
   string,
   Dispatch<React.SetStateAction<string>>,
-  (e: FormEvent) => Window | null | undefined
+  (e: FormEvent) => Window | null | undefined,
 ] => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   // const urlRegEx = /(^https?:\/\/)?[a-z0-9~_\-\.]+[a-z]{2,9}/;
   const urlRegExHttps = /(^https?:\/\/)[a-z0-9~_\-]+\.[a-z]{2,9}/;
@@ -14,12 +14,12 @@ export const useSearch = (): [
   const onSubmit = (e: FormEvent) => {
     if (urlRegExHttps.test(value)) {
       e.preventDefault();
-      return window.open(value, "_self");
+      return window.open(value, '_self');
     }
 
     if (wwwRegEx.test(value)) {
       e.preventDefault();
-      return window.open(`https://${value}`, "_self");
+      return window.open(`https://${value}`, '_self');
     }
   };
 

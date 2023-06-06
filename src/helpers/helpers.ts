@@ -13,9 +13,9 @@ export interface CheckImageURL {
 }
 
 export const checkImageURL = async (url: string): Promise<CheckImageURL> => {
-  const check = await fetch(url, { credentials: "omit", mode: "cors" })
+  const check = await fetch(url, { credentials: 'omit', mode: 'cors' })
     .then((res) => ({ ok: res.ok, status: res.status }))
-    .catch(() => ({ ok: false, status: "bad" }));
+    .catch(() => ({ ok: false, status: 'bad' }));
 
   return { url, ...check };
 };

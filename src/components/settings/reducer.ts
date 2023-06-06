@@ -1,15 +1,15 @@
-import { LOOKFEEL } from "./constants";
-import { TReducer, TAction } from "../../types/types";
-import { ISettings } from "../../redux/reducers/settings";
+import { LOOKFEEL } from './constants';
+import { TReducer, TAction } from '../../types/types';
+import { ISettings } from '../../redux/reducers/settings';
 
-const SET_CURRENT_TAB = "form/SET_CURRENT_TAB";
-const SET_INITIAL_STATE = "form/SET_INITIAL_STATE";
+const SET_CURRENT_TAB = 'form/SET_CURRENT_TAB';
+const SET_INITIAL_STATE = 'form/SET_INITIAL_STATE';
 
-const SET_WALLPAPER = "lookfeel/SET_WALLPAPER";
-const SET_THEME = "lookfeel/SET_THEME";
-const SET_DARKMODE = "lookfeel/SET_DARKMODE";
+const SET_WALLPAPER = 'lookfeel/SET_WALLPAPER';
+const SET_THEME = 'lookfeel/SET_THEME';
+const SET_DARKMODE = 'lookfeel/SET_DARKMODE';
 
-const SET_SHORTNAME = "profile/SET_SHORTNAME";
+const SET_SHORTNAME = 'profile/SET_SHORTNAME';
 
 // INITIAL STATE
 
@@ -22,7 +22,7 @@ export const initialState: ISettingsState = {
   lookfeel: {
     wallpaper: null,
     darkMode: false,
-    themeName: "defaultTheme",
+    themeName: 'defaultTheme',
   },
   profile: {
     shortName: null,

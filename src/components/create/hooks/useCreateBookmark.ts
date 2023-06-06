@@ -1,21 +1,15 @@
-import { useState, useEffect, Dispatch } from "react";
-import { checkImageURL, CheckImageURL } from "../../../helpers/helpers";
+import { useState, useEffect, Dispatch } from 'react';
+import { checkImageURL, CheckImageURL } from '../../../helpers/helpers';
 
-const fetchLink =
-  "https://vector-logos-figma-plugin-api.vercel.app/api/search?query=";
+const fetchLink = 'https://vector-logos-figma-plugin-api.vercel.app/api/search?query=';
 
 interface IconsResponse {
   [title: string]: string;
 }
 
 export const useCreateBookmark = (
-  title: string
-): [
-  CheckImageURL[],
-  boolean,
-  Dispatch<React.SetStateAction<boolean>>,
-  () => void
-] => {
+  title: string,
+): [CheckImageURL[], boolean, Dispatch<React.SetStateAction<boolean>>, () => void] => {
   const [isFetchedIconsOpen, setIsFetchedIconsOpen] = useState<boolean>(false);
   const [iconsResponse, setIconsResponce] = useState<IconsResponse[]>([]);
   const [icons, setIcons] = useState<CheckImageURL[]>([]);
@@ -27,7 +21,7 @@ export const useCreateBookmark = (
       return;
     }
 
-    fetch(`${fetchLink}${title}`, { credentials: "omit" })
+    fetch(`${fetchLink}${title}`, { credentials: 'omit' })
       .then((res) => res.json())
       .then((json) => setIconsResponce(json.results))
       .catch(() => setIconsResponce([]));

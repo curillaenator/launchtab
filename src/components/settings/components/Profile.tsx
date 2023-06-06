@@ -1,12 +1,12 @@
-import React, { FC, Dispatch } from "react";
-import { AnyAction } from "@reduxjs/toolkit";
-import styled, { keyframes } from "styled-components";
-import { fadeIn } from "react-animations";
+import React, { FC, Dispatch } from 'react';
+import { AnyAction } from '@reduxjs/toolkit';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
 
 // import { TextInput } from "../../inputs/TextInput";
-import { Typography } from "../../typography";
+import { Typography } from '../../typography';
 
-import type { IProfileActions, ISettingsState } from "../reducer";
+import type { IProfileActions, ISettingsState } from '../reducer';
 
 const animation = keyframes`${fadeIn}`;
 const ProfileStyled = styled.div`
@@ -16,7 +16,7 @@ const ProfileStyled = styled.div`
 `;
 
 interface IProfile {
-  values: ISettingsState["profile"];
+  values: ISettingsState['profile'];
   setters: IProfileActions;
   dispatch: Dispatch<AnyAction>;
 }
@@ -40,9 +40,7 @@ export const Profile: FC<IProfile> = ({ values, setters, dispatch }) => {
         value={values.shortName ? values.shortName : ""}
         onChange={handleShortName}
       /> */}
-      <Typography type="TextRegular14">
-        Profile editing is not available yet
-      </Typography>
+      <Typography type='TextRegular14'>Profile editing is not available yet</Typography>
     </ProfileStyled>
   );
 };

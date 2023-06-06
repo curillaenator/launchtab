@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ILoadings {
   isAppLoading: boolean;
@@ -13,7 +13,7 @@ const initialState: ILoadings = {
 };
 
 const loadingsSlice = createSlice({
-  name: "loadings",
+  name: 'loadings',
   initialState,
   reducers: {
     setIsAppLoading: (state, action: PayloadAction<boolean>) => {
@@ -32,5 +32,4 @@ const loadingsSlice = createSlice({
 
 export const loadings = loadingsSlice.reducer;
 
-export const { setIsAppLoading, setIsDataLoading, setIsDataSyncing } =
-  loadingsSlice.actions;
+export const { setIsAppLoading, setIsDataLoading, setIsDataSyncing } = loadingsSlice.actions;

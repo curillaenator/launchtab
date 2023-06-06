@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { FeatureList } from "./FeatureList";
+import { FeatureList } from './FeatureList';
 
-import { featureLists } from "./constants";
+import { featureLists } from './constants';
 
 const FeaturesStyled = styled.div`
   display: flex;

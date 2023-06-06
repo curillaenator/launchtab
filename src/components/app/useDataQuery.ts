@@ -1,21 +1,15 @@
-import firebase from "firebase/app";
-import { batch } from "react-redux";
-import { useEffect } from "react";
-import { useAppDispatch } from "../../hooks/hooks";
-import { pagesApi, localStorageApi } from "../../api/api";
-import { initialPages } from "../../api/apiHelpers";
+import firebase from 'firebase/app';
+import { batch } from 'react-redux';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks/hooks';
+import { pagesApi, localStorageApi } from '../../api/api';
+import { initialPages } from '../../api/apiHelpers';
 
-import { setMessage, applyData } from "../../redux/reducers/bookmarks";
+import { setMessage, applyData } from '../../redux/reducers/bookmarks';
 
-import {
-  setIsDataLoading,
-  setIsDataSyncing,
-} from "../../redux/reducers/loadings";
+import { setIsDataLoading, setIsDataSyncing } from '../../redux/reducers/loadings';
 
-import {
-  applySettings,
-  initialState as initialSettings,
-} from "../../redux/reducers/settings";
+import { applySettings, initialState as initialSettings } from '../../redux/reducers/settings';
 
 export const useDataQuery = (user: firebase.User | null) => {
   const dispatch = useAppDispatch();
@@ -29,17 +23,13 @@ export const useDataQuery = (user: firebase.User | null) => {
 
     // clear localStorage if settings & bookmarks EXIST, but user is UNATHORIZED
 
-    if (
-      user?.isAnonymous === true &&
-      "bookmarks" in localStorage &&
-      "settings" in localStorage
-    ) {
+    if (user?.isAnonymous === true && 'bookmarks' in localStorage && 'settings' in localStorage) {
       localStorageApi.clear();
     }
 
     // data process when user is ATHORIZED and settings & bookmarks EXIST in localStorage
 
-    if ("bookmarks" in localStorage && "settings" in localStorage) {
+    if ('bookmarks' in localStorage && 'settings' in localStorage) {
       const localResponse = {
         pages: localStorageApi.getBookmarks() || initialPages,
         settings: localStorageApi.getSettings() || initialSettings,
@@ -59,8 +49,8 @@ export const useDataQuery = (user: firebase.User | null) => {
     // data process when settings & bookmarks NOT EXIST in localStorage and user EXISTS
 
     pagesApi.getData(user.uid).then((response) => {
-      if (!response) return dispatch(setMessage("Bad server responce"));
-      if (typeof response === "string") return dispatch(setMessage(response));
+      if (!response) return dispatch(setMessage('Bad server responce'));
+      if (typeof response === 'string') return dispatch(setMessage(response));
 
       if (userAuthorized) {
         localStorageApi.setBookmarks(response.pages);

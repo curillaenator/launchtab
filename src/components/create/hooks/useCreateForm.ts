@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useAppDispatch } from "../../../hooks/hooks";
-import { createPage, createBookmark } from "../../../redux/reducers/bookmarks";
+import { useState } from 'react';
+import { useAppDispatch } from '../../../hooks/hooks';
+import { createPage, createBookmark } from '../../../redux/reducers/bookmarks';
 
 export interface States {
   name: string;
@@ -19,25 +19,25 @@ export type Handlers = {
 };
 
 export const useCreateForm = (
-  create: "new-page" | "new-bookmark"
+  create: 'new-page' | 'new-bookmark',
 ): [States, Handlers, (close: () => void) => void, () => void] => {
   const dispatch = useAppDispatch();
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
-  const [link, setLink] = useState("");
+  const [link, setLink] = useState('');
 
-  const [imageURL, setImageURL] = useState("");
+  const [imageURL, setImageURL] = useState('');
   const [imageURLerror, setImageURLerror] = useState(false);
 
-  const [iconURL, setIconURL] = useState("");
+  const [iconURL, setIconURL] = useState('');
 
   const resetFormState = () => {
-    setName("");
-    setLink("");
-    setImageURL("");
+    setName('');
+    setLink('');
+    setImageURL('');
     setImageURLerror(false);
-    setIconURL("");
+    setIconURL('');
   };
 
   const states: States = {
@@ -62,12 +62,12 @@ export const useCreateForm = (
     const submitImage = imageURL.trim();
     const submitIcon = iconURL.trim();
 
-    if (create === "new-page" && submitName) {
+    if (create === 'new-page' && submitName) {
       dispatch(createPage(submitName));
       close();
     }
 
-    if (create === "new-bookmark" && submitName && submitLink) {
+    if (create === 'new-bookmark' && submitName && submitLink) {
       const isImageURL = !!submitImage ? submitImage : null;
       const isIconsURL = !!submitIcon ? submitIcon : null;
 

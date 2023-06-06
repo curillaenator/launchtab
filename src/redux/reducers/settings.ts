@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { batch } from "react-redux";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { batch } from 'react-redux';
 
-import { settingsApi, localStorageApi } from "../../api/api";
+import { settingsApi, localStorageApi } from '../../api/api';
 
-import { TThemeName } from "../../colors/themes";
-import type { TThunk } from "../../types/types";
+import { TThemeName } from '../../colors/themes';
+import type { TThunk } from '../../types/types';
 
 export interface ISettings {
   lookfeel: {
@@ -20,7 +20,7 @@ export const initialState: ISettings = {
   lookfeel: {
     wallpaper: null,
     darkMode: false,
-    themeName: "defaultTheme",
+    themeName: 'defaultTheme',
   },
   profile: {
     shortName: null,
@@ -31,18 +31,18 @@ export const initialState: ISettings = {
 };
 
 const settingsSlice = createSlice({
-  name: "settings",
+  name: 'settings',
   initialState,
   reducers: {
-    setLookFeel: (state, action: PayloadAction<ISettings["lookfeel"]>) => {
+    setLookFeel: (state, action: PayloadAction<ISettings['lookfeel']>) => {
       state.lookfeel = { ...state.lookfeel, ...action.payload };
     },
 
-    setProfile: (state, action: PayloadAction<ISettings["profile"]>) => {
+    setProfile: (state, action: PayloadAction<ISettings['profile']>) => {
       state.profile = { ...state.profile, ...action.payload };
     },
 
-    setOther: (state, action: PayloadAction<ISettings["other"]>) => {
+    setOther: (state, action: PayloadAction<ISettings['other']>) => {
       state.other = { ...state.other, ...action.payload };
     },
 
@@ -55,10 +55,9 @@ const settingsSlice = createSlice({
 });
 export const settings = settingsSlice.reducer;
 
-const { setLookFeel, setProfile, setOther, setSettings } =
-  settingsSlice.actions;
+const { setLookFeel, setProfile, setOther, setSettings } = settingsSlice.actions;
 
-//THUNKS
+// THUNKS
 
 export const resetSettings = (): TThunk => {
   return (dispatch) => {
@@ -72,15 +71,15 @@ export const applySettings = (settings: ISettings): TThunk => {
     if (!settings) return;
 
     batch(() => {
-      if ("lookfeel" in settings) {
+      if ('lookfeel' in settings) {
         dispatch(setLookFeel(settings.lookfeel));
       }
 
-      if ("profile" in settings) {
+      if ('profile' in settings) {
         dispatch(setProfile(settings.profile));
       }
 
-      if ("other" in settings) {
+      if ('other' in settings) {
         dispatch(setOther(settings.other));
       }
     });

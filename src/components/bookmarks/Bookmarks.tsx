@@ -1,21 +1,18 @@
-import React, { FC } from "react";
-import SortableList, { SortableItem } from "react-easy-sort";
-import { arrayMoveImmutable } from "array-move";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import SortableList, { SortableItem } from 'react-easy-sort';
+import { arrayMoveImmutable } from 'array-move';
+import styled from 'styled-components';
 
-import { ContextMenu } from "../contextMenu/ContextMenu";
-import { Create } from "../create";
-import { Card } from "../card/Card";
+import { ContextMenu } from '../contextMenu/ContextMenu';
+import { Create } from '../create';
+import { Card } from '../card/Card';
 
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch } from '../../hooks/hooks';
 
-import {
-  updateBookmarksOrder,
-  deleteBookmark,
-} from "../../redux/reducers/bookmarks";
+import { updateBookmarksOrder, deleteBookmark } from '../../redux/reducers/bookmarks';
 
-import type { IBookmark } from "../../types/types";
-import type { IMenuItem } from "../contextMenu/ContextMenu";
+import type { IBookmark } from '../../types/types';
+import type { IMenuItem } from '../contextMenu/ContextMenu';
 
 const SortableListStyled = styled(SortableList)`
   display: grid;
@@ -77,11 +74,11 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
   const getMenuItems = (bm: IBookmark): IMenuItem[] => {
     const contextMenuItems: IMenuItem[] = [
       {
-        title: "Edit",
+        title: 'Edit',
         handler: () => {},
       },
       {
-        title: "Delete",
+        title: 'Delete',
         danger: true,
         handler: () => dispatch(deleteBookmark(bm.name, bm.id)),
       },
@@ -104,8 +101,8 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
         );
       })}
 
-      <div className="create">
-        <Create create="new-bookmark" iconName="addBigIcon" />
+      <div className='create'>
+        <Create create='new-bookmark' iconName='addBigIcon' />
       </div>
     </SortableListStyled>
   );

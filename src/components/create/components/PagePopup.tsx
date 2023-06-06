@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { TextInput } from "../../inputs";
-import { BtnCta, BtnGhost } from "../../buttons";
-import { Typography } from "../../typography/Typography";
-import { Shape } from "../../shape/Shape";
+import { TextInput } from '../../inputs';
+import { BtnCta, BtnGhost } from '../../buttons';
+import { Typography } from '../../typography/Typography';
+import { Shape } from '../../shape/Shape';
 
 const PagePopupStyled = styled.div`
   width: 340px;
@@ -57,39 +57,34 @@ interface IPagePopup {
   close: () => void;
 }
 
-export const PagePopup: FC<IPagePopup> = ({
-  pageName,
-  handlePageName,
-  handleCreate,
-  close,
-}) => {
+export const PagePopup: FC<IPagePopup> = ({ pageName, handlePageName, handleCreate, close }) => {
   return (
     <PagePopupStyled>
-      <div className="popup">
-        <Shape className="popup-shape" borderRadius={16} />
+      <div className='popup'>
+        <Shape className='popup-shape' borderRadius={16} />
 
-        <div className="popup-title">
-          <Typography type="RoundedHeavy24">New</Typography>
-          <Typography type="RoundedHeavy24" className="popup-title-themed">
+        <div className='popup-title'>
+          <Typography type='RoundedHeavy24'>New</Typography>
+          <Typography type='RoundedHeavy24' className='popup-title-themed'>
             page
           </Typography>
         </div>
 
-        <div className="popup-inputs">
+        <div className='popup-inputs'>
           <TextInput
-            type="text"
-            iconName="pencil"
-            name="new-page"
-            placeholder="Title"
+            type='text'
+            iconName='pencil'
+            name='new-page'
+            placeholder='Title'
             limitSymbols={24}
             value={pageName}
             onChange={handlePageName}
           />
         </div>
 
-        <div className="popup-buttons">
-          <BtnCta title="Create" handler={() => handleCreate(close)} />
-          <BtnGhost title="Cancel" handler={() => close()} />
+        <div className='popup-buttons'>
+          <BtnCta title='Create' handler={() => handleCreate(close)} />
+          <BtnGhost title='Cancel' handler={() => close()} />
         </div>
       </div>
     </PagePopupStyled>

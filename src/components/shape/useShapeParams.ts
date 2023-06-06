@@ -1,16 +1,9 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  MutableRefObject,
-} from "react";
+import { useRef, useState, useEffect, useCallback, useMemo, MutableRefObject } from 'react';
 
 type TUseShapeParams = (
   isAdaptive: boolean,
   radius: number,
-  height?: number
+  height?: number,
 ) => [number, number, string, MutableRefObject<SVGSVGElement | null>];
 
 export const useShapeParams: TUseShapeParams = (isAdaptive, radius, height) => {
@@ -18,16 +11,15 @@ export const useShapeParams: TUseShapeParams = (isAdaptive, radius, height) => {
   const [WH, setWH] = useState([0, 0]);
 
   const setShapeSize = useCallback(() => {
-    ref.current &&
-      setWH([ref.current.clientWidth, height || ref.current.clientHeight]);
+    ref.current && setWH([ref.current.clientWidth, height || ref.current.clientHeight]);
   }, []);
 
   useEffect(() => {
     setShapeSize();
 
     if (isAdaptive) {
-      window.addEventListener("resize", setShapeSize);
-      return () => window.removeEventListener("resize", setShapeSize);
+      window.addEventListener('resize', setShapeSize);
+      return () => window.removeEventListener('resize', setShapeSize);
     }
   }, []);
 

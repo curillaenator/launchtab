@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { useShapeParams } from "./useShapeParams";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import { useShapeParams } from './useShapeParams';
+import styled from 'styled-components';
 
 export const ShapeStyled = styled.svg`
   position: absolute;
@@ -19,22 +19,17 @@ interface IShape {
   className?: string;
 }
 
-export const Shape: FC<IShape> = ({
-  borderRadius = 24,
-  isAdaptive = false,
-  height,
-  className = "rounded-shape",
-}) => {
+export const Shape: FC<IShape> = ({ borderRadius = 24, isAdaptive = false, height, className = 'rounded-shape' }) => {
   const [W, H, path, ref] = useShapeParams(isAdaptive, borderRadius, height);
 
   return (
     <ShapeStyled
       ref={ref}
       className={className}
-      version="1.1"
-      shapeRendering="geometricPrecision"
+      version='1.1'
+      shapeRendering='geometricPrecision'
       viewBox={`0 0 ${W} ${H}`}
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns='http://www.w3.org/2000/svg'
     >
       <path d={path} />
     </ShapeStyled>

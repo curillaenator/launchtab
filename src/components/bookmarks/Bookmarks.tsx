@@ -19,17 +19,6 @@ const SortableListStyled = styled(SortableList)`
   grid-template-columns: 1fr;
   gap: 1rem;
 
-  .create {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 186px;
-    width: 100%;
-
-    border-radius: 18px;
-    border: 2px dashed ${({ theme }) => theme.modals.matte};
-  }
-
   @media (min-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -108,9 +97,7 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
         );
       })}
 
-      <div className='create'>
-        <Create create='new-bookmark' iconName='addBigIcon' />
-      </div>
+      <Create create='new-bookmark' iconName='addBigIcon' />
     </SortableListStyled>
   );
 };

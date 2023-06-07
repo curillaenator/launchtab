@@ -47,7 +47,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
 
   .rounded-shape {
     fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.base)};
-    filter: ${({ active }) => (active ? 'contrast(1.64)' : 'contrast(1)')};
+    filter: ${({ active }) => (active ? 'contrast(1.3)' : 'contrast(1)')};
   }
 
   &:hover {

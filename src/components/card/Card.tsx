@@ -45,7 +45,8 @@ const CardStyled = styled.a<ICardStyled>`
     backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(5px)' : 'none')};
 
     &-bordered {
-      fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
+      stroke: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.lightest)};
+      stroke-width: 1px;
     }
   }
 

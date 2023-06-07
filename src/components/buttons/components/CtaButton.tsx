@@ -50,7 +50,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
   .rounded-shape {
     transition: 0.08s linear;
     fill: ${({ theme }) => theme.primary[500]};
-    filter: contrast(1.64);
+    filter: contrast(1.3);
   }
 
   &:hover {

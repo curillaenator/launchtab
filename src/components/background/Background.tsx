@@ -13,8 +13,8 @@ const BackgroundStyled = styled.div`
   background-color: ${({ theme }) => theme.backgrounds.light};
 
   .background {
-    width: 120%;
-    height: 120%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `;

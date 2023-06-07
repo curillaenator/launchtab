@@ -19,6 +19,9 @@ interface ICardStyled {
 }
 
 const CardStyled = styled.a<ICardStyled>`
+  --card-animation-time: 120ms;
+  --card-animation-method: ease-in-out;
+
   position: relative;
   cursor: pointer;
   display: block;
@@ -29,11 +32,13 @@ const CardStyled = styled.a<ICardStyled>`
   overflow: hidden;
   will-change: transform;
   backdrop-filter: blur(5px);
-  border: ${({ theme, hasBorder }) => (hasBorder ? `2px solid ${theme.borderLines}` : 'none')};
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
-  animation: 0.6s ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
-  transition: box-shadow 0.08s ease-in-out, transform 0.08s ease-in-out, opacity 0.2s ease-in-out;
-  background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.shapes.base)};
+  background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
+  border: 2px solid ${({ theme, hasBorder }) => (hasBorder ? theme.backgrounds.light : 'none')};
+
+  animation: var(--card-animation-time) ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
+
+  transition: var(--card-animation-time) var(--card-animation-method);
 
   .card-darkener {
     position: absolute;
@@ -57,25 +62,21 @@ const CardStyled = styled.a<ICardStyled>`
     width: 100%;
     height: 44px;
     padding: 0 1rem;
-    color: ${({ theme, isOpaque }) => (isOpaque ? theme.texts.title.sub : theme.texts.button.base)};
+    color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.title.base)};
   }
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.card};
-    transform: scale(1.042);
-    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.hover20 : theme.shapes.hover)};
+    box-shadow: ${({ theme }) => theme.shadows.basic};
+    transform: scale(1.02);
+    background-color: ${({ theme }) => theme.backgrounds.base};
 
-    .card-image {
-      filter: ${({ theme }) => theme.imageEffects.cardImageDarkModeHover};
-    }
-
-    .card-icon {
-      filter: ${({ theme }) => theme.imageEffects.cardImageDarkModeHover};
+    .card-title {
+      color: ${({ theme }) => theme.primary[500]};
     }
   }
 
   &:active {
-    box-shadow: ${({ theme }) => theme.shadows.card};
+    box-shadow: none;
     transform: scale(1);
     background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.shapes.base)};
   }

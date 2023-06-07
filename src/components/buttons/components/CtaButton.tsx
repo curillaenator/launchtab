@@ -21,9 +21,9 @@ const ButtonStyled = styled.button<IButtonStyled>`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   height: 40px;
-  padding-left: ${({ isLeftIcon }) => (isLeftIcon ? '14px' : '16px')};
+  padding-left: ${({ isLeftIcon }) => (isLeftIcon ? '12px' : '16px')};
   padding-right: ${({ isRightIcon }) => (isRightIcon ? '8px' : '16px')};
   background: transparent;
   border-radius: 16px;

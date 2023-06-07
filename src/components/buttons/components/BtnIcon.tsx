@@ -1,12 +1,15 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
+import { Shape } from '@src/components/shape/Shape';
+
 import { icons } from '../assets/icons';
 import type { IBtnIcon } from './interfaces';
 
 interface IBtnStyled {
   active: boolean;
   isLoading: boolean;
+  hasImage: boolean;
 }
 
 const iconsCss = {
@@ -21,10 +24,6 @@ const iconsCss = {
 
       &-dark {
         fill: ${({ theme }) => theme.icons.dark};
-      }
-
-      &-bg {
-        fill: ${({ theme }) => theme.modals.matte};
       }
     }
 
@@ -46,10 +45,6 @@ const iconsCss = {
       &-light {
         fill: ${({ active, theme }) => (active ? theme.primary[500] : theme.white)};
       }
-
-      &-bg {
-        fill: ${({ active, theme }) => (active ? theme.white : theme.modals.matte)};
-      }
     }
 
     &:hover {
@@ -63,11 +58,12 @@ const iconsCss = {
 };
 
 const BtnStyled = styled.button<IBtnStyled>`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
-  height: fit-content;
+  width: ${({ hasImage }) => (hasImage ? 'fit-content' : '56px')};
+  height: ${({ hasImage }) => (hasImage ? 'fit-content' : '56px')};
 
   ${iconsCss.settings}
   ${iconsCss.addIcon}
@@ -89,6 +85,11 @@ const BtnStyled = styled.button<IBtnStyled>`
     overflow: hidden;
   }
 
+  .rounded-shape {
+    fill: ${({ active, theme }) => (active ? theme.white : theme.backgrounds.base40)};
+    backdrop-filter: blur(5px);
+  }
+
   &:hover {
     .button-image {
       background-color: ${({ theme }) => theme.shapes.hover};
@@ -97,16 +98,29 @@ const BtnStyled = styled.button<IBtnStyled>`
 `;
 
 export const BtnIcon = forwardRef<HTMLButtonElement, IBtnIcon>((props, ref) => {
-  const { iconName, imageURL, active = false, isLoading = false, disabled = false, handler, imageHandler } = props;
+  const {
+    iconName,
+    imageURL,
+    active = false,
+    isLoading = false,
+    disabled = false,
+    handler,
+    imageHandler,
+    ...rest
+  } = props;
 
   return (
     <BtnStyled
+      {...rest}
       ref={ref}
       active={active}
       isLoading={isLoading}
       disabled={disabled || isLoading}
+      hasImage={!!imageURL}
       onClick={imageHandler ? () => imageHandler(imageURL as string) : handler}
     >
+      {!isLoading && !imageURL && <Shape borderRadius={18} />}
+
       {iconName && icons[iconName]}
 
       {imageURL && <img key={imageURL} className='button-image' src={imageURL} alt={imageURL} />}

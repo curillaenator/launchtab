@@ -1,25 +1,25 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { TextInput } from '../../inputs';
-import { BtnCta, BtnGhost } from '../../buttons';
-import { Typography } from '../../typography/Typography';
-import { Shape } from '../../shape/Shape';
+import { TextInput } from '@src/components/inputs';
+import { BtnCta, BtnGhost } from '@src/components/buttons';
+import { Typography } from '@src/components/typography/Typography';
+import { Shape } from '@src/components/shape/Shape';
 
 const PagePopupStyled = styled.div`
   width: 340px;
-  border-radius: 2rem;
+  border-radius: 20px;
   background-color: transparent;
   box-shadow: ${({ theme }) => theme.shadows.basic};
 
   .popup {
     position: relative;
     width: 100%;
-    padding: 32px 40px;
+    padding: 32px;
     z-index: 20;
 
     &-shape {
-      fill: ${({ theme }) => theme.shapes.hover};
+      fill: ${({ theme }) => theme.backgrounds.base};
     }
 
     &-title {

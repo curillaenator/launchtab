@@ -19,19 +19,19 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
   return (
     <FormStyled onSubmit={onSubmit}>
       <div className='form'>
-        <Shape className='form-shape' borderRadius={24} isAdaptive />
+        <Shape className='form-shape' borderRadius={18} isAdaptive />
 
         <div className='form-title'>
           <Typography type='RoundedHeavy56' className='form-title-main'>
             Sign Up
           </Typography>
 
-          {/* <Typography type="RoundedBold20" className="form-title-add">
-            Create an account
-          </Typography> */}
+          <Typography type='TextRegular12' className='form-title-addsub'>
+            Sign up is free, signed up users get fast loading and customizible app!
+          </Typography>
 
           <Typography type='TextRegular12' className='form-title-addsub'>
-            Any changes you made prior to registration will be saved into this new account
+            Non signed up application has limited server connection speed and works slow as demo.
           </Typography>
         </div>
 

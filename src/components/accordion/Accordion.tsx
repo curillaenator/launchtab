@@ -13,6 +13,7 @@ const AccordionStyled = styled.div<IAccordionStyled>`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  z-index: 1;
 
   .trigger {
     margin-bottom: 1rem;
@@ -38,9 +39,7 @@ export const Accordion: FC<AccordionProps> = ({ title, open, disabled, children,
 
   return (
     <AccordionStyled open={open} height={ref.current?.scrollHeight || 0}>
-      <div className='trigger'>
-        <BtnGhost title={title} disabled={disabled} handler={openHandler} />
-      </div>
+      <BtnGhost title={title} disabled={disabled} handler={openHandler} className='trigger' />
 
       <div className='accordion' ref={ref}>
         {children}

@@ -1,7 +1,8 @@
+import type { HTMLAttributes } from 'react';
 import { ButtonsIcons } from '../assets/icons';
 
-export interface Button {
-  title?: string | number;
+export interface Button extends HTMLAttributes<HTMLButtonElement> {
+  // title?: string | number;
   isColorsStatic?: boolean;
   size?: 'medium' | 'large';
   leftIcon?: ButtonsIcons;
@@ -9,8 +10,7 @@ export interface Button {
   active?: boolean;
   disabled?: boolean;
   danger?: boolean;
-  type?: 'submit' | 'button';
-  className?: string;
+  // type?: 'submit' | 'button';
   handler?: () => void;
 }
 

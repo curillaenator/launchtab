@@ -10,7 +10,7 @@ const BackgroundStyled = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: -50;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.backgrounds.light};
 
   .background {
     width: 120%;

@@ -39,7 +39,7 @@ interface ICreate {
   iconName?: ButtonsIcons;
 }
 
-export const Create: FC<ICreate> = ({ create, iconName = 'addSmallIcon' }) => {
+export const Create: FC<ICreate> = ({ create, iconName = 'addBigIcon' }) => {
   const [states, handlers, handleCreate, resetStates] = useCreateForm(create);
   const [position, offsetY, onTriggerClick] = usePopupPosition('bottom center');
 

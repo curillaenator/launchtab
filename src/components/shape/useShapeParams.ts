@@ -1,30 +1,30 @@
-import { useRef, useState, useEffect, useCallback, useMemo, MutableRefObject } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 
-type TUseShapeParams = (
-  isAdaptive: boolean,
-  radius: number,
-  height?: number,
-) => [number, number, string, MutableRefObject<SVGSVGElement | null>];
+interface Options {
+  isAdaptive: boolean;
+  radius: number;
+  height?: number;
+}
 
-export const useShapeParams: TUseShapeParams = (isAdaptive, radius, height) => {
-  const ref = useRef<SVGSVGElement | null>(null);
-  const [WH, setWH] = useState([0, 0]);
+export const useShapeParams = ({ radius, height: forcedHeight }: Options) => {
+  const ref = useRef<SVGSVGElement>(null);
 
-  const setShapeSize = useCallback(() => {
-    ref.current && setWH([ref.current.clientWidth, height || ref.current.clientHeight]);
-  }, []);
+  const [W, setW] = useState(0);
+  const [H, setH] = useState(0);
 
   useEffect(() => {
-    setShapeSize();
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.target.getBoundingClientRect();
+      setW(width);
+      setH(forcedHeight || height);
+    });
 
-    if (isAdaptive) {
-      window.addEventListener('resize', setShapeSize);
-      return () => window.removeEventListener('resize', setShapeSize);
-    }
-  }, []);
+    if (ref.current) observer.observe(ref.current);
 
-  const shapeData: [number, number, string] = useMemo(() => {
-    const [W, H] = WH;
+    return () => observer.disconnect();
+  }, [forcedHeight]);
+
+  const shapeData: { W: number; H: number; path: string } = useMemo(() => {
     const minHalf = Math.min(W / 2, H / 2);
 
     const R = 1.25 * radius > minHalf ? minHalf : 1.25 * radius;
@@ -35,10 +35,8 @@ export const useShapeParams: TUseShapeParams = (isAdaptive, radius, height) => {
     H ${R} C ${S} ${H} 0 ${H - S} 0 ${H - R}
     V ${R} C 0 ${S} ${S} 0 ${R} 0 Z`;
 
-    return [W, H, path];
-  }, [WH]);
+    return { W, H, path };
+  }, [W, H]);
 
-  return [...shapeData, ref];
+  return { ...shapeData, ref };
 };
-
-// const S = (0.08 + R * 0.000012) * smoothQ - 4 / smoothQ - 3;

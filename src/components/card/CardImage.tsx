@@ -18,7 +18,6 @@ const CardImageStyled = styled.div`
     user-select: none;
     border-radius: 19px 19px 6px 6px;
     margin-top: 2px;
-    filter: ${({ theme }) => theme.imageEffects.cardImageDarkMode};
   }
 
   .card-icon {
@@ -26,7 +25,6 @@ const CardImageStyled = styled.div`
     height: 88px;
     margin-top: 38px;
     user-select: none;
-    filter: ${({ theme }) => theme.imageEffects.cardImageDarkMode};
 
     .content-svg {
       width: 100%;

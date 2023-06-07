@@ -3,30 +3,41 @@ import styled from 'styled-components';
 
 import { useCreateBookmark } from '../hooks/useCreateBookmark';
 
-import { TextInput } from '../../inputs/TextInput';
-import { BtnCta, BtnGhost, BtnIcon } from '../../buttons';
-import { Accordion } from '../../accordion/Accordion';
-import { Scrollbars } from '../../scrollbars/Scrollbars';
-import { Card } from '../../card/Card';
-import { Typography } from '../../typography';
+import { TextInput } from '@src/components/inputs/TextInput';
+import { BtnCta, BtnGhost, BtnIcon } from '@src/components/buttons';
+import { Accordion } from '@src/components/accordion/Accordion';
+import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
+import { Card } from '@src/components/card/Card';
+import { Shape } from '@src/components/shape/Shape';
+import { Typography } from '@src/components/typography';
 
-import { checkImageURL } from '../../../helpers/helpers';
+import { checkImageURL } from '@src/helpers/helpers';
 
 import type { States, Handlers } from '../hooks/useCreateForm';
 
 const BookmarkPopupStyled = styled.div`
+  position: relative;
   width: 458px;
-  padding: 32px 40px;
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.shapes.hover};
+  padding: 32px;
+  border-radius: 20px;
+  background-color: transparent;
   box-shadow: ${({ theme }) => theme.shadows.basic};
+
+  .popup-shape {
+    fill: ${({ theme }) => theme.backgrounds.base};
+    z-index: 0;
+  }
 
   .popup-title {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 24px;
-    color: ${({ theme }) => theme.texts.body.paragraph};
+    color: ${({ theme }) => theme.texts.title.base};
+
+    & > h3 {
+      z-index: 1;
+    }
 
     &-themed {
       color: ${({ theme }) => theme.primary[500]};
@@ -114,6 +125,8 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
 
   return (
     <BookmarkPopupStyled>
+      <Shape borderRadius={18} isAdaptive className='popup-shape' />
+
       <div className='popup-title'>
         <Typography type='RoundedHeavy24'>New</Typography>
         <Typography type='RoundedHeavy24' className='popup-title-themed'>

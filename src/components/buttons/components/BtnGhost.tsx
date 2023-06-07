@@ -20,6 +20,10 @@ const ButtonStyled = styled.button<IButtonStyled>`
   background: transparent;
   z-index: 20;
 
+  &:disabled {
+    cursor: default !important;
+  }
+
   .svg_icon {
     width: 1rem;
     width: 1rem;
@@ -36,13 +40,13 @@ const ButtonStyled = styled.button<IButtonStyled>`
     color: ${({ active, theme, disabled, danger }) => {
       switch (true) {
         case disabled:
-          return theme.shapes.base;
+          return theme.texts.title.disabled;
         case danger:
           return theme.texts.button.danger;
         case active:
           return theme.primary[500];
         default:
-          return theme.texts.body.paragraph;
+          return theme.texts.title.base;
       }
     }};
   }
@@ -51,7 +55,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
     color: ${({ active, theme, disabled, danger }) => {
       switch (true) {
         case disabled:
-          return theme.shapes.base;
+          return theme.texts.title.disabled;
         case danger:
           return theme.texts.button.danger;
         case active:
@@ -67,7 +71,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
       color: ${({ theme, active, disabled, danger }) => {
         switch (true) {
           case disabled:
-            return theme.shapes.base;
+            return theme.texts.title.disabled;
           case danger:
             return theme.texts.button.dangerHover;
           case active:

@@ -4,11 +4,9 @@ export const initialPages: IData[] = [
   {
     name: 'Home',
     pages: [
-      { id: 'home_default_1', name: 'Obmen.market', link: 'obmen.market' },
-      { id: 'home_default_2', name: 'Launch Tab', link: 'launchtab.app' },
-      { id: 'home_default_3', name: 'Facebook', link: 'facebook.com' },
-      { id: 'home_default_4', name: 'VK', link: 'vk.com' },
-      { id: 'home_default_5', name: 'Instagram', link: 'instagram.com' },
+      { id: 'home_default_1', name: 'Facebook', link: 'facebook.com' },
+      { id: 'home_default_2', name: 'VK', link: 'vk.com' },
+      { id: 'home_default_3', name: 'Instagram', link: 'instagram.com' },
     ],
   },
   {

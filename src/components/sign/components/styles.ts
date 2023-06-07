@@ -13,7 +13,7 @@ export const FormStyled = styled.form`
     z-index: 20;
 
     &-shape {
-      fill: ${({ theme }) => theme.background};
+      fill: ${({ theme }) => theme.backgrounds.base};
     }
 
     &-title {

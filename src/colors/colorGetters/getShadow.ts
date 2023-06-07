@@ -1,14 +1,21 @@
+import { colorsLib } from '../colors';
+
+const hexTrasparent = (hex: string, opacity: number) => {
+  const hexA = Math.ceil(255 * opacity).toString(16);
+  return `${hex}${hexA}`;
+};
+
 export const getThemeShadowsWithColors = (primaryColor: string, darkMode: boolean) => {
   const shadowsStaticLightMode = {
-    basic:
-      '0px 1px 0px rgba(132, 132, 182, 0.07), 0px 67px 71px -4px rgba(17, 7, 30, 0.04), 0px 43.077px 50.8258px -4px rgba(17, 7, 30, 0.0222), 0px 24.6907px 38px 7px rgba(17, 7, 30, 0.0278), 0px 11.5156px 21.5219px -4px rgba(17, 7, 30, 0.046), 0px 3.22593px 11.7019px -4px rgba(17, 7, 30, 0.0462)',
-    card: '0px 67px 71px -4px rgba(17, 7, 30, 0.04), 0px 43.077px 50.8258px -4px rgba(17, 7, 30, 0.0222), 0px 24.6907px 38px 7px rgba(17, 7, 30, 0.0278), 0px 11.5156px 21.5219px -4px rgba(17, 7, 30, 0.046), 0px 3.22593px 11.7019px -4px rgba(17, 7, 30, 0.0462)',
+    basic: `
+      0px 4px 12px ${hexTrasparent(colorsLib.liver[900], 0.2)},
+      0px 8px 24px ${hexTrasparent(colorsLib.liver[900], 0.15)},
+      0px 16px 48px ${hexTrasparent(colorsLib.liver[900], 0.1)}
+    `,
   };
 
   const shadowsStaticDarkMode = {
-    basic:
-      '0px 1px 0px rgba(20, 20, 26, 0.33), 0px 24.6907px 38px 7px rgba(21, 18, 24, 0.28), 0px 11.5156px 21.5219px -4px rgba(21, 16, 27, 0.4), inset 0px -1px 1px rgba(24, 20, 29, 0.38)',
-    card: '0px 1px 0px rgba(20, 20, 26, 0.31), 0px 24.6907px 38px 7px rgba(21, 18, 24, 0.28), 0px 11.5156px 21.5219px -4px rgba(21, 16, 27, 0.4), inset 0px -1px 1px rgba(24, 20, 29, 0.24)',
+    basic: 'none',
   };
 
   const shadowsStatic = darkMode ? shadowsStaticDarkMode : shadowsStaticLightMode;

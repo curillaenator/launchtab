@@ -19,23 +19,25 @@ import { checkUserIsAuthed } from '../../redux/reducers/auth';
 import { getCurBookmarks } from '../../redux/reducers/bookmarks';
 
 const AppStyled = styled.div`
+  --app-pd: 64px;
+
   position: relative;
   width: 100%;
   min-width: 1280px;
-  padding: 3.5rem 1rem;
+  min-height: 100vh;
+  padding: var(--app-pd);
   margin: 0 auto;
   color: ${({ theme }) => theme.texts.body.paragraph};
 
-  @media (min-width: 768px) {
-    padding: 4.5rem 2rem;
+  .main-screen {
+    width: 100%;
+    height: 100%;
+    padding-top: calc(var(--app-pd) * 3);
+    min-height: calc(100vh - var(--app-pd) * 2);
   }
 
-  @media (min-width: 1152px) {
-    padding: 4.5rem 4rem;
-  }
-
-  @media (min-width: 1440px) {
-    padding: 4.5rem 7rem;
+  @media (min-width: 1920px) {
+    --app-pd: 96px;
   }
 `;
 
@@ -71,9 +73,11 @@ export const App: FC = () => {
           <>
             <Header isAnon={isAnon} setSettingsModal={() => setSettingsModal(true)} />
 
-            <Pages pages={pages} curPage={curPage} />
+            <div className='main-screen'>
+              <Pages pages={pages} curPage={curPage} />
 
-            <Bookmarks bookmarks={curBookmarks} curPage={curPage} />
+              <Bookmarks bookmarks={curBookmarks} curPage={curPage} />
+            </div>
           </>
         )}
 

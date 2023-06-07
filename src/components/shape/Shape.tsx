@@ -20,7 +20,7 @@ interface IShape {
 }
 
 export const Shape: FC<IShape> = ({ borderRadius = 24, isAdaptive = false, height, className = 'rounded-shape' }) => {
-  const [W, H, path, ref] = useShapeParams(isAdaptive, borderRadius, height);
+  const { W, H, path, ref } = useShapeParams({ isAdaptive, radius: borderRadius, height });
 
   return (
     <ShapeStyled

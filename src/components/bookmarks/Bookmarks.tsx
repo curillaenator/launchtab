@@ -17,8 +17,7 @@ import type { IMenuItem } from '../contextMenu/ContextMenu';
 const SortableListStyled = styled(SortableList)`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.75rem;
-  /* margin-bottom: 7.25rem; */
+  gap: 1rem;
 
   .create {
     display: flex;

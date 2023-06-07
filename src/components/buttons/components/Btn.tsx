@@ -23,11 +23,9 @@ const ButtonStyled = styled.button<IButtonStyled>`
   border-radius: 22px;
   z-index: 20;
   transition: 0.08s ease-in-out;
-  box-shadow: ${({ active, theme, isColorsStatic }) => {
+  box-shadow: ${({ active, theme }) => {
     switch (true) {
-      case active && isColorsStatic:
-        return theme.shadows.basic;
-      case active && !isColorsStatic:
+      case active:
         return theme.shadows.largeCtaButton;
       default:
         return 'none';
@@ -41,19 +39,19 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 
   .ctabutton-title {
-    color: ${({ active, theme }) => (active ? theme.primary[500] : theme.texts.button.base)};
+    color: ${({ active, theme }) => (active ? theme.white : theme.texts.title.base)};
     transition: 0.08s ease-in-out;
     user-select: none;
     white-space: nowrap;
   }
 
   .rounded-shape {
-    fill: ${({ theme, active }) => (active ? theme.shapes.hover : theme.shapes.base)};
+    fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.shapes.base)};
   }
 
   &:hover {
     .ctabutton-title {
-      color: ${({ theme, active }) => (active ? theme.primary[500] : theme.texts.button.hover)};
+      color: ${({ theme, active }) => (active ? theme.white : theme.primary[500])};
     }
   }
 `;

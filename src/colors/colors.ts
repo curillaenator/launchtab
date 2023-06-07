@@ -1,3 +1,8 @@
+const hexTrasparent = (hex: string, opacity: number) => {
+  const hexA = Math.ceil(255 * opacity).toString(16);
+  return `${hex}${hexA}`;
+};
+
 export const colorsLib = {
   white: '#FFFFFF',
   black: '#000000',
@@ -151,22 +156,25 @@ export const colorsStaticLightMode = {
   texts: {
     title: {
       base: colorsLib.liver[900],
-      sub: colorsLib.silveria[900],
-      searchSub: colorsLib.silveria[100],
+      disabled: colorsLib.liver[200],
+      sub: colorsLib.liver[900],
     },
+
     body: {
-      paragraph: colorsLib.silveria[700],
-      caption: colorsLib.silveria[500],
+      paragraph: colorsLib.liver[700],
+      caption: colorsLib.liver[500],
     },
+
     input: {
-      placeholder: colorsLib.silveria[500],
-      filled: colorsLib.silveria[900],
-      caption: colorsLib.silveria[500],
+      placeholder: colorsLib.liver[500],
+      filled: colorsLib.liver[900],
+      caption: colorsLib.liver[500],
       error: colorsLib.danger[500],
-      success: colorsLib.nika[600],
+      success: colorsLib.nika[500],
     },
+
     button: {
-      base: colorsLib.silveria[500],
+      base: colorsLib.liver[500],
       here: 500,
       hover: colorsLib.liver[900],
       danger: colorsLib.danger[400],
@@ -174,38 +182,37 @@ export const colorsStaticLightMode = {
     },
   },
 
-  borderLines: colorsLib.silveria[100],
+  borderLines: colorsLib.liver[100],
 
   search: {
     base: colorsLib.white,
-    border: colorsLib.silveria[100],
-    borderFocus: colorsLib.silveria[50],
-    text: colorsLib.silveria[900],
-    placeholder: colorsLib.silveria[500],
-    clearIcon: colorsLib.silveria[500],
+    border: colorsLib.white,
+    borderFocus: colorsLib.white,
+    text: colorsLib.white,
+    placeholder: colorsLib.liver[100],
+    clearIcon: colorsLib.white,
   },
 
   shapes: {
-    base: '#F9F9FB',
-    base20: '#FCFCFD66',
-    hover: '#FCFCFD',
-    hover20: '#FCFCFD9E',
+    base: colorsLib.white,
+    base20: hexTrasparent(colorsLib.white, 0.2),
+    hover: colorsLib.liver[100],
+    hover20: hexTrasparent(colorsLib.liver[100], 0.2),
   },
 
   icons: {
-    dark: colorsLib.silveria[500],
-    darkHover: colorsLib.liver[700],
-    light: colorsLib.silveria[200],
-    lightHover: colorsLib.liver[300],
+    dark: colorsLib.liver[400],
+    darkHover: colorsLib.liver[500],
+    light: colorsLib.liver[100],
+    lightHover: colorsLib.liver[200],
   },
 
-  imageEffects: {
-    grayscaleAndBrightness: '',
-    cardImageDarkMode: '',
-    cardImageDarkModeHover: '',
+  backgrounds: {
+    base: colorsLib.white,
+    light: colorsLib.liver[100],
+    base20: hexTrasparent(colorsLib.white, 0.2),
+    base40: hexTrasparent(colorsLib.white, 0.4),
   },
-
-  background: colorsLib.white,
 
   modals: {
     matte: `rgba(244, 242, 245, 0.4)`,
@@ -215,25 +222,28 @@ export const colorsStaticLightMode = {
 export const colorsStaticDarkMode = {
   texts: {
     title: {
-      base: colorsLib.liver[900],
-      sub: colorsLib.silveria[100],
-      searchSub: colorsLib.silveria[100],
+      base: colorsLib.white,
+      disabled: colorsLib.liver[800],
+      sub: colorsLib.liver[100],
     },
+
     body: {
-      paragraph: colorsLib.silveria[700],
-      caption: colorsLib.silveria[900],
+      paragraph: colorsLib.liver[700],
+      caption: colorsLib.liver[900],
     },
+
     input: {
-      placeholder: colorsLib.silveria[700],
-      filled: colorsLib.silveria[200],
-      caption: colorsLib.silveria[900],
+      placeholder: colorsLib.liver[500],
+      filled: colorsLib.liver[200],
+      caption: colorsLib.liver[900],
       error: colorsLib.danger[500],
-      success: colorsLib.nika[600],
+      success: colorsLib.nika[500],
     },
+
     button: {
-      base: colorsLib.silveria[800],
+      base: colorsLib.liver[800],
       here: 500,
-      hover: colorsLib.silveria[500],
+      hover: colorsLib.liver[500],
       danger: colorsLib.danger[400],
       dangerHover: colorsLib.danger[300],
     },
@@ -245,34 +255,31 @@ export const colorsStaticDarkMode = {
     base: 'none',
     border: '#1d1a1e',
     borderFocus: '#1F1D20',
-    text: colorsLib.silveria[400],
+    text: colorsLib.liver[400],
     placeholder: colorsLib.liver[700],
-    clearIcon: colorsLib.silveria[600],
+    clearIcon: colorsLib.liver[600],
   },
 
   shapes: {
-    base: '#1F1D20',
-    base20: '#1F1D2048',
-    hover: '#252326',
-    hover20: '#25232648',
+    base: colorsLib.black,
+    base20: hexTrasparent(colorsLib.black, 0.2),
+    hover: colorsLib.liver[100],
+    hover20: hexTrasparent(colorsLib.liver[900], 0.2),
   },
 
   icons: {
-    dark: colorsLib.silveria[700],
-    darkHover: colorsLib.liver[700],
-    light: colorsLib.liver[700],
-    lightHover: colorsLib.liver[500],
+    dark: colorsLib.liver[700],
+    darkHover: colorsLib.liver[800],
+    light: colorsLib.liver[100],
+    lightHover: colorsLib.liver[200],
   },
 
-  // -webkit-filter:  -moz-filter:
-
-  imageEffects: {
-    grayscaleAndBrightness: 'filter: grayscale(1) sepia(.0) brightness(.72) contrast(1.32)',
-    cardImageDarkMode: 'saturate(.24) opacity(.72)',
-    cardImageDarkModeHover: 'saturate(1) opacity(1)',
+  backgrounds: {
+    base: colorsLib.black,
+    light: colorsLib.liver[900],
+    base20: hexTrasparent(colorsLib.black, 0.2),
+    base40: hexTrasparent(colorsLib.black, 0.4),
   },
-
-  background: '#211F22',
 
   modals: {
     matte: 'rgba(19, 18, 19, 0.4)',

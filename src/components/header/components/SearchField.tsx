@@ -16,7 +16,7 @@ const SearchFormStyled = styled.form`
 
   .subInput {
     text-align: center;
-    color: ${({ theme }) => theme.texts.title.searchSub};
+    color: ${({ theme }) => theme.white};
   }
 `;
 
@@ -29,57 +29,51 @@ const InputStyled = styled.div<IInputStyled>`
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   width: 100%;
+  padding: 0 88px;
 
   .google_logo {
+    z-index: 100;
     position: absolute;
     top: 50%;
-    left: 1.125rem;
+    left: calc(1.125rem + 88px);
     transform: translateY(-50%);
-    ${({ theme }) => theme.imageEffects.grayscaleAndBrightness}
-    z-index:100;
   }
 
   .searchInput {
     width: 100%;
     height: 3.75rem;
-    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.background)};
+    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
     border-radius: 1.85rem;
-    border: 0.5px solid ${({ theme }) => theme.search.border};
-    backdrop-filter: blur(5px);
+    backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(5px)' : 'none')};
     transition: 0.1s;
     font-size: 1rem;
+    font-weight: 600;
     padding: 0 1.25rem 0 3.5rem;
-    color: ${({ theme }) => theme.search.text};
+    color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.input)};
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.base40};
 
     &::placeholder {
       color: ${({ theme }) => theme.search.placeholder};
     }
 
     &::-webkit-search-cancel-button {
-      filter: invert(1) brightness(0.36);
+      cursor: pointer;
+      appearance: none;
     }
 
     &:focus {
-      box-shadow: 0 0 0 5px ${({ theme }) => theme.search.borderFocus};
-
-      .google_logo {
-        ${({ theme }) => theme.imageEffects.cardImageDarkModeHover};
-      }
+      box-shadow: inset 0 0 0 2px ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.primary[500])};
     }
   }
 
-  @media (min-width: 768px) {
-    width: 65vw;
+  @media (min-width: 1920px) {
+    width: 75vw;
   }
 
-  @media (min-width: 1152px) {
-    width: 45vw;
-  }
-
-  @media (min-width: 1440px) {
-    width: 35vw;
+  @media (min-width: 2560px) {
+    width: 55vw;
   }
 `;
 

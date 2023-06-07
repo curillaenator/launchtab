@@ -19,7 +19,7 @@ const SignStyled = styled.div`
   gap: 1rem;
   width: 100%;
   height: 72px;
-  background-color: #f3f3f7b8;
+  background-color: ${({ theme }) => theme.backgrounds.base};
   backdrop-filter: blur(12px);
 
   & .sign-text {

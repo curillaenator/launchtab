@@ -162,7 +162,7 @@ export const colorsStaticLightMode = {
     error: colorsLib.danger[500],
     success: colorsLib.nika[500],
 
-    placeholder: colorsLib.liver[500],
+    placeholder: colorsLib.liver[300],
     inputColor: colorsLib.liver[900],
   },
 

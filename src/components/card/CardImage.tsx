@@ -16,7 +16,7 @@ const CardImageStyled = styled.div`
     height: calc(100% - 4px);
     object-fit: cover;
     user-select: none;
-    border-radius: 19px 19px 6px 6px;
+    border-radius: 12px 12px 6px 6px;
     margin-top: 2px;
   }
 

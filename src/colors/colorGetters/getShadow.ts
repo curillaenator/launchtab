@@ -38,10 +38,6 @@ export const getThemeShadowsWithColors = (primaryColor: string, darkMode: boolea
       largeCtaButton: `0px 12px 21.5219px -4px ${primaryColor}5C, 0px 3.22593px 11.7019px -4px ${primaryColor}DC`,
       mediumCtaButton: `0px 12px 21.5219px -4px ${primaryColor}5C, 0px 3.22593px 11.7019px -4px ${primaryColor}DC`,
 
-      filter: {
-        cardTitleShadow: `drop-shadow(0px 0px 4px ${primaryColor})`,
-      },
-
       // static shadows
       ...shadowsStatic,
     },

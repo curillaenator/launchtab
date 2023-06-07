@@ -57,6 +57,16 @@ export const App: FC = () => {
   useEffect(() => dispatch(checkUserIsAuthed()), [dispatch]);
   useEffect(() => dispatch(getCurBookmarks(curPage)), [curPage, dispatch]);
 
+  useEffect(() => {
+    const html = document.querySelector('html');
+
+    if (!!html) {
+      html.style.setProperty('background-color', currentTheme.backgrounds.light);
+      html.style.setProperty('--scrollbar-thumb', currentTheme.backgrounds.base);
+      html.style.setProperty('--scrollbar-track', currentTheme.backgrounds.light);
+    }
+  }, [currentTheme]);
+
   if (isAppLoading || isDataLoading) return <Loader fullscreen />;
 
   return (

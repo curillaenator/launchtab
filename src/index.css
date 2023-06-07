@@ -1,3 +1,15 @@
+:root::-webkit-scrollbar {
+  width: 0.25rem;
+  margin-left: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: var(--scrollbar-track, white);
+}
+
+:root::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb, blue);
+  border-radius: 0.25rem;
+}
+
 *,
 *::after,
 *::before {

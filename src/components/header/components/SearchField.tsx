@@ -5,8 +5,6 @@ import { Shape } from '@src/components/shape/Shape';
 import { useAppSelector } from '@src/hooks/hooks';
 import { useSearch } from './useSearch';
 
-import { Typography } from '@src/components/typography/Typography';
-
 import { icons } from '@src/assets/icons';
 
 const SEARCH_FIXED_PADDING_X = 88;
@@ -111,12 +109,9 @@ export const SearchField: FC = () => {
           onBlur={() => setFocused(false)}
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          placeholder='Type URL or search query and press Enter'
         />
       </InputStyled>
-
-      <Typography type='TextRegular11' className='subInput'>
-        Type URL or search query and press Enter
-      </Typography>
     </SearchFormStyled>
   );
 };

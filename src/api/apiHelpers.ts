@@ -1,4 +1,4 @@
-import { IData } from '../types/types';
+import { IData } from '@src/types';
 
 export const initialPages: IData[] = [
   {

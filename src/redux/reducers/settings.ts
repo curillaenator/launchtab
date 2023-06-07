@@ -12,7 +12,9 @@ export interface ISettings {
     darkMode: boolean;
     themeName: TThemeName;
   };
+
   profile: { shortName: string | null };
+
   other: { other: any };
 }
 
@@ -22,9 +24,11 @@ export const initialState: ISettings = {
     darkMode: false,
     themeName: 'defaultTheme',
   },
+
   profile: {
     shortName: null,
   },
+
   other: {
     other: null,
   },
@@ -32,7 +36,9 @@ export const initialState: ISettings = {
 
 const settingsSlice = createSlice({
   name: 'settings',
+
   initialState,
+
   reducers: {
     setLookFeel: (state, action: PayloadAction<ISettings['lookfeel']>) => {
       state.lookfeel = { ...state.lookfeel, ...action.payload };
@@ -53,6 +59,7 @@ const settingsSlice = createSlice({
     },
   },
 });
+
 export const settings = settingsSlice.reducer;
 
 const { setLookFeel, setProfile, setOther, setSettings } = settingsSlice.actions;
@@ -97,6 +104,8 @@ export const updateSettings = (settings: ISettings): TThunk => {
       localStorageApi.setSettings(settings);
     }
 
-    settingsApi.updateSettings(userID!, settings);
+    if (userID) {
+      settingsApi.updateSettings(userID, settings);
+    }
   };
 };

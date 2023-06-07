@@ -44,7 +44,7 @@ const CreateContainerStyled = styled.div<CreateContainerStyledProps>`
   justify-content: center;
   width: ${({ isCreateBookmark }) => (isCreateBookmark ? '100%' : 'fit-content')};
   height: ${({ isCreateBookmark }) => (isCreateBookmark ? '100%' : 'fit-content')};
-  min-height: 186px;
+  min-height: ${({ isCreateBookmark }) => (isCreateBookmark ? '186px' : undefined)};
 
   .create-shape {
     fill: transparent;

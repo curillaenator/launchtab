@@ -62,9 +62,13 @@ const CardStyled = styled.a<ICardStyled>`
   }
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.basic};
+    /* box-shadow: ${({ theme }) => theme.shadows.basic}; */
     transform: scale(1.02);
     background-color: ${({ theme }) => theme.backgrounds.base};
+
+    .card-shape {
+      filter: drop-shadow(${({ theme }) => theme.shadows.card2});
+    }
 
     .card-title {
       color: ${({ theme }) => theme.primary[500]};

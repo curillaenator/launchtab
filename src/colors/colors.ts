@@ -1,4 +1,4 @@
-const hexTrasparent = (hex: string, opacity: number) => {
+const hexa = (hex: string, opacity: number) => {
   const hexA = Math.ceil(255 * opacity).toString(16);
   return `${hex}${hexA}`;
 };
@@ -177,12 +177,12 @@ export const colorsStaticLightMode = {
     base: colorsLib.white,
     light: colorsLib.liver[100],
     lightest: colorsLib.liver[50],
-    base20: hexTrasparent(colorsLib.white, 0.2),
-    base40: hexTrasparent(colorsLib.white, 0.4),
+    base20: hexa(colorsLib.white, 0.2),
+    base40: hexa(colorsLib.white, 0.4),
   },
 
   modals: {
-    matte: hexTrasparent(colorsLib.liver[100], 0.4),
+    matte: hexa(colorsLib.liver[100], 0.4),
   },
 };
 
@@ -210,11 +210,11 @@ export const colorsStaticDarkMode = {
     base: colorsLib.liver[900],
     light: colorsLib.liver[800],
     lightest: colorsLib.liver[700],
-    base20: hexTrasparent(colorsLib.liver[900], 0.4),
-    base40: hexTrasparent(colorsLib.liver[900], 0.6),
+    base20: hexa(colorsLib.liver[900], 0.4),
+    base40: hexa(colorsLib.liver[900], 0.6),
   },
 
   modals: {
-    matte: hexTrasparent(colorsLib.liver[900], 0.8),
+    matte: hexa(colorsLib.liver[900], 0.8),
   },
 };

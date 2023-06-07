@@ -16,9 +16,9 @@ const SwitchStyled = styled.button<ISwitchStyled>`
   z-index: 100;
 
   .switch-shape {
-    fill: ${({ theme }) => theme.shapes.base};
+    fill: ${({ theme }) => theme.backgrounds.base};
     stroke-width: 1px;
-    stroke: ${({ theme }) => theme.borderLines};
+    stroke: ${({ theme }) => theme.backgrounds.light};
   }
 
   .switch-toggler {
@@ -38,23 +38,23 @@ const SwitchStyled = styled.button<ISwitchStyled>`
     transform: ${({ active }) => (active ? 'translateX(100%)' : 'translateX(0)')};
 
     &-shape {
-      fill: ${({ theme, active }) => (active ? theme.primary[400] : theme.borderLines)};
+      fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.light)};
     }
 
     &-title {
       transition: 0.08s linear;
-      color: ${({ theme, active }) => (active ? theme.white : theme.texts.button.base)};
+      color: ${({ theme, active }) => (active ? theme.white : theme.texts.base)};
     }
   }
 
   &:hover {
     .switch-toggler {
       &-shape {
-        fill: ${({ theme, active }) => (active ? theme.primary[300] : theme.borderLines)};
+        fill: ${({ theme, active }) => (active ? theme.primary[400] : theme.backgrounds.light)};
       }
 
       &-title {
-        color: ${({ theme, active }) => (active ? theme.white : theme.texts.button.hover)};
+        color: ${({ theme, active }) => (active ? theme.white : theme.primary[400])};
       }
     }
   }

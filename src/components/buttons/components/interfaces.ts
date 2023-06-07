@@ -10,7 +10,7 @@ export interface Button extends HTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   disabled?: boolean;
   danger?: boolean;
-  // type?: 'submit' | 'button';
+  type?: 'submit' | 'button';
   handler?: () => void;
 }
 

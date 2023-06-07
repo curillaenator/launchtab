@@ -39,14 +39,15 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 
   .ctabutton-title {
-    color: ${({ active, theme }) => (active ? theme.white : theme.texts.title.base)};
+    color: ${({ active, theme }) => (active ? theme.white : theme.texts.base)};
     transition: 0.08s ease-in-out;
     user-select: none;
     white-space: nowrap;
   }
 
   .rounded-shape {
-    fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.shapes.base)};
+    fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.base)};
+    filter: ${({ active }) => (active ? 'contrast(1.64)' : 'contrast(1)')};
   }
 
   &:hover {

@@ -1,12 +1,9 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
+import type { ShapeProps } from './Shape';
 
-interface Options {
-  isAdaptive: boolean;
-  radius: number;
-  height?: number;
-}
+export const useShapeParams = (props: ShapeProps) => {
+  const { borderRadius = 18, height: forcedHeight, contractXBy = 0 } = props;
 
-export const useShapeParams = ({ radius, height: forcedHeight }: Options) => {
   const ref = useRef<SVGSVGElement>(null);
 
   const [W, setW] = useState(0);
@@ -15,7 +12,8 @@ export const useShapeParams = ({ radius, height: forcedHeight }: Options) => {
   useEffect(() => {
     const observer = new ResizeObserver(([entry]) => {
       const { width, height } = entry.target.getBoundingClientRect();
-      setW(width);
+
+      setW(width - contractXBy);
       setH(forcedHeight || height);
     });
 
@@ -27,7 +25,7 @@ export const useShapeParams = ({ radius, height: forcedHeight }: Options) => {
   const shapeData: { W: number; H: number; path: string } = useMemo(() => {
     const minHalf = Math.min(W / 2, H / 2);
 
-    const R = 1.25 * radius > minHalf ? minHalf : 1.25 * radius;
+    const R = 1.25 * borderRadius > minHalf ? minHalf : 1.25 * borderRadius;
     const S = 0.19 * R;
 
     const path = `M ${W - R} 0 C ${W - S} 0 ${W} ${S} ${W} ${R}

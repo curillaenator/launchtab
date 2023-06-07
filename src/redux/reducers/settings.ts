@@ -22,7 +22,7 @@ export const initialState: ISettings = {
   lookfeel: {
     wallpaper: null,
     darkMode: false,
-    themeName: 'classicBlueTheme',
+    themeName: 'defaultTheme',
   },
 
   profile: {

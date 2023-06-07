@@ -92,7 +92,7 @@ const BtnStyled = styled.button<IBtnStyled>`
 
   &:hover {
     .button-image {
-      background-color: ${({ theme }) => theme.shapes.hover};
+      background-color: ${({ theme }) => theme.texts.inversedBase};
     }
   }
 `;

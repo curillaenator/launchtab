@@ -9,7 +9,7 @@ export const FormStyled = styled.form`
   .form {
     position: relative;
     width: 100%;
-    padding: 4rem 3rem 2.5rem;
+    padding: 3rem;
     z-index: 20;
 
     &-shape {
@@ -17,24 +17,18 @@ export const FormStyled = styled.form`
     }
 
     &-title {
-      margin-bottom: 68px;
+      margin-bottom: 56px;
 
       &-main {
-        height: 60px;
+        /* height: 60px; */
         color: ${({ theme }) => theme.primary[500]};
       }
 
-      &-add {
-        margin-top: 7px;
-        margin-left: 2px;
-        color: ${({ theme }) => theme.texts.body.caption};
-      }
-
+      &-add,
       &-addsub {
-        max-width: 244px;
-        margin-top: 5px;
-        margin-left: 3px;
-        color: ${({ theme }) => theme.texts.body.caption};
+        margin-top: 8px;
+        margin-left: 2px;
+        color: ${({ theme }) => theme.texts.sub};
       }
     }
 
@@ -43,7 +37,7 @@ export const FormStyled = styled.form`
       flex-direction: column;
       gap: 1.5rem;
       width: 100%;
-      margin-bottom: 72px;
+      margin-bottom: 56px;
     }
 
     &-buttons {
@@ -51,7 +45,6 @@ export const FormStyled = styled.form`
       align-items: center;
       justify-content: flex-end;
       gap: 1rem;
-      transform: translateX(16px);
     }
   }
 

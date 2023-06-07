@@ -34,7 +34,7 @@ const CardStyled = styled.a<ICardStyled>`
   backdrop-filter: blur(5px);
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
   background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
-  border: 2px solid ${({ theme, hasBorder }) => (hasBorder ? theme.backgrounds.light : 'none')};
+  border: 2px solid ${({ theme, hasBorder }) => (hasBorder ? theme.backgrounds.lightest : 'none')};
 
   animation: var(--card-animation-time) ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
 
@@ -62,7 +62,7 @@ const CardStyled = styled.a<ICardStyled>`
     width: 100%;
     height: 44px;
     padding: 0 1rem;
-    color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.title.base)};
+    color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.base)};
   }
 
   &:hover {
@@ -78,7 +78,7 @@ const CardStyled = styled.a<ICardStyled>`
   &:active {
     box-shadow: none;
     transform: scale(1);
-    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.shapes.base20 : theme.shapes.base)};
+    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
   }
 `;
 

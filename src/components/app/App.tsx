@@ -27,7 +27,7 @@ const AppStyled = styled.div`
   min-height: 100vh;
   padding: var(--app-pd);
   margin: 0 auto;
-  color: ${({ theme }) => theme.texts.body.paragraph};
+  color: ${({ theme }) => theme.texts.base};
 
   .main-screen {
     width: 100%;

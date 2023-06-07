@@ -22,12 +22,12 @@ const FadesStyled = styled.div`
 
   .fade-top {
     top: 0;
-    background-image: ${({ theme }) => `linear-gradient(to bottom, ${theme.background}, transparent)`};
+    background-image: ${({ theme }) => `linear-gradient(to bottom, ${theme.backgrounds.base}, transparent)`};
   }
 
   .fade-bottom {
     bottom: 0;
-    background-image: ${({ theme }) => `linear-gradient(to top, ${theme.background}, transparent)`};
+    background-image: ${({ theme }) => `linear-gradient(to top, ${theme.backgrounds.base}, transparent)`};
   }
 `;
 
@@ -42,11 +42,11 @@ const ScrollbarsStyled = styled.div<ScrollbarsProps>`
     width: 0.25rem;
     margin-left: 0.25rem;
     border-radius: 0.25rem;
-    background-color: ${({ theme }) => theme.shapes.base};
+    background-color: ${({ theme }) => theme.backgrounds.base};
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.primary[400]};
+    background-color: ${({ theme }) => theme.primary[500]};
     border-radius: 0.25rem;
   }
 `;

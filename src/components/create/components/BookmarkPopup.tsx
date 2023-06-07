@@ -33,7 +33,7 @@ const BookmarkPopupStyled = styled.div`
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 24px;
-    color: ${({ theme }) => theme.texts.title.base};
+    color: ${({ theme }) => theme.texts.base};
 
     & > h3 {
       z-index: 1;
@@ -58,7 +58,7 @@ const BookmarkPopupStyled = styled.div`
     &-title {
       width: 100%;
       text-align: center;
-      color: ${({ theme }) => theme.texts.body.paragraph};
+      color: ${({ theme }) => theme.texts.base};
       user-select: none;
       margin-bottom: 1rem;
     }

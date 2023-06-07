@@ -26,7 +26,7 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
             Sign Up
           </Typography>
 
-          <Typography type='TextRegular12' className='form-title-addsub'>
+          <Typography type='TextRegular12' className='form-title-add'>
             Sign up is free, signed up users get fast loading and customizible app!
           </Typography>
 

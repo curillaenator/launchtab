@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import { Typography, ITypographyTypes } from '../typography';
@@ -9,7 +9,7 @@ const TitlewrapStyled = styled.div`
   }
 `;
 
-interface ITitlewrap {
+interface ITitlewrap extends PropsWithChildren {
   title: string;
   titleType?: ITypographyTypes;
   className?: string;

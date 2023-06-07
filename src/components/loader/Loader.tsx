@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { icons } from '../../assets/icons';
+import { icons } from '@src/assets/icons';
 
 interface ILoaderStyled {
   fs: boolean;

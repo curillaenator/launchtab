@@ -3,10 +3,10 @@ import { AnyAction } from '@reduxjs/toolkit';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-import { TextInput, Dropdown, Switch, Titlewrap } from '../../inputs';
-import { ImagePreview } from '../../imagePreview/ImagePreview';
+import { TextInput, Dropdown, Switch, Titlewrap } from '@src/components/inputs';
+import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
-import { themeNames } from '../../../colors/themes';
+import { themeNames } from '@src/colors/themes';
 
 import type { ILookFeelActions, ISettingsState } from '../reducer';
 

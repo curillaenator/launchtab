@@ -10,8 +10,8 @@ const ImagePreviewStyled = styled.div`
   height: 186px;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.borderLines};
-  background-color: ${({ theme }) => theme.shapes.base};
+  border: 1px solid ${({ theme }) => theme.backgrounds.light};
+  background-color: ${({ theme }) => theme.backgrounds.base};
 
   .preview-image {
     width: 100%;

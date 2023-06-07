@@ -28,24 +28,24 @@ const SettingsStyled = styled.div`
     z-index: 20;
 
     &-shape {
-      fill: ${({ theme }) => theme.background};
+      fill: ${({ theme }) => theme.backgrounds.base};
     }
 
     &-title {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 64px;
+      margin-bottom: 56px;
 
       &-themed {
-        color: ${({ theme }) => theme.primary[400]};
+        color: ${({ theme }) => theme.primary[500]};
       }
     }
 
     &-settings {
       display: flex;
       width: 100%;
-      margin-bottom: 2rem;
+      margin-bottom: 56px;
 
       &-menu {
         width: 154px;
@@ -57,7 +57,7 @@ const SettingsStyled = styled.div`
         position: relative;
         width: 100%;
         padding: 56px;
-        border-left: 1px solid ${({ theme }) => theme.borderLines};
+        border-left: 1px solid ${({ theme }) => theme.backgrounds.light};
       }
     }
 
@@ -117,7 +117,7 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
   return (
     <SettingsStyled>
       <div className='form'>
-        <Shape className='form-shape' borderRadius={24} isAdaptive />
+        <Shape className='form-shape' borderRadius={18} />
 
         <div className='form-title'>
           <Typography type='RoundedHeavy36'>Design & profile</Typography>

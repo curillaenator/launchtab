@@ -13,7 +13,7 @@ const MenuStyled = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 0.5rem;
-  background-color: ${({ theme }) => theme.shapes.base};
+  background-color: ${({ theme }) => theme.backgrounds.base};
   border-radius: 16px;
   animation: ${fade} 0.08s;
   z-index: 500;
@@ -25,7 +25,7 @@ const MenuStyled = styled.div`
     justify-content: center;
     width: 100%;
     height: 56px;
-    border-bottom: 1px solid ${({ theme }) => theme.borderLines};
+    border-bottom: 1px solid ${({ theme }) => theme.backgrounds.light};
 
     &:last-child {
       border-bottom: none;

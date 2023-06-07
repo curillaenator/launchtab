@@ -154,50 +154,16 @@ export const colorsLib = {
 
 export const colorsStaticLightMode = {
   texts: {
-    title: {
-      base: colorsLib.liver[900],
-      disabled: colorsLib.liver[200],
-      sub: colorsLib.liver[900],
-    },
+    base: colorsLib.liver[900],
+    inversedBase: colorsLib.liver[100],
+    sub: colorsLib.liver[400],
+    disabled: colorsLib.liver[200],
 
-    body: {
-      paragraph: colorsLib.liver[700],
-      caption: colorsLib.liver[500],
-    },
+    error: colorsLib.danger[500],
+    success: colorsLib.nika[500],
 
-    input: {
-      placeholder: colorsLib.liver[500],
-      filled: colorsLib.liver[900],
-      caption: colorsLib.liver[500],
-      error: colorsLib.danger[500],
-      success: colorsLib.nika[500],
-    },
-
-    button: {
-      base: colorsLib.liver[500],
-      here: 500,
-      hover: colorsLib.liver[900],
-      danger: colorsLib.danger[400],
-      dangerHover: colorsLib.danger[300],
-    },
-  },
-
-  borderLines: colorsLib.liver[100],
-
-  search: {
-    base: colorsLib.white,
-    border: colorsLib.white,
-    borderFocus: colorsLib.white,
-    text: colorsLib.white,
-    placeholder: colorsLib.liver[100],
-    clearIcon: colorsLib.white,
-  },
-
-  shapes: {
-    base: colorsLib.white,
-    base20: hexTrasparent(colorsLib.white, 0.2),
-    hover: colorsLib.liver[100],
-    hover20: hexTrasparent(colorsLib.liver[100], 0.2),
+    placeholder: colorsLib.liver[500],
+    inputColor: colorsLib.liver[900],
   },
 
   icons: {
@@ -210,78 +176,45 @@ export const colorsStaticLightMode = {
   backgrounds: {
     base: colorsLib.white,
     light: colorsLib.liver[100],
+    lightest: colorsLib.liver[50],
     base20: hexTrasparent(colorsLib.white, 0.2),
     base40: hexTrasparent(colorsLib.white, 0.4),
   },
 
   modals: {
-    matte: `rgba(244, 242, 245, 0.4)`,
+    matte: hexTrasparent(colorsLib.liver[100], 0.4),
   },
 };
 
 export const colorsStaticDarkMode = {
   texts: {
-    title: {
-      base: colorsLib.white,
-      disabled: colorsLib.liver[800],
-      sub: colorsLib.liver[100],
-    },
+    base: colorsLib.liver[100],
+    inversedBase: colorsLib.liver[900],
+    sub: colorsLib.liver[600],
+    disabled: colorsLib.liver[800],
+    error: colorsLib.danger[500],
+    success: colorsLib.nika[500],
 
-    body: {
-      paragraph: colorsLib.liver[700],
-      caption: colorsLib.liver[900],
-    },
-
-    input: {
-      placeholder: colorsLib.liver[500],
-      filled: colorsLib.liver[200],
-      caption: colorsLib.liver[900],
-      error: colorsLib.danger[500],
-      success: colorsLib.nika[500],
-    },
-
-    button: {
-      base: colorsLib.liver[800],
-      here: 500,
-      hover: colorsLib.liver[500],
-      danger: colorsLib.danger[400],
-      dangerHover: colorsLib.danger[300],
-    },
-  },
-
-  borderLines: '#1F1D20',
-
-  search: {
-    base: 'none',
-    border: '#1d1a1e',
-    borderFocus: '#1F1D20',
-    text: colorsLib.liver[400],
-    placeholder: colorsLib.liver[700],
-    clearIcon: colorsLib.liver[600],
-  },
-
-  shapes: {
-    base: colorsLib.black,
-    base20: hexTrasparent(colorsLib.black, 0.2),
-    hover: colorsLib.liver[100],
-    hover20: hexTrasparent(colorsLib.liver[900], 0.2),
+    placeholder: colorsLib.liver[500],
+    inputColor: colorsLib.liver[200],
   },
 
   icons: {
     dark: colorsLib.liver[700],
-    darkHover: colorsLib.liver[800],
-    light: colorsLib.liver[100],
-    lightHover: colorsLib.liver[200],
+    darkHover: colorsLib.liver[600],
+    light: colorsLib.liver[200],
+    lightHover: colorsLib.liver[100],
   },
 
   backgrounds: {
-    base: colorsLib.black,
-    light: colorsLib.liver[900],
-    base20: hexTrasparent(colorsLib.black, 0.2),
-    base40: hexTrasparent(colorsLib.black, 0.4),
+    base: colorsLib.liver[900],
+    light: colorsLib.liver[800],
+    lightest: colorsLib.liver[700],
+    base20: hexTrasparent(colorsLib.liver[900], 0.4),
+    base40: hexTrasparent(colorsLib.liver[900], 0.6),
   },
 
   modals: {
-    matte: 'rgba(19, 18, 19, 0.4)',
+    matte: hexTrasparent(colorsLib.liver[900], 0.8),
   },
 };

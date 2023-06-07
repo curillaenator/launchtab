@@ -40,13 +40,13 @@ const ButtonStyled = styled.button<IButtonStyled>`
     color: ${({ active, theme, disabled, danger }) => {
       switch (true) {
         case disabled:
-          return theme.texts.title.disabled;
+          return theme.texts.disabled;
         case danger:
-          return theme.texts.button.danger;
+          return theme.texts.error;
         case active:
           return theme.primary[500];
         default:
-          return theme.texts.title.base;
+          return theme.texts.base;
       }
     }};
   }
@@ -55,9 +55,9 @@ const ButtonStyled = styled.button<IButtonStyled>`
     color: ${({ active, theme, disabled, danger }) => {
       switch (true) {
         case disabled:
-          return theme.texts.title.disabled;
+          return theme.texts.disabled;
         case danger:
-          return theme.texts.button.danger;
+          return theme.texts.error;
         case active:
           return theme.primary[500];
         default:
@@ -71,13 +71,13 @@ const ButtonStyled = styled.button<IButtonStyled>`
       color: ${({ theme, active, disabled, danger }) => {
         switch (true) {
           case disabled:
-            return theme.texts.title.disabled;
+            return theme.texts.disabled;
           case danger:
-            return theme.texts.button.dangerHover;
+            return theme.texts.error;
           case active:
             return theme.primary[500];
           default:
-            return theme.texts.button.hover;
+            return theme.primary[400];
         }
       }};
     }
@@ -86,13 +86,13 @@ const ButtonStyled = styled.button<IButtonStyled>`
       color: ${({ active, theme, disabled, danger }) => {
         switch (true) {
           case disabled:
-            return theme.shapes.base;
+            return theme.backgrounds.base;
           case danger:
-            return theme.texts.button.danger;
+            return theme.texts.error;
           case active:
             return theme.secondary[500];
           default:
-            return theme.texts.button.hover;
+            return theme.primary[400];
         }
       }};
     }

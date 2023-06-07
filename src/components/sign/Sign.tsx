@@ -23,7 +23,7 @@ const SignStyled = styled.div`
   backdrop-filter: blur(12px);
 
   & .sign-text {
-    color: ${({ theme }) => theme.texts.title.base};
+    color: ${({ theme }) => theme.texts.base};
   }
 `;
 

@@ -48,8 +48,6 @@ export const Header: FC<HeaderProps> = (props) => {
 
   return (
     <HeaderStyled>
-      {/* <img className='logo' src='/favicon-194x194.png' alt='Logotype' /> */}
-
       <SearchField />
 
       {!isAnon && (

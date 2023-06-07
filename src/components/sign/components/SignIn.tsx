@@ -50,8 +50,8 @@ export const SignIn: FC<ISignIn> = ({ close }) => {
             name='password'
             placeholder='Password'
             description={values.passwordMes}
-            withButton
-            buttonTitle='remind'
+            // withButton
+            // buttonTitle='remind'
             value={values.password}
             onChange={handlers.handlePass}
           />

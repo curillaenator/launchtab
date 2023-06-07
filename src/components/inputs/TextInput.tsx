@@ -60,16 +60,16 @@ const FieldStyled = styled.div<IFieldStyled>`
       font-size: 14px;
       line-height: 24px;
       background: none;
-      color: ${({ theme }) => theme.texts.input.filled};
+      color: ${({ theme }) => theme.texts.inputColor};
       border-bottom: 1px solid
         ${({ theme, isFocused, state }) => {
           switch (true) {
             case isFocused:
               return theme.primary[200];
             case state === 'error':
-              return theme.texts.input.error;
+              return theme.texts.error;
             default:
-              return theme.borderLines;
+              return theme.backgrounds.light;
           }
         }};
 
@@ -77,9 +77,9 @@ const FieldStyled = styled.div<IFieldStyled>`
         color: ${({ theme, state }) => {
           switch (true) {
             case state === 'error':
-              return theme.texts.input.error;
+              return theme.texts.error;
             default:
-              return theme.texts.input.placeholder;
+              return theme.texts.placeholder;
           }
         }};
       }
@@ -97,9 +97,9 @@ const FieldStyled = styled.div<IFieldStyled>`
       color: ${({ theme, state }) => {
         switch (true) {
           case state === 'error':
-            return theme.texts.input.error;
+            return theme.texts.error;
           default:
-            return theme.texts.input.placeholder;
+            return theme.texts.placeholder;
         }
       }};
       padding: 0 4px;

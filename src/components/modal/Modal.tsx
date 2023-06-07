@@ -27,7 +27,7 @@ const PopupStyled = styled(Popup)`
     align-items: center;
     width: 100%;
     background-color: transparent;
-    color: ${({ theme }) => theme.texts.body.paragraph};
+    color: ${({ theme }) => theme.texts.base};
   }
 `;
 

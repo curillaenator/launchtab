@@ -10,22 +10,25 @@ export const ShapeStyled = styled.svg`
   height: 100%;
   z-index: -10;
   transition: 0.08s ease-in-out;
+  margin: 0 auto;
 `;
 
-interface IShape {
+export interface ShapeProps {
   borderRadius?: number;
-  isAdaptive?: boolean;
+  isAdaptive?: boolean; // deprecated, need to clear everywhere
+  contractXBy?: number;
+  contractYBy?: number;
   height?: number;
   className?: string;
 }
 
-export const Shape: FC<IShape> = ({ borderRadius = 24, isAdaptive = false, height, className = 'rounded-shape' }) => {
-  const { W, H, path, ref } = useShapeParams({ isAdaptive, radius: borderRadius, height });
+export const Shape: FC<ShapeProps> = (props) => {
+  const { W, H, path, ref } = useShapeParams(props);
 
   return (
     <ShapeStyled
       ref={ref}
-      className={className}
+      className={props.className || 'rounded-shape'}
       version='1.1'
       shapeRendering='geometricPrecision'
       viewBox={`0 0 ${W} ${H}`}

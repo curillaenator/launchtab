@@ -27,7 +27,7 @@ const PagePopupStyled = styled.div`
       align-items: center;
       gap: 0.5rem;
       margin-bottom: 24px;
-      color: ${({ theme }) => theme.texts.body.paragraph};
+      color: ${({ theme }) => theme.texts.base};
 
       &-themed {
         color: ${({ theme }) => theme.primary[500]};

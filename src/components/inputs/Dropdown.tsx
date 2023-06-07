@@ -25,12 +25,12 @@ const DropdownStyled = styled.div<IDropdownStyled>`
     height: 56px;
     padding: 0 1.5rem;
     border-radius: 1rem;
-    border: 1px solid ${({ theme }) => theme.borderLines};
-    background-color: ${({ theme }) => theme.shapes.base};
+    border: 1px solid ${({ theme }) => theme.backgrounds.light};
+    background-color: ${({ theme }) => theme.backgrounds.base};
     z-index: 100;
 
     &-text {
-      color: ${({ theme }) => theme.texts.button.base};
+      color: ${({ theme }) => theme.texts.base};
       user-select: none;
       transition: 0.08s linear;
     }
@@ -38,16 +38,16 @@ const DropdownStyled = styled.div<IDropdownStyled>`
     &-shevron {
       transform: ${({ open }) => (open ? 'rotate(-180deg)' : 'rotate(0)')};
       transition: 0.08s linear;
-      fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.button.base)};
+      fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.base)};
     }
 
     &:hover {
       .dropdown-title-text {
-        color: ${({ theme }) => theme.texts.button.hover};
+        color: ${({ theme }) => theme.primary[400]};
       }
 
       .dropdown-title-shevron {
-        fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.button.hover)};
+        fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.primary[400])};
       }
     }
   }
@@ -61,8 +61,8 @@ const DropdownStyled = styled.div<IDropdownStyled>`
     overflow: hidden;
     transition: 0.12s ease-in-out;
     border-radius: 1rem 0 1rem 1rem;
-    background-color: ${({ theme }) => theme.shapes.base};
-    box-shadow: ${({ theme }) => theme.shadows.basic};
+    background-color: ${({ theme }) => theme.backgrounds.base};
+    box-shadow: ${({ theme }) => theme.shadows.dropdown};
     opacity: ${({ open }) => (open ? 1 : 0)};
     z-index: 9999;
 
@@ -73,7 +73,7 @@ const DropdownStyled = styled.div<IDropdownStyled>`
       height: 56px;
       padding-left: 0.5rem;
       background-color: transparent;
-      border-bottom: 1px solid ${({ theme }) => theme.borderLines};
+      border-bottom: 1px solid ${({ theme }) => theme.backgrounds.light};
     }
   }
 `;

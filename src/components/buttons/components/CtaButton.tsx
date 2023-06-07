@@ -50,18 +50,19 @@ const ButtonStyled = styled.button<IButtonStyled>`
   .rounded-shape {
     transition: 0.08s linear;
     fill: ${({ theme }) => theme.primary[500]};
+    filter: contrast(1.64);
   }
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.mediumCtaButtonHover};
+    box-shadow: ${({ theme }) => theme.shadows.mediumCtaButton};
 
     .rounded-shape {
-      filter: contrast(1.64);
+      fill: ${({ theme }) => theme.primary[400]};
     }
   }
 
   &:active {
-    box-shadow: ${({ theme }) => theme.shadows.mediumCtaButtonActive};
+    box-shadow: ${({ theme }) => theme.shadows.mediumCtaButton};
 
     .btn_title {
       opacity: 0.75;

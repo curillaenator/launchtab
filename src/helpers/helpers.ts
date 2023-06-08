@@ -92,13 +92,12 @@ const getFetchOptions = (url: string) => {
     domain = url.slice(0, dotWineIndex);
   } else if (dotZoneIndex > 'https://'.length + '.zone'.length) {
     domain = url.slice(0, dotZoneIndex);
-    console.log(domain);
   }
 
   return { ...DEFAULT_OPTIONS, ...(OPTIONS[domain] || {}) };
 };
 
-const EXEPTIONS: string[] = []; // 'https://upload.wikimedia.org' 'https://raw.githubusercontent.com'
+const EXEPTIONS: string[] = [];
 
 export const checkImageURL = async (url: string): Promise<CheckImageURL> => {
   if (EXEPTIONS.some((exeption) => url.includes(exeption))) {
@@ -108,7 +107,7 @@ export const checkImageURL = async (url: string): Promise<CheckImageURL> => {
   const check = await fetch(url, getFetchOptions(url))
     .then((res) => ({ ok: res.ok, status: res.status }))
     .catch((err) => {
-      console.log(err.message);
+      console.error(err.message);
       return { ok: false, status: 'bad' };
     });
 

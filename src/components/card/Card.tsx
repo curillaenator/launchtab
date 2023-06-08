@@ -72,6 +72,10 @@ const CardStyled = styled.a<ICardStyled>`
     .card-title {
       color: ${({ theme }) => theme.primary[500]};
     }
+
+    .card-shape {
+      fill: ${({ theme }) => theme.backgrounds.base};
+    }
   }
 
   &:active {

@@ -12,9 +12,13 @@ export interface CheckImageURL {
   url: string;
 }
 
-export const DEFAULT_OPTIONS: Record<string, RequestInit> = {};
+const DEFAULT_OPTIONS: RequestInit = {
+  method: 'GET',
+  credentials: 'omit', // omit, same-origin или include
+  mode: 'cors', // mode: 'cors' | 'same-origin' | 'no-cors'
+};
 
-export const OPTIONS: Record<string, RequestInit> = {
+const OPTIONS: Record<string, RequestInit> = {
   'https://cdn.worldvectorlogo.com': {
     headers: {
       'Access-Control-Allow-Origin': 'https://cdn.worldvectorlogo.com',
@@ -22,22 +26,91 @@ export const OPTIONS: Record<string, RequestInit> = {
     },
     mode: 'no-cors',
   },
+
+  'https://vectorwiki.com': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://cdn.worldvectorlogo.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
+
+  'https://brandeps.com': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://cdn.worldvectorlogo.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
+
+  'https://logowiki.net': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://cdn.worldvectorlogo.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
+
+  'https://www.logo.wine': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://cdn.worldvectorlogo.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
+
+  'https://gitlab.svg.zone': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://cdn.worldvectorlogo.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
+
+  'https://raw.githubusercontent.com': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://raw.githubusercontent.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
 };
 
-export const getHeaders = () => {};
+const getFetchOptions = (url: string) => {
+  let domain = '';
+
+  const dotComIndex = url.search(/.com/) + 4;
+  const dotNetIndex = url.search(/.net/) + 4;
+  const dotWineIndex = url.search(/.wine/) + 5;
+  const dotZoneIndex = url.search(/.zone/) + 5;
+
+  if (dotComIndex > 'https://'.length + '.com'.length) {
+    domain = url.slice(0, dotComIndex);
+  } else if (dotNetIndex > 'https://'.length + '.net'.length) {
+    domain = url.slice(0, dotNetIndex);
+  } else if (dotWineIndex > 'https://'.length + '.wine'.length) {
+    domain = url.slice(0, dotWineIndex);
+  } else if (dotZoneIndex > 'https://'.length + '.zone'.length) {
+    domain = url.slice(0, dotZoneIndex);
+    console.log(domain);
+  }
+
+  return { ...DEFAULT_OPTIONS, ...(OPTIONS[domain] || {}) };
+};
+
+const EXEPTIONS: string[] = []; // 'https://upload.wikimedia.org' 'https://raw.githubusercontent.com'
 
 export const checkImageURL = async (url: string): Promise<CheckImageURL> => {
-  const check = await fetch(url, {
-    method: 'GET',
-    // headers: {
-    //   'Access-Control-Allow-Origin': '*',
-    //   'Content-Type': 'image/svg+xml',
-    // },
-    credentials: 'omit', // omit, same-origin или include
-    mode: 'cors', // mode: 'cors' | 'same-origin' | 'no-cors'
-  })
+  if (EXEPTIONS.some((exeption) => url.includes(exeption))) {
+    return { url, ok: false, status: 'bad' };
+  }
+
+  const check = await fetch(url, getFetchOptions(url))
     .then((res) => ({ ok: res.ok, status: res.status }))
-    .catch(() => ({ ok: false, status: 'bad' }));
+    .catch((err) => {
+      console.log(err.message);
+      return { ok: false, status: 'bad' };
+    });
 
   return { url, ...check };
 };

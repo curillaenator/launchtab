@@ -4,7 +4,6 @@ export const FormStyled = styled.form`
   width: 100%;
   background-color: transparent;
   border-radius: 24px;
-  box-shadow: ${({ theme }) => theme.shadows.basic};
 
   .form {
     position: relative;
@@ -14,6 +13,7 @@ export const FormStyled = styled.form`
 
     &-shape {
       fill: ${({ theme }) => theme.backgrounds.base};
+      filter: drop-shadow(${({ theme }) => theme.shadows.card});
     }
 
     &-title {

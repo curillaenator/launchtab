@@ -22,6 +22,8 @@ const SwitchStyled = styled.button<ISwitchStyled>`
   }
 
   .switch-toggler {
+    will-change: filter;
+    overflow: visible;
     position: absolute;
     top: 0;
     left: 0;
@@ -33,9 +35,9 @@ const SwitchStyled = styled.button<ISwitchStyled>`
     z-index: 50;
     background-color: transparent;
     border-radius: 20px;
-    box-shadow: ${({ theme, active }) => (active ? theme.shadows.mediumCtaButton : 'none')};
     transition: 0.12s ease-in-out;
     transform: ${({ active }) => (active ? 'translateX(100%)' : 'translateX(0)')};
+    filter: drop-shadow(${({ theme, active }) => (active ? theme.shadows.primary : 'none')});
 
     &-shape {
       fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.light)};

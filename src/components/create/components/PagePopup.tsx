@@ -10,16 +10,19 @@ const PagePopupStyled = styled.div`
   width: 340px;
   border-radius: 20px;
   background-color: transparent;
-  box-shadow: ${({ theme }) => theme.shadows.basic};
 
   .popup {
     position: relative;
     width: 100%;
     padding: 32px;
     z-index: 20;
+    will-change: filter;
+    overflow: visible;
 
     &-shape {
+      overflow: visible;
       fill: ${({ theme }) => theme.backgrounds.base};
+      filter: drop-shadow(${({ theme }) => theme.shadows.card});
     }
 
     &-title {

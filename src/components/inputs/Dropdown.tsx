@@ -62,8 +62,8 @@ const DropdownStyled = styled.div<IDropdownStyled>`
     transition: 0.12s ease-in-out;
     border-radius: 1rem 0 1rem 1rem;
     background-color: ${({ theme }) => theme.backgrounds.base};
-    box-shadow: ${({ theme }) => theme.shadows.dropdown};
     opacity: ${({ open }) => (open ? 1 : 0)};
+    filter: drop-shadow(${({ theme }) => theme.shadows.card});
     z-index: 9999;
 
     &-option {

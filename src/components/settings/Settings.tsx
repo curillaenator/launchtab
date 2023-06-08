@@ -20,7 +20,6 @@ const SettingsStyled = styled.div`
   width: 100%;
   border-radius: 32px;
   background-color: transparent;
-  box-shadow: ${({ theme }) => theme.shadows.basic};
 
   .form {
     position: relative;
@@ -28,7 +27,9 @@ const SettingsStyled = styled.div`
     z-index: 20;
 
     &-shape {
+      overflow: visible;
       fill: ${({ theme }) => theme.backgrounds.base};
+      filter: drop-shadow(${({ theme }) => theme.shadows.card});
     }
 
     &-title {

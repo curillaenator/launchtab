@@ -17,7 +17,7 @@ const MenuStyled = styled.div`
   border-radius: 16px;
   animation: ${fade} 0.08s;
   z-index: 500;
-  box-shadow: ${({ theme }) => theme.shadows.basic};
+  filter: drop-shadow(${({ theme }) => theme.shadows.card});
 
   .menuitem {
     display: flex;

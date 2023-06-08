@@ -23,14 +23,6 @@ const ButtonStyled = styled.button<IButtonStyled>`
   border-radius: 22px;
   z-index: 20;
   transition: 0.08s ease-in-out;
-  box-shadow: ${({ active, theme }) => {
-    switch (true) {
-      case active:
-        return theme.shadows.largeCtaButton;
-      default:
-        return 'none';
-    }
-  }};
 
   .svg_icon {
     width: 1rem;
@@ -46,8 +38,19 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 
   .rounded-shape {
+    will-change: filter;
     fill: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.base)};
-    filter: ${({ active }) => (active ? 'contrast(1.3)' : 'contrast(1)')};
+    filter: ${({ active }) => (active ? 'contrast(1.3)' : 'contrast(1)')}
+      drop-shadow(
+        ${({ active, theme }) => {
+          switch (true) {
+            case active:
+              return theme.shadows.primary;
+            default:
+              return 'none';
+          }
+        }}
+      );
   }
 
   &:hover {

@@ -1,7 +1,4 @@
-const hexa = (hex: string, opacity: number) => {
-  const hexA = Math.ceil(255 * opacity).toString(16);
-  return `${hex}${hexA}`;
-};
+import { hexa } from './utils';
 
 export const colorsLib = {
   white: '#FFFFFF',
@@ -195,7 +192,7 @@ export const colorsStaticDarkMode = {
     error: colorsLib.danger[500],
     success: colorsLib.nika[500],
 
-    placeholder: colorsLib.liver[500],
+    placeholder: colorsLib.liver[700],
     inputColor: colorsLib.liver[200],
   },
 
@@ -218,3 +215,13 @@ export const colorsStaticDarkMode = {
     matte: hexa(colorsLib.liver[900], 0.8),
   },
 };
+
+export const shadowsStaticLightMode = (primaryColor: string) => ({
+  card: `0px 0px 10px ${hexa(colorsLib.liver[900], 0.35)}`,
+  primary: `0px 6px 8px ${hexa(primaryColor, 0.8)}`,
+});
+
+export const shadowsStaticDarkMode = (primaryColor: string) => ({
+  card: `0px 0px 12px ${hexa(colorsLib.liver[800], 0.8)}`,
+  primary: `0px 6px 8px ${hexa(primaryColor, 0.8)}`,
+});

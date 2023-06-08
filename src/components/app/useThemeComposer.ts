@@ -1,26 +1,27 @@
-import { useMemo } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '@src/hooks/hooks';
 
-import { themes } from '../../colors/themes';
-import { getThemeShadowsWithColors } from '../../colors/colorGetters/getShadow';
-import * as allColors from '../../colors/colors';
-import type { TTheme } from '../../colors/interfaces';
+import {
+  themes,
+  colorsLib,
+  colorsStaticDarkMode,
+  colorsStaticLightMode,
+  shadowsStaticDarkMode,
+  shadowsStaticLightMode,
+  type TTheme,
+} from '@src/colors';
 
 export const useThemeComposer = (): TTheme => {
-  const darkMode = useAppSelector((state) => state.settings.lookfeel.darkMode);
-  const themeName = useAppSelector((state) => state.settings.lookfeel.themeName);
+  const { darkMode, themeName } = useAppSelector((state) => state.settings.lookfeel);
 
-  const currentTheme = useMemo(() => {
-    const colorsStatic = darkMode ? allColors.colorsStaticDarkMode : allColors.colorsStaticLightMode;
+  const colorsStatic = darkMode ? colorsStaticDarkMode : colorsStaticLightMode;
+  const primaryColor = themes[themeName].primary[500];
+  const shadows = darkMode ? shadowsStaticDarkMode(primaryColor) : shadowsStaticLightMode(primaryColor);
 
-    return {
-      white: allColors.colorsLib.white,
-      black: allColors.colorsLib.black,
-      ...themes[themeName],
-      ...colorsStatic,
-      ...getThemeShadowsWithColors(themes[themeName].primary[500], darkMode),
-    };
-  }, [themeName, darkMode]);
-
-  return currentTheme;
+  return {
+    white: colorsLib.white,
+    black: colorsLib.black,
+    shadows,
+    ...themes[themeName],
+    ...colorsStatic,
+  };
 };

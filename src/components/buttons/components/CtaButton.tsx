@@ -28,7 +28,6 @@ const ButtonStyled = styled.button<IButtonStyled>`
   background: transparent;
   border-radius: 16px;
   z-index: 20;
-  box-shadow: ${({ theme }) => theme.shadows.mediumCtaButton};
   transition: 0.08s linear;
 
   .button-icon {
@@ -50,20 +49,16 @@ const ButtonStyled = styled.button<IButtonStyled>`
   .rounded-shape {
     transition: 0.08s linear;
     fill: ${({ theme }) => theme.primary[500]};
-    filter: contrast(1.3);
+    filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
   }
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.mediumCtaButton};
-
     .rounded-shape {
       fill: ${({ theme }) => theme.primary[400]};
     }
   }
 
   &:active {
-    box-shadow: ${({ theme }) => theme.shadows.mediumCtaButton};
-
     .btn_title {
       opacity: 0.75;
     }

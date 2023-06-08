@@ -1,9 +1,12 @@
 import { colorsLib } from './colors';
 
 export const themeNames: { [title: string]: string } = {
-  defaultTheme: 'Default',
-  fireOrangeTheme: 'Fire Orange',
+  defaultTheme: 'Default Violet',
+  dangerRed: 'Danger Red',
+  awesome: 'Awesome Pinkish',
+  phlox: 'Phlox ultra',
   classicBlueTheme: 'Classic Blue',
+  greenTheme: 'Light green',
   radioactiveGreenTheme: 'Radioactive Green',
   sunnyOrange: 'Sunset Orange',
 };
@@ -11,25 +14,36 @@ export const themeNames: { [title: string]: string } = {
 export const themes = {
   defaultTheme: {
     primary: colorsLib.electroviolet,
-    secondary: colorsLib.aquamarina,
+    secondary: colorsLib.electroviolet,
   },
-  fireOrangeTheme: {
+  awesome: {
     primary: colorsLib.awesome,
-    secondary: colorsLib.orange,
+    secondary: colorsLib.awesome,
   },
   classicBlueTheme: {
     primary: colorsLib.ultra,
+    secondary: colorsLib.ultra,
+  },
+  dangerRed: {
+    primary: colorsLib.danger,
+    secondary: colorsLib.danger,
+  },
+  greenTheme: {
+    primary: colorsLib.malachite,
     secondary: colorsLib.malachite,
   },
   radioactiveGreenTheme: {
     primary: colorsLib.nika,
-    secondary: colorsLib.malachite,
+    secondary: colorsLib.nika,
   },
   sunnyOrange: {
     primary: colorsLib.orange,
     secondary: colorsLib.orange,
   },
+  phlox: {
+    primary: colorsLib.phlox,
+    secondary: colorsLib.phlox,
+  },
 };
 
-type TAllThemes = typeof themes;
-export type TThemeName = keyof TAllThemes;
+export type TThemeName = keyof typeof themes;

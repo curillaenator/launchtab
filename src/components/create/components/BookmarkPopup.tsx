@@ -21,10 +21,11 @@ const BookmarkPopupStyled = styled.div`
   padding: 32px;
   border-radius: 20px;
   background-color: transparent;
-  box-shadow: ${({ theme }) => theme.shadows.basic};
 
   .popup-shape {
+    overflow: visible;
     fill: ${({ theme }) => theme.backgrounds.base};
+    filter: drop-shadow(${({ theme }) => theme.shadows.card});
     z-index: 0;
   }
 

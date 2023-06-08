@@ -21,7 +21,12 @@ export const useCreateBookmark = (
       return;
     }
 
-    fetch(`${fetchLink}${title}`, { credentials: 'omit' })
+    fetch(`${fetchLink}${title}`, {
+      method: 'GET',
+      headers: {},
+      credentials: 'omit', // omit, same-origin или include
+      mode: 'cors', // mode: 'cors' | 'same-origin' | 'no-cors'
+    })
       .then((res) => res.json())
       .then((json) => setIconsResponce(json.results))
       .catch(() => setIconsResponce([]));

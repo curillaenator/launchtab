@@ -35,11 +35,12 @@ const InputStyled = styled.div<IInputStyled>`
   padding: 0 ${SEARCH_FIXED_PADDING_X}px;
 
   .input-shape {
-    fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base40)};
+    fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
     backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(5px)' : 'none')};
 
     &-focused {
       fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
+      filter: drop-shadow(${({ theme }) => theme.shadows.card});
     }
   }
 

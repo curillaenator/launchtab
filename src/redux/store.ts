@@ -23,4 +23,4 @@ export const store = configureStore({
 export type TState = ReturnType<typeof store.getState>;
 export type TDispatch = typeof store.dispatch;
 
-// (window as any).store = store;
+(window as any).store = store;

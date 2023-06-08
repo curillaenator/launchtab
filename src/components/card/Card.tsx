@@ -43,6 +43,7 @@ const CardStyled = styled.a<ICardStyled>`
 
   .card-shape {
     fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
+    will-change: filter;
 
     &-bordered {
       stroke: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.lightest)};
@@ -67,14 +68,13 @@ const CardStyled = styled.a<ICardStyled>`
     transform: scale(1.02);
     background-color: ${({ theme }) => theme.backgrounds.base};
 
-    filter: drop-shadow(${({ theme }) => theme.shadows.card});
-
     .card-title {
       color: ${({ theme }) => theme.primary[500]};
     }
 
     .card-shape {
       fill: ${({ theme }) => theme.backgrounds.base};
+      filter: drop-shadow(${({ theme }) => theme.shadows.card});
     }
   }
 

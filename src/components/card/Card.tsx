@@ -23,6 +23,10 @@ const CardStyled = styled.a<ICardStyled>`
   --card-animation-time: 120ms;
   --card-animation-method: ease-in-out;
 
+  will-change: filter;
+  overflow: visible;
+  backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')};
+
   position: relative;
   cursor: pointer;
   display: block;
@@ -30,19 +34,15 @@ const CardStyled = styled.a<ICardStyled>`
   height: 100%;
   text-decoration: none;
   border-radius: 20px;
-  /* overflow: hidden; */
-  will-change: transform;
-  backdrop-filter: blur(5px);
-  opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
+
   border: 2px solid ${({ theme, hasBorder }) => (hasBorder ? theme.backgrounds.lightest : 'none')};
+  opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
 
   animation: var(--card-animation-time) ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
-
   transition: var(--card-animation-time) var(--card-animation-method);
 
   .card-shape {
     fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
-    backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(5px)' : 'none')};
 
     &-bordered {
       stroke: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.lightest)};
@@ -59,16 +59,15 @@ const CardStyled = styled.a<ICardStyled>`
     height: 44px;
     padding: 0 1rem;
     color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.base)};
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
   }
 
   &:hover {
-    /* box-shadow: ${({ theme }) => theme.shadows.basic}; */
     transform: scale(1.02);
     background-color: ${({ theme }) => theme.backgrounds.base};
 
-    .card-shape {
-      filter: drop-shadow(${({ theme }) => theme.shadows.card2});
-    }
+    filter: drop-shadow(${({ theme }) => theme.shadows.card});
 
     .card-title {
       color: ${({ theme }) => theme.primary[500]};
@@ -108,6 +107,7 @@ export const Card: FC<CardProps> = (props) => {
       // hasBorder={hasBorder}
       onMouseDown={() => setNoAnimation(true)}
       onClick={() => setNoAnimation(true)}
+      data-card='true'
     >
       <Shape borderRadius={18} className={`card-shape ${hasBorder ? 'card-shape-bordered' : ''}`} />
 

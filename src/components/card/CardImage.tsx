@@ -10,6 +10,8 @@ const CardImageStyled = styled.div`
   display: flex;
   justify-content: center;
   height: 142px;
+  border-radius: 20px 20px 0px 0px;
+  overflow: hidden;
 
   .card-image {
     width: calc(100% - 4px);

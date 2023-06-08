@@ -17,21 +17,19 @@ export const getThemeShadowsWithColors = (primaryColor: string, darkMode: boolea
       0px 8px 24px ${hexTrasparent(colorsLib.liver[600], 0.15)},
       0px 16px 48px ${hexTrasparent(colorsLib.liver[600], 0.1)}
     `,
-    card: `0px 4px 6px ${hexTrasparent(colorsLib.liver[600], 0.2)}`,
-    card2: `0px 8px 12px ${hexTrasparent(colorsLib.liver[600], 0.2)}`,
+    card: `0px 4px 10px ${hexTrasparent(colorsLib.liver[900], 0.35)}`,
   };
 
   const shadowsStaticDarkMode = {
     basic: `
-      0px 4px 12px ${hexTrasparent(colorsLib.liver[800], 0.2)},
-      0px 8px 24px ${hexTrasparent(colorsLib.liver[800], 0.15)},
-      0px 16px 48px ${hexTrasparent(colorsLib.liver[800], 0.1)}
+      0px 4px 12px ${hexTrasparent(colorsLib.liver[700], 0.2)},
+      0px 8px 24px ${hexTrasparent(colorsLib.liver[700], 0.15)},
+      0px 16px 48px ${hexTrasparent(colorsLib.liver[700], 0.1)}
     `,
     dropdown: `
       0px 2px 24px ${hexTrasparent(colorsLib.liver[700], 0.15)}
     `,
-    card: `0px 4px 6px ${hexTrasparent(colorsLib.liver[800], 0.2)}`,
-    card2: `0px 8px 12px ${hexTrasparent(colorsLib.liver[800], 0.2)}`,
+    card: `0px 4px 10px ${hexTrasparent(colorsLib.liver[700], 0.35)}`,
   };
 
   const shadowsStatic = darkMode ? shadowsStaticDarkMode : shadowsStaticLightMode;

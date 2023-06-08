@@ -10,10 +10,12 @@ export interface CheckImageURL {
   ok: boolean;
   status: string | number;
   url: string;
+  type?: 'opaque' | 'cors';
 }
 
 const DEFAULT_OPTIONS: RequestInit = {
   method: 'GET',
+  headers: new Headers(),
   credentials: 'omit', // omit, same-origin или include
   mode: 'cors', // mode: 'cors' | 'same-origin' | 'no-cors'
 };
@@ -74,6 +76,14 @@ const OPTIONS: Record<string, RequestInit> = {
     },
     mode: 'no-cors',
   },
+
+  'https://www.vectorlogo.zone': {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://raw.githubusercontent.com',
+      'Content-Type': 'image/svg+xml',
+    },
+    mode: 'no-cors',
+  },
 };
 
 const getFetchOptions = (url: string) => {
@@ -105,9 +115,16 @@ export const checkImageURL = async (url: string): Promise<CheckImageURL> => {
   }
 
   const check = await fetch(url, getFetchOptions(url))
-    .then((res) => ({ ok: res.ok, status: res.status }))
+    .then((res) => {
+      if (res.type === 'opaque') {
+        return { ok: true, status: 200 };
+      }
+
+      return { ok: res.ok, status: res.status };
+    })
     .catch((err) => {
-      console.error(err.message);
+      console.error(err);
+
       return { ok: false, status: 'bad' };
     });
 

@@ -98,9 +98,7 @@ interface IBookmarkPopup {
 }
 
 export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCreate, close }) => {
-  const [iconsWithGoodLinks, iconisFetchedIconsOpenOpen, setIsFetchedIconsOpen, fetchIcons] = useCreateBookmark(
-    values.name,
-  );
+  const { iconsWithGoodLinks, isFetchedIconsOpen, setIsFetchedIconsOpen, fetchIcons } = useCreateBookmark(values.name);
 
   const bookmark = {
     name: values.name || 'Title',
@@ -169,9 +167,9 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
 
       <div className='popup-icons'>
         <Accordion
-          title={iconisFetchedIconsOpenOpen ? 'hide icons' : '...or select from icons'}
+          title={isFetchedIconsOpen ? 'hide icons' : '...or select from icons'}
           disabled={iconsWithGoodLinks.length === 0}
-          open={iconisFetchedIconsOpenOpen}
+          open={isFetchedIconsOpen}
           openHandler={() => setIsFetchedIconsOpen((open) => !open)}
         >
           <Scrollbars height={172}>

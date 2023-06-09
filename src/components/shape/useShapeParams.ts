@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
+import { ResizeObserver } from 'resize-observer';
 import type { ShapeProps } from './Shape';
 
 export const useShapeParams = (props: ShapeProps) => {

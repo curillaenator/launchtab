@@ -1,11 +1,10 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
-import { ResizeObserver } from 'resize-observer';
 import type { ShapeProps } from './Shape';
 
 export const useShapeParams = (props: ShapeProps) => {
   const { borderRadius = 18, height: forcedHeight, contractXBy = 0 } = props;
 
-  const ref = useRef<SVGSVGElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const [boundings, setBoundings] = useState<string>('0_0');
 

@@ -14,11 +14,7 @@ const SearchFormStyled = styled.form`
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-  .subInput {
-    text-align: center;
-    color: ${({ theme }) => theme.white};
-  }
+  overflow: visible;
 `;
 
 interface IInputStyled {
@@ -33,10 +29,13 @@ const InputStyled = styled.div<IInputStyled>`
   margin-bottom: 8px;
   width: 100%;
   padding: 0 ${SEARCH_FIXED_PADDING_X}px;
+  overflow: visible;
 
   .input-shape {
     fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
     backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(5px)' : 'none')};
+    overflow: visible;
+    will-change: filter;
 
     &-focused {
       fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};

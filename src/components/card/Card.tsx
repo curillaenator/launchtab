@@ -20,7 +20,7 @@ interface ICardStyled {
 }
 
 const CardStyled = styled.a<ICardStyled>`
-  --card-animation-time: 120ms;
+  --card-animation-time: 150ms;
   --card-animation-method: ease-in-out;
 
   will-change: filter;

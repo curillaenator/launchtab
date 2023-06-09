@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { install as installResizeObserver } from 'resize-observer';
 import styled, { ThemeProvider } from 'styled-components';
 import GlobalFonts from '../../assets/fonts/fonts';
 
@@ -42,6 +43,16 @@ const AppStyled = styled.div`
 `;
 
 export const App: FC = () => {
+  useEffect(() => {
+    console.log('fired try to install');
+
+    if (!window.ResizeObserver) {
+      console.log('fired installation');
+      installResizeObserver();
+      console.log('install comlete!!');
+    }
+  }, []);
+
   const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.auth.user);

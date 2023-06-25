@@ -1,65 +1,9 @@
-import {
-  signInAnonymously,
-  EmailAuthProvider,
-  linkWithCredential,
-  updateProfile,
-  signInWithCredential,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
-  type User,
-} from 'firebase/auth';
-
-import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import type { ISettings } from '@src/redux/reducers/settings';
-import type { ISignUpCreds, ISignInCreds, IUpdate, IData } from '@src/types';
+import type { IUpdate, IData } from '@src/types';
 
-import { auth, fsdb } from './firebase';
-import { initiateAnon } from './apiHelpers';
-
-export const authApi = {
-  async signUpAnon() {
-    const user = (await signInAnonymously(auth)).user;
-
-    if (!user) alert('Auth failed');
-
-    const defaultAnonBookmarks = initiateAnon(user.uid);
-
-    await setDoc(doc(collection(fsdb, 'users'), user.uid), defaultAnonBookmarks).catch(
-      (e) => `Code: ${e.code}, message ${e.message}`,
-    );
-
-    return user.uid;
-  },
-
-  async signUp(creds: ISignUpCreds) {
-    const { email, password, displayName } = creds;
-    const credential = EmailAuthProvider.credential(email, password);
-
-    const { user } = await linkWithCredential(auth.currentUser as User, credential);
-
-    await updateDoc(doc(collection(fsdb, 'users'), user.uid), { displayName, email });
-    await updateProfile(user, { displayName });
-    const { user: linkedUser } = await signInWithCredential(auth, credential);
-
-    return linkedUser;
-  },
-
-  async signIn(creds: ISignInCreds) {
-    return (await signInWithEmailAndPassword(auth, creds.email, creds.password)).user;
-  },
-
-  async logoOut() {
-    await signOut(auth);
-    await 'Signout successful';
-  },
-
-  async passwordReset(email: string) {
-    await sendPasswordResetEmail(auth, email);
-    return `Password Reset Email sent to ${email}`;
-  },
-};
+import { fsdb } from './firebase';
 
 export const pagesApi = {
   async getData(userID: string) {

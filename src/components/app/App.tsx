@@ -47,6 +47,7 @@ export const App: FC = () => {
 
   const bookmarks = useAppSelector((state) => state.bookmarks);
   const loadings = useAppSelector((state) => state.loadings);
+  const { userLoading } = useAppSelector((state) => state.auth);
 
   const { data, pages, curPage, curBookmarks } = bookmarks;
   const { isAppLoading, isDataLoading } = loadings;
@@ -75,7 +76,9 @@ export const App: FC = () => {
     }
   }, [currentTheme]);
 
-  if (isAppLoading || isDataLoading) return <Loader fullscreen />;
+  console.log(userLoading);
+
+  if (userLoading || isAppLoading || isDataLoading) return <Loader fullscreen />;
 
   return (
     <ThemeProvider theme={currentTheme}>

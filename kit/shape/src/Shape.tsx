@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import { useShapeParams } from './useShapeParams';
+import { useShapeParams } from './hooks/useShapeParams';
 import styled from 'styled-components';
+
+import { ShapeProps } from './interfaces';
 
 export const ShapeStyled = styled.div`
   position: absolute;
@@ -11,15 +13,6 @@ export const ShapeStyled = styled.div`
   z-index: -1;
   margin: 0 auto;
 `;
-
-export interface ShapeProps {
-  borderRadius?: number;
-  isAdaptive?: boolean; // deprecated, need to clear everywhere
-  contractXBy?: number;
-  contractYBy?: number;
-  height?: number;
-  className?: string;
-}
 
 export const Shape: FC<ShapeProps> = (props) => {
   const { W, H, path, ref } = useShapeParams(props);

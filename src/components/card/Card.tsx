@@ -4,7 +4,7 @@ import { fadeIn } from 'react-animations';
 
 import { useAppSelector } from '@src/hooks/hooks';
 import { Typography } from '@src/components/typography';
-import { Corners } from '@src/components/shape';
+import { Corners } from '@launch-ui/shape';
 
 import { CardImage } from './CardImage';
 

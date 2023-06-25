@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Popup from 'reactjs-popup';
 import styled, { keyframes } from 'styled-components';
-import { Corners } from '@src/components/shape';
+import { Corners } from '@launch-ui/shape';
 
 import { useCreateForm } from './hooks/useCreateForm';
 import { usePopupPosition } from './hooks/usePopupPosition';

@@ -16,9 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
+    "disableSizeLimit": true,
     "paths": {
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src", "src/styled.d.ts"]
+  "include": ["src", "src/@types", "kit", "src/styled.d.ts"]
 }

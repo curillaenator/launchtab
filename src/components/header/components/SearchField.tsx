@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { Shape } from '@src/components/shape/Shape';
+import { Shape } from '@launch-ui/shape';
 
 import { useAppSelector } from '@src/hooks/hooks';
 import { useSearch } from './useSearch';
@@ -93,7 +93,6 @@ export const SearchField: FC = () => {
           className={`input-shape ${focused ? 'input-shape-focused' : ''}`}
           borderRadius={18}
           contractXBy={SEARCH_FIXED_PADDING_X * 2}
-          contractYBy={4}
         />
 
         {icons.searchEngines.google}

@@ -1,16 +1,17 @@
-import firebase from 'firebase/app';
-import { auth as fbauth } from '../../api/firebase';
+import { type User, onAuthStateChanged } from 'firebase/auth';
+
+import { auth as fbauth } from '@src/api/firebase';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
 
-import { authApi } from '../../api/api';
+import { authApi } from '@src/api/api';
 import { resetSettings } from './settings';
 import { setIsAppLoading } from './loadings';
 
 import type { ISignUpCreds, ISignInCreds, TThunk } from '../../types/types';
 
 interface IAuth {
-  user: firebase.User | null;
+  user: User | null;
   anonymousID: string | null;
 }
 
@@ -23,7 +24,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<firebase.User | null>) => {
+    setUser: (state, action: PayloadAction<User | null>) => {
       state.user = action.payload;
     },
 
@@ -32,6 +33,7 @@ const authSlice = createSlice({
     },
   },
 });
+
 export const auth = authSlice.reducer;
 
 const { setUser, setAnonymousID } = authSlice.actions;
@@ -46,7 +48,7 @@ export const checkUserIsAuthed = (): TThunk => {
       dispatch(setIsAppLoading(false));
     }
 
-    fbauth.onAuthStateChanged((user) => {
+    onAuthStateChanged(fbauth, (user) => {
       if (!user) {
         return authApi.signUpAnon();
       }

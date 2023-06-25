@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
-import type { ShapeProps } from './Shape';
+import type { ShapeProps } from '../interfaces';
 
 export const useShapeParams = (props: ShapeProps) => {
   const { borderRadius = 18, height: forcedHeight, contractXBy = 0 } = props;

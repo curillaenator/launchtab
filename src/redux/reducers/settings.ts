@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
 
-import { settingsApi, localStorageApi } from '../../api/api';
+import { settingsApi, localStorageApi } from '@src/api';
 
-import { TThemeName } from '../../colors/themes';
-import type { TThunk } from '../../types/types';
+import { TThemeName } from '@src/colors/themes';
+import type { TThunk } from '@src/types';
 
 export interface ISettings {
   lookfeel: {

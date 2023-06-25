@@ -1,103 +1,82 @@
-/* eslint-disable no-throw-literal */
+import {
+  signInAnonymously,
+  EmailAuthProvider,
+  linkWithCredential,
+  updateProfile,
+  signInWithCredential,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  type User,
+} from 'firebase/auth';
 
-import firebase from 'firebase/app';
+import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+
+import type { ISettings } from '@src/redux/reducers/settings';
+import type { ISignUpCreds, ISignInCreds, IUpdate, IData } from '@src/types';
+
 import { auth, fsdb } from './firebase';
-
 import { initiateAnon } from './apiHelpers';
-import type { ISettings } from '../redux/reducers/settings';
-import type { ISignUpCreds, ISignInCreds, IUpdate, IData } from '../types/types';
 
 export const authApi = {
-  signUpAnon(): Promise<string> {
-    return auth
-      .signInAnonymously()
-      .then((anon) => {
-        if (!anon.user) {
-          throw 'Failed';
-        }
+  async signUpAnon() {
+    const user = (await signInAnonymously(auth)).user;
 
-        const initial = initiateAnon(anon.user.uid);
+    if (!user) alert('Auth failed');
 
-        fsdb.collection('users').doc(anon.user.uid).set(initial);
+    const defaultAnonBookmarks = initiateAnon(user.uid);
 
-        return anon.user.uid;
-      })
-      .catch((e) => `Code: ${e.code}, message ${e.message}`);
+    await setDoc(doc(collection(fsdb, 'users'), user.uid), defaultAnonBookmarks).catch(
+      (e) => `Code: ${e.code}, message ${e.message}`,
+    );
+
+    return user.uid;
   },
 
-  signUp(creds: ISignUpCreds): Promise<firebase.User | string | null> {
+  async signUp(creds: ISignUpCreds) {
     const { email, password, displayName } = creds;
+    const credential = EmailAuthProvider.credential(email, password);
 
-    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+    const { user } = await linkWithCredential(auth.currentUser as User, credential);
 
-    if (!auth.currentUser) {
-      return new Promise((resolve) => resolve('Something went wrong, try reload page'));
-    }
+    await updateDoc(doc(collection(fsdb, 'users'), user.uid), { displayName, email });
+    await updateProfile(user, { displayName });
+    const { user: linkedUser } = await signInWithCredential(auth, credential);
 
-    return auth.currentUser
-      .linkWithCredential(credential)
-      .then((linked) => {
-        fsdb.collection('users').doc(linked.user?.uid).update({ displayName, email });
-
-        auth.currentUser?.updateProfile({ displayName });
-        return auth.signInWithCredential(linked.credential!);
-      })
-      .then((signed) => signed.user)
-      .catch((e) => `Code: ${e.code}, message ${e.message}`);
+    return linkedUser;
   },
 
-  signIn(creds: ISignInCreds): Promise<firebase.User | string | null> {
-    return auth
-      .signInWithEmailAndPassword(creds.email, creds.password)
-      .then((responce) => responce.user)
-      .catch((e) => `Code: ${e.code}, message ${e.message}`);
+  async signIn(creds: ISignInCreds) {
+    return (await signInWithEmailAndPassword(auth, creds.email, creds.password)).user;
   },
 
-  logoOut(): Promise<string> {
-    return auth
-      .signOut()
-      .then(() => 'Signout successful')
-      .catch((e) => `Code: ${e.code}, message ${e.message}`);
+  async logoOut() {
+    await signOut(auth);
+    await 'Signout successful';
   },
 
-  passwordReset(email: string): Promise<string> {
-    return auth
-      .sendPasswordResetEmail(email)
-      .then(() => `Password Reset Email sent to ${email}`)
-      .catch(() => 'Something went wrong, try reload page');
+  async passwordReset(email: string) {
+    await sendPasswordResetEmail(auth, email);
+    return `Password Reset Email sent to ${email}`;
   },
-
-  // deleteAnonymousUser() {
-  //   auth.currentUser?.delete();
-  // },
 };
 
 export const pagesApi = {
-  getData(userID: string): Promise<firebase.firestore.DocumentData | string | undefined> {
-    return fsdb
-      .collection('users')
-      .doc(userID)
-      .get()
-      .then((doc) => doc.data())
-      .catch(() => 'Something went wrong, try reload page');
+  async getData(userID: string) {
+    const snap = await getDoc(doc(fsdb, 'users', userID));
+    return snap.exists() ? snap.data() : 'Something went wrong, try reload page';
   },
 
-  updateData(data: IUpdate): Promise<string> {
-    return fsdb
-      .collection('users')
-      .doc(data.uid)
-      .update({ pages: data.tabs })
+  async updateData(data: IUpdate) {
+    return updateDoc(doc(collection(fsdb, 'users'), data.uid), { pages: data.tabs })
       .then(() => 'Update successful!')
       .catch(() => 'Something went wrong, try reload page');
   },
 };
 
 export const settingsApi = {
-  updateSettings(userID: string, settings: ISettings): Promise<string> {
-    return fsdb
-      .collection('users')
-      .doc(userID)
-      .update({ settings: settings })
+  async updateSettings(userID: string, settings: ISettings): Promise<string> {
+    return updateDoc(doc(collection(fsdb, 'users'), userID), { settings })
       .then(() => 'Update successful!')
       .catch(() => 'Something went wrong, try reload page');
   },

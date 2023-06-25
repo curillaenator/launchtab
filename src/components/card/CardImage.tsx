@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { icons } from '../../assets/icons';
-import { pagesIcons } from '../../assets/pagesIcons';
+import { icons } from '@src/assets/icons';
+import { pagesIcons } from '@src/assets/pagesIcons';
 
-import type { IBookmark } from '../../types/types';
+import type { IBookmark } from '@src/types';
 
 const CardImageStyled = styled.div`
   display: flex;

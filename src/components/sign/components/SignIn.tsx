@@ -5,7 +5,7 @@ import { useSignForm } from '../hooks/useSignForm';
 import { BtnCta, BtnGhost } from '../../buttons';
 import { TextInput } from '../../inputs/TextInput';
 import { Typography } from '../../typography';
-import { Shape } from '../../shape/Shape';
+import { Shape } from '@launch-ui/shape';
 
 import { FormStyled } from './styles';
 
@@ -19,7 +19,7 @@ export const SignIn: FC<ISignIn> = ({ close }) => {
   return (
     <FormStyled onSubmit={onSubmit}>
       <div className='form'>
-        <Shape className='form-shape' borderRadius={18} isAdaptive />
+        <Shape className='form-shape' borderRadius={18} />
 
         <div className='form-title'>
           <Typography type='RoundedHeavy56' className='form-title-main'>

@@ -8,6 +8,8 @@ export interface ShapeProps extends HTMLAttributes<HTMLDivElement> {
   gradientDirection?: 'right' | 'left' | 'bottom' | 'top';
   stroke?: number;
   defferedRender?: boolean;
+  contractXBy?: number;
+  height?: number;
 }
 
 export interface CornerProps extends HTMLAttributes<HTMLDivElement> {

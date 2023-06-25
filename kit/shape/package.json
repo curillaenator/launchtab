@@ -1,0 +1,26 @@
+{
+  "name": "@launch-ui/shape",
+  "version": "1.0.0",
+  "description": "Smoothed corners container",
+  "license": "ISC",
+  "repository": {
+    "type": "git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "type": "git"
+  },
+  "main": "src/index",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "npx tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "files": [
+    "/build"
+  ]
+}

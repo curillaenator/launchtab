@@ -54,8 +54,13 @@ export const App: FC = () => {
   const [isAnon] = useDataQuery(user);
   const currentTheme = useThemeComposer();
 
-  useEffect(() => dispatch(checkUserIsAuthed()), [dispatch]);
-  useEffect(() => dispatch(getCurBookmarks(curPage)), [curPage, dispatch]);
+  useEffect(() => {
+    dispatch(checkUserIsAuthed());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCurBookmarks(curPage));
+  }, [curPage, dispatch]);
 
   useEffect(() => {
     const html = document.querySelector('html');

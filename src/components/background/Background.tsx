@@ -20,7 +20,7 @@ const BackgroundStyled = styled.div`
 `;
 
 export const Background: FC = () => {
-  const { wallpaper } = useAppSelector((state) => state.settings.lookfeel);
+  const wallpaper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
 
   if (!wallpaper) return <BackgroundStyled />;
 

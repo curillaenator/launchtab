@@ -11,7 +11,8 @@ import {
 } from '@src/colors';
 
 export const useThemeComposer = (): TTheme => {
-  const { darkMode, themeName } = useAppSelector((state) => state.settings.lookfeel);
+  const darkMode = useAppSelector((state) => state.settings.lookfeel.darkMode);
+  const themeName = useAppSelector((state) => state.settings.lookfeel.themeName);
 
   const colorsStatic = darkMode ? colorsStaticDarkMode : colorsStaticLightMode;
   const primaryColor = themes[themeName].primary[500];

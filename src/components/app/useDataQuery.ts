@@ -1,70 +1,91 @@
-import firebase from 'firebase/app';
 import { batch } from 'react-redux';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { pagesApi, localStorageApi } from '../../api/api';
-import { initialPages } from '../../api/apiHelpers';
+import isEqual from 'lodash.isequal';
 
-import { setMessage, applyData } from '../../redux/reducers/bookmarks';
+import { useAppDispatch, useAppSelector } from '@src/hooks';
+import { pagesApi, localStorageApi } from '@src/api/api';
 
-import { setIsDataLoading, setIsDataSyncing } from '../../redux/reducers/loadings';
+import { setMessage, applyData } from '@src/redux/reducers/bookmarks';
+import { setIsDataLoading } from '@src/redux/reducers/loadings';
 
-import { applySettings, initialState as initialSettings } from '../../redux/reducers/settings';
+import { applySettings } from '@src/redux/reducers/settings';
 
-export const useDataQuery = (user: firebase.User | null) => {
+import type { IData } from '@src/types';
+
+export const useDataQuery = () => {
+  const user = useAppSelector((state) => state.auth.user);
+  const loadings = useAppSelector((state) => state.loadings);
+
   const dispatch = useAppDispatch();
-  const userAuthorized = !user?.isAnonymous;
+
+  const UID = user?.uid;
+  const isUserAnon = user?.isAnonymous;
 
   useEffect(() => {
-    batch(() => {
+    const localBookmarks = localStorage.getItem('bookmarks');
+    const localSettings = localStorage.getItem('settings');
+
+    if (!localBookmarks) {
       dispatch(setIsDataLoading(true));
-      dispatch(setIsDataSyncing(true));
+    }
+
+    batch(() => {
+      if (!!localBookmarks) dispatch(applyData(JSON.parse(localBookmarks) as IData[]));
+      if (!!localSettings) dispatch(applySettings(JSON.parse(localSettings)));
     });
+  }, [dispatch]);
 
-    // clear localStorage if settings & bookmarks EXIST, but user is UNATHORIZED
+  useEffect(() => {
+    if (!UID) return;
 
-    if (user?.isAnonymous === true && 'bookmarks' in localStorage && 'settings' in localStorage) {
-      localStorageApi.clear();
-    }
-
-    // data process when user is ATHORIZED and settings & bookmarks EXIST in localStorage
-
-    if ('bookmarks' in localStorage && 'settings' in localStorage) {
-      const localResponse = {
-        pages: localStorageApi.getBookmarks() || initialPages,
-        settings: localStorageApi.getSettings() || initialSettings,
-      };
-
-      batch(() => {
-        dispatch(applyData(localResponse.pages));
-        dispatch(applySettings(localResponse.settings));
+    pagesApi.getData(UID).then((response) => {
+      if (loadings.isDataLoading) {
         dispatch(setIsDataLoading(false));
-      });
-    }
-
-    // after check localStorage if still no user break here until next getUser iteration with existing user
-
-    if (!user) return;
-
-    // data process when settings & bookmarks NOT EXIST in localStorage and user EXISTS
-
-    pagesApi.getData(user.uid).then((response) => {
-      if (!response) return dispatch(setMessage('Bad server responce'));
-      if (typeof response === 'string') return dispatch(setMessage(response));
-
-      if (userAuthorized) {
-        localStorageApi.setBookmarks(response.pages);
-        localStorageApi.setSettings(response.settings);
       }
 
-      batch(() => {
-        dispatch(applyData(response.pages));
-        dispatch(applySettings(response.settings));
-        dispatch(setIsDataLoading(false));
-        dispatch(setIsDataSyncing(false));
-      });
-    });
-  }, [user]);
+      if (!response) {
+        dispatch(setMessage('Bad server response'));
+        return;
+      }
 
-  return [!userAuthorized];
+      if (typeof response === 'string') {
+        dispatch(setMessage(response));
+        return;
+      }
+
+      const { pages: resPages, settings: resSettings } = response as { pages: IData[]; settings: any };
+
+      const bookmarks = localStorage.getItem('bookmarks') ? JSON.parse(localStorage.getItem('bookmarks') || '') : null;
+      const settings = localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings') || '') : null;
+
+      const areCachedPagesEqualToRes = isEqual(resPages, bookmarks);
+      const areCacheSettingsEqualToRes = isEqual(resSettings, settings);
+
+      if (!areCachedPagesEqualToRes) {
+        localStorageApi.setBookmarks(resPages);
+        dispatch(applyData(resPages));
+      }
+
+      if (!areCacheSettingsEqualToRes) {
+        if (!!resSettings) {
+          localStorageApi.setSettings(resSettings);
+        }
+
+        if (!settings && !!resSettings) {
+          dispatch(applySettings(resSettings));
+        }
+      }
+    });
+  }, [UID, loadings.isDataLoading]);
+
+  return {
+    isUserAuthed: !!UID,
+    isUserAnon,
+  };
 };
+
+// clear localStorage if settings & bookmarks EXIST, but user is UNATHORIZED
+
+// if (!isUserAuthed && ('bookmarks' in localStorage || 'settings' in localStorage)) {
+//   localStorageApi.clear();
+// }

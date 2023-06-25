@@ -12,7 +12,6 @@ const root = createRoot(appContainer);
 
 root.render(
   <Provider store={store}>
-    {/* <h1>Hello!</h1> */}
     <App />
   </Provider>,
 );

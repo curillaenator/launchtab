@@ -7,7 +7,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = {
   mode: 'development',
 
-  entry: ['@babel/polyfill', './src/index.tsx'],
+  entry: './src/index.tsx',
 
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -22,11 +22,10 @@ module.exports = {
   },
 
   plugins: [
-    new HTMLWebpackPlugin({
-      template: './src/index.html',
-      title: 'Happy Repo',
-    }),
+    new HTMLWebpackPlugin({ template: './src/index.html' }),
+
     new CleanWebpackPlugin(),
+
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -38,11 +37,13 @@ module.exports = {
         },
       ],
     }),
+
     new Dotenv(),
   ],
 
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx'],
+
     alias: {
       '@src': path.resolve(__dirname, './src'),
     },
@@ -53,7 +54,15 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: { localIdentName: '[local]_[hash:base64:8]' },
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -61,7 +70,7 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.m?(js|jsx|ts|tsx)$/i,
+        test: /\.(js|jsx|ts|tsx)$/i,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },

@@ -107,11 +107,13 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
       profile,
       other,
     };
+
     appDispatch(updateSettings(settings));
   };
 
   const hadleLogOut = () => {
     appDispatch(logOut());
+
     closeSettings();
   };
 

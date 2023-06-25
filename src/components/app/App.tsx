@@ -44,14 +44,16 @@ const AppStyled = styled.div`
 export const App: FC = () => {
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector((state) => state.auth.user);
-  const { bookmarks, loadings } = useAppSelector((state) => state);
+  const bookmarks = useAppSelector((state) => state.bookmarks);
+  const loadings = useAppSelector((state) => state.loadings);
 
   const { data, pages, curPage, curBookmarks } = bookmarks;
   const { isAppLoading, isDataLoading } = loadings;
 
   const [settingsModal, setSettingsModal] = useState(false);
-  const [isAnon] = useDataQuery(user);
+
+  const { isUserAnon } = useDataQuery();
+
   const currentTheme = useThemeComposer();
 
   useEffect(() => {
@@ -86,7 +88,7 @@ export const App: FC = () => {
 
         {data && (
           <>
-            <Header isAnon={isAnon} setSettingsModal={() => setSettingsModal(true)} />
+            <Header isAnon={!!isUserAnon} setSettingsModal={() => setSettingsModal(true)} />
 
             <div className='main-screen'>
               <Pages pages={pages} curPage={curPage} />
@@ -96,7 +98,7 @@ export const App: FC = () => {
           </>
         )}
 
-        {isAnon && <Sign />}
+        {isUserAnon && <Sign />}
       </AppStyled>
     </ThemeProvider>
   );

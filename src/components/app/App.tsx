@@ -76,8 +76,6 @@ export const App: FC = () => {
     }
   }, [currentTheme]);
 
-  console.log(userLoading);
-
   if (userLoading || isAppLoading || isDataLoading) return <Loader fullscreen />;
 
   return (

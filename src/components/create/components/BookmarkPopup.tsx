@@ -8,7 +8,7 @@ import { BtnCta, BtnGhost, BtnIcon } from '@src/components/buttons';
 import { Accordion } from '@src/components/accordion/Accordion';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { Card } from '@src/components/card/Card';
-import { Shape } from '@src/components/shape/Shape';
+import { Shape } from '@launch-ui/shape';
 import { Typography } from '@src/components/typography';
 
 import { checkImageURL } from '@src/helpers/helpers';
@@ -124,7 +124,7 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
 
   return (
     <BookmarkPopupStyled>
-      <Shape borderRadius={18} isAdaptive className='popup-shape' />
+      <Shape borderRadius={18} className='popup-shape' />
 
       <div className='popup-title'>
         <Typography type='RoundedHeavy24'>New</Typography>

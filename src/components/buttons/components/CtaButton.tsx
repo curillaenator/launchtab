@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { Typography } from '../../typography/Typography';
-import { Shape } from '../../shape/Shape';
+import { Shape } from '@launch-ui/shape';
 
 import { icons } from './../assets/icons';
 import type { Button } from './interfaces';

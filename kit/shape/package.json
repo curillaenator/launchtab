@@ -1,11 +1,8 @@
 {
   "name": "@launch-ui/shape",
   "version": "1.0.0",
-  "description": "Компонент для скрытия дополнительного контента",
+  "description": "Smoothed corners container",
   "license": "ISC",
-  "sideEffects": [
-    "*.css"
-  ],
   "publishConfig": {
     "access": "public",
     "main": "build/index.js",
@@ -15,20 +12,10 @@
   "main": "src/index",
   "types": "src/index.ts",
   "scripts": {
-    "build": "npx tsc -p tsconfig.json",
-    "build:raw": "run -T tsc -p tsconfig.build.json",
-    "build:watch": "yarn build:raw --watch",
-    "test": "run -T pcbl-fe  test",
-    "checkDep": "run -T pcbl-fe  checkDependencies",
-    "pack": "run -T pcbl-fe  pack",
-    "revertPack": "run -T pcbl-fe  revertPack",
-    "setVersion": "run -T pcbl-fe  setVersion",
-    "clean": "run -T pcbl-fe  clean"
+    "build": "npx tsc -p tsconfig.json"
   },
   "repository": {
-    "type": "git",
-    "url": "https://bitbucket.pcbltools.ru/bitbucket/projects/EDUPOWER/repos/uikit4/browse/packages/xyz/Accordion",
-    "directory": "packages/ui"
+    "type": "git"
   },
   "devDependencies": {
     "@launch-ui/config": "1.0.0"

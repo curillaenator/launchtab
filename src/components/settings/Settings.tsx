@@ -9,7 +9,7 @@ import { logOut } from '../../redux/reducers/auth';
 
 import { BtnCta, BtnGhost } from '../buttons';
 import { Typography } from '../typography';
-import { Shape } from '../shape/Shape';
+import { Shape } from '@launch-ui/shape';
 import { Scrollbars } from '../scrollbars/Scrollbars';
 
 import { LookFeel, Profile } from './components';

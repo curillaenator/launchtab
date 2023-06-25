@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { Shape } from '../shape/Shape';
+import { Shape } from '@launch-ui/shape';
 import { Typography } from '../typography';
 
 interface ISwitchStyled {

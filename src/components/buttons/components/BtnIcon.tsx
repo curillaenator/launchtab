@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Shape } from '@src/components/shape/Shape';
+import { Shape } from '@launch-ui/shape';
 
 import { icons } from '../assets/icons';
 import type { IBtnIcon } from './interfaces';

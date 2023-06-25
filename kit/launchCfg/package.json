@@ -6,8 +6,7 @@
   "main": "src/index",
   "types": "src/index.d.ts",
   "scripts": {
-    "build": "run -T rimraf build && cp -R src build",
-    "build:watch": "cp -R src build"
+    "build": "run -T rimraf build && cp -R src build"
   },
   "files": [
     "/build"

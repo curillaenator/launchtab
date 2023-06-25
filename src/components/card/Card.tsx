@@ -57,7 +57,7 @@ const CardStyled = styled.a<ICardStyled>`
   }
 
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.015);
     background-color: ${({ theme }) => theme.backgrounds.base};
 
     filter: drop-shadow(${({ theme }) => theme.shadows.card});

@@ -24,12 +24,12 @@ const CardStyled = styled.a<ICardStyled>`
   --card-animation-method: ease-in-out;
   --card-bdrs: calc((18px * 1.25) + 3px);
 
-  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+  --shp-bgc: transparent;
+  --shp-bdc: ${({ theme }) => theme.backgrounds.base};
 
   will-change: filter;
   overflow: visible;
-  /* backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')}; */
-  background-color: var(--shp-bgc);
+  background-color: ${({ theme }) => theme.backgrounds.base};
   position: relative;
   cursor: pointer;
   display: block;
@@ -38,7 +38,6 @@ const CardStyled = styled.a<ICardStyled>`
   text-decoration: none;
   border-radius: var(--card-bdrs);
 
-  border: 2px solid ${({ theme, hasBorder }) => (hasBorder ? theme.backgrounds.lightest : 'none')};
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
 
   animation: var(--card-animation-time) ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
@@ -58,8 +57,6 @@ const CardStyled = styled.a<ICardStyled>`
   }
 
   &:hover {
-    --shp-bgc: ${({ theme }) => theme.backgrounds.base};
-
     transform: scale(1.02);
     background-color: ${({ theme }) => theme.backgrounds.base};
 
@@ -107,6 +104,7 @@ export const Card: FC<CardProps> = (props) => {
     >
       <Corners
         borderRadius={18}
+        stroke={4}
         // className={`card-shape ${hasBorder ? 'card-shape-bordered' : ''}`}
       />
 

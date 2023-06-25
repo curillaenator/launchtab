@@ -13,14 +13,14 @@ const CardImageStyled = styled.div`
   height: 142px;
   border-radius: var(--card-bdrs) var(--card-bdrs) 0px 0px;
   overflow: hidden;
-  padding: 8px 8px 0 8px;
+  padding: 4px 4px 0 4px;
 
   .card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     user-select: none;
-    border-radius: 12px 12px 6px 6px;
+    border-radius: 0 0 6px 6px;
   }
 
   .card-icon {

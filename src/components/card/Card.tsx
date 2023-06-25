@@ -4,7 +4,7 @@ import { fadeIn } from 'react-animations';
 
 import { useAppSelector } from '@src/hooks/hooks';
 import { Typography } from '@src/components/typography';
-import { Shape } from '@src/components/shape/Shape';
+import { Corners } from '@src/components/shape';
 
 import { CardImage } from './CardImage';
 
@@ -22,34 +22,27 @@ interface ICardStyled {
 const CardStyled = styled.a<ICardStyled>`
   --card-animation-time: 150ms;
   --card-animation-method: ease-in-out;
+  --card-bdrs: calc((18px * 1.25) + 3px);
+
+  --shp-bgc: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
 
   will-change: filter;
   overflow: visible;
   backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')};
-
+  background-color: var(--shp-bgc);
   position: relative;
   cursor: pointer;
   display: block;
   width: 100%;
   height: 100%;
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: var(--card-bdrs);
 
   border: 2px solid ${({ theme, hasBorder }) => (hasBorder ? theme.backgrounds.lightest : 'none')};
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
 
   animation: var(--card-animation-time) ${({ noAnimation }) => (noAnimation ? 'none' : animation)};
   transition: var(--card-animation-time) var(--card-animation-method);
-
-  .card-shape {
-    fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
-    will-change: filter;
-
-    &-bordered {
-      stroke: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.lightest)};
-      stroke-width: 1px;
-    }
-  }
 
   .card-title {
     display: flex;
@@ -65,23 +58,22 @@ const CardStyled = styled.a<ICardStyled>`
   }
 
   &:hover {
+    --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+
     transform: scale(1.02);
     background-color: ${({ theme }) => theme.backgrounds.base};
+
+    filter: drop-shadow(${({ theme }) => theme.shadows.card});
 
     .card-title {
       color: ${({ theme }) => theme.primary[500]};
     }
-
-    .card-shape {
-      fill: ${({ theme }) => theme.backgrounds.base};
-      filter: drop-shadow(${({ theme }) => theme.shadows.card});
-    }
   }
 
   &:active {
-    box-shadow: none;
+    /* box-shadow: none; */
     transform: scale(1);
-    background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
+    /* background-color: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)}; */
   }
 `;
 
@@ -93,7 +85,7 @@ interface CardProps {
 }
 
 export const Card: FC<CardProps> = (props) => {
-  const { bookmark, className = 'class-bookmark', as = 'a', hasBorder = false } = props;
+  const { bookmark, className = 'class-bookmark', as = 'a' } = props;
 
   const wallpapper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
 
@@ -113,7 +105,10 @@ export const Card: FC<CardProps> = (props) => {
       onClick={() => setNoAnimation(true)}
       data-card='true'
     >
-      <Shape borderRadius={18} className={`card-shape ${hasBorder ? 'card-shape-bordered' : ''}`} />
+      <Corners
+        borderRadius={18}
+        // className={`card-shape ${hasBorder ? 'card-shape-bordered' : ''}`}
+      />
 
       <CardImage {...bookmark} />
 

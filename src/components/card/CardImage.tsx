@@ -8,24 +8,24 @@ import type { IBookmark } from '../../types/types';
 
 const CardImageStyled = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
   height: 142px;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: var(--card-bdrs) var(--card-bdrs) 0px 0px;
   overflow: hidden;
+  padding: 8px 8px 0 8px;
 
   .card-image {
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     user-select: none;
     border-radius: 12px 12px 6px 6px;
-    margin-top: 2px;
   }
 
   .card-icon {
     width: 88px;
     height: 88px;
-    margin-top: 38px;
     user-select: none;
 
     .content-svg {

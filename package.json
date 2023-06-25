@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@launch-ui/config": "1.0.0",
+    "@launch-ui/dialog": "1.0.0",
     "@launch-ui/shape": "1.0.0",
     "@reduxjs/toolkit": "1.9.5",
     "array-move": "4.0.0",

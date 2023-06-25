@@ -1,8 +1,8 @@
 {
-  "name": "@launch-ui/shape",
+  "name": "@launch-ui/dialog",
   "version": "1.0.0",
-  "description": "Smoothed corners container",
-  "license": "ISC",
+  "description": "Dialog component",
+  "license": "UNLICENSED",
   "repository": {
     "type": "git"
   },
@@ -16,6 +16,10 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@launch-ui/shape": "1.0.0",
+    "classnames": "2.3.2"
   },
   "peerDependencies": {
     "react": "*"

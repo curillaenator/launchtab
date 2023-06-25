@@ -2,9 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
 import shortid from 'shortid';
 
-import { pagesApi, localStorageApi } from '../../api/api';
-
-import type { IBookmark, IData, IUpdate, TThunk } from '../../types/types';
+import { pagesApi, localStorageApi } from '@src/api';
+import type { IBookmark, IData, IUpdate, TThunk } from '@src/types';
 
 export interface IBookmarks {
   pages: string[];

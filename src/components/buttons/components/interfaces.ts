@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, MouseEvent } from 'react';
 import { ButtonsIcons } from '../assets/icons';
 
 export interface Button extends HTMLAttributes<HTMLButtonElement> {
@@ -11,7 +11,7 @@ export interface Button extends HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   danger?: boolean;
   type?: 'submit' | 'button';
-  handler?: () => void;
+  handler?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface IBtnGhost extends Button {

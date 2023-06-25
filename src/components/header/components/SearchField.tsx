@@ -33,7 +33,7 @@ const InputStyled = styled.div<IInputStyled>`
 
   .input-shape {
     fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
-    backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(5px)' : 'none')};
+    backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')};
     overflow: visible;
     will-change: filter;
 

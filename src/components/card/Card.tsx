@@ -24,11 +24,11 @@ const CardStyled = styled.a<ICardStyled>`
   --card-animation-method: ease-in-out;
   --card-bdrs: calc((18px * 1.25) + 3px);
 
-  --shp-bgc: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
+  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
 
   will-change: filter;
   overflow: visible;
-  backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')};
+  /* backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')}; */
   background-color: var(--shp-bgc);
   position: relative;
   cursor: pointer;
@@ -52,7 +52,7 @@ const CardStyled = styled.a<ICardStyled>`
     width: 100%;
     height: 44px;
     padding: 0 1rem;
-    color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.base)};
+    color: ${({ theme }) => theme.texts.base};
     border-radius: 0 0 20px 20px;
     overflow: hidden;
   }

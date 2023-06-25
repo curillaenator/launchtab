@@ -20,7 +20,7 @@ const SignStyled = styled.div`
   width: 100%;
   height: 72px;
   background-color: ${({ theme }) => theme.backgrounds.base};
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 
   & .sign-text {
     color: ${({ theme }) => theme.texts.base};

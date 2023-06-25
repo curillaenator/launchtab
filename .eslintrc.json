@@ -4,11 +4,13 @@
     "es2021": true,
     "node": true
   },
+
   "settings": {
     "react": {
       "version": "detect"
     }
   },
+
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
@@ -20,7 +22,9 @@
     "plugin:prettier/recommended"
   ],
   "overrides": [],
+
   "parser": "@typescript-eslint/parser",
+
   "parserOptions": {
     "project": ["./tsconfig.json"],
     "ecmaFeatures": {
@@ -29,10 +33,15 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+
+  "plugins": ["@typescript-eslint", "react", "prettier"],
+
   "rules": {
     "import/no-unresolved": "off",
     "no-console": "warn",
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-empty-function": "off"
   }
 }

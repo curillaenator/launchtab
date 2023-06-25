@@ -37,7 +37,7 @@ const PagesJSX: FC<IPages> = ({ pages, curPage }) => {
 
       dispatch(updatePagesOrder([pages[0], ...sortedKnobs]));
     },
-    [pages],
+    [pages, dispatch, sortablePages],
   );
 
   return (

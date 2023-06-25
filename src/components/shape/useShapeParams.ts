@@ -18,7 +18,7 @@ export const useShapeParams = (props: ShapeProps) => {
     if (ref.current) observer.observe(ref.current);
 
     return () => observer.disconnect();
-  }, [forcedHeight]);
+  }, [forcedHeight, contractXBy]);
 
   const shapeData: { W: number; H: number; path: string } = useMemo(() => {
     const [W, H] = boundings.split('_').map((v) => +v);

@@ -15,6 +15,7 @@ export interface ISettings {
 
   profile: { shortName: string | null };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   other: { other: any };
 }
 

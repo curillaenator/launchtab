@@ -44,4 +44,5 @@ export type TThunk = ThunkAction<void, TState, unknown, AnyAction>; // thunk
 
 // EVENTS
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TEventHandler<E extends SyntheticEvent<any>> = (event: E) => void;

@@ -82,7 +82,7 @@ const SettingsStyled = styled.div`
   }
 `;
 
-interface ISettings {
+export interface ISettings {
   closeSettings: () => void;
 }
 
@@ -99,7 +99,7 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
     // { title: OTHER, handler: () => dispatch(r.setCurrentTab(OTHER)) },
   ];
 
-  useEffect(() => dispatch(r.setInitialState(userSettings)), []);
+  useEffect(() => dispatch(r.setInitialState(userSettings)), [userSettings]);
 
   const submitSettings = () => {
     const settings = {

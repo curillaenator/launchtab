@@ -14,6 +14,8 @@ interface IFeatures {
 }
 
 export const Features: FC<IFeatures> = ({ close }) => {
+  console.log(close);
+
   return (
     <FeaturesStyled>
       {featureLists.map((list) => (

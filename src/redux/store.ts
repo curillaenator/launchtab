@@ -23,4 +23,5 @@ export const store = configureStore({
 export type TState = ReturnType<typeof store.getState>;
 export type TDispatch = typeof store.dispatch;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).store = store;

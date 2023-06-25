@@ -8,7 +8,7 @@ import { pagesApi, localStorageApi } from '@src/api/api';
 import { setMessage, applyData } from '@src/redux/reducers/bookmarks';
 import { setIsDataLoading } from '@src/redux/reducers/loadings';
 
-import { applySettings } from '@src/redux/reducers/settings';
+import { applySettings, type ISettings } from '@src/redux/reducers/settings';
 
 import type { IData } from '@src/types';
 
@@ -53,7 +53,7 @@ export const useDataQuery = () => {
         return;
       }
 
-      const { pages: resPages, settings: resSettings } = response as { pages: IData[]; settings: any };
+      const { pages: resPages, settings: resSettings } = response as { pages: IData[]; settings: ISettings };
 
       const bookmarks = localStorage.getItem('bookmarks') ? JSON.parse(localStorage.getItem('bookmarks') || '') : null;
       const settings = localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings') || '') : null;
@@ -76,7 +76,7 @@ export const useDataQuery = () => {
         }
       }
     });
-  }, [UID, loadings.isDataLoading]);
+  }, [UID, loadings.isDataLoading, dispatch]);
 
   return {
     isUserAuthed: !!UID,

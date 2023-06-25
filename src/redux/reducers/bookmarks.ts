@@ -233,7 +233,10 @@ export const deletePage = (pageName: string): TThunk => {
   };
 };
 
-export const deleteBookmark = (bookmarkName: string, pageID?: string): TThunk => {
+export const deleteBookmark = (
+  bookmarkName: string,
+  // pageID?: string
+): TThunk => {
   return (dispatch, getState) => {
     const { curPage, data, curBookmarks } = getState().bookmarks;
 

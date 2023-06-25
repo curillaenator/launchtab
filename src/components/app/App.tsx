@@ -1,22 +1,23 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import GlobalFonts from '../../assets/fonts/fonts';
+import GlobalFonts from '@src/assets/fonts/fonts';
 
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '@src/hooks';
+
+import { Header } from '@src/components/header/Header';
+import { Loader } from '@src/components/loader/Loader';
+import { Background } from '@src/components/background/Background';
+import { Pages } from '@src/components/pages/Pages';
+import { Bookmarks } from '@src/components/bookmarks/Bookmarks';
+import { Sign } from '@src/components/sign';
+import { Modal } from '@src/components/modal/Modal';
+import { Settings } from '@src/components/settings';
+
+import { checkUserIsAuthed } from '@src/redux/reducers/auth';
+import { getCurBookmarks } from '@src/redux/reducers/bookmarks';
+
 import { useDataQuery } from './useDataQuery';
 import { useThemeComposer } from './useThemeComposer';
-
-import { Header } from '../header/Header';
-import { Loader } from '../loader/Loader';
-import { Background } from '../background/Background';
-import { Pages } from '../pages/Pages';
-import { Bookmarks } from '../bookmarks/Bookmarks';
-import { Sign } from '../sign';
-import { Modal } from '../modal/Modal';
-import { Settings } from '../settings/Settings';
-
-import { checkUserIsAuthed } from '../../redux/reducers/auth';
-import { getCurBookmarks } from '../../redux/reducers/bookmarks';
 
 const AppStyled = styled.div`
   --app-pd: 64px;

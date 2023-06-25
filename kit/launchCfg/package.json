@@ -1,0 +1,22 @@
+{
+  "name": "@launch-ui/config",
+  "description": "Common cfg & types",
+  "version": "1.0.0",
+  "license": "ISC",
+  "main": "src/index",
+  "types": "src/index.d.ts",
+  "scripts": {
+    "build": "run -T rimraf build && cp -R src build",
+    "build:watch": "cp -R src build"
+  },
+  "files": [
+    "/build"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "styled-components": "*",
+    "typescript": "*"
+  },
+  "type": "git"
+}

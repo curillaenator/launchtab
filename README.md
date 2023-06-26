@@ -12,8 +12,7 @@ password: testaccount
 
 ## Description
 
-This webapp is customizible start page with grouped bookmarks leading to your favorite sites.
-Bookmarks are easy to setup + drag&drop support.
+This webapp is customizible start page with grouped bookmarks leading to your favorite sites. Bookmarks are easy to setup + drag&drop support.
 
 ## Stack
 
@@ -28,6 +27,7 @@ Bookmarks are easy to setup + drag&drop support.
   <img src="/screens/image1.jpg">
   <img src="/screens/image2.jpg">
   <img src="/screens/image3.jpg">
+  <img src="/screens/image4.jpg">
 </div>
 
 ## Local start:

@@ -32,5 +32,5 @@ This webapp is customizible start page with grouped bookmarks leading to your fa
 
 ## Local start:
 
-- yarn install
+- yarn
 - yarn start

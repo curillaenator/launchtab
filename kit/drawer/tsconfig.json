@@ -1,10 +1,13 @@
 {
   "extends": "@launch-ui/config/tsconfig.json",
   "compilerOptions": {
+    "target": "es2019",
+    "moduleResolution": "Node",
     "outDir": "./build",
-    "declarationDir": "./build",
+    "lib": ["esnext", "dom"],
     "rootDir": "./src",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "types": ["react"]
   },
   "include": ["src"]
 }

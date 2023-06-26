@@ -76,7 +76,6 @@ export const App: FC = () => {
       html.style.setProperty('--scrollbar-track', currentTheme.backgrounds.light);
 
       html.style.setProperty('--dwr-overlay-bgc', currentTheme.backgrounds.base40);
-      html.style.setProperty('--drw-overlay-backdrop-filter', 'blur(8px)');
       html.style.setProperty('--drw-sh', currentTheme.shadows.card);
       html.style.setProperty('--drw-ct-gn', currentTheme.texts.base);
     }

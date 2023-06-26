@@ -1,57 +1,54 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { Shape } from '@launch-ui/shape';
+import { Corners } from '@launch-ui/shape';
 
 import { useAppSelector } from '@src/hooks/hooks';
 import { useSearch } from './useSearch';
 
 import { icons } from '@src/assets/icons';
 
-const SEARCH_FIXED_PADDING_X = 88;
-
 const SearchFormStyled = styled.form`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 100%;
   overflow: visible;
 `;
 
 interface IInputStyled {
   isOpaque: boolean;
+  focused: boolean;
 }
 
 const InputStyled = styled.div<IInputStyled>`
+  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+  --shp-bdc: ${({ theme, focused }) => (focused ? theme.primary[500] : theme.backgrounds.base)};
+
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 8px;
-  width: 100%;
-  padding: 0 ${SEARCH_FIXED_PADDING_X}px;
+  width: 75%;
   overflow: visible;
+  border-radius: calc(18px * 1.25 + 3px);
+  background-color: var(--shp-bgc);
+  box-shadow: inset 0 0 0 2px var(--shp-bdc);
 
-  .input-shape {
-    fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base20 : theme.backgrounds.base)};
-    backdrop-filter: ${({ isOpaque }) => (isOpaque ? 'blur(8px)' : 'none')};
-    overflow: visible;
-    will-change: filter;
+  @media (width > 2560px) {
+    width: 50%;
+  }
 
-    &-focused {
-      fill: ${({ theme, isOpaque }) => (isOpaque ? theme.backgrounds.base40 : theme.backgrounds.base)};
-      filter: drop-shadow(${({ theme }) => theme.shadows.card});
-    }
+  &:hover {
+    --shp-bdc: ${({ theme, focused }) => (focused ? theme.primary[500] : theme.primary[400])};
   }
 
   .google_logo {
     z-index: 100;
     position: absolute;
     top: 50%;
-    left: calc(1.125rem + 88px);
+    left: 1.125rem;
     transform: translateY(-50%);
   }
 
   .searchInput {
+    /* position: s */
+    display: block;
     width: 100%;
     height: 56px;
     background-color: transparent;
@@ -60,7 +57,9 @@ const InputStyled = styled.div<IInputStyled>`
     font-weight: 600;
     padding: 0 1.25rem 0 3.5rem;
     outline: none;
-    color: ${({ theme, isOpaque }) => (isOpaque ? theme.white : theme.texts.base)};
+    color: ${({ theme }) => theme.texts.base};
+    z-index: 100;
+    position: relative;
 
     &::placeholder {
       color: ${({ theme }) => theme.texts.placeholder};
@@ -69,14 +68,6 @@ const InputStyled = styled.div<IInputStyled>`
     &::-webkit-search-cancel-button {
       appearance: none;
     }
-  }
-
-  @media (min-width: 1920px) {
-    width: 75vw;
-  }
-
-  @media (min-width: 2560px) {
-    width: 55vw;
   }
 `;
 
@@ -88,12 +79,8 @@ export const SearchField: FC = () => {
 
   return (
     <SearchFormStyled action='https://www.google.com/search' onSubmit={onSubmit}>
-      <InputStyled isOpaque={!!wallpapper}>
-        <Shape
-          className={`input-shape ${focused ? 'input-shape-focused' : ''}`}
-          borderRadius={18}
-          contractXBy={SEARCH_FIXED_PADDING_X * 2}
-        />
+      <InputStyled isOpaque={!!wallpapper} focused={focused}>
+        <Corners stroke={2} borderRadius={18} />
 
         {icons.searchEngines.google}
 

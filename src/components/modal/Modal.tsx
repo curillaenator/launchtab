@@ -16,8 +16,7 @@ const PopupStyled = styled(Popup)`
   &-overlay {
     min-width: 320px;
     padding: 0 1rem;
-    background-color: ${({ theme }) => theme.modals.matte};
-    backdrop-filter: blur(16px);
+    background-color: ${({ theme }) => theme.backgrounds.base40};
     animation: ${appear} 0.12s linear;
   }
 

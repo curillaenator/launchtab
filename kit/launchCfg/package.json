@@ -1,28 +1,27 @@
 {
   "name": "@launch-ui/config",
-  "version": "1.0.0",
-  "description": "Common cfg & types for LaunchTabs UI",
+  "version": "1.0.5",
+  "description": "Common configs for LaunchTabs UI packages",
   "license": "ISC",
   "author": "curillaenator@gmail.com",
   "publishConfig": {
     "access": "public",
-    "main": "build/index.js",
-    "types": "build/index.d.ts",
-    "type": "module",
+    "main": "index.js",
+    "type": "git",
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "index.js",
   "scripts": {
-    "build": "npx tsc -p tsconfig.json"
+    "pb": "npm publish",
+    "pb:dry": "npm publish --dry-run"
   },
   "files": [
-    "build",
+    "tsconfig.json",
     "package.json"
   ],
   "peerDependencies": {
     "react": "*",
     "typescript": "*"
   },
-  "type": "module"
+  "type": "commonjs"
 }

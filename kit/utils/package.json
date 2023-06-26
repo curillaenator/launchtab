@@ -22,7 +22,6 @@
     "qs": "6.9.4"
   },
   "devDependencies": {
-    "@launch-ui/config": "1.0.0",
     "@types/css-mediaquery": "0.1.1",
     "css-mediaquery": "0.1.2"
   },

@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { Drawer } from '@launch-ui/drawer';
+
 import GlobalFonts from '@src/assets/fonts/fonts';
 
 import { useAppSelector, useAppDispatch } from '@src/hooks';
@@ -10,7 +12,6 @@ import { Background } from '@src/components/background/Background';
 import { Pages } from '@src/components/pages/Pages';
 import { Bookmarks } from '@src/components/bookmarks/Bookmarks';
 import { Sign } from '@src/components/sign';
-import { Modal } from '@src/components/modal/Modal';
 import { Settings } from '@src/components/settings';
 
 import { checkUserIsAuthed } from '@src/redux/reducers/auth';
@@ -52,7 +53,7 @@ export const App: FC = () => {
   const { data, pages, curPage, curBookmarks } = bookmarks;
   const { isAppLoading, isDataLoading } = loadings;
 
-  const [settingsModal, setSettingsModal] = useState(false);
+  const [isRightDrawerOpen, setIsRightDrawerOpen] = useState<boolean>(false);
 
   const { isUserAnon } = useDataQuery();
 
@@ -73,6 +74,11 @@ export const App: FC = () => {
       html.style.setProperty('background-color', currentTheme.backgrounds.light);
       html.style.setProperty('--scrollbar-thumb', currentTheme.backgrounds.base);
       html.style.setProperty('--scrollbar-track', currentTheme.backgrounds.light);
+
+      html.style.setProperty('--dwr-overlay-bgc', currentTheme.backgrounds.base40);
+      html.style.setProperty('--drw-overlay-backdrop-filter', 'blur(8px)');
+      html.style.setProperty('--drw-sh', currentTheme.shadows.card);
+      html.style.setProperty('--drw-ct-gn', currentTheme.texts.base);
     }
   }, [currentTheme]);
 
@@ -84,13 +90,9 @@ export const App: FC = () => {
         <GlobalFonts />
         <Background />
 
-        <Modal open={settingsModal} onClose={() => setSettingsModal(false)}>
-          <Settings closeSettings={() => setSettingsModal(false)} />
-        </Modal>
-
         {data && (
           <>
-            <Header isAnon={!!isUserAnon} setSettingsModal={() => setSettingsModal(true)} />
+            <Header isAnon={!!isUserAnon} setSettingsModal={() => setIsRightDrawerOpen(true)} />
 
             <div className='main-screen'>
               <Pages pages={pages} curPage={curPage} />
@@ -98,6 +100,12 @@ export const App: FC = () => {
               <Bookmarks bookmarks={curBookmarks} curPage={curPage} />
             </div>
           </>
+        )}
+
+        {!isUserAnon && (
+          <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setIsRightDrawerOpen(false)}>
+            <Settings closeSettings={() => setIsRightDrawerOpen(false)} />
+          </Drawer>
         )}
 
         {isUserAnon && <Sign />}

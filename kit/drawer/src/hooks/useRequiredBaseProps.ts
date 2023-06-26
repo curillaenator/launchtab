@@ -1,6 +1,6 @@
-import { OmitedBaseDrawerProps } from '../interfaces';
+import { OmitedDrawerProps } from '../interfaces';
 
-export const useRequiredBaseProps = (props: OmitedBaseDrawerProps): OmitedBaseDrawerProps => {
+export const useRequiredBaseProps = (props: OmitedDrawerProps): OmitedDrawerProps => {
   const { portalId, open, onClose, disableBackgroundClick, placement } = props;
 
   return {

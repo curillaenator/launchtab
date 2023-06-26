@@ -7,11 +7,11 @@ import { CORNERS } from './constants';
 import type { CornerProps } from './interfaces';
 
 const Component: FC<CornerProps> = (props) => {
-  const { path, borderPath, commonSvgProps, stroke } = useCorners(props);
+  const { path, borderPath, commonSvgProps, stroke, corners = CORNERS } = useCorners(props);
 
   return (
     <CornersContainerStyled>
-      {CORNERS.map((corner) => (
+      {corners.map((corner) => (
         <svg {...commonSvgProps} key={corner} className={`corner-${corner}`}>
           <path d={path} fill='var(--shp-bgc, blue)' />
           <path d={borderPath} strokeWidth={stroke} stroke='var(--shp-bdc, red)' fill='none' />

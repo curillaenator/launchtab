@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo, PropsWithChildren } from 'react';
+import React, { FC, useState, useMemo, type PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
 import cn from 'classnames';
 import { Transition } from '@headlessui/react';
@@ -7,12 +7,12 @@ import { usePortal } from '@launch-ui/utils';
 import { ModalContext } from './context';
 import { useCloseOnEscape } from './hooks/useCloseOnEscape';
 import { Overlay } from './components/Overlay';
-import { BaseDrawerProps } from './interfaces';
+import type { DrawerProps } from './interfaces';
 
 import styles from './styles/styles.module.scss';
 
-export const BaseDrawer: FC<PropsWithChildren<BaseDrawerProps>> = (props) => {
-  const { open, portalId, transitionClassName, contentClassName, children, placement = 'left' } = props;
+export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
+  const { open, portalId, transitionClassName, contentClassName, children, placement = 'right' } = props;
 
   useCloseOnEscape(props);
 

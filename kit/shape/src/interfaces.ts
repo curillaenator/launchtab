@@ -17,4 +17,5 @@ export interface CornerProps extends HTMLAttributes<HTMLDivElement> {
   isGradient?: boolean;
   gradientDirection?: 'right' | 'left' | 'bottom' | 'top';
   stroke?: number;
+  corners?: ('tl' | 'tr' | 'br' | 'bl')[];
 }

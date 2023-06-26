@@ -21,8 +21,9 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--dwr-overlay-bgc);
+    background-color: var(--dwr-overlay-bgc, rgba(255, 255, 255, 0.4));
     z-index: -1;
+    backdrop-filter: var(--drw-overlay-backdrop-filter, none);
 
     &_noPointerEvents {
       pointer-events: none;
@@ -33,16 +34,16 @@
 .content {
   position: fixed;
   top: 0;
-  width: var(--dwr-opened-w);
+  width: var(--dwr-opened-w, 420px);
   height: 100vh;
   min-height: 100vh;
-  background: var(--dwr-ct-bgc);
+  background: var(--dwr-ct-bgc, transparent);
   z-index: var(--dwr-z, 1300);
-  // box-shadow: var(--drw-sh);
-  filter: drop-shadow(var(--drw-sh, 0px 0px 0px transparent));
+  filter: drop-shadow(var(--drw-sh, 0px 0px 6px rgba(0, 0, 0, 0.4)));
 
-  transition: var(--dwr-animation-time) var(--dwr-animation-method);
+  transition: var(--dwr-animation-time, 0.2s) var(--dwr-animation-method, ease);
   overflow: hidden;
+  color: var(--drw-ct-gn, black);
 
   &_left {
     left: 0;
@@ -53,7 +54,6 @@
   }
 
   &_closed {
-    width: var(--dwr-closed-w);
-    box-shadow: 0 0 0 0 transparent;
+    width: var(--dwr-closed-w, 0px);
   }
 }

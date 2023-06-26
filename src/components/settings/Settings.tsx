@@ -1,64 +1,57 @@
 import React, { FC, useReducer, useEffect } from 'react';
+import { Corners } from '@launch-ui/shape';
 import styled from 'styled-components';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '@src/hooks';
+
+import { updateSettings } from '@src/redux/reducers/settings';
+import { logOut } from '@src/redux/reducers/auth';
+
+import { BtnCta, BtnGhost } from '@src/components/buttons';
+import { Typography } from '@src/components/typography';
+import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
+import { LookFeel } from './components';
 
 import * as r from './reducer';
-import { updateSettings } from '../../redux/reducers/settings';
-import { logOut } from '../../redux/reducers/auth';
-
-import { BtnCta, BtnGhost } from '../buttons';
-import { Typography } from '../typography';
-import { Shape } from '@launch-ui/shape';
-import { Scrollbars } from '../scrollbars/Scrollbars';
-
-import { LookFeel, Profile } from './components';
-
-import { LOOKFEEL, PROFILE } from './constants';
 
 const SettingsStyled = styled.div`
   width: 100%;
-  border-radius: 32px;
+  height: 100%;
   background-color: transparent;
 
   .form {
-    position: relative;
-    padding: 56px;
-    z-index: 20;
+    --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+    --shp-bdc: transparent;
+    --form-bdrs: calc(24px * 1.25 + 3px);
 
-    &-shape {
-      overflow: visible;
-      fill: ${({ theme }) => theme.backgrounds.base};
-      filter: drop-shadow(${({ theme }) => theme.shadows.card});
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    width: 100%;
+    height: 100%;
+    padding: 32px 0;
+    border-radius: var(--form-bdrs) 0 0 var(--form-bdrs);
+    background-color: ${({ theme }) => theme.backgrounds.base};
+
+    &-block {
+      width: 100%;
+      padding: 0 32px;
+    }
+
+    &-topBlock {
+      height: 100%;
     }
 
     &-title {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 56px;
+      margin-bottom: 40px;
 
       &-themed {
         color: ${({ theme }) => theme.primary[500]};
-      }
-    }
-
-    &-settings {
-      display: flex;
-      width: 100%;
-      margin-bottom: 56px;
-
-      &-menu {
-        width: 154px;
-        flex-shrink: 0;
-        margin-left: -16px;
-      }
-
-      &-framework {
-        position: relative;
-        width: 100%;
-        padding: 56px;
-        border-left: 1px solid ${({ theme }) => theme.backgrounds.light};
       }
     }
 
@@ -67,18 +60,7 @@ const SettingsStyled = styled.div`
       align-items: center;
       justify-content: space-between;
       width: 100%;
-
-      &-block {
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
     }
-  }
-
-  @media (min-width: 1024px) {
-    width: 858px;
   }
 `;
 
@@ -91,13 +73,7 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
   const userSettings = useAppSelector((state) => state.settings);
 
   const [state, dispatch] = useReducer(r.reducer, r.initialState);
-  const { currentTab, lookfeel, profile, other } = state;
-
-  const TABS = [
-    { title: LOOKFEEL, handler: () => dispatch(r.setCurrentTab(LOOKFEEL)) },
-    { title: PROFILE, handler: () => dispatch(r.setCurrentTab(PROFILE)) },
-    // { title: OTHER, handler: () => dispatch(r.setCurrentTab(OTHER)) },
-  ];
+  const { lookfeel, profile, other } = state;
 
   useEffect(() => dispatch(r.setInitialState(userSettings)), [userSettings]);
 
@@ -109,6 +85,8 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
     };
 
     appDispatch(updateSettings(settings));
+
+    closeSettings();
   };
 
   const hadleLogOut = () => {
@@ -120,40 +98,24 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
   return (
     <SettingsStyled>
       <div className='form'>
-        <Shape className='form-shape' borderRadius={18} />
+        <Corners borderRadius={24} corners={['tl', 'bl']} />
 
-        <div className='form-title'>
-          <Typography type='RoundedHeavy36'>Design & profile</Typography>
-          <Typography type='RoundedHeavy36' className='form-title-themed'>
-            settings
-          </Typography>
-        </div>
-
-        <div className='form-settings'>
-          <div className='form-settings-menu'>
-            {TABS.map((tab) => (
-              <BtnGhost {...tab} active={currentTab === tab.title} key={tab.title} />
-            ))}
+        <div className='form-block form-topBlock'>
+          <div className='form-title'>
+            <Typography type='RoundedHeavy36'>Appearance</Typography>
+            <Typography type='RoundedHeavy36' className='form-title-themed'>
+              settings
+            </Typography>
           </div>
 
-          <Scrollbars height={320} hasFades>
-            <div className='form-settings-framework'>
-              {currentTab === LOOKFEEL && (
-                <LookFeel values={lookfeel} setters={r.LookFeelActions} dispatch={dispatch} />
-              )}
-
-              {currentTab === PROFILE && <Profile values={profile} setters={r.ProfileActions} dispatch={dispatch} />}
-            </div>
+          <Scrollbars height='calc(100vh - 219px)'>
+            <LookFeel values={lookfeel} setters={r.LookFeelActions} dispatch={dispatch} />
           </Scrollbars>
         </div>
 
-        <div className='form-buttons'>
-          <div className='form-buttons-block'>
+        <div className='form-block'>
+          <div className='form-buttons'>
             <BtnGhost title='Log Out' handler={hadleLogOut} />
-          </div>
-
-          <div className='form-buttons-block'>
-            <BtnGhost title='Close' handler={closeSettings} />
             <BtnCta title='Save changes' handler={submitSettings} />
           </div>
         </div>

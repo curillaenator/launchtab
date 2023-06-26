@@ -6,8 +6,9 @@ const ImagePreviewStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 308px;
-  height: 186px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* height: 186px; */
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.backgrounds.light};

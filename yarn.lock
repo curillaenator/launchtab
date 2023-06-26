@@ -2197,13 +2197,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/config@npm:1.0.5":
-  version: 1.0.5
-  resolution: "@launch-ui/config@npm:1.0.5"
+"@launch-ui/config@npm:1.0.6":
+  version: 1.0.6
+  resolution: "@launch-ui/config@npm:1.0.6"
   peerDependencies:
     react: "*"
     typescript: "*"
-  checksum: 26be38bb4d5aca3afdc26245b6009dc95c2d2089e9ec29a651d312ff3a25c194eb4e106bef9e406df11abdc501fa43e783bda994903084410379220ed841370b
+  checksum: d9f4d4a7fd03e20393a09d55b19422e2dcadb124a4895d5b3cfbf13f1f28a86c0016101b74ed283b80dc505f2d0061303692fd9075c75993eede654324190465
   languageName: node
   linkType: hard
 
@@ -6264,7 +6264,7 @@ __metadata:
     "@babel/preset-env": 7.22.5
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
-    "@launch-ui/config": 1.0.5
+    "@launch-ui/config": 1.0.6
     "@launch-ui/drawer": 1.0.0
     "@launch-ui/shape": 1.0.0
     "@reduxjs/toolkit": 1.9.5

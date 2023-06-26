@@ -1,19 +1,18 @@
 {
   "name": "@launch-ui/utils",
-  "version": "1.0.0",
-  "description": "Drawer component",
+  "version": "1.0.1",
+  "description": "LaunchTabs utils",
   "license": "ISC",
-  "repository": {
-    "type": "git"
-  },
+  "author": "curillaenator@gmail.com",
   "publishConfig": {
     "access": "public",
     "main": "build/index.js",
     "types": "build/index.d.ts",
-    "type": "git"
+    "type": "git",
+    "registry": "https://registry.npmjs.org/"
   },
-  "main": "src/index",
-  "types": "src/index.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
   },
@@ -21,14 +20,12 @@
     "bowser": "2.11.0",
     "qs": "6.9.4"
   },
-  "devDependencies": {
-    "@types/css-mediaquery": "0.1.1",
-    "css-mediaquery": "0.1.2"
-  },
   "peerDependencies": {
     "react": "*"
   },
   "files": [
-    "/build"
-  ]
+    "/build",
+    "package.json"
+  ],
+  "type": "module"
 }

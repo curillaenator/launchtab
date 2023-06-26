@@ -86,8 +86,9 @@ export const App: FC = () => {
 
   return (
     <ThemeProvider theme={currentTheme}>
+      <GlobalFonts />
+
       <AppStyled>
-        <GlobalFonts />
         <Background />
 
         {data && (
@@ -96,7 +97,6 @@ export const App: FC = () => {
 
             <div className='main-screen'>
               <Pages pages={pages} curPage={curPage} />
-
               <Bookmarks bookmarks={curBookmarks} curPage={curPage} />
             </div>
           </>

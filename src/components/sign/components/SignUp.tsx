@@ -19,7 +19,7 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
   return (
     <FormStyled onSubmit={onSubmit}>
       <div className='form'>
-        <Shape className='form-shape' borderRadius={18} />
+        <Shape className='form-shape' borderRadius={24} />
 
         <div className='form-title'>
           <Typography type='RoundedHeavy56' className='form-title-main'>

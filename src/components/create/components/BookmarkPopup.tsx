@@ -124,7 +124,7 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
 
   return (
     <BookmarkPopupStyled>
-      <Shape borderRadius={18} className='popup-shape' />
+      <Shape borderRadius={24} className='popup-shape' />
 
       <div className='popup-title'>
         <Typography type='RoundedHeavy24'>New</Typography>

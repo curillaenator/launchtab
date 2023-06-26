@@ -80,7 +80,7 @@ export const SearchField: FC = () => {
   return (
     <SearchFormStyled action='https://www.google.com/search' onSubmit={onSubmit}>
       <InputStyled isOpaque={!!wallpapper} focused={focused}>
-        <Corners stroke={2} borderRadius={18} />
+        <Corners stroke={2} borderRadius={20} />
 
         {icons.searchEngines.google}
 

@@ -74,7 +74,7 @@ export const Create: FC<ICreate> = ({ create, iconName = 'addBigIcon' }) => {
       position={position}
       trigger={(open) => (
         <CreateContainerStyled isCreateBookmark={create === 'new-bookmark'}>
-          {create === 'new-bookmark' && <Corners borderRadius={18} stroke={2} />}
+          {create === 'new-bookmark' && <Corners borderRadius={20} stroke={2} />}
 
           <BtnIcon id='add-bookmark' iconName={iconName} active={open} handler={onTriggerClick} />
         </CreateContainerStyled>

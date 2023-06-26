@@ -103,7 +103,7 @@ export const Card: FC<CardProps> = (props) => {
       data-card='true'
     >
       <Corners
-        borderRadius={18}
+        borderRadius={20}
         stroke={4}
         // className={`card-shape ${hasBorder ? 'card-shape-bordered' : ''}`}
       />

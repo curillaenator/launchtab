@@ -71,7 +71,7 @@ export const Btn: FC<Button> = ({
 }) => {
   return (
     <ButtonStyled isColorsStatic={isColorsStatic} active={active} disabled={disabled} type={type} onClick={handler}>
-      <Shape borderRadius={18} />
+      <Shape borderRadius={22} />
 
       {leftIcon && icons[leftIcon]}
 

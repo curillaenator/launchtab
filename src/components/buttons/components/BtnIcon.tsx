@@ -119,7 +119,7 @@ export const BtnIcon = forwardRef<HTMLButtonElement, IBtnIcon>((props, ref) => {
       hasImage={!!imageURL}
       onClick={imageHandler ? () => imageHandler(imageURL as string) : handler}
     >
-      {!isLoading && !imageURL && <Shape borderRadius={18} />}
+      {!isLoading && !imageURL && <Shape borderRadius={22} />}
 
       {iconName && icons[iconName]}
 

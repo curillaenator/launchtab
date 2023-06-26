@@ -172,7 +172,7 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
           open={isFetchedIconsOpen}
           openHandler={() => setIsFetchedIconsOpen((open) => !open)}
         >
-          <Scrollbars height={172}>
+          <Scrollbars height='172px'>
             <div className='popup-icons-array'>
               {iconsWithGoodLinks.map((icon) => {
                 return <BtnIcon key={icon.url} imageURL={icon.url} imageHandler={handleIconsSelect} />;

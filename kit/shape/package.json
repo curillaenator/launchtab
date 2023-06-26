@@ -1,7 +1,6 @@
 {
   "name": "@launch-ui/shape",
   "version": "1.0.0",
-  "private": false,
   "description": "Smoothed corners containers component",
   "license": "ISC",
   "author": "curillaenator@gmail.com",

@@ -1,7 +1,6 @@
 {
   "name": "@launch-ui/config",
   "version": "1.0.0",
-  "private": false,
   "description": "Common cfg & types for LaunchTabs UI",
   "license": "ISC",
   "author": "curillaenator@gmail.com",

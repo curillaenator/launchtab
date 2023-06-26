@@ -21,6 +21,9 @@
     "@launch-ui/shape": "1.0.0",
     "classnames": "2.3.2"
   },
+  "devDependencies": {
+    "@launch-ui/config": "1.0.0"
+  },
   "peerDependencies": {
     "react": "*"
   },

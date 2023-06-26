@@ -21,5 +21,5 @@
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src", "src/@types", "kit", "src/styled.d.ts"]
+  "include": ["src", "kit", "src/styled.d.ts", "src/declaration.d.ts"]
 }

@@ -13,8 +13,6 @@
   ],
   "peerDependencies": {
     "react": "*",
-    "react-dom": "*",
-    "styled-components": "*",
     "typescript": "*"
   },
   "type": "git"

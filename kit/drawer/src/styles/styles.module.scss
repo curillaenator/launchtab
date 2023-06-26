@@ -1,0 +1,59 @@
+@use './transitions' as transitions;
+
+.overlayTransition {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  z-index: var(--dwr-z, 1300);
+
+  @include transitions.overlayTransitions;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--dwr-overlay-bgc);
+    z-index: -1;
+
+    &_noPointerEvents {
+      pointer-events: none;
+    }
+  }
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  width: var(--dwr-opened-w);
+  height: 100vh;
+  min-height: 100vh;
+  background: var(--dwr-ct-bgc);
+  z-index: var(--dwr-z, 1300);
+  // box-shadow: var(--drw-sh);
+  filter: drop-shadow(var(--drw-sh, 0px 0px 0px transparent));
+
+  transition: var(--dwr-animation-time) var(--dwr-animation-method);
+  overflow: hidden;
+
+  &_left {
+    left: 0;
+  }
+
+  &_right {
+    right: 0;
+  }
+
+  &_closed {
+    width: var(--dwr-closed-w);
+    box-shadow: 0 0 0 0 transparent;
+  }
+}

@@ -1,0 +1,25 @@
+@mixin overlayTransitions {
+  .overlay_enter {
+    transition: opacity var(--dwr-animation-time, 0.2s) var(--dwr-animation-method, ease);
+
+    &_from {
+      opacity: 0;
+    }
+
+    &_to {
+      opacity: 1;
+    }
+  }
+
+  .overlay_leave {
+    transition: opacity var(--dwr-animation-time, 0.2s) var(--dwr-animation-method, ease);
+
+    &_from {
+      opacity: 1;
+    }
+
+    &_to {
+      opacity: 0;
+    }
+  }
+}

@@ -26,7 +26,6 @@
     "url": "https://github.com/curillaenator/webpack-edu"
   },
   "dependencies": {
-    "@launch-ui/dialog": "1.0.0",
     "@launch-ui/drawer": "1.0.0",
     "@launch-ui/shape": "1.0.0",
     "@reduxjs/toolkit": "1.9.5",
@@ -90,7 +89,6 @@
   },
   "workspaces": {
     "packages": [
-      "kit/dialog",
       "kit/drawer",
       "kit/shape",
       "kit/utils"

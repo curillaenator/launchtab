@@ -32,5 +32,5 @@ Bookmarks are easy to setup + drag&drop support.
 
 ## Local start:
 
-- npm install
-- npm start
+- yarn install
+- yarn start

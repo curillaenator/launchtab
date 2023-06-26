@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -23,6 +24,10 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({ template: './src/index.html' }),
+
+    new MiniCssExtractPlugin({
+      filename: '[name].[fullhash].css',
+    }),
 
     new CleanWebpackPlugin(),
 
@@ -52,16 +57,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.(scss|css|sass)$/i,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              modules: { localIdentName: '[local]_[hash:base64:8]' },
+              modules: { localIdentName: '[local]_[hash:base64:12]' },
             },
           },
+          'sass-loader',
         ],
       },
       {

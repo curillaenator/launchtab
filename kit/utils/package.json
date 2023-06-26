@@ -1,7 +1,7 @@
 {
-  "name": "@launch-ui/shape",
+  "name": "@launch-ui/utils",
   "version": "1.0.0",
-  "description": "Smoothed corners container",
+  "description": "Drawer component",
   "license": "ISC",
   "repository": {
     "type": "git"
@@ -17,8 +17,14 @@
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
   },
+  "dependencies": {
+    "bowser": "2.11.0",
+    "qs": "6.9.4"
+  },
   "devDependencies": {
-    "@launch-ui/config": "1.0.0"
+    "@launch-ui/config": "1.0.0",
+    "@types/css-mediaquery": "0.1.1",
+    "css-mediaquery": "0.1.2"
   },
   "peerDependencies": {
     "react": "*"

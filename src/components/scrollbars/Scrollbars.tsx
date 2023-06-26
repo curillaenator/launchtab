@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 interface ScrollbarsProps extends PropsWithChildren {
-  height: number;
+  height: string;
   hasFades?: boolean;
 }
 
@@ -35,7 +35,7 @@ const ScrollbarsStyled = styled.div<ScrollbarsProps>`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  max-height: ${({ height }) => height}px;
+  max-height: ${({ height }) => height};
   position: relative;
 
   &::-webkit-scrollbar {

@@ -2089,6 +2089,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@headlessui/react@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@headlessui/react@npm:1.5.0"
+  peerDependencies:
+    react: ^16 || ^17 || ^18
+    react-dom: ^16 || ^17 || ^18
+  checksum: e3373dfb73936950d659a87718fb9fdedc599b344b30cb0d8b1ef0a2ec13d6f405c653fa51284236788658840ece82c6a8538a5a5931e595274e9590b2020079
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.8":
   version: 0.11.10
   resolution: "@humanwhocodes/config-array@npm:0.11.10"
@@ -2192,8 +2202,6 @@ __metadata:
   resolution: "@launch-ui/config@workspace:kit/launchCfg"
   peerDependencies:
     react: "*"
-    react-dom: "*"
-    styled-components: "*"
     typescript: "*"
   languageName: unknown
   linkType: soft
@@ -2202,7 +2210,21 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/dialog@workspace:kit/dialog"
   dependencies:
+    "@launch-ui/config": 1.0.0
     "@launch-ui/shape": 1.0.0
+    classnames: 2.3.2
+  peerDependencies:
+    react: "*"
+  languageName: unknown
+  linkType: soft
+
+"@launch-ui/drawer@1.0.0, @launch-ui/drawer@workspace:kit/drawer":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/drawer@workspace:kit/drawer"
+  dependencies:
+    "@headlessui/react": 1.5.0
+    "@launch-ui/config": 1.0.0
+    "@launch-ui/utils": 1.0.0
     classnames: 2.3.2
   peerDependencies:
     react: "*"
@@ -2212,6 +2234,22 @@ __metadata:
 "@launch-ui/shape@1.0.0, @launch-ui/shape@workspace:kit/shape":
   version: 0.0.0-use.local
   resolution: "@launch-ui/shape@workspace:kit/shape"
+  dependencies:
+    "@launch-ui/config": 1.0.0
+  peerDependencies:
+    react: "*"
+  languageName: unknown
+  linkType: soft
+
+"@launch-ui/utils@1.0.0, @launch-ui/utils@workspace:kit/utils":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/utils@workspace:kit/utils"
+  dependencies:
+    "@launch-ui/config": 1.0.0
+    "@types/css-mediaquery": 0.1.1
+    bowser: 2.11.0
+    css-mediaquery: 0.1.2
+    qs: 6.9.4
   peerDependencies:
     react: "*"
   languageName: unknown
@@ -2409,6 +2447,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: fe81351470f2d3165e8b12ce33542eef89ea893e36dd62e8f7d72566dfb7e448376ae962f9f3ea888547ce8b55a40020ca0e01d637fab5d99567673084542641
+  languageName: node
+  linkType: hard
+
+"@types/css-mediaquery@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@types/css-mediaquery@npm:0.1.1"
+  checksum: b8beb960238fd32b44396fd0871fc8626d9e0136217f168effccd3cc33a0673f1a94e8a982e385a46c34b5ab4b19c9220be7ec628818837a3c47dcaa973954c4
   languageName: node
   linkType: hard
 
@@ -3520,6 +3565,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bowser@npm:2.11.0":
+  version: 2.11.0
+  resolution: "bowser@npm:2.11.0"
+  checksum: 29c3f01f22e703fa6644fc3b684307442df4240b6e10f6cfe1b61c6ca5721073189ca97cdeedb376081148c8518e33b1d818a57f781d70b0b70e1f31fb48814f
+  languageName: node
+  linkType: hard
+
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
   resolution: "brace-expansion@npm:1.1.11"
@@ -3665,7 +3717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.4.0, chokidar@npm:^3.5.3":
+"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.4.0, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -4025,6 +4077,13 @@ __metadata:
   peerDependencies:
     webpack: ^5.0.0
   checksum: 9c6e6e1eef7ab897ea1f45094a153ee82d94ef5248b54b8f8a3634c72900ec5f3cc463b3c0eca65290118c3dbfd52887ba7294b4807a0247a3c5d7cf3a63b2e6
+  languageName: node
+  linkType: hard
+
+"css-mediaquery@npm:0.1.2":
+  version: 0.1.2
+  resolution: "css-mediaquery@npm:0.1.2"
+  checksum: 8e26ae52d8aaaa71893f82fc485363ff0fab494b7d3b3464572aaed50714b8b538d33dbdaa69f0c02cf7f80d1f4d9a77519306c0492223ce91b3987475031a69
   languageName: node
   linkType: hard
 
@@ -5686,6 +5745,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immutable@npm:^4.0.0":
+  version: 4.3.0
+  resolution: "immutable@npm:4.3.0"
+  checksum: bbd7ea99e2752e053323543d6ff1cc71a4b4614fa6121f321ca766db2bd2092f3f1e0a90784c5431350b7344a4f792fa002eac227062d59b9377b6c09063b58b
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.0.0, import-fresh@npm:^3.2.1":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -6215,6 +6281,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@launch-ui/config": 1.0.0
     "@launch-ui/dialog": 1.0.0
+    "@launch-ui/drawer": 1.0.0
     "@launch-ui/shape": 1.0.0
     "@reduxjs/toolkit": 1.9.5
     "@types/lodash.isequal": 4.5.6
@@ -6245,6 +6312,7 @@ __metadata:
     husky: 8.0.0
     lint-staged: 12.3.5
     lodash.isequal: 4.5.0
+    mini-css-extract-plugin: 2.7.6
     prettier: 2.8.8
     react: 18.2.0
     react-animations: 1.0.0
@@ -6253,6 +6321,8 @@ __metadata:
     react-redux: 8.1.1
     reactjs-popup: 2.0.5
     rimraf: 5.0.1
+    sass: 1.63.6
+    sass-loader: 13.3.2
     shortid: 2.2.16
     style-loader: 3.2.1
     styled-components: 5.3.11
@@ -6587,6 +6657,17 @@ __metadata:
   version: 2.1.0
   resolution: "mimic-fn@npm:2.1.0"
   checksum: d2421a3444848ce7f84bd49115ddacff29c15745db73f54041edc906c14b131a38d05298dae3081667627a59b2eb1ca4b436ff2e1b80f69679522410418b478a
+  languageName: node
+  linkType: hard
+
+"mini-css-extract-plugin@npm:2.7.6":
+  version: 2.7.6
+  resolution: "mini-css-extract-plugin@npm:2.7.6"
+  dependencies:
+    schema-utils: ^4.0.0
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: be6f7cefc6275168eb0a6b8fe977083a18c743c9612c9f00e6c1a62c3393ca7960e93fba1a7ebb09b75f36a0204ad087d772c1ef574bc29c90c0e8175a3c0b83
   languageName: node
   linkType: hard
 
@@ -7463,6 +7544,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.9.4":
+  version: 6.9.4
+  resolution: "qs@npm:6.9.4"
+  checksum: 5ac0bd145f32d346d20c2fdcf19c8e548c5916458851e32527efb25be0c2cff8a3a81140c145c98a1184779b5b625c91bc7c50e147073bffb978fb7f4a9c8c8a
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -7976,6 +8064,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sass-loader@npm:13.3.2":
+  version: 13.3.2
+  resolution: "sass-loader@npm:13.3.2"
+  dependencies:
+    neo-async: ^2.6.2
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+    sass: ^1.3.0
+    sass-embedded: "*"
+    webpack: ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+  checksum: 7394a8d1b818a289b9caabd979543c907b83e28ae08bc80ccb836e0ccabc4ae574c077ab2fa520ba5fb8abb2ec3e7c9822a1cbd8c58a28ff30018be9d1dc6c27
+  languageName: node
+  linkType: hard
+
+"sass@npm:1.63.6":
+  version: 1.63.6
+  resolution: "sass@npm:1.63.6"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: 3372319904658eeafaf78a09a6fcb3368a68e6d76fe3c43c2d009f4f72e475ab22b82ef483ef5c00fcda3ab00066846c0bd88c36b42771b855f6ab80c7eda541
+  languageName: node
+  linkType: hard
+
 "scheduler@npm:^0.23.0":
   version: 0.23.0
   resolution: "scheduler@npm:0.23.0"
@@ -8289,7 +8414,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:^1.0.2":
+"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
   checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c

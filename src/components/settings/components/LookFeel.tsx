@@ -18,6 +18,7 @@ const LookFeelStyled = styled.div`
   width: 100%;
   min-height: 320px;
   animation: ${animation} 0.2s linear;
+  /* padding-right: 16px; */
 `;
 
 interface ILookFeel {

@@ -1,6 +1,5 @@
-import { LOOKFEEL } from './constants';
-import { TReducer, TAction } from '../../types/types';
-import { ISettings } from '../../redux/reducers/settings';
+import type { TReducer, TAction } from '@src/types';
+import type { ISettings } from '@src/redux/reducers/settings';
 
 const SET_CURRENT_TAB = 'form/SET_CURRENT_TAB';
 const SET_INITIAL_STATE = 'form/SET_INITIAL_STATE';
@@ -18,15 +17,18 @@ export interface ISettingsState extends ISettings {
 }
 
 export const initialState: ISettingsState = {
-  currentTab: LOOKFEEL,
+  currentTab: 'Appearance',
+
   lookfeel: {
     wallpaper: null,
     darkMode: false,
     themeName: 'defaultTheme',
   },
+
   profile: {
     shortName: null,
   },
+
   other: {
     other: null,
   },

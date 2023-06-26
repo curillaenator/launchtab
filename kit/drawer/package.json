@@ -1,7 +1,7 @@
 {
-  "name": "@launch-ui/shape",
+  "name": "@launch-ui/drawer",
   "version": "1.0.0",
-  "description": "Smoothed corners container",
+  "description": "Drawer component",
   "license": "ISC",
   "repository": {
     "type": "git"
@@ -16,6 +16,11 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@headlessui/react": "1.5.0",
+    "@launch-ui/utils": "1.0.0",
+    "classnames": "2.3.2"
   },
   "devDependencies": {
     "@launch-ui/config": "1.0.0"

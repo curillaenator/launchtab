@@ -6,7 +6,6 @@ import { Typography } from '../typography/Typography';
 import { BtnCta } from '../buttons';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
-import { Features } from './components/Features';
 
 const SignStyled = styled.div`
   position: fixed;
@@ -30,7 +29,6 @@ const SignStyled = styled.div`
 export const Sign: FC = () => {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
-  const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
 
   return (
     <SignStyled>
@@ -52,10 +50,6 @@ export const Sign: FC = () => {
 
       <Modal open={isSignUpOpen} onClose={() => setIsSignUpOpen(false)}>
         <SignUp close={() => setIsSignUpOpen(false)} />
-      </Modal>
-
-      <Modal open={isFeaturesOpen} onClose={() => setIsFeaturesOpen(false)}>
-        <Features close={() => setIsFeaturesOpen(false)} />
       </Modal>
     </SignStyled>
   );

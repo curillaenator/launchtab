@@ -5,7 +5,11 @@ import { Typography, ITypographyTypes } from '../typography';
 
 const TitlewrapStyled = styled.div`
   .titlewrap-title {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
+  }
+
+  .titlewrap-children {
+    padding-left: 16px;
   }
 `;
 
@@ -22,7 +26,7 @@ export const Titlewrap: FC<ITitlewrap> = ({ title, titleType = 'RoundedBold20', 
         {title}
       </Typography>
 
-      {children}
+      <div className='titlewrap-children'>{children}</div>
     </TitlewrapStyled>
   );
 };

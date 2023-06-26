@@ -1,18 +1,18 @@
 {
   "name": "@launch-ui/shape",
   "version": "1.0.0",
-  "description": "Smoothed corners container",
+  "private": false,
+  "description": "Smoothed corners containers component",
   "license": "ISC",
-  "repository": {
-    "type": "git"
-  },
+  "author": "curillaenator@gmail.com",
   "publishConfig": {
     "access": "public",
     "main": "build/index.js",
     "types": "build/index.d.ts",
-    "type": "git"
+    "type": "module",
+    "registry": "https://registry.npmjs.org/"
   },
-  "main": "src/index",
+  "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
@@ -24,6 +24,8 @@
     "react": "*"
   },
   "files": [
-    "/build"
-  ]
+    "/build",
+    "package.json"
+  ],
+  "type": "module"
 }

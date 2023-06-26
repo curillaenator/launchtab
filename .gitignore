@@ -14,6 +14,7 @@ hosting.*
 
 # production
 /build
+kit/*/**/build
 
 # misc
 .DS_Store

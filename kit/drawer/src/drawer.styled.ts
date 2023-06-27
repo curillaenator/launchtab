@@ -9,16 +9,15 @@ export const ContentStyled = styled.div<ContentStyledProps>`
   position: fixed;
   top: 0;
   right: 0;
-  width: ${({ closed }) => (closed ? 'var(--dwr-closed-w, 0px)' : 'var(--dwr-opened-w, 420px)')};
+  width: ${({ closed }) => (closed ? '0px' : '420px')};
   height: 100vh;
   min-height: 100vh;
-  background: var(--dwr-ct-bgc, transparent);
-  z-index: var(--dwr-z, 1300);
-  filter: drop-shadow(var(--drw-sh, 0px 0px 6px rgba(0, 0, 0, 0.4)));
-
-  transition: var(--dwr-animation-time, 0.2s) var(--dwr-animation-method, ease);
+  background: transparent;
+  z-index: 1300;
+  filter: drop-shadow(${({ theme }) => theme.shadows.card});
+  transition: 0.2s ease;
   overflow: hidden;
-  color: var(--drw-ct-gn, black);
+  color: ${({ theme }) => theme.texts.base};
 `;
 
 export const TransitionStyled = styled(Transition)`
@@ -32,10 +31,10 @@ export const TransitionStyled = styled(Transition)`
   align-items: center;
   width: 100vw;
   min-height: 100vh;
-  z-index: var(--dwr-z, 1300);
+  z-index: 1300;
 
   .overlay_enter {
-    transition: opacity var(--dwr-animation-time, 0.2s) var(--dwr-animation-method, ease);
+    transition: opacity 0.2s ease;
 
     &_from {
       opacity: 0;
@@ -47,7 +46,7 @@ export const TransitionStyled = styled(Transition)`
   }
 
   .overlay_leave {
-    transition: opacity var(--dwr-animation-time, 0.2s) var(--dwr-animation-method, ease);
+    transition: opacity 0.2s ease;
 
     &_from {
       opacity: 1;

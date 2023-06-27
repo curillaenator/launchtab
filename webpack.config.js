@@ -67,7 +67,6 @@ module.exports = {
               modules: { localIdentName: '[local]_[hash:base64:12]' },
             },
           },
-          'sass-loader',
         ],
       },
       {

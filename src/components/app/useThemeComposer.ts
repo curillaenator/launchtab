@@ -8,7 +8,7 @@ import {
   shadowsStaticDarkMode,
   shadowsStaticLightMode,
   type TTheme,
-} from '@src/colors';
+} from '@launch-ui/theme';
 
 export const useThemeComposer = (): TTheme => {
   const darkMode = useAppSelector((state) => state.settings.lookfeel.darkMode);

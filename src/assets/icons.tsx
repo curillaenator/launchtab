@@ -1,11 +1,11 @@
 import React from 'react';
-import * as allColors from '../colors/colors';
+import { colorsLib } from '@launch-ui/theme';
 
 export const icons = {
   loader: (
     <svg className='svg_loader' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'>
       <g transform='rotate(0 50 50)'>
-        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill={allColors.colorsLib.electroviolet[500]}>
+        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill={colorsLib.electroviolet[500]}>
           <animate
             attributeName='opacity'
             values='1;0'
@@ -17,7 +17,7 @@ export const icons = {
         </rect>
       </g>
       <g transform='rotate(120 50 50)'>
-        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill={allColors.colorsLib.awesome[500]}>
+        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill={colorsLib.awesome[500]}>
           <animate
             attributeName='opacity'
             values='1;0'

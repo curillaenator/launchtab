@@ -10,8 +10,7 @@ export const OverlayStyled = styled.div<OverlayStyledProps>`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--dwr-overlay-bgc, rgba(255, 255, 255, 0.4));
+  background-color: ${({ theme }) => theme.backgrounds.base40};
   z-index: -1;
-  backdrop-filter: var(--drw-overlay-backdrop-filter, none);
   pointer-events: ${({ disableBackgroundClick }) => (disableBackgroundClick ? 'none' : 'all')};
 `;

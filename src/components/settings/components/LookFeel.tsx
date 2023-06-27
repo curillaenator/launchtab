@@ -6,7 +6,7 @@ import { fadeIn } from 'react-animations';
 import { TextInput, Dropdown, Switch, Titlewrap } from '@src/components/inputs';
 import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
-import { themeNames } from '@src/colors/themes';
+import { themeNames } from '@launch-ui/theme';
 
 import type { ILookFeelActions, ISettingsState } from '../reducer';
 

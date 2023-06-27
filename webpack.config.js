@@ -80,6 +80,12 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.(m|c)?js$/i,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   },
 

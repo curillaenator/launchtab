@@ -1,10 +1,24 @@
 {
-  "extends": "./src/tsconfig.json",
   "compilerOptions": {
-    "outDir": "./build",
-    "declarationDir": "./build",
-    "rootDir": "./src",
-    "baseUrl": "./src"
-  },
-  "include": ["src", "src/@types"]
+    "target": "ES2019",
+    "module": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "declaration": true,
+    "noEmit": false,
+    "strict": false,
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noImplicitOverride": true,
+    "jsx": "react-jsx",
+    "types": ["react"]
+  }
 }

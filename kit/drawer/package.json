@@ -3,32 +3,31 @@
   "version": "1.0.0",
   "description": "Drawer component",
   "license": "ISC",
-  "repository": {
-    "type": "git"
-  },
+  "author": "curillaenator@gmail.com",
   "publishConfig": {
     "access": "public",
     "main": "build/index.js",
     "types": "build/index.d.ts",
-    "type": "git"
+    "type": "module",
+    "registry": "https://registry.npmjs.org/"
   },
-  "main": "src/index",
-  "types": "src/index.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
   },
   "dependencies": {
     "@headlessui/react": "1.5.0",
-    "@launch-ui/utils": "1.0.0",
+    "@launch-ui/utils": "1.0.1",
     "classnames": "2.3.2"
   },
-  "devDependencies": {
-    "@launch-ui/config": "1.0.0"
-  },
   "peerDependencies": {
-    "react": "*"
+    "react": "*",
+    "styled-components": "*"
   },
   "files": [
-    "/build"
-  ]
+    "/build",
+    "package.json"
+  ],
+  "type": "module"
 }

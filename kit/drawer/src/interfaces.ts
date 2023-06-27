@@ -8,6 +8,7 @@ export interface DrawerProps {
   transitionClassName?: string;
   contentClassName?: string;
   placement?: 'left' | 'right';
+  openWidth?: string;
 }
 
 export type OmitedDrawerProps = Omit<DrawerProps, 'overlayClassName' | 'scrollClassName' | 'transitionClassName'>;

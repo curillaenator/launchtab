@@ -26,7 +26,7 @@
     "url": "https://github.com/curillaenator/webpack-edu"
   },
   "dependencies": {
-    "@launch-ui/drawer": "1.0.1",
+    "@launch-ui/drawer": "1.0.2",
     "@launch-ui/shape": "1.0.5",
     "@launch-ui/theme": "1.0.0",
     "@launch-ui/utils": "1.0.1",

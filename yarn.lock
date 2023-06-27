@@ -2207,9 +2207,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/drawer@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@launch-ui/drawer@npm:1.0.1"
+"@launch-ui/drawer@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@launch-ui/drawer@npm:1.0.2"
   dependencies:
     "@headlessui/react": 1.5.0
     "@launch-ui/utils": 1.0.1
@@ -2217,7 +2217,7 @@ __metadata:
   peerDependencies:
     react: "*"
     styled-components: "*"
-  checksum: d0a6583aff7d0c589e023a74538313137f39ea1fd0bb4594968f58bab579686e26900be985e50ad58148e5c9882bdbfce2b1fee8f9185930843d2cd6e9bb7b0f
+  checksum: a830dc769c1299fcfc92f78aa33c726d12c6ccdfa1bcff787fda30ad5db63773075e24a112b4393367dd3867a132241f0e01a8bf28dd0e129786836ad6c38d8e
   languageName: node
   linkType: hard
 
@@ -6255,7 +6255,7 @@ __metadata:
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
     "@launch-ui/config": 1.1.0
-    "@launch-ui/drawer": 1.0.1
+    "@launch-ui/drawer": 1.0.2
     "@launch-ui/shape": 1.0.5
     "@launch-ui/theme": 1.0.0
     "@launch-ui/utils": 1.0.1

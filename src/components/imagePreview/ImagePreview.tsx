@@ -7,6 +7,7 @@ const ImagePreviewStyled = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-width: 350px;
   aspect-ratio: 16 / 9;
   /* height: 186px; */
   border-radius: 20px;

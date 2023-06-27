@@ -11,7 +11,7 @@ import type { DrawerProps } from './interfaces';
 import { TransitionStyled, ContentStyled } from './drawer.styled';
 
 export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
-  const { open, portalId, transitionClassName, contentClassName, children } = props;
+  const { open, portalId, transitionClassName, contentClassName, children, openWidth = '420px' } = props;
 
   useCloseOnEscape(props);
 
@@ -33,7 +33,7 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
         <Overlay {...props} />
       </TransitionStyled>
 
-      <ContentStyled closed={!open} className={cn(contentClassName, transitionClassName)}>
+      <ContentStyled closed={!open} openWidth={openWidth} className={cn(contentClassName, transitionClassName)}>
         {children}
       </ContentStyled>
     </ModalContext.Provider>,

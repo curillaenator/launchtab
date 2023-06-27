@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 interface ContentStyledProps {
   closed?: boolean;
+  openWidth?: string;
 }
 
 export const ContentStyled = styled.div<ContentStyledProps>`
   position: fixed;
   top: 0;
   right: 0;
-  width: ${({ closed }) => (closed ? '0px' : '420px')};
+  width: ${({ closed, openWidth }) => (closed ? '0px' : openWidth)};
   height: 100vh;
   min-height: 100vh;
   background: transparent;

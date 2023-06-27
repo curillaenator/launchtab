@@ -1,28 +1,31 @@
 import React, { useRef, Fragment } from 'react';
-import cn from 'classnames';
 import { Transition } from '@headlessui/react';
 import { useDisabledScroll, usePreventEvent } from '@launch-ui/utils';
-
-import { DrawerProps } from '../interfaces';
-import { overlayTransitions } from '../styles/styles';
-import styles from '../styles/styles.module.scss';
+import { OverlayStyled } from './overlay.styled';
+import type { DrawerProps } from '../interfaces';
 
 export const Overlay = (props: DrawerProps) => {
   const { disableBackgroundClick, onClose, overlayClassName } = props;
-
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useDisabledScroll(document, window);
   usePreventEvent([overlayRef], 'touchmove');
 
   return (
-    <Transition.Child as={Fragment} {...overlayTransitions}>
-      <div
+    <Transition.Child
+      as={Fragment}
+      enter='overlay_enter'
+      enterFrom='overlay_enter_from'
+      enterTo='overlay_enter_to'
+      leave='overlay_leave'
+      leaveFrom='overlay_leave_from'
+      leaveTo='overlay_leave_to'
+    >
+      <OverlayStyled
         ref={overlayRef}
+        disableBackgroundClick={disableBackgroundClick}
         onClick={disableBackgroundClick ? undefined : onClose}
-        className={cn(styles.overlay, overlayClassName, {
-          [styles.overlay_noPointerEvents]: disableBackgroundClick,
-        })}
+        className={overlayClassName}
       />
     </Transition.Child>
   );

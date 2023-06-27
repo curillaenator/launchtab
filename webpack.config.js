@@ -81,7 +81,7 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.m?js/,
+        test: /\.(m|c)?js$/i,
         resolve: {
           fullySpecified: false,
         },

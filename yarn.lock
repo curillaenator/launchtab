@@ -2197,35 +2197,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/config@npm:1.0.6":
-  version: 1.0.6
-  resolution: "@launch-ui/config@npm:1.0.6"
+"@launch-ui/config@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@launch-ui/config@npm:1.1.0"
   peerDependencies:
     react: "*"
     typescript: "*"
-  checksum: d9f4d4a7fd03e20393a09d55b19422e2dcadb124a4895d5b3cfbf13f1f28a86c0016101b74ed283b80dc505f2d0061303692fd9075c75993eede654324190465
+  checksum: 7f7e973eae078fbb7ec6c0b33097e56d7de54a5a10ab67c0b5a15e4875b79377ac4492499b398322fd85b8d320bb697effc4d13ea57d68ff8d16ba42a3fffaba
   languageName: node
   linkType: hard
 
-"@launch-ui/drawer@1.0.0, @launch-ui/drawer@workspace:kit/drawer":
-  version: 0.0.0-use.local
-  resolution: "@launch-ui/drawer@workspace:kit/drawer"
+"@launch-ui/drawer@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@launch-ui/drawer@npm:1.0.0"
   dependencies:
     "@headlessui/react": 1.5.0
     "@launch-ui/utils": 1.0.1
     classnames: 2.3.2
   peerDependencies:
     react: "*"
-  languageName: unknown
-  linkType: soft
+    styled-components: "*"
+  checksum: 5b84dfd5b71d848d566106992e06be262eeb61df7e2eb0c2378ed706c88107f7fe7025b51a4dade8ef5f9d4f821c25372238afe3eb2323ca2e9db0ff03c20cbc
+  languageName: node
+  linkType: hard
 
-"@launch-ui/shape@1.0.0, @launch-ui/shape@workspace:kit/shape":
-  version: 0.0.0-use.local
-  resolution: "@launch-ui/shape@workspace:kit/shape"
+"@launch-ui/shape@npm:1.0.5":
+  version: 1.0.5
+  resolution: "@launch-ui/shape@npm:1.0.5"
   peerDependencies:
     react: "*"
-  languageName: unknown
-  linkType: soft
+  checksum: 8c110da895da8625c6f2ab7dbc60373c9c3e7f2c329b118969740f8fdf6d81481ed28e9c4ddf69163c7ca302996e8d31dc3af9fce363579a4a83c5fe09f9219e
+  languageName: node
+  linkType: hard
 
 "@launch-ui/utils@npm:1.0.1":
   version: 1.0.1
@@ -6249,9 +6252,9 @@ __metadata:
     "@babel/preset-env": 7.22.5
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
-    "@launch-ui/config": 1.0.6
+    "@launch-ui/config": 1.1.0
     "@launch-ui/drawer": 1.0.0
-    "@launch-ui/shape": 1.0.0
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/utils": 1.0.1
     "@reduxjs/toolkit": 1.9.5
     "@types/lodash.isequal": 4.5.6

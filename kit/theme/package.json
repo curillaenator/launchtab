@@ -1,0 +1,27 @@
+{
+  "name": "@launch-ui/theme",
+  "version": "1.0.0",
+  "description": "Launch theme",
+  "license": "ISC",
+  "author": "curillaenator@gmail.com",
+  "publishConfig": {
+    "access": "public",
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "type": "module",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "npx tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "files": [
+    "/build",
+    "package.json"
+  ],
+  "type": "module"
+}

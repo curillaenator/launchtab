@@ -14,7 +14,6 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
   const { open, portalId, transitionClassName, contentClassName, children } = props;
 
   useCloseOnEscape(props);
-  console.log();
 
   const portal = usePortal(portalId);
   const [isAnimationCompleted, setIsAnimationCompleted] = useState<boolean>(false);

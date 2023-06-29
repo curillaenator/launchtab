@@ -47,18 +47,28 @@ export const LookFeel: FC<ILookFeel> = ({ values, setters, dispatch }) => {
         <Switch value={values.darkMode} onChange={() => dispatch(setters.setDarkMode(!values.darkMode))} />
       </Titlewrap>
 
-      <Titlewrap title='Wallpaper'>
-        <TextInput
-          iconName='link'
-          type='url'
-          name='background'
-          placeholder='full link to any image'
-          value={values.wallpaper || ''}
-          onChange={(url) => dispatch(setters.setWallpaper(url))}
+      <Titlewrap title='Dynamic wallpaper'>
+        <Switch
+          value={values.isDynamicWallpaper}
+          onChange={() => dispatch(setters.setIsDynamicWallpaper(!values.isDynamicWallpaper))}
         />
       </Titlewrap>
 
-      <ImagePreview imageURL={values.wallpaper || ''} />
+      {!values.isDynamicWallpaper && (
+        <Titlewrap title='Wallpaper'>
+          <TextInput
+            disabled={values.isDynamicWallpaper}
+            iconName='link'
+            type='url'
+            name='background'
+            placeholder='full link to any image'
+            value={values.wallpaper || ''}
+            onChange={(url) => dispatch(setters.setWallpaper(url))}
+          />
+        </Titlewrap>
+      )}
+
+      <ImagePreview disabled={values.isDynamicWallpaper} imageURL={values.wallpaper || ''} />
     </LookFeelStyled>
   );
 };

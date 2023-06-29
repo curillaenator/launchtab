@@ -1,6 +1,6 @@
 {
-  "name": "@launch-ui/theme",
-  "version": "1.0.1",
+  "name": "@launch-ui/dynamic-bg",
+  "version": "1.0.0",
   "description": "Launch theme",
   "license": "ISC",
   "author": "curillaenator@gmail.com",
@@ -17,7 +17,8 @@
     "build": "npx tsc -p tsconfig.json"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": "*",
+    "styled-components": "*"
   },
   "files": [
     "/build",

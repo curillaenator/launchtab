@@ -2221,6 +2221,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@launch-ui/dynamic-bg@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@launch-ui/dynamic-bg@npm:1.0.0"
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  checksum: 54d6729ac6cbb8dec8b7e99ff8d1fbb08334fa493b7710efebd8390005824d1e196f1f58cfaff25714bc6b5e209f7015d9c6842b35891bb02e4e3cd7e5b96fea
+  languageName: node
+  linkType: hard
+
 "@launch-ui/shape@npm:1.0.5":
   version: 1.0.5
   resolution: "@launch-ui/shape@npm:1.0.5"
@@ -2230,12 +2240,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/theme@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@launch-ui/theme@npm:1.0.0"
+"@launch-ui/theme@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@launch-ui/theme@npm:1.0.1"
   peerDependencies:
     react: "*"
-  checksum: 7f5311fd1e2e771447c689a124883ad3f3a8ce178697e423894abff133d782534918e79999a7a39741f9593f1386b4dda50f46d491ee50d2eb912c28c91e7c97
+  checksum: 404bf4537d93e52bcf71356c09b32d8562b046d89bb3f11afa84b46b7baa6a9941d2c7673aa8e5151aafddf485a8fbaa0262f9bb7005ee0234327c341f2954ed
   languageName: node
   linkType: hard
 
@@ -6256,8 +6266,9 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@launch-ui/config": 1.1.0
     "@launch-ui/drawer": 1.0.2
+    "@launch-ui/dynamic-bg": 1.0.0
     "@launch-ui/shape": 1.0.5
-    "@launch-ui/theme": 1.0.0
+    "@launch-ui/theme": 1.0.1
     "@launch-ui/utils": 1.0.1
     "@reduxjs/toolkit": 1.9.5
     "@types/lodash.isequal": 4.5.6

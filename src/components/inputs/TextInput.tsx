@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useCallback, ChangeEvent } from 'react';
+import React, { FC, useState, useRef, useCallback, type ChangeEvent, type HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { BtnGhost } from '../buttons';
@@ -107,7 +107,9 @@ const FieldStyled = styled.div<IFieldStyled>`
   }
 `;
 
-export interface ITextInput {
+type OmitedHTMLInputElementAttributes = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
+
+export interface ITextInput extends OmitedHTMLInputElementAttributes {
   state?: IInputState;
   iconName?: InputIconsType;
   type?: 'text' | 'email' | 'password' | 'url';
@@ -120,6 +122,7 @@ export interface ITextInput {
   withButton?: boolean;
   onChange: (valueString: string) => void;
   onFocusOut?: () => void;
+  disabled?: boolean;
 }
 
 export const TextInput: FC<ITextInput> = ({
@@ -135,6 +138,7 @@ export const TextInput: FC<ITextInput> = ({
   withButton = false,
   onChange,
   onFocusOut,
+  ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const inputButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -182,6 +186,7 @@ export const TextInput: FC<ITextInput> = ({
         {!!iconName && getIcon()}
 
         <input
+          {...rest}
           ref={inputRef}
           className='input-input'
           type={type}

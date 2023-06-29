@@ -27,8 +27,9 @@
   },
   "dependencies": {
     "@launch-ui/drawer": "1.0.2",
+    "@launch-ui/dynamic-bg": "1.0.0",
     "@launch-ui/shape": "1.0.5",
-    "@launch-ui/theme": "1.0.0",
+    "@launch-ui/theme": "1.0.1",
     "@launch-ui/utils": "1.0.1",
     "@reduxjs/toolkit": "1.9.5",
     "array-move": "4.0.0",

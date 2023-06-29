@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Drawer } from '@launch-ui/drawer';
+import { useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
 
 import GlobalFonts from '@src/assets/fonts/fonts';
 
@@ -30,12 +31,25 @@ const AppStyled = styled.div`
   padding: var(--app-pd);
   margin: 0 auto;
   color: ${({ theme }) => theme.texts.base};
+  /* overflow-x: hidden; */
 
   .main-screen {
     width: 100%;
     height: 100%;
     padding-top: calc(var(--app-pd) * 3);
     min-height: calc(100vh - var(--app-pd) * 2);
+  }
+
+  .dynamic-bg {
+    width: 100%;
+    height: 100vh;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
   }
 
   @media (min-width: 1920px) {
@@ -46,6 +60,7 @@ const AppStyled = styled.div`
 export const App: FC = () => {
   const dispatch = useAppDispatch();
 
+  const isDynamicBackground = useAppSelector((state) => state.settings.lookfeel.isDynamicWallpaper);
   const bookmarks = useAppSelector((state) => state.bookmarks);
   const loadings = useAppSelector((state) => state.loadings);
   const { userLoading } = useAppSelector((state) => state.auth);
@@ -58,6 +73,10 @@ export const App: FC = () => {
   const { isUserAnon } = useDataQuery();
 
   const currentTheme = useThemeComposer();
+
+  const { watchMouse, ...clouds } = useCloudsPositionStyle({
+    skipCalc: !isDynamicBackground || isRightDrawerOpen,
+  });
 
   useEffect(() => {
     dispatch(checkUserIsAuthed());
@@ -87,8 +106,8 @@ export const App: FC = () => {
     <ThemeProvider theme={currentTheme}>
       <GlobalFonts />
 
-      <AppStyled>
-        <Background />
+      <AppStyled onMouseMove={isDynamicBackground ? watchMouse : undefined}>
+        <Background {...clouds} />
 
         {data && (
           <>

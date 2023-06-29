@@ -147,6 +147,18 @@ export const colorsLib = {
     800: '#272628',
     900: '#1E1C1E',
   },
+  gray: {
+    50: '#F1F1F1',
+    100: '#E4E4E4',
+    200: '#C0C0C0',
+    300: '#969696',
+    400: '#767676',
+    500: '#525252',
+    600: '#424242',
+    700: '#272727',
+    800: '#1E1E1E',
+    900: '#101010',
+  },
 };
 
 export const colorsStaticLightMode = {
@@ -171,6 +183,7 @@ export const colorsStaticLightMode = {
   },
 
   backgrounds: {
+    dark: colorsLib.white,
     base: colorsLib.white,
     light: colorsLib.liver[100],
     lightest: colorsLib.liver[50],
@@ -204,6 +217,7 @@ export const colorsStaticDarkMode = {
   },
 
   backgrounds: {
+    dark: colorsLib.gray[900],
     base: colorsLib.liver[900],
     light: colorsLib.liver[800],
     lightest: colorsLib.liver[700],

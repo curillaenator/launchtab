@@ -4,6 +4,7 @@ import type { ISettings } from '@src/redux/reducers/settings';
 const SET_CURRENT_TAB = 'form/SET_CURRENT_TAB';
 const SET_INITIAL_STATE = 'form/SET_INITIAL_STATE';
 
+const SET_IS_DYNAMIC_WALLPAPER = 'lookfeel/SET_IS_DYNAMIC_WALLPAPER';
 const SET_WALLPAPER = 'lookfeel/SET_WALLPAPER';
 const SET_THEME = 'lookfeel/SET_THEME';
 const SET_DARKMODE = 'lookfeel/SET_DARKMODE';
@@ -20,6 +21,7 @@ export const initialState: ISettingsState = {
   currentTab: 'Appearance',
 
   lookfeel: {
+    isDynamicWallpaper: false,
     wallpaper: null,
     darkMode: false,
     themeName: 'defaultTheme',
@@ -39,29 +41,53 @@ export const initialState: ISettingsState = {
 export const reducer: TReducer<ISettingsState> = (state, action) => {
   switch (action.type) {
     case SET_CURRENT_TAB:
-      return { ...state, currentTab: action.payload };
+      return {
+        ...state,
+        currentTab: action.payload,
+      };
 
     case SET_INITIAL_STATE:
-      return { ...state, ...action.payload };
+      return {
+        ...state,
+        ...action.payload,
+      };
 
     // LOOKFEEL
+
+    case SET_IS_DYNAMIC_WALLPAPER:
+      return {
+        ...state,
+        lookfeel: {
+          ...state.lookfeel,
+          isDynamicWallpaper: action.payload,
+        },
+      };
 
     case SET_WALLPAPER:
       return {
         ...state,
-        lookfeel: { ...state.lookfeel, wallpaper: action.payload },
+        lookfeel: {
+          ...state.lookfeel,
+          wallpaper: action.payload,
+        },
       };
 
     case SET_THEME:
       return {
         ...state,
-        lookfeel: { ...state.lookfeel, themeName: action.payload },
+        lookfeel: {
+          ...state.lookfeel,
+          themeName: action.payload,
+        },
       };
 
     case SET_DARKMODE:
       return {
         ...state,
-        lookfeel: { ...state.lookfeel, darkMode: action.payload },
+        lookfeel: {
+          ...state.lookfeel,
+          darkMode: action.payload,
+        },
       };
 
     // PROFILE
@@ -69,7 +95,10 @@ export const reducer: TReducer<ISettingsState> = (state, action) => {
     case SET_SHORTNAME:
       return {
         ...state,
-        profile: { ...state.profile, shortName: action.payload },
+        profile: {
+          ...state.profile,
+          shortName: action.payload,
+        },
       };
 
     default:
@@ -94,6 +123,7 @@ export const setInitialState: TAction<ISettings> = (payload) => ({
 export interface ILookFeelActions {
   setWallpaper: TAction<string>;
   setDarkMode: TAction<boolean>;
+  setIsDynamicWallpaper: TAction<boolean>;
   setTheme: TAction<string>;
 }
 
@@ -104,6 +134,10 @@ export const LookFeelActions: ILookFeelActions = {
   }),
   setDarkMode: (payload) => ({
     type: SET_DARKMODE,
+    payload,
+  }),
+  setIsDynamicWallpaper: (payload) => ({
+    type: SET_IS_DYNAMIC_WALLPAPER,
     payload,
   }),
   setTheme: (payload) => ({

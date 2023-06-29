@@ -3,11 +3,12 @@ import { batch } from 'react-redux';
 
 import { settingsApi, localStorageApi } from '@src/api';
 
-import { TThemeName } from '@src/colors/themes';
+import type { TThemeName } from '@launch-ui/theme';
 import type { TThunk } from '@src/types';
 
 export interface ISettings {
   lookfeel: {
+    isDynamicWallpaper: boolean;
     wallpaper: string | null;
     darkMode: boolean;
     themeName: TThemeName;
@@ -21,6 +22,7 @@ export interface ISettings {
 
 export const initialState: ISettings = {
   lookfeel: {
+    isDynamicWallpaper: false,
     wallpaper: null,
     darkMode: false,
     themeName: 'defaultTheme',

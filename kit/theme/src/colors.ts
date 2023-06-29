@@ -183,7 +183,7 @@ export const colorsStaticLightMode = {
   },
 
   backgrounds: {
-    dark: colorsLib.white,
+    dark: colorsLib.liver[100],
     base: colorsLib.white,
     light: colorsLib.liver[100],
     lightest: colorsLib.liver[50],

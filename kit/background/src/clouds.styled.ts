@@ -12,11 +12,11 @@ export const CloudsStyled = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -54%);
-    width: 150%;
-    height: 133%;
+    width: 128%;
+    height: 128%;
 
     .fill {
-      fill: ${({ theme }) => theme.backgrounds.light};
+      fill: ${({ theme }) => theme.backgrounds.dark};
     }
 
     &_cloud1 {

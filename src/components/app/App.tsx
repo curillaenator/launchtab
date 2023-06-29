@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Drawer } from '@launch-ui/drawer';
-import { useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
 
 import GlobalFonts from '@src/assets/fonts/fonts';
 
@@ -40,18 +39,6 @@ const AppStyled = styled.div`
     min-height: calc(100vh - var(--app-pd) * 2);
   }
 
-  .dynamic-bg {
-    width: 100%;
-    height: 100vh;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-  }
-
   @media (min-width: 1920px) {
     --app-pd: 96px;
   }
@@ -60,7 +47,6 @@ const AppStyled = styled.div`
 export const App: FC = () => {
   const dispatch = useAppDispatch();
 
-  const isDynamicBackground = useAppSelector((state) => state.settings.lookfeel.isDynamicWallpaper);
   const bookmarks = useAppSelector((state) => state.bookmarks);
   const loadings = useAppSelector((state) => state.loadings);
   const { userLoading } = useAppSelector((state) => state.auth);
@@ -73,10 +59,6 @@ export const App: FC = () => {
   const { isUserAnon } = useDataQuery();
 
   const currentTheme = useThemeComposer();
-
-  const { watchMouse, ...clouds } = useCloudsPositionStyle({
-    skipCalc: !isDynamicBackground || isRightDrawerOpen,
-  });
 
   useEffect(() => {
     dispatch(checkUserIsAuthed());
@@ -100,14 +82,25 @@ export const App: FC = () => {
     }
   }, [currentTheme]);
 
+  const mouseWatcher = useRef<(e: React.MouseEvent<Element, MouseEvent>) => void>(null);
+
+  const onMouseMove = (e: React.MouseEvent<Element, MouseEvent>) => {
+    if (isRightDrawerOpen || !mouseWatcher.current) return;
+    mouseWatcher.current(e);
+  };
+
   if (userLoading || isAppLoading || isDataLoading) return <Loader fullscreen />;
 
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalFonts />
 
-      <AppStyled onMouseMove={isDynamicBackground ? watchMouse : undefined}>
-        <Background {...clouds} />
+      <AppStyled id='launch-app-container' onMouseMove={onMouseMove}>
+        <Background
+          setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
+            mouseWatcher.current = watcher;
+          }}
+        />
 
         {data && (
           <>

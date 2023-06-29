@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Clouds, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
 import styled from 'styled-components';
 
@@ -20,19 +20,39 @@ const BackgroundStyled = styled.div`
   }
 `;
 
-export const Background: FC<Partial<ReturnType<typeof useCloudsPositionStyle>>> = (props) => {
-  const { layerRotation, positionStyles } = props;
+const DynamicWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+`;
+
+interface BackgroundProps {
+  setMouseWatcher: (watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => void;
+}
+
+export const Background: FC<BackgroundProps> = (props) => {
+  const { setMouseWatcher } = props;
 
   const wallpaper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
   const isDynamicWallpaper = useAppSelector((state) => state.settings.lookfeel.isDynamicWallpaper);
 
+  const { watchMouse, layerRotation, positionStyles } = useCloudsPositionStyle();
+
+  useEffect(() => {
+    if (isDynamicWallpaper) setMouseWatcher(watchMouse);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDynamicWallpaper]);
+
   if (isDynamicWallpaper) {
     return (
-      <div className='dynamic-bg'>
-        <div className='dynamic-bg-content' style={layerRotation}>
+      <DynamicWrapper>
+        <div style={layerRotation} className='content'>
           <Clouds positionStyles={positionStyles} />
         </div>
-      </div>
+      </DynamicWrapper>
     );
   }
 

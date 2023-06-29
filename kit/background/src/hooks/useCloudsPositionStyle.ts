@@ -3,10 +3,10 @@ import { useState, useCallback, MouseEvent, CSSProperties } from 'react';
 export type Layers = 'cloud4' | 'cloud3' | 'cloud2' | 'cloud1' | 'back5' | 'back4' | 'back3' | 'back2' | 'back1' | 'bg';
 
 export const LAYERS_RATES: Record<string, number> = {
-  cloud1: 3,
-  cloud2: 4.5,
-  cloud3: 6,
-  cloud4: 8,
+  cloud1: 6,
+  cloud2: 14,
+  cloud3: 10,
+  cloud4: 20,
 };
 
 export const INITIAL_POSITION = {
@@ -16,30 +16,23 @@ export const INITIAL_POSITION = {
   posY: 0,
 };
 
-type UseCloudsPositionStyleType = (props?: { skipCalc?: boolean }) => {
+type UseCloudsPositionStyleType = () => {
   layerRotation: CSSProperties;
   positionStyles: Record<Layers, CSSProperties>;
   watchMouse: (e: MouseEvent) => void;
 };
 
-export const useCloudsPositionStyle: UseCloudsPositionStyleType = (props) => {
-  const { skipCalc } = props || {};
-
+export const useCloudsPositionStyle: UseCloudsPositionStyleType = () => {
   const [position, setPosition] = useState(INITIAL_POSITION);
 
-  const watchMouse = useCallback(
-    (e: MouseEvent) => {
-      if (skipCalc || !e) return;
-
-      setPosition({
-        cX: window.innerWidth / 2,
-        cY: window.innerHeight / 2,
-        posX: e.pageX - window.innerWidth / 2,
-        posY: e.pageY - window.innerHeight / 2,
-      });
-    },
-    [skipCalc],
-  );
+  const watchMouse = useCallback((e: MouseEvent) => {
+    setPosition({
+      cX: window.innerWidth / 2,
+      cY: window.innerHeight / 2,
+      posX: e.pageX - window.innerWidth / 2,
+      posY: e.pageY - window.innerHeight / 2,
+    });
+  }, []);
 
   const { cX, cY, posX, posY } = position;
 

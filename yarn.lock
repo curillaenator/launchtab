@@ -2221,13 +2221,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/dynamic-bg@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@launch-ui/dynamic-bg@npm:1.0.0"
+"@launch-ui/dynamic-bg@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@launch-ui/dynamic-bg@npm:1.0.1"
   peerDependencies:
     react: "*"
     styled-components: "*"
-  checksum: 54d6729ac6cbb8dec8b7e99ff8d1fbb08334fa493b7710efebd8390005824d1e196f1f58cfaff25714bc6b5e209f7015d9c6842b35891bb02e4e3cd7e5b96fea
+  checksum: c8a6ea9f24d83545c8ffe37feb3ee5b6418cd96a27d74a4196822c0d6e7e24c17e4065accf43336334d362c33cf5a235740c42905a59c6a2a2c63691175c3176
   languageName: node
   linkType: hard
 
@@ -2240,12 +2240,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/theme@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@launch-ui/theme@npm:1.0.1"
+"@launch-ui/theme@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@launch-ui/theme@npm:1.1.0"
   peerDependencies:
     react: "*"
-  checksum: 404bf4537d93e52bcf71356c09b32d8562b046d89bb3f11afa84b46b7baa6a9941d2c7673aa8e5151aafddf485a8fbaa0262f9bb7005ee0234327c341f2954ed
+  checksum: 446d28e1d481ed3fcd74f22905f38c6eaf3d9e8758f46adbee3f73987970571c29da92a05c0a90e37e41d1e4a32d2ee370b94c76d9a3fd9a183106541aa01169
   languageName: node
   linkType: hard
 
@@ -6266,9 +6266,9 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@launch-ui/config": 1.1.0
     "@launch-ui/drawer": 1.0.2
-    "@launch-ui/dynamic-bg": 1.0.0
+    "@launch-ui/dynamic-bg": 1.0.1
     "@launch-ui/shape": 1.0.5
-    "@launch-ui/theme": 1.0.1
+    "@launch-ui/theme": 1.1.0
     "@launch-ui/utils": 1.0.1
     "@reduxjs/toolkit": 1.9.5
     "@types/lodash.isequal": 4.5.6

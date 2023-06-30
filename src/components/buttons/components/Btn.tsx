@@ -5,7 +5,7 @@ import { Shape } from '@launch-ui/shape';
 import { Typography } from '../../typography/Typography';
 
 import { icons } from '../assets/icons';
-import type { Button } from './interfaces';
+import type { ButtonProps } from './interfaces';
 
 interface IButtonStyled {
   active: boolean;
@@ -60,7 +60,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 `;
 
-export const Btn: FC<Button> = ({
+export const Btn: FC<ButtonProps> = ({
   title,
   leftIcon,
   isColorsStatic = true,

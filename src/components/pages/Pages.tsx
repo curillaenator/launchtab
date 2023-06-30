@@ -5,7 +5,7 @@ import { arrayMoveImmutable } from 'array-move';
 
 import { useAppDispatch } from '../../hooks/hooks';
 
-import { Btn } from '../buttons';
+import { Button } from '../buttons';
 import { Create } from '../create';
 import { ContextMenu } from '../contextMenu/ContextMenu';
 
@@ -42,21 +42,21 @@ const PagesJSX: FC<IPages> = ({ pages, curPage }) => {
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      <Btn title='Home' active={pages[0] === curPage} handler={() => dispatch(setCurPage(pages[0]))} />
+      <Button title='Home' active={pages[0] === curPage} onClick={() => dispatch(setCurPage(pages[0]))} />
 
       {sortablePages.map((knob, i) => {
         return (
           <SortableItem key={`${knob}${i}`}>
             <div>
               <ContextMenu items={getContextMenuItems(knob, dispatch)}>
-                <Btn title={knob} active={knob === curPage} handler={() => dispatch(setCurPage(knob))} />
+                <Button title={knob} active={knob === curPage} onClick={() => dispatch(setCurPage(knob))} />
               </ContextMenu>
             </div>
           </SortableItem>
         );
       })}
 
-      <Create create='new-page' iconName='addBigIcon' />
+      <Create create='new-page' />
     </SortableListStyled>
   );
 };

@@ -1,3 +1,4 @@
+export { Button } from './components/Button';
 export { Btn } from './components/Btn';
 export { BtnCta } from './components/CtaButton';
 export { BtnGhost } from './components/BtnGhost';

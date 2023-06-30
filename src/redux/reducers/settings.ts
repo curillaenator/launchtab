@@ -22,7 +22,7 @@ export interface ISettings {
 
 export const initialState: ISettings = {
   lookfeel: {
-    isDynamicWallpaper: false,
+    isDynamicWallpaper: true,
     wallpaper: null,
     darkMode: false,
     themeName: 'defaultTheme',

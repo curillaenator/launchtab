@@ -95,7 +95,7 @@ export const App: FC = () => {
     <ThemeProvider theme={currentTheme}>
       <GlobalFonts />
 
-      <AppStyled id='launch-app-container' onMouseMove={onMouseMove}>
+      <AppStyled id='launch-app-container' className='launch-app-container' onMouseMove={onMouseMove}>
         <Background
           setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
             mouseWatcher.current = watcher;

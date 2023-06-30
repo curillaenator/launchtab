@@ -4,11 +4,12 @@ import styled, { keyframes } from 'styled-components';
 import { Corners } from '@launch-ui/shape';
 
 import { useCreateForm } from './hooks/useCreateForm';
-import { usePopupPosition } from './hooks/usePopupPosition';
 
-import { BtnIcon, ButtonsIcons } from '@src/components/buttons';
 import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
+
+import { CreateContainerStyled } from './create.styled';
+import { icons } from '@src/assets/icons';
 
 const appear = keyframes`
   from {
@@ -33,50 +34,25 @@ const PopupStyled = styled(Popup)`
   }
 `;
 
-interface CreateContainerStyledProps {
-  isCreateBookmark: boolean;
-}
-
-const CreateContainerStyled = styled.div<CreateContainerStyledProps>`
-  --shp-bgc: ${({ theme }) => theme.backgrounds.light};
-  --shp-bdc: ${({ theme }) => theme.backgrounds.base};
-
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: ${({ isCreateBookmark }) => (isCreateBookmark ? '100%' : 'fit-content')};
-  height: ${({ isCreateBookmark }) => (isCreateBookmark ? '100%' : 'fit-content')};
-  min-height: ${({ isCreateBookmark }) => (isCreateBookmark ? '186px' : undefined)};
-
-  .create-shape {
-    fill: transparent;
-    stroke: ${({ theme, isCreateBookmark }) => (isCreateBookmark ? theme.backgrounds.lightest : 'transparent')};
-    stroke-width: 1px;
-  }
-`;
-
 interface ICreate {
   create: 'new-page' | 'new-bookmark';
-  iconName?: ButtonsIcons;
 }
 
-export const Create: FC<ICreate> = ({ create, iconName = 'addBigIcon' }) => {
+export const Create: FC<ICreate> = ({ create }) => {
   const [states, handlers, handleCreate, resetStates] = useCreateForm(create);
-  const { pos: position, offsetY, onTriggerClick } = usePopupPosition('bottom center');
 
   return (
     <PopupStyled
-      offsetY={create === 'new-bookmark' ? offsetY : 74}
+      offsetY={create === 'new-bookmark' ? 128 : 74}
       offsetX={create === 'new-bookmark' ? -64 : 32}
       arrow={false}
       onClose={() => resetStates()}
-      position={position}
+      keepTooltipInside='.launch-app-container'
+      position={['left center', 'right center']}
       trigger={(open) => (
-        <CreateContainerStyled isCreateBookmark={create === 'new-bookmark'}>
-          {create === 'new-bookmark' && <Corners borderRadius={20} stroke={2} />}
-
-          <BtnIcon id='add-bookmark' iconName={iconName} active={open} handler={onTriggerClick} />
+        <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
+          <Corners borderRadius={20} stroke={2} />
+          <button>{icons.plus}</button>
         </CreateContainerStyled>
       )}
     >

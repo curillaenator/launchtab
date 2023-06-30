@@ -76,7 +76,13 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
       {
         title: 'Delete',
         danger: true,
-        handler: () => dispatch(deleteBookmark(bm.name, bm.id)),
+        handler: () =>
+          dispatch(
+            deleteBookmark(
+              bm.name,
+              //  bm.id
+            ),
+          ),
       },
     ];
 

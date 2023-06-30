@@ -5,7 +5,7 @@ import { Typography } from '../../typography/Typography';
 import { Shape } from '@launch-ui/shape';
 
 import { icons } from './../assets/icons';
-import type { Button } from './interfaces';
+import type { ButtonProps } from './interfaces';
 
 // TODO size variations
 
@@ -69,7 +69,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 `;
 
-export const BtnCta: FC<Button> = ({
+export const BtnCta: FC<ButtonProps> = ({
   title,
   leftIcon,
   rightIcon,

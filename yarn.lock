@@ -2221,15 +2221,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/dynamic-bg@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@launch-ui/dynamic-bg@npm:1.0.1"
+"@launch-ui/dynamic-bg@1.0.2, @launch-ui/dynamic-bg@workspace:kit/background":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/dynamic-bg@workspace:kit/background"
   peerDependencies:
     react: "*"
     styled-components: "*"
-  checksum: c8a6ea9f24d83545c8ffe37feb3ee5b6418cd96a27d74a4196822c0d6e7e24c17e4065accf43336334d362c33cf5a235740c42905a59c6a2a2c63691175c3176
-  languageName: node
-  linkType: hard
+  languageName: unknown
+  linkType: soft
 
 "@launch-ui/shape@npm:1.0.5":
   version: 1.0.5
@@ -6266,7 +6265,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@launch-ui/config": 1.1.0
     "@launch-ui/drawer": 1.0.2
-    "@launch-ui/dynamic-bg": 1.0.1
+    "@launch-ui/dynamic-bg": 1.0.2
     "@launch-ui/shape": 1.0.5
     "@launch-ui/theme": 1.1.0
     "@launch-ui/utils": 1.0.1

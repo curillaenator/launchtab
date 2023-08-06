@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { Typography, ITypographyTypes } from '../typography';
 
 const TitlewrapStyled = styled.div`
+  width: 100%;
+  min-width: 356px;
+
   .titlewrap-title {
     margin-bottom: 16px;
   }

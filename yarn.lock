@@ -2197,19 +2197,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/config@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@launch-ui/config@npm:1.1.0"
+"@launch-ui/config@1.1.0, @launch-ui/config@workspace:kit/launchCfg":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/config@workspace:kit/launchCfg"
   peerDependencies:
     react: "*"
     typescript: "*"
-  checksum: 7f7e973eae078fbb7ec6c0b33097e56d7de54a5a10ab67c0b5a15e4875b79377ac4492499b398322fd85b8d320bb697effc4d13ea57d68ff8d16ba42a3fffaba
-  languageName: node
-  linkType: hard
+  languageName: unknown
+  linkType: soft
 
-"@launch-ui/drawer@npm:1.0.2":
-  version: 1.0.2
-  resolution: "@launch-ui/drawer@npm:1.0.2"
+"@launch-ui/drawer@1.0.2, @launch-ui/drawer@workspace:kit/drawer":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/drawer@workspace:kit/drawer"
   dependencies:
     "@headlessui/react": 1.5.0
     "@launch-ui/utils": 1.0.1
@@ -2217,9 +2216,8 @@ __metadata:
   peerDependencies:
     react: "*"
     styled-components: "*"
-  checksum: a830dc769c1299fcfc92f78aa33c726d12c6ccdfa1bcff787fda30ad5db63773075e24a112b4393367dd3867a132241f0e01a8bf28dd0e129786836ad6c38d8e
-  languageName: node
-  linkType: hard
+  languageName: unknown
+  linkType: soft
 
 "@launch-ui/dynamic-bg@1.0.2, @launch-ui/dynamic-bg@workspace:kit/background":
   version: 0.0.0-use.local
@@ -2230,35 +2228,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/shape@npm:1.0.5":
-  version: 1.0.5
-  resolution: "@launch-ui/shape@npm:1.0.5"
+"@launch-ui/shape@1.0.5, @launch-ui/shape@workspace:kit/shape":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/shape@workspace:kit/shape"
   peerDependencies:
     react: "*"
-  checksum: 8c110da895da8625c6f2ab7dbc60373c9c3e7f2c329b118969740f8fdf6d81481ed28e9c4ddf69163c7ca302996e8d31dc3af9fce363579a4a83c5fe09f9219e
-  languageName: node
-  linkType: hard
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
 
-"@launch-ui/theme@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@launch-ui/theme@npm:1.1.0"
+"@launch-ui/theme@1.1.0, @launch-ui/theme@workspace:kit/theme":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/theme@workspace:kit/theme"
   peerDependencies:
     react: "*"
-  checksum: 446d28e1d481ed3fcd74f22905f38c6eaf3d9e8758f46adbee3f73987970571c29da92a05c0a90e37e41d1e4a32d2ee370b94c76d9a3fd9a183106541aa01169
-  languageName: node
-  linkType: hard
+  languageName: unknown
+  linkType: soft
 
-"@launch-ui/utils@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@launch-ui/utils@npm:1.0.1"
+"@launch-ui/utils@1.0.1, @launch-ui/utils@workspace:kit/utils":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/utils@workspace:kit/utils"
   dependencies:
     bowser: 2.11.0
     qs: 6.9.4
   peerDependencies:
     react: "*"
-  checksum: 9f38b8dab8b88ab663453e939b42879b2a87af477f8be1b5ed3ade64f9c38aebe6c5fa4cf8fd257bd559acc0d4ef4ac335514f462e4d2149fb4b45eb022d7be9
-  languageName: node
-  linkType: hard
+  languageName: unknown
+  linkType: soft
 
 "@leichtgewicht/ip-codec@npm:^2.0.1":
   version: 2.0.4

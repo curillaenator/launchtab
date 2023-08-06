@@ -102,11 +102,7 @@ export const Card: FC<CardProps> = (props) => {
       onClick={() => setNoAnimation(true)}
       data-card='true'
     >
-      <Corners
-        borderRadius={20}
-        stroke={4}
-        // className={`card-shape ${hasBorder ? 'card-shape-bordered' : ''}`}
-      />
+      <Corners borderRadius={20} stroke={4} />
 
       <CardImage {...bookmark} />
 

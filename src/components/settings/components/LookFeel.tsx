@@ -11,9 +11,8 @@ import { themeNames } from '@launch-ui/theme';
 
 import { PEXELS_INITIAL_STATE, type ILookFeelActions, type ISettingsFormState } from '../reducer';
 
-// import { RES_MOCK } from './mock';
-
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
+// import { RES_MOCK } from './mock';
 
 const animation = keyframes`${fadeIn}`;
 const LookFeelStyled = styled.div`
@@ -115,6 +114,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               src={photo.src.large}
               onClick={() => dispatch(setters.setWallpaper(photo.src.original))}
               active={values.lookfeel.wallpaper === photo.src.original}
+              avgColor={photo.avg_color}
               clickable
             />
           ))}

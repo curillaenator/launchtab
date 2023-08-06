@@ -91,7 +91,12 @@
   },
   "workspaces": {
     "packages": [
-      "kit/background"
+      "kit/background",
+      "kit/drawer",
+      "kit/launchCfg",
+      "kit/shape",
+      "kit/theme",
+      "kit/utils"
     ]
   },
   "packageManager": "yarn@3.2.0"

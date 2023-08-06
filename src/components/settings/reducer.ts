@@ -1,7 +1,15 @@
+import type { PhotosWithTotalResults } from 'pexels';
 import type { TReducer, TAction } from '@src/types';
-import type { ISettings } from '@src/redux/reducers/settings';
+import { INITIAL_LOOKFEEL_STATE, type ISettings } from '@src/redux/reducers/settings';
 
-const SET_CURRENT_TAB = 'form/SET_CURRENT_TAB';
+export const PEXELS_INITIAL_STATE: PhotosWithTotalResults = {
+  total_results: 0,
+  page: 1,
+  per_page: 8,
+  photos: [],
+  next_page: 2,
+};
+
 const SET_INITIAL_STATE = 'form/SET_INITIAL_STATE';
 
 const SET_IS_DYNAMIC_WALLPAPER = 'lookfeel/SET_IS_DYNAMIC_WALLPAPER';
@@ -9,43 +17,38 @@ const SET_WALLPAPER = 'lookfeel/SET_WALLPAPER';
 const SET_THEME = 'lookfeel/SET_THEME';
 const SET_DARKMODE = 'lookfeel/SET_DARKMODE';
 
-const SET_SHORTNAME = 'profile/SET_SHORTNAME';
+const SET_PEXELS = 'lookfeel/SET_PEXELS';
+const SET_PEXELS_PAGE = 'lookfeel/SET_PEXELS_PAGE';
+const SET_PEXELS_QUERY = 'lookfeel/SET_PEXELS_QUERY';
+
+interface IPexels {
+  pexelsQuery: string | null;
+  pexelsLoading: boolean;
+  pexels: PhotosWithTotalResults;
+}
 
 // INITIAL STATE
 
-export interface ISettingsState extends ISettings {
-  currentTab: string;
+export interface ISettingsFormState {
+  pexels: IPexels;
+
+  lookfeel: ISettings['lookfeel'];
 }
 
-export const initialState: ISettingsState = {
-  currentTab: 'Appearance',
-
-  lookfeel: {
-    isDynamicWallpaper: false,
-    wallpaper: null,
-    darkMode: false,
-    themeName: 'defaultTheme',
+export const initialState: ISettingsFormState = {
+  pexels: {
+    pexels: PEXELS_INITIAL_STATE,
+    pexelsQuery: '',
+    pexelsLoading: false,
   },
 
-  profile: {
-    shortName: null,
-  },
-
-  other: {
-    other: null,
-  },
+  lookfeel: INITIAL_LOOKFEEL_STATE,
 };
 
 // REDUCER
 
-export const reducer: TReducer<ISettingsState> = (state, action) => {
+export const reducer: TReducer<ISettingsFormState> = (state, action) => {
   switch (action.type) {
-    case SET_CURRENT_TAB:
-      return {
-        ...state,
-        currentTab: action.payload,
-      };
-
     case SET_INITIAL_STATE:
       return {
         ...state,
@@ -90,16 +93,28 @@ export const reducer: TReducer<ISettingsState> = (state, action) => {
         },
       };
 
-    // PROFILE
+    // PEXELS
 
-    case SET_SHORTNAME:
+    case SET_PEXELS_QUERY:
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          shortName: action.payload,
+        pexels: {
+          ...state.pexels,
+          pexelsQuery: action.payload,
         },
       };
+
+    case SET_PEXELS:
+      return {
+        ...state,
+        pexels: {
+          pexels: action.payload,
+          pexelsQuery: state.pexels.pexelsQuery,
+          pexelsLoading: false,
+        },
+      };
+
+    // DEFAULT
 
     default:
       return { ...state };
@@ -108,26 +123,24 @@ export const reducer: TReducer<ISettingsState> = (state, action) => {
 
 // ACTIONS
 
-export const setCurrentTab: TAction<string> = (payload) => ({
-  type: SET_CURRENT_TAB,
-  payload,
-});
-
-export const setInitialState: TAction<ISettings> = (payload) => ({
-  type: SET_INITIAL_STATE,
-  payload,
-});
-
-// lookfeel
-
 export interface ILookFeelActions {
+  setInitialState: TAction<ISettings>;
+
   setWallpaper: TAction<string>;
   setDarkMode: TAction<boolean>;
   setIsDynamicWallpaper: TAction<boolean>;
   setTheme: TAction<string>;
+
+  setPexels: TAction<PhotosWithTotalResults>;
+  setPixelsPage: TAction<number>;
+  setPixelsQuery: TAction<string>;
 }
 
 export const LookFeelActions: ILookFeelActions = {
+  setInitialState: (payload) => ({
+    type: SET_INITIAL_STATE,
+    payload,
+  }),
   setWallpaper: (payload) => ({
     type: SET_WALLPAPER,
     payload,
@@ -144,17 +157,17 @@ export const LookFeelActions: ILookFeelActions = {
     type: SET_THEME,
     payload,
   }),
-};
 
-// profile
-
-export interface IProfileActions {
-  setShortName: TAction<string>;
-}
-
-export const ProfileActions: IProfileActions = {
-  setShortName: (payload) => ({
-    type: SET_SHORTNAME,
+  setPexels: (payload) => ({
+    type: SET_PEXELS,
+    payload,
+  }),
+  setPixelsQuery: (payload) => ({
+    type: SET_PEXELS_QUERY,
+    payload,
+  }),
+  setPixelsPage: (payload) => ({
+    type: SET_PEXELS_PAGE,
     payload,
   }),
 };

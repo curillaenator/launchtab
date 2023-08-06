@@ -13,65 +13,62 @@ export interface ISettings {
     darkMode: boolean;
     themeName: TThemeName;
   };
-
-  profile: { shortName: string | null };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  other: { other: any };
 }
 
-export const initialState: ISettings = {
-  lookfeel: {
-    isDynamicWallpaper: true,
-    wallpaper: null,
-    darkMode: false,
-    themeName: 'defaultTheme',
-  },
+export const INITIAL_LOOKFEEL_STATE: ISettings['lookfeel'] = {
+  isDynamicWallpaper: true,
+  wallpaper: null,
+  darkMode: false,
+  themeName: 'classicBlueTheme',
+};
 
-  profile: {
-    shortName: null,
-  },
-
-  other: {
-    other: null,
-  },
+export const INITIAL_SETTINGS_STATE: ISettings = {
+  lookfeel: INITIAL_LOOKFEEL_STATE,
 };
 
 const settingsSlice = createSlice({
   name: 'settings',
 
-  initialState,
+  initialState: INITIAL_SETTINGS_STATE,
 
   reducers: {
     setLookFeel: (state, action: PayloadAction<ISettings['lookfeel']>) => {
       state.lookfeel = { ...state.lookfeel, ...action.payload };
     },
 
-    setProfile: (state, action: PayloadAction<ISettings['profile']>) => {
-      state.profile = { ...state.profile, ...action.payload };
-    },
-
-    setOther: (state, action: PayloadAction<ISettings['other']>) => {
-      state.other = { ...state.other, ...action.payload };
-    },
-
     setSettings: (state, action: PayloadAction<ISettings>) => {
       state.lookfeel = action.payload.lookfeel;
-      state.profile = action.payload.profile;
-      state.other = action.payload.other;
     },
   },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(getWallpapers.pending, (state) => {
+  //       state.lookfeel.pixelsLoading = true;
+  //     })
+  //     .addCase(getWallpapers.rejected, (state) => {
+  //       state.lookfeel.pixelsLoading = false;
+  //       alert('Walpaper request rejected =(');
+  //     })
+  //     .addCase(getWallpapers.fulfilled, (state, action) => {
+  //       state.lookfeel.pixelsLoading = false;
+  //       state.lookfeel.pixels = {
+  //         ...state.lookfeel.pixels,
+  //         ...action.payload,
+  //         photos: [...state.lookfeel.pixels.photos, ...action.payload.photos],
+  //       };
+  //     });
+  // },
 });
 
-export const settings = settingsSlice.reducer;
+const settings = settingsSlice.reducer;
 
-const { setLookFeel, setProfile, setOther, setSettings } = settingsSlice.actions;
+const { setLookFeel, setSettings } = settingsSlice.actions;
 
 // THUNKS
 
 export const resetSettings = (): TThunk => {
   return (dispatch) => {
-    dispatch(setSettings({ ...initialState }));
+    dispatch(setSettings({ ...INITIAL_SETTINGS_STATE }));
     localStorageApi.clear();
   };
 };
@@ -83,14 +80,6 @@ export const applySettings = (settings: ISettings): TThunk => {
     batch(() => {
       if ('lookfeel' in settings) {
         dispatch(setLookFeel(settings.lookfeel));
-      }
-
-      if ('profile' in settings) {
-        dispatch(setProfile(settings.profile));
-      }
-
-      if ('other' in settings) {
-        dispatch(setOther(settings.other));
       }
     });
   };
@@ -112,3 +101,5 @@ export const updateSettings = (settings: ISettings): TThunk => {
     }
   };
 };
+
+export { settings };

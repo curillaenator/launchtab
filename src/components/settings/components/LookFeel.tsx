@@ -1,4 +1,5 @@
-import React, { FC, Dispatch } from 'react';
+import React, { FC, Dispatch, useEffect, useRef } from 'react';
+import { createClient, PhotosWithTotalResults } from 'pexels';
 import { AnyAction } from '@reduxjs/toolkit';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
@@ -8,7 +9,11 @@ import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
 import { themeNames } from '@launch-ui/theme';
 
-import type { ILookFeelActions, ISettingsState } from '../reducer';
+import { PEXELS_INITIAL_STATE, type ILookFeelActions, type ISettingsFormState } from '../reducer';
+
+// import { RES_MOCK } from './mock';
+
+const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
 const animation = keyframes`${fadeIn}`;
 const LookFeelStyled = styled.div`
@@ -16,59 +21,105 @@ const LookFeelStyled = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  /* height: 100%; */
   min-height: 320px;
   animation: ${animation} 0.2s linear;
   /* padding-right: 16px; */
 `;
 
 interface ILookFeel {
-  values: ISettingsState['lookfeel'];
+  values: ISettingsFormState;
   setters: ILookFeelActions;
   dispatch: Dispatch<AnyAction>;
 }
 
-export const LookFeel: FC<ILookFeel> = ({ values, setters, dispatch }) => {
+export const LookFeel: FC<ILookFeel> = (props) => {
+  const { values, setters, dispatch } = props;
+  const { lookfeel, pexels } = values;
+
   const themeOptions = Object.keys(themeNames).map((themeKey) => ({
     title: themeNames[themeKey],
     value: themeKey,
   }));
 
+  const pexelsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (!pexels.pexelsQuery) {
+      dispatch(setters.setPexels(PEXELS_INITIAL_STATE));
+      return;
+    }
+
+    if (pexelsTimer.current) clearTimeout(pexelsTimer.current);
+
+    pexelsTimer.current = setTimeout(() => {
+      client.photos
+        .search({
+          query: pexels.pexelsQuery,
+          per_page: 30,
+          page: 1,
+        })
+        .then((res) => {
+          dispatch(setters.setPexels(res as PhotosWithTotalResults));
+        })
+        .catch(() => {
+          alert('Image service unfurtunatelly failed =(');
+        });
+
+      // dispatch(setters.setPexels(RES_MOCK));
+    }, 500);
+  }, [pexels.pexelsQuery, setters, dispatch]);
+
   return (
     <LookFeelStyled>
       <Titlewrap title='Theme'>
         <Dropdown
-          selected={values.themeName}
+          selected={lookfeel.themeName}
           options={themeOptions}
           onChange={(themeName) => dispatch(setters.setTheme(themeName))}
         />
       </Titlewrap>
 
       <Titlewrap title='Dark Mode'>
-        <Switch value={values.darkMode} onChange={() => dispatch(setters.setDarkMode(!values.darkMode))} />
+        <Switch value={lookfeel.darkMode} onChange={() => dispatch(setters.setDarkMode(!lookfeel.darkMode))} />
       </Titlewrap>
 
       <Titlewrap title='Dynamic wallpaper'>
         <Switch
-          value={values.isDynamicWallpaper}
-          onChange={() => dispatch(setters.setIsDynamicWallpaper(!values.isDynamicWallpaper))}
+          value={lookfeel.isDynamicWallpaper}
+          onChange={() => dispatch(setters.setIsDynamicWallpaper(!lookfeel.isDynamicWallpaper))}
         />
       </Titlewrap>
 
-      {!values.isDynamicWallpaper && (
-        <Titlewrap title='Wallpaper'>
-          <TextInput
-            disabled={values.isDynamicWallpaper}
-            iconName='link'
-            type='url'
-            name='background'
-            placeholder='full link to any image'
-            value={values.wallpaper || ''}
-            onChange={(url) => dispatch(setters.setWallpaper(url))}
-          />
-        </Titlewrap>
-      )}
+      {!lookfeel.isDynamicWallpaper && (
+        <>
+          <Titlewrap title='Current wallpaper' noOffset>
+            <ImagePreview alt='launchtabs-wallpaper' src={lookfeel.wallpaper} />
+          </Titlewrap>
 
-      <ImagePreview disabled={values.isDynamicWallpaper} imageURL={values.wallpaper || ''} />
+          <Titlewrap title='Search wallpaper'>
+            <TextInput
+              iconName='link'
+              type='url'
+              name='background'
+              placeholder='Type in any tag (example "nature")'
+              value={pexels.pexelsQuery}
+              onChange={(query) => dispatch(setters.setPixelsQuery(query))}
+            />
+          </Titlewrap>
+
+          {pexels.pexels.photos.map((photo) => (
+            <ImagePreview
+              key={photo.id}
+              alt={photo.alt}
+              src={photo.src.large}
+              onClick={() => dispatch(setters.setWallpaper(photo.src.original))}
+              active={values.lookfeel.wallpaper === photo.src.original}
+              clickable
+            />
+          ))}
+        </>
+      )}
     </LookFeelStyled>
   );
 };

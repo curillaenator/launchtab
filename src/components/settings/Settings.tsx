@@ -37,7 +37,7 @@ const SettingsStyled = styled.div`
 
     &-block {
       width: 100%;
-      padding: 0 32px;
+      padding: 0 24px 0 32px;
     }
 
     &-topBlock {
@@ -73,25 +73,17 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
   const userSettings = useAppSelector((state) => state.settings);
 
   const [state, dispatch] = useReducer(r.reducer, r.initialState);
-  const { lookfeel, profile, other } = state;
+  const { lookfeel, pexels } = state;
 
-  useEffect(() => dispatch(r.setInitialState(userSettings)), [userSettings]);
+  useEffect(() => dispatch(r.LookFeelActions.setInitialState(userSettings)), [userSettings]);
 
   const submitSettings = () => {
-    const settings = {
-      lookfeel,
-      profile,
-      other,
-    };
-
-    appDispatch(updateSettings(settings));
-
+    appDispatch(updateSettings({ lookfeel }));
     closeSettings();
   };
 
   const hadleLogOut = () => {
     appDispatch(logOut());
-
     closeSettings();
   };
 
@@ -109,7 +101,7 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
           </div>
 
           <Scrollbars height='calc(100vh - 219px)'>
-            <LookFeel values={lookfeel} setters={r.LookFeelActions} dispatch={dispatch} />
+            <LookFeel values={{ lookfeel, pexels }} setters={r.LookFeelActions} dispatch={dispatch} />
           </Scrollbars>
         </div>
 

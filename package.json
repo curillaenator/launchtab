@@ -9,7 +9,10 @@
     "redux-toolkit",
     "styled-components",
     "typescript",
-    "webpack"
+    "webpack",
+    "bookmarks",
+    "tabs",
+    "launch"
   ],
   "scripts": {
     "start": "webpack serve --open",

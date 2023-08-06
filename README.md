@@ -1,4 +1,4 @@
-# LaunchTab
+# LaunchTabs
 
 Start page with bookmarks for web browsers.
 

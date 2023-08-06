@@ -30,7 +30,6 @@ const AppStyled = styled.div`
   padding: var(--app-pd);
   margin: 0 auto;
   color: ${({ theme }) => theme.texts.base};
-  /* overflow-x: hidden; */
 
   .main-screen {
     width: 100%;

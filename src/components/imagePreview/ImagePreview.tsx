@@ -1,43 +1,47 @@
-import React, { FC } from 'react';
+import React, { FC, ImgHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { Typography } from '../typography';
 
-const ImagePreviewStyled = styled.div<{ disabled?: boolean }>`
+interface ImagePreviewProps extends ImgHTMLAttributes<HTMLImageElement> {
+  clickable?: boolean;
+  active?: boolean;
+  avgColor?: string;
+}
+
+const ImagePreviewStyled = styled.div<ImagePreviewProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   min-width: 350px;
   aspect-ratio: 16 / 9;
-  /* height: 186px; */
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.backgrounds.light};
   background-color: ${({ theme }) => theme.backgrounds.base};
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  transition: 0.12s ease-in-out;
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  border: ${({ active }) => (active ? '8px' : '0px')} solid
+    ${({ theme, active, avgColor }) => (active ? avgColor || theme.backgrounds.light : 'transparent')};
+
+  &:hover {
+    opacity: ${({ clickable }) => (clickable ? 0.5 : 1)};
+  }
 
   .preview-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
 
-  .disabled {
-    opacity: 0.5;
+    &_active {
+    }
   }
 `;
 
-interface ImagePreviewProps {
-  imageURL: string;
-  disabled?: boolean;
-}
+export const ImagePreview: FC<ImagePreviewProps> = (props) => {
+  const { src, alt, active, clickable, avgColor, ...rest } = props;
 
-export const ImagePreview: FC<ImagePreviewProps> = ({ imageURL, disabled }) => {
   return (
-    <ImagePreviewStyled disabled={disabled}>
-      {imageURL && <img className='preview-image' src={imageURL} alt='Wallpaper' draggable={false} />}
-
-      {!imageURL && <Typography type='RoundedBold16'>Wallpaper preview</Typography>}
+    <ImagePreviewStyled active={active} clickable={clickable} avgColor={avgColor}>
+      {src && <img {...rest} className='preview-image' src={src} alt={alt} draggable={false} />}
     </ImagePreviewStyled>
   );
 };

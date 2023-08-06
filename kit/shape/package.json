@@ -11,14 +11,14 @@
     "type": "module",
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
   },
   "peerDependencies": {
-    "styled-components": "*",
-    "react": "*"
+    "react": "*",
+    "styled-components": "*"
   },
   "files": [
     "/build",

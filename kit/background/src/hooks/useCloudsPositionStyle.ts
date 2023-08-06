@@ -2,11 +2,18 @@ import { useState, useCallback, MouseEvent, CSSProperties } from 'react';
 
 export type Layers = 'cloud4' | 'cloud3' | 'cloud2' | 'cloud1' | 'back5' | 'back4' | 'back3' | 'back2' | 'back1' | 'bg';
 
+// export const LAYERS_RATES: Record<string, number> = {
+//   cloud1: 6,
+//   cloud2: 14,
+//   cloud3: 10,
+//   cloud4: 20,
+// };
+
 export const LAYERS_RATES: Record<string, number> = {
   cloud1: 6,
-  cloud2: 14,
-  cloud3: 10,
-  cloud4: 20,
+  cloud2: 10,
+  cloud3: 18,
+  cloud4: 30,
 };
 
 export const INITIAL_POSITION = {
@@ -22,7 +29,7 @@ type UseCloudsPositionStyleType = () => {
   watchMouse: (e: MouseEvent) => void;
 };
 
-export const useCloudsPositionStyle: UseCloudsPositionStyleType = () => {
+export const useCloudsPositionStyle: UseCloudsPositionStyleType = (rates: Record<string, number> = LAYERS_RATES) => {
   const [position, setPosition] = useState(INITIAL_POSITION);
 
   const watchMouse = useCallback((e: MouseEvent) => {
@@ -44,8 +51,8 @@ export const useCloudsPositionStyle: UseCloudsPositionStyleType = () => {
   };
 
   const positionStyles = Object.fromEntries(
-    Object.keys(LAYERS_RATES).map((layer) => {
-      const q = LAYERS_RATES[layer];
+    Object.keys(rates).map((layer) => {
+      const q = rates[layer];
       return [layer, { transform: `translate(${posX / q}px, ${posY / q}px)` }];
     }),
   ) as Record<Layers, CSSProperties>;

@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@launch-ui/drawer": "1.0.2",
-    "@launch-ui/dynamic-bg": "1.0.1",
+    "@launch-ui/dynamic-bg": "1.0.2",
     "@launch-ui/shape": "1.0.5",
     "@launch-ui/theme": "1.1.0",
     "@launch-ui/utils": "1.0.1",
@@ -36,6 +36,7 @@
     "classnames": "2.3.2",
     "firebase": "9.22.2",
     "lodash.isequal": "4.5.0",
+    "pexels": "1.4.0",
     "react": "18.2.0",
     "react-animations": "1.0.0",
     "react-dom": "18.2.0",
@@ -89,7 +90,14 @@
     "node": ">=16.18"
   },
   "workspaces": {
-    "packages": []
+    "packages": [
+      "kit/background",
+      "kit/drawer",
+      "kit/launchCfg",
+      "kit/shape",
+      "kit/theme",
+      "kit/utils"
+    ]
   },
   "packageManager": "yarn@3.2.0"
 }

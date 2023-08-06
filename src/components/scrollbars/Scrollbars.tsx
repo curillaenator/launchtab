@@ -35,7 +35,8 @@ const ScrollbarsStyled = styled.div<ScrollbarsProps>`
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  max-height: ${({ height }) => height};
+  height: ${({ height }) => height};
+  padding-right: 8px;
   position: relative;
 
   &::-webkit-scrollbar {

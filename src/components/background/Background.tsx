@@ -1,8 +1,21 @@
 import React, { FC, useEffect } from 'react';
-import { Clouds, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
+import { Beach, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
 import styled from 'styled-components';
 
 import { useAppSelector } from '../../hooks/hooks';
+
+export const CLOUDS_RATES: Record<string, number> = {
+  cloud1: 6,
+  cloud2: 14,
+  cloud3: 10,
+  cloud4: 20,
+};
+
+export const BEACH_RATES: Record<string, number> = {
+  cloud2: 20,
+  cloud3: 14,
+  cloud4: 6,
+};
 
 const BackgroundStyled = styled.div`
   position: fixed;
@@ -39,7 +52,11 @@ export const Background: FC<BackgroundProps> = (props) => {
   const wallpaper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
   const isDynamicWallpaper = useAppSelector((state) => state.settings.lookfeel.isDynamicWallpaper);
 
-  const { watchMouse, layerRotation, positionStyles } = useCloudsPositionStyle();
+  const {
+    watchMouse,
+    // layerRotation,
+    positionStyles,
+  } = useCloudsPositionStyle();
 
   useEffect(() => {
     if (isDynamicWallpaper) setMouseWatcher(watchMouse);
@@ -49,8 +66,11 @@ export const Background: FC<BackgroundProps> = (props) => {
   if (isDynamicWallpaper) {
     return (
       <DynamicWrapper>
-        <div style={layerRotation} className='content'>
-          <Clouds positionStyles={positionStyles} />
+        <div
+          // style={layerRotation}
+          className='content'
+        >
+          <Beach positionStyles={positionStyles} />
         </div>
       </DynamicWrapper>
     );

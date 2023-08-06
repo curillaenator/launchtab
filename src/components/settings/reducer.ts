@@ -13,6 +13,7 @@ export const PEXELS_INITIAL_STATE: PhotosWithTotalResults = {
 const SET_INITIAL_STATE = 'form/SET_INITIAL_STATE';
 
 const SET_IS_DYNAMIC_WALLPAPER = 'lookfeel/SET_IS_DYNAMIC_WALLPAPER';
+const SET_DYNAMIC_WALLPAPER = 'lookfeel/SET_DYNAMIC_WALLPAPER';
 const SET_WALLPAPER = 'lookfeel/SET_WALLPAPER';
 const SET_THEME = 'lookfeel/SET_THEME';
 const SET_DARKMODE = 'lookfeel/SET_DARKMODE';
@@ -63,6 +64,15 @@ export const reducer: TReducer<ISettingsFormState> = (state, action) => {
         lookfeel: {
           ...state.lookfeel,
           isDynamicWallpaper: action.payload,
+        },
+      };
+
+    case SET_DYNAMIC_WALLPAPER:
+      return {
+        ...state,
+        lookfeel: {
+          ...state.lookfeel,
+          dynamicWallpaper: action.payload,
         },
       };
 
@@ -129,6 +139,7 @@ export interface ILookFeelActions {
   setWallpaper: TAction<string>;
   setDarkMode: TAction<boolean>;
   setIsDynamicWallpaper: TAction<boolean>;
+  setDynamicWallpaper: TAction<'clouds' | 'beach'>;
   setTheme: TAction<string>;
 
   setPexels: TAction<PhotosWithTotalResults>;
@@ -151,6 +162,10 @@ export const LookFeelActions: ILookFeelActions = {
   }),
   setIsDynamicWallpaper: (payload) => ({
     type: SET_IS_DYNAMIC_WALLPAPER,
+    payload,
+  }),
+  setDynamicWallpaper: (payload) => ({
+    type: SET_DYNAMIC_WALLPAPER,
     payload,
   }),
   setTheme: (payload) => ({

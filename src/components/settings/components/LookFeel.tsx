@@ -90,6 +90,19 @@ export const LookFeel: FC<ILookFeel> = (props) => {
         />
       </Titlewrap>
 
+      {lookfeel.isDynamicWallpaper && (
+        <Titlewrap title='Select dynamic wallpaper'>
+          <Dropdown
+            selected={lookfeel.dynamicWallpaper}
+            options={[
+              { title: 'Flowy Clouds', value: 'clouds' },
+              { title: 'Beach Noon', value: 'beach' },
+            ]}
+            onChange={(dynWallpaper) => dispatch(setters.setDynamicWallpaper(dynWallpaper as 'beach' | 'clouds'))}
+          />
+        </Titlewrap>
+      )}
+
       {!lookfeel.isDynamicWallpaper && (
         <>
           <Titlewrap title='Current wallpaper' noOffset>

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { Beach, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
+import { Beach, Clouds, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
 import styled from 'styled-components';
 
 import { useAppSelector } from '../../hooks/hooks';
@@ -51,6 +51,7 @@ export const Background: FC<BackgroundProps> = (props) => {
 
   const wallpaper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
   const isDynamicWallpaper = useAppSelector((state) => state.settings.lookfeel.isDynamicWallpaper);
+  const dynamicWallpaper = useAppSelector((state) => state.settings.lookfeel.dynamicWallpaper);
 
   const {
     watchMouse,
@@ -70,7 +71,8 @@ export const Background: FC<BackgroundProps> = (props) => {
           // style={layerRotation}
           className='content'
         >
-          <Beach positionStyles={positionStyles} />
+          {dynamicWallpaper === 'beach' && <Beach positionStyles={positionStyles} />}
+          {dynamicWallpaper === 'clouds' && <Clouds positionStyles={positionStyles} />}
         </div>
       </DynamicWrapper>
     );
@@ -80,7 +82,7 @@ export const Background: FC<BackgroundProps> = (props) => {
 
   return (
     <BackgroundStyled>
-      <img className='background' src={wallpaper} alt='' />
+      <img className='background' src={wallpaper} alt='launch-tabs-background' />
     </BackgroundStyled>
   );
 };

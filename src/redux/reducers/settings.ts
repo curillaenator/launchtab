@@ -9,6 +9,7 @@ import type { TThunk } from '@src/types';
 export interface ISettings {
   lookfeel: {
     isDynamicWallpaper: boolean;
+    dynamicWallpaper: 'clouds' | 'beach';
     wallpaper: string | null;
     darkMode: boolean;
     themeName: TThemeName;
@@ -17,6 +18,7 @@ export interface ISettings {
 
 export const INITIAL_LOOKFEEL_STATE: ISettings['lookfeel'] = {
   isDynamicWallpaper: true,
+  dynamicWallpaper: 'clouds',
   wallpaper: null,
   darkMode: false,
   themeName: 'classicBlueTheme',

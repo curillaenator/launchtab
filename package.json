@@ -30,8 +30,10 @@
   },
   "dependencies": {
     "@launch-ui/button": "1.0.0",
+    "@launch-ui/config": "1.1.0",
     "@launch-ui/drawer": "1.0.2",
     "@launch-ui/dynamic-bg": "1.0.2",
+    "@launch-ui/modal": "1.0.0",
     "@launch-ui/select": "1.0.0",
     "@launch-ui/shape": "1.0.5",
     "@launch-ui/theme": "1.1.0",
@@ -97,15 +99,7 @@
   },
   "workspaces": {
     "packages": [
-      "kit/background",
-      "kit/drawer",
-      "kit/launchCfg",
-      "kit/shape",
-      "kit/theme",
-      "kit/utils",
-      "kit/select",
-      "kit/button",
-      "kit/typography"
+      "kit/*"
     ]
   },
   "packageManager": "yarn@3.2.0"

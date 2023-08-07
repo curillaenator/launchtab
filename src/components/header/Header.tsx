@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../hooks/hooks';
 
 import { SearchField } from './components/SearchField';
-import { BtnIcon } from '../buttons';
+import { BtnIcon } from '@launch-ui/button';
 
 const HeaderStyled = styled.header`
   --header-pd: 64px;

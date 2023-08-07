@@ -2239,6 +2239,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@launch-ui/modal@1.0.0, @launch-ui/modal@workspace:kit/modal":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/modal@workspace:kit/modal"
+  dependencies:
+    reactjs-popup: 2.0.5
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
+
 "@launch-ui/select@1.0.0, @launch-ui/select@workspace:kit/select":
   version: 0.0.0-use.local
   resolution: "@launch-ui/select@workspace:kit/select"
@@ -6305,6 +6316,7 @@ __metadata:
     "@launch-ui/config": 1.1.0
     "@launch-ui/drawer": 1.0.2
     "@launch-ui/dynamic-bg": 1.0.2
+    "@launch-ui/modal": 1.0.0
     "@launch-ui/select": 1.0.0
     "@launch-ui/shape": 1.0.5
     "@launch-ui/theme": 1.1.0

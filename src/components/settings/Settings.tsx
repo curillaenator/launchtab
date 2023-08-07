@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks';
 import { updateSettings } from '@src/redux/reducers/settings';
 import { logOut } from '@src/redux/reducers/auth';
 
-import { BtnCta, BtnGhost } from '@src/components/buttons';
+import { BtnCta, BtnGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';

@@ -1,6 +1,8 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC } from 'react';
 import Popup from 'reactjs-popup';
 import styled, { keyframes } from 'styled-components';
+
+import type { ModalProps } from './interfaces';
 
 const appear = keyframes`
   from {
@@ -30,13 +32,9 @@ const PopupStyled = styled(Popup)`
   }
 `;
 
-interface ModalProps extends PropsWithChildren {
-  trigger?: JSX.Element;
-  open?: boolean;
-  onClose?: () => void;
-}
+export const Modal: FC<ModalProps> = (props) => {
+  const { trigger, open, children, onClose } = props;
 
-export const Modal: FC<ModalProps> = ({ trigger, open, children, onClose }) => {
   return (
     <PopupStyled
       modal

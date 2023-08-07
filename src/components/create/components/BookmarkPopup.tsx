@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useCreateBookmark } from '../hooks/useCreateBookmark';
 
 import { TextInput } from '@src/components/inputs/TextInput';
-import { BtnCta, BtnGhost, BtnIcon } from '@src/components/buttons';
+import { BtnCta, BtnGhost, BtnIcon } from '@launch-ui/button';
 import { Accordion } from '@src/components/accordion/Accordion';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { Card } from '@src/components/card/Card';

@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
-import { Modal } from '../modal/Modal';
+import { Modal } from '@launch-ui/modal';
 import { Typography } from '@launch-ui/typography';
-import { BtnCta } from '../buttons';
+import { BtnCta } from '@launch-ui/button';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 

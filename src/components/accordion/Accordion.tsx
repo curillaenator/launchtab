@@ -1,7 +1,7 @@
 import React, { FC, useRef, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-import { BtnGhost } from '../buttons';
+import { BtnGhost } from '@launch-ui/button';
 
 interface IAccordionStyled {
   open: boolean;

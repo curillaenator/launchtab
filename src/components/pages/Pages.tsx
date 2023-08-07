@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import SortableList, { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch } from '@src/hooks/hooks';
 
-import { Button } from '../buttons';
-import { Create } from '../create';
-import { ContextMenu } from '../contextMenu/ContextMenu';
+import { Button } from '@launch-ui/button';
+import { Create } from '@src/components/create';
+import { ContextMenu } from '@src/components/contextMenu/ContextMenu';
 
-import { setCurPage, updatePagesOrder } from '../../redux/reducers/bookmarks';
+import { setCurPage, updatePagesOrder } from '@src/redux/reducers/bookmarks';
 
 import { getContextMenuItems } from './helpers';
 

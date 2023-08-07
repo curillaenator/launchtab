@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, FC, MouseEventHandler } from 'react
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-import { BtnGhost } from '../buttons';
+import { BtnGhost } from '@launch-ui/button';
 
 import { compose } from '../../helpers/helpers';
 

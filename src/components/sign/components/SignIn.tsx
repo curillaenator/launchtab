@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { useSignForm } from '../hooks/useSignForm';
 
-import { BtnCta, BtnGhost } from '../../buttons';
+import { BtnCta, BtnGhost } from '@launch-ui/button';
 import { TextInput } from '../../inputs/TextInput';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';

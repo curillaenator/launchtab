@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { TextInput } from '@src/components/inputs';
-import { BtnCta, BtnGhost } from '@src/components/buttons';
+import { BtnCta, BtnGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 

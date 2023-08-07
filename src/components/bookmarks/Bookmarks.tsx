@@ -3,16 +3,15 @@ import SortableList, { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 import styled from 'styled-components';
 
-import { ContextMenu } from '../contextMenu/ContextMenu';
-import { Create } from '../create';
-import { Card } from '../card/Card';
+import { ContextMenu, type IMenuItem } from '@launch-ui/context-menu';
+import { Create } from '@src/components/create';
+import { Card } from '@src/components/card/Card';
 
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch } from '@src/hooks/hooks';
 
-import { updateBookmarksOrder, deleteBookmark } from '../../redux/reducers/bookmarks';
+import { updateBookmarksOrder, deleteBookmark } from '@src/redux/reducers/bookmarks';
 
-import type { IBookmark } from '../../types/types';
-import type { IMenuItem } from '../contextMenu/ContextMenu';
+import type { IBookmark } from '@src/types/types';
 
 const SortableListStyled = styled(SortableList)`
   display: grid;
@@ -103,7 +102,7 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
         );
       })}
 
-      <Create create='new-bookmark' iconName='addBigIcon' />
+      <Create create='new-bookmark' />
     </SortableListStyled>
   );
 };

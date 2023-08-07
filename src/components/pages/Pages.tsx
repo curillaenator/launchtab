@@ -6,8 +6,8 @@ import { arrayMoveImmutable } from 'array-move';
 import { useAppDispatch } from '@src/hooks/hooks';
 
 import { Button } from '@launch-ui/button';
+import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
-import { ContextMenu } from '@src/components/contextMenu/ContextMenu';
 
 import { setCurPage, updatePagesOrder } from '@src/redux/reducers/bookmarks';
 

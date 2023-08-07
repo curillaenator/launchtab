@@ -1,9 +1,3 @@
-// запуск всех переданных в массиве функций
-
-export const compose = (funcs: (() => void)[]) => {
-  funcs.forEach((func) => func());
-};
-
 // Проверка линка с картинкой на работоспособсноть
 
 export interface CheckImageURL {

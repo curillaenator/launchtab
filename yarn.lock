@@ -2217,6 +2217,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@launch-ui/context-menu@1.0.0, @launch-ui/context-menu@workspace:kit/contextMenu":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/context-menu@workspace:kit/contextMenu"
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
+
 "@launch-ui/drawer@1.0.2, @launch-ui/drawer@workspace:kit/drawer":
   version: 0.0.0-use.local
   resolution: "@launch-ui/drawer@workspace:kit/drawer"
@@ -6314,6 +6323,7 @@ __metadata:
     "@babel/preset-typescript": 7.22.5
     "@launch-ui/button": 1.0.0
     "@launch-ui/config": 1.1.0
+    "@launch-ui/context-menu": 1.0.0
     "@launch-ui/drawer": 1.0.2
     "@launch-ui/dynamic-bg": 1.0.2
     "@launch-ui/modal": 1.0.0

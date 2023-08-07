@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect, FC, MouseEventHandler } from 'react';
+import React, { useState, useRef, useEffect, FC, type MouseEventHandler } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
-
 import { BtnGhost } from '@launch-ui/button';
-
-import { compose } from '../../helpers/helpers';
+import { compose } from './utils';
+import type { ContextMenuProps } from './interfaces';
 
 const fade = keyframes`${fadeIn}`;
 
@@ -15,7 +14,7 @@ const MenuStyled = styled.div`
   padding: 0 0.5rem;
   background-color: ${({ theme }) => theme.backgrounds.base};
   border-radius: 16px;
-  animation: ${fade} 0.08s;
+  animation: ${fade} 0.12s;
   z-index: 500;
   filter: drop-shadow(${({ theme }) => theme.shadows.card});
 
@@ -33,18 +32,7 @@ const MenuStyled = styled.div`
   }
 `;
 
-export interface IMenuItem {
-  title: string;
-  danger?: boolean;
-  handler: () => void;
-}
-
-interface Props {
-  items: IMenuItem[];
-  children: React.ReactElement;
-}
-
-export const ContextMenu: FC<Props> = ({ children, items }) => {
+export const ContextMenu: FC<ContextMenuProps> = ({ children, items }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const [location, setLocation] = useState({ x: 0, y: 0 });

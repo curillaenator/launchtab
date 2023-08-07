@@ -3,13 +3,15 @@ import { createClient, PhotosWithTotalResults } from 'pexels';
 import { AnyAction } from '@reduxjs/toolkit';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
+import { Select } from '@launch-ui/select';
 
-import { TextInput, Dropdown, Switch, Titlewrap } from '@src/components/inputs';
+import { TextInput, Switch, Titlewrap } from '@src/components/inputs';
 import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
 import { themeNames } from '@launch-ui/theme';
 
 import { PEXELS_INITIAL_STATE, type ILookFeelActions, type ISettingsFormState } from '../reducer';
+import { icons } from '@src/assets/icons';
 
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 // import { RES_MOCK } from './mock';
@@ -72,7 +74,8 @@ export const LookFeel: FC<ILookFeel> = (props) => {
   return (
     <LookFeelStyled>
       <Titlewrap title='Theme'>
-        <Dropdown
+        <Select
+          shevronIcon={icons.dropdownShevron}
           selected={lookfeel.themeName}
           options={themeOptions}
           onChange={(themeName) => dispatch(setters.setTheme(themeName))}
@@ -92,7 +95,8 @@ export const LookFeel: FC<ILookFeel> = (props) => {
 
       {lookfeel.isDynamicWallpaper && (
         <Titlewrap title='Select dynamic wallpaper'>
-          <Dropdown
+          <Select
+            shevronIcon={icons.dropdownShevron}
             selected={lookfeel.dynamicWallpaper}
             options={[
               { title: 'Flowy Clouds', value: 'clouds' },

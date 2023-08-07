@@ -29,10 +29,13 @@
     "url": "https://github.com/curillaenator/webpack-edu"
   },
   "dependencies": {
+    "@launch-ui/button": "1.0.0",
     "@launch-ui/drawer": "1.0.2",
     "@launch-ui/dynamic-bg": "1.0.2",
+    "@launch-ui/select": "1.0.0",
     "@launch-ui/shape": "1.0.5",
     "@launch-ui/theme": "1.1.0",
+    "@launch-ui/typography": "1.0.0",
     "@launch-ui/utils": "1.0.1",
     "@reduxjs/toolkit": "1.9.5",
     "array-move": "4.0.0",
@@ -99,7 +102,10 @@
       "kit/launchCfg",
       "kit/shape",
       "kit/theme",
-      "kit/utils"
+      "kit/utils",
+      "kit/select",
+      "kit/button",
+      "kit/typography"
     ]
   },
   "packageManager": "yarn@3.2.0"

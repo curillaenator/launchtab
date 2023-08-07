@@ -2197,6 +2197,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@launch-ui/button@1.0.0, @launch-ui/button@workspace:kit/button":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/button@workspace:kit/button"
+  dependencies:
+    "@launch-ui/typography": 1.0.0
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
+
 "@launch-ui/config@1.1.0, @launch-ui/config@workspace:kit/launchCfg":
   version: 0.0.0-use.local
   resolution: "@launch-ui/config@workspace:kit/launchCfg"
@@ -2228,6 +2239,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@launch-ui/select@1.0.0, @launch-ui/select@workspace:kit/select":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/select@workspace:kit/select"
+  dependencies:
+    "@launch-ui/typography": 1.0.0
+    "@launch-ui/utils": 1.0.1
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
+
 "@launch-ui/shape@1.0.5, @launch-ui/shape@workspace:kit/shape":
   version: 0.0.0-use.local
   resolution: "@launch-ui/shape@workspace:kit/shape"
@@ -2242,6 +2265,15 @@ __metadata:
   resolution: "@launch-ui/theme@workspace:kit/theme"
   peerDependencies:
     react: "*"
+  languageName: unknown
+  linkType: soft
+
+"@launch-ui/typography@1.0.0, @launch-ui/typography@workspace:kit/typography":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/typography@workspace:kit/typography"
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
   languageName: unknown
   linkType: soft
 
@@ -6269,11 +6301,14 @@ __metadata:
     "@babel/preset-env": 7.22.5
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
+    "@launch-ui/button": 1.0.0
     "@launch-ui/config": 1.1.0
     "@launch-ui/drawer": 1.0.2
     "@launch-ui/dynamic-bg": 1.0.2
+    "@launch-ui/select": 1.0.0
     "@launch-ui/shape": 1.0.5
     "@launch-ui/theme": 1.1.0
+    "@launch-ui/typography": 1.0.0
     "@launch-ui/utils": 1.0.1
     "@reduxjs/toolkit": 1.9.5
     "@types/lodash.isequal": 4.5.6

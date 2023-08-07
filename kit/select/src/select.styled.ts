@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import type { SelectStyledProps } from './interfaces';
 
-interface IDropdownStyled {
-  open: boolean;
-  bodyHeight: number;
-}
-
-export const DropdownStyled = styled.div<IDropdownStyled>`
+export const SelectStyled = styled.div<SelectStyledProps>`
   cursor: pointer;
   width: fit-content;
   position: relative;

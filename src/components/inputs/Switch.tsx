@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { Shape } from '@launch-ui/shape';
-import { Typography } from '../typography';
+import { Typography } from '@launch-ui/typography';
 
 interface ISwitchStyled {
   active: boolean;

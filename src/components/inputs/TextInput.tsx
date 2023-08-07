@@ -2,7 +2,7 @@ import React, { FC, useState, useRef, useCallback, type ChangeEvent, type HTMLAt
 import styled from 'styled-components';
 
 import { BtnGhost } from '../buttons';
-import { Typography } from '../typography';
+import { Typography } from '@launch-ui/typography';
 
 import { inputIcons, InputIconsType } from './assets/inputIcons';
 

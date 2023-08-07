@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 
-import { Typography, ITypographyTypes } from '../typography';
+import { Typography, type ITypographyTypes } from '@launch-ui/typography';
 
 const TitlewrapStyled = styled.div`
   width: 100%;

@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from '../modal/Modal';
-import { Typography } from '../typography/Typography';
+import { Typography } from '@launch-ui/typography';
 import { BtnCta } from '../buttons';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';

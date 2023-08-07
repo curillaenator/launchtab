@@ -2,10 +2,10 @@ import React, { FC, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
-import { useAppSelector } from '@src/hooks/hooks';
-import { Typography } from '@src/components/typography';
+import { Typography } from '@launch-ui/typography';
 import { Corners } from '@launch-ui/shape';
 
+import { useAppSelector } from '@src/hooks/hooks';
 import { CardImage } from './CardImage';
 
 import type { IBookmark } from '@src/types';

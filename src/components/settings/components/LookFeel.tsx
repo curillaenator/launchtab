@@ -118,7 +118,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               iconName='link'
               type='url'
               name='background'
-              placeholder='Type in any tag (example "nature")'
+              placeholder='Type any tag (example "nature")'
               value={pexels.pexelsQuery}
               onChange={(query) => dispatch(setters.setPixelsQuery(query))}
             />

@@ -9,7 +9,7 @@ import { Accordion } from '@src/components/accordion/Accordion';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { Card } from '@src/components/card/Card';
 import { Shape } from '@launch-ui/shape';
-import { Typography } from '@src/components/typography';
+import { Typography } from '@launch-ui/typography';
 
 import { checkImageURL } from '@src/helpers/helpers';
 

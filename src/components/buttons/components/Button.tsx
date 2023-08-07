@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Corners } from '@launch-ui/shape';
-import { Typography } from '@src/components/typography/Typography';
+import { Typography } from '@launch-ui/typography';
 
 import { ButtonStyled } from './button.styled';
 import type { BaseButtonProps } from './interfaces';

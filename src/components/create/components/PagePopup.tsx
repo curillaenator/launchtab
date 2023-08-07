@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { TextInput } from '@src/components/inputs';
 import { BtnCta, BtnGhost } from '@src/components/buttons';
-import { Typography } from '@src/components/typography/Typography';
+import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
 const PagePopupStyled = styled.div`

@@ -4,7 +4,7 @@ import { useSignForm } from '../hooks/useSignForm';
 
 import { BtnCta, BtnGhost } from '../../buttons';
 import { TextInput } from '../../inputs/TextInput';
-import { Typography } from '../../typography';
+import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
 import { FormStyled } from './styles';

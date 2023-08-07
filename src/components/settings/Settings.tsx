@@ -8,7 +8,7 @@ import { updateSettings } from '@src/redux/reducers/settings';
 import { logOut } from '@src/redux/reducers/auth';
 
 import { BtnCta, BtnGhost } from '@src/components/buttons';
-import { Typography } from '@src/components/typography';
+import { Typography } from '@launch-ui/typography';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';
 

@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
-import { Typography } from '../../typography/Typography';
+import { Typography } from '@launch-ui/typography';
 
 import { icons } from '../assets/icons';
 import type { IBtnGhost } from './interfaces';

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { Typography } from '../../typography/Typography';
+import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
 import { icons } from './../assets/icons';

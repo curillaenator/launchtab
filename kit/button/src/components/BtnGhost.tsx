@@ -109,6 +109,7 @@ export const BtnGhost = forwardRef<HTMLButtonElement, IBtnGhost>((props, ref) =>
     type = 'button',
     colorPreset = 'primary-colors',
     className = 'ghost-button',
+    style,
     handler,
   } = props;
 
@@ -120,6 +121,7 @@ export const BtnGhost = forwardRef<HTMLButtonElement, IBtnGhost>((props, ref) =>
       disabled={disabled}
       danger={danger}
       type={type}
+      style={style}
       onClick={handler}
     >
       {!!leftIcon && icons[leftIcon]}

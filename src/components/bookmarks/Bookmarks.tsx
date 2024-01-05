@@ -3,7 +3,7 @@ import SortableList, { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 import styled from 'styled-components';
 
-import { ContextMenu, type IMenuItem } from '@launch-ui/context-menu';
+import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 import { Card } from '@src/components/card/Card';
 
@@ -66,41 +66,25 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
     dispatch(updateBookmarksOrder(updBookmarks));
   };
 
-  const getMenuItems = (bm: IBookmark): IMenuItem[] => {
-    const contextMenuItems: IMenuItem[] = [
-      {
-        title: 'Edit',
-        handler: () => {},
-      },
-      {
-        title: 'Delete',
-        danger: true,
-        handler: () =>
-          dispatch(
-            deleteBookmark(
-              bm.name,
-              //  bm.id
-            ),
-          ),
-      },
-    ];
-
-    return contextMenuItems;
-  };
-
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      {bookmarks.map((bookmark, i) => {
-        return (
-          <SortableItem key={`${curPage}${i}`}>
-            <HoverWrapper>
-              <ContextMenu items={getMenuItems(bookmark)}>
-                <Card bookmark={bookmark} />
-              </ContextMenu>
-            </HoverWrapper>
-          </SortableItem>
-        );
-      })}
+      {bookmarks.map((bookmark, i) => (
+        <SortableItem key={`${curPage}${i}`}>
+          <HoverWrapper>
+            <ContextMenu
+              items={[
+                {
+                  title: 'Delete',
+                  danger: true,
+                  handler: () => dispatch(deleteBookmark(bookmark.name)),
+                },
+              ]}
+            >
+              <Card bookmark={bookmark} />
+            </ContextMenu>
+          </HoverWrapper>
+        </SortableItem>
+      ))}
 
       <Create create='new-bookmark' />
     </SortableListStyled>

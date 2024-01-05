@@ -5,6 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 import { Select } from '@launch-ui/select';
 
+import { BtnGhost } from '@launch-ui/button';
 import { TextInput, Switch, Titlewrap } from '@src/components/inputs';
 import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
@@ -109,9 +110,11 @@ export const LookFeel: FC<ILookFeel> = (props) => {
 
       {!lookfeel.isDynamicWallpaper && (
         <>
-          <Titlewrap title='Current wallpaper' noOffset>
-            <ImagePreview alt='launchtabs-wallpaper' src={lookfeel.wallpaper} />
-          </Titlewrap>
+          {lookfeel.wallpaper && (
+            <Titlewrap title='Current wallpaper' noOffset>
+              <ImagePreview alt='launchtabs-wallpaper' src={lookfeel.wallpaper} />
+            </Titlewrap>
+          )}
 
           <Titlewrap title='Search wallpaper'>
             <TextInput
@@ -135,6 +138,12 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               clickable
             />
           ))}
+
+          <BtnGhost
+            title='Clear wallpaper'
+            style={{ width: 'fit-content' }}
+            handler={() => dispatch(setters.setWallpaper(''))}
+          />
         </>
       )}
     </LookFeelStyled>

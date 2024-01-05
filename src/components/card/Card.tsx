@@ -22,7 +22,7 @@ interface ICardStyled {
 const CardStyled = styled.a<ICardStyled>`
   --card-animation-time: 150ms;
   --card-animation-method: ease-in-out;
-  --card-bdrs: calc((18px * 1.25) + 3px);
+  --card-bdrs: 30px;
 
   --shp-bgc: transparent;
   --shp-bdc: ${({ theme }) => theme.backgrounds.base};
@@ -102,7 +102,7 @@ export const Card: FC<CardProps> = (props) => {
       onClick={() => setNoAnimation(true)}
       data-card='true'
     >
-      <Corners borderRadius={20} stroke={4} />
+      <Corners borderRadius={24} stroke={4} />
 
       <CardImage {...bookmark} />
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface CreateContainerStyledProps {
   isCreateBookmark: boolean;
@@ -6,11 +6,11 @@ interface CreateContainerStyledProps {
 }
 
 export const CreateContainerStyled = styled.div<CreateContainerStyledProps>`
-  --shp-bgc: ${({ theme, isCreateBookmark }) => (isCreateBookmark ? 'transparent' : theme.backgrounds.base)};
+  --shp-bgc: ${({ theme, isCreateBookmark }) => (isCreateBookmark ? theme.backgrounds.base20 : theme.backgrounds.base)};
   --shp-bdc: ${({ theme }) => theme.backgrounds.base};
   --icon-light: ${({ theme, isCreateBookmark }) => (isCreateBookmark ? theme.backgrounds.base : theme.texts.base)};
 
-  border-radius: calc(20px * 1.25 + 3px);
+  border-radius: calc(${({ isCreateBookmark }) => (isCreateBookmark ? 24 : 18)}px * 1.25 + 3px);
   position: relative;
   display: flex;
   align-items: center;
@@ -24,8 +24,16 @@ export const CreateContainerStyled = styled.div<CreateContainerStyledProps>`
   cursor: pointer;
   /* pointer-events: none; */
 
+  ${({ isCreateBookmark }) =>
+    isCreateBookmark &&
+    css({
+      'svg[data-svg-corner]': {
+        '--shp-bgc': 'transparent',
+      },
+    })}
+
   &:hover {
-    /* --shp-bdc: ${({ theme }) => theme.primary[500]}; */
+    --shp-bdc: ${({ theme }) => theme.primary[500]};
     --icon-light: ${({ theme }) => theme.primary[500]};
   }
 

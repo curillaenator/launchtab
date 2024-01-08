@@ -14,7 +14,7 @@ export const ButtonStyled = styled.button<BaseButtonProps>`
   height: 3.5rem;
   padding: 0 32px;
   background-color: var(--shp-bgc);
-  border-radius: calc(22px * 1.25 + 3px);
+  border-radius: calc(18px * 1.25 + 3px);
 
   filter: ${({ active }) => (active ? 'contrast(1.3)' : 'contrast(1)')}
     drop-shadow(

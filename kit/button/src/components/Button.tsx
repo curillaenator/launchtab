@@ -10,7 +10,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref
 
   return (
     <ButtonStyled {...rest} ref={ref} isColorsStatic={isColorsStatic}>
-      <Corners borderRadius={20} />
+      <Corners borderRadius={18} />
 
       {IconLeft && <IconLeft />}
 

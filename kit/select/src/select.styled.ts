@@ -15,7 +15,7 @@ export const SelectStyled = styled.div<SelectStyledProps>`
     height: 56px;
     padding: 0 1.5rem;
     border-radius: 1rem;
-    border: 1px solid ${({ theme }) => theme.backgrounds.light};
+    border: 2px solid ${({ theme }) => theme.backgrounds.light};
     background-color: ${({ theme }) => theme.backgrounds.base};
     z-index: 100;
 

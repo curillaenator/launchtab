@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { Shape } from '@launch-ui/shape';
+import { Shape, Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
 interface ISwitchStyled {
@@ -15,10 +15,12 @@ const SwitchStyled = styled.button<ISwitchStyled>`
   background-color: transparent;
   z-index: 100;
 
-  .switch-shape {
-    fill: ${({ theme }) => theme.backgrounds.base};
-    stroke-width: 1px;
-    stroke: ${({ theme }) => theme.backgrounds.light};
+  box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.light};
+  border-radius: calc(14px * 1.25 + 3px);
+
+  svg[data-svg-corner='true'] {
+    --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+    --shp-bdc: ${({ theme }) => theme.backgrounds.light};
   }
 
   .switch-toggler {
@@ -34,7 +36,7 @@ const SwitchStyled = styled.button<ISwitchStyled>`
     height: 40px;
     z-index: 50;
     background-color: transparent;
-    border-radius: 20px;
+    border-radius: calc(14px * 1.25 + 3px);
     transition: 0.12s ease-in-out;
     transform: ${({ active }) => (active ? 'translateX(100%)' : 'translateX(0)')};
     filter: drop-shadow(${({ theme, active }) => (active ? theme.shadows.primary : 'none')});
@@ -70,10 +72,10 @@ export interface ITextInput {
 export const Switch: FC<ITextInput> = ({ value, onChange }) => {
   return (
     <SwitchStyled active={value} type='button' onClick={() => onChange(!value)}>
-      <Shape className='switch-shape' borderRadius={16} />
+      <Corners borderRadius={14} stroke={2} />
 
       <div className='switch-toggler'>
-        <Shape className='switch-toggler-shape' borderRadius={16} />
+        <Shape className='switch-toggler-shape' borderRadius={20} />
 
         <Typography type='RoundedBold14' className='switch-toggler-title'>
           {value ? 'On' : 'Off'}

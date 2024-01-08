@@ -12,7 +12,7 @@ const Component: FC<CornerProps> = (props) => {
   return (
     <CornersContainerStyled>
       {corners.map((corner) => (
-        <svg {...commonSvgProps} key={corner} className={`corner-${corner}`}>
+        <svg {...commonSvgProps} data-svg-corner='true' key={corner} className={`corner-${corner}`}>
           <path d={path} fill='var(--shp-bgc, blue)' />
           <path d={borderPath} strokeWidth={stroke} stroke='var(--shp-bdc, red)' fill='none' />
         </svg>

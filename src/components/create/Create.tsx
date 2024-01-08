@@ -51,7 +51,8 @@ export const Create: FC<ICreate> = ({ create }) => {
       position={['left center', 'right center']}
       trigger={(open) => (
         <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
-          <Corners borderRadius={20} stroke={2} />
+          <Corners borderRadius={create === 'new-bookmark' ? 24 : 18} stroke={create === 'new-bookmark' ? 4 : 0} />
+
           <button>{icons.plus}</button>
         </CreateContainerStyled>
       )}

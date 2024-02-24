@@ -55,6 +55,30 @@ const iconsCss = {
       }
     }
   `,
+
+  menu: css<IBtnStyled>`
+    .menu-icon {
+      &-light {
+        fill: ${({ theme }) => theme.white};
+      }
+
+      &-dark {
+        fill: ${({ theme }) => theme.white};
+      }
+    }
+
+    &:hover {
+      .menu-icon {
+        &-light {
+          fill: ${({ theme }) => theme.primary[500]};
+        }
+
+        &-dark {
+          fill: ${({ theme }) => theme.primary[500]};
+        }
+      }
+    }
+  `,
 };
 
 const BtnStyled = styled.button<IBtnStyled>`
@@ -67,6 +91,7 @@ const BtnStyled = styled.button<IBtnStyled>`
 
   ${iconsCss.settings}
   ${iconsCss.addIcon}
+  ${iconsCss.menu}
 
   .defaultIcon {
     &-light {

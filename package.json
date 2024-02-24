@@ -12,7 +12,8 @@
     "webpack",
     "bookmarks",
     "tabs",
-    "launch"
+    "launch",
+    "firebase"
   ],
   "scripts": {
     "start": "webpack serve --open",

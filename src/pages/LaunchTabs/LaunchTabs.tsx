@@ -10,15 +10,14 @@ import { getCurBookmarks } from '@src/redux/reducers/bookmarks';
 import { useDataQuery } from './useDataQuery';
 
 const LaunchTabsStyled = styled.main`
-  --app-pd: 64px;
+  --app-pd: 56px;
 
   width: 100%;
-  height: 100%;
   padding: var(--app-pd);
 
-  @media (min-width: 1920px) {
+  /* @media (min-width: 1920px) {
     --app-pd: 96px;
-  }
+  } */
 `;
 
 export const LaunchTabs: FC = () => {

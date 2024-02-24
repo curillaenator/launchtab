@@ -1,55 +1,37 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-
-import { useAppSelector } from '../../hooks/hooks';
-
-import { SearchField } from './components/SearchField';
 import { BtnIcon } from '@launch-ui/button';
 
+import { useAppSelector } from '@src/hooks/hooks';
+
+import { LayoutCTX } from '@src/layout';
+
+import { SearchField } from './components/SearchField';
+
 const HeaderStyled = styled.header`
-  --header-pd: 64px;
-
+  display: flex;
+  position: sticky;
+  top: 0;
   width: 100%;
-  padding: var(--header-pd);
-
-  @media (min-width: 1920px) {
-    --header-pd: 96px;
-  }
-
-  /* .logo {
-    position: absolute;
-    top: var(--header-pd);
-    left: var(--header-pd);
-    width: 56px;
-    height: 56px;
-    object-fit: cover;
-  } */
-
-  .header-button {
-    position: absolute;
-    top: var(--header-pd);
-    right: var(--header-pd);
-  }
+  padding: 56px 56px 96px;
 `;
 
-interface HeaderProps {
-  isAnon: boolean;
-  setSettingsModal: () => void;
-}
+export const Header: FC = () => {
+  const { setIsAsideOpen, setIsRightDrawerOpen } = useContext(LayoutCTX);
 
-export const Header: FC<HeaderProps> = (props) => {
-  const { isAnon, setSettingsModal } = props;
-
-  const isDataSyncing = useAppSelector((state) => state.loadings.isDataSyncing);
+  const { user } = useAppSelector((state) => state.auth);
+  const { isDataSyncing } = useAppSelector((state) => state.loadings);
 
   return (
     <HeaderStyled>
+      {!user?.isAnonymous && (
+        <BtnIcon iconName='menu' handler={() => setIsAsideOpen((prev) => !prev)} isLoading={isDataSyncing} />
+      )}
+
       <SearchField />
 
-      {!isAnon && (
-        <div className='header-button'>
-          <BtnIcon iconName='settings' handler={setSettingsModal} isLoading={isDataSyncing} />
-        </div>
+      {!user?.isAnonymous && (
+        <BtnIcon iconName='settings' handler={() => setIsRightDrawerOpen(true)} isLoading={isDataSyncing} />
       )}
     </HeaderStyled>
   );

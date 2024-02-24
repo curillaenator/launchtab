@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "rootDir": ".",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,12 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "baseUrl": "./",
     "disableSizeLimit": true,
     "paths": {
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src", "kit", "src/styled.d.ts", "src/declaration.d.ts"]
+  "include": ["src", "kit", "src/declaration.d.ts"]
 }

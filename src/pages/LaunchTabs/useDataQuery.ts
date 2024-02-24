@@ -19,7 +19,6 @@ export const useDataQuery = () => {
   const dispatch = useAppDispatch();
 
   const UID = user?.uid;
-  const isUserAnon = user?.isAnonymous;
 
   useEffect(() => {
     const localBookmarks = localStorage.getItem('bookmarks');
@@ -77,15 +76,4 @@ export const useDataQuery = () => {
       }
     });
   }, [UID, loadings.isDataLoading, dispatch]);
-
-  return {
-    isUserAuthed: !!UID,
-    isUserAnon,
-  };
 };
-
-// clear localStorage if settings & bookmarks EXIST, but user is UNATHORIZED
-
-// if (!isUserAuthed && ('bookmarks' in localStorage || 'settings' in localStorage)) {
-//   localStorageApi.clear();
-// }

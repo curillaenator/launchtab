@@ -66,7 +66,7 @@ export const Background: FC<BackgroundProps> = (props) => {
 
   if (isDynamicWallpaper) {
     return (
-      <DynamicWrapper>
+      <DynamicWrapper data-description='background-container'>
         <div
           // style={layerRotation}
           className='content'
@@ -78,10 +78,10 @@ export const Background: FC<BackgroundProps> = (props) => {
     );
   }
 
-  if (!wallpaper) return <BackgroundStyled />;
+  if (!wallpaper) return <BackgroundStyled data-description='background-container' />;
 
   return (
-    <BackgroundStyled>
+    <BackgroundStyled data-description='background-container'>
       <img className='background' src={wallpaper} alt='launch-tabs-background' />
     </BackgroundStyled>
   );

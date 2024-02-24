@@ -34,21 +34,16 @@ const PopupStyled = styled(Popup)`
   }
 `;
 
-interface ICreate {
-  create: 'new-page' | 'new-bookmark';
-}
-
-export const Create: FC<ICreate> = ({ create }) => {
+export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => {
   const [states, handlers, handleCreate, resetStates] = useCreateForm(create);
 
   return (
     <PopupStyled
-      offsetY={create === 'new-bookmark' ? 128 : 74}
-      offsetX={create === 'new-bookmark' ? -64 : 32}
+      offsetX={16}
       arrow={false}
       onClose={() => resetStates()}
-      keepTooltipInside='.launch-app-container'
-      position={['left center', 'right center']}
+      keepTooltipInside='.layout-container'
+      position={['right center', 'left center']}
       trigger={(open) => (
         <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
           <Corners borderRadius={create === 'new-bookmark' ? 24 : 18} stroke={create === 'new-bookmark' ? 4 : 0} />

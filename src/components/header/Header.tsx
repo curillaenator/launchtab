@@ -14,7 +14,7 @@ const HeaderStyled = styled.header<{ shadowed: boolean }>`
   position: sticky;
   top: 0;
   width: 100%;
-  padding: 56px 56px 96px;
+  padding: 56px 56px 0;
   filter: drop-shadow(0 0 8px ${({ theme, shadowed }) => (shadowed ? theme.primary[500] : 'transparent')});
   transition: filter 300ms ease;
 `;
@@ -28,7 +28,7 @@ export const Header: FC = () => {
   const [shadowed, setShadowed] = useState<boolean>(false);
 
   const hanleShadowed = useCallback(() => {
-    setShadowed(window.scrollY > 56 * 3);
+    setShadowed(window.scrollY > 56 * 2);
   }, []);
 
   useEffect(() => {

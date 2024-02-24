@@ -5,19 +5,18 @@ import { useCreateBookmark } from '../hooks/useCreateBookmark';
 
 import { TextInput } from '@src/components/inputs/TextInput';
 import { BtnCta, BtnGhost, BtnIcon } from '@launch-ui/button';
-import { Accordion } from '@src/components/accordion/Accordion';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { Card } from '@src/components/card/Card';
 import { Shape } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import { checkImageURL } from '@src/helpers/helpers';
-
 import type { States, Handlers } from '../hooks/useCreateForm';
+
+const ICONS_IN_A_ROW = 4;
 
 const BookmarkPopupStyled = styled.div`
   position: relative;
-  width: 458px;
+  width: calc(80px * ${ICONS_IN_A_ROW} + 8px * (${ICONS_IN_A_ROW} - 1) + 2 * 32px + 16px);
   padding: 32px;
   border-radius: 20px;
   background-color: transparent;
@@ -48,38 +47,25 @@ const BookmarkPopupStyled = styled.div`
   .popup-inputs {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    gap: 8px;
+    margin-bottom: 24px;
   }
 
   .popup-icons {
     width: 100%;
-    margin-bottom: 2rem;
-
-    &-title {
-      width: 100%;
-      text-align: center;
-      color: ${({ theme }) => theme.texts.base};
-      user-select: none;
-      margin-bottom: 1rem;
-    }
-
-    &-loader {
-      width: 100%;
-      height: 80px;
-    }
+    margin-bottom: 24px;
 
     &-array {
-      width: 100%;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
+      grid-template-columns: repeat(${ICONS_IN_A_ROW}, 1fr);
+      width: 100%;
+      gap: 8px;
     }
   }
 
   .popup-preview {
-    padding: 0 35px;
-    margin-bottom: 2rem;
+    padding: 0 32px;
+    margin-bottom: 24px;
   }
 
   .popup-buttons {
@@ -97,8 +83,10 @@ interface IBookmarkPopup {
   close: () => void;
 }
 
-export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCreate, close }) => {
-  const { iconsWithGoodLinks, isFetchedIconsOpen, setIsFetchedIconsOpen, fetchIcons } = useCreateBookmark(values.name);
+export const BookmarkPopup: FC<IBookmarkPopup> = (props) => {
+  const { values, handlers, handleCreate, close } = props;
+
+  const { iconsWithGoodLinks, fetchIcons } = useCreateBookmark(values.name);
 
   const bookmark = {
     name: values.name || 'Title',
@@ -107,27 +95,13 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
     iconURL: values.iconURL,
   };
 
-  const handleIconsSelect = (iconURL: string) => {
-    handlers.handleIconURL(iconURL);
-    handlers.handleImageURL('');
-  };
-
-  const handleImagePasteURL = (imageURL: string) => {
-    checkImageURL(imageURL).then((response) => {
-      handlers.handleImageURL(imageURL);
-      handlers.handleIconURL('');
-
-      if (response.ok) return handlers.handleImageURLerror(false);
-      if (!response.ok) return handlers.handleImageURLerror(true);
-    });
-  };
-
   return (
     <BookmarkPopupStyled>
       <Shape borderRadius={24} className='popup-shape' />
 
       <div className='popup-title'>
         <Typography type='RoundedHeavy24'>New</Typography>
+
         <Typography type='RoundedHeavy24' className='popup-title-themed'>
           bookmark
         </Typography>
@@ -153,34 +127,23 @@ export const BookmarkPopup: FC<IBookmarkPopup> = ({ values, handlers, handleCrea
           onChange={handlers.handleLink}
           placeholder='Site link'
         />
-
-        <TextInput
-          type='url'
-          iconName='image'
-          name='new-image'
-          value={values.imageURL}
-          onChange={handleImagePasteURL}
-          placeholder='Paste here image link'
-          // error={values.imageURLerror}
-        />
       </div>
 
-      <div className='popup-icons'>
-        <Accordion
-          title={isFetchedIconsOpen ? 'hide icons' : '...or select from icons'}
-          disabled={iconsWithGoodLinks.length === 0}
-          open={isFetchedIconsOpen}
-          openHandler={() => setIsFetchedIconsOpen((open) => !open)}
-        >
+      {!!iconsWithGoodLinks.length && (
+        <div className='popup-icons'>
           <Scrollbars height='172px'>
             <div className='popup-icons-array'>
-              {iconsWithGoodLinks.map((icon) => {
-                return <BtnIcon key={icon.url} imageURL={icon.url} imageHandler={handleIconsSelect} />;
-              })}
+              {iconsWithGoodLinks.map((icon) => (
+                <BtnIcon
+                  key={icon.url}
+                  imageURL={icon.url}
+                  imageHandler={(iconURL: string) => handlers.handleIconURL(iconURL)}
+                />
+              ))}
             </div>
           </Scrollbars>
-        </Accordion>
-      </div>
+        </div>
+      )}
 
       <div className='popup-preview'>
         <Card bookmark={bookmark} as='div' hasBorder />

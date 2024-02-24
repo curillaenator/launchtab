@@ -49,7 +49,9 @@ const CardImageStyled = styled.div`
 `;
 
 export const CardImage: FC<IBookmark> = ({ name, link, imageURL, iconURL }) => {
-  const generatedSitePreview = `https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/640/crop/1200/viewportWidth/1520/noanimate/maxAge/48/https://${link}`;
+  const previewLink = link.match(/^https?:\/\//) ? link : `https://${link}`;
+
+  const generatedSitePreview = `https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/640/crop/1200/viewportWidth/1520/noanimate/maxAge/48/${previewLink}`;
   const isInBookmarkIcons = link in pagesIcons;
 
   if (iconURL)

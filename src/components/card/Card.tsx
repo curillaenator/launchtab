@@ -54,6 +54,8 @@ const CardStyled = styled.a<ICardStyled>`
     color: ${({ theme }) => theme.texts.base};
     border-radius: 0 0 20px 20px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &:hover {
@@ -106,7 +108,7 @@ export const Card: FC<CardProps> = (props) => {
 
       <CardImage {...bookmark} />
 
-      <Typography type='RoundedBold14' className='card-title'>
+      <Typography as='span' type='RoundedBold14' className='card-title'>
         {bookmark.name}
       </Typography>
     </CardStyled>

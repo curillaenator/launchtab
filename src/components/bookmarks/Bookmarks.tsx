@@ -18,31 +18,31 @@ const SortableListStyled = styled(SortableList)`
   grid-template-columns: 1fr;
   gap: 1rem;
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (min-width: 1152px) {
+  @media (min-width: 1153px) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: 1441px) {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  @media (min-width: 1680px) {
+  @media (min-width: 1681px) {
     grid-template-columns: repeat(6, 1fr);
   }
 
-  @media (min-width: 1920px) {
+  @media (min-width: 1921px) {
     grid-template-columns: repeat(7, 1fr);
   }
 
-  @media (min-width: 2560px) {
+  @media (min-width: 2561px) {
     grid-template-columns: repeat(8, 1fr);
   }
 `;

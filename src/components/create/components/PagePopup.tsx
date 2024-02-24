@@ -7,7 +7,7 @@ import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
 const PagePopupStyled = styled.div`
-  width: 340px;
+  width: 336px;
   border-radius: 20px;
   background-color: transparent;
 

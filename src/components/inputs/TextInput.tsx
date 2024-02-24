@@ -209,17 +209,19 @@ export const TextInput: FC<ITextInput> = ({
         )}
       </div>
 
-      <div className='subinput'>
-        <Typography type='TextRegular11' className='subinput-text'>
-          {description || ''}
-        </Typography>
-
-        {limitSymbols && (
+      {(description || limitSymbols) && (
+        <div className='subinput'>
           <Typography type='TextRegular11' className='subinput-text'>
-            {`${value.length}/${limitSymbols}`}
+            {description || ''}
           </Typography>
-        )}
-      </div>
+
+          {limitSymbols && (
+            <Typography type='TextRegular11' className='subinput-text'>
+              {`${value.length}/${limitSymbols}`}
+            </Typography>
+          )}
+        </div>
+      )}
     </FieldStyled>
   );
 };

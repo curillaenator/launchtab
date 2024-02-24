@@ -8,14 +8,11 @@ interface IconsResponse {
 }
 
 export const useCreateBookmark = (title: string) => {
-  const [isFetchedIconsOpen, setIsFetchedIconsOpen] = useState<boolean>(false);
   const [iconsResponse, setIconsResponce] = useState<IconsResponse[]>([]);
-
   const [icons, setIcons] = useState<CheckImageURL[]>([]);
 
   const fetchIcons = useCallback(() => {
     if (!title.trim()) {
-      setIsFetchedIconsOpen(false);
       setIcons([]);
       return;
     }
@@ -37,22 +34,12 @@ export const useCreateBookmark = (title: string) => {
 
     Promise.all(urlsCheck).then((res) => {
       const goodLinks = res.length ? res.filter((resItem) => resItem.ok) : [];
-
-      if (!goodLinks.length) {
-        setIcons([]);
-        setIsFetchedIconsOpen(false);
-        return;
-      }
-
-      setIcons(goodLinks);
-      setIsFetchedIconsOpen(true);
+      setIcons(!!goodLinks.length ? goodLinks : []);
     });
   }, [iconsResponse]);
 
   return {
     iconsWithGoodLinks: icons,
-    isFetchedIconsOpen,
-    setIsFetchedIconsOpen,
     fetchIcons,
   };
 };

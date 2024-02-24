@@ -1,65 +1,48 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { createPage, createBookmark } from '../../../redux/reducers/bookmarks';
 
 export interface States {
   name: string;
   link: string;
-  imageURL: string;
-  imageURLerror: boolean;
+  imageURL?: string;
   iconURL: string;
 }
 
 export type Handlers = {
   handleName: (nameString: string) => void;
   handleLink: (linkString: string) => void;
-  handleImageURL: (urlString: string) => void;
-  handleImageURLerror: (error: boolean) => void;
   handleIconURL: (urlString: string) => void;
 };
+
+const formReducer = (prev: States, action: { key: keyof States; payload: string }) => ({
+  ...prev,
+  [action.key]: action.payload,
+});
 
 export const useCreateForm = (
   create: 'new-page' | 'new-bookmark',
 ): [States, Handlers, (close: () => void) => void, () => void] => {
   const dispatch = useAppDispatch();
 
-  const [name, setName] = useState('');
-
-  const [link, setLink] = useState('');
-
-  const [imageURL, setImageURL] = useState('');
-  const [imageURLerror, setImageURLerror] = useState(false);
-
-  const [iconURL, setIconURL] = useState('');
+  const [formState, dispatchForm] = useReducer(formReducer, { name: '', link: '', iconURL: '' });
+  const { name, link, iconURL } = formState;
 
   const resetFormState = () => {
-    setName('');
-    setLink('');
-    setImageURL('');
-    setImageURLerror(false);
-    setIconURL('');
-  };
-
-  const states: States = {
-    name,
-    link,
-    imageURL,
-    imageURLerror,
-    iconURL,
+    dispatchForm({ key: 'name', payload: '' });
+    dispatchForm({ key: 'link', payload: '' });
+    dispatchForm({ key: 'iconURL', payload: '' });
   };
 
   const handlers: Handlers = {
-    handleName: (string) => setName(string),
-    handleLink: (string) => setLink(string),
-    handleImageURL: (urlString) => setImageURL(urlString),
-    handleImageURLerror: (error) => setImageURLerror(error),
-    handleIconURL: (urlString) => setIconURL(urlString),
+    handleName: (string) => dispatchForm({ key: 'name', payload: string }),
+    handleLink: (string) => dispatchForm({ key: 'link', payload: string }),
+    handleIconURL: (string) => dispatchForm({ key: 'iconURL', payload: string }),
   };
 
   const handleCreate = (close: () => void) => {
     const submitName = name.trim();
-    const submitLink = link.trim();
-    const submitImage = imageURL.trim();
+    const submitLink = link.trim().replace(/^https?:\/\//, '');
     const submitIcon = iconURL.trim();
 
     if (create === 'new-page' && submitName) {
@@ -68,13 +51,10 @@ export const useCreateForm = (
     }
 
     if (create === 'new-bookmark' && submitName && submitLink) {
-      const isImageURL = !!submitImage ? submitImage : null;
-      const isIconsURL = !!submitIcon ? submitIcon : null;
-
-      dispatch(createBookmark(submitName, submitLink, isImageURL, isIconsURL));
+      dispatch(createBookmark(submitName, submitLink, null, submitIcon || null));
       close();
     }
   };
 
-  return [states, handlers, handleCreate, resetFormState];
+  return [formState, handlers, handleCreate, resetFormState];
 };

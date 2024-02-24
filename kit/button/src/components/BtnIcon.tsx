@@ -112,7 +112,6 @@ const BtnStyled = styled.button<IBtnStyled>`
 
   .rounded-shape {
     fill: ${({ active, theme }) => (active ? theme.white : theme.backgrounds.base40)};
-    backdrop-filter: blur(8px);
   }
 
   &:hover {

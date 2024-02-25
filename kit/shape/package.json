@@ -16,6 +16,9 @@
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
   },
+  "devDependencies": {
+    "@launch-ui/types": "*"
+  },
   "peerDependencies": {
     "react": "*",
     "styled-components": "*"

@@ -3397,6 +3397,7 @@ __metadata:
   resolution: "@launch-ui/drawer@workspace:kit/drawer"
   dependencies:
     "@headlessui/react": 1.5.0
+    "@launch-ui/types": "*"
     "@launch-ui/utils": 1.0.1
     classnames: 2.3.2
   peerDependencies:
@@ -3419,6 +3420,8 @@ __metadata:
 "@launch-ui/input@workspace:kit/input":
   version: 0.0.0-use.local
   resolution: "@launch-ui/input@workspace:kit/input"
+  dependencies:
+    "@launch-ui/types": "*"
   peerDependencies:
     react: "*"
     styled-components: "*"
@@ -3429,6 +3432,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/modal@workspace:kit/modal"
   dependencies:
+    "@launch-ui/types": "*"
     reactjs-popup: 2.0.5
   peerDependencies:
     react: "*"
@@ -3440,6 +3444,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/select@workspace:kit/select"
   dependencies:
+    "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
     "@launch-ui/utils": 1.0.1
   peerDependencies:
@@ -3451,6 +3456,8 @@ __metadata:
 "@launch-ui/shape@*, @launch-ui/shape@workspace:kit/shape":
   version: 0.0.0-use.local
   resolution: "@launch-ui/shape@workspace:kit/shape"
+  dependencies:
+    "@launch-ui/types": "*"
   peerDependencies:
     react: "*"
     styled-components: "*"

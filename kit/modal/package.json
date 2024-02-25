@@ -19,6 +19,9 @@
   "dependencies": {
     "reactjs-popup": "2.0.5"
   },
+  "devDependencies": {
+    "@launch-ui/types": "*"
+  },
   "peerDependencies": {
     "react": "*",
     "styled-components": "*"

@@ -21,6 +21,9 @@
     "@launch-ui/utils": "1.0.1",
     "classnames": "2.3.2"
   },
+  "devDependencies": {
+    "@launch-ui/types": "*"
+  },
   "peerDependencies": {
     "react": "*",
     "styled-components": "*"

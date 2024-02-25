@@ -1,6 +1,8 @@
 {
   "extends": "@launch-ui/config/tsconfig.json",
   "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
     "noEmit": true,
     "disableSizeLimit": true,
     "paths": {

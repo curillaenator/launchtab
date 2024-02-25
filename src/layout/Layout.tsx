@@ -28,7 +28,7 @@ export const Layout: FC = () => {
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
   const [isRightDrawerOpen, setIsRightDrawerOpen] = useState<boolean>(false);
 
-  const mouseWatcher = useRef<(e: React.MouseEvent<Element, MouseEvent>) => void>(null);
+  const mouseWatcher = useRef<((e: React.MouseEvent<Element, MouseEvent>) => void) | null>(null);
   const currentTheme = useThemeComposer();
 
   const showLoader = userLoading || isAppLoading;
@@ -51,18 +51,18 @@ export const Layout: FC = () => {
     }
   }, [currentTheme]);
 
-  const valueCTX = useMemo(
-    () => ({
-      isAsideOpen,
-      isRightDrawerOpen,
-      setIsAsideOpen,
-      setIsRightDrawerOpen,
-    }),
-    [isAsideOpen, isRightDrawerOpen, setIsAsideOpen, setIsRightDrawerOpen],
-  );
-
   return (
-    <LayoutCTX.Provider value={valueCTX}>
+    <LayoutCTX.Provider
+      value={useMemo(
+        () => ({
+          isAsideOpen,
+          isRightDrawerOpen,
+          setIsAsideOpen,
+          setIsRightDrawerOpen,
+        }),
+        [isAsideOpen, isRightDrawerOpen, setIsAsideOpen, setIsRightDrawerOpen],
+      )}
+    >
       <ThemeProvider theme={currentTheme}>
         <GlobalFonts />
 

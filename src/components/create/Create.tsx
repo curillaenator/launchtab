@@ -40,7 +40,7 @@ export const CreateBookmarkCard = styled.div<{ active: boolean }>`
   --shp-bdc: ${({ theme }) => theme.backgrounds.base};
 
   color: ${({ theme }) => theme.backgrounds.base};
-  border-radius: calc(24px * 1.25 + 3px);
+  border-radius: calc(19px * 1.25 + 3px);
   position: relative;
   display: flex;
   align-items: center;
@@ -56,15 +56,14 @@ export const CreateBookmarkCard = styled.div<{ active: boolean }>`
   ${css({ 'svg[data-svg-corner]': { '--shp-bgc': 'transparent' } })}
 
   &:hover {
-    --shp-bdc: ${({ theme }) => theme.primary[400]};
-
-    color: ${({ theme }) => theme.primary[400]};
-  }
-
-  &:active {
     --shp-bdc: ${({ theme }) => theme.primary[500]};
 
     color: ${({ theme }) => theme.primary[500]};
+    background-color: ${({ theme }) => theme.backgrounds.base40};
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.backgrounds.base20};
   }
 `;
 
@@ -84,7 +83,7 @@ export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) 
             <Button active={open} IconLeft={FolderIcon} />
           ) : (
             <CreateBookmarkCard active={open}>
-              <Corners borderRadius={24} stroke={2} />
+              <Corners borderRadius={24} stroke={3} />
               <LinkIcon width={32} height={32} viewBox='0 0 24 24' fill='none' />
             </CreateBookmarkCard>
           )

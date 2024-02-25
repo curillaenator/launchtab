@@ -1,12 +1,13 @@
 import React, { FC, useContext, useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { BtnIcon } from '@launch-ui/button';
+import { Button } from '@launch-ui/button';
 
 import { useAppSelector } from '@src/hooks/hooks';
-
 import { LayoutCTX } from '@src/layout';
-
 import { SearchField } from './components/SearchField';
+
+import SettingsIcon from '@src/assets/svg/settings.svg';
+import MeatballsIcon from '@src/assets/svg/meatballs.svg';
 
 const HeaderStyled = styled.header<{ shadowed: boolean }>`
   z-index: 1000;
@@ -23,7 +24,6 @@ export const Header: FC = () => {
   const { setIsAsideOpen, setIsRightDrawerOpen } = useContext(LayoutCTX);
 
   const { user } = useAppSelector((state) => state.auth);
-  const { isDataSyncing } = useAppSelector((state) => state.loadings);
 
   const [shadowed, setShadowed] = useState<boolean>(false);
 
@@ -38,15 +38,11 @@ export const Header: FC = () => {
 
   return (
     <HeaderStyled shadowed={shadowed}>
-      {!user?.isAnonymous && (
-        <BtnIcon iconName='menu' handler={() => setIsAsideOpen((prev) => !prev)} isLoading={isDataSyncing} />
-      )}
+      {!user?.isAnonymous && <Button IconLeft={MeatballsIcon} onClick={() => setIsAsideOpen((prev) => !prev)} />}
 
       <SearchField />
 
-      {!user?.isAnonymous && (
-        <BtnIcon iconName='settings' handler={() => setIsRightDrawerOpen(true)} isLoading={isDataSyncing} />
-      )}
+      {!user?.isAnonymous && <Button IconLeft={SettingsIcon} onClick={() => setIsRightDrawerOpen((prev) => !prev)} />}
     </HeaderStyled>
   );
 };

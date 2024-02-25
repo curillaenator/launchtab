@@ -20,6 +20,7 @@ export const Shape: FC<ShapeProps> = (props) => {
   return (
     <ShapeStyled ref={ref}>
       <svg
+        data-geometry='smoothed-shape'
         className={props.className || 'rounded-shape'}
         width='100%'
         height='100%'

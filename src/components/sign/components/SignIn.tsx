@@ -2,18 +2,16 @@ import React, { FC } from 'react';
 
 import { useSignForm } from '../hooks/useSignForm';
 
-import { BtnCta, BtnGhost } from '@launch-ui/button';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { TextInput } from '../../inputs/TextInput';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
 import { FormStyled } from './styles';
 
-interface ISignIn {
-  close: () => void;
-}
+import LoginIcon from '@src/assets/svg/login.svg';
 
-export const SignIn: FC<ISignIn> = ({ close }) => {
+export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
   const [values, handlers, onSubmit] = useSignForm('signin');
 
   return (
@@ -26,8 +24,8 @@ export const SignIn: FC<ISignIn> = ({ close }) => {
             Sign In
           </Typography>
 
-          <Typography type='RoundedBold20' className='form-title-add'>
-            to your custom workspace!
+          <Typography as='p' type='TextRegular14' className='form-title-add'>
+            Manage your frequently used links & bookmarks
           </Typography>
         </div>
 
@@ -50,17 +48,14 @@ export const SignIn: FC<ISignIn> = ({ close }) => {
             name='password'
             placeholder='Password'
             description={values.passwordMes}
-            // withButton
-            // buttonTitle='remind'
             value={values.password}
             onChange={handlers.handlePass}
           />
         </div>
 
         <div className='form-buttons'>
-          <BtnGhost type='button' title='Cancel' handler={close} />
-
-          <BtnCta title='I want my bookmarks!' rightIcon='login' type='submit' />
+          <ButtonGhost title='Cancel' onClick={closePopup} type='button' />
+          <ButtonAction title='To my account' RightIcon={LoginIcon} type='submit' />
         </div>
       </div>
     </FormStyled>

@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
-import { icons } from './../assets/icons';
-import type { ButtonProps } from './interfaces';
+import type { ButtonActionProps } from './interfaces';
 
 // TODO size variations
 
@@ -16,7 +15,7 @@ interface IButtonStyled {
   isRightIcon: boolean;
 }
 
-const ButtonStyled = styled.button<IButtonStyled>`
+const ButtonActionStyled = styled.button<IButtonStyled>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -30,6 +29,8 @@ const ButtonStyled = styled.button<IButtonStyled>`
   z-index: 20;
   transition: 0.08s linear;
 
+  color: ${({ theme }) => theme.white};
+
   .button-icon {
     &-light {
       fill: ${({ theme }) => theme.primary[300]};
@@ -42,7 +43,7 @@ const ButtonStyled = styled.button<IButtonStyled>`
 
   .btn_title {
     transition: 0.08s linear;
-    color: ${({ theme }) => theme.white};
+
     white-space: nowrap;
   }
 
@@ -69,29 +70,27 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 `;
 
-export const BtnCta: FC<ButtonProps> = ({
+export const ButtonAction: FC<ButtonActionProps> = ({
   title,
-  leftIcon,
-  rightIcon,
+  LeftIcon,
+  RightIcon,
   active = false,
-  disabled = false,
   danger = false,
   type = 'button',
-  handler,
+  ...rest
 }) => {
   return (
-    <ButtonStyled
-      isLeftIcon={!!leftIcon}
-      isRightIcon={!!rightIcon}
+    <ButtonActionStyled
+      {...rest}
+      isLeftIcon={!!LeftIcon}
+      isRightIcon={!!RightIcon}
       active={active}
-      disabled={disabled}
       danger={danger}
       type={type}
-      onClick={handler}
     >
       <Shape borderRadius={12} />
 
-      {leftIcon && icons[leftIcon]}
+      {LeftIcon && <LeftIcon />}
 
       {title && (
         <Typography type='RoundedBold14' className='btn_title'>
@@ -99,7 +98,7 @@ export const BtnCta: FC<ButtonProps> = ({
         </Typography>
       )}
 
-      {rightIcon && icons[rightIcon]}
-    </ButtonStyled>
+      {RightIcon && <RightIcon />}
+    </ButtonActionStyled>
   );
 };

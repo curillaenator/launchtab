@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Typography } from '@launch-ui/typography';
-import { BtnGhost } from '@launch-ui/button';
+import { ButtonGhost } from '@launch-ui/button';
 
 import { useSelectProps } from './useSelectProps';
 import { SelectStyled } from './select.styled';
@@ -33,7 +33,7 @@ export const Select: FC<SelectProps> = (props) => {
       <div className='dropdown-body' ref={menuRef}>
         {options.map((option) => (
           <div className='dropdown-body-option' key={option.value}>
-            <BtnGhost
+            <ButtonGhost
               title={option.title}
               handler={() => optionHandler(option.value)}
               active={selected === option.value}

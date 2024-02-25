@@ -5,7 +5,7 @@ import { Corners } from '@launch-ui/shape';
 import { useAppSelector } from '@src/hooks/hooks';
 import { useSearch } from './useSearch';
 
-import { icons } from '@src/assets/icons';
+import GoogleIcon from '@src/assets/svg/google.svg';
 
 const SearchFormStyled = styled.form`
   display: flex;
@@ -82,7 +82,7 @@ export const SearchField: FC = () => {
       <InputStyled isOpaque={!!wallpapper} focused={focused}>
         <Corners stroke={4} borderRadius={18} />
 
-        {icons.searchEngines.google}
+        <GoogleIcon className='search_engine google_logo' />
 
         <input
           className='searchInput'

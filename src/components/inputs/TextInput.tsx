@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef, useCallback, type ChangeEvent, type HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-import { BtnGhost } from '@launch-ui/button';
+import { ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 
 import { inputIcons, InputIconsType } from './assets/inputIcons';
@@ -199,12 +199,7 @@ export const TextInput: FC<ITextInput> = ({
 
         {withButton && (
           <div className='input-button'>
-            <BtnGhost
-              ref={inputButtonRef}
-              title={buttonTitle || ''}
-              colorPreset='secondary-colors'
-              handler={() => {}}
-            />
+            <ButtonGhost ref={inputButtonRef} title={buttonTitle || ''} colorPreset='secondary-colors' />
           </div>
         )}
       </div>

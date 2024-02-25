@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks';
 import { updateSettings } from '@src/redux/reducers/settings';
 import { logOut } from '@src/redux/reducers/auth';
 
-import { BtnCta, BtnGhost } from '@launch-ui/button';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';
@@ -107,8 +107,8 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
 
         <div className='form-block'>
           <div className='form-buttons'>
-            <BtnGhost title='Log Out' handler={hadleLogOut} />
-            <BtnCta title='Save changes' handler={submitSettings} />
+            <ButtonGhost title='Log Out' onClick={hadleLogOut} />
+            <ButtonAction title='Save changes' onClick={submitSettings} />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-import { BtnCta, BtnGhost, BtnIcon } from '@launch-ui/button';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Shape } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
@@ -63,9 +63,21 @@ const BookmarkPopupStyled = styled.form`
 
     &-array {
       display: grid;
-      grid-template-columns: repeat(${ICONS_IN_A_ROW}, 1fr);
-      width: 100%;
+      grid-template-columns: repeat(${ICONS_IN_A_ROW}, 80px);
+      width: calc(80px * ${ICONS_IN_A_ROW} + 8px * (${ICONS_IN_A_ROW} - 1));
       gap: 8px;
+
+      &-selector {
+        width: fit-content;
+        height: fit-content;
+      }
+
+      &-image {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        overflow: hidden;
+      }
     }
   }
 
@@ -96,6 +108,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
       }}
       onMouseDown={(e) => e.stopPropagation()}
     >
+      {/* Испольтзован Shape чтобы отбросить красивую тень */}
       <Shape borderRadius={24} className='popup-shape' />
 
       <div className='popup-title'>
@@ -136,14 +149,17 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
 
       {!!iconsWithGoodLinks.length && !isFetching && (
         <div className='popup-icons'>
-          <Scrollbars height='172px'>
+          <Scrollbars height='168px'>
             <div className='popup-icons-array'>
               {iconsWithGoodLinks.map((icon) => (
-                <BtnIcon
+                <button
+                  type='button'
                   key={icon.url}
-                  imageURL={icon.url}
-                  imageHandler={(iconURL: string) => dispatchForm({ key: 'iconURL', payload: iconURL })}
-                />
+                  className='popup-icons-array-selector'
+                  onClick={() => dispatchForm({ key: 'iconURL', payload: icon.url })}
+                >
+                  <img key={icon.url} className='popup-icons-array-image' src={icon.url} alt={icon.url} />
+                </button>
               ))}
             </div>
           </Scrollbars>
@@ -164,8 +180,8 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
       </div>
 
       <div className='popup-buttons'>
-        <BtnCta title='Create' type='submit' />
-        <BtnGhost type='button' title='Cancel' handler={() => closePopup()} />
+        <ButtonAction title='Create' type='submit' />
+        <ButtonGhost title='Cancel' type='button' onClick={() => closePopup()} />
       </div>
     </BookmarkPopupStyled>
   );

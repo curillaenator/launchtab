@@ -8,7 +8,7 @@ export const FormStyled = styled.form`
   .form {
     position: relative;
     width: 100%;
-    padding: 3rem;
+    padding: 32px;
     z-index: 20;
 
     &-shape {
@@ -17,34 +17,32 @@ export const FormStyled = styled.form`
     }
 
     &-title {
-      margin-bottom: 56px;
+      margin-bottom: 16px;
 
       &-main {
-        /* height: 60px; */
         color: ${({ theme }) => theme.primary[500]};
+        margin-bottom: 16px;
       }
 
-      &-add,
-      &-addsub {
+      &-add {
         margin-top: 8px;
-        margin-left: 2px;
-        color: ${({ theme }) => theme.texts.sub};
+        color: ${({ theme }) => theme.texts.base};
       }
     }
 
     &-inputs {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 8px;
       width: 100%;
-      margin-bottom: 56px;
+      margin-bottom: 32px;
     }
 
     &-buttons {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 1rem;
+      gap: 16px;
     }
   }
 

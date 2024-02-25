@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CreateFormCTX } from '../context';
 
 import { TextInput } from '@src/components/inputs';
-import { BtnCta, BtnGhost } from '@launch-ui/button';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
@@ -90,8 +90,8 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
         </div>
 
         <div className='popup-buttons'>
-          <BtnCta title='Create' type='submit' />
-          <BtnGhost type='button' title='Cancel' handler={() => closePopup()} />
+          <ButtonAction title='Create' type='submit' />
+          <ButtonGhost title='Cancel' type='button' onClick={() => closePopup()} />
         </div>
       </div>
     </PagePopupStyled>

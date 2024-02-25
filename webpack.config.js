@@ -70,9 +70,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         exclude: /node_modules/,
         type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/i,
+        exclude: /node_modules/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.(js|jsx|ts|tsx)$/i,

@@ -3,15 +3,14 @@ import styled from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
 
-import { icons } from '../assets/icons';
-import type { IBtnGhost } from './interfaces';
+import type { ButtonGhostProps } from './interfaces';
 
 interface IButtonStyled {
   active: boolean;
   danger: boolean;
 }
 
-const ButtonStyled = styled.button<IButtonStyled>`
+const ButtonGhostStyled = styled.button<IButtonStyled>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,40 +98,31 @@ const ButtonStyled = styled.button<IButtonStyled>`
   }
 `;
 
-export const BtnGhost = forwardRef<HTMLButtonElement, IBtnGhost>((props, ref) => {
+export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((props, ref) => {
   const {
     title,
-    leftIcon,
+    LeftIcon,
+    RightIcon,
     active = false,
     danger = false,
-    disabled = false,
-    type = 'button',
     colorPreset = 'primary-colors',
-    className = 'ghost-button',
-    style,
-    handler,
+    type = 'button',
+    ...rest
   } = props;
 
   return (
-    <ButtonStyled
-      ref={ref}
-      className={className}
-      active={active}
-      disabled={disabled}
-      danger={danger}
-      type={type}
-      style={style}
-      onClick={handler}
-    >
-      {!!leftIcon && icons[leftIcon]}
+    <ButtonGhostStyled {...rest} ref={ref} type={type} active={active} danger={danger}>
+      {!!LeftIcon && <LeftIcon />}
 
       {title && (
         <Typography type='RoundedBold14' className={`${colorPreset} common-title`}>
           {title}
         </Typography>
       )}
-    </ButtonStyled>
+
+      {!!RightIcon && <RightIcon />}
+    </ButtonGhostStyled>
   );
 });
 
-BtnGhost.displayName = 'BtnGhost';
+ButtonGhost.displayName = 'BtnGhost';

@@ -10,7 +10,8 @@ import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
 
 import { CreateContainerStyled } from './create.styled';
-import { icons } from '@src/assets/icons';
+
+import PlusIcon from '@src/assets/svg/plus.svg';
 
 const appear = keyframes`
   from {
@@ -49,7 +50,10 @@ export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) 
         trigger={(open) => (
           <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
             <Corners borderRadius={create === 'new-bookmark' ? 24 : 18} stroke={create === 'new-bookmark' ? 4 : 0} />
-            <button>{icons.plus}</button>
+
+            <button>
+              <PlusIcon />
+            </button>
           </CreateContainerStyled>
         )}
       >

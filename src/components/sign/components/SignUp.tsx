@@ -2,18 +2,16 @@ import React, { FC } from 'react';
 
 import { useSignForm } from '../hooks/useSignForm';
 
-import { BtnCta, BtnGhost } from '@launch-ui/button';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { TextInput } from '../../inputs/TextInput';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
 import { FormStyled } from './styles';
 
-interface ISignUp {
-  close: () => void;
-}
+import AddIcon from '@src/assets/svg/add.svg';
 
-export const SignUp: FC<ISignUp> = ({ close }) => {
+export const SignUp: FC<{ closePopup: () => void }> = ({ closePopup }) => {
   const [values, handlers, onSubmit] = useSignForm('signup');
 
   return (
@@ -26,12 +24,13 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
             Sign Up
           </Typography>
 
-          <Typography type='TextRegular12' className='form-title-add'>
-            Sign up is free, signed up users get fast loading and customizible app!
+          <Typography as='p' type='TextRegular14' className='form-title-add'>
+            Sign up is free! Signed users get fast loads and fully customizible look!
           </Typography>
 
-          <Typography type='TextRegular12' className='form-title-addsub'>
-            Non signed up application has limited server connection speed and works slow as demo.
+          <Typography as='p' type='TextRegular14' className='form-title-add'>
+            Non signed appn has limited server connection speed and works slow as demo. App stores only your links &
+            bookmarks when signed
           </Typography>
         </div>
 
@@ -71,9 +70,8 @@ export const SignUp: FC<ISignUp> = ({ close }) => {
         </div>
 
         <div className='form-buttons'>
-          <BtnGhost type='button' title='Close' handler={close} />
-
-          <BtnCta title='I want my workspace' rightIcon='signUp' type='submit' />
+          <ButtonGhost title='Close' onClick={closePopup} type='button' />
+          <ButtonAction title='Create account' RightIcon={AddIcon} type='submit' />
         </div>
       </div>
     </FormStyled>

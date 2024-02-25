@@ -9,7 +9,7 @@ export const getFontFamily = (type: ITypographyTypes): string => {
 export const generateTag = (type: ITypographyTypes): TypeAs => {
   const fontSize = type.replace(/\D/g, '');
 
-  if (+fontSize < 20) return 'p';
+  if (+fontSize < 20) return 'span';
   if (+fontSize < 24) return 'h4';
   if (+fontSize < 36) return 'h3';
   if (+fontSize < 48) return 'h2';

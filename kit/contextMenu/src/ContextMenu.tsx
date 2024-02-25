@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, FC, type MouseEventHandler } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
-import { BtnGhost } from '@launch-ui/button';
+import { ButtonGhost } from '@launch-ui/button';
 import { compose } from './utils';
 import type { ContextMenuProps } from './interfaces';
 
@@ -65,7 +65,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({ children, items }) => {
         <MenuStyled style={{ position: 'absolute', left: location.x, top: location.y }}>
           {items.map((item) => (
             <div className='menuitem' key={item.title}>
-              <BtnGhost {...item} handler={() => compose([handleOpen, item.handler])} />
+              <ButtonGhost {...item} handler={() => compose([handleOpen, item.handler])} />
             </div>
           ))}
         </MenuStyled>

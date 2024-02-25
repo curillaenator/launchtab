@@ -1,6 +1,3 @@
 export { Button } from './components/Button';
-export { Btn } from './components/Btn';
-export { BtnCta } from './components/CtaButton';
-export { BtnGhost } from './components/BtnGhost';
-export { BtnIcon } from './components/BtnIcon';
-export * from './assets/icons';
+export { ButtonAction } from './components/ButtonAction';
+export { ButtonGhost } from './components/ButtonGhost';

@@ -3,9 +3,12 @@ import styled from 'styled-components';
 
 import { Modal } from '@launch-ui/modal';
 import { Typography } from '@launch-ui/typography';
-import { BtnCta } from '@launch-ui/button';
+import { ButtonAction } from '@launch-ui/button';
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
+
+import StarIcon from '@src/assets/svg/star.svg';
+import LoginIcon from '@src/assets/svg/login.svg';
 
 const SignStyled = styled.div`
   position: fixed;
@@ -36,20 +39,20 @@ export const Sign: FC = () => {
         Get access to your bookmarks with
       </Typography>
 
-      <BtnCta title='Sign Up' leftIcon='star' handler={() => setIsSignUpOpen(true)} />
+      <ButtonAction title='Sign Up' RightIcon={StarIcon} onClick={() => setIsSignUpOpen(true)} />
 
       <Typography type='RoundedBold14' className='sign-text'>
         or
       </Typography>
 
-      <BtnCta title='Sign In' handler={() => setIsSignInOpen(true)} />
+      <ButtonAction title='Sign In' RightIcon={LoginIcon} onClick={() => setIsSignInOpen(true)} />
 
       <Modal open={isSignInOpen} onClose={() => setIsSignInOpen(false)}>
-        <SignIn close={() => setIsSignInOpen(false)} />
+        <SignIn closePopup={() => setIsSignInOpen(false)} />
       </Modal>
 
       <Modal open={isSignUpOpen} onClose={() => setIsSignUpOpen(false)}>
-        <SignUp close={() => setIsSignUpOpen(false)} />
+        <SignUp closePopup={() => setIsSignUpOpen(false)} />
       </Modal>
     </SignStyled>
   );

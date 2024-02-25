@@ -19,6 +19,9 @@
   "dependencies": {
     "@launch-ui/typography": "1.0.0"
   },
+  "devDependencies": {
+    "@launch-ui/types": "*"
+  },
   "peerDependencies": {
     "react": "*",
     "styled-components": "*"

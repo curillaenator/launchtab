@@ -2535,12 +2535,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.8.4":
   version: 7.22.5
   resolution: "@babel/runtime@npm:7.22.5"
   dependencies:
     regenerator-runtime: ^0.13.11
   checksum: 12a50b7de2531beef38840d17af50c55a094253697600cee255311222390c68eed704829308d4fd305e1b3dfbce113272e428e9d9d45b1730e0fede997eaceb1
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.9.2":
+  version: 7.23.9
+  resolution: "@babel/runtime@npm:7.23.9"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 6bbebe8d27c0c2dd275d1ac197fc1a6c00e18dab68cc7aaff0adc3195b45862bae9c4cc58975629004b0213955b2ed91e99eccb3d9b39cabea246c657323d667
   languageName: node
   linkType: hard
 
@@ -3351,10 +3360,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/button@1.0.0, @launch-ui/button@workspace:kit/button":
+"@launch-ui/button@*, @launch-ui/button@workspace:kit/button":
   version: 0.0.0-use.local
   resolution: "@launch-ui/button@workspace:kit/button"
   dependencies:
+    "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
   peerDependencies:
     react: "*"
@@ -3362,7 +3372,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/config@1.1.0, @launch-ui/config@workspace:kit/launchCfg":
+"@launch-ui/config@*, @launch-ui/config@workspace:kit/launchCfg":
   version: 0.0.0-use.local
   resolution: "@launch-ui/config@workspace:kit/launchCfg"
   peerDependencies:
@@ -3371,16 +3381,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/context-menu@1.0.0, @launch-ui/context-menu@workspace:kit/contextMenu":
+"@launch-ui/context-menu@*, @launch-ui/context-menu@workspace:kit/contextMenu":
   version: 0.0.0-use.local
   resolution: "@launch-ui/context-menu@workspace:kit/contextMenu"
+  dependencies:
+    "@launch-ui/types": "*"
   peerDependencies:
     react: "*"
     styled-components: "*"
   languageName: unknown
   linkType: soft
 
-"@launch-ui/drawer@1.0.2, @launch-ui/drawer@workspace:kit/drawer":
+"@launch-ui/drawer@*, @launch-ui/drawer@workspace:kit/drawer":
   version: 0.0.0-use.local
   resolution: "@launch-ui/drawer@workspace:kit/drawer"
   dependencies:
@@ -3393,16 +3405,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/dynamic-bg@1.0.2, @launch-ui/dynamic-bg@workspace:kit/background":
+"@launch-ui/dynamic-bg@*, @launch-ui/dynamic-bg@workspace:kit/background":
   version: 0.0.0-use.local
   resolution: "@launch-ui/dynamic-bg@workspace:kit/background"
+  dependencies:
+    "@launch-ui/types": "*"
   peerDependencies:
     react: "*"
     styled-components: "*"
   languageName: unknown
   linkType: soft
 
-"@launch-ui/modal@1.0.0, @launch-ui/modal@workspace:kit/modal":
+"@launch-ui/input@workspace:kit/input":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/input@workspace:kit/input"
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
+
+"@launch-ui/modal@*, @launch-ui/modal@workspace:kit/modal":
   version: 0.0.0-use.local
   resolution: "@launch-ui/modal@workspace:kit/modal"
   dependencies:
@@ -3413,7 +3436,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/select@1.0.0, @launch-ui/select@workspace:kit/select":
+"@launch-ui/select@*, @launch-ui/select@workspace:kit/select":
   version: 0.0.0-use.local
   resolution: "@launch-ui/select@workspace:kit/select"
   dependencies:
@@ -3425,7 +3448,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/shape@1.0.5, @launch-ui/shape@workspace:kit/shape":
+"@launch-ui/shape@*, @launch-ui/shape@workspace:kit/shape":
   version: 0.0.0-use.local
   resolution: "@launch-ui/shape@workspace:kit/shape"
   peerDependencies:
@@ -3434,7 +3457,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/theme@1.1.0, @launch-ui/theme@workspace:kit/theme":
+"@launch-ui/theme@*, @launch-ui/theme@1.1.0, @launch-ui/theme@workspace:kit/theme":
   version: 0.0.0-use.local
   resolution: "@launch-ui/theme@workspace:kit/theme"
   peerDependencies:
@@ -3442,7 +3465,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/typography@1.0.0, @launch-ui/typography@workspace:kit/typography":
+"@launch-ui/types@*, @launch-ui/types@workspace:kit/types":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/types@workspace:kit/types"
+  dependencies:
+    "@launch-ui/theme": 1.1.0
+  languageName: unknown
+  linkType: soft
+
+"@launch-ui/typography@*, @launch-ui/typography@1.0.0, @launch-ui/typography@workspace:kit/typography":
   version: 0.0.0-use.local
   resolution: "@launch-ui/typography@workspace:kit/typography"
   peerDependencies:
@@ -3451,7 +3482,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/utils@1.0.1, @launch-ui/utils@workspace:kit/utils":
+"@launch-ui/utils@*, @launch-ui/utils@1.0.1, @launch-ui/utils@workspace:kit/utils":
   version: 0.0.0-use.local
   resolution: "@launch-ui/utils@workspace:kit/utils"
   dependencies:
@@ -3759,7 +3790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@svgr/webpack@npm:^8.1.0":
+"@svgr/webpack@npm:8.1.0":
   version: 8.1.0
   resolution: "@svgr/webpack@npm:8.1.0"
   dependencies:
@@ -6878,7 +6909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2, glob@npm:^10.2.5":
+"glob@npm:^10.2.2":
   version: 10.3.0
   resolution: "glob@npm:10.3.0"
   dependencies:
@@ -6890,6 +6921,21 @@ __metadata:
   bin:
     glob: dist/cjs/src/bin.js
   checksum: 6fa4ac0a86ffec1c5715a2e6fbdd63e1e7f1c2c8f5db08cc3256cdfcb81093678e7c80a3d100b502a1b9d141369ecf87bc24fe2bcb72acec7b14626d358a4eb0
+  languageName: node
+  linkType: hard
+
+"glob@npm:^10.3.7":
+  version: 10.3.10
+  resolution: "glob@npm:10.3.10"
+  dependencies:
+    foreground-child: ^3.1.0
+    jackspeak: ^2.3.5
+    minimatch: ^9.0.1
+    minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
+    path-scurry: ^1.10.1
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: 4f2fe2511e157b5a3f525a54092169a5f92405f24d2aed3142f4411df328baca13059f4182f1db1bf933e2c69c0bd89e57ae87edd8950cba8c7ccbe84f721cf3
   languageName: node
   linkType: hard
 
@@ -7721,6 +7767,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jackspeak@npm:^2.3.5":
+  version: 2.3.6
+  resolution: "jackspeak@npm:2.3.6"
+  dependencies:
+    "@isaacs/cliui": ^8.0.2
+    "@pkgjs/parseargs": ^0.11.0
+  dependenciesMeta:
+    "@pkgjs/parseargs":
+      optional: true
+  checksum: 57d43ad11eadc98cdfe7496612f6bbb5255ea69fe51ea431162db302c2a11011642f50cfad57288bd0aea78384a0612b16e131944ad8ecd09d619041c8531b54
+  languageName: node
+  linkType: hard
+
 "jest-worker@npm:^27.4.5":
   version: 27.5.1
   resolution: "jest-worker@npm:27.5.1"
@@ -7859,19 +7918,19 @@ __metadata:
     "@babel/preset-env": 7.22.5
     "@babel/preset-react": 7.22.5
     "@babel/preset-typescript": 7.22.5
-    "@launch-ui/button": 1.0.0
-    "@launch-ui/config": 1.1.0
-    "@launch-ui/context-menu": 1.0.0
-    "@launch-ui/drawer": 1.0.2
-    "@launch-ui/dynamic-bg": 1.0.2
-    "@launch-ui/modal": 1.0.0
-    "@launch-ui/select": 1.0.0
-    "@launch-ui/shape": 1.0.5
-    "@launch-ui/theme": 1.1.0
-    "@launch-ui/typography": 1.0.0
-    "@launch-ui/utils": 1.0.1
+    "@launch-ui/button": "*"
+    "@launch-ui/config": "*"
+    "@launch-ui/context-menu": "*"
+    "@launch-ui/drawer": "*"
+    "@launch-ui/dynamic-bg": "*"
+    "@launch-ui/modal": "*"
+    "@launch-ui/select": "*"
+    "@launch-ui/shape": "*"
+    "@launch-ui/theme": "*"
+    "@launch-ui/typography": "*"
+    "@launch-ui/utils": "*"
     "@reduxjs/toolkit": 1.9.5
-    "@svgr/webpack": ^8.1.0
+    "@svgr/webpack": 8.1.0
     "@types/lodash.isequal": 4.5.6
     "@types/react": 18.2.14
     "@types/react-animations": 1.0.0
@@ -7910,7 +7969,7 @@ __metadata:
     react-redux: 8.1.1
     react-router-dom: 6.22.1
     reactjs-popup: 2.0.5
-    rimraf: 5.0.1
+    rimraf: 5.0.5
     shortid: 2.2.16
     style-loader: 3.2.1
     styled-components: 5.3.11
@@ -8124,6 +8183,13 @@ __metadata:
   version: 9.1.2
   resolution: "lru-cache@npm:9.1.2"
   checksum: d3415634be3908909081fc4c56371a8d562d9081eba70543d86871b978702fffd0e9e362b83921b27a29ae2b37b90f55675aad770a54ac83bb3e4de5049d4b15
+  languageName: node
+  linkType: hard
+
+"lru-cache@npm:^9.1.1 || ^10.0.0":
+  version: 10.2.0
+  resolution: "lru-cache@npm:10.2.0"
+  checksum: eee7ddda4a7475deac51ac81d7dd78709095c6fa46e8350dc2d22462559a1faa3b81ed931d5464b13d48cbd7e08b46100b6f768c76833912bc444b99c37e25db
   languageName: node
   linkType: hard
 
@@ -8383,6 +8449,13 @@ __metadata:
   version: 6.0.2
   resolution: "minipass@npm:6.0.2"
   checksum: d140b91f4ab2e5ce5a9b6c468c0e82223504acc89114c1a120d4495188b81fedf8cade72a9f4793642b4e66672f990f1e0d902dd858485216a07cd3c8a62fac9
+  languageName: node
+  linkType: hard
+
+"minipass@npm:^5.0.0 || ^6.0.2 || ^7.0.0":
+  version: 7.0.4
+  resolution: "minipass@npm:7.0.4"
+  checksum: 87585e258b9488caf2e7acea242fd7856bbe9a2c84a7807643513a338d66f368c7d518200ad7b70a508664d408aa000517647b2930c259a8b1f9f0984f344a21
   languageName: node
   linkType: hard
 
@@ -8901,6 +8974,16 @@ __metadata:
   version: 1.0.7
   resolution: "path-parse@npm:1.0.7"
   checksum: 49abf3d81115642938a8700ec580da6e830dde670be21893c62f4e10bd7dd4c3742ddc603fe24f898cba7eb0c6bc1777f8d9ac14185d34540c6d4d80cd9cae8a
+  languageName: node
+  linkType: hard
+
+"path-scurry@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "path-scurry@npm:1.10.1"
+  dependencies:
+    lru-cache: ^9.1.1 || ^10.0.0
+    minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
+  checksum: e2557cff3a8fb8bc07afdd6ab163a92587884f9969b05bbbaf6fe7379348bfb09af9ed292af12ed32398b15fb443e81692047b786d1eeb6d898a51eb17ed7d90
   languageName: node
   linkType: hard
 
@@ -9443,6 +9526,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 9f57c93277b5585d3c83b0cf76be47b473ae8c6d9142a46ce8b0291a04bb2cf902059f0f8445dcabb3fb7378e5fe4bb4ea1e008876343d42e46d3b484534ce38
+  languageName: node
+  linkType: hard
+
 "regenerator-transform@npm:^0.15.1":
   version: 0.15.1
   resolution: "regenerator-transform@npm:0.15.1"
@@ -9665,14 +9755,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:5.0.1":
-  version: 5.0.1
-  resolution: "rimraf@npm:5.0.1"
+"rimraf@npm:5.0.5":
+  version: 5.0.5
+  resolution: "rimraf@npm:5.0.5"
   dependencies:
-    glob: ^10.2.5
+    glob: ^10.3.7
   bin:
-    rimraf: dist/cjs/src/bin.js
-  checksum: bafce85391349a2d960847980bf9b5caa2a8887f481af630f1ea27e08288217293cec72d75e9a2ba35495c212789f66a7f3d23366ba6197026ab71c535126857
+    rimraf: dist/esm/bin.mjs
+  checksum: d66eef829b2e23b16445f34e73d75c7b7cf4cbc8834b04720def1c8f298eb0753c3d76df77325fad79d0a2c60470525d95f89c2475283ad985fd7441c32732d1
   languageName: node
   linkType: hard
 

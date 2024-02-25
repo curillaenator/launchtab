@@ -61,7 +61,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref
         </Typography>
       )}
 
-      {IconRight && <IconLeft />}
+      {IconRight && <IconRight />}
     </ButtonStyled>
   );
 });

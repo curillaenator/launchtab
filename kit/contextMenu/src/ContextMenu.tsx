@@ -65,7 +65,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({ children, items }) => {
         <MenuStyled style={{ position: 'absolute', left: location.x, top: location.y }}>
           {items.map((item) => (
             <div className='menuitem' key={item.title}>
-              <ButtonGhost {...item} handler={() => compose([handleOpen, item.handler])} />
+              <ButtonGhost {...item} onClick={() => compose([handleOpen, item.handler])} />
             </div>
           ))}
         </MenuStyled>

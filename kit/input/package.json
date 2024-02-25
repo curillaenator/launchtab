@@ -1,7 +1,7 @@
 {
-  "name": "@launch-ui/context-menu",
-  "version": "1.0.0",
-  "description": "Context (right mouse click) menu component",
+  "name": "@launch-ui/input",
+  "version": "0.0.1",
+  "description": "Input component",
   "license": "ISC",
   "author": "curillaenator@gmail.com",
   "publishConfig": {
@@ -15,9 +15,6 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
-  },
-  "devDependencies": {
-    "@launch-ui/types": "*"
   },
   "peerDependencies": {
     "react": "*",

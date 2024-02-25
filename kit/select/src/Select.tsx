@@ -24,7 +24,7 @@ export const Select: FC<SelectProps> = (props) => {
     <SelectStyled open={open} bodyHeight={options.length * optionHeight}>
       <button className='dropdown-title' aria-hidden={!open} type='button' onClick={defferedOpen ? undefined : setOpen}>
         <Typography type='RoundedBold14' className='dropdown-title-text'>
-          {triggerTitle}
+          {triggerTitle || ''}
         </Typography>
 
         {shevronIcon}
@@ -35,7 +35,7 @@ export const Select: FC<SelectProps> = (props) => {
           <div className='dropdown-body-option' key={option.value}>
             <ButtonGhost
               title={option.title}
-              handler={() => optionHandler(option.value)}
+              onClick={() => optionHandler(option.value)}
               active={selected === option.value}
             />
           </div>

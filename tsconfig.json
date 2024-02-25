@@ -1,25 +1,11 @@
 {
+  "extends": "@launch-ui/config/tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "baseUrl": "./",
     "disableSizeLimit": true,
     "paths": {
       "@src/*": ["src/*"]
     }
   },
-  "include": ["src"]
+  "exclude": ["node_modules", "tmp"]
 }

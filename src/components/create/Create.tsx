@@ -55,16 +55,24 @@ export const CreateBookmarkCard = styled.div<{ active: boolean }>`
 
   ${css({ 'svg[data-svg-corner]': { '--shp-bgc': 'transparent' } })}
 
-  &:hover {
-    --shp-bdc: ${({ theme }) => theme.primary[500]};
-
-    color: ${({ theme }) => theme.primary[500]};
-    background-color: ${({ theme }) => theme.backgrounds.base40};
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.backgrounds.base20};
-  }
+  ${({ theme, active }) =>
+    active
+      ? css({
+          'background-color': theme.backgrounds.base40,
+          '--shp-bdc': theme.primary[500],
+          color: theme.primary[500],
+        })
+      : css({
+          '&:hover': {
+            '--shp-bdc': theme.primary[500],
+            color: theme.primary[500],
+            'background-color': theme.backgrounds.base40,
+          },
+          '&:active': {
+            '--shp-bdc': theme.primary[600],
+            color: theme.primary[600],
+          },
+        })}
 `;
 
 export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => {

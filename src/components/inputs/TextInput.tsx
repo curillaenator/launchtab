@@ -24,10 +24,12 @@ const FieldStyled = styled.div<IFieldStyled>`
     position: relative;
     display: flex;
     width: 100%;
-    gap: 1rem;
+    gap: 8px;
     margin-bottom: 4px;
 
     .input_icon {
+      --icon-color: ${({ theme, isFocused }) => (isFocused ? theme.primary[500] : theme.icons.dark)};
+
       margin-top: 4px;
       flex-shrink: 0;
 

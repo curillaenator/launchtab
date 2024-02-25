@@ -103,7 +103,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
     <BookmarkPopupStyled
       onSubmit={(e) => {
         e.preventDefault;
-        handleCreate();
+        handleCreate?.();
         closePopup();
       }}
       onMouseDown={(e) => e.stopPropagation()}
@@ -115,18 +115,18 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
         <Typography type='RoundedHeavy24'>New</Typography>
 
         <Typography type='RoundedHeavy24' className='popup-title-themed'>
-          bookmark
+          link
         </Typography>
       </div>
 
       <div className='popup-inputs'>
         <TextInput
           type='text'
-          iconName='pencil'
+          iconName='label'
           name='new-bookmark'
           limitSymbols={24}
           value={formState.name}
-          onChange={(bmName) => dispatchForm({ key: 'name', payload: bmName })}
+          onChange={(bmName) => dispatchForm?.({ key: 'name', payload: bmName })}
           onFocusOut={fetchIcons}
           placeholder='Title'
         />
@@ -136,7 +136,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
           iconName='link'
           name='new-link'
           value={formState.link}
-          onChange={(link) => dispatchForm({ key: 'link', payload: link })}
+          onChange={(link) => dispatchForm?.({ key: 'link', payload: link })}
           placeholder='Site link'
         />
       </div>
@@ -156,7 +156,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
                   type='button'
                   key={icon.url}
                   className='popup-icons-array-selector'
-                  onClick={() => dispatchForm({ key: 'iconURL', payload: icon.url })}
+                  onClick={() => dispatchForm?.({ key: 'iconURL', payload: icon.url })}
                 >
                   <img key={icon.url} className='popup-icons-array-image' src={icon.url} alt={icon.url} />
                 </button>

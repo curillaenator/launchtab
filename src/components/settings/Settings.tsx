@@ -12,6 +12,9 @@ import { Typography } from '@launch-ui/typography';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';
 
+import SaveIcon from '@src/assets/svg/save.svg';
+import LogoutIcon from '@src/assets/svg/logout.svg';
+
 import * as r from './reducer';
 
 const SettingsStyled = styled.div`
@@ -107,8 +110,8 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
 
         <div className='form-block'>
           <div className='form-buttons'>
-            <ButtonGhost title='Log Out' onClick={hadleLogOut} />
-            <ButtonAction title='Save changes' onClick={submitSettings} />
+            <ButtonGhost LeftIcon={LogoutIcon} title='Log Out' onClick={hadleLogOut} />
+            <ButtonAction LeftIcon={SaveIcon} title='Save changes' onClick={submitSettings} />
           </div>
         </div>
       </div>

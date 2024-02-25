@@ -14,7 +14,8 @@ import { themeNames } from '@launch-ui/theme';
 import { PEXELS_INITIAL_STATE, type ILookFeelActions, type ISettingsFormState } from '../reducer';
 
 import ShevronIcon from '@src/assets/svg/shevron.svg';
-import TrashBinIcon from '@src/assets/svg/trash.svg';
+// import TrashBinIcon from '@src/assets/svg/trash.svg';
+import UpdateIcon from '@src/assets/svg/update.svg';
 
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
@@ -58,7 +59,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
     pexelsTimer.current = setTimeout(() => {
       client.photos
         .search({
-          query: pexels.pexelsQuery,
+          query: pexels.pexelsQuery as string,
           per_page: 30,
           page: 1,
         })
@@ -70,7 +71,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
         });
 
       // dispatch(setters.setPexels(RES_MOCK));
-    }, 500);
+    }, 2000);
   }, [pexels.pexelsQuery, setters, dispatch]);
 
   return (
@@ -119,16 +120,16 @@ export const LookFeel: FC<ILookFeel> = (props) => {
 
           <Titlewrap title='Search wallpaper'>
             <TextInput
-              iconName='link'
+              iconName='search'
               type='url'
               name='background'
               placeholder='Type any tag (example "nature")'
-              value={pexels.pexelsQuery}
+              value={pexels.pexelsQuery as string}
               onChange={(query) => dispatch(setters.setPixelsQuery(query))}
             />
 
             <ButtonGhost
-              LeftIcon={TrashBinIcon}
+              LeftIcon={UpdateIcon}
               title='Clear wallpaper'
               style={{ width: 'fit-content' }}
               onClick={() => dispatch(setters.setWallpaper(''))}
@@ -138,11 +139,11 @@ export const LookFeel: FC<ILookFeel> = (props) => {
           {pexels.pexels.photos.map((photo) => (
             <ImagePreview
               key={photo.id}
-              alt={photo.alt}
+              alt={photo.alt as string}
               src={photo.src.large}
               onClick={() => dispatch(setters.setWallpaper(photo.src.original))}
               active={values.lookfeel.wallpaper === photo.src.original}
-              avgColor={photo.avg_color}
+              avgColor={photo.avg_color as string}
               clickable
             />
           ))}

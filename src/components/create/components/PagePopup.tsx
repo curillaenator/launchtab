@@ -61,7 +61,7 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
     <PagePopupStyled
       onSubmit={(e) => {
         e.preventDefault();
-        handleCreate();
+        handleCreate?.();
         closePopup();
       }}
       onMouseDown={(e) => e.stopPropagation()}
@@ -73,19 +73,19 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           <Typography type='RoundedHeavy24'>New</Typography>
 
           <Typography type='RoundedHeavy24' className='popup-title-themed'>
-            page
+            folder
           </Typography>
         </div>
 
         <div className='popup-inputs'>
           <TextInput
             type='text'
-            iconName='pencil'
+            iconName='label'
             name='new-page'
             placeholder='Title'
             limitSymbols={24}
             value={formState.name}
-            onChange={(pageName) => dispatchForm({ key: 'name', payload: pageName })}
+            onChange={(pageName) => dispatchForm?.({ key: 'name', payload: pageName })}
           />
         </div>
 

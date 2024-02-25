@@ -21,7 +21,7 @@ export const INITIAL_LOOKFEEL_STATE: ISettings['lookfeel'] = {
   dynamicWallpaper: 'clouds',
   wallpaper: null,
   darkMode: false,
-  themeName: 'classicBlueTheme',
+  themeName: 'defaultTheme',
 };
 
 export const INITIAL_SETTINGS_STATE: ISettings = {

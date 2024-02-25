@@ -19,7 +19,7 @@ export const ButtonStyled = styled.button<BaseButtonProps>`
   padding: 0 16px;
 
   background-color: var(--shp-bgc);
-  border-radius: calc(18px * 1.25 + 3px);
+  border-radius: calc(20px * 1.25 + 3px);
 
   color: ${({ active, theme }) => (active ? theme.white : theme.texts.base)};
 
@@ -51,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref
 
   return (
     <ButtonStyled {...rest} ref={ref}>
-      <Corners borderRadius={18} />
+      <Corners borderRadius={20} />
 
       {IconLeft && <IconLeft />}
 

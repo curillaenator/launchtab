@@ -14,9 +14,9 @@ import { themeNames } from '@launch-ui/theme';
 import { PEXELS_INITIAL_STATE, type ILookFeelActions, type ISettingsFormState } from '../reducer';
 
 import ShevronIcon from '@src/assets/svg/shevron.svg';
+import TrashBinIcon from '@src/assets/svg/trash.svg';
 
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
-// import { RES_MOCK } from './mock';
 
 const animation = keyframes`${fadeIn}`;
 const LookFeelStyled = styled.div`
@@ -126,6 +126,13 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               value={pexels.pexelsQuery}
               onChange={(query) => dispatch(setters.setPixelsQuery(query))}
             />
+
+            <ButtonGhost
+              LeftIcon={TrashBinIcon}
+              title='Clear wallpaper'
+              style={{ width: 'fit-content' }}
+              onClick={() => dispatch(setters.setWallpaper(''))}
+            />
           </Titlewrap>
 
           {pexels.pexels.photos.map((photo) => (
@@ -139,12 +146,6 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               clickable
             />
           ))}
-
-          <ButtonGhost
-            title='Clear wallpaper'
-            style={{ width: 'fit-content' }}
-            onClick={() => dispatch(setters.setWallpaper(''))}
-          />
         </>
       )}
     </LookFeelStyled>

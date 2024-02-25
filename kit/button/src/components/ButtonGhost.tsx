@@ -15,86 +15,24 @@ const ButtonGhostStyled = styled.button<IButtonStyled>`
   justify-content: center;
   align-items: center;
   height: 40px;
-  padding: 0 16px;
   background: transparent;
   z-index: 20;
+
+  transition: color 0.08s ease-in-out;
+  color: ${({ theme }) => theme.texts.base};
 
   &:disabled {
     cursor: default !important;
   }
 
-  .svg_icon {
-    width: 1rem;
-    width: 1rem;
-    margin-right: 0.75rem;
-  }
-
   .common-title {
-    transition: 0.08s ease-in-out;
+    padding: 0 16px;
     user-select: none;
     white-space: nowrap;
   }
 
-  .primary-colors {
-    color: ${({ active, theme, disabled, danger }) => {
-      switch (true) {
-        case disabled:
-          return theme.texts.disabled;
-        case danger:
-          return theme.texts.error;
-        case active:
-          return theme.primary[500];
-        default:
-          return theme.texts.base;
-      }
-    }};
-  }
-
-  .secondary-colors {
-    color: ${({ active, theme, disabled, danger }) => {
-      switch (true) {
-        case disabled:
-          return theme.texts.disabled;
-        case danger:
-          return theme.texts.error;
-        case active:
-          return theme.primary[500];
-        default:
-          return theme.secondary[500];
-      }
-    }};
-  }
-
   &:hover {
-    .primary-colors {
-      color: ${({ theme, active, disabled, danger }) => {
-        switch (true) {
-          case disabled:
-            return theme.texts.disabled;
-          case danger:
-            return theme.texts.error;
-          case active:
-            return theme.primary[500];
-          default:
-            return theme.primary[400];
-        }
-      }};
-    }
-
-    .secondary-colors {
-      color: ${({ active, theme, disabled, danger }) => {
-        switch (true) {
-          case disabled:
-            return theme.backgrounds.base;
-          case danger:
-            return theme.texts.error;
-          case active:
-            return theme.secondary[500];
-          default:
-            return theme.primary[400];
-        }
-      }};
-    }
+    color: ${({ theme }) => theme.primary[500]};
   }
 `;
 

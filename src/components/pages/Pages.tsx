@@ -13,6 +13,8 @@ import { setCurPage, updatePagesOrder } from '@src/redux/reducers/bookmarks';
 
 import { getContextMenuItems } from './helpers';
 
+import HomeIcon from '@src/assets/svg/home.svg';
+
 const SortableListStyled = styled(SortableList)`
   display: flex;
   justify-content: center;
@@ -42,7 +44,12 @@ const PagesJSX: FC<IPages> = ({ pages, curPage }) => {
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      <Button title='Home' active={pages[0] === curPage} onClick={() => dispatch(setCurPage(pages[0]))} />
+      <Button
+        IconLeft={HomeIcon}
+        title='Home'
+        active={pages[0] === curPage}
+        onClick={() => dispatch(setCurPage(pages[0]))}
+      />
 
       {sortablePages.map((knob, i) => {
         return (

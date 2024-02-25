@@ -1,7 +1,8 @@
 import React, { FC, ReactNode, useMemo } from 'react';
 import Popup from 'reactjs-popup';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Corners } from '@launch-ui/shape';
+import { Button } from '@launch-ui/button';
 
 import { useCreateForm } from './hooks/useCreateForm';
 import { CreateFormCTX } from './context';
@@ -9,9 +10,8 @@ import { CreateFormCTX } from './context';
 import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
 
-import { CreateContainerStyled } from './create.styled';
-
-import PlusIcon from '@src/assets/svg/plus.svg';
+import LinkIcon from '@src/assets/svg/link.svg';
+import FolderIcon from '@src/assets/svg/folder.svg';
 
 const appear = keyframes`
   from {
@@ -36,6 +36,38 @@ const PopupStyled = styled(Popup)`
   }
 `;
 
+export const CreateBookmarkCard = styled.div<{ active: boolean }>`
+  --shp-bdc: ${({ theme }) => theme.backgrounds.base};
+
+  color: ${({ theme }) => theme.backgrounds.base};
+  border-radius: calc(24px * 1.25 + 3px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  min-width: 56px;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.backgrounds.base20};
+  min-height: 186px;
+  cursor: pointer;
+
+  ${css({ 'svg[data-svg-corner]': { '--shp-bgc': 'transparent' } })}
+
+  &:hover {
+    --shp-bdc: ${({ theme }) => theme.primary[400]};
+
+    color: ${({ theme }) => theme.primary[400]};
+  }
+
+  &:active {
+    --shp-bdc: ${({ theme }) => theme.primary[500]};
+
+    color: ${({ theme }) => theme.primary[500]};
+  }
+`;
+
 export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => {
   const { formContextValue, resetFormState } = useCreateForm(create);
 
@@ -47,15 +79,16 @@ export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) 
         onClose={() => resetFormState()}
         keepTooltipInside='.layout-container'
         position={['right center', 'left center']}
-        trigger={(open) => (
-          <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
-            <Corners borderRadius={create === 'new-bookmark' ? 24 : 18} stroke={create === 'new-bookmark' ? 4 : 0} />
-
-            <button>
-              <PlusIcon />
-            </button>
-          </CreateContainerStyled>
-        )}
+        trigger={(open) =>
+          create === 'new-page' ? (
+            <Button active={open} IconLeft={FolderIcon} />
+          ) : (
+            <CreateBookmarkCard active={open}>
+              <Corners borderRadius={24} stroke={2} />
+              <LinkIcon width={32} height={32} viewBox='0 0 24 24' fill='none' />
+            </CreateBookmarkCard>
+          )
+        }
       >
         {
           ((close: () => void) =>

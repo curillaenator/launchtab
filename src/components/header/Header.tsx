@@ -16,7 +16,7 @@ const HeaderStyled = styled.header<{ shadowed: boolean }>`
   top: 0;
   width: 100%;
   padding: 56px 56px 0;
-  filter: drop-shadow(0 0 8px ${({ theme, shadowed }) => (shadowed ? theme.primary[500] : 'transparent')});
+  filter: drop-shadow(${({ theme, shadowed }) => (shadowed ? theme.shadows.card : '0 0 0 0 transparent')});
   transition: filter 300ms ease;
 `;
 

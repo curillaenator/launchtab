@@ -26,9 +26,9 @@ const InputStyled = styled.div<IInputStyled>`
   position: relative;
   width: 75%;
   overflow: visible;
-  border-radius: calc(18px * 1.25 + 3px);
+  border-radius: calc(20px * 1.25 + 3px);
   background-color: var(--shp-bgc);
-  box-shadow: inset 0 0 0 4px var(--shp-bdc);
+  box-shadow: inset 0 0 0 2px var(--shp-bdc);
 
   @media (width > 2560px) {
     width: 50%;
@@ -80,7 +80,7 @@ export const SearchField: FC = () => {
   return (
     <SearchFormStyled action='https://www.google.com/search' onSubmit={onSubmit}>
       <InputStyled isOpaque={!!wallpapper} focused={focused}>
-        <Corners stroke={4} borderRadius={18} />
+        <Corners stroke={2} borderRadius={20} />
 
         <GoogleIcon className='search_engine google_logo' />
 

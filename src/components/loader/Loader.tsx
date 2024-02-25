@@ -45,7 +45,7 @@ const LoaderStyled = styled.div<LoaderProps>`
     .animatedCircle {
       fill: none;
       stroke: ${({ theme }) => theme.primary[500]};
-      stroke-width: 3px;
+      stroke-width: 1.8px;
       transform-origin: center;
       stroke-linecap: round;
       animation: ${DASH} 1.6s linear infinite, ${ROTATE} 2s linear infinite;

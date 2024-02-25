@@ -231,11 +231,11 @@ export const colorsStaticDarkMode = {
 };
 
 export const shadowsStaticLightMode = (primaryColor: string) => ({
-  card: `0px 0px 6px ${hexa(colorsLib.liver[900], 0.2)}`,
+  card: `0px 0px 8px ${hexa(colorsLib.liver[900], 0.3)}`,
   primary: `0px 2px 6px ${hexa(primaryColor, 0.8)}`,
 });
 
 export const shadowsStaticDarkMode = (primaryColor: string) => ({
-  card: `0px 0px 6px ${hexa(colorsLib.liver[800], 0.4)}`,
+  card: `0px 0px 4px ${hexa(colorsLib.liver[800], 0.4)}`,
   primary: `0px 2px 6px ${hexa(primaryColor, 0.8)}`,
 });

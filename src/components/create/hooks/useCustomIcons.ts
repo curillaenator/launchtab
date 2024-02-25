@@ -7,15 +7,18 @@ interface IconsResponse {
   [title: string]: string;
 }
 
-export const useCreateBookmark = (title: string) => {
+export const useCustomIcons = (title: string) => {
   const [iconsResponse, setIconsResponce] = useState<IconsResponse[]>([]);
   const [icons, setIcons] = useState<CheckImageURL[]>([]);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const fetchIcons = useCallback(() => {
     if (!title.trim()) {
       setIcons([]);
       return;
     }
+
+    setIsFetching(true);
 
     fetch(`${fetchLink}${title}`, {
       method: 'GET',
@@ -24,7 +27,10 @@ export const useCreateBookmark = (title: string) => {
     })
       .then((res) => res.json())
       .then((json) => setIconsResponce(json.results))
-      .catch(() => setIconsResponce([]));
+      .catch(() => {
+        setIconsResponce([]);
+        setIsFetching(false);
+      });
   }, [title]);
 
   useEffect(() => {
@@ -32,13 +38,16 @@ export const useCreateBookmark = (title: string) => {
 
     const urlsCheck = iconsResponse.map((icon) => checkImageURL(icon.url));
 
-    Promise.all(urlsCheck).then((res) => {
-      const goodLinks = res.length ? res.filter((resItem) => resItem.ok) : [];
-      setIcons(!!goodLinks.length ? goodLinks : []);
-    });
+    Promise.all(urlsCheck)
+      .then((res) => {
+        const goodLinks = res.length ? res.filter((resItem) => resItem.ok) : [];
+        setIcons(!!goodLinks.length ? goodLinks : []);
+      })
+      .finally(() => setIsFetching(false));
   }, [iconsResponse]);
 
   return {
+    isFetching,
     iconsWithGoodLinks: icons,
     fetchIcons,
   };

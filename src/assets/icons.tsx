@@ -1,48 +1,6 @@
 import React from 'react';
-import { colorsLib } from '@launch-ui/theme';
 
 export const icons = {
-  loader: (
-    <svg className='svg_loader' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'>
-      <g transform='rotate(0 50 50)'>
-        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill={colorsLib.electroviolet[500]}>
-          <animate
-            attributeName='opacity'
-            values='1;0'
-            keyTimes='0;1'
-            dur='1.6949152542372883s'
-            begin='-1.1299435028248588s'
-            repeatCount='indefinite'
-          ></animate>
-        </rect>
-      </g>
-      <g transform='rotate(120 50 50)'>
-        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill={colorsLib.awesome[500]}>
-          <animate
-            attributeName='opacity'
-            values='1;0'
-            keyTimes='0;1'
-            dur='1.6949152542372883s'
-            begin='-0.5649717514124294s'
-            repeatCount='indefinite'
-          ></animate>
-        </rect>
-      </g>
-      <g transform='rotate(240 50 50)'>
-        <rect x='38' y='28.5' rx='8' ry='8' width='24' height='25' fill='#534868'>
-          <animate
-            attributeName='opacity'
-            values='1;0'
-            keyTimes='0;1'
-            dur='1.6949152542372883s'
-            begin='0s'
-            repeatCount='indefinite'
-          ></animate>
-        </rect>
-      </g>
-    </svg>
-  ),
-
   searchEngines: {
     google: (
       <svg className='search_engine google_logo' width='24' height='24' fill='none' viewBox='0 0 24 24'>

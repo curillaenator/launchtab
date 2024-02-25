@@ -1,15 +1,16 @@
 import React, { FC, useEffect, useState, useRef, useMemo } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import { Drawer } from '@launch-ui/drawer';
 
+import LayoutStyled from './styled';
 import GlobalFonts from '@src/assets/fonts/fonts';
 import { Background } from '@src/components/background/Background';
 import { Header } from '@src/components/header/Header';
 import { Aside } from '@src/components/aside';
 import { Settings } from '@src/components/settings';
 import { Sign } from '@src/components/sign';
-import { Loader } from '@src/components/loader/Loader';
+import { Loader } from '@src/components/loader';
 
 import { LayoutCTX } from './context';
 
@@ -17,30 +18,6 @@ import { useAppSelector, useAppDispatch } from '@src/hooks';
 import { checkUserIsAuthed } from '@src/redux/reducers/auth';
 
 import { useThemeComposer } from './useThemeComposer';
-
-const LayoutStyled = styled.div<{ isAsideOpen: boolean }>`
-  position: relative;
-
-  display: flex;
-  width: 100%;
-  min-width: 1280px;
-  color: ${({ theme }) => theme.texts.base};
-
-  .aside {
-    position: sticky;
-    top: 0;
-    width: ${({ isAsideOpen }) => (isAsideOpen ? '384px' : '0')};
-    min-height: 100vh;
-    max-height: 100vh;
-    flex-shrink: 0;
-    transition: width 200ms ease;
-    overflow: hidden;
-  }
-
-  .viewport {
-    width: 100%;
-  }
-`;
 
 export const Layout: FC = () => {
   const dispatch = useAppDispatch();
@@ -53,6 +30,8 @@ export const Layout: FC = () => {
 
   const mouseWatcher = useRef<(e: React.MouseEvent<Element, MouseEvent>) => void>(null);
   const currentTheme = useThemeComposer();
+
+  const showLoader = userLoading || isAppLoading;
 
   useEffect(() => {
     dispatch(checkUserIsAuthed());
@@ -82,46 +61,51 @@ export const Layout: FC = () => {
     [isAsideOpen, isRightDrawerOpen, setIsAsideOpen, setIsRightDrawerOpen],
   );
 
-  if (userLoading || isAppLoading) return <Loader fullscreen />;
-
   return (
     <LayoutCTX.Provider value={valueCTX}>
       <ThemeProvider theme={currentTheme}>
         <GlobalFonts />
 
-        <LayoutStyled
-          className='layout-container'
-          data-description='layout-container'
-          isAsideOpen={isAsideOpen}
-          onMouseMove={(e) => {
-            if (isRightDrawerOpen || !mouseWatcher.current) return;
-            mouseWatcher.current(e);
-          }}
-        >
-          <Background
-            setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
-              mouseWatcher.current = watcher;
+        {showLoader && <Loader fullscreen size='56px' />}
+
+        {!showLoader && (
+          <LayoutStyled
+            className='layout-container'
+            data-description='layout-container'
+            isAsideOpen={isAsideOpen}
+            onMouseMove={(e) => {
+              if (isRightDrawerOpen || !mouseWatcher.current) return;
+              mouseWatcher.current(e);
             }}
-          />
+          >
+            <Background
+              setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
+                mouseWatcher.current = watcher;
+              }}
+            />
 
-          <aside className='aside'>
-            <Aside />
-          </aside>
+            <aside className='aside'>
+              <Aside />
+            </aside>
 
-          <div className='viewport'>
-            <Header />
+            <div className='viewport'>
+              <Header />
+              <Outlet />
+            </div>
 
-            <Outlet />
-          </div>
-
-          {!user?.isAnonymous ? (
-            <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setIsRightDrawerOpen(false)}>
-              <Settings closeSettings={() => setIsRightDrawerOpen(false)} />
-            </Drawer>
-          ) : (
-            <Sign />
-          )}
-        </LayoutStyled>
+            {!user?.isAnonymous ? (
+              <Drawer
+                portalId='launch-tabs-drawer'
+                open={isRightDrawerOpen}
+                onClose={() => setIsRightDrawerOpen(false)}
+              >
+                <Settings closeSettings={() => setIsRightDrawerOpen(false)} />
+              </Drawer>
+            ) : (
+              <Sign />
+            )}
+          </LayoutStyled>
+        )}
       </ThemeProvider>
     </LayoutCTX.Provider>
   );

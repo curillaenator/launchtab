@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import Popup from 'reactjs-popup';
 import styled, { keyframes } from 'styled-components';
 import { Corners } from '@launch-ui/shape';
 
 import { useCreateForm } from './hooks/useCreateForm';
+import { CreateFormCTX } from './context';
 
 import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
@@ -35,42 +36,32 @@ const PopupStyled = styled(Popup)`
 `;
 
 export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => {
-  const [states, handlers, handleCreate, resetStates] = useCreateForm(create);
+  const { formContextValue, resetFormState } = useCreateForm(create);
 
   return (
-    <PopupStyled
-      offsetX={16}
-      arrow={false}
-      onClose={() => resetStates()}
-      keepTooltipInside='.layout-container'
-      position={['right center', 'left center']}
-      trigger={(open) => (
-        <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
-          <Corners borderRadius={create === 'new-bookmark' ? 24 : 18} stroke={create === 'new-bookmark' ? 4 : 0} />
-
-          <button>{icons.plus}</button>
-        </CreateContainerStyled>
-      )}
-    >
-      {
-        // @ts-expect-error need fix types
-        (close: () => void) => (
-          <>
-            {create === 'new-page' && (
-              <PagePopup
-                pageName={states.name}
-                handlePageName={handlers.handleName}
-                handleCreate={handleCreate}
-                close={close}
-              />
-            )}
-
-            {create === 'new-bookmark' && (
-              <BookmarkPopup values={states} handlers={handlers} handleCreate={handleCreate} close={close} />
-            )}
-          </>
-        )
-      }
-    </PopupStyled>
+    <CreateFormCTX.Provider value={useMemo(() => formContextValue, [formContextValue])}>
+      <PopupStyled
+        offsetX={16}
+        arrow={false}
+        onClose={() => resetFormState()}
+        keepTooltipInside='.layout-container'
+        position={['right center', 'left center']}
+        trigger={(open) => (
+          <CreateContainerStyled active={open} isCreateBookmark={create === 'new-bookmark'}>
+            <Corners borderRadius={create === 'new-bookmark' ? 24 : 18} stroke={create === 'new-bookmark' ? 4 : 0} />
+            <button>{icons.plus}</button>
+          </CreateContainerStyled>
+        )}
+      >
+        {
+          ((close: () => void) =>
+            create === 'new-page' ? (
+              <PagePopup closePopup={close} />
+            ) : (
+              <BookmarkPopup closePopup={close} />
+            )) as unknown as ReactNode
+        }
+      </PopupStyled>
+    </CreateFormCTX.Provider>
   );
 };

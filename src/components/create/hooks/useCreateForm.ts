@@ -1,32 +1,18 @@
-import { useReducer } from 'react';
+import { useReducer, useCallback } from 'react';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { createPage, createBookmark } from '../../../redux/reducers/bookmarks';
 
-export interface States {
-  name: string;
-  link: string;
-  imageURL?: string;
-  iconURL: string;
-}
+import type { FormStateType, FormActionType } from '../interfaces';
 
-export type Handlers = {
-  handleName: (nameString: string) => void;
-  handleLink: (linkString: string) => void;
-  handleIconURL: (urlString: string) => void;
-};
-
-const formReducer = (prev: States, action: { key: keyof States; payload: string }) => ({
+const formReducer = (prev: FormStateType, action: FormActionType) => ({
   ...prev,
   [action.key]: action.payload,
 });
 
-export const useCreateForm = (
-  create: 'new-page' | 'new-bookmark',
-): [States, Handlers, (close: () => void) => void, () => void] => {
-  const dispatch = useAppDispatch();
+export const useCreateForm = (create: 'new-page' | 'new-bookmark') => {
+  const dispatchApp = useAppDispatch();
 
   const [formState, dispatchForm] = useReducer(formReducer, { name: '', link: '', iconURL: '' });
-  const { name, link, iconURL } = formState;
 
   const resetFormState = () => {
     dispatchForm({ key: 'name', payload: '' });
@@ -34,27 +20,24 @@ export const useCreateForm = (
     dispatchForm({ key: 'iconURL', payload: '' });
   };
 
-  const handlers: Handlers = {
-    handleName: (string) => dispatchForm({ key: 'name', payload: string }),
-    handleLink: (string) => dispatchForm({ key: 'link', payload: string }),
-    handleIconURL: (string) => dispatchForm({ key: 'iconURL', payload: string }),
-  };
+  const handleCreate = useCallback(() => {
+    const { name, link, iconURL } = formState;
 
-  const handleCreate = (close: () => void) => {
     const submitName = name.trim();
     const submitLink = link.trim().replace(/^https?:\/\//, '');
     const submitIcon = iconURL.trim();
 
     if (create === 'new-page' && submitName) {
-      dispatch(createPage(submitName));
-      close();
+      dispatchApp(createPage(submitName));
     }
 
     if (create === 'new-bookmark' && submitName && submitLink) {
-      dispatch(createBookmark(submitName, submitLink, null, submitIcon || null));
-      close();
+      dispatchApp(createBookmark(submitName, submitLink, null, submitIcon || null));
     }
-  };
+  }, [create, formState, dispatchApp]);
 
-  return [formState, handlers, handleCreate, resetFormState];
+  return {
+    formContextValue: { formState, dispatchForm, handleCreate },
+    resetFormState,
+  };
 };

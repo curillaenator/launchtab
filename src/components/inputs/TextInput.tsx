@@ -151,8 +151,8 @@ export const TextInput: FC<ITextInput> = ({
   };
 
   const handleBlur = () => {
-    !!inputRef.current && inputRef.current.blur();
-    !!onFocusOut && onFocusOut();
+    inputRef.current?.blur();
+    onFocusOut?.();
     setIsFocused(false);
   };
 

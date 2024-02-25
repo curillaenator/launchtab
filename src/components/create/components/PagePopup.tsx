@@ -1,14 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
+
+import { CreateFormCTX } from '../context';
 
 import { TextInput } from '@src/components/inputs';
 import { BtnCta, BtnGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
-const PagePopupStyled = styled.div`
+const PagePopupStyled = styled.form`
   width: 336px;
-  border-radius: 20px;
   background-color: transparent;
 
   .popup {
@@ -41,7 +42,7 @@ const PagePopupStyled = styled.div`
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     &-buttons {
@@ -53,21 +54,24 @@ const PagePopupStyled = styled.div`
   }
 `;
 
-interface IPagePopup {
-  pageName: string;
-  handlePageName: (knobName: string) => void;
-  handleCreate: (close: () => void) => void;
-  close: () => void;
-}
+export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
+  const { formState, dispatchForm, handleCreate } = useContext(CreateFormCTX);
 
-export const PagePopup: FC<IPagePopup> = ({ pageName, handlePageName, handleCreate, close }) => {
   return (
-    <PagePopupStyled>
+    <PagePopupStyled
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleCreate();
+        closePopup();
+      }}
+      onMouseDown={(e) => e.stopPropagation()}
+    >
       <div className='popup'>
         <Shape className='popup-shape' borderRadius={24} />
 
         <div className='popup-title'>
           <Typography type='RoundedHeavy24'>New</Typography>
+
           <Typography type='RoundedHeavy24' className='popup-title-themed'>
             page
           </Typography>
@@ -80,14 +84,14 @@ export const PagePopup: FC<IPagePopup> = ({ pageName, handlePageName, handleCrea
             name='new-page'
             placeholder='Title'
             limitSymbols={24}
-            value={pageName}
-            onChange={handlePageName}
+            value={formState.name}
+            onChange={(pageName) => dispatchForm({ key: 'name', payload: pageName })}
           />
         </div>
 
         <div className='popup-buttons'>
-          <BtnCta title='Create' handler={() => handleCreate(close)} />
-          <BtnGhost title='Cancel' handler={() => close()} />
+          <BtnCta title='Create' type='submit' />
+          <BtnGhost type='button' title='Cancel' handler={() => closePopup()} />
         </div>
       </div>
     </PagePopupStyled>

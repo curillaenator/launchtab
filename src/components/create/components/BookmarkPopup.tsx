@@ -1,24 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-
-import { useCreateBookmark } from '../hooks/useCreateBookmark';
-
-import { TextInput } from '@src/components/inputs/TextInput';
 import { BtnCta, BtnGhost, BtnIcon } from '@launch-ui/button';
-import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
-import { Card } from '@src/components/card/Card';
 import { Shape } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import type { States, Handlers } from '../hooks/useCreateForm';
+import { CreateFormCTX } from '../context';
+import { useCustomIcons } from '../hooks/useCustomIcons';
+
+import { TextInput } from '@src/components/inputs/TextInput';
+import { Scrollbars } from '@src/components/scrollbars';
+import { Card } from '@src/components/card';
+import { Loader } from '@src/components/loader';
 
 const ICONS_IN_A_ROW = 4;
 
-const BookmarkPopupStyled = styled.div`
+const BookmarkPopupStyled = styled.form`
   position: relative;
   width: calc(80px * ${ICONS_IN_A_ROW} + 8px * (${ICONS_IN_A_ROW} - 1) + 2 * 32px + 16px);
   padding: 32px;
-  border-radius: 20px;
   background-color: transparent;
 
   .popup-shape {
@@ -26,6 +25,7 @@ const BookmarkPopupStyled = styled.div`
     fill: ${({ theme }) => theme.backgrounds.base};
     filter: drop-shadow(${({ theme }) => theme.shadows.card});
     z-index: 0;
+    pointer-events: none;
   }
 
   .popup-title {
@@ -49,6 +49,12 @@ const BookmarkPopupStyled = styled.div`
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px;
+  }
+
+  .popup-iconsLoader {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .popup-icons {
@@ -76,27 +82,20 @@ const BookmarkPopupStyled = styled.div`
   }
 `;
 
-interface IBookmarkPopup {
-  values: States;
-  handlers: Handlers;
-  handleCreate: (close: () => void) => void;
-  close: () => void;
-}
+export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
+  const { formState, dispatchForm, handleCreate } = useContext(CreateFormCTX);
 
-export const BookmarkPopup: FC<IBookmarkPopup> = (props) => {
-  const { values, handlers, handleCreate, close } = props;
-
-  const { iconsWithGoodLinks, fetchIcons } = useCreateBookmark(values.name);
-
-  const bookmark = {
-    name: values.name || 'Title',
-    link: values.link,
-    imageURL: values.imageURL,
-    iconURL: values.iconURL,
-  };
+  const { iconsWithGoodLinks, isFetching, fetchIcons } = useCustomIcons(formState.name);
 
   return (
-    <BookmarkPopupStyled>
+    <BookmarkPopupStyled
+      onSubmit={(e) => {
+        e.preventDefault;
+        handleCreate();
+        closePopup();
+      }}
+      onMouseDown={(e) => e.stopPropagation()}
+    >
       <Shape borderRadius={24} className='popup-shape' />
 
       <div className='popup-title'>
@@ -113,23 +112,29 @@ export const BookmarkPopup: FC<IBookmarkPopup> = (props) => {
           iconName='pencil'
           name='new-bookmark'
           limitSymbols={24}
-          value={values.name}
-          onChange={handlers.handleName}
+          value={formState.name}
+          onChange={(bmName) => dispatchForm({ key: 'name', payload: bmName })}
           onFocusOut={fetchIcons}
           placeholder='Title'
         />
 
         <TextInput
-          type='url'
+          type='text'
           iconName='link'
           name='new-link'
-          value={values.link}
-          onChange={handlers.handleLink}
+          value={formState.link}
+          onChange={(link) => dispatchForm({ key: 'link', payload: link })}
           placeholder='Site link'
         />
       </div>
 
-      {!!iconsWithGoodLinks.length && (
+      {isFetching && (
+        <div className='popup-iconsLoader'>
+          <Loader size='32px' />
+        </div>
+      )}
+
+      {!!iconsWithGoodLinks.length && !isFetching && (
         <div className='popup-icons'>
           <Scrollbars height='172px'>
             <div className='popup-icons-array'>
@@ -137,7 +142,7 @@ export const BookmarkPopup: FC<IBookmarkPopup> = (props) => {
                 <BtnIcon
                   key={icon.url}
                   imageURL={icon.url}
-                  imageHandler={(iconURL: string) => handlers.handleIconURL(iconURL)}
+                  imageHandler={(iconURL: string) => dispatchForm({ key: 'iconURL', payload: iconURL })}
                 />
               ))}
             </div>
@@ -146,12 +151,21 @@ export const BookmarkPopup: FC<IBookmarkPopup> = (props) => {
       )}
 
       <div className='popup-preview'>
-        <Card bookmark={bookmark} as='div' hasBorder />
+        <Card
+          as='div'
+          hasBorder
+          bookmark={{
+            name: formState.name || 'Title',
+            link: formState.link,
+            imageURL: formState.imageURL,
+            iconURL: formState.iconURL,
+          }}
+        />
       </div>
 
       <div className='popup-buttons'>
-        <BtnCta title='Create' handler={() => handleCreate(close)} />
-        <BtnGhost title='Cancel' handler={() => close()} />
+        <BtnCta title='Create' type='submit' />
+        <BtnGhost type='button' title='Cancel' handler={() => closePopup()} />
       </div>
     </BookmarkPopupStyled>
   );

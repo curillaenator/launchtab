@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Typography } from '@launch-ui/typography';
 import { ButtonGhost } from '@launch-ui/button';
+import { Corners } from '@launch-ui/shape';
 
 import { useSelectProps } from './useSelectProps';
 import { SelectStyled } from './select.styled';
@@ -23,6 +24,8 @@ export const Select: FC<SelectProps> = (props) => {
   return (
     <SelectStyled open={open} bodyHeight={options.length * optionHeight}>
       <button className='dropdown-title' aria-hidden={!open} type='button' onClick={defferedOpen ? undefined : setOpen}>
+        <Corners borderRadius={20} stroke={2} />
+
         <Typography type='RoundedBold14' className='dropdown-title-text'>
           {triggerTitle || ''}
         </Typography>
@@ -31,15 +34,20 @@ export const Select: FC<SelectProps> = (props) => {
       </button>
 
       <div className='dropdown-body' ref={menuRef}>
-        {options.map((option) => (
-          <div className='dropdown-body-option' key={option.value}>
-            <ButtonGhost
-              title={option.title}
-              onClick={() => optionHandler(option.value)}
-              active={selected === option.value}
-            />
-          </div>
-        ))}
+        <Corners borderRadius={20} stroke={2} />
+
+        {defferedOpen &&
+          options
+            .sort((a) => (a.value === selected ? -1 : 0))
+            .map((option) => (
+              <div className='dropdown-body-option' key={option.value}>
+                <ButtonGhost
+                  title={option.title}
+                  onClick={() => optionHandler(option.value)}
+                  active={selected === option.value}
+                />
+              </div>
+            ))}
       </div>
     </SelectStyled>
   );

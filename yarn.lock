@@ -3364,6 +3364,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/button@workspace:kit/button"
   dependencies:
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
   peerDependencies:
@@ -3444,6 +3445,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/select@workspace:kit/select"
   dependencies:
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
     "@launch-ui/utils": 1.0.1
@@ -3453,7 +3455,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/shape@*, @launch-ui/shape@workspace:kit/shape":
+"@launch-ui/shape@*, @launch-ui/shape@1.0.5, @launch-ui/shape@workspace:kit/shape":
   version: 0.0.0-use.local
   resolution: "@launch-ui/shape@workspace:kit/shape"
   dependencies:

@@ -19,7 +19,7 @@ const ButtonGhostStyled = styled.button<IButtonStyled>`
   z-index: 20;
 
   transition: color 0.08s ease-in-out;
-  color: ${({ theme }) => theme.texts.base};
+  color: ${({ theme, active }) => (active ? theme.primary[500] : theme.texts.base)};
 
   &:disabled {
     cursor: default !important;

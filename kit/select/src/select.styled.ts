@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import type { SelectStyledProps } from './interfaces';
 
 export const SelectStyled = styled.div<SelectStyledProps>`
@@ -7,27 +8,31 @@ export const SelectStyled = styled.div<SelectStyledProps>`
   position: relative;
 
   .dropdown-title {
+    --shp-bdc: ${({ theme }) => theme.backgrounds.light};
+    --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.light};
+    border-radius: calc(20px * 1.25 + 3px);
+
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 220px;
     height: 56px;
-    padding: 0 1.5rem;
-    border-radius: 1rem;
-    border: 2px solid ${({ theme }) => theme.backgrounds.light};
-    background-color: ${({ theme }) => theme.backgrounds.base};
-    z-index: 100;
+    padding: 0 24px;
+
+    z-index: 10;
 
     &-text {
       color: ${({ theme }) => theme.texts.base};
       user-select: none;
-      transition: 0.08s linear;
+      transition: 200ms linear;
     }
 
     &-shevron {
       transform: ${({ open }) => (open ? 'rotate(-180deg)' : 'rotate(0)')};
-      transition: 0.08s linear;
+      transition: 200ms linear;
       fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.base)};
     }
 
@@ -43,14 +48,18 @@ export const SelectStyled = styled.div<SelectStyledProps>`
   }
 
   .dropdown-body {
+    --shp-bdc: ${({ theme }) => theme.backgrounds.light};
+    --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.light};
+    border-radius: calc(20px * 1.25 + 3px);
+
     position: absolute;
     top: 0;
     left: 0;
     width: 164px;
-    height: ${({ open, bodyHeight }) => (open ? bodyHeight : 0)}px;
-    overflow: hidden;
-    transition: 0.12s ease-in-out;
-    border-radius: 1rem 0 1rem 1rem;
+    height: ${({ open, bodyHeight }) => (open ? bodyHeight : 56)}px;
+    transition: 200ms ease;
     background-color: ${({ theme }) => theme.backgrounds.base};
     opacity: ${({ open }) => (open ? 1 : 0)};
     filter: drop-shadow(${({ theme }) => theme.shadows.card});
@@ -64,6 +73,10 @@ export const SelectStyled = styled.div<SelectStyledProps>`
       padding-left: 0.5rem;
       background-color: transparent;
       border-bottom: 1px solid ${({ theme }) => theme.backgrounds.light};
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 `;

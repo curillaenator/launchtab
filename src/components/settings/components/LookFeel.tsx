@@ -114,7 +114,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
         <>
           {lookfeel.wallpaper && (
             <Titlewrap title='Current wallpaper' noOffset>
-              <ImagePreview alt='launchtabs-wallpaper' src={lookfeel.wallpaper} />
+              <ImagePreview clickable={false} alt='launchtabs-wallpaper' src={lookfeel.wallpaper} />
             </Titlewrap>
           )}
 

@@ -1,4 +1,5 @@
 import React, { FC, ImgHTMLAttributes } from 'react';
+import { Corners } from '@launch-ui/shape';
 import styled from 'styled-components';
 
 interface ImagePreviewProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -8,19 +9,20 @@ interface ImagePreviewProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 const ImagePreviewStyled = styled.div<ImagePreviewProps>`
+  --shp-bdc: ${({ theme, active, avgColor }) =>
+    active ? avgColor || theme.backgrounds.light : theme.backgrounds.light};
+
+  --shp-bgc: transparent;
+
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   min-width: 350px;
-  aspect-ratio: 16 / 9;
-  border-radius: 18px;
-  overflow: hidden;
-  background-color: ${({ theme }) => theme.backgrounds.base};
-  transition: 0.12s ease-in-out;
+  background-color: transparent;
+  transition: 200ms ease-in-out;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
-  border: ${({ active }) => (active ? '8px' : '0px')} solid
-    ${({ theme, active, avgColor }) => (active ? avgColor || theme.backgrounds.light : 'transparent')};
 
   &:hover {
     opacity: ${({ clickable }) => (clickable ? 0.5 : 1)};
@@ -28,8 +30,10 @@ const ImagePreviewStyled = styled.div<ImagePreviewProps>`
 
   .preview-image {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
+    border-radius: calc(22px * 1.25 + 3px);
+    user-select: none;
 
     &_active {
     }
@@ -37,10 +41,12 @@ const ImagePreviewStyled = styled.div<ImagePreviewProps>`
 `;
 
 export const ImagePreview: FC<ImagePreviewProps> = (props) => {
-  const { src, alt, active, clickable, avgColor, ...rest } = props;
+  const { src, alt, active, clickable, avgColor, onClick, ...rest } = props;
 
   return (
-    <ImagePreviewStyled active={active} clickable={clickable} avgColor={avgColor}>
+    <ImagePreviewStyled active={active} clickable={clickable} avgColor={avgColor} onClick={onClick}>
+      <Corners borderRadius={24} stroke={4} />
+
       {src && <img {...rest} className='preview-image' src={src} alt={alt} draggable={false} />}
     </ImagePreviewStyled>
   );

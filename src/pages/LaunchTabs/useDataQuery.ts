@@ -1,6 +1,6 @@
 import { batch } from 'react-redux';
 import { useEffect } from 'react';
-import isEqual from 'lodash.isequal';
+import { isEqual } from 'lodash';
 
 import { useAppDispatch, useAppSelector } from '@src/hooks';
 import { pagesApi, localStorageApi } from '@src/api/api';

@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import styled from 'styled-components';
 import SortableList, { SortableItem } from 'react-easy-sort';
@@ -27,24 +27,25 @@ const SortableListStyled = styled(SortableList)`
 export const Tabs: FC = () => {
   const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
 
-  const sortablePages = tabs.filter((...[, i]) => i !== 0);
+  const sortableTabs = useMemo(() => tabs.filter((...[, i]) => i !== 0), [tabs]);
+  console.log('tabs', tabs, sortableTabs);
 
   const onSortEnd = useCallback(
     (oldIndex: number, newIndex: number) => {
-      const sortedKnobs = arrayMoveImmutable([...sortablePages], oldIndex, newIndex);
+      const sortedKnobs = arrayMoveImmutable([...sortableTabs], oldIndex, newIndex);
 
       // dispatch(updatePagesOrder([pages[0], ...sortedKnobs]));
     },
-    [tabs, sortablePages],
+    [tabs, sortableTabs],
   );
 
   if (!tabs.length) return null;
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      <Button IconLeft={HomeIcon} title='Home' active={currentTab === 'Home'} onClick={() => setCurrentTab('home')} />
+      <Button IconLeft={HomeIcon} title='Home' active={currentTab === 'Home'} onClick={() => setCurrentTab('Home')} />
 
-      {sortablePages.map(({ name }, i) => (
+      {sortableTabs.map(({ name }, i) => (
         <SortableItem key={`${name}${i}`}>
           {/* <div> */}
           {/* <ContextMenu items={getContextMenuItems(knob, dispatch)}> */}

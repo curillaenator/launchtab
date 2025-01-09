@@ -10,7 +10,7 @@ import { $settingsStore } from '@src/entities/settings';
 
 import { CardImage } from './CardImage';
 
-import type { BookmarkCardProps } from '@src/types';
+import type { BookmarkCardProps } from '@src/entities/bookmarks';
 
 const animation = keyframes`${fadeIn}`;
 

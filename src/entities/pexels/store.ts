@@ -1,13 +1,7 @@
 import type { PhotosWithTotalResults } from 'pexels';
 import { createStore, createEvent } from 'effector';
 
-const PEXELS_INITIAL_STATE: PhotosWithTotalResults = {
-  total_results: 0,
-  page: 1,
-  per_page: 8,
-  photos: [],
-  next_page: 2,
-};
+import { PEXELS_INITIAL_STATE } from './constants';
 
 interface PexelsStore {
   pexelsQuery: string;
@@ -26,17 +20,8 @@ const $pexelsStore = createStore<PexelsStore>({
 });
 
 $pexelsStore
-  .on(setPexels, (prevState, pexels) => ({
-    ...prevState,
-    pexels,
-  }))
-  .on(setPexelsQuery, (prevState, pexelsQuery) => ({
-    ...prevState,
-    pexelsQuery,
-  }))
-  .on(setPexelsLoading, (prevState, pexelsLoading) => ({
-    ...prevState,
-    pexelsLoading,
-  }));
+  .on(setPexels, (prevState, pexels) => ({ ...prevState, pexels }))
+  .on(setPexelsQuery, (prevState, pexelsQuery) => ({ ...prevState, pexelsQuery }))
+  .on(setPexelsLoading, (prevState, pexelsLoading) => ({ ...prevState, pexelsLoading }));
 
 export { $pexelsStore, setPexels, setPexelsQuery, setPexelsLoading };

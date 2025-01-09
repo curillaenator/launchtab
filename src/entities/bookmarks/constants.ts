@@ -1,4 +1,4 @@
-import { BookmarkTabProps } from './interfaces';
+import { BookmarkTabProps, BookmarksStore } from './interfaces';
 
 const DEFAULT_PAGES: BookmarkTabProps[] = [
   {
@@ -41,4 +41,9 @@ const DEFAULT_PAGES: BookmarkTabProps[] = [
   },
 ];
 
-export { DEFAULT_PAGES };
+const DEFAULT_APP_STORE: BookmarksStore = {
+  currentTab: 'Home',
+  tabs: DEFAULT_PAGES,
+};
+
+export { DEFAULT_PAGES, DEFAULT_APP_STORE };

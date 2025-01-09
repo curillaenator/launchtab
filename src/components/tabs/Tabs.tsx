@@ -8,7 +8,8 @@ import { Button } from '@launch-ui/button';
 // import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 
-import { $bookmarksStore, setCurrentTab } from '@src/entities/bookmarks';
+import { $userStore } from '@src/entities/user';
+import { $bookmarksStore, setCurrentTab, reorderTabs } from '@src/entities/bookmarks';
 
 // import { getContextMenuItems } from './helpers';
 
@@ -25,16 +26,19 @@ const SortableListStyled = styled(SortableList)`
 `;
 
 export const Tabs: FC = () => {
+  const { uid } = useEffectorUnit($userStore);
   const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
 
+  console.log(tabs);
+
   const sortableTabs = useMemo(() => tabs.filter((...[, i]) => i !== 0), [tabs]);
-  console.log('tabs', tabs, sortableTabs);
 
   const onSortEnd = useCallback(
     (oldIndex: number, newIndex: number) => {
-      const sortedKnobs = arrayMoveImmutable([...sortableTabs], oldIndex, newIndex);
+      if (!uid || !sortableTabs.length) return;
 
-      // dispatch(updatePagesOrder([pages[0], ...sortedKnobs]));
+      const sortedTabs = arrayMoveImmutable([...sortableTabs], oldIndex, newIndex);
+      reorderTabs({ uid, tabs: [tabs[0], ...sortedTabs], tabName: '' });
     },
     [tabs, sortableTabs],
   );

@@ -28,7 +28,6 @@ const getUserData = createEffect(async (uid: string) => {
   const userSnap = await getDoc(doc(fsdb, 'users', uid));
   setAppLoading(false);
 
-  console.log('userSnap.data()', userSnap.data());
   return !!userSnap.exists() ? userSnap.data() : { ...NULL_USER };
 });
 

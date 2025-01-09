@@ -10,11 +10,15 @@ import { Create } from '@src/components/create';
 
 import { $userStore } from '@src/entities/user';
 import { $bookmarksStore, setCurrentTab, reorderTabs } from '@src/entities/bookmarks';
+import { MY_MOCK } from './mock';
 
 // import { getContextMenuItems } from './helpers';
 
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
+
+// import { collection, doc, updateDoc } from 'firebase/firestore';
+// import { fsdb } from '@src/api/firebase';
 
 //@ts-expect-error
 const SortableListStyled = styled(SortableList)`
@@ -28,8 +32,6 @@ const SortableListStyled = styled(SortableList)`
 export const Tabs: FC = () => {
   const { uid } = useEffectorUnit($userStore);
   const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
-
-  console.log(tabs);
 
   const sortableTabs = useMemo(() => tabs.filter((...[, i]) => i !== 0), [tabs]);
 
@@ -48,6 +50,14 @@ export const Tabs: FC = () => {
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
       <Button IconLeft={HomeIcon} title='Home' active={currentTab === 'Home'} onClick={() => setCurrentTab('Home')} />
+
+      {/* <Button
+        IconLeft={HomeIcon}
+        title='Update'
+        onClick={() => {
+          updateDoc(doc(collection(fsdb, 'users'), uid!), { pages: MY_MOCK });
+        }}
+      /> */}
 
       {sortableTabs.map(({ name }, i) => (
         <SortableItem key={`${name}${i}`}>

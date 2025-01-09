@@ -17,5 +17,6 @@ $bookmarksStore
   .on(reorderCards.doneData, (prevState, tabs) => ({ ...prevState, tabs }))
   .on(getUserData.doneData, (prevState, userData) => ({ ...prevState, tabs: userData.pages }))
   .on(setCurrentTab, (prevState, currentTab) => ({ ...prevState, currentTab }));
+// .on(setTabs, (prevState, tabs) => ({ ...prevState, tabs }));
 
 export { $bookmarksStore, setCurrentTab, reorderCards, reorderTabs, createTab, createCard };

@@ -1,14 +1,16 @@
 import React, { FC, useState } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import styled, { keyframes } from 'styled-components';
 import { fadeIn } from 'react-animations';
 
 import { Typography } from '@launch-ui/typography';
 import { Corners } from '@launch-ui/shape';
 
-import { useAppSelector } from '@src/hooks/hooks';
+import { $settingsStore } from '@src/entities/settings';
+
 import { CardImage } from './CardImage';
 
-import type { IBookmark } from '@src/types';
+import type { BookmarkCardProps } from '@src/types';
 
 const animation = keyframes`${fadeIn}`;
 
@@ -77,7 +79,7 @@ const CardStyled = styled.a<ICardStyled>`
 `;
 
 interface CardProps {
-  bookmark: IBookmark;
+  bookmark: BookmarkCardProps;
   className?: string;
   as?: 'a' | 'div';
   hasBorder?: boolean;
@@ -86,14 +88,14 @@ interface CardProps {
 export const Card: FC<CardProps> = (props) => {
   const { bookmark, className = 'class-bookmark', as = 'a' } = props;
 
-  const wallpapper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
+  const { wallpaper } = useEffectorUnit($settingsStore);
 
   const [noAnimation, setNoAnimation] = useState(false);
 
   return (
     <CardStyled
       isDeleted={bookmark.deleted}
-      isOpaque={!!wallpapper}
+      isOpaque={!!wallpaper}
       noAnimation={noAnimation}
       href={`https://${bookmark.link}`}
       as={as}

@@ -1,11 +1,11 @@
 export interface IUpdate {
   uid: string;
-  tabs: IData[];
+  tabs: BookmarkTabProps[];
 }
 
 // COMMON
 
-export interface IBookmark {
+export interface BookmarkCardProps {
   id?: string;
   name: string;
   deleted?: boolean;
@@ -14,7 +14,7 @@ export interface IBookmark {
   iconURL?: string | null;
 }
 
-export interface IData {
+export interface BookmarkTabProps {
   name: string;
-  pages: IBookmark[];
+  pages: BookmarkCardProps[];
 }

@@ -1,5 +1,4 @@
 import { useReducer, useCallback } from 'react';
-import { useAppDispatch } from '../../../hooks/hooks';
 import { createPage, createBookmark } from '../../../redux/reducers/bookmarks';
 
 import type { FormStateType, FormActionType } from '../interfaces';
@@ -10,8 +9,6 @@ const formReducer = (prev: FormStateType, action: FormActionType) => ({
 });
 
 export const useCreateForm = (create: 'new-page' | 'new-bookmark') => {
-  const dispatchApp = useAppDispatch();
-
   const [formState, dispatchForm] = useReducer(formReducer, { name: '', link: '', iconURL: '' });
 
   const resetFormState = () => {
@@ -27,14 +24,14 @@ export const useCreateForm = (create: 'new-page' | 'new-bookmark') => {
     const submitLink = link.trim().replace(/^https?:\/\//, '');
     const submitIcon = iconURL.trim();
 
-    if (create === 'new-page' && submitName) {
-      dispatchApp(createPage(submitName));
-    }
+    // if (create === 'new-page' && submitName) {
+    //   dispatchApp(createPage(submitName));
+    // }
 
-    if (create === 'new-bookmark' && submitName && submitLink) {
-      dispatchApp(createBookmark(submitName, submitLink, null, submitIcon || null));
-    }
-  }, [create, formState, dispatchApp]);
+    // if (create === 'new-bookmark' && submitName && submitLink) {
+    //   dispatchApp(createBookmark(submitName, submitLink, null, submitIcon || null));
+    // }
+  }, [create, formState]);
 
   return {
     formContextValue: { formState, dispatchForm, handleCreate },

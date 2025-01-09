@@ -10,7 +10,7 @@ import { setIsDataLoading } from '@src/redux/reducers/loadings';
 
 import { applySettings } from '@src/redux/reducers/settings';
 
-import type { IData } from '@src/types';
+import type { BookmarkTabProps } from '@src/types';
 
 export const useDataQuery = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -29,7 +29,7 @@ export const useDataQuery = () => {
     }
 
     batch(() => {
-      if (!!localBookmarks) dispatch(applyData(JSON.parse(localBookmarks) as IData[]));
+      if (!!localBookmarks) dispatch(applyData(JSON.parse(localBookmarks) as BookmarkTabProps[]));
       if (!!localSettings) dispatch(applySettings(JSON.parse(localSettings)));
     });
   }, [dispatch]);

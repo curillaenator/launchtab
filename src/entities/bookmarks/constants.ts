@@ -1,6 +1,6 @@
-import { BookmarkTabProps } from '@src/types';
+import { BookmarkTabProps } from './interfaces';
 
-export const initialPages: BookmarkTabProps[] = [
+const DEFAULT_PAGES: BookmarkTabProps[] = [
   {
     name: 'Home',
     pages: [
@@ -40,3 +40,5 @@ export const initialPages: BookmarkTabProps[] = [
     ],
   },
 ];
+
+export { DEFAULT_PAGES };

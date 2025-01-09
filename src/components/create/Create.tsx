@@ -10,7 +10,9 @@ import { CreateFormCTX } from './context';
 import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
 
+//@ts-expect-error
 import LinkIcon from '@src/assets/svg/link.svg';
+//@ts-expect-error
 import FolderIcon from '@src/assets/svg/folder.svg';
 
 const appear = keyframes`
@@ -25,6 +27,7 @@ const appear = keyframes`
   }
 `;
 
+//@ts-expect-error
 const PopupStyled = styled(Popup)`
   &-overlay {
   }
@@ -86,7 +89,7 @@ export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) 
         onClose={() => resetFormState()}
         keepTooltipInside='.layout-container'
         position={['right center', 'left center']}
-        trigger={(open) =>
+        trigger={(open: boolean) =>
           create === 'new-page' ? (
             <Button active={open} IconLeft={FolderIcon} />
           ) : (

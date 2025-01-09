@@ -1,18 +1,16 @@
 import React, { FC } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import SortableList, { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 import styled from 'styled-components';
 
-import { ContextMenu } from '@launch-ui/context-menu';
+import { $bookmarksStore, setCurrentTab, BookmarkTabProps } from '@src/entities/bookmarks';
+
+// import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 import { Card } from '@src/components/card/Card';
 
-import { useAppDispatch } from '@src/hooks/hooks';
-
-import { updateBookmarksOrder, deleteBookmark } from '@src/redux/reducers/bookmarks';
-
-import type { IBookmark } from '@src/types/types';
-
+//@ts-expect-error
 const SortableListStyled = styled(SortableList)`
   display: grid;
   grid-template-columns: 1fr;
@@ -53,25 +51,22 @@ const HoverWrapper = styled.div`
   }
 `;
 
-interface IBookmarks {
-  curPage: string;
-  bookmarks: IBookmark[];
-}
+export const Bookmarks: FC = () => {
+  const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
 
-export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
-  const dispatch = useAppDispatch();
+  const { name, pages: bookmarks } = tabs.find((el) => el.name === currentTab) as BookmarkTabProps;
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
     const updBookmarks = arrayMoveImmutable([...bookmarks], oldIndex, newIndex);
-    dispatch(updateBookmarksOrder(updBookmarks));
+    // dispatch(updateBookmarksOrder(updBookmarks));
   };
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
       {bookmarks.map((bookmark, i) => (
-        <SortableItem key={`${curPage}${i}`}>
+        <SortableItem key={`${bookmark.name}${i}`}>
           <HoverWrapper>
-            <ContextMenu
+            {/* <ContextMenu
               items={[
                 {
                   title: 'Delete',
@@ -79,9 +74,9 @@ export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
                   handler: () => dispatch(deleteBookmark(bookmark.name)),
                 },
               ]}
-            >
-              <Card bookmark={bookmark} />
-            </ContextMenu>
+            > */}
+            <Card bookmark={bookmark} />
+            {/* </ContextMenu> */}
           </HoverWrapper>
         </SortableItem>
       ))}

@@ -2,13 +2,13 @@ import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { ref, set, push, child } from 'firebase/database';
 
 import type { ISettings } from '@src/redux/reducers/settings';
-import type { IUpdate, IData } from '@src/types';
+import type { IUpdate, BookmarkTabProps } from '@src/types';
 
 import { fsdb, rtdb } from './firebase';
 
 interface UserDataResponse {
   uid: string;
-  pages: IData[];
+  pages: BookmarkTabProps[];
   settings: ISettings;
 }
 
@@ -18,7 +18,7 @@ export const pagesApi = {
 
     console.log('getData', snap.data());
 
-    const userData = snap.data() as { uid: string; pages: IData[]; settings: ISettings };
+    const userData = snap.data() as { uid: string; pages: BookmarkTabProps[]; settings: ISettings };
 
     // if (userData?.pages?.length) {
     //   userData.pages.forEach((page) => {
@@ -41,8 +41,8 @@ export const pagesApi = {
 interface LocalStorageAPI {
   setSettings: (object: ISettings) => void;
   getSettings: () => ISettings | null;
-  setBookmarks: (object: IData[]) => void;
-  getBookmarks: () => IData[] | null;
+  setBookmarks: (object: BookmarkTabProps[]) => void;
+  getBookmarks: () => BookmarkTabProps[] | null;
   clear: () => void;
 }
 

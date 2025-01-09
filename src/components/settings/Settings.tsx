@@ -23,8 +23,6 @@ export const Settings: FC = () => {
   const settings = useEffectorUnit($settingsStore);
   const { uid } = useEffectorUnit($userStore);
 
-  console.log('settings', settings);
-
   if (!uid) return null;
 
   return (

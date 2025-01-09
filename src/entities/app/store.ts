@@ -8,7 +8,7 @@ interface AppStore {
 }
 
 const DEFAULT_APP_STORE: AppStore = {
-  isLoading: false,
+  isLoading: true,
   isSignInOpen: false,
   isAsideOpen: false,
   isRightDrawerOpen: false,

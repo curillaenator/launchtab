@@ -3,13 +3,13 @@ import { batch } from 'react-redux';
 import shortid from 'shortid';
 
 import { pagesApi, localStorageApi } from '@src/api';
-import type { IBookmark, IData, IUpdate, TThunk } from '@src/types';
+import type { BookmarkCardProps, BookmarkTabProps, IUpdate, TThunk } from '@src/types';
 
 export interface IBookmarks {
   pages: string[];
   curPage: string;
-  data: IData[];
-  curBookmarks: IBookmark[];
+  data: BookmarkTabProps[];
+  curBookmarks: BookmarkCardProps[];
   message: string;
 }
 
@@ -33,11 +33,11 @@ const bmSlice = createSlice({
       state.curPage = action.payload;
     },
 
-    setCurBookmarks: (state, action: PayloadAction<IBookmark[]>) => {
+    setCurBookmarks: (state, action: PayloadAction<BookmarkCardProps[]>) => {
       state.curBookmarks = action.payload;
     },
 
-    setData: (state, action: PayloadAction<IData[]>) => {
+    setData: (state, action: PayloadAction<BookmarkTabProps[]>) => {
       state.data = action.payload;
     },
 
@@ -52,11 +52,11 @@ export const { setPages, setCurPage, setCurBookmarks, setData, setMessage } = bm
 
 // THUNKS
 
-type TApplyData = (pagesData: IData[]) => TThunk;
+type TApplyData = (pagesData: BookmarkTabProps[]) => TThunk;
 
 export const applyData: TApplyData = (pagesData) => {
   return (dispatch) => {
-    const pages: string[] = pagesData.map((page: IData) => page.name);
+    const pages: string[] = pagesData.map((page: BookmarkTabProps) => page.name);
     const curBookmarks = pagesData[0].pages;
 
     batch(() => {
@@ -150,13 +150,13 @@ export const updatePagesOrder = (pagesOrder: string[]): TThunk => {
     const updData = pagesOrder.map((knob) => data.find((tab) => tab.name === knob));
 
     batch(() => {
-      dispatch(setData(updData as IData[]));
+      dispatch(setData(updData as BookmarkTabProps[]));
       dispatch(setPages(pagesOrder));
     });
 
     if (user) {
-      !user.isAnonymous && localStorageApi.setBookmarks(updData as IData[]);
-      const userData: IUpdate = { uid: user.uid, tabs: updData as IData[] };
+      !user.isAnonymous && localStorageApi.setBookmarks(updData as BookmarkTabProps[]);
+      const userData: IUpdate = { uid: user.uid, tabs: updData as BookmarkTabProps[] };
       const message = await pagesApi.updateData(userData);
 
       dispatch(setMessage(message));
@@ -164,7 +164,7 @@ export const updatePagesOrder = (pagesOrder: string[]): TThunk => {
   };
 };
 
-export const updateBookmarksOrder = (bookmarks: IBookmark[]): TThunk => {
+export const updateBookmarksOrder = (bookmarks: BookmarkCardProps[]): TThunk => {
   return async (dispatch, getState) => {
     const { curPage, data } = getState().bookmarks;
     const user = getState().auth.user;

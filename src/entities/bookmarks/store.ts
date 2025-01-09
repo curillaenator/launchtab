@@ -24,8 +24,11 @@ interface ReorderCardPayload extends BasePayload {
   reorderedCards: BookmarkCardProps[];
 }
 
+const setLocalTabs = (tabs: BookmarkTabProps[]) => localStorage.setItem('tabs', JSON.stringify(tabs));
+
 const reorderTabs = createEffect(({ uid, tabs }: BasePayload) => {
   updateDoc(doc(collection(fsdb, 'users'), uid), { pages: tabs });
+  setLocalTabs(tabs);
   return tabs;
 });
 
@@ -38,12 +41,14 @@ const reorderCards = createEffect(({ uid, tabs, tabName, reorderedCards }: Reord
   newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: reorderedCards });
 
   updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
+  setLocalTabs(newFullTabs);
   return newFullTabs;
 });
 
 const createTab = createEffect(({ uid, tabName, tabs }: BasePayload) => {
   const newFullTabs = [...tabs, { name: tabName, pages: [] }];
   updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
+  setLocalTabs(newFullTabs);
   return newFullTabs;
 });
 
@@ -59,6 +64,7 @@ const createCard = createEffect(({ uid, tabName, tabs, card }: CreateCardPayload
   newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: [...tabs[updatedTabIdx].pages, card] });
 
   updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
+  setLocalTabs(newFullTabs);
   return newFullTabs;
 });
 

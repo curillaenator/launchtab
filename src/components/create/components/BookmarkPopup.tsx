@@ -102,7 +102,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
   return (
     <BookmarkPopupStyled
       onSubmit={(e) => {
-        e.preventDefault;
+        // e.preventDefault();
         handleCreate?.();
         closePopup();
       }}

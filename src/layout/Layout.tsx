@@ -33,9 +33,7 @@ export const Layout: FC = () => {
 
   const showLoader = userLoading || isAppLoading;
 
-  useEffect(() => {
-    dispatch(checkUserIsAuthed());
-  }, [dispatch]);
+  useEffect(() => dispatch(checkUserIsAuthed()), [dispatch]);
 
   useEffect(() => {
     const html = document.querySelector('html');
@@ -63,7 +61,9 @@ export const Layout: FC = () => {
         [isAsideOpen, isRightDrawerOpen, setIsAsideOpen, setIsRightDrawerOpen],
       )}
     >
+      {/** @ts-expect-error */}
       <ThemeProvider theme={currentTheme}>
+        {/** @ts-expect-error */}
         <GlobalFonts />
 
         {showLoader && <Loader fullscreen size='56px' />}

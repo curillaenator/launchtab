@@ -52,7 +52,7 @@ export const useDataQuery = () => {
         return;
       }
 
-      const { pages: resPages, settings: resSettings } = response as { pages: IData[]; settings: ISettings };
+      const { pages: resPages, settings: resSettings } = response;
 
       const bookmarks = localStorage.getItem('bookmarks') ? JSON.parse(localStorage.getItem('bookmarks') || '') : null;
       const settings = localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings') || '') : null;

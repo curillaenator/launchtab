@@ -5,7 +5,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 
 import { store } from './redux/store';
 import { Layout } from './layout';
-import { LaunchTabs } from './pages/LaunchTabs';
+import { LaunchTabs } from './pages/LaunchTabsV2';
 
 import './index.css';
 
@@ -21,6 +21,7 @@ const router = createBrowserRouter(
 );
 
 root.render(
+  // @ts-expect-error
   <Provider store={store}>
     <RouterProvider router={router} fallbackElement={<div>подождите...</div>} />
   </Provider>,

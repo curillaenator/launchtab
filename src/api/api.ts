@@ -1,14 +1,34 @@
 import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { ref, set, push, child } from 'firebase/database';
 
 import type { ISettings } from '@src/redux/reducers/settings';
 import type { IUpdate, IData } from '@src/types';
 
-import { fsdb } from './firebase';
+import { fsdb, rtdb } from './firebase';
+
+interface UserDataResponse {
+  uid: string;
+  pages: IData[];
+  settings: ISettings;
+}
 
 export const pagesApi = {
-  async getData(userID: string) {
+  async getData(userID: string): Promise<UserDataResponse | string> {
     const snap = await getDoc(doc(fsdb, 'users', userID));
-    return snap.exists() ? snap.data() : 'Something went wrong, try reload page';
+
+    console.log('getData', snap.data());
+
+    const userData = snap.data() as { uid: string; pages: IData[]; settings: ISettings };
+
+    // if (userData?.pages?.length) {
+    //   userData.pages.forEach((page) => {
+    //     const pageKey = push(child(ref(rtdb), `pages/${userData.uid}`)).key;
+
+    //     set(ref(rtdb, `pages/${userData.uid}/${pageKey}`), page);
+    //   });
+    // }
+
+    return snap.exists() ? userData : 'Something went wrong, try reload page';
   },
 
   async updateData(data: IUpdate) {

@@ -5,6 +5,7 @@
     "baseUrl": ".",
     "noEmit": true,
     "disableSizeLimit": true,
+    "types": ["react", "node"],
     "paths": {
       "@src/*": ["src/*"]
     }

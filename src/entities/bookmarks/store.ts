@@ -1,7 +1,7 @@
 import { createStore, createEvent } from 'effector';
 
 import { getUserData, resetUser } from '@src/entities/user';
-import { reorderTabs, reorderCards, createTab, createCard } from './api';
+import { reorderTabs, reorderCards, createTab, createCard, removeCards } from './api';
 
 import { DEFAULT_APP_STORE } from './constants';
 import type { BookmarksStore } from './interfaces';
@@ -11,6 +11,7 @@ const $bookmarksStore = createStore<BookmarksStore>(DEFAULT_APP_STORE);
 
 $bookmarksStore
   .on(resetUser, () => DEFAULT_APP_STORE)
+  .on(removeCards.doneData, (prevState, tabs) => ({ ...prevState, tabs }))
   .on(createTab.doneData, (prevState, tabs) => ({ ...prevState, tabs }))
   .on(createCard.doneData, (prevState, tabs) => ({ ...prevState, tabs }))
   .on(reorderTabs.doneData, (prevState, tabs) => ({ ...prevState, tabs }))
@@ -19,4 +20,4 @@ $bookmarksStore
   .on(setCurrentTab, (prevState, currentTab) => ({ ...prevState, currentTab }));
 // .on(setTabs, (prevState, tabs) => ({ ...prevState, tabs }));
 
-export { $bookmarksStore, setCurrentTab, reorderCards, reorderTabs, createTab, createCard };
+export { $bookmarksStore, setCurrentTab, reorderCards, reorderTabs, createTab, createCard, removeCards };

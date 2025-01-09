@@ -3,10 +3,10 @@ import { useUnit as useEffectorUnit } from 'effector-react';
 import { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 
-import { $bookmarksStore, reorderCards, BookmarkTabProps } from '@src/entities/bookmarks';
+import { $bookmarksStore, reorderCards, BookmarkTabProps, removeCards } from '@src/entities/bookmarks';
 import { $userStore } from '@src/entities/user';
 
-// import { ContextMenu } from '@launch-ui/context-menu';
+import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 import { Card } from '@src/components/card/Card';
 import { SortableListStyled, HoverWrapper } from './styles';
@@ -25,20 +25,20 @@ export const Bookmarks: FC = () => {
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      {bookmarks.map((card, i) => (
-        <SortableItem key={`${card.name}${i}`}>
+      {bookmarks.map((card, cardIdx) => (
+        <SortableItem key={`${card.name}${cardIdx}`}>
           <HoverWrapper>
-            {/* <ContextMenu
+            <ContextMenu
               items={[
                 {
                   title: 'Delete',
                   danger: true,
-                  handler: () => dispatch(deleteBookmark(bookmark.name)),
+                  handler: () => removeCards({ uid: uid!, tabs, tabName: name, cardIdx }),
                 },
               ]}
-            > */}
-            <Card bookmark={card} />
-            {/* </ContextMenu> */}
+            >
+              <Card bookmark={card} />
+            </ContextMenu>
           </HoverWrapper>
         </SortableItem>
       ))}

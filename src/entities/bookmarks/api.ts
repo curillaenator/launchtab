@@ -9,6 +9,10 @@ interface BasePayload {
   tabs: BookmarkTabProps[];
 }
 
+interface RemoveCardPayload extends BasePayload {
+  cardIdx: number;
+}
+
 interface ReorderCardPayload extends BasePayload {
   reorderedCards: BookmarkCardProps[];
 }
@@ -38,6 +42,22 @@ const reorderCards = createEffect(({ uid, tabs, tabName, reorderedCards }: Reord
   return newFullTabs;
 });
 
+const removeCards = createEffect(({ uid, tabs, tabName, cardIdx }: RemoveCardPayload) => {
+  const newFullTabs = [...tabs];
+  const updatedTabIdx = tabs.findIndex((el) => el.name === tabName);
+
+  if (updatedTabIdx < 0) return tabs;
+
+  const updatedCards = [...tabs[updatedTabIdx].pages];
+  updatedCards.splice(cardIdx, 1);
+
+  newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: updatedCards });
+
+  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
+  // setLocalTabs(newFullTabs);
+  return newFullTabs;
+});
+
 const createTab = createEffect(({ uid, tabName, tabs }: BasePayload) => {
   const newFullTabs = [...tabs, { name: tabName, pages: [] }];
   updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
@@ -57,4 +77,4 @@ const createCard = createEffect(({ uid, tabName, tabs, card }: CreateCardPayload
   return newFullTabs;
 });
 
-export { reorderTabs, reorderCards, createTab, createCard };
+export { reorderTabs, reorderCards, createTab, createCard, removeCards };

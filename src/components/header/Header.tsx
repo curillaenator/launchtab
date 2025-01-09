@@ -1,13 +1,17 @@
-import React, { FC, useContext, useEffect, useCallback, useState } from 'react';
+import React, { FC, useEffect, useCallback, useState } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
+
 import styled from 'styled-components';
 import { Button } from '@launch-ui/button';
 
-import { useAppSelector } from '@src/hooks/hooks';
-import { LayoutCTX } from '@src/layout';
+import { $appStore, setAside, setRightDrawer, setSignIn } from '@src/entities/app';
+import { $userStore } from '@src/entities/user';
+
 import { SearchField } from './components/SearchField';
 
 import SettingsIcon from '@src/assets/svg/settings.svg';
 import MeatballsIcon from '@src/assets/svg/meatballs.svg';
+import LoginIcon from '@src/assets/svg/login.svg';
 
 const HeaderStyled = styled.header<{ shadowed: boolean }>`
   z-index: 1000;
@@ -21,9 +25,8 @@ const HeaderStyled = styled.header<{ shadowed: boolean }>`
 `;
 
 export const Header: FC = () => {
-  const { setIsAsideOpen, setIsRightDrawerOpen } = useContext(LayoutCTX);
-
-  const { user } = useAppSelector((state) => state.auth);
+  const user = useEffectorUnit($userStore);
+  const { isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
 
   const [shadowed, setShadowed] = useState<boolean>(false);
 
@@ -38,11 +41,20 @@ export const Header: FC = () => {
 
   return (
     <HeaderStyled shadowed={shadowed}>
-      {!user?.isAnonymous && <Button IconLeft={MeatballsIcon} onClick={() => setIsAsideOpen((prev) => !prev)} />}
+      {!!user.uid && <Button IconLeft={MeatballsIcon} onClick={() => setAside(!isAsideOpen)} />}
 
       <SearchField />
 
-      {!user?.isAnonymous && <Button IconLeft={SettingsIcon} onClick={() => setIsRightDrawerOpen((prev) => !prev)} />}
+      <Button
+        IconLeft={!!user.uid ? SettingsIcon : LoginIcon}
+        onClick={() => {
+          if (!!user.uid) {
+            setRightDrawer(!isRightDrawerOpen);
+          } else {
+            setSignIn(true);
+          }
+        }}
+      />
     </HeaderStyled>
   );
 };

@@ -10,6 +10,7 @@ import type { DrawerProps } from './interfaces';
 
 import { TransitionStyled, ContentStyled } from './drawer.styled';
 
+// @ts-expect-error
 export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
   const { open, portalId, transitionClassName, contentClassName, children, openWidth = '420px' } = props;
 

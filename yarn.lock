@@ -6052,6 +6052,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"effector-react@npm:^23.3.0":
+  version: 23.3.0
+  resolution: "effector-react@npm:23.3.0"
+  dependencies:
+    use-sync-external-store: ^1.0.0
+  peerDependencies:
+    effector: ^23.0.0
+    react: ">=16.8.0 <20.0.0"
+  checksum: 61d4aa917b0e62a52de17123f34ecca3da5964b041d2722c875c4e9aa90b9aed1bc9be12d423104e874ef54a66c1dc14fdb773c236bbc9ec00c913243405f022
+  languageName: node
+  linkType: hard
+
+"effector@npm:^23.2.3":
+  version: 23.2.3
+  resolution: "effector@npm:23.2.3"
+  checksum: 662f8a356b4ee27566ed2cea902aed8feaca8d94895ccaa68852ec961afeb5ffa50c60fa5ab8c46130a9bd7ad651fb5022ba13a765e793ab0a6733d795ed7c42
+  languageName: node
+  linkType: hard
+
 "electron-to-chromium@npm:^1.4.431":
   version: 1.4.440
   resolution: "electron-to-chromium@npm:1.4.440"
@@ -7517,6 +7536,8 @@ __metadata:
     copy-webpack-plugin: 9.0.1
     css-loader: 6.2.0
     dotenv-webpack: 7.1.0
+    effector: ^23.2.3
+    effector-react: ^23.3.0
     firebase: 9.22.2
     html-webpack-plugin: 5.3.2
     husky: 9.1.7

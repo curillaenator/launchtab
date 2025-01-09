@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LayoutStyled = styled.div<{ isAsideOpen: boolean }>`
+const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
   position: relative;
 
   display: flex;
@@ -11,7 +11,7 @@ const LayoutStyled = styled.div<{ isAsideOpen: boolean }>`
   .aside {
     position: sticky;
     top: 0;
-    width: ${({ isAsideOpen }) => (isAsideOpen ? '384px' : '0')};
+    width: ${({ $isAsideOpen }) => ($isAsideOpen ? '384px' : '0')};
     min-height: 100vh;
     max-height: 100vh;
     flex-shrink: 0;

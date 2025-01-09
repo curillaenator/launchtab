@@ -15,8 +15,10 @@ const firebaseConfig = {
   measurementId: process.env.MEASUREMENT_ID,
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-export const fsdb = getFirestore(app);
-export const rtdb = getDatabase(app);
+const auth = getAuth(app);
+const fsdb = getFirestore(app);
+const rtdb = getDatabase(app);
+
+export { auth, fsdb, rtdb, app };

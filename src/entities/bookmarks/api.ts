@@ -17,7 +17,7 @@ interface CreateCardPayload extends BasePayload {
   card: BookmarkCardProps;
 }
 
-const setLocalTabs = (tabs: BookmarkTabProps[]) => localStorage.setItem('tabs', JSON.stringify(tabs));
+// const setLocalTabs = (tabs: BookmarkTabProps[]) => localStorage.setItem('tabs', JSON.stringify(tabs));
 
 const reorderTabs = createEffect(({ uid, tabs }: BasePayload) => {
   updateDoc(doc(collection(fsdb, 'users'), uid), { pages: tabs });

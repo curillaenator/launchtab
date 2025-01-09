@@ -1,39 +1,31 @@
-import React, { FC, useReducer, useEffect } from 'react';
+import React, { FC } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { Corners } from '@launch-ui/shape';
-
 import { logout } from '@src/entities/user';
-import { $settingsStore, setSettings } from '@src/entities/settings';
-import { $pexelsStore, setPexels } from '@src/entities/pexels';
 
-import { ButtonAction, ButtonGhost } from '@launch-ui/button';
+import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';
+
+import { setRightDrawer } from '@src/entities/app';
+import { $settingsStore, saveSettings } from '@src/entities/settings';
+import { $userStore } from '@src/entities/user';
+
 import { SettingsStyled } from './styles';
 
+//@ts-expect-error
 import SaveIcon from '@src/assets/svg/save.svg';
+//@ts-expect-error
 import LogoutIcon from '@src/assets/svg/logout.svg';
 
-export interface ISettings {
-  closeSettings: () => void;
-}
+export const Settings: FC = () => {
+  const settings = useEffectorUnit($settingsStore);
+  const { uid } = useEffectorUnit($userStore);
 
-export const Settings: FC<ISettings> = ({ closeSettings }) => {
-  // const lookfeel = useEffectorUnit($settingsStore);
-  // const pexels = useEffectorUnit($pexelsStore);
+  console.log('settings', settings);
 
-  // useEffect(() => dispatch(r.LookFeelActions.setInitialState(userSettings)), [userSettings]);
-
-  const submitSettings = () => {
-    // appDispatch(updateSettings({ lookfeel }));
-    closeSettings();
-  };
-
-  const hadleLogOut = () => {
-    logout();
-    closeSettings();
-  };
+  if (!uid) return null;
 
   return (
     <SettingsStyled>
@@ -42,9 +34,8 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
 
         <div className='form-block form-topBlock'>
           <div className='form-title'>
-            <Typography type='RoundedHeavy36'>Appearance</Typography>
             <Typography type='RoundedHeavy36' className='form-title-themed'>
-              settings
+              Settings
             </Typography>
           </div>
 
@@ -55,8 +46,23 @@ export const Settings: FC<ISettings> = ({ closeSettings }) => {
 
         <div className='form-block'>
           <div className='form-buttons'>
-            <ButtonGhost LeftIcon={LogoutIcon} title='Log Out' onClick={hadleLogOut} />
-            <ButtonAction LeftIcon={SaveIcon} title='Save changes' onClick={submitSettings} />
+            <ButtonGhost
+              LeftIcon={LogoutIcon}
+              title='Log Out'
+              onClick={() => {
+                logout();
+                setRightDrawer(false);
+              }}
+            />
+
+            <ButtonAction
+              title='Save settings'
+              LeftIcon={SaveIcon}
+              onClick={() => {
+                saveSettings({ uid, settings });
+                setRightDrawer(false);
+              }}
+            />
           </div>
         </div>
       </div>

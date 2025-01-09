@@ -26,7 +26,7 @@ const HeaderStyled = styled.header<{ shadowed: boolean }>`
 
 export const Header: FC = () => {
   const user = useEffectorUnit($userStore);
-  const { isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
+  const { isAsideOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
 
   const [shadowed, setShadowed] = useState<boolean>(false);
 

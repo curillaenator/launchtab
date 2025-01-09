@@ -8,7 +8,7 @@ import { pagesApi, localStorageApi } from '@src/api/api';
 import { setMessage, applyData } from '@src/redux/reducers/bookmarks';
 import { setIsDataLoading } from '@src/redux/reducers/loadings';
 
-import { applySettings, type ISettings } from '@src/redux/reducers/settings';
+import { applySettings } from '@src/redux/reducers/settings';
 
 import type { IData } from '@src/types';
 

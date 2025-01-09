@@ -15,7 +15,7 @@ import { Settings } from '@src/components/settings';
 import { SignIn } from '@src/components/signin';
 import { Loader } from '@src/components/loader';
 
-import { $appStore, setRightDrawer, setSignIn } from '@src/entities/app';
+import { $appStore, setSignIn, setRightDrawer } from '@src/entities/app';
 import { $userStore, useAuthState } from '@src/entities/user';
 
 import { useDomStyles } from '@src/hooks/useDomStyles';
@@ -33,6 +33,7 @@ export const Layout: FC = () => {
   return (
     // @ts-expect-error
     <ThemeProvider theme={currentTheme}>
+      {/* @ts-expect-error */}
       <GlobalFonts />
 
       {isLoading && <Loader fullscreen size='56px' />}
@@ -64,7 +65,7 @@ export const Layout: FC = () => {
 
           {!!user.uid && (
             <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
-              <Settings closeSettings={() => setRightDrawer(false)} />
+              <Settings />
             </Drawer>
           )}
 

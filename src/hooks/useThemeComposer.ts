@@ -1,4 +1,6 @@
-import { useAppSelector } from '@src/hooks/hooks';
+import { useUnit as useEffectorUnit } from 'effector-react';
+
+import { $settingsStore } from '@src/entities/settings';
 
 import {
   themes,
@@ -11,8 +13,7 @@ import {
 } from '@launch-ui/theme';
 
 export const useThemeComposer = (): TTheme => {
-  const darkMode = useAppSelector((state) => state.settings.lookfeel.darkMode);
-  const themeName = useAppSelector((state) => state.settings.lookfeel.themeName);
+  const { themeName, darkMode } = useEffectorUnit($settingsStore);
 
   const colorsStatic = darkMode ? colorsStaticDarkMode : colorsStaticLightMode;
   const primaryColor = themes[themeName].primary[500];

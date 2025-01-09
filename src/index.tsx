@@ -1,9 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
-import { store } from './redux/store';
 import { Layout } from './layout';
 import { LaunchTabs } from './pages/LaunchTabsV2';
 
@@ -20,9 +18,4 @@ const router = createBrowserRouter(
   ),
 );
 
-root.render(
-  // @ts-expect-error
-  <Provider store={store}>
-    <RouterProvider router={router} fallbackElement={<div>подождите...</div>} />
-  </Provider>,
-);
+root.render(<RouterProvider router={router} fallbackElement={<div>подождите...</div>} />);

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Button, ButtonAction, ButtonGhost } from '@launch-ui/button';
+import { Button } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
 
@@ -8,7 +8,6 @@ import { login } from '@src/entities/user';
 
 import { FormStyled } from './styles';
 
-import LoginIcon from '@src/assets/svg/login.svg';
 import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
@@ -30,7 +29,7 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
         <div className='form-inputs'>
           <Button
             type='button'
-            title='To my account'
+            title='Sign in with Google'
             IconLeft={GoogleIcon}
             onClick={() => {
               closePopup();
@@ -38,11 +37,6 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
             }}
           />
         </div>
-
-        {/* <div className='form-buttons'>
-          <ButtonGhost title='Cancel' onClick={closePopup} type='button' />
-          <ButtonAction title='To my account' RightIcon={LoginIcon} type='submit' />
-        </div> */}
       </div>
     </FormStyled>
   );

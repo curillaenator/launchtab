@@ -10,7 +10,7 @@ const PEXELS_INITIAL_STATE: PhotosWithTotalResults = {
 };
 
 interface PexelsStore {
-  pexelsQuery: string | null;
+  pexelsQuery: string;
   pexelsLoading: boolean;
   pexels: PhotosWithTotalResults;
 }
@@ -20,7 +20,7 @@ const setPexelsQuery = createEvent<string>();
 const setPexelsLoading = createEvent<boolean>();
 
 const $pexelsStore = createStore<PexelsStore>({
-  pexelsQuery: null,
+  pexelsQuery: '',
   pexelsLoading: false,
   pexels: PEXELS_INITIAL_STATE,
 });

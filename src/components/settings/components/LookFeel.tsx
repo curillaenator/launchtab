@@ -14,14 +14,16 @@ import { $settingsStore, setSettings } from '@src/entities/settings';
 import { $pexelsStore, setPexels, setPexelsLoading, setPexelsQuery } from '@src/entities/pexels';
 
 import { LookFeelStyled } from './styles';
+//@ts-expect-error
 import ShevronIcon from '@src/assets/svg/shevron.svg';
+//@ts-expect-error
 import UpdateIcon from '@src/assets/svg/update.svg';
 
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
 export const LookFeel: FC = () => {
   const lookfeel = useEffectorUnit($settingsStore);
-  const pexels = useEffectorUnit($pexelsStore);
+  const { pexels, pexelsLoading, pexelsQuery } = useEffectorUnit($pexelsStore);
 
   const themeOptions = Object.keys(themeNames).map((themeKey) => ({
     title: themeNames[themeKey],
@@ -31,7 +33,7 @@ export const LookFeel: FC = () => {
   const pexelsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (!pexels.pexelsQuery) {
+    if (!pexelsQuery) {
       return;
     }
 
@@ -39,11 +41,7 @@ export const LookFeel: FC = () => {
 
     pexelsTimer.current = setTimeout(() => {
       client.photos
-        .search({
-          query: pexels.pexelsQuery as string,
-          per_page: 30,
-          page: 1,
-        })
+        .search({ query: pexelsQuery, per_page: 30, page: 1 })
         .then((res) => {
           setPexels(res as PhotosWithTotalResults);
         })
@@ -51,7 +49,7 @@ export const LookFeel: FC = () => {
           alert('Image service unfurtunatelly failed =(');
         });
     }, 2000);
-  }, [pexels.pexelsQuery]);
+  }, [pexelsQuery]);
 
   return (
     <LookFeelStyled>
@@ -104,7 +102,7 @@ export const LookFeel: FC = () => {
               type='url'
               name='background'
               placeholder='Type any tag (example "nature")'
-              value={pexels.pexelsQuery as string}
+              value={pexelsQuery}
               onChange={(query) => setPexelsQuery(query)}
             />
 
@@ -116,7 +114,7 @@ export const LookFeel: FC = () => {
             />
           </Titlewrap>
 
-          {pexels.pexels.photos.map((photo) => (
+          {pexels.photos.map((photo) => (
             <ImagePreview
               key={photo.id}
               alt={photo.alt as string}

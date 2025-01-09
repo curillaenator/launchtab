@@ -7301,6 +7301,7 @@ __metadata:
     style-loader: 3.2.1
     styled-components: 5.3.11
     typescript: 5.7.3
+    uuid: ^11.0.4
     webpack: 5.88.0
     webpack-cli: 5.1.4
     webpack-dev-server: 4.15.1
@@ -9835,6 +9836,15 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: c81095493225ecfc28add49c106ca4f09cdf56bc66731aa8dabc2edbbccb1e1bfe2de6a115e5c6a380d3ea166d1636410b62ef216bb07b3feb1cfde1d95d5080
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.0.4":
+  version: 11.0.4
+  resolution: "uuid@npm:11.0.4"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 88860d20dafa648642581b2e7bb364588149df50d41c812100839aec095593fcc8548fde6929605efd42f556455cf5683e3bad9e9e311f4b62d7efbb68598d3e
   languageName: node
   linkType: hard
 

@@ -1,7 +1,8 @@
 import { useReducer, useCallback } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { $bookmarksStore, createTab } from '@src/entities/bookmarks';
+import { $bookmarksStore, createTab, createCard } from '@src/entities/bookmarks';
 import { $userStore } from '@src/entities/user';
+import { v4 as getId } from 'uuid';
 
 import type { FormStateType, FormActionType } from '../interfaces';
 
@@ -12,7 +13,7 @@ const formReducer = (prev: FormStateType, action: FormActionType) => ({
 
 export const useCreateForm = (create: 'new-page' | 'new-bookmark') => {
   const { uid } = useEffectorUnit($userStore);
-  const { tabs } = useEffectorUnit($bookmarksStore);
+  const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
 
   const [formState, dispatchForm] = useReducer(formReducer, { name: '', link: '', iconURL: '' });
 
@@ -33,9 +34,19 @@ export const useCreateForm = (create: 'new-page' | 'new-bookmark') => {
       createTab({ uid, tabs, tabName: submitName });
     }
 
-    // if (create === 'new-bookmark' && submitName && submitLink) {
-    //   dispatchApp(createBookmark(submitName, submitLink, null, submitIcon || null));
-    // }
+    if (create === 'new-bookmark' && uid && submitName && submitLink) {
+      createCard({
+        uid,
+        tabs,
+        tabName: currentTab,
+        card: {
+          id: getId(),
+          link: submitLink,
+          name: submitName,
+          iconURL: submitIcon,
+        },
+      });
+    }
   }, [create, formState]);
 
   return {

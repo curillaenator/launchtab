@@ -38,14 +38,6 @@ export const pagesApi = {
   },
 };
 
-export const settingsApi = {
-  async updateSettings(userID: string, settings: ISettings): Promise<string> {
-    return updateDoc(doc(collection(fsdb, 'users'), userID), { settings })
-      .then(() => 'Update successful!')
-      .catch(() => 'Something went wrong, try reload page');
-  },
-};
-
 interface LocalStorageAPI {
   setSettings: (object: ISettings) => void;
   getSettings: () => ISettings | null;

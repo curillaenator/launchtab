@@ -1,11 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
-import { store } from './redux/store';
 import { Layout } from './layout';
-import { LaunchTabs } from './pages/LaunchTabs';
+import { LaunchTabs, Notes } from './pages';
 
 import './index.css';
 
@@ -16,12 +14,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<LaunchTabs />} />
+      <Route path='/notes' element={<Notes />} />
     </Route>,
   ),
 );
 
-root.render(
-  <Provider store={store}>
-    <RouterProvider router={router} fallbackElement={<div>подождите...</div>} />
-  </Provider>,
-);
+root.render(<RouterProvider router={router} fallbackElement={<div>подождите...</div>} />);

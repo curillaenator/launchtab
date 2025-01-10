@@ -1,86 +1,43 @@
 import React, { FC } from 'react';
-import SortableList, { SortableItem } from 'react-easy-sort';
+import { useUnit as useEffectorUnit } from 'effector-react';
+import { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
-import styled from 'styled-components';
+
+import { $bookmarksStore, reorderCards, BookmarkTabProps, removeCards } from '@src/entities/bookmarks';
+import { $userStore } from '@src/entities/user';
 
 import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 import { Card } from '@src/components/card/Card';
+import { SortableListStyled, HoverWrapper } from './styles';
 
-import { useAppDispatch } from '@src/hooks/hooks';
+export const Bookmarks: FC = () => {
+  const { uid } = useEffectorUnit($userStore);
+  const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
 
-import { updateBookmarksOrder, deleteBookmark } from '@src/redux/reducers/bookmarks';
-
-import type { IBookmark } from '@src/types/types';
-
-const SortableListStyled = styled(SortableList)`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-
-  @media (min-width: 481px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 769px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1153px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 1441px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  @media (min-width: 1681px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  @media (min-width: 1921px) {
-    grid-template-columns: repeat(7, 1fr);
-  }
-
-  @media (min-width: 2561px) {
-    grid-template-columns: repeat(8, 1fr);
-  }
-`;
-
-const HoverWrapper = styled.div`
-  &:hover {
-    z-index: 20;
-  }
-`;
-
-interface IBookmarks {
-  curPage: string;
-  bookmarks: IBookmark[];
-}
-
-export const Bookmarks: FC<IBookmarks> = ({ bookmarks, curPage }) => {
-  const dispatch = useAppDispatch();
+  const { name, pages: bookmarks } = (tabs.find((el) => el?.name === currentTab) || {}) as BookmarkTabProps;
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    const updBookmarks = arrayMoveImmutable([...bookmarks], oldIndex, newIndex);
-    dispatch(updateBookmarksOrder(updBookmarks));
+    if (!uid) return;
+    const reorderedCards = arrayMoveImmutable([...bookmarks], oldIndex, newIndex);
+    reorderCards({ uid, tabs, tabName: name, reorderedCards });
   };
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      {bookmarks.map((bookmark, i) => (
-        <SortableItem key={`${curPage}${i}`}>
+      {bookmarks.map((card, cardIdx) => (
+        <SortableItem key={`${card.name}${cardIdx}`}>
           <HoverWrapper>
             <ContextMenu
               items={[
                 {
                   title: 'Delete',
                   danger: true,
-                  handler: () => dispatch(deleteBookmark(bookmark.name)),
+                  handler: () => removeCards({ uid: uid!, tabs, tabName: name, cardIdx }),
                 },
               ]}
             >
-              <Card bookmark={bookmark} />
+              <Card bookmark={card} />
             </ContextMenu>
           </HoverWrapper>
         </SortableItem>

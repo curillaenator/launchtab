@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import styled from 'styled-components';
 import { Corners } from '@launch-ui/shape';
 
-import { useAppSelector } from '@src/hooks/hooks';
+import { $settingsStore } from '@src/entities/settings';
 import { useSearch } from './useSearch';
 
 import GoogleIcon from '@src/assets/svg/google.svg';
@@ -75,11 +76,11 @@ export const SearchField: FC = () => {
   const [value, setValue, onSubmit] = useSearch();
   const [focused, setFocused] = useState<boolean>(false);
 
-  const wallpapper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
+  const { wallpaper } = useEffectorUnit($settingsStore);
 
   return (
     <SearchFormStyled action='https://www.google.com/search' onSubmit={onSubmit}>
-      <InputStyled isOpaque={!!wallpapper} focused={focused}>
+      <InputStyled isOpaque={!!wallpaper} focused={focused}>
         <Corners stroke={2} borderRadius={20} />
 
         <GoogleIcon className='search_engine google_logo' />

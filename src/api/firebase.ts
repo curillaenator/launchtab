@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
@@ -14,7 +15,10 @@ const firebaseConfig = {
   measurementId: process.env.MEASUREMENT_ID,
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-export const fsdb = getFirestore(app);
+const auth = getAuth(app);
+const fsdb = getFirestore(app);
+const rtdb = getDatabase(app);
+
+export { auth, fsdb, rtdb, app };

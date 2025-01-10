@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo, type PropsWithChildren } from 'react';
+import React, { FC, useState, useMemo, PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
 import cn from 'classnames';
 import { usePortal } from '@launch-ui/utils';
@@ -10,7 +10,8 @@ import type { DrawerProps } from './interfaces';
 
 import { TransitionStyled, ContentStyled } from './drawer.styled';
 
-export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
+// @ts-expect-error
+const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
   const { open, portalId, transitionClassName, contentClassName, children, openWidth = '420px' } = props;
 
   useCloseOnEscape(props);
@@ -25,7 +26,6 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
         appear
         show={open}
         unmount
-        // as='div'
         className={transitionClassName}
         afterEnter={() => setIsAnimationCompleted(true)}
         afterLeave={() => setIsAnimationCompleted(false)}
@@ -34,9 +34,12 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
       </TransitionStyled>
 
       <ContentStyled closed={!open} openWidth={openWidth} className={cn(contentClassName, transitionClassName)}>
+        {/* @ts-expect-error */}
         {children}
       </ContentStyled>
     </ModalContext.Provider>,
     portal,
   );
 };
+
+export { Drawer };

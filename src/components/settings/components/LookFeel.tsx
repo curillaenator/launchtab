@@ -1,8 +1,7 @@
-import React, { FC, Dispatch, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import { createClient, PhotosWithTotalResults } from 'pexels';
-import { AnyAction } from '@reduxjs/toolkit';
-import styled, { keyframes } from 'styled-components';
-import { fadeIn } from 'react-animations';
+
 import { Select } from '@launch-ui/select';
 
 import { ButtonGhost } from '@launch-ui/button';
@@ -11,35 +10,20 @@ import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
 import { themeNames } from '@launch-ui/theme';
 
-import { PEXELS_INITIAL_STATE, type ILookFeelActions, type ISettingsFormState } from '../reducer';
+import { $settingsStore, setSettings } from '@src/entities/settings';
+import { $pexelsStore, setPexels, setPexelsLoading, setPexelsQuery } from '@src/entities/pexels';
 
+import { LookFeelStyled } from './styles';
+//@ts-expect-error
 import ShevronIcon from '@src/assets/svg/shevron.svg';
-// import TrashBinIcon from '@src/assets/svg/trash.svg';
+//@ts-expect-error
 import UpdateIcon from '@src/assets/svg/update.svg';
 
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
-const animation = keyframes`${fadeIn}`;
-const LookFeelStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  /* height: 100%; */
-  min-height: 320px;
-  animation: ${animation} 0.2s linear;
-  /* padding-right: 16px; */
-`;
-
-interface ILookFeel {
-  values: ISettingsFormState;
-  setters: ILookFeelActions;
-  dispatch: Dispatch<AnyAction>;
-}
-
-export const LookFeel: FC<ILookFeel> = (props) => {
-  const { values, setters, dispatch } = props;
-  const { lookfeel, pexels } = values;
+export const LookFeel: FC = () => {
+  const lookfeel = useEffectorUnit($settingsStore);
+  const { pexels, pexelsLoading, pexelsQuery } = useEffectorUnit($pexelsStore);
 
   const themeOptions = Object.keys(themeNames).map((themeKey) => ({
     title: themeNames[themeKey],
@@ -49,8 +33,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
   const pexelsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (!pexels.pexelsQuery) {
-      dispatch(setters.setPexels(PEXELS_INITIAL_STATE));
+    if (!pexelsQuery) {
       return;
     }
 
@@ -58,21 +41,15 @@ export const LookFeel: FC<ILookFeel> = (props) => {
 
     pexelsTimer.current = setTimeout(() => {
       client.photos
-        .search({
-          query: pexels.pexelsQuery as string,
-          per_page: 30,
-          page: 1,
-        })
+        .search({ query: pexelsQuery, per_page: 30, page: 1 })
         .then((res) => {
-          dispatch(setters.setPexels(res as PhotosWithTotalResults));
+          setPexels(res as PhotosWithTotalResults);
         })
         .catch(() => {
           alert('Image service unfurtunatelly failed =(');
         });
-
-      // dispatch(setters.setPexels(RES_MOCK));
     }, 2000);
-  }, [pexels.pexelsQuery, setters, dispatch]);
+  }, [pexelsQuery]);
 
   return (
     <LookFeelStyled>
@@ -81,18 +58,19 @@ export const LookFeel: FC<ILookFeel> = (props) => {
           shevronIcon={<ShevronIcon className='svg_icon dropdown-title-shevron' />}
           selected={lookfeel.themeName}
           options={themeOptions}
-          onChange={(themeName) => dispatch(setters.setTheme(themeName))}
+          //@ts-expect-error
+          onChange={(themeName) => setSettings({ themeName })}
         />
       </Titlewrap>
 
       <Titlewrap title='Dark Mode'>
-        <Switch value={lookfeel.darkMode} onChange={() => dispatch(setters.setDarkMode(!lookfeel.darkMode))} />
+        <Switch value={lookfeel.darkMode} onChange={() => setSettings({ darkMode: !lookfeel.darkMode })} />
       </Titlewrap>
 
       <Titlewrap title='Dynamic wallpaper'>
         <Switch
           value={lookfeel.isDynamicWallpaper}
-          onChange={() => dispatch(setters.setIsDynamicWallpaper(!lookfeel.isDynamicWallpaper))}
+          onChange={() => setSettings({ isDynamicWallpaper: !lookfeel.isDynamicWallpaper })}
         />
       </Titlewrap>
 
@@ -105,7 +83,7 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               { title: 'Flowy Clouds', value: 'clouds' },
               { title: 'Beach Noon', value: 'beach' },
             ]}
-            onChange={(dynWallpaper) => dispatch(setters.setDynamicWallpaper(dynWallpaper as 'beach' | 'clouds'))}
+            onChange={(dynWallpaper) => setSettings({ dynamicWallpaper: dynWallpaper as 'beach' | 'clouds' })}
           />
         </Titlewrap>
       )}
@@ -124,25 +102,25 @@ export const LookFeel: FC<ILookFeel> = (props) => {
               type='url'
               name='background'
               placeholder='Type any tag (example "nature")'
-              value={pexels.pexelsQuery as string}
-              onChange={(query) => dispatch(setters.setPixelsQuery(query))}
+              value={pexelsQuery}
+              onChange={(query) => setPexelsQuery(query)}
             />
 
             <ButtonGhost
               LeftIcon={UpdateIcon}
               title='Clear wallpaper'
               style={{ width: 'fit-content' }}
-              onClick={() => dispatch(setters.setWallpaper(''))}
+              onClick={() => setSettings({ wallpaper: null })}
             />
           </Titlewrap>
 
-          {pexels.pexels.photos.map((photo) => (
+          {pexels.photos.map((photo) => (
             <ImagePreview
               key={photo.id}
               alt={photo.alt as string}
               src={photo.src.large}
-              onClick={() => dispatch(setters.setWallpaper(photo.src.original))}
-              active={values.lookfeel.wallpaper === photo.src.original}
+              onClick={() => setSettings({ wallpaper: photo.src.original })}
+              active={lookfeel.wallpaper === photo.src.original}
               avgColor={photo.avg_color as string}
               clickable
             />

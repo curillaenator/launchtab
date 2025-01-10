@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import { Beach, Clouds, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
 import styled from 'styled-components';
-
-import { useAppSelector } from '../../hooks/hooks';
+import { $settingsStore } from '@src/entities/settings';
 
 export const CLOUDS_RATES: Record<string, number> = {
   cloud1: 6,
@@ -49,9 +49,7 @@ interface BackgroundProps {
 export const Background: FC<BackgroundProps> = (props) => {
   const { setMouseWatcher } = props;
 
-  const wallpaper = useAppSelector((state) => state.settings.lookfeel.wallpaper);
-  const isDynamicWallpaper = useAppSelector((state) => state.settings.lookfeel.isDynamicWallpaper);
-  const dynamicWallpaper = useAppSelector((state) => state.settings.lookfeel.dynamicWallpaper);
+  const { wallpaper, isDynamicWallpaper, dynamicWallpaper } = useEffectorUnit($settingsStore);
 
   const {
     watchMouse,

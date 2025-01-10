@@ -1,25 +1,66 @@
 import React, { FC } from 'react';
-// import { Corners } from '@launch-ui/shape';
-import styled from 'styled-components';
+import type { NavLinkProps } from 'react-router-dom';
+import { useUnit as useEffectorUnit } from 'effector-react';
 
-// import { useAppDispatch, useAppSelector } from '@src/hooks';
+import { Corners } from '@launch-ui/shape';
+import { Typography } from '@launch-ui/typography';
+import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './aside.styled';
 
-const AsideStyled = styled.div`
-  --shp-bgc: ${({ theme }) => theme.modals.matte};
-  --shp-bdc: transparent;
-  /* --form-bdrs: calc(24px * 1.25 + 3px); */
-  --form-bdrs: 24px;
+import { $appStore } from '@src/entities/app';
 
-  position: relative;
-  width: 384px;
-  height: 100%;
-  padding: 32px;
-  border-radius: 0 var(--form-bdrs) var(--form-bdrs) 0;
-  background-color: ${({ theme }) => theme.modals.matte};
-`;
+//@ts-expect-error
+import HomeIcon from '@src/assets/svg/home.svg';
+//@ts-expect-error
+import GoogleIcon from '@src/assets/svg/google.svg';
+//@ts-expect-error
+import StarIcon from '@src/assets/svg/star.svg';
 
 export const Aside: FC = ({}) => {
-  // const appDispatch = useAppDispatch();
+  const { isAsideOpen } = useEffectorUnit($appStore);
 
-  return <AsideStyled>{/* <Corners borderRadius={24} corners={['tr', 'br']} /> */}</AsideStyled>;
+  return (
+    <AsideStyled isAsideOpen={isAsideOpen}>
+      <Corners borderRadius={24} corners={['tr', 'br']} />
+
+      <AsideHeader>
+        <Typography as='span' type='RoundedHeavy36'>
+          Launch
+        </Typography>
+
+        <Typography as='span' type='RoundedHeavy36' className='highlighted'>
+          Tabs
+        </Typography>
+      </AsideHeader>
+
+      <AsideRoutesList>
+        <RouteLinkStyled to='/' end>
+          <HomeIcon />
+
+          <Typography as='span' type='RoundedBold20' className='typography'>
+            LaunchTabs
+          </Typography>
+        </RouteLinkStyled>
+
+        <RouteLinkStyled to='/notes'>
+          <StarIcon />
+
+          <Typography as='span' type='RoundedBold20' className='typography'>
+            Notes
+          </Typography>
+        </RouteLinkStyled>
+
+        <RouteLinkStyled
+          to='https://google.com'
+          target='_blank'
+          className={(({ isActive }) => (isActive ? 'active-route' : '')) as NavLinkProps['className']}
+        >
+          <GoogleIcon />
+
+          <Typography as='span' type='RoundedBold20' className='typography'>
+            Google
+          </Typography>
+        </RouteLinkStyled>
+      </AsideRoutesList>
+    </AsideStyled>
+  );
 };

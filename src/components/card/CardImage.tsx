@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { pagesIcons } from '@src/assets/pagesIcons';
 
-import type { IBookmark } from '@src/types';
+import type { BookmarkCardProps } from '@src/types';
 
 const CardImageStyled = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const CardImageStyled = styled.div`
   }
 `;
 
-export const CardImage: FC<IBookmark> = ({ name, link, imageURL, iconURL }) => {
+export const CardImage: FC<BookmarkCardProps> = ({ name, link, imageURL, iconURL }) => {
   const previewLink = link.match(/^https?:\/\//) ? link : `https://${link}`;
 
   const generatedSitePreview = `https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/640/crop/1200/viewportWidth/1520/noanimate/maxAge/48/${previewLink}`;

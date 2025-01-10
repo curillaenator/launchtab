@@ -7,18 +7,25 @@ interface ContentStyledProps {
 }
 
 export const ContentStyled = styled.div<ContentStyledProps>`
+  will-change: transform;
+  z-index: 1300;
+
   position: fixed;
   top: 0;
   right: 0;
-  width: ${({ closed, openWidth }) => (closed ? '0px' : openWidth)};
+
+  width: 420px;
   height: 100vh;
   min-height: 100vh;
-  background: transparent;
-  z-index: 1300;
+
+  background-color: transparent;
   filter: drop-shadow(${({ theme }) => theme.shadows.card});
-  transition: 0.2s ease;
-  overflow: hidden;
   color: ${({ theme }) => theme.texts.base};
+
+  transform: translateX(${({ closed, openWidth }) => (closed ? openWidth : '0px')});
+  transition: transform 0.2s ease;
+
+  overflow: hidden;
 `;
 
 export const TransitionStyled = styled(Transition)`
@@ -27,11 +34,14 @@ export const TransitionStyled = styled(Transition)`
   right: 0;
   bottom: 0;
   left: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: 100vw;
   min-height: 100vh;
+
   z-index: 1300;
 
   .overlay_enter {

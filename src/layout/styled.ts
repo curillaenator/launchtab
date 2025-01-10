@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+const ASIDE_WIDTH = '384px';
+
 const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
   position: relative;
 
@@ -11,16 +13,36 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
   .aside {
     position: sticky;
     top: 0;
-    width: ${({ $isAsideOpen }) => ($isAsideOpen ? '384px' : '0')};
+    flex: 0 0 auto;
+    width: ${({ $isAsideOpen }) => ($isAsideOpen ? ASIDE_WIDTH : '0px')};
     min-height: 100vh;
     max-height: 100vh;
-    flex-shrink: 0;
-    transition: width 200ms ease;
-    overflow: hidden;
+
+    will-change: width;
+    transition: width 160ms ease;
   }
 
   .viewport {
     width: 100%;
+    flex: 1 1 auto;
+
+    min-height: 100vh;
+    max-height: 100vh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      margin-left: 0.25rem;
+      border-radius: 4px;
+      background-color: ${({ theme }) => theme.backgrounds.base};
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.primary[500]};
+      border-radius: 4px;
+    }
   }
 `;
 

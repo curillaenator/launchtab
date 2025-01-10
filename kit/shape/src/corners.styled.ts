@@ -6,6 +6,7 @@ export const CornersContainerStyled = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 
   & > svg {
     display: block;

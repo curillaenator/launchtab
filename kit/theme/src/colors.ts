@@ -231,7 +231,7 @@ export const colorsStaticDarkMode = {
 };
 
 export const shadowsStaticLightMode = (primaryColor: string) => ({
-  card: `0px 0px 8px ${hexa(colorsLib.liver[900], 0.3)}`,
+  card: `0px 0px 8px ${hexa(primaryColor, 0.15)}`,
   primary: `0px 2px 6px ${hexa(primaryColor, 0.8)}`,
 });
 

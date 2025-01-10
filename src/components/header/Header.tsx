@@ -9,8 +9,11 @@ import { $userStore } from '@src/entities/user';
 
 import { SearchField } from './components/SearchField';
 
+//@ts-expect-error
 import SettingsIcon from '@src/assets/svg/settings.svg';
+//@ts-expect-error
 import MeatballsIcon from '@src/assets/svg/meatballs.svg';
+//@ts-expect-error
 import LoginIcon from '@src/assets/svg/login.svg';
 
 const HeaderStyled = styled.header<{ shadowed: boolean }>`
@@ -41,7 +44,7 @@ export const Header: FC = () => {
 
   return (
     <HeaderStyled shadowed={shadowed}>
-      {!!user.uid && <Button IconLeft={MeatballsIcon} onClick={() => setAside(!isAsideOpen)} />}
+      <Button IconLeft={MeatballsIcon} onClick={() => setAside(!isAsideOpen)} />
 
       <SearchField />
 

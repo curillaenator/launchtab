@@ -8,6 +8,7 @@ import { login } from '@src/entities/user';
 
 import { FormStyled } from './styles';
 
+//@ts-expect-error
 import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
@@ -22,11 +23,24 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            Why sign in? Just to save your bookmarks so you can use it from any device under your account.
+            Why? App won't save your changes unless you signed in
+          </Typography>
+
+          <Typography as='p' type='TextRegular14' className='form-title-add'>
+            Enter via your Google account so it'll be easy to use your saved links/tabs and customized view on any
+            device under your account
           </Typography>
         </div>
 
-        <div className='form-inputs'>
+        <div className='form-buttons'>
+          <Button
+            type='button'
+            title='Close'
+            onClick={() => {
+              closePopup();
+            }}
+          />
+
           <Button
             type='button'
             title='Sign in with Google'

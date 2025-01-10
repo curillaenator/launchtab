@@ -17,11 +17,11 @@ export const FormStyled = styled.form`
     }
 
     &-title {
-      margin-bottom: 16px;
+      margin-bottom: 32px;
 
       &-main {
         color: ${({ theme }) => theme.primary[500]};
-        margin-bottom: 16px;
+        margin-bottom: 32px;
       }
 
       &-add {
@@ -41,8 +41,8 @@ export const FormStyled = styled.form`
     &-buttons {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 16px;
+      justify-content: center;
+      gap: 32px;
     }
   }
 

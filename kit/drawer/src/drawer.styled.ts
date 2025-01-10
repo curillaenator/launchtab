@@ -19,7 +19,7 @@ export const ContentStyled = styled.div<ContentStyledProps>`
   min-height: 100vh;
 
   background-color: transparent;
-  filter: drop-shadow(${({ theme }) => theme.shadows.card});
+  /* filter: drop-shadow(${({ theme }) => theme.shadows.card}); */
   color: ${({ theme }) => theme.texts.base};
 
   transform: translateX(${({ closed, openWidth }) => (closed ? openWidth : '0px')});

@@ -48,7 +48,9 @@ const LoaderStyled = styled.div<LoaderProps>`
       stroke-width: 1.8px;
       transform-origin: center;
       stroke-linecap: round;
-      animation: ${DASH} 1.6s linear infinite, ${ROTATE} 2s linear infinite;
+      animation:
+        ${DASH} 1.6s linear infinite,
+        ${ROTATE} 2s linear infinite;
     }
   }
 `;

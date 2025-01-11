@@ -36,7 +36,7 @@ export const Tabs: FC = () => {
       const sortedTabs = arrayMoveImmutable([...sortableTabs], oldIndex, newIndex);
       reorderTabs({ uid, tabs: [tabs[0], ...sortedTabs], tabName: '' });
     },
-    [tabs, sortableTabs],
+    [tabs, sortableTabs, uid],
   );
 
   if (!tabs.length) return null;

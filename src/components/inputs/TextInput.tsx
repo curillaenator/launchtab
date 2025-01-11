@@ -57,7 +57,9 @@ const FieldStyled = styled.div<IFieldStyled>`
       padding: 4px ${({ buttonWidth }) => (buttonWidth ? `${buttonWidth + 4}px` : '4px')} 8px 4px;
       transition: 0.08s ease-in-out;
       font-style: normal;
-      font-variation-settings: 'GRAD' 400, 'wght' 500;
+      font-variation-settings:
+        'GRAD' 400,
+        'wght' 500;
       letter-spacing: 0.002em;
       font-size: 14px;
       line-height: 24px;

@@ -1,5 +1,5 @@
-import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { fsdb, rtdb } from '@src/api/firebase';
+import { collection, doc, updateDoc } from 'firebase/firestore';
+import { fsdb } from '@src/api/firebase';
 
 import type { SettingsStore } from './interfaces';
 

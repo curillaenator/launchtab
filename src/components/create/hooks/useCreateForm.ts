@@ -47,7 +47,7 @@ export const useCreateForm = (create: 'new-page' | 'new-bookmark') => {
         },
       });
     }
-  }, [create, formState]);
+  }, [uid, tabs, create, formState, currentTab]);
 
   return {
     formContextValue: { formState, dispatchForm, handleCreate },

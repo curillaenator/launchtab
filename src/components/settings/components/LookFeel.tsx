@@ -11,7 +11,13 @@ import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 import { themeNames } from '@launch-ui/theme';
 
 import { $settingsStore, setSettings } from '@src/entities/settings';
-import { $pexelsStore, setPexels, setPexelsLoading, setPexelsQuery } from '@src/entities/pexels';
+
+import {
+  $pexelsStore,
+  setPexels,
+  // setPexelsLoading,
+  setPexelsQuery,
+} from '@src/entities/pexels';
 
 import { LookFeelStyled } from './styles';
 //@ts-expect-error
@@ -23,7 +29,11 @@ const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAW
 
 export const LookFeel: FC = () => {
   const lookfeel = useEffectorUnit($settingsStore);
-  const { pexels, pexelsLoading, pexelsQuery } = useEffectorUnit($pexelsStore);
+  const {
+    pexels,
+    // pexelsLoading,
+    pexelsQuery,
+  } = useEffectorUnit($pexelsStore);
 
   const themeOptions = Object.keys(themeNames).map((themeKey) => ({
     title: themeNames[themeKey],

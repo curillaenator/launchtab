@@ -1,7 +1,0 @@
-.firebase
-.husky
-.yarn
-node_modules
-build
-.eslintrc.json
-webpack.config.js

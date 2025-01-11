@@ -13,4 +13,5 @@ export const OverlayStyled = styled.div<OverlayStyledProps>`
   background-color: ${({ theme }) => theme.backgrounds.base40};
   z-index: -1;
   pointer-events: ${({ disableBackgroundClick }) => (disableBackgroundClick ? 'none' : 'all')};
+  backdrop-filter: blur(5px);
 `;

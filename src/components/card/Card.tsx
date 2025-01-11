@@ -5,15 +5,12 @@ import { fadeIn } from 'react-animations';
 
 import { Typography } from '@launch-ui/typography';
 import { Corners } from '@launch-ui/shape';
-// import { ButtonGhost } from '@launch-ui/button/src';
 
 import { $settingsStore } from '@src/entities/settings';
 
 import { CardImage } from './CardImage';
 
 import type { BookmarkCardProps } from '@src/entities/bookmarks';
-
-// import EditIcon from '@src/assets/svg/update.svg';
 
 const animation = keyframes`${fadeIn}`;
 
@@ -81,21 +78,17 @@ const CardStyled = styled.a<ICardStyled>`
   }
 `;
 
-// const CardButtons = styled.div`
-//   position: absolute;
-//   top: 12px;
-//   right: 12px;
-
-//   display: flex;
-//   align-items: center;
-// `;
-
 interface CardProps {
   bookmark: BookmarkCardProps;
   className?: string;
   as?: 'a' | 'div';
   hasBorder?: boolean;
 }
+
+const validatedHref = (bookmarkLink?: string) => {
+  if (!bookmarkLink) return;
+  return new URL(/^https?:\/\/.*/.test(bookmarkLink) ? bookmarkLink : `https://${bookmarkLink}`).href;
+};
 
 export const Card: FC<CardProps> = (props) => {
   const { bookmark, className = 'class-bookmark', as = 'a' } = props;
@@ -109,7 +102,7 @@ export const Card: FC<CardProps> = (props) => {
       isDeleted={bookmark.deleted}
       isOpaque={!!wallpaper}
       noAnimation={noAnimation}
-      href={`https://${bookmark.link}`}
+      href={validatedHref(bookmark.link)}
       as={as}
       draggable={false}
       className={className}
@@ -119,10 +112,6 @@ export const Card: FC<CardProps> = (props) => {
       data-card='true'
     >
       <Corners borderRadius={24} stroke={4} />
-
-      {/* <CardButtons>
-        <ButtonGhost LeftIcon={EditIcon} />
-      </CardButtons> */}
 
       <CardImage {...bookmark} />
 

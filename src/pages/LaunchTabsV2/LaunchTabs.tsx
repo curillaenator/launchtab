@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { Tabs } from '@src/features/tabs';
+import { BookmarksTabs } from '@src/features/bookmarksTabs';
 import { Bookmarks } from '@src/features/bookmarks';
 
 const LaunchTabsStyled = styled.main`
@@ -13,7 +13,7 @@ const LaunchTabsStyled = styled.main`
 export const LaunchTabs: FC = () => {
   return (
     <LaunchTabsStyled id='launch-app-container' className='launch-app-container'>
-      <Tabs />
+      <BookmarksTabs />
       <Bookmarks />
     </LaunchTabsStyled>
   );

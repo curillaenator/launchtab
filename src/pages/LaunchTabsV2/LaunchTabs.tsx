@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { Tabs } from '@src/components/tabs';
-import { Bookmarks } from '@src/components/bookmarks';
+import { Tabs } from '@src/features/tabs';
+import { Bookmarks } from '@src/features/bookmarks';
 
 const LaunchTabsStyled = styled.main`
   width: 100%;

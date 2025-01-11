@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { Beach, Clouds, useCloudsPositionStyle } from '@launch-ui/dynamic-bg';
-import styled from 'styled-components';
 import { $settingsStore } from '@src/entities/settings';
+import styled from 'styled-components';
 
 export const CLOUDS_RATES: Record<string, number> = {
   cloud1: 6,

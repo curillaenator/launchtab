@@ -15,7 +15,7 @@ import GoogleIcon from '@src/assets/svg/google.svg';
 //@ts-expect-error
 import StarIcon from '@src/assets/svg/star.svg';
 
-export const Aside: FC = ({}) => {
+export const Aside: FC = () => {
   const { isAsideOpen } = useEffectorUnit($appStore);
 
   return (

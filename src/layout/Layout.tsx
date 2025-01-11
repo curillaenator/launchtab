@@ -6,23 +6,26 @@ import { Outlet } from 'react-router-dom';
 import { Drawer } from '@launch-ui/drawer';
 import { Modal } from '@launch-ui/modal';
 
-import LayoutStyled from './styled';
-import GlobalFonts from '@src/assets/fonts/fonts';
-import { Background } from '@src/components/background/Background';
-import { Header } from '@src/components/header/Header';
-import { Aside } from '@src/components/aside';
-import { Settings } from '@src/components/settings';
-import { SignIn } from '@src/components/signin';
-import { Loader } from '@src/components/loader';
+import { Header } from '@src/features/header';
+import { Aside } from '@src/features/aside';
+import { Background } from '@src/features/background';
+import { Loader } from '@src/features/loader';
+import { Settings } from '@src/features/settings';
+import { SignIn } from '@src/features/signin';
 
 import { $appStore, setSignIn, setRightDrawer } from '@src/entities/app';
 import { $userStore, useAuthState } from '@src/entities/user';
+import { $settingsStore } from '@src/entities/settings';
 
 import { useDomStyles } from '@src/hooks/useDomStyles';
 
+import GlobalFonts from '@src/assets/fonts/fonts';
+import LayoutStyled from './styled';
+
 export const Layout: FC = () => {
   const { isLoading, isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
-  const user = useEffectorUnit($userStore);
+  const { uid } = useEffectorUnit($userStore);
+  const { dynamicWallpaper } = useEffectorUnit($settingsStore);
 
   const mouseWatcher = useRef<((e: React.MouseEvent<Element, MouseEvent>) => void) | null>(null);
 
@@ -44,12 +47,13 @@ export const Layout: FC = () => {
           data-description='layout-container'
           $isAsideOpen={isAsideOpen}
           onMouseMove={(e) => {
-            if (isRightDrawerOpen || !mouseWatcher.current) return;
+            if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
             mouseWatcher.current(e);
           }}
         >
           <Background
             setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
+              if (!dynamicWallpaper) return;
               mouseWatcher.current = watcher;
             }}
           />
@@ -63,13 +67,13 @@ export const Layout: FC = () => {
             <Outlet />
           </div>
 
-          {!!user.uid && (
+          {!!uid && (
             <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
               <Settings />
             </Drawer>
           )}
 
-          {!user.uid && (
+          {!uid && (
             <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
               <SignIn closePopup={() => setSignIn(false)} />
             </Modal>

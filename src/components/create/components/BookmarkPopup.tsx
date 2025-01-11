@@ -7,10 +7,11 @@ import { Typography } from '@launch-ui/typography';
 import { CreateFormCTX } from '../context';
 import { useCustomIcons } from '../hooks/useCustomIcons';
 
+import { Loader } from '@src/features/loader';
+
 import { TextInput } from '@src/components/inputs/TextInput';
 import { Scrollbars } from '@src/components/scrollbars';
 import { Card } from '@src/components/card';
-import { Loader } from '@src/components/loader';
 
 const ICONS_IN_A_ROW = 4;
 

@@ -6,7 +6,7 @@ import { fsdb, auth } from '@src/api/firebase';
 import { setAppLoading } from '../app';
 
 import { setSettings } from '../settings';
-import { setTabs, setTabsWoDb } from '../bookmarks';
+import { setTabsWoDb } from '../bookmarks';
 import { setUser } from './store';
 
 import { NULL_USER } from './contants';
@@ -28,6 +28,7 @@ const logout = () => {
   setUser(NULL_USER);
   setSettings(DEFAULT_SETTINGS);
   setTabsWoDb(DEFAULT_PAGES);
+  localStorage.clear();
 };
 
 const getUserData = async (user: FirebaseUser | null) => {
@@ -37,33 +38,38 @@ const getUserData = async (user: FirebaseUser | null) => {
   }
 
   const { uid, displayName, email, photoURL } = user;
-  const defaultUser = { uid, username: displayName, email, avatar: photoURL };
+  const optimisticUserData = { uid, username: displayName, email, avatar: photoURL };
+
+  setUser(optimisticUserData);
 
   const localSettings = localStorage.getItem('settings');
   const localTabs = localStorage.getItem('tabs');
 
-  if (localSettings && localTabs) {
-    // setUser(defaultUser);
-    setSettings(JSON.parse(localSettings));
-    setTabsWoDb(JSON.parse(localTabs));
-    setAppLoading(false);
-  }
+  if (localSettings) setSettings(JSON.parse(localSettings));
+  if (localTabs) setTabsWoDb(JSON.parse(localTabs));
+  if (localSettings && localTabs) setAppLoading(false); // will show app with user data from localStorage
 
-  const userSnap = await getDoc(doc(fsdb, 'users', uid));
+  const userSnap = await getDoc(doc(fsdb, 'users', uid)); // check latest data
 
+  // optimistic update data if no db record presented (first login)
   if (!userSnap.exists()) {
-    await setDoc(doc(fsdb, 'users', user.uid), defaultUser);
-    setUser(defaultUser);
-
+    setUser(optimisticUserData);
     setSettings(DEFAULT_SETTINGS);
-    setTabs({ uid, tabs: DEFAULT_PAGES, tabName: '' });
+    setTabsWoDb(DEFAULT_PAGES);
     setAppLoading(false);
+
+    setDoc(doc(fsdb, 'users', user.uid), {
+      ...optimisticUserData,
+      pages: DEFAULT_PAGES,
+      settings: DEFAULT_SETTINGS,
+    } as LaunchUserData);
 
     return;
   }
 
   const { settings, pages } = userSnap.data() as LaunchUserData;
 
+  // TODO: check for state update requred via localStorage data deep compare
   setUser(userSnap.data() as LaunchUserData);
   setSettings(settings);
   setTabsWoDb(pages);

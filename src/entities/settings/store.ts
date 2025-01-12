@@ -7,9 +7,6 @@ const setSettings = createEvent<Partial<SettingsStore>>();
 
 const $settingsStore = createStore<SettingsStore>(DEFAULT_SETTINGS);
 
-$settingsStore.on(setSettings, (prevState, settings) => {
-  localStorage.setItem('settings', JSON.stringify({ ...prevState, ...settings }));
-  return { ...prevState, ...settings };
-});
+$settingsStore.on(setSettings, (prevState, settings) => ({ ...prevState, ...settings }));
 
 export { $settingsStore, setSettings };

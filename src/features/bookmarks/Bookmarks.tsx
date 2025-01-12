@@ -11,21 +11,23 @@ import { Create } from '@src/components/create';
 import { Card } from '@src/components/card/Card';
 import { SortableListStyled, HoverWrapper } from './styles';
 
+const FALLBACK_PAGES: BookmarkTabProps = { name: 'Home', pages: [] };
+
 export const Bookmarks: FC = () => {
   const { uid } = useEffectorUnit($userStore);
-  const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
+  const { tabs = [], currentTab } = useEffectorUnit($bookmarksStore);
 
-  const { name, pages: bookmarks } = (tabs.find((el) => el?.name === currentTab) || {}) as BookmarkTabProps;
+  const { name, pages: cards = [] } = tabs.find((el) => el?.name === currentTab) || FALLBACK_PAGES;
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
     if (!uid) return;
-    const reorderedCards = arrayMoveImmutable([...bookmarks], oldIndex, newIndex);
+    const reorderedCards = arrayMoveImmutable([...cards], oldIndex, newIndex);
     reorderCards({ uid, tabs, tabName: name, reorderedCards });
   };
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      {bookmarks.map((card, cardIdx) => (
+      {cards.map((card, cardIdx) => (
         <SortableItem key={`${card.name}${cardIdx}`}>
           <HoverWrapper>
             <ContextMenu

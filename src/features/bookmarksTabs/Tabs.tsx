@@ -25,7 +25,7 @@ const SortableListStyled = styled(SortableList)`
 
 export const Tabs: FC = () => {
   const { uid } = useEffectorUnit($userStore);
-  const { tabs, currentTab } = useEffectorUnit($bookmarksStore);
+  const { tabs = [], currentTab } = useEffectorUnit($bookmarksStore);
 
   const sortableTabs = useMemo(() => tabs.filter((...[, i]) => i !== 0), [tabs]);
 

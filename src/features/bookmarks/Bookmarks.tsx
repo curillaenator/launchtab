@@ -33,7 +33,10 @@ export const Bookmarks: FC = () => {
                 {
                   title: 'Delete',
                   danger: true,
-                  handler: () => removeCards({ uid: uid!, tabs, tabName: name, cardIdx }),
+                  handler: () => {
+                    if (!uid) return;
+                    removeCards({ uid, tabs, tabName: name, cardIdx });
+                  },
                 },
               ]}
             >

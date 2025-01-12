@@ -1,49 +1,53 @@
-import { signOut, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signOut, signInWithPopup, GoogleAuthProvider, type User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { createEffect } from 'effector';
 
-import { setAppLoading } from '@src/entities/app';
-import { updateUser, resetUser } from '@src/entities/user';
 import { fsdb, auth } from '@src/api/firebase';
+
+import { setAppLoading } from '../app';
 
 import { NULL_USER } from './contants';
 import { DEFAULT_PAGES } from '../bookmarks/constants';
 import { DEFAULT_SETTINGS } from '../settings/constants';
 
+import type { LaunchUserData } from './interfaces';
+
 const googleProvider = new GoogleAuthProvider();
 
 const login = () => {
-  signInWithPopup(auth, googleProvider).then(async ({ user }) => {
-    const userSnap = await getDoc(doc(fsdb, 'users', user.uid));
-
-    if (!userSnap.exists()) {
-      await setDoc(doc(fsdb, 'users', user.uid), {
-        uid: user.uid,
-        username: user.displayName,
-        email: user.email,
-        avatar: user.photoURL,
-        pages: DEFAULT_PAGES,
-        settings: DEFAULT_SETTINGS,
-      });
-    }
-
-    updateUser({ uid: user.uid, email: user.email, avatar: user.photoURL, username: user.displayName });
-  });
+  setAppLoading(true);
+  signInWithPopup(auth, googleProvider);
 };
 
 const logout = () => {
   setAppLoading(true);
   signOut(auth);
-
-  resetUser();
-  setAppLoading(false);
 };
 
-const getUserData = createEffect(async (uid: string) => {
-  const userSnap = await getDoc(doc(fsdb, 'users', uid));
+const getUserData = createEffect(async (user: FirebaseUser | null) => {
+  if (!user) {
+    setAppLoading(false);
+    return { ...NULL_USER, settings: DEFAULT_SETTINGS, pages: DEFAULT_PAGES } as LaunchUserData;
+  }
+
+  const userSnap = await getDoc(doc(fsdb, 'users', user.uid));
+
+  if (!userSnap.exists()) {
+    const defaultLaunchUserData: LaunchUserData = {
+      uid: user.uid,
+      username: user.displayName,
+      email: user.email,
+      avatar: user.photoURL,
+      pages: DEFAULT_PAGES,
+      settings: DEFAULT_SETTINGS,
+    };
+
+    await setDoc(doc(fsdb, 'users', user.uid), defaultLaunchUserData);
+  }
+
   setAppLoading(false);
 
-  return !!userSnap.exists() ? userSnap.data() : { ...NULL_USER, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
+  return userSnap.data() as LaunchUserData;
 });
 
 export { login, logout, getUserData };

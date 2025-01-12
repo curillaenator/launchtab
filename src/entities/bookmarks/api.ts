@@ -21,11 +21,14 @@ interface CreateCardPayload extends BasePayload {
   card: BookmarkCardProps;
 }
 
-// const setLocalTabs = (tabs: BookmarkTabProps[]) => localStorage.setItem('tabs', JSON.stringify(tabs));
+const updateDatabases = (uid: string, tabs: BookmarkTabProps[]) => {
+  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: tabs });
+  localStorage.setItem('tabs', JSON.stringify(tabs));
+};
 
 const reorderTabs = createEffect(({ uid, tabs }: BasePayload) => {
-  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: tabs });
-  // setLocalTabs(tabs);
+  updateDatabases(uid, tabs);
+
   return tabs;
 });
 
@@ -37,8 +40,8 @@ const reorderCards = createEffect(({ uid, tabs, tabName, reorderedCards }: Reord
 
   newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: reorderedCards });
 
-  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
-  // setLocalTabs(newFullTabs);
+  updateDatabases(uid, newFullTabs);
+
   return newFullTabs;
 });
 
@@ -53,15 +56,26 @@ const removeCards = createEffect(({ uid, tabs, tabName, cardIdx }: RemoveCardPay
 
   newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: updatedCards });
 
-  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
-  // setLocalTabs(newFullTabs);
+  updateDatabases(uid, newFullTabs);
+  return newFullTabs;
+});
+
+const removeTabs = createEffect(({ uid, tabName, tabs }: BasePayload) => {
+  const newFullTabs = [...tabs];
+  const removeTabIdx = newFullTabs.findIndex((el) => el.name === tabName);
+
+  if (removeTabIdx < 0) return tabs;
+
+  newFullTabs.splice(removeTabIdx, 1);
+
+  updateDatabases(uid, newFullTabs);
+
   return newFullTabs;
 });
 
 const createTab = createEffect(({ uid, tabName, tabs }: BasePayload) => {
   const newFullTabs = [...tabs, { name: tabName, pages: [] }];
-  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
-  // setLocalTabs(newFullTabs);
+  updateDatabases(uid, newFullTabs);
   return newFullTabs;
 });
 
@@ -72,9 +86,8 @@ const createCard = createEffect(({ uid, tabName, tabs, card }: CreateCardPayload
 
   newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: [...tabs[updatedTabIdx].pages, card] });
 
-  updateDoc(doc(collection(fsdb, 'users'), uid), { pages: newFullTabs });
-  // setLocalTabs(newFullTabs);
+  updateDatabases(uid, newFullTabs);
   return newFullTabs;
 });
 
-export { reorderTabs, reorderCards, createTab, createCard, removeCards };
+export { reorderTabs, reorderCards, createTab, createCard, removeCards, removeTabs };

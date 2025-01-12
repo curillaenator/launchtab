@@ -9,7 +9,7 @@ import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 
 import { $userStore } from '@src/entities/user';
-import { $bookmarksStore, setCurrentTab, reorderTabs } from '@src/entities/bookmarks';
+import { $bookmarksStore, setCurrentTab, reorderTabs, removeTabs } from '@src/entities/bookmarks';
 
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
@@ -48,7 +48,18 @@ export const Tabs: FC = () => {
       {sortableTabs.map(({ name }, i) => (
         <SortableItem key={`${name}${i}`}>
           <div>
-            <ContextMenu items={[{ title: 'Delete', danger: true, handler: () => {} }]}>
+            <ContextMenu
+              items={[
+                {
+                  title: 'Delete',
+                  danger: true,
+                  handler: () => {
+                    if (!uid) return;
+                    removeTabs({ uid, tabs, tabName: name });
+                  },
+                },
+              ]}
+            >
               <Button title={name} active={name === currentTab} onClick={() => setCurrentTab(name)} />
             </ContextMenu>
           </div>

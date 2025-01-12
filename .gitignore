@@ -16,6 +16,7 @@ hosting.*
 # production
 /build
 kit/*/**/build
+src/entities/mock
 
 # misc
 .DS_Store

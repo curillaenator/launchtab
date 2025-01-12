@@ -41,9 +41,9 @@ const DEFAULT_PAGES: BookmarkTabProps[] = [
   },
 ];
 
-const DEFAULT_APP_STORE: BookmarksStore = {
+const DEFAULT_CARDS_STORE: BookmarksStore = {
   currentTab: 'Home',
   tabs: DEFAULT_PAGES,
 };
 
-export { DEFAULT_PAGES, DEFAULT_APP_STORE };
+export { DEFAULT_PAGES, DEFAULT_CARDS_STORE };

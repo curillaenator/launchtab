@@ -1,6 +1,6 @@
-import { LaunchUser } from './interfaces';
+import type { LaunchStoreUser } from './interfaces';
 
-const NULL_USER: LaunchUser = {
+const NULL_USER: LaunchStoreUser = {
   uid: null,
   username: null,
   email: null,

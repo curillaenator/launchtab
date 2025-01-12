@@ -3,7 +3,7 @@ import { useUnit as useEffectorUnit } from 'effector-react';
 import { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 
-import { $bookmarksStore, reorderCards, BookmarkTabProps, removeCards } from '@src/entities/bookmarks';
+import { $bookmarksStore, reorderCards, BookmarkTabProps, removeCard } from '@src/entities/bookmarks';
 import { $userStore } from '@src/entities/user';
 
 import { ContextMenu } from '@launch-ui/context-menu';
@@ -35,7 +35,7 @@ export const Bookmarks: FC = () => {
                   danger: true,
                   handler: () => {
                     if (!uid) return;
-                    removeCards({ uid, tabs, tabName: name, cardIdx });
+                    removeCard({ uid, tabs, tabName: name, cardIdx });
                   },
                 },
               ]}

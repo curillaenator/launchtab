@@ -1,3 +1,13 @@
-export { $bookmarksStore, setCurrentTab, setTabs } from './store';
-export { reorderCards, createTab, reorderTabs, createCard, removeCards, removeTabs } from './api';
+export {
+  $bookmarksStore,
+  createCard,
+  removeCard,
+  reorderCards,
+  setCurrentTab,
+  removeTab,
+  setTabs,
+  setTabsWoDb,
+  createTab,
+} from './store';
+
 export type { BookmarkTabProps, BookmarkCardProps } from './interfaces';

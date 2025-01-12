@@ -9,19 +9,19 @@ import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';
 
 import { setRightDrawer } from '@src/entities/app';
-import { $settingsStore, saveSettings } from '@src/entities/settings';
 import { $userStore } from '@src/entities/user';
+import { $settingsStore, saveSettings } from '@src/entities/settings';
 
 import { SettingsStyled } from './styles';
 
 //@ts-expect-error
-import SaveIcon from '@src/assets/svg/save.svg';
-//@ts-expect-error
 import LogoutIcon from '@src/assets/svg/logout.svg';
+//@ts-expect-error
+import SaveIcon from '@src/assets/svg/save.svg';
 
 export const Settings: FC = () => {
-  const settings = useEffectorUnit($settingsStore);
   const { uid } = useEffectorUnit($userStore);
+  const settings = useEffectorUnit($settingsStore);
 
   if (!uid) return null;
 
@@ -54,8 +54,8 @@ export const Settings: FC = () => {
             />
 
             <ButtonAction
-              title='Save settings'
               LeftIcon={SaveIcon}
+              title='Save settings'
               onClick={() => {
                 saveSettings({ uid, settings });
                 setRightDrawer(false);

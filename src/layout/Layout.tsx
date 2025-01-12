@@ -22,6 +22,8 @@ import { useDomStyles } from '@src/hooks/useDomStyles';
 import GlobalFonts from '@src/assets/fonts/fonts';
 import LayoutStyled from './styled';
 
+// import { restoreMe } from '@src/entities/mock';
+
 export const Layout: FC = () => {
   const { isLoading, isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
   const { uid } = useEffectorUnit($userStore);
@@ -32,6 +34,10 @@ export const Layout: FC = () => {
   const { currentTheme } = useDomStyles();
 
   useAuthState();
+
+  // useEffect(() => {
+  //   restoreMe();
+  // }, []);
 
   return (
     // @ts-expect-error

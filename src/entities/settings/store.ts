@@ -1,32 +1,15 @@
-import { createStore, createEvent, createEffect } from 'effector';
-import { collection, doc, updateDoc } from 'firebase/firestore';
-import { fsdb } from '@src/api/firebase';
-
-import { getUserData } from '@src/entities/user';
+import { createStore, createEvent } from 'effector';
 
 import { DEFAULT_SETTINGS } from './constants';
 import type { SettingsStore } from './interfaces';
 
-interface AsyncSettingsPayload {
-  uid: string;
-  settings: Partial<SettingsStore>;
-}
-
-const saveSettings = createEffect(async ({ uid, settings }: AsyncSettingsPayload) =>
-  updateDoc(doc(collection(fsdb, 'users'), uid), { settings }).then(() => {
-    localStorage.setItem('settings', JSON.stringify(settings));
-    return settings;
-  }),
-);
-
 const setSettings = createEvent<Partial<SettingsStore>>();
 
-const localSettings = localStorage.getItem('settings');
-const $settingsStore = createStore<SettingsStore>(localSettings ? JSON.parse(localSettings) : DEFAULT_SETTINGS);
+const $settingsStore = createStore<SettingsStore>(DEFAULT_SETTINGS);
 
-$settingsStore
-  .on(setSettings, (prevState, newSettings) => ({ ...prevState, ...newSettings }))
-  .on(getUserData.doneData, (prevState, fsUser) => ({ ...prevState, ...fsUser.settings }))
-  .on(saveSettings.doneData, (prevState, newSettings) => ({ ...prevState, ...newSettings }));
+$settingsStore.on(setSettings, (prevState, settings) => {
+  localStorage.setItem('settings', JSON.stringify({ ...prevState, ...settings }));
+  return { ...prevState, ...settings };
+});
 
-export { $settingsStore, setSettings, saveSettings };
+export { $settingsStore, setSettings };

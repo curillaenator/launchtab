@@ -28,7 +28,8 @@ import UpdateIcon from '@src/assets/svg/update.svg';
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
 export const LookFeel: FC = () => {
-  const lookfeel = useEffectorUnit($settingsStore);
+  const settingsState = useEffectorUnit($settingsStore);
+
   const {
     pexels,
     // pexelsLoading,
@@ -66,29 +67,31 @@ export const LookFeel: FC = () => {
       <Titlewrap title='Theme'>
         <Select
           shevronIcon={<ShevronIcon className='svg_icon dropdown-title-shevron' />}
-          selected={lookfeel.themeName}
+          selected={settingsState.themeName}
           options={themeOptions}
-          //@ts-expect-error
-          onChange={(themeName) => setSettings({ themeName })}
+          onChange={(themeName) =>
+            //@ts-expect-error
+            setSettings({ themeName })
+          }
         />
       </Titlewrap>
 
       <Titlewrap title='Dark Mode'>
-        <Switch value={lookfeel.darkMode} onChange={() => setSettings({ darkMode: !lookfeel.darkMode })} />
+        <Switch value={settingsState.darkMode} onChange={() => setSettings({ darkMode: !settingsState.darkMode })} />
       </Titlewrap>
 
       <Titlewrap title='Dynamic wallpaper'>
         <Switch
-          value={lookfeel.isDynamicWallpaper}
-          onChange={() => setSettings({ isDynamicWallpaper: !lookfeel.isDynamicWallpaper })}
+          value={settingsState.isDynamicWallpaper}
+          onChange={() => setSettings({ isDynamicWallpaper: !settingsState.isDynamicWallpaper })}
         />
       </Titlewrap>
 
-      {lookfeel.isDynamicWallpaper && (
+      {settingsState.isDynamicWallpaper && (
         <Titlewrap title='Select dynamic wallpaper'>
           <Select
             shevronIcon={<ShevronIcon className='svg_icon dropdown-title-shevron' />}
-            selected={lookfeel.dynamicWallpaper}
+            selected={settingsState.dynamicWallpaper}
             options={[
               { title: 'Flowy Clouds', value: 'clouds' },
               { title: 'Beach Noon', value: 'beach' },
@@ -98,11 +101,11 @@ export const LookFeel: FC = () => {
         </Titlewrap>
       )}
 
-      {!lookfeel.isDynamicWallpaper && (
+      {!settingsState.isDynamicWallpaper && (
         <>
-          {lookfeel.wallpaper && (
+          {settingsState.wallpaper && (
             <Titlewrap title='Current wallpaper' noOffset>
-              <ImagePreview clickable={false} alt='launchtabs-wallpaper' src={lookfeel.wallpaper} />
+              <ImagePreview clickable={false} alt='launchtabs-wallpaper' src={settingsState.wallpaper} />
             </Titlewrap>
           )}
 
@@ -130,7 +133,7 @@ export const LookFeel: FC = () => {
               alt={photo.alt as string}
               src={photo.src.large}
               onClick={() => setSettings({ wallpaper: photo.src.original })}
-              active={lookfeel.wallpaper === photo.src.original}
+              active={settingsState.wallpaper === photo.src.original}
               avgColor={photo.avg_color as string}
               clickable
             />

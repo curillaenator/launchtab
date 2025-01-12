@@ -17,4 +17,30 @@ interface BookmarksStore {
   tabs: BookmarkTabProps[];
 }
 
-export type { BookmarkCardProps, BookmarkTabProps, BookmarksStore };
+interface BasePayload {
+  uid: string | null;
+  tabName: string;
+  tabs: BookmarkTabProps[];
+}
+
+interface RemoveCardPayload extends BasePayload {
+  cardIdx: number;
+}
+
+interface ReorderCardPayload extends BasePayload {
+  reorderedCards: BookmarkCardProps[];
+}
+
+interface CreateCardPayload extends BasePayload {
+  card: BookmarkCardProps;
+}
+
+export type {
+  BookmarkCardProps,
+  BookmarkTabProps,
+  BookmarksStore,
+  BasePayload,
+  RemoveCardPayload,
+  ReorderCardPayload,
+  CreateCardPayload,
+};

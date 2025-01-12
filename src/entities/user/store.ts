@@ -1,12 +1,12 @@
-import { createStore } from 'effector';
+import { createStore, createEvent } from 'effector';
+
 import { NULL_USER } from './contants';
 import type { LaunchStoreUser } from './interfaces';
-import { omit } from 'lodash';
 
-import { getUserData } from './api';
+const setUser = createEvent<LaunchStoreUser>();
 
 const $userStore = createStore<LaunchStoreUser>(NULL_USER);
 
-$userStore.on(getUserData.doneData, (_, userData) => omit(userData, 'pages', 'settings'));
+$userStore.on(setUser, (_, userData) => userData);
 
-export { $userStore };
+export { $userStore, setUser };

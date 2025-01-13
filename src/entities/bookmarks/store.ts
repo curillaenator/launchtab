@@ -14,8 +14,8 @@ import type {
 } from './interfaces';
 
 const setCurrentTab = createEvent<string>();
-const setTabs = createEvent<BasePayload>();
-const setTabsWoDb = createEvent<BookmarkTabProps[]>();
+const setTabsWithDbUpdate = createEvent<BasePayload>();
+const setTabsWithoutDbUpdate = createEvent<BookmarkTabProps[]>();
 const createTab = createEvent<BasePayload>();
 const removeTab = createEvent<BasePayload>();
 
@@ -33,11 +33,11 @@ const updateDatabases = (uid: string | null, tabs: BookmarkTabProps[]) => {
 $bookmarksStore
   .on(setCurrentTab, (prevState, currentTab) => ({ ...prevState, currentTab }))
   //
-  .on(setTabs, (prevState, { uid, tabs }) => {
+  .on(setTabsWithDbUpdate, (prevState, { uid, tabs }) => {
     updateDatabases(uid, tabs);
     return { ...prevState, tabs };
   })
-  .on(setTabsWoDb, (prevState, tabs) => ({ ...prevState, tabs }))
+  .on(setTabsWithoutDbUpdate, (prevState, tabs) => ({ ...prevState, tabs }))
   .on(createTab, (prevState, { uid, tabs, tabName }) => {
     const newFullTabs = [...tabs, { name: tabName, pages: [] }];
     updateDatabases(uid, newFullTabs);
@@ -104,8 +104,9 @@ export {
   //
   setCurrentTab,
   //
-  setTabs,
-  setTabsWoDb,
+  setTabsWithDbUpdate,
+  setTabsWithoutDbUpdate,
+  //
   createTab,
   removeTab,
   //

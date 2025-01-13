@@ -5,8 +5,8 @@ export {
   reorderCards,
   setCurrentTab,
   removeTab,
-  setTabs,
-  setTabsWoDb,
+  setTabsWithDbUpdate,
+  setTabsWithoutDbUpdate,
   createTab,
 } from './store';
 

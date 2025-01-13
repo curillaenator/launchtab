@@ -5,15 +5,15 @@ import { fsdb, auth } from '@src/api/firebase';
 
 import { setAppLoading } from '../app';
 
-import { setSettings } from '../settings';
-import { setTabsWoDb } from '../bookmarks';
+import { setSettings, SettingsStore } from '../settings';
+import { setTabsWithoutDbUpdate, BookmarkTabProps } from '../bookmarks';
 import { setUser } from './store';
 
 import { NULL_USER } from './contants';
 import { DEFAULT_PAGES } from '../bookmarks/constants';
 import { DEFAULT_SETTINGS } from '../settings/constants';
 
-import type { LaunchUserData } from './interfaces';
+import type { LaunchUserData, LaunchStoreUser } from './interfaces';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -27,7 +27,7 @@ const logout = () => {
   signOut(auth);
   setUser(NULL_USER);
   setSettings(DEFAULT_SETTINGS);
-  setTabsWoDb(DEFAULT_PAGES);
+  setTabsWithoutDbUpdate(DEFAULT_PAGES);
   localStorage.clear();
 };
 
@@ -38,15 +38,27 @@ const getUserData = async (user: FirebaseUser | null) => {
   }
 
   const { uid, displayName, email, photoURL } = user;
-  const optimisticUserData = { uid, username: displayName, email, avatar: photoURL };
+  const optimisticUserData: LaunchStoreUser = { uid, username: displayName, email, avatar: photoURL };
+  const optimisticDbData: LaunchUserData = { ...optimisticUserData, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
+  const localDbData: LaunchUserData = { ...optimisticUserData, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
 
   setUser(optimisticUserData);
 
   const localSettings = localStorage.getItem('settings');
   const localTabs = localStorage.getItem('tabs');
 
-  if (localSettings) setSettings(JSON.parse(localSettings));
-  if (localTabs) setTabsWoDb(JSON.parse(localTabs));
+  if (localSettings) {
+    const lsSettings = JSON.parse(localSettings) as SettingsStore;
+    setSettings(lsSettings);
+    localDbData.settings = lsSettings;
+  }
+
+  if (localTabs) {
+    const lsTabs = JSON.parse(localTabs) as BookmarkTabProps[];
+    setTabsWithoutDbUpdate(lsTabs);
+    localDbData.pages = lsTabs;
+  }
+
   if (localSettings && localTabs) setAppLoading(false); // will show app with user data from localStorage
 
   const userSnap = await getDoc(doc(fsdb, 'users', uid)); // check latest data
@@ -54,25 +66,21 @@ const getUserData = async (user: FirebaseUser | null) => {
   // optimistic update data if no db record presented (first login)
   if (!userSnap.exists()) {
     setUser(optimisticUserData);
-    setSettings(DEFAULT_SETTINGS);
-    setTabsWoDb(DEFAULT_PAGES);
+    setSettings(optimisticDbData.settings);
+    setTabsWithoutDbUpdate(optimisticDbData.pages);
     setAppLoading(false);
 
-    setDoc(doc(fsdb, 'users', user.uid), {
-      ...optimisticUserData,
-      pages: DEFAULT_PAGES,
-      settings: DEFAULT_SETTINGS,
-    } as LaunchUserData);
+    setDoc(doc(fsdb, 'users', user.uid), optimisticDbData);
 
     return;
   }
 
-  const { settings, pages } = userSnap.data() as LaunchUserData;
+  const dbUserData = userSnap.data() as LaunchUserData;
 
   // TODO: check for state update requred via localStorage data deep compare
-  setUser(userSnap.data() as LaunchUserData);
-  setSettings(settings);
-  setTabsWoDb(pages);
+  setUser(dbUserData);
+  setSettings(dbUserData.settings);
+  setTabsWithoutDbUpdate(dbUserData.pages);
   setAppLoading(false);
 };
 

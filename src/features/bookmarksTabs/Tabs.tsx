@@ -9,7 +9,7 @@ import { ContextMenu } from '@launch-ui/context-menu';
 import { Create } from '@src/components/create';
 
 import { $userStore } from '@src/entities/user';
-import { $bookmarksStore, setCurrentTab, setTabs, removeTab } from '@src/entities/bookmarks';
+import { $bookmarksStore, setCurrentTab, setTabsWithDbUpdate, removeTab } from '@src/entities/bookmarks';
 
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
@@ -34,7 +34,7 @@ export const Tabs: FC = () => {
       if (!uid || !sortableTabs.length) return;
 
       const sortedTabs = arrayMoveImmutable([...sortableTabs], oldIndex, newIndex);
-      setTabs({ uid, tabs: [tabs[0], ...sortedTabs], tabName: '' });
+      setTabsWithDbUpdate({ uid, tabs: [tabs[0], ...sortedTabs], tabName: '' });
     },
     [tabs, sortableTabs, uid],
   );

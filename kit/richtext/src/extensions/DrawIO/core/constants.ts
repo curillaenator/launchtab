@@ -1,0 +1,3 @@
+const DRAWIO_EXTENSION_NAME = 'drawio';
+
+export { DRAWIO_EXTENSION_NAME };

@@ -1,5 +1,7 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useCallback } from 'react';
+import styled from 'styled-components';
 import { useUnit as useEffectorUnit } from 'effector-react';
+import { debounce } from 'lodash';
 
 import { ThemeProvider } from 'styled-components';
 import { Outlet } from 'react-router-dom';
@@ -16,13 +18,21 @@ import { SignIn } from '@src/features/signin';
 import { $appStore, setSignIn, setRightDrawer } from '@src/entities/app';
 import { $userStore, useAuthState } from '@src/entities/user';
 import { $settingsStore } from '@src/entities/settings';
+import { setHeaderShadowed } from '@src/entities/header';
 
 import { useDomStyles } from '@src/hooks/useDomStyles';
 
 import GlobalFonts from '@src/assets/fonts/fonts';
 import LayoutStyled from './styled';
 
+import { MAIN_ELEMENT_ID } from './constants';
+
 // import { restoreMe } from '@src/entities/mock';
+
+const MainStyled = styled.main`
+  width: 100%;
+  padding: 56px;
+`;
 
 export const Layout: FC = () => {
   const { isLoading, isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
@@ -34,6 +44,14 @@ export const Layout: FC = () => {
   const { currentTheme } = useDomStyles();
 
   useAuthState();
+
+  const onViewportScroll = useCallback(
+    debounce((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+      //@ts-expect-error
+      setHeaderShadowed(e.nativeEvent.target?.scrollTop > 56 * 2);
+    }, 400),
+    [],
+  );
 
   // useEffect(() => {
   //   restoreMe();
@@ -68,9 +86,12 @@ export const Layout: FC = () => {
             <Aside />
           </aside>
 
-          <div className='viewport'>
+          <div className='viewport' onScroll={onViewportScroll}>
             <Header />
-            <Outlet />
+
+            <MainStyled id={MAIN_ELEMENT_ID}>
+              <Outlet />
+            </MainStyled>
           </div>
 
           {!!uid && (

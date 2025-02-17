@@ -1,0 +1,75 @@
+.container {
+  --drawio-widget-toolbar-opacity: 0;
+  --drawio-widget-pd: 16px;
+
+  width: 100%;
+  position: relative;
+  padding: var(--drawio-widget-pd);
+
+  min-height: calc(40px + var(--drawio-widget-pd) * 2); // 40 - min actions height
+
+  overflow: hidden;
+
+  &:has(img[data-filetype='xmlpng']),
+  &:has(img[data-filetype='png-pair-to-xml']) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 512px;
+  }
+
+  &:hover {
+    --drawio-drag-handler-c: var(--editor-bdc);
+    --drawio-widget-toolbar-opacity: 1;
+  }
+
+  .fileName {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: 3px 16px 4px;
+
+    border-radius: 7px 0 8px 0;
+    background-color: var(--editor-bgc-primary);
+    border-right: 1px solid var(--editor-bdc);
+    border-bottom: 1px solid var(--editor-bdc);
+
+    max-width: calc(100% - 24px);
+
+    & > span {
+      display: block;
+      height: 16px;
+      max-width: 100%;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      color: var(--editor-c);
+
+      font-family: 'SB Sans Text', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+    }
+  }
+
+  .actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: fit-content;
+    padding: 8px;
+    border-radius: 8px;
+
+    background-color: var(--eds-bgc-base);
+    opacity: var(--drawio-widget-toolbar-opacity);
+  }
+}

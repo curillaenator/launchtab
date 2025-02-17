@@ -34,7 +34,7 @@ export const useAnimation = (opts?: AnimationProps) => {
         config: { ...config[type], tension: 250, friction: 26, duration: 10 },
       });
     },
-    [hidden, api],
+    [hidden, type, api],
   );
 
   return {

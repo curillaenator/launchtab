@@ -41,17 +41,7 @@ export default [
   },
 
   {
-    files: [
-      //
-      'src/**/*.js',
-      'src/**/*.ts',
-      'src/**/*.jsx',
-      'src/**/*.tsx',
-      'kit/**/*.js',
-      'kit/**/*.ts',
-      'kit/**/*.jsx',
-      'kit/**/*.tsx',
-    ],
+    files: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.jsx', 'src/**/*.tsx'],
 
     rules: {
       'react/react-in-jsx-scope': 'off',
@@ -66,14 +56,6 @@ export default [
       'valid-jsdoc': 'off',
     },
 
-    ignores: [
-      //
-      '.firebase/*',
-      '.husky/*',
-      '.yarn/*',
-      '**/node_modules/*',
-      'build/*',
-      '**/*.config.js',
-    ],
+    ignores: ['.firebase/*', '.husky/*', '.yarn/*', '**/node_modules/*', 'build/*', '**/*.config.js'],
   },
 ];

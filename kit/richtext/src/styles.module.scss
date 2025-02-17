@@ -1,7 +1,7 @@
-@use './styleTokens/eds' as eds;
+@import './styleTokens/_eds';
 
 ._theme_eds {
-  @include eds.edsCssv;
+  @include edsCssv;
 
   --editor-primary: var(--eds-fore-accent);
   --editor-primary-h: var(--eds-fore-accent-h);

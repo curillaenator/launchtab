@@ -1,6 +1,7 @@
 import { colorsLib, colorsStaticLightMode } from './colors';
 import { hexa } from './utils';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const themeTemplate = {
   white: colorsLib.white,
   black: colorsLib.black,

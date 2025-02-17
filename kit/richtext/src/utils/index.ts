@@ -1,5 +1,3 @@
-export { getExtensionsFor } from './getExtensionsFor';
-export { getMacrosesExtensions } from './getMacrosesExtensions';
 export { isContentSemiEmpty } from './isContentSemiEmpty';
 export { isImageContent } from './isImageContent';
 export { isNotEmptyParagraph } from './isNotEmptyParagraph';

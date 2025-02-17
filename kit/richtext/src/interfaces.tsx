@@ -39,12 +39,12 @@ interface RichTextExtensionsOptions {
   plantUml?: {}; // PlantUmlConfig;
   table?: {}; // FilterTableConfig;
   heading?: {}; // HeadingConfig;
-  image: {
+  image?: {
     onAddImage?: (file: File) => void;
     onAddFile?: (file: File) => void;
     imageList?: unknown[]; // ImageListItem[];
   };
-  files: {
+  files?: {
     filesList?: unknown[]; // FileListItem[];
   };
 }
@@ -78,7 +78,7 @@ interface RichtextContainerProps {
 
   toolStruct?: unknown;
 
-  extensionsOptions: RichTextExtensionsOptions;
+  extensionsOptions?: RichTextExtensionsOptions;
 }
 
 export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsConfig, RichTextExtensionsOptions };

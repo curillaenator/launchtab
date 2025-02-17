@@ -103,14 +103,12 @@ const CORE_EXTENSIONS = [
 ];
 
 interface GetExtensionsArgs {
-  extensionsOptions: RichTextExtensionsOptions;
   config: RichTextExtensionsConfig;
+  extensionsOptions?: RichTextExtensionsOptions;
 }
 
 function getExtensions(args: GetExtensionsArgs) {
   const { extensionsOptions, config } = args;
-
-  const { drawio, blocksGrid } = extensionsOptions;
 
   const {
     dataTestId,
@@ -120,18 +118,18 @@ function getExtensions(args: GetExtensionsArgs) {
 
   const extensions = [...CORE_EXTENSIONS];
 
-  if (drawio)
+  if (extensionsOptions?.drawio)
     extensions.push(
       DrawIO.configure({
-        ...drawio,
+        ...extensionsOptions.drawio,
         dataTestId: `${dataTestId}.DrawIO`,
       }),
     );
 
-  if (blocksGrid) {
+  if (extensionsOptions?.blocksGrid) {
     extensions.push(
       BlocksGrid.configure({
-        ...blocksGrid,
+        ...extensionsOptions.blocksGrid,
         dataTestId: `${dataTestId}.BlocksGrid`,
       }),
     );

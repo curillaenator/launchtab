@@ -24,8 +24,8 @@ export const useBaseDropdownProps = (
 ): ExtendedBaseDropdownProps & InternalDropableProps => {
   const {
     // propguard
-    mounted,
-    openDropdown,
+    mounted, //eslint-disable-line @typescript-eslint/no-unused-vars
+    openDropdown, //eslint-disable-line @typescript-eslint/no-unused-vars
 
     trigger = 'click',
     visible,

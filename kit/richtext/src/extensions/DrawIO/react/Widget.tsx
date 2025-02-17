@@ -27,7 +27,7 @@ const UIWidget: FC<UiWidgetProps> = (props) => {
   const isDrawioEditorAvailable =
     !!extension.options.drawIoLink && !!extension.options.uploadFile && !!extension.options.updateFile;
 
-  const dataTestId = `${extension.options.dataTestId}.DrawIO`;
+  const dataTestId = extension.options.dataTestId || 'DrawIOExtension';
 
   const contextValue = useMemo(
     () => ({

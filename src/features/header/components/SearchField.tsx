@@ -6,6 +6,7 @@ import { Corners } from '@launch-ui/shape';
 import { $settingsStore } from '@src/entities/settings';
 import { useSearch } from './useSearch';
 
+// @ts-expect-error
 import GoogleIcon from '@src/assets/svg/google.svg';
 
 const SearchFormStyled = styled.form`
@@ -36,7 +37,7 @@ const InputStyled = styled.div<IInputStyled>`
   }
 
   &:hover {
-    --shp-bdc: ${({ theme, focused }) => (focused ? theme.primary[500] : theme.primary[400])};
+    /* --shp-bdc: ${({ theme, focused }) => (focused ? theme.primary[500] : theme.primary[400])}; */
   }
 
   .google_logo {

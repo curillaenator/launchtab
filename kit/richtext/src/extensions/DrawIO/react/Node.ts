@@ -1,7 +1,7 @@
 import { mergeAttributes } from '@tiptap/core';
 import { ReactNodeViewRenderer, NodeViewProps } from '@tiptap/react';
 
-import type { DrawIoAttributes } from '../core/interfaces';
+// import type { DrawIoAttributes } from '../core/interfaces';
 import { DrawIoPlugin as DrawIoPluginCore } from '../core';
 
 import UiWidget from './Widget';
@@ -10,7 +10,7 @@ import styles from './node.module.scss';
 
 import drawioIcon from './icons/drawioFileIcon.png';
 
-const DrawIoPlugin = DrawIoPluginCore.extend({
+const DrawIO = DrawIoPluginCore.extend({
   addOptions() {
     return this.parent?.();
   },
@@ -29,4 +29,4 @@ const DrawIoPlugin = DrawIoPluginCore.extend({
   },
 });
 
-export { DrawIoPlugin };
+export { DrawIO };

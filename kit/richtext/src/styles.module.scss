@@ -1,0 +1,377 @@
+@use './styleTokens/eds' as eds;
+
+._theme_eds {
+  @include eds.edsCssv;
+
+  --editor-primary: var(--eds-fore-accent);
+  --editor-primary-h: var(--eds-fore-accent-h);
+  --editor-primary-a: var(--eds-fore-accent-a);
+
+  --editor-warning: var(--eds-fore-warning);
+  --editor-error: var(--eds-fore-negative);
+  --editor-positive: var(--eds-fore-positive);
+  --editor-disabled: var(--eds-fore-tertiary);
+
+  --editor-link-primary: var(--eds-fore-accent);
+  --editor-link-visited: var(--eds-fore-visited);
+
+  --editor-c: var(--eds-fore-primary);
+
+  --editor-bdc: var(--eds-bdc-intence);
+  --editor-warning-bdc: var(--editor-warning);
+  --editor-error-bdc: var(--editor-error);
+
+  --editor-bgc: var(--eds-bgc-base);
+  --editor-bgc-primary: var(--eds-bgc-primary);
+  --editor-bgc-secondary: var(--eds-bgc-secondary);
+  --editor-bgc-tertiary: var(--eds-bgc-tertiary);
+
+  --editor-highlight-bgc: var(--eds-bgc-secondary);
+  --editor-highlight-warning-bgc: var(--eds-bgc-card-warning);
+  --editor-highlight-error-bgc: var(--eds-bgc-card-error);
+  --editor-highlight-info-bgc: var(--eds-bgc-card-info);
+  --editor-highlight-success-bgc: var(--eds-bgc-card-success);
+
+  --editor-codeblock-bgc: var(--eds-bgc-primary);
+
+  --editor-img-bdc: var(--eds-bdc-intence);
+  --editor-toolbar-bgc: var(--eds-bgc-base);
+
+  --editor-dropdown-bgc: var(--eds-bgc-base);
+  --editor-dropdown-bdc: transparent;
+  --editor-dropdown-drop-sh: 0 0 32px 0 #2969e33d;
+
+  --editor-scroll-thumb: var(--eds-bgc-accent-56);
+  --editor-scroll-thumb-h: var(--eds-bgc-accent);
+  --editor-scroll-track: var(--eds-bgc-primary);
+  --editor-scroll-track-h: var(--eds-bgc-primary);
+
+  --editor-pd: 48px; // must be single digit, use another var for separate values, like "24px 24px 8px 6px"
+  --editor-bdrs: 8px;
+  --editor-pre-pd: 16px;
+
+  --editor-toolbar-pd-y: 8px;
+  --editor-toolbar-pd-x: 8px;
+
+  /* 1px - border тулбара */
+  --editor-toolbar-bdrs: calc(var(--editor-bdrs) + 1px);
+
+  --editor-inline-comment-hightlight-bgc: var(--eds-bgc-surface-secondary-h);
+  --editor-inline-comment-hightlight-bgc-h: var(--eds-bgc-surface-secondary-a);
+  --editor-inline-comment-hightlight-bdc: var(--eds-bdc-accent);
+
+  --editor-mention-bgc: var(--eds-bgc-base);
+  --editor-mention-item-bgc: var(--eds-bgc-primary);
+  --editor-mention-item-b: var(--eds-bdc-intence);
+  --editor-mention-item-selected-b: var(--editor-primary);
+  --editor-mention-item-selected-c: #eaeff7;
+  --editor-mention-item-selected-bgc: var(--editor-primary);
+  --editor-mention-item-login-c: var(--editor-disabled);
+  --editor-mention-item-avatar-bgc: var(--editor-positive);
+
+  --editor-tag-bgc: var(--eds-bdc-intence);
+  --editor-tag-c: var(--editor-primary);
+}
+
+.editor {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--editor-c);
+  font-family: 'SB Sans Text', sans-serif;
+  font-size: var(--editor-fz, 14px);
+  line-height: var(--editor-lh, 24px);
+  border-radius: var(--editor-bdrs);
+
+  &_toolbarTop {
+    flex-direction: column-reverse;
+  }
+
+  &_isFocused {
+    --blocksgrid-bdc: var(--editor-bdc);
+    --blocksgrid-toolbar-opacity: 1;
+  }
+
+  .scrollbar {
+    overflow-y: auto;
+    overflow-x: auto;
+
+    margin-right: 4px;
+
+    // настройка отображение плейсхолдера: https://tiptap.dev/docs/editor/api/extensions/placeholder
+    :global {
+      .tiptap {
+        a {
+          cursor: pointer;
+          text-decoration: none;
+          color: var(--editor-link-primary);
+
+          &:visited {
+            color: var(--editor-link-visited);
+          }
+        }
+
+        p.is-editor-empty:first-child::before {
+          color: var(--color-neutral-300, #c2c2c2);
+          content: attr(data-placeholder);
+          float: left;
+          height: 0;
+          pointer-events: none;
+        }
+        .is-empty {
+          position: relative;
+        }
+        .is-empty::before {
+          color: var(--color-neutral-300, #c2c2c2);
+          content: attr(data-placeholder);
+          position: absolute;
+          left: 0;
+          pointer-events: none;
+          opacity: 0.5;
+          font-weight: 400;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  &:not(:has(._disabled)) {
+    .scrollbar {
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+
+        &-thumb {
+          border-radius: 2px;
+          background-color: var(--editor-scroll-thumb);
+
+          &:hover {
+            background-color: var(--editor-scroll-thumb-h);
+          }
+        }
+
+        &-track {
+          margin: 8px 0;
+          border-radius: 2px;
+          background-color: var(--editor-scroll-track);
+        }
+      }
+    }
+  }
+}
+
+._disabled {
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0.04);
+
+  .scrollbar {
+    overflow: hidden;
+
+    & > * {
+      pointer-events: none;
+    }
+  }
+}
+
+.content {
+  cursor: text;
+  position: relative;
+
+  :global {
+    .ProseMirror-focused {
+      outline: none;
+    }
+
+    .ProseMirror {
+      padding: var(--editor-pd);
+    }
+  }
+}
+
+// sticky TOC START
+// @keyframes stickyTocAppear {
+//   from {
+//     width: 0;
+//   }
+//   to {
+//     width: #{$aside-w};
+//   }
+// }
+
+// .tocContainer {
+//   position: absolute;
+//   top: 49px;
+//   right: 0px;
+//   width: 0px;
+//   height: calc(100% - 49px);
+//   transition: width 200ms ease;
+
+//   &_bordered {
+//     border-left: 1px solid var(--eds-bdc-intence);
+//   }
+
+//   &_aside {
+//     width: #{$aside-w};
+//     animation: stickyTocAppear 200ms ease;
+//   }
+
+//   &_popup {
+//     width: #{$aside-48-w};
+//   }
+// }
+// sticky TOC END
+
+.content h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.content * + h1 {
+  margin-top: 32px;
+}
+
+.content h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.content * + h2 {
+  margin-top: 32px;
+}
+
+.content h3 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.content * + h3 {
+  margin-top: 32px;
+}
+
+.content h4 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.content * + h4 {
+  margin-top: 32px;
+}
+
+.content h5 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.content * + h5 {
+  margin-top: 12px;
+}
+
+.content h6 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.content * + h6 {
+  margin-top: 12px;
+}
+
+.content ul,
+.content ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 24px;
+}
+
+/*
+  BEGIN OF HACK BLOCK
+*/
+
+.content ul > li > p::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 9px;
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 100%;
+}
+
+.content ul > li > p[style='text-align: center']::before,
+.content ul > li > p[style='text-align: right']::before {
+  position: relative;
+  top: -2px;
+}
+
+.content ul > li > p,
+.content ol > li > p {
+  position: relative;
+}
+
+.content ol {
+  counter-reset: counter;
+}
+
+.content ol > li:nth-child(n + 10) > p:not([style='text-align: center']):not([style='text-align: right']) {
+  padding-left: 10px;
+}
+
+.content ol > li:nth-child(n + 100) > p:not([style='text-align: center']):not([style='text-align: right']) {
+  padding-left: 20px;
+}
+
+.content ol > li > p::before {
+  counter-increment: counter;
+  content: counter(counter) '. ';
+  position: absolute;
+  left: -18px;
+  top: 0;
+  display: inline-block;
+  color: currentColor;
+}
+
+.content ol > li > p[style='text-align: center']::before,
+.content ol > li > p[style='text-align: right']::before {
+  position: relative;
+}
+
+/* END OF HACK BLOCK */
+
+.content * + p {
+  margin-top: 8px;
+}
+
+/* TAGS */
+
+.editor pre {
+  margin: 0;
+
+  box-shadow: inset 0 0 0 1px var(--editor-bdc);
+  padding: var(--editor-pre-pd);
+  border-radius: 4px;
+  background-color: var(--editor-codeblock-bgc);
+}
+
+.editor code[data-set='inline'] {
+  padding: 2px 4px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px var(--editor-bdc);
+  background-color: var(--editor-highlight-bgc);
+}
+
+.editor blockquote {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  border-left: 1px solid var(--editor-bdc);
+}
+
+.editor hr {
+  height: 1px;
+  background-color: var(--editor-bdc);
+  border: none;
+  margin: 16px 0;
+}

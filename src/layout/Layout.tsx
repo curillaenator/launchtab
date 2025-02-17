@@ -45,6 +45,7 @@ export const Layout: FC = () => {
 
   useAuthState();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onViewportScroll = useCallback(
     debounce((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
       //@ts-expect-error

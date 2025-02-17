@@ -1,1 +1,1 @@
-export {} from './Container';
+export { RichTextContainer } from './RichTextContainer';

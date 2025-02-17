@@ -21,11 +21,14 @@ import { OrderedList } from '@tiptap/extension-ordered-list';
 import { Paragraph } from '@tiptap/extension-paragraph';
 import { Strike } from '@tiptap/extension-strike';
 import { Text } from '@tiptap/extension-text';
-
 import { TaskList } from '@tiptap/extension-task-list';
 import { TaskItem } from '@tiptap/extension-task-item';
 import { Superscript } from '@tiptap/extension-superscript';
 import { Subscript } from '@tiptap/extension-subscript';
+
+import { DrawIO } from './extensions/DrawIO';
+import { BlocksGrid, BlocksGridColumn } from './extensions/BlocksGrid';
+import { Draggable } from './extensions/Draggable';
 // import { Indent } from './extensions/Indent';
 // import { PaintableTableCell } from './extensions/FilterTable/core/TableCell';
 // import { Emoji } from './extensions/Emoji';
@@ -33,9 +36,10 @@ import { Subscript } from '@tiptap/extension-subscript';
 // import { MediaSingle } from './extensions/MediaSingle';
 // import { Media } from './extensions/Media';
 // import { Panel } from './extensions/Panel';
-import { Draggable } from './extensions/Draggable';
 
-const coreExtensions = [
+import { RichTextExtensionsConfig, RichTextExtensionsOptions } from './interfaces';
+
+const CORE_EXTENSIONS = [
   Document,
 
   Dropcursor,
@@ -98,4 +102,44 @@ const coreExtensions = [
   Draggable.configure({ types: ['fileLink'] }),
 ];
 
-export { coreExtensions };
+interface GetExtensionsArgs {
+  extensionsOptions: RichTextExtensionsOptions;
+  config: RichTextExtensionsConfig;
+}
+
+function getExtensions(args: GetExtensionsArgs) {
+  const { extensionsOptions, config } = args;
+
+  const { drawio, blocksGrid } = extensionsOptions;
+
+  const { dataTestId, internalScrollContainerId, editorContentRef } = config;
+
+  const extensions = [...CORE_EXTENSIONS];
+
+  if (drawio)
+    extensions.push(
+      DrawIO.configure({
+        ...drawio,
+        dataTestId: `${dataTestId}.DrawIO`,
+      }),
+    );
+
+  if (blocksGrid) {
+    extensions.push(
+      BlocksGrid.configure({
+        ...blocksGrid,
+        dataTestId: `${dataTestId}.BlocksGrid`,
+      }),
+    );
+    extensions.push(
+      BlocksGridColumn.configure({
+        dataTestId: `${dataTestId}.BlocksGridColumn`,
+        editorContentRef,
+      }),
+    );
+  }
+
+  return extensions;
+}
+
+export { getExtensions };

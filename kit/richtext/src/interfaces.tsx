@@ -10,7 +10,7 @@ import type { Editor } from '@tiptap/react';
 //   ToolbarProps,
 // } from './components/Toolbar';
 
-// import type { DrawIoConfig } from './extensions/DrawIO/core/interfaces';
+import type { DrawIOConfig } from './extensions/DrawIO';
 // import type { PlantUmlConfig } from './extensions/PlantUML/core/interfaces';
 // import type { IncludeConfig } from './extensions/Include/core/interfaces';
 // import type { FilterTableExternalConfig } from './extensions/FilterTable/core/interfaces';
@@ -18,15 +18,39 @@ import type { Editor } from '@tiptap/react';
 // import type { TocNodeConfig } from './extensions/ToC/core/interfaces';
 // import type { TocAsideConfig } from './components/TocAside/interfaces';
 // import type { ReactHeadingConfig } from './extensions/Heading/react/interfaces';
-// import type { BlocksGridConfig } from './extensions/BlocksGrid/core/interfaces';
+import type { BlocksGridConfig, BlocksGridColumnConfig } from './extensions/BlocksGrid';
 // import type { UniqueIdConfig } from './extensions/UniqueId';
 
 interface RichtextChangeEvent {
   value: JSONContent;
-  isEditable: boolean;
-  hasText: boolean;
-  hasOnlyImage: boolean;
+  // isEditable: boolean;
+  // hasText: boolean;
+  // hasOnlyImage: boolean;
   isSemiEmpty: boolean;
+}
+
+interface RichTextExtensionsOptions {
+  uniqueIdCfg?: {}; // UniqueIdConfig;
+  toc?: {}; // TocConfig;
+  blocksGrid?: BlocksGridConfig;
+  drawio?: DrawIOConfig;
+  plantUml?: {}; // PlantUmlConfig;
+  table?: {}; // FilterTableConfig;
+  heading?: {}; // HeadingConfig;
+  image: {
+    onAddImage?: (file: File) => void;
+    onAddFile?: (file: File) => void;
+    imageList?: any[]; // ImageListItem[];
+  };
+  files: {
+    filesList?: any[]; // FileListItem[];
+  };
+}
+
+interface RichTextExtensionsConfig {
+  dataTestId: string;
+  editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
+  internalScrollContainerId: string;
 }
 
 interface RichtextContainerProps {
@@ -58,27 +82,7 @@ interface RichtextContainerProps {
 
   toolStruct?: any;
 
-  extensionsOptions: {
-    uniqueIdCfg?: {}; // UniqueIdConfig;
-    toc?: {}; // TocConfig;
-    blocksGrid?: {}; // BlocksGridConfig;
-    drawio?: {}; // DrawIoConfig;
-    plantUml?: {}; // PlantUmlConfig;
-    table?: {}; // FilterTableConfig;
-    heading?: {}; // HeadingConfig;
-    image: {
-      onAddImage?: (file: File) => void;
-      onAddFile?: (file: File) => void;
-      imageList?: any[]; // ImageListItem[];
-    };
-    files: {
-      filesList?: any[]; // FileListItem[];
-    };
-  };
+  extensionsOptions: RichTextExtensionsOptions;
 }
 
-interface ExtensionsConfig extends RichtextContainerProps {
-  editorContentRef?: React.MutableRefObject<HTMLDivElement | null>;
-}
-
-export type { RichtextContainerProps, RichtextChangeEvent, ExtensionsConfig };
+export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsConfig, RichTextExtensionsOptions };

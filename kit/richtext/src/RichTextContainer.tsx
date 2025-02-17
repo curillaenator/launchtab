@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useId, useMemo, useRef } from 'react';
+import React, { FC, useId, useMemo, useRef } from 'react';
 import { setDefaultOptions } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
@@ -6,14 +6,14 @@ import { useEditor, EditorContext } from '@tiptap/react';
 
 import { RichTextView } from './RichTextView';
 
-import { useCanUploadDrawIo, useEnableOnChageFn } from './hooks';
-import { isContentSemiEmpty, isOnlyImageContent, parseJSONWithoutError } from './utils';
+// import { useCanUploadDrawIo, useEnableOnChageFn } from './hooks';
+import { isContentSemiEmpty, parseJSONWithoutError } from './utils';
 
 import { getExtensions } from './getExtensions';
 // import { getStruct } from './getStruct';
 
 import type { RichtextContainerProps } from './interfaces';
-import { DEFAULT_TEST_ID, DEFAULT_CAPTIONS } from './constants';
+import { DEFAULT_TEST_ID } from './constants';
 
 setDefaultOptions({ locale: ru });
 

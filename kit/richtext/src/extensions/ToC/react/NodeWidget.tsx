@@ -20,7 +20,6 @@ import type { TocReactNodeViewProps } from './interfaces';
 import type { TocNodeAttributes, TocNodeItem } from '../core/interfaces';
 
 import styles from './toc.module.scss';
-import buttonStyles from '../../../shared/styles/button.module.scss';
 
 const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
   const { editor, node, updateAttributes, extension, deleteNode } = props;
@@ -30,6 +29,7 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
   const [tocItems, setTocItems] = useState<TocNodeItem[]>([]);
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const calcTocItems = useCallback(
     debounce((ed: CoreEditor, nodeAttrs: TocNodeAttributes) => {
       const toc: TocNodeItem[] = [];

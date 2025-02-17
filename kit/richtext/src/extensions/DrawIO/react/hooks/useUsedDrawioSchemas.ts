@@ -19,7 +19,7 @@ const useUsedDrawioSchemas = (props: UiWidgetProps) => {
     return () => {
       storage.includedFiles = storage.includedFiles.filter((el: string) => el !== attrs.drawIoCode);
     };
-  }, [attrs.drawIoCode]);
+  }, [attrs.drawIoCode]); // eslint-disable-line react-hooks/exhaustive-deps
 };
 
 export { useUsedDrawioSchemas };

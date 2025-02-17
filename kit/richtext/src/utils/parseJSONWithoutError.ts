@@ -7,6 +7,7 @@ export const parseJSONWithoutError = (v: string | unknown): string | Record<stri
     try {
       const json = JSON.parse(v);
       return typeof json === 'object' && json !== null ? json : String(json);
+      //eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
       return v;
     }

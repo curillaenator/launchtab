@@ -1,9 +1,8 @@
-// import type { ControlCaption } from './components/Toolbar';
+import type { ControlCaption } from './components/Toolbar';
 
 const DEFAULT_TEST_ID = '@launch-ui/richtext';
 
-// const DEFAULT_CAPTIONS: Record<ControlCaption, string> = {
-const DEFAULT_CAPTIONS: Record<string, string> = {
+const DEFAULT_CAPTIONS: Record<ControlCaption, string> = {
   insertTableOfContent: 'Содержание',
   h1: 'Заголовок 1',
   h2: 'Заголовок 2',
@@ -17,8 +16,6 @@ const DEFAULT_CAPTIONS: Record<string, string> = {
   checkbox: 'Список задач',
   hr: 'Разделитель',
   expand: 'Раскрывающийся блок',
-  fragment: 'Выборка',
-  include: 'Вставить страницу или выборку',
   blockquote: 'Цитата',
   codeBlock: 'Блок кода',
   left: 'По левому краю',
@@ -72,8 +69,6 @@ const DEFAULT_CAPTIONS: Record<string, string> = {
   deleteBlocksGrid: 'Удалить разделы',
   undo: 'Отменить',
   redo: 'Востановить',
-  addTab: 'Создать отступ',
-  removeTab: 'Удалить отступ',
   colorFill: 'Залить ячейку таблицы',
   colorFillLightGreen: 'Светло-зеленый',
   colorFillLightYellow: 'Светло-желтый ',

@@ -1,4 +1,4 @@
-import type { Editor, NodeViewProps } from '@tiptap/core';
+import type { Editor } from '@tiptap/core';
 
 import type { DrawIoConfig, DrawIoStorage, DrawIoAttributes } from '../core/interfaces';
 

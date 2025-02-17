@@ -187,7 +187,7 @@ export const useWidget = (props: UiWidgetProps) => {
 
       window.addEventListener('message', onMessageReceive);
     },
-    [attrs, src, options],
+    [attrs, src, options, updateAttributes],
   );
 
   useEffect(() => {

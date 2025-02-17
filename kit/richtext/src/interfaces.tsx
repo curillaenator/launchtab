@@ -1,24 +1,26 @@
 // import type { ReactNode } from 'react';
-import type { AnyExtension, JSONContent } from '@tiptap/core';
+import type {
+  // AnyExtension,
+  JSONContent,
+} from '@tiptap/core';
 import type { Editor } from '@tiptap/react';
 
 // import type {
 //   ControlCaption,
 //   OnAddImageReturnType,
 //   TableCommand,
-//   ToolbarComponentStruct,
+// ToolbarComponentStruct,
 //   ToolbarProps,
 // } from './components/Toolbar';
 
 import type { DrawIOConfig } from './extensions/DrawIO';
 // import type { PlantUmlConfig } from './extensions/PlantUML/core/interfaces';
-// import type { IncludeConfig } from './extensions/Include/core/interfaces';
 // import type { FilterTableExternalConfig } from './extensions/FilterTable/core/interfaces';
 // import type { MentionLinkConfig } from './extensions/MentionLink/core/interfaces';
 // import type { TocNodeConfig } from './extensions/ToC/core/interfaces';
 // import type { TocAsideConfig } from './components/TocAside/interfaces';
 // import type { ReactHeadingConfig } from './extensions/Heading/react/interfaces';
-import type { BlocksGridConfig, BlocksGridColumnConfig } from './extensions/BlocksGrid';
+import type { BlocksGridConfig } from './extensions/BlocksGrid';
 // import type { UniqueIdConfig } from './extensions/UniqueId';
 
 interface RichtextChangeEvent {
@@ -40,10 +42,10 @@ interface RichTextExtensionsOptions {
   image: {
     onAddImage?: (file: File) => void;
     onAddFile?: (file: File) => void;
-    imageList?: any[]; // ImageListItem[];
+    imageList?: unknown[]; // ImageListItem[];
   };
   files: {
-    filesList?: any[]; // FileListItem[];
+    filesList?: unknown[]; // FileListItem[];
   };
 }
 
@@ -68,19 +70,13 @@ interface RichtextContainerProps {
   onEditorInstanceChange?: (editor: Editor) => void;
   onEditorContentWidthChange?: (widthHeigth: [number, number]) => void;
 
-  // aside?: ReactNode;
-  // view?: 'default' | 'minimalistic';
-
-  // renderAside?: boolean;
   // tocCfg?: TocAsideConfig;
   // autoscrollCfg?: { autoscroll: () => void };
   // currentTocItem?: string | null;
 
-  ///
-
   onChange?: (changeEvent: RichtextChangeEvent) => void;
 
-  toolStruct?: any;
+  toolStruct?: unknown;
 
   extensionsOptions: RichTextExtensionsOptions;
 }

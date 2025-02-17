@@ -41,7 +41,7 @@ export const usePanZoom = (props?: PanZoomProps) => {
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-scale`, `${scale.toFixed(1)}`);
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-offset-x`, `${xPos}px`);
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-offset-y`, `${yPos}px`);
-  }, [enabled, panZoomStore]);
+  }, [enabled, panZoomStore, prefix]);
 
   const onPan = useCallback((e: MouseEvent) => {
     const { pageX, pageY } = e;
@@ -75,7 +75,7 @@ export const usePanZoom = (props?: PanZoomProps) => {
 
       imageContainerRef.current?.addEventListener('mousemove', onPan);
     },
-    [panZoomStore],
+    [panZoomStore, onPan], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const onPanEnd = useCallback(
@@ -89,7 +89,7 @@ export const usePanZoom = (props?: PanZoomProps) => {
 
       imageContainerRef.current?.removeEventListener('mousemove', onPan);
     },
-    [panZoomStore],
+    [panZoomStore, onPan],
   );
 
   const onZoomByWheel = useCallback(

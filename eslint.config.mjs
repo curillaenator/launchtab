@@ -47,6 +47,10 @@ export default [
       'src/**/*.ts',
       'src/**/*.jsx',
       'src/**/*.tsx',
+      'kit/**/*.js',
+      'kit/**/*.ts',
+      'kit/**/*.jsx',
+      'kit/**/*.tsx',
     ],
 
     rules: {

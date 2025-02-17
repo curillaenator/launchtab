@@ -1,9 +1,7 @@
-import { mergeAttributes, Node } from '@tiptap/core';
+import { Node } from '@tiptap/core';
 
 import { DRAWIO_EXTENSION_NAME } from './constants';
 import type { DrawIoConfig, DrawIoStorage, DrawIoAttributes } from './interfaces';
-
-import drawioIcon from './assets/drawioFileIcon.png';
 
 const NULL_ATTRS: DrawIoAttributes = {
   drawIoCode: null,

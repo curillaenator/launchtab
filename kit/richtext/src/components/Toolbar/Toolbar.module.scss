@@ -1,0 +1,38 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  background: var(--editor-toolbar-bgc, transparent);
+
+  .toolbarBlock {
+    display: flex;
+    padding: var(--editor-toolbar-pd-y) 0;
+
+    &:first-child {
+      padding-left: var(--editor-toolbar-pd-x);
+    }
+
+    &:last-child {
+      padding-right: var(--editor-toolbar-pd-x);
+    }
+  }
+
+  .toolbarSection {
+    display: flex;
+  }
+
+  &_top {
+    border-bottom: 1px solid var(--editor-bdc, var(--color-neutral-200));
+    border-radius: var(--editor-toolbar-bdrs) var(--editor-toolbar-bdrs) 0 0;
+  }
+
+  &_bottom {
+    border-top: 1px solid var(--editor-bdc, var(--color-neutral-200));
+    border-radius: 0 0 var(--editor-toolbar-bdrs) var(--editor-toolbar-bdrs);
+  }
+}
+
+@each $composition, $gapX in ('full': 24px, 'medium': 18px, 'compact': 12px, 'small': 8px, 'minimal': 4px) {
+  ._#{'' + $composition} {
+    gap: #{$gapX};
+  }
+}

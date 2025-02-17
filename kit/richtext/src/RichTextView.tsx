@@ -3,14 +3,10 @@ import cn from 'classnames';
 import { useCurrentEditor, EditorContent } from '@tiptap/react';
 import { debounce } from 'lodash';
 
-// import { Toolbar } from './components/Toolbar';
+import { Toolbar } from './components/Toolbar';
 // import { TocAside, useAsideToc } from './components/TocAside';
 
-import {
-  DEFAULT_TEST_ID,
-  // DEFAULT_CAPTIONS,
-  TOOLBAR_HEIGHT,
-} from './constants';
+import { DEFAULT_TEST_ID, TOOLBAR_HEIGHT } from './constants';
 
 import type { RichtextContainerProps } from './interfaces';
 
@@ -68,7 +64,7 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
     return () => {
       resizeObs.unobserve(editorContent);
     };
-  }, [editorContentRef?.current, onEditorContentWidthChange]);
+  }, [editorContentRef, onEditorContentWidthChange]);
 
   useEffect(() => {
     if (editor) onEditorInstanceChange?.(editor);
@@ -101,16 +97,7 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
         <EditorContent placeholder={placeholder} editor={editor} className={styles.content} ref={editorContentRef} />
       </div>
 
-      {editable && (
-        <div></div>
-        // <Toolbar
-        //   tocCfg={tocCfg}
-        //   captions={captions}
-        //   placement={toolbarPlacement}
-        //   disabled={disabled}
-        //   className={toolbarClassName}
-        // />
-      )}
+      {editable && <Toolbar disabled={disabled} />}
     </div>
   );
 };

@@ -112,7 +112,11 @@ function getExtensions(args: GetExtensionsArgs) {
 
   const { drawio, blocksGrid } = extensionsOptions;
 
-  const { dataTestId, internalScrollContainerId, editorContentRef } = config;
+  const {
+    dataTestId,
+    // internalScrollContainerId,
+    editorContentRef,
+  } = config;
 
   const extensions = [...CORE_EXTENSIONS];
 

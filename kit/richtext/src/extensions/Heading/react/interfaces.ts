@@ -24,7 +24,7 @@ interface HeadingReactWidgetProps {
   editor: CoreEditor;
   selected: boolean;
   deleteNode: () => void;
-  updateAttributes: (attrs: any) => void;
+  updateAttributes: (attrs: HeadingAttributes) => void;
   getPos: () => number;
   HTMLAttributes?: Record<string, unknown>;
 }

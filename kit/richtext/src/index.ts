@@ -1,1 +1,1 @@
-export { RichTextContainer } from './RichTextContainer';
+export { RichTextContainer as RichTextField } from './RichTextContainer';

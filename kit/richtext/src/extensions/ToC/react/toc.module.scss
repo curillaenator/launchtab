@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .toctainer {
   padding: 16px;
   border-radius: 8px;
@@ -106,7 +108,7 @@ $tocLevels: (
 
   @each $level, $levelVars in $tocLevels {
     &_#{'level' + $level} {
-      font-size: #{map-get($levelVars, 'fz')};
+      font-size: #{map.get($levelVars, 'fz')};
       padding-left: calc(#{$levelOffset} * #{$level} + 8px);
     }
   }

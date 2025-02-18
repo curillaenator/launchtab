@@ -11,5 +11,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["src", "kit"]
+  "include": ["src", "webpack.config.js"]
 }

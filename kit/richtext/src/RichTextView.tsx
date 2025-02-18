@@ -42,15 +42,12 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
   } = props;
 
   const { editor } = useCurrentEditor();
-  // const { editorContentRef } = useCustomEditorContext();
 
   // Resize observer
   useEffect(() => {
     const editorContent = editorContentRef?.current;
 
-    if (!editorContent) {
-      return;
-    }
+    if (!editorContent) return;
 
     const resizeObs = new ResizeObserver(
       debounce(([entry]: ResizeObserverEntry[]) => {
@@ -81,6 +78,8 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
   // Toolbar
   const maxHeightWithToolbar = typeof maxHeight === 'number' ? maxHeight - TOOLBAR_HEIGHT : maxHeight;
 
+  if (!editor) return null;
+
   return (
     <div
       data-testid={dataTestId}
@@ -92,7 +91,7 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
       <div
         id={internalScrollContainerId}
         style={{ maxHeight: editable ? maxHeightWithToolbar : maxHeight }}
-        className={cn(styles.scrollbar)}
+        className={styles.scrollbar}
       >
         <EditorContent placeholder={placeholder} editor={editor} className={styles.content} ref={editorContentRef} />
       </div>

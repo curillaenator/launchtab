@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import type { TocAsideConfig, TocAsideView } from '../components/TocAside/interfaces';
+// import type { TocAsideConfig, TocAsideView } from '../components/TocAside/interfaces';
 
-interface TocUseTocConfigOptions extends Pick<TocAsideConfig, 'title' | 'updateTocOnChange' | 'scrollContainerId'> {
-  canBeShown?: boolean;
-}
+// interface TocUseTocConfigOptions extends Pick<TocAsideConfig, 'title' | 'updateTocOnChange' | 'scrollContainerId'> {
+//   canBeShown?: boolean;
+// }
 
 /**
  * Хук для управления оглавлением (ToC) в редакторе.
@@ -24,18 +24,18 @@ interface TocUseTocConfigOptions extends Pick<TocAsideConfig, 'title' | 'updateT
  *
  * @returns {TocAsideConfig} Конфигурация для работы с оглавлением
  */
-const useEditorToc = (options?: TocUseTocConfigOptions) => {
-  const { canBeShown, title, scrollContainerId, updateTocOnChange } = options || {};
+// const useEditorToc = (options?: TocUseTocConfigOptions) => {
+// const { canBeShown, title, scrollContainerId, updateTocOnChange } = options || {};
 
-  const [tocView, setTocView] = useState<TocAsideView>('disabled');
+// const [tocView, setTocView] = useState<TocAsideView>('disabled');
 
-  return {
-    title,
-    scrollContainerId,
-    view: canBeShown ? tocView : 'disabled',
-    setView: setTocView,
-    updateTocOnChange,
-  } as TocAsideConfig;
-};
+// return {
+//   title,
+//   scrollContainerId,
+//   view: canBeShown ? tocView : 'disabled',
+//   setView: setTocView,
+//   updateTocOnChange,
+// } as TocAsideConfig;
+// };
 
-export { useEditorToc };
+// export { useEditorToc };

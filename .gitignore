@@ -16,6 +16,7 @@ hosting.*
 # production
 /build
 kit/*/**/build
+kit/*/**/node_modules
 src/entities/mock
 
 # misc

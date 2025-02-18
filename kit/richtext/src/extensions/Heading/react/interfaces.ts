@@ -13,7 +13,6 @@ type HeadingObsRef = MutableRefObject<IntersectionObserver | null>;
 
 interface ReactHeadingConfig extends HeadingOptions {
   headingObsRef?: HeadingObsRef;
-  editorContentRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

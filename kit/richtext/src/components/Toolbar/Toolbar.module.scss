@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   background: var(--editor-toolbar-bgc, transparent);
+  min-height: 48px;
 
   .toolbarBlock {
     display: flex;
@@ -21,8 +22,9 @@
   }
 
   &_top {
-    border-bottom: 1px solid var(--editor-bdc, var(--color-neutral-200));
-    border-radius: var(--editor-toolbar-bdrs) var(--editor-toolbar-bdrs) 0 0;
+    border-bottom: 1px solid var(--eds-bdc-intence);
+    border-radius: var(--editor-toolbar-bdrs);
+    background-color: bisque;
   }
 
   &_bottom {

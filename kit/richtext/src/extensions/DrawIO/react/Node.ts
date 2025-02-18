@@ -1,14 +1,11 @@
 import { mergeAttributes } from '@tiptap/core';
 import { ReactNodeViewRenderer, NodeViewProps } from '@tiptap/react';
 
-// import type { DrawIoAttributes } from '../core/interfaces';
+import { UIWidget } from './Widget';
 import { DrawIoPlugin as DrawIoPluginCore } from '../core';
 
-import UiWidget from './Widget';
-
+import { DRAWIO_DUMMY_IMG } from './constants';
 import styles from './node.module.scss';
-
-import drawioIcon from './icons/drawioFileIcon.png';
 
 const DrawIO = DrawIoPluginCore.extend({
   addOptions() {
@@ -20,12 +17,12 @@ const DrawIO = DrawIoPluginCore.extend({
       'div',
       mergeAttributes(HTMLAttributes, { class: styles.htmlNode, 'data-drawio': true }),
       ['span', { class: styles.htmlFilename }, HTMLAttributes.drawIoName || 'N/A'],
-      ['img', { class: styles.htmlImage, src: drawioIcon }],
+      ['img', { class: styles.htmlImage, src: DRAWIO_DUMMY_IMG }],
     ];
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(UiWidget as unknown as React.ComponentType<NodeViewProps>);
+    return ReactNodeViewRenderer(UIWidget as unknown as React.ComponentType<NodeViewProps>);
   },
 });
 

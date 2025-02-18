@@ -78,4 +78,4 @@ const UIWidget: FC<UiWidgetProps> = (props) => {
   );
 };
 
-export default UIWidget;
+export { UIWidget };

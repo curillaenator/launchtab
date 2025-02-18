@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $marginY: (
   'h1': (
     'top': 8px,
@@ -54,7 +56,6 @@ $headingAligns: (
 
   display: flex;
   align-items: flex-start;
-  // gap: 8px;
 
   margin-top: var(--custom-heading-mt, 0);
   margin-bottom: var(--custom-heading-mb, 0);
@@ -64,8 +65,7 @@ $headingAligns: (
 
   @each $textAlign, $textValues in $headingAligns {
     &_#{'' + $textAlign} {
-      justify-content: #{map-get($textValues, 'justify')};
-      // flex-direction: #{map-get($textValues, 'direction')};
+      justify-content: #{map.get($textValues, 'justify')};
     }
   }
 
@@ -87,8 +87,8 @@ $headingAligns: (
 
   @each $level, $pd in $marginY {
     &_#{'' + $level} {
-      --custom-heading-mt: #{map-get($marginY, $level, 'top')};
-      --custom-heading-mb: #{map-get($marginY, $level, 'bottom')};
+      --custom-heading-mt: #{map.get($marginY, $level, 'top')};
+      --custom-heading-mb: #{map.get($marginY, $level, 'bottom')};
     }
   }
 }
@@ -118,114 +118,3 @@ $headingAligns: (
     color: var(--eds-fore-accent-a);
   }
 }
-
-// .actionContainer {
-//   opacity: var(--action-button-visibility, 0);
-//   position: relative;
-//   flex: 0 0 auto;
-//   width: $triggerWidth;
-//   // align-self: stretch;
-//   max-height: min-content;
-
-//   &:hover {
-//     --heading-popup-w: 144px;
-//     --heading-popup-h: 32px;
-//     --heading-popup-pd-y: 0px;
-//     --heading-popup-opacity: 1;
-//     --heading-popup-item-c: var(--eds-fore-primary);
-//     --heading-popup-bgc: var(--eds-bgc-base);
-//     --heading-popup-box-shadow: var(--editor-dropdown-drop-sh);
-
-//     overflow: visible;
-//     color: var(--eds-fore-accent-h);
-//   }
-// }
-
-// .popup {
-//   position: absolute;
-//   top: calc(-1 * #{$popupShift} / 2);
-
-//   opacity: var(--heading-popup-opacity, 0);
-//   transition: opacity 200ms ease;
-
-//   padding: var(--heading-popup-pd-y, 0) 0;
-//   width: var(--heading-popup-w, 0);
-//   height: var(--heading-popup-h, 0);
-
-//   border-radius: 8px;
-//   z-index: 9999;
-
-//   background-color: var(--heading-popup-bgc, transparent);
-//   box-shadow: var(--heading-popup-box-shadow, 0 0 0 0 transparent);
-
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     top: 0;
-
-//     width: #{$popupShift};
-//     height: 100%;
-
-//     // background-color: red;
-//   }
-
-//   &_left {
-//     right: calc(-1 * #{$popupShift} - var(--heading-popup-w, 0));
-
-//     &:after {
-//       left: calc(-1 * #{$popupShift});
-//     }
-//   }
-
-//   // &_right {
-//   //   left: calc(-1 * #{$popupShift} - var(--heading-popup-w, 0));
-
-//   //   &:after {
-//   //     right: calc(-1 * #{$popupShift});
-//   //   }
-//   // }
-// }
-
-// .popupItem {
-//   position: relative;
-//   cursor: pointer;
-
-//   outline: none;
-//   background-color: transparent;
-
-//   width: 100%;
-//   height: 32px;
-//   padding: 8px;
-//   text-align: center;
-//   border: none;
-
-//   // color: var(--eds-fore-primary);
-//   color: var(--heading-popup-item-c, transparent);
-//   font-family: 'SB Sans Text', sans-serif;
-//   font-size: 12px;
-//   line-height: 16px;
-
-//   white-space: nowrap;
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-
-//   &:hover {
-//     color: var(--eds-fore-accent-h);
-//   }
-
-//   &:active {
-//     color: var(--eds-fore-accent-a);
-//   }
-
-//   &:focus::after {
-//     content: 'Скопировано';
-
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     padding: 8px;
-//     border-radius: 8px;
-//     width: 100%;
-//     background-color: var(--eds-bgc-base);
-//   }
-// }

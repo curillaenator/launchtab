@@ -8,7 +8,7 @@ import { usePanZoom } from '../../../../hooks/usePanZoom';
 import { useDrawioContext } from '../../context';
 import { DRAWIO_FILE_TYPE } from '../../constants';
 
-import { Viewer } from '../ImageViewer';
+// import { Viewer } from '../ImageViewer';
 
 import {
   WidgetIconEdit,
@@ -24,7 +24,6 @@ import type { WithActionsProps } from './interfaces';
 import type { DrawIoAttributes } from '../../../core/interfaces';
 
 import styles from './withactions.module.scss';
-import buttonStyles from '../../../../../shared/styles/button.module.scss';
 
 const handleAttrs = (nodeAttrs: DrawIoAttributes) =>
   fromPairs(toPairs(nodeAttrs).map(([k, v]) => [`data-${k.toLowerCase()}`, String(v)]));
@@ -111,7 +110,6 @@ export const WithActions: FC<WithActionsProps> = (props) => {
             <>
               <ButtonAction
                 LeftIcon={ZoomOutIcon}
-                className={cn(buttonStyles.button_secondary, buttonStyles.button_size_40)}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -122,7 +120,6 @@ export const WithActions: FC<WithActionsProps> = (props) => {
 
               <ButtonAction
                 LeftIcon={ZoomInIcon}
-                className={cn(buttonStyles.button_secondary, buttonStyles.button_size_40)}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -134,7 +131,6 @@ export const WithActions: FC<WithActionsProps> = (props) => {
               <ButtonAction
                 disabled={!isPanZoomTouched}
                 LeftIcon={ResetIcon}
-                className={cn(buttonStyles.button_secondary, buttonStyles.button_size_40)}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -145,18 +141,11 @@ export const WithActions: FC<WithActionsProps> = (props) => {
             </>
           )}
 
-          {isSrcDownloadable && (
-            <ButtonAction
-              LeftIcon={WidgetIconDownload}
-              className={cn(buttonStyles.button_secondary, buttonStyles.button_size_40)}
-              onClick={() => downloadDrawio(src)}
-            />
-          )}
+          {isSrcDownloadable && <ButtonAction LeftIcon={WidgetIconDownload} onClick={() => downloadDrawio(src)} />}
 
           {hasPreview && (
             <ButtonAction
               LeftIcon={WidgetFullscreenIcon}
-              className={cn(buttonStyles.button_secondary, buttonStyles.button_size_40)}
               onClick={() => {
                 if (!src) return;
                 setIsViewer(true);
@@ -164,20 +153,13 @@ export const WithActions: FC<WithActionsProps> = (props) => {
             />
           )}
 
-          {editable && (
-            <ButtonAction
-              LeftIcon={WidgetIconDelete}
-              onClick={deleteNode}
-              className={cn(buttonStyles.button_danger, buttonStyles.button_size_40)}
-            />
-          )}
+          {editable && <ButtonAction LeftIcon={WidgetIconDelete} onClick={deleteNode} />}
         </div>
       </div>
 
-      {!!src && (
-        // @ts-expect-error
+      {/* {!!src && (
         <Viewer open={isViewer} close={() => setIsViewer(false)} />
-      )}
+      )} */}
     </>
   );
 };

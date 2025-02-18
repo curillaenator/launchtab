@@ -93,10 +93,10 @@ const RichTextContainer: FC<RichtextContainerProps> = (props) => {
     [editable, initialValue, onChange],
   );
 
-  const editorContextValue = useMemo(() => ({ editor }), [editor]);
+  const editorCTX = useMemo(() => ({ editor }), [editor]);
 
   return (
-    <EditorContext.Provider value={editorContextValue}>
+    <EditorContext.Provider value={editorCTX}>
       <RichTextView
         {...props}
         editorContentRef={editorContentRef}

@@ -56,6 +56,14 @@ export default [
       'valid-jsdoc': 'off',
     },
 
-    ignores: ['.firebase/*', '.husky/*', '.yarn/*', '**/node_modules/*', 'build/*', '**/*.config.js'],
+    ignores: [
+      //
+      '.firebase/*',
+      '.husky/*',
+      '.yarn/*',
+      '**/node_modules/*',
+      '**/build/*',
+      '**/*.config.js',
+    ],
   },
 ];

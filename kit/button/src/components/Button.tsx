@@ -50,6 +50,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref
   const { title, IconLeft, IconRight, ...rest } = props;
 
   return (
+    //@ts-ignore
     <ButtonStyled {...rest} ref={ref}>
       <Corners borderRadius={20} />
 

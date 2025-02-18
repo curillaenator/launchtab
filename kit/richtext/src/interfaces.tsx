@@ -19,7 +19,7 @@ import type { DrawIOConfig } from './extensions/DrawIO';
 // import type { MentionLinkConfig } from './extensions/MentionLink/core/interfaces';
 // import type { TocNodeConfig } from './extensions/ToC/core/interfaces';
 // import type { TocAsideConfig } from './components/TocAside/interfaces';
-// import type { ReactHeadingConfig } from './extensions/Heading/react/interfaces';
+import type { ReactHeadingConfig } from './extensions/Heading';
 import type { BlocksGridConfig } from './extensions/BlocksGrid';
 // import type { UniqueIdConfig } from './extensions/UniqueId';
 
@@ -32,21 +32,21 @@ interface RichtextChangeEvent {
 }
 
 interface RichTextExtensionsOptions {
-  uniqueIdCfg?: {}; // UniqueIdConfig;
-  toc?: {}; // TocConfig;
-  blocksGrid?: BlocksGridConfig;
   drawio?: DrawIOConfig;
-  plantUml?: {}; // PlantUmlConfig;
-  table?: {}; // FilterTableConfig;
-  heading?: {}; // HeadingConfig;
-  image?: {
-    onAddImage?: (file: File) => void;
-    onAddFile?: (file: File) => void;
-    imageList?: unknown[]; // ImageListItem[];
-  };
-  files?: {
-    filesList?: unknown[]; // FileListItem[];
-  };
+  blocksGrid?: BlocksGridConfig;
+  heading?: ReactHeadingConfig;
+  // uniqueIdCfg?: {}; // UniqueIdConfig;
+  // toc?: {}; // TocConfig;
+  // plantUml?: {}; // PlantUmlConfig;
+  // table?: {}; // FilterTableConfig;
+  // image?: {
+  //   onAddImage?: (file: File) => void;
+  //   onAddFile?: (file: File) => void;
+  //   imageList?: unknown[]; // ImageListItem[];
+  // };
+  // files?: {
+  //   filesList?: unknown[]; // FileListItem[];
+  // };
 }
 
 interface RichTextExtensionsConfig {

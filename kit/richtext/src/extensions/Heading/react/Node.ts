@@ -73,23 +73,3 @@ const HeadingReactNode = Heading.extend<ReactHeadingConfig>({
 });
 
 export { HeadingReactNode };
-
-// const actionContainer = document.createElement('div');
-// actionContainer.setAttribute('contentEditable', 'false');
-// actionContainer.classList.add(styles.actionContainer);
-
-// actionContainer.append(button, popup);
-
-// const popup = document.createElement('div');
-// popup.classList.add(styles.popup, styles[`popup_left`]);
-
-// popup.append(
-//   getPopupItem({
-//     caption: 'Скопировать ссылку',
-// onClick: (e) => {
-//   e.preventDefault();
-//   e.stopPropagation();
-//   onItemClick(node);
-// },
-//   }),
-// );

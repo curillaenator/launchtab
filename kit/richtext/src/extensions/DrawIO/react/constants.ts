@@ -1,5 +1,7 @@
 import type { DrawIoMessage } from './interfaces';
 
+const DRAWIO_DUMMY_IMG = 'https://jobtech.jp/wp-content/uploads/draw-io.png';
+
 const DRAWIO_FILE_TYPE = 'text/plain';
 const DRAWIO_EVENTS: DrawIoMessage['event'][] = ['init', 'save', 'export', 'exit', 'autosave', 'prompt'];
 
@@ -19,4 +21,4 @@ const DICT = {
   save: 'Сохранить',
 };
 
-export { DRAWIO_EVENTS, DEFAULT_FILE_NAME, DRAWIO_FILE_TYPE, AVIOD_FILENAME_SYMBOLS, DICT };
+export { DRAWIO_EVENTS, DEFAULT_FILE_NAME, DRAWIO_FILE_TYPE, AVIOD_FILENAME_SYMBOLS, DICT, DRAWIO_DUMMY_IMG };

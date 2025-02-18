@@ -80,6 +80,7 @@ export const ButtonAction: FC<ButtonActionProps> = ({
   ...rest
 }) => {
   return (
+    //@ts-ignore
     <ButtonActionStyled
       {...rest}
       isLeftIcon={!!LeftIcon}

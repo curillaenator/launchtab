@@ -41,7 +41,15 @@ export default [
   },
 
   {
-    files: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.jsx', 'src/**/*.tsx'],
+    files: [
+      //
+      'src/**/*.js',
+      'src/**/*.ts',
+      'src/**/*.jsx',
+      'src/**/*.tsx',
+      'kit/**/*.ts',
+      'kit/**/*.tsx',
+    ],
 
     rules: {
       'react/react-in-jsx-scope': 'off',

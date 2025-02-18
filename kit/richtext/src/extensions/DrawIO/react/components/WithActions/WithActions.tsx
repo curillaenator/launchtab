@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { fromPairs, toPairs } from 'lodash';
 
@@ -45,7 +45,7 @@ export const WithActions: FC<WithActionsProps> = (props) => {
   const { editable } = editorOptions;
   const { drawIoName } = nodeAttrs as DrawIoAttributes;
 
-  const [isViewer, setIsViewer] = useState<boolean>(false);
+  // const [isViewer, setIsViewer] = useState<boolean>(false);
 
   const downloadDrawio = useCallback(
     (fileSrc: string | null) => {
@@ -148,7 +148,7 @@ export const WithActions: FC<WithActionsProps> = (props) => {
               LeftIcon={WidgetFullscreenIcon}
               onClick={() => {
                 if (!src) return;
-                setIsViewer(true);
+                // setIsViewer(true);
               }}
             />
           )}

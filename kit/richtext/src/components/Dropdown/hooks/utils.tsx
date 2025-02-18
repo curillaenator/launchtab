@@ -1,30 +1,13 @@
-import React, { ReactNode } from 'react';
 import IconEllipsis from '../../../icons/IconEllipsis';
 import type { DropdownProps, DropdownItemProps, DropdownIdProp } from '../interfaces';
-
-export const resolveOpenNodeLabel = (
-  props: DropdownProps<DropdownIdProp>,
-  selectedItem: DropdownItemProps<DropdownIdProp> | null,
-  isOpen: boolean,
-): ReactNode => {
-  const { value, placeholder, isOpenNodeCaption = true, selectedItems } = props;
-
-  if (!selectedItems && isOpenNodeCaption && !!value && selectedItem) return selectedItem?.caption || '';
-
-  if (isOpenNodeCaption && placeholder) {
-    return <span data-element={isOpen ? 'placeholder-active' : 'placeholder'}>{placeholder}</span>;
-  }
-
-  return null;
-};
 
 export const resolveOpenNodeIcon = (
   props: DropdownProps<DropdownIdProp>,
   selectedItem: DropdownItemProps<DropdownIdProp> | null,
 ) => {
-  const { value: selectedId, items, icon = null, selectedItems, showOnlyIconComponent } = props;
+  const { value: selectedId, items, icon = null, selectedItems } = props;
 
-  if (showOnlyIconComponent && icon) return icon;
+  if (icon) return icon;
 
   // отображение иконки: при синглвелью дропдауне
   if (!selectedItems) return !!selectedId ? selectedItem?.Icon || icon : icon;

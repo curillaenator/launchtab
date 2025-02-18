@@ -89,7 +89,7 @@ export type ControlCaption =
 export interface ToolbarProps {
   richtextViewId: string;
   disabled?: boolean;
-  // editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
+  editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
 }
 
@@ -105,6 +105,7 @@ export type ToolbarSections = 'left' | 'right';
 export interface ToolbarActiveComponentDropdownProps extends Omit<DropdownProps<string>, 'value' | 'onChange'> {
   richtextViewId: string;
   defaultValue?: string;
+  editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   // button?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
   // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
 }

@@ -11,6 +11,7 @@ import { Bold } from '@tiptap/extension-bold';
 import { Code } from '@tiptap/extension-code';
 import { Underline } from '@tiptap/extension-underline';
 import { Italic } from '@tiptap/extension-italic';
+import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
 
 import { TextAlign } from '@tiptap/extension-text-align';
 import { Blockquote } from '@tiptap/extension-blockquote';
@@ -41,7 +42,12 @@ import { Heading } from './extensions/Heading';
 import { Draggable } from './extensions/Draggable';
 // import { Indent } from './extensions/Indent';
 
+import { all, createLowlight } from 'lowlight';
+
 import { RichTextExtensionsConfig, RichTextExtensionsOptions } from './interfaces';
+
+// create a lowlight instance with all languages loaded
+const lowlight = createLowlight(all);
 
 const CORE_EXTENSIONS = [
   Document,
@@ -96,6 +102,10 @@ const CORE_EXTENSIONS = [
 
   Highlight.configure({ multicolor: true }),
 
+  CodeBlockLowlight.configure({
+    lowlight,
+  }),
+
   Color,
 
   Draggable.configure({ types: ['fileLink'] }),
@@ -117,8 +127,6 @@ function getExtensions(args: GetExtensionsArgs) {
 
   const extensions = [...CORE_EXTENSIONS];
 
-  extensions.push(Heading.configure(extensionsOptions?.heading));
-
   if (extensionsOptions?.drawio)
     extensions.push(
       DrawIO.configure({
@@ -127,20 +135,9 @@ function getExtensions(args: GetExtensionsArgs) {
       }),
     );
 
-  if (extensionsOptions?.blocksGrid) {
-    extensions.push(
-      BlocksGrid.configure({
-        ...extensionsOptions.blocksGrid,
-        dataTestId: `${dataTestId}.BlocksGrid`,
-      }),
-    );
-    extensions.push(
-      BlocksGridColumn.configure({
-        dataTestId: `${dataTestId}.BlocksGridColumn`,
-        editorContentRef,
-      }),
-    );
-  }
+  extensions.push(Heading.configure(extensionsOptions?.heading));
+  extensions.push(BlocksGrid.configure({ dataTestId: `${dataTestId}.BlocksGrid` }));
+  extensions.push(BlocksGridColumn.configure({ dataTestId: `${dataTestId}.BlocksGridColumn`, editorContentRef }));
 
   return extensions;
 }

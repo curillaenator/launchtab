@@ -1,5 +1,5 @@
 export { TEXT_ITEMS as ITEMS } from './text';
-// export { ADDITIONAL_TEXT_ITEMS as ADDITIONAL_BLOCK_ITEMS } from './additional';
+export { ADDITIONAL_TEXT_ITEMS as ADDITIONAL_ITEMS } from './additional';
 // export { TABLE_ITEMS, TABLE_COLOR_ITEMS } from './table';
 // export { TEXT_ALIGN_ITEMS } from './textAlight';
 // export { TEXT_FORMAT_ITEMS } from './textFormat';

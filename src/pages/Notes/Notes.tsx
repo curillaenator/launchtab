@@ -19,7 +19,7 @@ const NotesStyled = styled.div`
   height: fit-content;
   border-radius: var(--form-bdrs);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 56px;
+  padding: 32px;
 `;
 
 export const Notes: FC = () => {

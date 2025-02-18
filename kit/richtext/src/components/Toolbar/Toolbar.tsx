@@ -9,7 +9,7 @@ import { DEFAULT_STRUCT } from './constants';
 import styles from './Toolbar.module.scss';
 
 const ToolbarWithStruct: FC<ToolbarProps> = (props) => {
-  const { disabled, richtextViewId } = props;
+  const { disabled, richtextViewId, editorContentRef } = props;
 
   const {
     containerRef,
@@ -36,7 +36,12 @@ const ToolbarWithStruct: FC<ToolbarProps> = (props) => {
         )}
       >
         {left.map((Component) => (
-          <Component key={getKey()} disabled={disabled} richtextViewId={richtextViewId} />
+          <Component
+            key={getKey()}
+            disabled={disabled}
+            richtextViewId={richtextViewId}
+            editorContentRef={editorContentRef}
+          />
         ))}
       </div>
 

@@ -12,6 +12,7 @@ import { DEFAULT_TEST_ID, TOOLBAR_HEIGHT } from './constants';
 import type { RichtextContainerProps } from './interfaces';
 
 import styles from './styles.module.scss';
+import 'highlight.js/styles/github.css';
 
 interface RichTextViewProps extends RichtextContainerProps {
   internalScrollContainerId: string;
@@ -99,7 +100,7 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
         <EditorContent placeholder={placeholder} editor={editor} className={styles.content} ref={editorContentRef} />
       </div>
 
-      {editable && <Toolbar disabled={disabled} richtextViewId={richtextViewId} />}
+      {editable && <Toolbar disabled={disabled} richtextViewId={richtextViewId} editorContentRef={editorContentRef} />}
     </div>
   );
 };

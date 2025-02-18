@@ -190,6 +190,17 @@
   }
 }
 
+.dropableVars {
+  --dd-pd: 8px 8px;
+  --dd-bdw: 0px;
+  --dd-scrl-pd: 0 8px 0 0;
+  --dd-bdrs: 8px;
+
+  --dd-bgc: var(--editor-dropdown-bgc);
+  --dd-bdc: var(--editor-dropdown-bdc);
+  --dd-drop-sh: var(--editor-dropdown-drop-sh);
+}
+
 // sticky TOC START
 // @keyframes stickyTocAppear {
 //   from {

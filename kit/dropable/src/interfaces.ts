@@ -22,12 +22,9 @@ export interface _BaseMenuProps {
   maxWidth: string | number;
   minWidth: string | number;
   maxHeight: string | number;
-  className?: string;
-  scrollClassName?: string;
   closeOnItemClick?: boolean;
   animationStyle?: CSSProperties;
   closeDropdown?: () => void;
-  getDropdownScrollHeight: (fullScrollHeight?: number) => void;
   children: ReactNode;
 }
 
@@ -37,9 +34,6 @@ type _OmitedTippyProps = Omit<TippyProps, 'arrow' | 'appendTo' | 'content' | 'tr
 export interface DropableProps extends _OmitedBaseMenuProps, _OmitedTippyProps {
   children: ReactNode;
   openNode: ReactNode;
-  matchWidth?: boolean;
   appendToId?: string;
   trigger?: 'mouseenter focus' | 'click' | 'focusin' | 'mouseenter click' | 'manual';
-  openNodeClassName?: string;
-  getOpenNodeWidth?: (width: number) => void;
 }

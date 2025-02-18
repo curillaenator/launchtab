@@ -1,0 +1,48 @@
+.button {
+  height: 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+
+  font-family: 'SB Sans Text', sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+
+  color: var(--editor-c);
+  background-color: transparent;
+
+  &:hover {
+    background-color: #2a72f81e;
+  }
+
+  &:active {
+    background-color: #3f81fd33;
+  }
+
+  &.active:not(.disabled) {
+    background-color: #3f81fd33;
+
+    &:hover {
+      background-color: #3f81fd33;
+    }
+
+    &:active {
+      background-color: #3f81fd33;
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: transparent;
+  color: var(--editor-disabled);
+
+  svg path {
+    stroke: var(--editor-disabled);
+  }
+}

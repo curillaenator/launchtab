@@ -21,11 +21,9 @@
   .scroll {
     width: 100%;
 
-    &_scrollable {
-      overflow-x: hidden;
-      overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 
-      padding: var(--dd-scrl-pd);
-    }
+    padding: var(--dd-scrl-pd);
   }
 }

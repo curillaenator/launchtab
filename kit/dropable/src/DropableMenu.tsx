@@ -6,6 +6,9 @@ import { VERSION } from './version';
 import { DEFAULT_TEST_ID } from './constants';
 import { _BaseMenuProps } from './interfaces';
 
+//@ts-expect-error
+import styles from './dropable.module.scss';
+
 export const DropableMenu: FC<_BaseMenuProps> = (props) => {
   const {
     attrs,
@@ -17,9 +20,6 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
     animationStyle,
     closeOnItemClick = false,
     closeDropdown,
-    getDropdownScrollHeight,
-    className,
-    scrollClassName,
     children,
   } = props;
 
@@ -35,20 +35,16 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
   const Component = animationStyle ? animated.div : ('div' as ElementType);
 
   return (
-    // @ts-ignore игнор для феба, проблема с несоответсвием типов, разобраться на какой стороне пофиксить
     <Component
       {...attrs}
       data-testid={dataTestId}
       data-analytics={DEFAULT_TEST_ID}
       data-version={VERSION}
-      className={className}
+      className={styles.content}
       style={{ minWidth, maxWidth, maxHeight, ...animationStyle }}
     >
-      <div ref={(inst) => getDropdownScrollHeight(inst?.scrollHeight)} className={scrollClassName}>
-        {
-          // @ts-ignore игнор для феба, проблема с несоответсвием типов, разобраться на какой стороне пофиксить
-          <DropableContext.Provider value={contextValue}>{children}</DropableContext.Provider>
-        }
+      <div className={styles.scroll} style={{ minWidth, maxWidth, maxHeight }}>
+        <DropableContext.Provider value={contextValue}>{children}</DropableContext.Provider>
       </div>
     </Component>
   );

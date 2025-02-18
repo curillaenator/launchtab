@@ -1,9 +1,8 @@
+import type { FC } from 'react';
 import type { Editor as CoreEditor } from '@tiptap/core';
 import type { Transaction } from '@tiptap/pm/state';
-// import type { DropdownProps } from 'components/Dropdown';
+import type { DropdownProps } from 'components/Dropdown';
 // import type { TocAsideConfig } from 'components/TocAside';
-// import { FC } from 'react';
-// import * as React from 'react';
 
 export type TocCommand = 'insertTableOfContent';
 export type DrawIoCommand = 'insertDrawIo';
@@ -88,8 +87,9 @@ export type ControlCaption =
   | HistoryCommand;
 
 export interface ToolbarProps {
-  captions?: Record<ControlCaption, string>;
+  richtextViewId: string;
   disabled?: boolean;
+  // editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
 }
 
@@ -102,12 +102,12 @@ export type ToolbarCompositionTypeName = 'full' | 'medium' | 'compact' | 'small'
 
 export type ToolbarSections = 'left' | 'right';
 
-// export interface ToolbarActiveComponentDropdownProps extends Omit<DropdownProps<string>, 'value' | 'onChange'> {
-//   defaultValue?: string;
-//   button?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
-//   // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
-//   tooltip?: string;
-// }
+export interface ToolbarActiveComponentDropdownProps extends Omit<DropdownProps<string>, 'value' | 'onChange'> {
+  richtextViewId: string;
+  defaultValue?: string;
+  // button?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
+  // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
+}
 
-// export interface ToolbarComponentStruct
-//   extends Record<ToolbarCompositionTypeName, Record<ToolbarSections, FC<ToolbarActiveComponentDropdownProps>[]>> {}
+export interface ToolbarComponentStruct
+  extends Record<ToolbarCompositionTypeName, Record<ToolbarSections, FC<ToolbarActiveComponentDropdownProps>[]>> {}

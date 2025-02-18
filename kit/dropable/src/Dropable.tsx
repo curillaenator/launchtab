@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement, JSXElementConstructor } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import { Instance } from 'tippy.js';
 
 import { useBaseDropdownProps } from './hooks/useBaseDropdownProps';
 import { DropableMenu } from './DropableMenu';
 import { DEFAULT_TEST_ID, PLUGINS } from './constants';
-import { VERSION } from './version';
 import { DropableProps } from './interfaces';
 
 export const Dropable: FC<DropableProps> = (props) => {
@@ -13,17 +12,12 @@ export const Dropable: FC<DropableProps> = (props) => {
     dataTestId = DEFAULT_TEST_ID,
     openNode,
     children,
-    className,
-    scrollClassName,
-    openNodeClassName,
     maxWidth = 256,
     minWidth = 216,
     maxHeight = 320,
     animationStyle,
     closeOnItemClick,
     closeDropdown,
-    getOpenNodeWidth,
-    getDropdownScrollHeight,
     ...rest
   } = useBaseDropdownProps(props);
 
@@ -38,10 +32,7 @@ export const Dropable: FC<DropableProps> = (props) => {
           attrs={attrs}
           dataTestId={dataTestId}
           instance={instance as Instance}
-          getDropdownScrollHeight={getDropdownScrollHeight}
           closeDropdown={closeDropdown}
-          className={className}
-          scrollClassName={scrollClassName}
           maxWidth={maxWidth}
           minWidth={minWidth}
           maxHeight={maxHeight}
@@ -52,15 +43,8 @@ export const Dropable: FC<DropableProps> = (props) => {
         </DropableMenu>
       )}
     >
-      <div
-        data-testid={`${dataTestId}.OpenNode`}
-        data-analytics={DEFAULT_TEST_ID}
-        data-version={VERSION}
-        ref={(inst) => getOpenNodeWidth(inst?.clientWidth)}
-        className={openNodeClassName}
-      >
-        {openNode}
-      </div>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {openNode as ReactElement<any, string | JSXElementConstructor<any>>}
     </Tippy>
   );
 };

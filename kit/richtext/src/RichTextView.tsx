@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import cn from 'classnames';
 import { useCurrentEditor, EditorContent } from '@tiptap/react';
 import { debounce } from 'lodash';
+import { v4 as getViewId } from 'uuid';
 
 import { Toolbar } from './components/Toolbar';
 // import { TocAside, useAsideToc } from './components/TocAside';
@@ -76,14 +77,16 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
   // const hasToc = !!tocCfg?.scrollContainerId && (tocView === 'aside' || tocView === 'popup');
 
   // Toolbar
+  const richtextViewId = getViewId();
   const maxHeightWithToolbar = typeof maxHeight === 'number' ? maxHeight - TOOLBAR_HEIGHT : maxHeight;
 
   if (!editor) return null;
 
   return (
     <div
+      id={richtextViewId}
       data-testid={dataTestId}
-      className={cn(styles.editor, styles._theme_eds, styles.editor_toolbarTop, className, {
+      className={cn(styles.dropableVars, styles.editor, styles._theme_eds, styles.editor_toolbarTop, className, {
         [styles._disabled]: disabled,
         [styles.editor_isFocused]: editor?.isEditable && editor?.isFocused,
       })}
@@ -96,7 +99,7 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
         <EditorContent placeholder={placeholder} editor={editor} className={styles.content} ref={editorContentRef} />
       </div>
 
-      {editable && <Toolbar disabled={disabled} />}
+      {editable && <Toolbar disabled={disabled} richtextViewId={richtextViewId} />}
     </div>
   );
 };

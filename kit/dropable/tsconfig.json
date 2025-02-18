@@ -6,5 +6,5 @@
     "baseUrl": "./src",
     "types": ["react"]
   },
-  "include": ["src/**/*", "./@types"]
+  "include": ["src/**/*"]
 }

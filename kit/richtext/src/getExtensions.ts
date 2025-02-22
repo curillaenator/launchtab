@@ -128,7 +128,7 @@ function getExtensions(args: GetExtensionsArgs) {
     extensions.push(DrawIO.configure({ ...extensionsOptions.drawio, dataTestId: `${dataTestId}.DrawIO` }));
   }
 
-  extensions.push(FilterTable.configure({ ...extensionsOptions?.table, editorContentRef }));
+  extensions.push(FilterTable.configure(extensionsOptions?.table));
   extensions.push(Heading.configure(extensionsOptions?.heading));
   extensions.push(BlocksGrid.configure({ dataTestId: `${dataTestId}.BlocksGrid` }));
   extensions.push(BlocksGridColumn.configure({ dataTestId: `${dataTestId}.BlocksGridColumn`, editorContentRef }));

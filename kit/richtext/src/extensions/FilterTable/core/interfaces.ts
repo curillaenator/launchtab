@@ -1,4 +1,3 @@
-import React from 'react';
 import type { ColumnDefinition, SortDirection } from 'tabulator-tables';
 import type { TableOptions } from '@tiptap/extension-table';
 
@@ -53,11 +52,7 @@ interface FilterTableAtributes {
 
 interface FilterTableStorage {}
 
-interface FilterTableExternalConfig {
-  editorContentRef?: React.MutableRefObject<HTMLDivElement | null>;
-}
-
-interface FilterTableConfig extends TableOptions, FilterTableExternalConfig {}
+interface FilterTableConfig extends TableOptions {}
 
 interface TableCellAttributes {
   colspan: number;
@@ -79,6 +74,5 @@ export type {
   CalcColumnType,
   FilterTableAtributes,
   FilterTableStorage,
-  FilterTableExternalConfig,
   FilterTableConfig,
 };

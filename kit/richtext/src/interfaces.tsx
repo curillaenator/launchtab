@@ -14,21 +14,21 @@ import type { Editor } from '@tiptap/react';
 // } from './components/Toolbar';
 
 import type { DrawIOConfig } from './extensions/DrawIO';
+import type { FilterTableConfig } from './extensions/FilterTable/core/interfaces';
+import type { ReactHeadingConfig } from './extensions/Heading';
+import type { BlocksGridConfig } from './extensions/BlocksGrid';
 // import type { PlantUmlConfig } from './extensions/PlantUML/core/interfaces';
-import type { FilterTableExternalConfig as FilterTableConfig } from './extensions/FilterTable/core/interfaces';
 // import type { MentionLinkConfig } from './extensions/MentionLink/core/interfaces';
 // import type { TocNodeConfig } from './extensions/ToC/core/interfaces';
 // import type { TocAsideConfig } from './components/TocAside/interfaces';
-import type { ReactHeadingConfig } from './extensions/Heading';
-import type { BlocksGridConfig } from './extensions/BlocksGrid';
 // import type { UniqueIdConfig } from './extensions/UniqueId';
 
 interface RichtextChangeEvent {
   value: JSONContent;
-  // isEditable: boolean;
-  // hasText: boolean;
-  // hasOnlyImage: boolean;
   isSemiEmpty: boolean;
+  // hasText: boolean;
+  // isEditable: boolean;
+  // hasOnlyImage: boolean;
 }
 
 interface RichTextExtensionsOptions {
@@ -36,9 +36,11 @@ interface RichTextExtensionsOptions {
   blocksGrid?: BlocksGridConfig;
   heading?: ReactHeadingConfig;
   table?: FilterTableConfig;
-  // uniqueIdCfg?: {}; // UniqueIdConfig;
+
   // toc?: {}; // TocConfig;
   // plantUml?: {}; // PlantUmlConfig;
+
+  // uniqueIdCfg?: {}; // UniqueIdConfig;
   // image?: {
   //   onAddImage?: (file: File) => void;
   //   onAddFile?: (file: File) => void;

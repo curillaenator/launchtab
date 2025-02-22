@@ -15,7 +15,7 @@ import type { Editor } from '@tiptap/react';
 
 import type { DrawIOConfig } from './extensions/DrawIO';
 // import type { PlantUmlConfig } from './extensions/PlantUML/core/interfaces';
-// import type { FilterTableExternalConfig } from './extensions/FilterTable/core/interfaces';
+import type { FilterTableExternalConfig as FilterTableConfig } from './extensions/FilterTable/core/interfaces';
 // import type { MentionLinkConfig } from './extensions/MentionLink/core/interfaces';
 // import type { TocNodeConfig } from './extensions/ToC/core/interfaces';
 // import type { TocAsideConfig } from './components/TocAside/interfaces';
@@ -35,10 +35,10 @@ interface RichTextExtensionsOptions {
   drawio?: DrawIOConfig;
   blocksGrid?: BlocksGridConfig;
   heading?: ReactHeadingConfig;
+  table?: FilterTableConfig;
   // uniqueIdCfg?: {}; // UniqueIdConfig;
   // toc?: {}; // TocConfig;
   // plantUml?: {}; // PlantUmlConfig;
-  // table?: {}; // FilterTableConfig;
   // image?: {
   //   onAddImage?: (file: File) => void;
   //   onAddFile?: (file: File) => void;

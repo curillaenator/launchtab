@@ -19,6 +19,10 @@ declare module '@tiptap/core' {
       deleteBlocksGrid: (onDelete: () => void) => ReturnType;
     };
 
+    coreTable: {
+      colorFill: (color: string) => ReturnType;
+    };
+
     // fileLink: {
     //   insertFileLink: (attrs: FileListItem) => ReturnType;
     //   updateFileLinkSize: (size: 'small' | 'medium' | 'large') => ReturnType;
@@ -28,10 +32,6 @@ declare module '@tiptap/core' {
     // indent: {
     //   indent: () => ReturnType;
     //   outdent: () => ReturnType;
-    // };
-
-    // coreTable: {
-    //   colorFill: (color: string) => ReturnType;
     // };
   }
 }

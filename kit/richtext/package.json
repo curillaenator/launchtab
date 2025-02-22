@@ -65,11 +65,13 @@
     "lodash": "4.17.21",
     "lowlight": "3.3.0",
     "react-scroll": "1.9.2",
+    "tabulator-tables": "6.2.5",
     "uuid": "11.0.4"
   },
   "devDependencies": {
     "@launch-ui/types": "*",
-    "@types/react-scroll": "1.8.10"
+    "@types/react-scroll": "1.8.10",
+    "@types/tabulator-tables": "6.2.3"
   },
   "peerDependencies": {
     "react": "*"

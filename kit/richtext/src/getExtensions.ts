@@ -20,9 +20,7 @@ import { HorizontalRule } from '@tiptap/extension-horizontal-rule';
 import { Superscript } from '@tiptap/extension-superscript';
 import { Subscript } from '@tiptap/extension-subscript';
 
-import { Table } from '@tiptap/extension-table';
-import { TableCell } from '@tiptap/extension-table-cell';
-import { TableHeader } from '@tiptap/extension-table-header';
+import { FilterTable, TableHeader, TableCell } from './extensions/FilterTable';
 import { TableRow } from '@tiptap/extension-table-row';
 
 import { Link } from '@tiptap/extension-link';
@@ -95,7 +93,6 @@ const CORE_EXTENSIONS = [
 
   TextStyle,
 
-  Table,
   TableRow,
   TableHeader,
   TableCell,
@@ -127,14 +124,11 @@ function getExtensions(args: GetExtensionsArgs) {
 
   const extensions = [...CORE_EXTENSIONS];
 
-  if (extensionsOptions?.drawio)
-    extensions.push(
-      DrawIO.configure({
-        ...extensionsOptions.drawio,
-        dataTestId: `${dataTestId}.DrawIO`,
-      }),
-    );
+  if (extensionsOptions?.drawio) {
+    extensions.push(DrawIO.configure({ ...extensionsOptions.drawio, dataTestId: `${dataTestId}.DrawIO` }));
+  }
 
+  extensions.push(FilterTable.configure({ ...extensionsOptions?.table, editorContentRef }));
   extensions.push(Heading.configure(extensionsOptions?.heading));
   extensions.push(BlocksGrid.configure({ dataTestId: `${dataTestId}.BlocksGrid` }));
   extensions.push(BlocksGridColumn.configure({ dataTestId: `${dataTestId}.BlocksGridColumn`, editorContentRef }));

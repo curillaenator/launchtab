@@ -5,3 +5,4 @@ export { isNotEmptyTextContent } from './isNotEmptyTextContent';
 export { isOnlyImageContent } from './isOnlyImageContent';
 export { isOnlyImageInParagraph } from './isOnlyImageInParagraph';
 export { parseJSONWithoutError } from './parseJSONWithoutError';
+export { remapObject } from './remapObject';

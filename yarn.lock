@@ -3802,12 +3802,14 @@ __metadata:
     "@tiptap/react": 2.11.5
     "@tiptap/suggestion": 2.11.5
     "@types/react-scroll": 1.8.10
+    "@types/tabulator-tables": 6.2.3
     classnames: 2.5.1
     date-fns: 3.2.0
     highlight.js: 11.11.1
     lodash: 4.17.21
     lowlight: 3.3.0
     react-scroll: 1.9.2
+    tabulator-tables: 6.2.5
     uuid: 11.0.4
   peerDependencies:
     react: "*"
@@ -5306,6 +5308,13 @@ __metadata:
     "@types/react": "*"
     csstype: ^3.0.2
   checksum: 84f53b3101739b20d1731554fb7735bc2f3f5d050a8b392e9845403c8c8bbd729737d033978649f9195a97b557875b010d46e35a4538564a2d0dbcce661dbf76
+  languageName: node
+  linkType: hard
+
+"@types/tabulator-tables@npm:6.2.3":
+  version: 6.2.3
+  resolution: "@types/tabulator-tables@npm:6.2.3"
+  checksum: dcfbd8ec870ddb9ea4e79275afa61b0741d5dd353f0691d83fcf9508c7fa44b81d91d4f2b967eb7abc006c734bb6ff1cc052fe6133a0a66971b0465785216299
   languageName: node
   linkType: hard
 
@@ -12542,6 +12551,13 @@ __metadata:
   bin:
     svgo: ./bin/svgo
   checksum: 42168748a5586d85d447bec2867bc19814a4897f973ff023e6aad4ff19ba7408be37cf3736e982bb78e3f1e52df8785da5dca77a8ebc64c0ebd6fcf9915d2895
+  languageName: node
+  linkType: hard
+
+"tabulator-tables@npm:6.2.5":
+  version: 6.2.5
+  resolution: "tabulator-tables@npm:6.2.5"
+  checksum: 09e3ca20f12cb777e89482d36683980177c5848b27f1b8c10ff2b9acc6b92f14ca6e014ea0018b6b6457c7f80923a2988463a8d4c5f7d05edddb5911e7bed790
   languageName: node
   linkType: hard
 

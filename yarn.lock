@@ -3762,6 +3762,7 @@ __metadata:
   resolution: "@launch-ui/richtext@workspace:kit/richtext"
   dependencies:
     "@launch-ui/types": "*"
+    "@launch-ui/typography": 1.0.0
     "@tiptap/core": 2.11.5
     "@tiptap/extension-blockquote": 2.11.5
     "@tiptap/extension-bold": 2.11.5

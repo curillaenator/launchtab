@@ -7,7 +7,7 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
 
   display: flex;
   width: 100%;
-  min-width: 1280px;
+  min-width: 1440px;
   color: ${({ theme }) => theme.texts.base};
 
   .aside {

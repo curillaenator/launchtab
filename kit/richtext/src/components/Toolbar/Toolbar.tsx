@@ -48,7 +48,6 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
         styles.toolbar,
         // styles[`_${composition}`],
         styles[`_full`],
-        styles.toolbar_top,
       )}
     >
       <div

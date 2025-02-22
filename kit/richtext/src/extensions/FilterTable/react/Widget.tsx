@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useRef, useState, useId } from 'react';
 import { NodeViewWrapper, useReactNodeView } from '@tiptap/react';
-import { ButtonGhost } from '@launch-ui/button';
+import { ButtonAction } from '@launch-ui/button';
 import cn from 'classnames';
 
 import {
@@ -17,7 +17,10 @@ import { useResizers } from './hooks/useResizers';
 import { TABLE_WIDTH_CSSV } from './constants';
 import type { UiWidgetProps, TabulatorRef, FilterControls } from './interfaces';
 
-import { SettingsIcon, IconEdit } from './icons';
+import {
+  // SettingsIcon,
+  IconEdit,
+} from './icons';
 
 import styles from './widget.module.scss';
 
@@ -38,7 +41,7 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
 
   const [headingNames, setHeadingNames] = useState<string[]>(initHeadingNames);
 
-  const [isFilterPresentor, setIsFilterPresentor] = useState<boolean>(canBeFiltered);
+  const [isFilterPresentor, setIsFilterPresentor] = useState<boolean>(false);
   // const [isSaveFiltersSortBtn, setIsSaveFiltersSortBtn] = useState<boolean>(false);
   // const [isSettings, setIsSettings] = useState<boolean>(false);
   const [isTableReady, setIsTableReady] = useState<boolean>(false);
@@ -88,7 +91,7 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
 
                 {/* <ButtonGhost LeftIcon={SettingsIcon} onClick={() => setIsSettings(true)} /> */}
 
-                <ButtonGhost LeftIcon={IconEdit} onClick={() => setIsFilterPresentor((p) => !p)} />
+                <ButtonAction LeftIcon={IconEdit} onClick={() => setIsFilterPresentor((p) => !p)} />
               </div>
             </div>
 
@@ -112,7 +115,7 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
               <div />
 
               <div className={cn(styles.block, styles.block_right)}>
-                {canBeFiltered && <ButtonGhost onClick={() => setIsFilterPresentor((p) => !p)} title={'Filters'} />}
+                {canBeFiltered && <ButtonAction onClick={() => setIsFilterPresentor((p) => !p)} title={'Filters'} />}
               </div>
             </div>
 

@@ -3,28 +3,23 @@
 ._theme_eds {
   @include tokens.edsCssv;
 
-  --editor-primary: var(--eds-fore-accent);
-  --editor-primary-h: var(--eds-fore-accent-h);
-  --editor-primary-a: var(--eds-fore-accent-a);
+  --editor-primary: var(--theme-primary-500);
+  --editor-primary-h: var(--theme-primary-400);
+  --editor-primary-a: var(--theme-primary-600);
 
   --editor-warning: var(--eds-fore-warning);
-  --editor-error: var(--eds-fore-negative);
-  --editor-positive: var(--eds-fore-positive);
-  --editor-disabled: var(--eds-fore-tertiary);
+  --editor-error: var(--theme-texts-error);
+  --editor-positive: var(--theme-texts-success);
+  --editor-disabled: var(--theme-texts-disabled);
 
-  --editor-link-primary: var(--eds-fore-accent);
-  --editor-link-visited: var(--eds-fore-visited);
+  --editor-c: var(--theme-texts-base);
 
-  --editor-c: var(--eds-fore-primary);
+  --editor-bdc: var(--theme-backgrounds-dark);
 
-  --editor-bdc: var(--eds-bdc-intence);
   --editor-warning-bdc: var(--editor-warning);
   --editor-error-bdc: var(--editor-error);
 
-  --editor-bgc: var(--eds-bgc-base);
-  --editor-bgc-primary: var(--eds-bgc-primary);
-  --editor-bgc-secondary: var(--eds-bgc-secondary);
-  --editor-bgc-tertiary: var(--eds-bgc-tertiary);
+  --editor-bgc: var(--theme-backgrounds-base);
 
   --editor-highlight-bgc: var(--eds-bgc-secondary);
   --editor-highlight-warning-bgc: var(--eds-bgc-card-warning);
@@ -32,45 +27,12 @@
   --editor-highlight-info-bgc: var(--eds-bgc-card-info);
   --editor-highlight-success-bgc: var(--eds-bgc-card-success);
 
-  --editor-codeblock-bgc: var(--eds-bgc-primary);
-
-  --editor-img-bdc: var(--eds-bdc-intence);
-  --editor-toolbar-bgc: var(--eds-bgc-base);
-
-  --editor-dropdown-bgc: var(--eds-bgc-base);
-  --editor-dropdown-bdc: transparent;
-  --editor-dropdown-drop-sh: 0 0 32px 0 #2969e33d;
-
-  --editor-scroll-thumb: var(--eds-bgc-accent-56);
-  --editor-scroll-thumb-h: var(--eds-bgc-accent);
-  --editor-scroll-track: var(--eds-bgc-primary);
-  --editor-scroll-track-h: var(--eds-bgc-primary);
+  --editor-scroll-thumb: var(--theme-primary-500);
+  --editor-scroll-thumb-h: var(--theme-primary-400);
+  --editor-scroll-track: var(--theme-backgrounds-lightest);
+  --editor-scroll-track-h: var(--theme-backgrounds-lightest);
 
   --editor-pd: 48px; // must be single digit, use another var for separate values, like "24px 24px 8px 6px"
-  --editor-bdrs: 8px;
-  --editor-pre-pd: 16px;
-
-  --editor-toolbar-pd-y: 8px;
-  --editor-toolbar-pd-x: 8px;
-
-  /* 1px - border тулбара */
-  --editor-toolbar-bdrs: calc(var(--editor-bdrs) + 1px);
-
-  --editor-inline-comment-hightlight-bgc: var(--eds-bgc-surface-secondary-h);
-  --editor-inline-comment-hightlight-bgc-h: var(--eds-bgc-surface-secondary-a);
-  --editor-inline-comment-hightlight-bdc: var(--eds-bdc-accent);
-
-  --editor-mention-bgc: var(--eds-bgc-base);
-  --editor-mention-item-bgc: var(--eds-bgc-primary);
-  --editor-mention-item-b: var(--eds-bdc-intence);
-  --editor-mention-item-selected-b: var(--editor-primary);
-  --editor-mention-item-selected-c: #eaeff7;
-  --editor-mention-item-selected-bgc: var(--editor-primary);
-  --editor-mention-item-login-c: var(--editor-disabled);
-  --editor-mention-item-avatar-bgc: var(--editor-positive);
-
-  --editor-tag-bgc: var(--eds-bdc-intence);
-  --editor-tag-c: var(--editor-primary);
 }
 
 .editor {
@@ -79,18 +41,18 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  color: var(--editor-c);
-  font-family: 'SB Sans Text', sans-serif;
-  font-size: var(--editor-fz, 14px);
-  line-height: var(--editor-lh, 24px);
-  border-radius: var(--editor-bdrs);
+  color: var(--theme-texts-base);
+  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', SanFrancisco, proxima-soft, Roboto, 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 16px;
+  line-height: 24px;
+  // border-radius: 8px;
 
   &_toolbarTop {
     flex-direction: column-reverse;
   }
 
   &_isFocused {
-    // --blocksgrid-bdc: var(--eds-bdc-intence);
     --blocksgrid-toolbar-opacity: 1;
   }
 
@@ -106,15 +68,15 @@
         a {
           cursor: pointer;
           text-decoration: none;
-          color: var(--editor-link-primary);
+          color: var(--theme-primary-500);
 
           &:visited {
-            color: var(--editor-link-visited);
+            color: var(--theme-primary-800);
           }
         }
 
         p.is-editor-empty:first-child::before {
-          color: var(--color-neutral-300, #c2c2c2);
+          color: var(--theme-texts-placeholder);
           content: attr(data-placeholder);
           float: left;
           height: 0;
@@ -124,7 +86,7 @@
           position: relative;
         }
         .is-empty::before {
-          color: var(--color-neutral-300, #c2c2c2);
+          color: var(--theme-texts-placeholder);
           content: attr(data-placeholder);
           position: absolute;
           left: 0;
@@ -192,13 +154,13 @@
 
 .dropableVars {
   --dd-pd: 8px 8px;
-  --dd-bdw: 0px;
+  --dd-bdw: 1px;
   --dd-scrl-pd: 0 8px 0 0;
-  --dd-bdrs: 8px;
+  --dd-bdrs: 6px;
 
-  --dd-bgc: var(--editor-dropdown-bgc);
-  --dd-bdc: var(--editor-dropdown-bdc);
-  --dd-drop-sh: var(--editor-dropdown-drop-sh);
+  --dd-bgc: var(--theme-backgrounds-lightest);
+  --dd-bdc: var(--theme-backgrounds-dark);
+  --dd-drop-sh: 0 0 0 0 transparent;
 }
 
 // sticky TOC START
@@ -220,7 +182,7 @@
 //   transition: width 200ms ease;
 
 //   &_bordered {
-//     border-left: 1px solid var(--eds-bdc-intence);
+//     border-left: 1px solid var(--editor-bdc);
 //   }
 
 //   &_aside {
@@ -360,29 +322,28 @@
 
 .editor pre {
   margin: 0;
-
-  box-shadow: inset 0 0 0 1px var(--editor-bdc);
-  padding: var(--editor-pre-pd);
-  border-radius: 4px;
-  background-color: var(--editor-codeblock-bgc);
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--theme-backgrounds-lightest);
+  box-shadow: inset 0 0 0 1px var(--theme-backgrounds-dark);
 }
 
 .editor code[data-set='inline'] {
   padding: 2px 4px;
-  border-radius: 4px;
-  box-shadow: inset 0 0 0 1px var(--editor-bdc);
-  background-color: var(--editor-highlight-bgc);
+  border-radius: 6px;
+  background-color: var(--theme-backgrounds-lightest);
+  box-shadow: inset 0 0 0 1px var(--theme-backgrounds-dark);
 }
 
 .editor blockquote {
   margin: 8px 0 0;
   padding-left: 16px;
-  border-left: 1px solid var(--editor-bdc);
+  border-left: 1px solid var(--theme-primary-500);
 }
 
 .editor hr {
   height: 1px;
-  background-color: var(--editor-bdc);
+  background-color: var(--theme-primary-500);
   border: none;
   margin: 16px 0;
 }

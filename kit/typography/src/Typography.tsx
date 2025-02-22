@@ -22,7 +22,7 @@ const TypographyJSX = forwardRef<HTMLDivElement, TypographyProps>((props, ref) =
   return (
     <TypographyStyled
       ref={ref}
-      fontFamily={getFontFamily(type)}
+      fontFamily={getFontFamily()}
       fontStyles={fontStyles[type]}
       as={as || generateTag(type)}
       className={className || type}

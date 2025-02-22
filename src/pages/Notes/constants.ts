@@ -12,7 +12,7 @@ const INIT_CONTENT = JSON.stringify({
       attrs: {
         blocksCount: 2,
         fatBlockIdx: 0,
-        timestamp: null,
+        timestamp: 1740215953690,
         blocksGridId: '111d7c8d-ec10-4722-a584-dd54028aa685',
       },
       content: [
@@ -32,7 +32,7 @@ const INIT_CONTENT = JSON.stringify({
               content: [
                 {
                   type: 'text',
-                  text: 'Hi there,',
+                  text: 'Тест контент,',
                 },
               ],
             },
@@ -144,6 +144,12 @@ const INIT_CONTENT = JSON.stringify({
                   text: 'Isn’t that great? And all of that is editable. But wait, there’s more. Let’s try a code block:',
                 },
               ],
+            },
+            {
+              type: 'paragraph',
+              attrs: {
+                textAlign: 'justify',
+              },
             },
             {
               type: 'codeBlock',

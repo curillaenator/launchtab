@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
@@ -8,13 +8,14 @@ import type { ButtonGhostProps } from './interfaces';
 interface IButtonStyled {
   active: boolean;
   danger: boolean;
+  height: CSSProperties['height'];
 }
 
 const ButtonGhostStyled = styled.button<IButtonStyled>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: ${({ height }) => `${height}px`};
   background: transparent;
   z-index: 20;
 
@@ -43,6 +44,7 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
     RightIcon,
     active = false,
     danger = false,
+    height = 40,
     colorPreset = 'primary-colors',
     type = 'button',
     ...rest
@@ -58,6 +60,7 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
       type={type}
       active={active}
       danger={danger}
+      height={height}
     >
       {!!LeftIcon && <LeftIcon />}
 

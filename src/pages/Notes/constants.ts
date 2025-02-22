@@ -8,6 +8,12 @@ const INIT_CONTENT = JSON.stringify({
       },
     },
     {
+      type: 'paragraph',
+      attrs: {
+        textAlign: 'justify',
+      },
+    },
+    {
       type: 'blocksGrid',
       attrs: {
         blocksCount: 2,
@@ -372,7 +378,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: 'var(--theme-backgrounds-lightest)',
+                        backgroundColor: '#FFBDAD',
                       },
                       content: [
                         {
@@ -395,7 +401,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: 'var(--theme-backgrounds-lightest)',
+                        backgroundColor: '#FFBDAD',
                       },
                       content: [
                         {
@@ -418,7 +424,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: 'var(--theme-backgrounds-lightest)',
+                        backgroundColor: '#FFBDAD',
                       },
                       content: [
                         {
@@ -492,7 +498,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: 'transparent',
+                        backgroundColor: '#B3F5FF',
                       },
                       content: [
                         {
@@ -566,7 +572,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: 'transparent',
+                        backgroundColor: '#B3F5FF',
                       },
                       content: [
                         {
@@ -725,9 +731,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: 'var(--editor-highlight-bgc)',
-                        },
+                        backgroundColor: '#B3D4FF',
                       },
                       content: [
                         {
@@ -750,9 +754,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: 'var(--editor-highlight-bgc)',
-                        },
+                        backgroundColor: '#B3D4FF',
                       },
                       content: [
                         {
@@ -775,9 +777,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: 'var(--editor-highlight-bgc)',
-                        },
+                        backgroundColor: '#B3D4FF',
                       },
                       content: [
                         {
@@ -800,9 +800,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: 'var(--editor-highlight-bgc)',
-                        },
+                        backgroundColor: '#B3D4FF',
                       },
                       content: [
                         {
@@ -880,9 +878,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: '#ABF5D1',
-                        },
+                        backgroundColor: '#FFBDAD',
                       },
                       content: [
                         {
@@ -985,9 +981,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: '#ABF5D1',
-                        },
+                        backgroundColor: '#FFBDAD',
                       },
                       content: [
                         {
@@ -1090,9 +1084,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: '#FFF0B3',
-                        },
+                        backgroundColor: '#FFF0B3',
                       },
                       content: [
                         {
@@ -1195,9 +1187,7 @@ const INIT_CONTENT = JSON.stringify({
                         colspan: 1,
                         rowspan: 1,
                         colwidth: null,
-                        backgroundColor: {
-                          backgroundColor: '#ABF5D1',
-                        },
+                        backgroundColor: '#FFBDAD',
                       },
                       content: [
                         {

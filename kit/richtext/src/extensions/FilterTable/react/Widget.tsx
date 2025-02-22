@@ -112,7 +112,7 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
             data-resizers-table-id={resizersTableId}
           >
             <div className={styles.toolbar} contentEditable={false}>
-              <Toolbar editor={editor} />
+              <Toolbar />
 
               <div className={cn(styles.block, styles.block_right)}>
                 {canBeFiltered && <ButtonAction onClick={() => setIsFilterPresentor((p) => !p)} title={'Filters'} />}

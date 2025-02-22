@@ -1,4 +1,4 @@
-import type { FC, ButtonHTMLAttributes, SVGAttributes } from 'react';
+import type { FC, ButtonHTMLAttributes, SVGAttributes, CSSProperties } from 'react';
 import React from 'react';
 
 export interface BaseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,4 +16,5 @@ export interface ButtonActionProps extends ButtonHTMLAttributes<HTMLButtonElemen
 
 export interface ButtonGhostProps extends ButtonActionProps {
   colorPreset?: 'secondary-colors' | 'primary-colors';
+  height?: CSSProperties['height'];
 }

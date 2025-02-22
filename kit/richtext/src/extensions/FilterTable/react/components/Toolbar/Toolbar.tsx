@@ -1,4 +1,5 @@
 import React, { FC, memo, Fragment } from 'react';
+import { useCurrentEditor } from '@tiptap/react';
 import { ButtonGhost } from '@launch-ui/button';
 import { Dropable } from '@launch-ui/dropable';
 import type { Editor } from '@tiptap/core';
@@ -12,39 +13,46 @@ import { DEFAULT_CAPTIONS } from '../../../../../components/constants';
 
 import styles from './toolbar.module.scss';
 
-const Toolbar: FC<{ editor: Editor }> = memo(({ editor }) => {
+const Toolbar: FC = memo(() => {
   const { isOpen: isBgcOpen = false, closeDropdown: closeBgc, ...bgcRest } = useSelect();
+
+  const { editor } = useCurrentEditor();
+
+  if (!editor) return null;
 
   return (
     <div className={styles.toolbar}>
       <div className={styles.toolbar_block}>
-        {TABLE_EDIT_ITEMS.map(({ id, Icon, command, shouldBeDisabled }) => {
-          if (id.includes('splitter')) return <div key={id} className={styles.splitter} />;
+        {TABLE_EDIT_ITEMS.map(
+          ({
+            id,
+            Icon,
+            command,
+            // shouldBeDisabled
+          }) => {
+            if (id.includes('splitter')) return <div key={id} className={styles.splitter} />;
 
-          return (
-            <ButtonGhost
-              key={id}
-              LeftIcon={Icon}
-              onClick={() => command?.(editor.chain())}
-              disabled={shouldBeDisabled?.(editor)}
-            />
-          );
-        })}
+            return (
+              <ButtonGhost
+                key={id}
+                LeftIcon={Icon}
+                onClick={() => command?.(editor.chain())}
+                // disabled={shouldBeDisabled?.(editor)}
+              />
+            );
+          },
+        )}
       </div>
 
       <div className={styles.toolbar_block}>
         <Dropable
           {...bgcRest}
           offset={[0, 4]}
-          // disabled={!editor.isActive('table')}
-          // TODO: append to richtext container required
-          // appendToId='app-pages-viewport'
           openNode={
             <div>
               <ButtonGhost
                 active={isBgcOpen}
                 LeftIcon={TableColorFill}
-                // disabled={!editor.isActive('table')}
                 onClick={() => setTimeout(() => editor?.commands.focus(), 20)}
               />
             </div>
@@ -59,9 +67,9 @@ const Toolbar: FC<{ editor: Editor }> = memo(({ editor }) => {
                 {group.map(({ id, command, Icon }) => (
                   <ButtonGhost
                     key={id}
+                    height={32}
                     LeftIcon={Icon}
                     // @ts-expect-error
-                    // disabled={!editor.isActive('table')}
                     title={DEFAULT_CAPTIONS[id]}
                     onClick={() => {
                       if (!!editor) command?.(editor.chain());

@@ -39,7 +39,7 @@ const TableHeader = CoreTableHeader.extend<TableHeaderOptions>({
 
       th.append(content);
 
-      if (editor.isEditable && !!keys(extension.storage.rezisers).length) {
+      if (editor.isEditable) {
         const toggler = document.createElement('span');
         toggler.classList.add(styles.widthHandler);
         toggler.contentEditable = 'false';

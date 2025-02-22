@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Corners } from '@launch-ui/shape';
 
-// import { Typography } from '@launch-ui/typography';
-import { RichTextField } from '@launch-ui/richtext';
+import { RichTextField, type RichtextChangeEvent } from '@launch-ui/richtext';
 
-import { CONTENT } from './constants';
+import { INIT_CONTENT } from './constants';
+
+import 'tabulator-tables/dist/css/tabulator.min.css';
 
 const NotesStyled = styled.div`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
@@ -22,12 +23,17 @@ const NotesStyled = styled.div`
   padding: 32px;
 `;
 
-export const Notes: FC = () => {
+// @ts-expect-error
+export const Notes: FC<PropsWithChildren> = () => {
+  const onRichTextChange = useCallback((e: RichtextChangeEvent) => {
+    console.log('onRichTextChange', e.value);
+  }, []);
+
   return (
     <NotesStyled>
       <Corners borderRadius={24} />
 
-      <RichTextField initialValue={CONTENT} />
+      <RichTextField initialValue={INIT_CONTENT} onChange={onRichTextChange} />
     </NotesStyled>
   );
 };

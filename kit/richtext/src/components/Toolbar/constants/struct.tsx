@@ -5,7 +5,7 @@ import { ControlSection } from '../../ControlSection';
 import { GridSelector } from '../../GridSelector';
 
 import { DROPDOWN_PARAMS } from './const';
-import { ITEMS, ADDITIONAL_ITEMS } from './items';
+import { ITEMS, ADDITIONAL_ITEMS, TABLE_ITEMS, TABLE_COLOR_ITEMS } from './items';
 
 const DEFAULT_STRUCT: ToolbarComponentStruct = {
   full: {
@@ -14,7 +14,6 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
         <DropdownWithActiveCommand
           {...props}
           items={ITEMS}
-          // isOpenNodeCaption={false}
           placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.left}
@@ -23,6 +22,30 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
       ),
 
       (props) => <ControlSection {...props} items={ADDITIONAL_ITEMS} />,
+
+      (props) => (
+        <DropdownWithActiveCommand
+          {...props}
+          defaultValue='tableInsert'
+          items={[TABLE_ITEMS]}
+          placement='bottom-end'
+          maxHeight={DROPDOWN_PARAMS.maxHeight}
+          minWidth={DROPDOWN_PARAMS.table}
+          maxWidth={DROPDOWN_PARAMS.table}
+        />
+      ),
+
+      (props) => (
+        <DropdownWithActiveCommand
+          {...props}
+          defaultValue='colorFillLightGreen'
+          items={[TABLE_COLOR_ITEMS]}
+          placement='bottom-end'
+          maxHeight={DROPDOWN_PARAMS.maxHeight}
+          minWidth={DROPDOWN_PARAMS.table}
+          maxWidth={DROPDOWN_PARAMS.table}
+        />
+      ),
 
       (props) => (
         <GridSelector

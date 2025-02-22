@@ -14,7 +14,7 @@ import { $filterTableCtx as WidgetCtx } from './context';
 import { useTable } from './hooks/useTable';
 import { useResizers } from './hooks/useResizers';
 
-import { DEFAULT_TABLE_TEST_ID, TEST_ID_TABLE, TABLE_WIDTH_CSSV } from './constants';
+import { TABLE_WIDTH_CSSV } from './constants';
 import type { UiWidgetProps, TabulatorRef, FilterControls } from './interfaces';
 
 import { SettingsIcon, IconEdit } from './icons';
@@ -39,11 +39,11 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
   const [headingNames, setHeadingNames] = useState<string[]>(initHeadingNames);
 
   const [isFilterPresentor, setIsFilterPresentor] = useState<boolean>(canBeFiltered);
-  const [isSaveFiltersSortBtn, setIsSaveFiltersSortBtn] = useState<boolean>(false);
-  const [isSettings, setIsSettings] = useState<boolean>(false);
+  // const [isSaveFiltersSortBtn, setIsSaveFiltersSortBtn] = useState<boolean>(false);
+  // const [isSettings, setIsSettings] = useState<boolean>(false);
   const [isTableReady, setIsTableReady] = useState<boolean>(false);
 
-  const isEditable = editor.options.editable;
+  // const isEditable = editor.options.editable;
 
   const ctxValue = useMemo(
     () => ({
@@ -79,15 +79,15 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
               </div>
 
               <div className={cn(styles.block, styles.block_right)}>
-                {isSaveFiltersSortBtn && isEditable && (
+                {/* {isSaveFiltersSortBtn && isEditable && (
                   <ButtonAction onClick={() => filterControlsRef.current?.saveSortFiltersToNodeAttrs?.()}>
                     Сохранить фильтры/сортировку
                   </ButtonAction>
-                )}
+                )} */}
 
                 {/* {isEditable && <Actions />} */}
 
-                <ButtonAction LeftIcon={SettingsIcon} onClick={() => setIsSettings(true)} />
+                {/* <ButtonAction LeftIcon={SettingsIcon} onClick={() => setIsSettings(true)} /> */}
 
                 <ButtonAction LeftIcon={IconEdit} onClick={() => setIsFilterPresentor((p) => !p)} />
               </div>

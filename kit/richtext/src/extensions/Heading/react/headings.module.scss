@@ -109,13 +109,13 @@ $headingAligns: (
 
   width: $triggerWidth;
   height: 24px;
-  color: var(--eds-fore-tertiary);
+  color: var(--theme-texts-disabled);
 
   &:hover {
-    color: var(--eds-fore-accent-h);
+    color: var(--theme-primary-400);
   }
 
   &:active {
-    color: var(--eds-fore-accent-a);
+    color: var(--theme-primary-600);
   }
 }

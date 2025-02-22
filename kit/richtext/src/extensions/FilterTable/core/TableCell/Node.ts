@@ -24,7 +24,7 @@ const CoreTableCell = TableCell.extend({
       },
 
       backgroundColor: {
-        default: null,
+        default: 'transparent',
 
         renderHTML: (attrs) => ({
           'data-bgc': attrs['backgroundColor'] || DEFAULT_BACKGROUND_COLOR,

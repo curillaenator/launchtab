@@ -27,7 +27,7 @@
   cursor: ew-resize;
 
   &:hover {
-    background-color: var(--eds-bgc-surface-secondary-a);
+    background-color: var(--theme-backgrounds-lightest);
     color: var(--editor-c);
   }
 }

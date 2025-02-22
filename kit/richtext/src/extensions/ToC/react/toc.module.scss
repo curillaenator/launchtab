@@ -24,7 +24,7 @@
   width: 100%;
   padding: 8px;
 
-  color: var(--eds-fore-primary);
+  color: var(--theme-texts-base);
   font-family: 'SBSans Text', sans-serif;
   font-weight: 600;
   font-size: 16px;
@@ -119,7 +119,7 @@ $tocLevels: (
     flex: 1 1 auto;
     padding: 4px;
 
-    color: var(--eds-fore-primary);
+    color: var(--theme-texts-base);
     line-height: 16px;
     font-weight: 400;
 
@@ -128,11 +128,11 @@ $tocLevels: (
     white-space: nowrap;
 
     &:hover {
-      color: var(--eds-fore-accent-h);
+      color: var(--theme-primary-400);
     }
 
     &:active {
-      color: var(--eds-fore-accent-a);
+      color: var(--theme-primary-600);
     }
   }
 

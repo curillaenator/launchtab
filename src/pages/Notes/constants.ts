@@ -333,10 +333,371 @@ const INIT_CONTENT = JSON.stringify({
           },
           content: [
             {
+              type: 'heading',
+              attrs: {
+                textAlign: 'justify',
+                level: 1,
+                id: null,
+              },
+              content: [
+                {
+                  type: 'text',
+                  text: 'Tables',
+                },
+              ],
+            },
+            {
               type: 'paragraph',
               attrs: {
                 textAlign: 'justify',
               },
+            },
+            {
+              type: 'table',
+              attrs: {
+                columnWidths: [96, 284, 599],
+                filters: [],
+                sort: null,
+                summaryRow: {},
+                calcColumn: null,
+                style: null,
+              },
+              content: [
+                {
+                  type: 'tableRow',
+                  content: [
+                    {
+                      type: 'tableHeader',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'var(--theme-backgrounds-lightest)',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: '#',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'tableHeader',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'var(--theme-backgrounds-lightest)',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'name',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'tableHeader',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'var(--theme-backgrounds-lightest)',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'descr',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'tableRow',
+                  content: [
+                    {
+                      type: 'tableCell',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'transparent',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'dvs',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'tableCell',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'transparent',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'sdbsdb',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'tableCell',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'transparent',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'sdbsd',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'tableRow',
+                  content: [
+                    {
+                      type: 'tableCell',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'transparent',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'sdb',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'tableCell',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'transparent',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'sdb',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'tableCell',
+                      attrs: {
+                        colspan: 1,
+                        rowspan: 1,
+                        colwidth: null,
+                        backgroundColor: 'transparent',
+                      },
+                      content: [
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                          content: [
+                            {
+                              type: 'text',
+                              text: 'I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                        },
+                        {
+                          type: 'blockquote',
+                          content: [
+                            {
+                              type: 'paragraph',
+                              attrs: {
+                                textAlign: 'justify',
+                              },
+                              content: [
+                                {
+                                  type: 'text',
+                                  text: 'Wow, that’s amazing. Good work, boy! 👏 ',
+                                },
+                                {
+                                  type: 'hardBreak',
+                                },
+                                {
+                                  type: 'text',
+                                  text: '— Mom',
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                        {
+                          type: 'paragraph',
+                          attrs: {
+                            textAlign: 'justify',
+                          },
+                        },
+                        {
+                          type: 'orderedList',
+                          attrs: {
+                            start: 1,
+                          },
+                          content: [
+                            {
+                              type: 'listItem',
+                              content: [
+                                {
+                                  type: 'paragraph',
+                                  attrs: {
+                                    textAlign: 'justify',
+                                  },
+                                  content: [
+                                    {
+                                      type: 'text',
+                                      text: 'sdklvlnsdv',
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                            {
+                              type: 'listItem',
+                              content: [
+                                {
+                                  type: 'paragraph',
+                                  attrs: {
+                                    textAlign: 'justify',
+                                  },
+                                  content: [
+                                    {
+                                      type: 'text',
+                                      text: 'sdlkdskbndsb',
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                            {
+                              type: 'listItem',
+                              content: [
+                                {
+                                  type: 'paragraph',
+                                  attrs: {
+                                    textAlign: 'justify',
+                                  },
+                                  content: [
+                                    {
+                                      type: 'text',
+                                      text: 'ds',
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                            {
+                              type: 'listItem',
+                              content: [
+                                {
+                                  type: 'paragraph',
+                                  attrs: {
+                                    textAlign: 'justify',
+                                  },
+                                  content: [
+                                    {
+                                      type: 'text',
+                                      text: 'b',
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
             {
               type: 'paragraph',

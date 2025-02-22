@@ -10,7 +10,7 @@
   width: 100%;
   padding: 8px;
 
-  color: var(--eds-fore-primary);
+  color: var(--theme-texts-base);
   font-weight: 600;
   font-size: 16px;
   line-height: 16px;
@@ -25,7 +25,7 @@
   width: 100%;
   padding: 8px;
 
-  color: var(--eds-fore-tertiary);
+  color: var(--theme-texts-disabled);
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
@@ -44,7 +44,7 @@ $levelOffset: 24px;
   height: 32px;
   padding: 8px;
 
-  color: var(--eds-fore-primary);
+  color: var(--theme-texts-base);
   line-height: 16px;
   font-size: 14px;
   font-weight: 400;

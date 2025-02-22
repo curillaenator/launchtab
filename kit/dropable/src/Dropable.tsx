@@ -18,6 +18,13 @@ export const Dropable: FC<DropableProps> = (props) => {
     animationStyle,
     closeOnItemClick,
     closeDropdown,
+
+    // Reason: guard tippy props from getting into DOM
+    // @ts-expect-error
+    mounted, // eslint-disable-line @typescript-eslint/no-unused-vars
+    // @ts-expect-error
+    openDropdown, // eslint-disable-line @typescript-eslint/no-unused-vars
+
     ...rest
   } = useBaseDropdownProps(props);
 

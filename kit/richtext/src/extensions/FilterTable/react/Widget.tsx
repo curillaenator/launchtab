@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useRef, useState, useId } from 'react';
 import { NodeViewWrapper, useReactNodeView } from '@tiptap/react';
-import { ButtonAction } from '@launch-ui/button';
+import { ButtonGhost } from '@launch-ui/button';
 import cn from 'classnames';
 
 import {
@@ -80,16 +80,15 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
 
               <div className={cn(styles.block, styles.block_right)}>
                 {/* {isSaveFiltersSortBtn && isEditable && (
-                  <ButtonAction onClick={() => filterControlsRef.current?.saveSortFiltersToNodeAttrs?.()}>
-                    Сохранить фильтры/сортировку
-                  </ButtonAction>
+                  <ButtonGhost
+                    title='Сохранить фильтры/сортировку'
+                    onClick={() => filterControlsRef.current?.saveSortFiltersToNodeAttrs?.()}
+                  />
                 )} */}
 
-                {/* {isEditable && <Actions />} */}
+                {/* <ButtonGhost LeftIcon={SettingsIcon} onClick={() => setIsSettings(true)} /> */}
 
-                {/* <ButtonAction LeftIcon={SettingsIcon} onClick={() => setIsSettings(true)} /> */}
-
-                <ButtonAction LeftIcon={IconEdit} onClick={() => setIsFilterPresentor((p) => !p)} />
+                <ButtonGhost LeftIcon={IconEdit} onClick={() => setIsFilterPresentor((p) => !p)} />
               </div>
             </div>
 
@@ -113,7 +112,7 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
               <div />
 
               <div className={cn(styles.block, styles.block_right)}>
-                {canBeFiltered && <ButtonAction onClick={() => setIsFilterPresentor((p) => !p)} title={'Filters'} />}
+                {canBeFiltered && <ButtonGhost onClick={() => setIsFilterPresentor((p) => !p)} title={'Filters'} />}
               </div>
             </div>
 

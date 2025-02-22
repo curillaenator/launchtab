@@ -11,6 +11,7 @@ interface GridSelectorBaseProps {
   id?: string;
   placement?: Placements;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
+  onSelectionUpdateHandlers: React.MutableRefObject<(() => void)[]>;
 }
 
 interface GridSelectorProps extends GridSelectorBaseProps, OmitedBaseDropableProps {}

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { Editor as CoreEditor } from '@tiptap/core';
+import type { Editor as CoreEditor, Editor } from '@tiptap/core';
 import type { Transaction } from '@tiptap/pm/state';
 import type { DropdownProps } from 'components/Dropdown';
 // import type { TocAsideConfig } from 'components/TocAside';
@@ -93,6 +93,15 @@ export interface ToolbarProps {
   // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
 }
 
+// interface ToolbarItemProps<T extends string> extends BaseDropdownItemProps<T> {
+//   dataTestId?: string;
+//   onClick?: (item: BaseDropdownItemProps<T>) => void;
+//   command?: (chain: ChainedCommands) => boolean;
+//   isActive?: (editor: ReactEditor) => boolean;
+//   shouldBeDisabled?: (editor: ReactEditor) => boolean;
+//   disabled?: BaseDropdownItemProps<T>['disabled'];
+// }
+
 export interface UpdatePayload {
   editor: CoreEditor;
   transaction: Transaction;
@@ -103,10 +112,10 @@ export type ToolbarCompositionTypeName = 'full' | 'medium' | 'compact' | 'small'
 export type ToolbarSections = 'left' | 'right';
 
 export interface ToolbarActiveComponentDropdownProps extends Omit<DropdownProps<string>, 'value' | 'onChange'> {
-  richtextViewId: string;
-  defaultValue?: string;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
-  // button?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
+  onSelectionUpdateHandlers: React.MutableRefObject<(() => void)[]>;
+  defaultValue?: string;
+  // toolbarIdForDropdowns: string;
   // tocCfg?: Partial<Pick<TocAsideConfig, 'view' | 'setView'>>;
 }
 

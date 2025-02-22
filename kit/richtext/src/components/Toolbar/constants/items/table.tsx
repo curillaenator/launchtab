@@ -69,6 +69,9 @@ const TABLE_ITEMS: DropdownItemProps<TableCommand>[] = [
     command: (chain) => chain.focus().deleteTable().run(),
     shouldBeDisabled: (editor) => !editor.isActive('table'),
   },
+];
+
+const TABLE_EDIT_ITEMS: DropdownItemProps<TableCommand>[] = [
   {
     id: 'addColumnBefore',
     Icon: IconAddColumnBefore,
@@ -182,4 +185,4 @@ const TABLE_COLOR_ITEMS: DropdownItemProps<TableColorCommand>[] = [
   },
 ];
 
-export { TABLE_ITEMS, TABLE_COLOR_ITEMS };
+export { TABLE_ITEMS, TABLE_COLOR_ITEMS, TABLE_EDIT_ITEMS };

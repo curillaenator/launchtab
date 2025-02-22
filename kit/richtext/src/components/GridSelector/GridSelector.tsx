@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
-import cn from 'classnames';
+// import cn from 'classnames';
 
 import { Dropable } from '@launch-ui/dropable';
 import { ToolbarButton } from '../ToolbarButton';
@@ -20,7 +20,20 @@ import styles from './gridselector.module.scss';
 
 export const GridSelector: FC<GridSelectorProps> = (props) => {
   const { editor } = useCurrentEditor();
-  const { id, disabled, offset = [0, 4], isOpen, closeDropdown, editorContentRef, ...rest } = useDropdown(props);
+
+  const {
+    id,
+    disabled,
+    offset = [0, 4],
+    isOpen,
+    closeDropdown,
+    editorContentRef,
+
+    //guard
+    onSelectionUpdateHandlers,
+
+    ...rest
+  } = useDropdown(props);
 
   const clearBlocksGridCssv = useCallback(() => {
     if (!editor || !editorContentRef?.current) return;
@@ -59,7 +72,6 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
       offset={offset}
       closeDropdown={closeDropdown}
       closeOnItemClick
-      // className={cn(styles.dropableVars, props.className)}
       openNode={
         <div>
           <ToolbarButton

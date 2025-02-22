@@ -33,7 +33,11 @@ export const Notes: FC<PropsWithChildren> = () => {
     <NotesStyled>
       <Corners borderRadius={24} />
 
-      <RichTextField initialValue={INIT_CONTENT} onChange={onRichTextChange} />
+      <RichTextField
+        maxHeight={window.innerHeight - 168 - 56 * 2 - 64 - 4}
+        initialValue={INIT_CONTENT}
+        onChange={onRichTextChange}
+      />
     </NotesStyled>
   );
 };

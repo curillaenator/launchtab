@@ -1,5 +1,9 @@
 import { SyntheticEvent, FC } from 'react';
-import type { ChainedCommands, Editor as CoreEditor } from '@tiptap/core';
+import { Editor as ReactEditor } from '@tiptap/react';
+import type {
+  ChainedCommands,
+  // Editor as CoreEditor
+} from '@tiptap/core';
 import type { DropableProps } from '@launch-ui/dropable';
 
 type DropdownIdProp = string | number;
@@ -18,8 +22,8 @@ interface DropdownItemProps<T extends DropdownIdProp> extends BaseDropdownItemPr
   dataTestId?: string;
   onClick?: (item: BaseDropdownItemProps<T>) => void;
   command?: (chain: ChainedCommands) => boolean;
-  isActive?: (editor: CoreEditor) => boolean;
-  shouldBeDisabled?: (editor: CoreEditor) => boolean;
+  isActive?: (editor: ReactEditor) => boolean;
+  shouldBeDisabled?: (editor: ReactEditor) => boolean;
   disabled?: BaseDropdownItemProps<T>['disabled'];
 }
 
@@ -46,9 +50,7 @@ interface DropdownBaseProps<
 
 interface DropdownProps<T extends DropdownIdProp>
   extends DropdownBaseProps<T, DropdownItemProps<T>>,
-    OmitedBaseDropableProps {
-  chain?: ChainedCommands;
-}
+    OmitedBaseDropableProps {}
 
 interface DropdownIconProps {
   id?: string;

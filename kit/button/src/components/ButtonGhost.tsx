@@ -50,7 +50,15 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
 
   return (
     //@ts-ignore
-    <ButtonGhostStyled {...rest} ref={ref} type={type} active={active} danger={danger}>
+    <ButtonGhostStyled
+      //
+      {...rest}
+      data-ghost-button
+      ref={ref}
+      type={type}
+      active={active}
+      danger={danger}
+    >
       {!!LeftIcon && <LeftIcon />}
 
       {title && (

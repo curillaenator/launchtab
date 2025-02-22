@@ -1,36 +1,47 @@
-import React, { FC } from 'react';
+import React, { FC, useState, memo, useEffect } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
 
 import { ToolbarButton } from '../ToolbarButton';
 
-// TODO: wrong type
 import type { DropdownItemProps } from '../Dropdown';
 
 import styles from './styles.module.scss';
 
 interface ControlSectionProps {
+  id: string;
   items: DropdownItemProps<string>[];
   disabled?: boolean;
+  onSelectionUpdateHandlers: React.MutableRefObject<(() => void)[]>;
 }
 
-const ControlSection: FC<ControlSectionProps> = (props) => {
+const ControlSection: FC<ControlSectionProps> = memo((props) => {
+  const { id, onSelectionUpdateHandlers, items = [], disabled: sectionDisabled } = props;
   const { editor } = useCurrentEditor();
+
+  const [_, setActiveCommand] = useState<number>(Date.now());
+
+  useEffect(() => {
+    onSelectionUpdateHandlers.current.push(() => setActiveCommand(Date.now()));
+  }, [id, setActiveCommand]);
 
   return (
     <div className={styles.toolbarSection}>
-      {(props.items ?? []).map(({ id, Icon, command, isActive, shouldBeDisabled, disabled, dataTestId }) => (
+      {items.map(({ id, Icon, command, isActive, shouldBeDisabled, disabled, dataTestId }) => (
         <ToolbarButton
           key={id}
           dataTestId={dataTestId}
-          disabled={(editor && shouldBeDisabled?.(editor)) || disabled || props.disabled}
+          disabled={(editor && shouldBeDisabled?.(editor)) || disabled || sectionDisabled}
           active={(editor && (isActive?.(editor) ?? editor?.isActive(id))) ?? false}
-          onClick={() => editor && command?.(editor.chain())}
+          onClick={() => {
+            setActiveCommand(Date.now());
+            editor && command?.(editor.chain());
+          }}
         >
           {Icon && <Icon />}
         </ToolbarButton>
       ))}
     </div>
   );
-};
+});
 
 export { ControlSection };

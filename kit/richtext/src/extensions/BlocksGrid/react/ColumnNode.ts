@@ -34,7 +34,7 @@ const BlocksGridColumn = BlocksGridColumnCore.extend({
       dom.classList.add(columnStyles.column);
       dom.style.setProperty(
         '--blocksgrid-column-bdc',
-        `var(--blocksgrid-${node.attrs['blocksGridId']}-${columnIdx}-bdc, var(--blocksgrid-bdc))`,
+        `var(--blocksgrid-${node.attrs['blocksGridId']}-${columnIdx}-bdc, var(--eds-bdc-intence))`,
       );
 
       const contentDOM = document.createElement('div');

@@ -51,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref
 
   return (
     //@ts-ignore
-    <ButtonStyled {...rest} ref={ref}>
+    <ButtonStyled {...rest} ref={ref} data-primary-button>
       <Corners borderRadius={20} />
 
       {IconLeft && <IconLeft />}

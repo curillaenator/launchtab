@@ -83,6 +83,7 @@ export const ButtonAction: FC<ButtonActionProps> = ({
     //@ts-ignore
     <ButtonActionStyled
       {...rest}
+      data-action-button
       isLeftIcon={!!LeftIcon}
       isRightIcon={!!RightIcon}
       active={active}

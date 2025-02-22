@@ -1,8 +1,8 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useId } from 'react';
 import cn from 'classnames';
 import { useCurrentEditor, EditorContent } from '@tiptap/react';
 import { debounce } from 'lodash';
-import { v4 as getViewId } from 'uuid';
+// import { v4 as getViewId } from 'uuid';
 
 import { Toolbar } from './components/Toolbar';
 // import { TocAside, useAsideToc } from './components/TocAside';
@@ -78,7 +78,7 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
   // const hasToc = !!tocCfg?.scrollContainerId && (tocView === 'aside' || tocView === 'popup');
 
   // Toolbar
-  const richtextViewId = getViewId();
+  const richtextViewId = useId();
   const maxHeightWithToolbar = typeof maxHeight === 'number' ? maxHeight - TOOLBAR_HEIGHT : maxHeight;
 
   if (!editor) return null;
@@ -100,7 +100,14 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
         <EditorContent placeholder={placeholder} editor={editor} className={styles.content} ref={editorContentRef} />
       </div>
 
-      {editable && <Toolbar disabled={disabled} richtextViewId={richtextViewId} editorContentRef={editorContentRef} />}
+      {editor?.isEditable && (
+        <Toolbar
+          // editor={editor}
+          disabled={disabled}
+          richtextViewId={richtextViewId}
+          editorContentRef={editorContentRef}
+        />
+      )}
     </div>
   );
 };

@@ -5,7 +5,8 @@ import { noop } from 'lodash';
 import type { UpdatePayload } from '../interfaces';
 
 interface UseToolbarActiveCommandProps {
-  onUpdate?: (props: { editor: UpdatePayload['editor'] }) => unknown;
+  // onUpdate?: (props: { editor: UpdatePayload['editor'] }) => unknown;
+  onUpdate?: () => unknown;
 }
 
 const useToolbarActiveCommand = (props: UseToolbarActiveCommandProps) => {

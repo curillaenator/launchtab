@@ -2,15 +2,14 @@ import React, { Fragment } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
 import { Dropable } from '@launch-ui/dropable';
 
-import { DropdownItem } from './DropdownItem';
-
 import { useDropdownProps } from './hooks/useDropdownProps';
+
+import { DropdownItem } from './DropdownItem';
 import { ToolbarButton } from '../ToolbarButton';
 
 import type { DropdownProps, DropdownIdProp } from './interfaces';
 
 import IconSelect from '../../icons/IconSelect';
-import { DEFAULT_TEST_ID } from '../../constants';
 import styles from './dropdown.module.scss';
 
 export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
@@ -24,7 +23,6 @@ export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
     selectedItem,
     selectedItems,
     onChange,
-    chain,
     isActive,
     openNodeIcon: OpenNodeIcon,
     ...rest
@@ -39,17 +37,13 @@ export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
       openNode={
         <div>
           <ToolbarButton
-            data-testid={rest.dataTestId ? `${rest.dataTestId}.Trigger` : `${DEFAULT_TEST_ID}.Dropdown.Trigger`}
             id={!!id ? `${id}-opennode` : undefined}
             active={isActive}
             disabled={disabled}
-            // onClick={() => setTimeout(() => editor?.commands.focus(), 20)}
-            isDropdownTrigger
+            onClick={() => setTimeout(() => editor?.commands.focus(), 20)}
           >
-            <>
-              {OpenNodeIcon && <OpenNodeIcon />}
-              <IconSelect />
-            </>
+            {OpenNodeIcon && <OpenNodeIcon />}
+            <IconSelect />
           </ToolbarButton>
         </div>
       }
@@ -68,7 +62,7 @@ export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
                 active={selectedItems?.[item.id] || item.id === selectedItem?.id}
                 disabled={item.shouldBeDisabled?.(editor!) || item.disabled || disabled}
                 onClick={() => {
-                  chain && item.command?.(chain);
+                  if (!!editor) item.command?.(editor.chain());
                   onChange(item.id);
                 }}
                 // canTextOverflow={canTextOverflow}

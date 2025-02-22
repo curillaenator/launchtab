@@ -1,18 +1,25 @@
-import React, { FC, useState, useCallback, useMemo } from 'react';
+import React, { FC, useState, useCallback, useMemo, useEffect, memo } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
+import { noop, uniqueId } from 'lodash';
 
 import { Dropdown } from '../Dropdown';
 
-// TODO: thats wrong, should be in current dir
-import { useToolbarActiveCommand } from '../Toolbar/hooks/useToolbarActiveCommand';
-
-//  TODO: thats wrong, should be in current dir
-import type { UpdatePayload, ControlCaption, ToolbarActiveComponentDropdownProps } from '../Toolbar/interfaces';
-
 import { DEFAULT_CAPTIONS } from '../constants';
+import type { ControlCaption, ToolbarActiveComponentDropdownProps } from '../Toolbar/interfaces';
 
-const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = (props) => {
-  const { items, defaultValue = 'paragraph', richtextViewId, ...rest } = props;
+const WATCH_IDS_FOR_ACTIVE_COMMAND = ['h1-h2-h3-h4-h5-h6-paragraph-bull'];
+const WATCH_IDS_FOR_FOCUSED_CONTENT = ['tableInsert-tableDelete'];
+
+const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = memo((props) => {
+  const {
+    id = uniqueId('dd-with-comands'),
+    items,
+    defaultValue = 'paragraph',
+    editorContentRef,
+    onSelectionUpdateHandlers,
+    //
+    ...rest
+  } = props;
 
   const { editor } = useCurrentEditor();
 
@@ -23,28 +30,27 @@ const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = (prop
     [items],
   );
 
-  const onUpdate = useCallback(
-    ({ editor: edtr }: { editor: UpdatePayload['editor'] }) => {
-      const flatten = (items ?? []).flat().filter((v) => v.id !== 'paragraph');
-      const theActiveCommand = flatten.find((v) => v.isActive?.(edtr) ?? edtr?.isActive(v.id))?.id ?? defaultValue;
-      setActiveCommand(theActiveCommand);
-    },
-    [items, defaultValue, setActiveCommand],
-  );
+  const onUpdate = useCallback(() => {
+    if (!editor) return;
 
-  useToolbarActiveCommand({ onUpdate });
+    if (WATCH_IDS_FOR_FOCUSED_CONTENT.includes(id)) {
+      setActiveCommand(Date.now());
+      return;
+    }
 
-  return editor ? (
-    <Dropdown
-      {...rest}
-      items={itemsWithCaptions}
-      value={activeCommand}
-      onChange={setActiveCommand}
-      chain={editor.chain()}
-      closeOnItemClick
-      appendToId={richtextViewId}
-    />
-  ) : null;
-};
+    if (!WATCH_IDS_FOR_ACTIVE_COMMAND.includes(id)) return;
+
+    const flatten = (items ?? []).flat().filter((v) => v.id !== 'paragraph');
+    const theActiveCommand = flatten.find((v) => v.isActive?.(editor) ?? editor?.isActive(v.id))?.id ?? defaultValue;
+
+    setActiveCommand(theActiveCommand);
+  }, [id, editor, items, defaultValue]);
+
+  useEffect(() => {
+    onSelectionUpdateHandlers.current.push(onUpdate);
+  }, [onUpdate]);
+
+  return <Dropdown {...rest} items={itemsWithCaptions} value={activeCommand} onChange={noop} closeOnItemClick />;
+});
 
 export { DropdownWithActiveCommand };

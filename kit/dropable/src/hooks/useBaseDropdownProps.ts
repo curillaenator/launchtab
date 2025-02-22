@@ -4,7 +4,7 @@ import { DropableProps } from '../interfaces';
 
 export const useBaseDropdownProps = (props: DropableProps) => {
   const {
-    trigger = 'mouseenter click',
+    trigger = 'click',
 
     appendToId,
 

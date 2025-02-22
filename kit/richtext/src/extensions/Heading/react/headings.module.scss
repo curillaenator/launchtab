@@ -78,6 +78,7 @@ $headingAligns: (
     cursor: text;
     flex: 0 0 auto;
     max-width: calc(100% - $triggerWidth);
+    min-width: 8px;
     margin: 0 !important;
   }
 

@@ -56,7 +56,7 @@ const useResizers = (options: UseResizersOptions) => {
 
       const startX = event.clientX;
       const startWidth = resizersDomRef.current.querySelectorAll('col')[collIdxViaColspans]?.offsetWidth || 0;
-      const updatedColumnWidths = colgroup.map((_, colIdx) => attrs.columnWidths[colIdx] || MIN_CELL_WIDTH);
+      const updatedColumnWidths = colgroup.map((_, colIdx) => attrs.columnWidths[colIdx] || MIN_CELL_WIDTH * 2);
 
       const handleMouseMove = (moveEvent: MouseEvent) => {
         updatedColumnWidths[collIdxViaColspans] = Math.max(MIN_CELL_WIDTH, startWidth + moveEvent.clientX - startX);
@@ -95,7 +95,7 @@ const useResizers = (options: UseResizersOptions) => {
 
   useEffect(() => {
     if (!resizersDomRef.current) return;
-    updateTableWidthsCssv(colgroup.map((_, colIdx) => attrs.columnWidths[colIdx] || MIN_CELL_WIDTH));
+    updateTableWidthsCssv(colgroup.map((_, colIdx) => attrs.columnWidths[colIdx] || MIN_CELL_WIDTH * 2));
   }, [attrs, colgroup, updateTableWidthsCssv]);
 
   return {

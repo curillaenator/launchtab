@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 import {
   // FilterSelector,
-  // Actions,
+  Toolbar,
   TabulatorTable,
   // TableSettings,
 } from './components';
@@ -112,7 +112,7 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
             data-resizers-table-id={resizersTableId}
           >
             <div className={styles.toolbar} contentEditable={false}>
-              <div />
+              <Toolbar editor={editor} />
 
               <div className={cn(styles.block, styles.block_right)}>
                 {canBeFiltered && <ButtonAction onClick={() => setIsFilterPresentor((p) => !p)} title={'Filters'} />}

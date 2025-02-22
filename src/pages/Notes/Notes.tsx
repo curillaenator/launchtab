@@ -11,6 +11,15 @@ import { INIT_CONTENT } from './constants';
 import 'tabulator-tables/dist/css/tabulator.min.css';
 
 const NotesStyled = styled.div`
+  --dd-pd: 8px 8px;
+  --dd-bdw: 1px;
+  --dd-scrl-pd: 0 8px 0 0;
+  --dd-bdrs: 6px;
+
+  --dd-bgc: var(--theme-backgrounds-lightest);
+  --dd-bdc: var(--theme-backgrounds-dark);
+  --dd-drop-sh: 0 0 0 0 transparent;
+
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
   --form-bdrs: calc(24px * 1.25 + 3px);

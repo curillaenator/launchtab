@@ -1,4 +1,4 @@
 export * from './FilterSelector';
-// export * from './Actions';
+export * from './Toolbar';
 export * from './TabulatorTable';
 // export * from './TableSettings';

@@ -31,18 +31,18 @@ import { Color } from '@tiptap/extension-color';
 import { BulletList } from '@tiptap/extension-bullet-list';
 import { ListItem } from '@tiptap/extension-list-item';
 import { OrderedList } from '@tiptap/extension-ordered-list';
+import { TaskItem } from './extensions/TaskItem';
 
 import { TaskList } from '@tiptap/extension-task-list';
-import { TaskItem } from '@tiptap/extension-task-item';
 
 import { UniqueId } from './extensions/UniqId/UniqueId';
 
 import { Heading } from './extensions/Heading';
 
 import { Emoji } from './extensions/Emoji';
-import { ToC } from './extensions/ToC';
-import { DrawIO, getDrawioEditorURL } from './extensions/DrawIO';
-import { BlocksGrid, BlocksGridColumn } from './extensions/BlocksGrid';
+import { ToC, TOC_EXTENSION_NAME } from './extensions/ToC';
+import { DrawIO, getDrawioEditorURL, DRAWIO_EXTENSION_NAME } from './extensions/DrawIO';
+import { BlocksGrid, BlocksGridColumn, EXTENSION_NAME as GRIDS_EXTENSION_NAME } from './extensions/BlocksGrid';
 
 import { Draggable } from './extensions/Draggable';
 import { BackspaceDeletePreventerPlugin } from './extensions/BackspaceDelete';
@@ -109,7 +109,7 @@ const STATIC_EXTS = [
   DrawIO.configure({ drawIoLink: getDrawioEditorURL(DRAWIO_SERVICE_URL) }),
 
   BackspaceDeletePreventerPlugin,
-  Draggable.configure({ types: ['fileLink'] }),
+  Draggable.configure({ types: [DRAWIO_EXTENSION_NAME, GRIDS_EXTENSION_NAME, TOC_EXTENSION_NAME] }),
 ];
 
 function getExtensions(options: RichTextExtensionsOptions) {
@@ -122,7 +122,7 @@ function getExtensions(options: RichTextExtensionsOptions) {
   exts.push(BlocksGrid);
   exts.push(BlocksGridColumn.configure({ editorContentRef }));
 
-  exts.push(UniqueId.configure({ enableEditorOnChangeFn, types: ['heading', 'paragraph'] }));
+  exts.push(UniqueId.configure({ enableEditorOnChangeFn, types: ['heading'] }));
 
   return exts;
 }

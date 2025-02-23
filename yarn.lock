@@ -3763,6 +3763,7 @@ __metadata:
   dependencies:
     "@launch-ui/button": 1.0.0
     "@launch-ui/dropable": 1.0.0
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
     "@tiptap/core": 2.11.5
@@ -3816,6 +3817,7 @@ __metadata:
     uuid: 11.0.4
   peerDependencies:
     react: "*"
+    styled-components: "*"
   languageName: unknown
   linkType: soft
 

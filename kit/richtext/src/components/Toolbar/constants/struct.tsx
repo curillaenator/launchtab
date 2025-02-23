@@ -19,6 +19,7 @@ import {
   TEXT_COLOR_CLEAR,
   BACKGROUND_COLOR_ITEMS,
   TEXT_HIGHLIGHT_CLEAR,
+  TASK_LIST_ITEMS,
 } from './items';
 
 import IconTableInsert from '../../../icons/IconTableInsert';
@@ -69,7 +70,6 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
         />
       ),
 
-      // (props) => <ControlSection {...props} id='text-align-commands' items={TEXT_ALIGN_ITEMS} />,
       (props) => (
         <DropdownWithActiveCommand
           {...props}
@@ -92,7 +92,10 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           maxWidth={DROPDOWN_PARAMS.blocksGrid}
         />
       ),
+
+      (props) => <ControlSection {...props} id='task-list-commands' items={TASK_LIST_ITEMS} />,
     ],
+
     right: [
       (props) => <ControlSection {...props} id='additional-items-commands' items={ADDITIONAL_ITEMS} />,
 

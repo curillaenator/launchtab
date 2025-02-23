@@ -7,6 +7,8 @@ export { TOC_ITEMS } from './toc';
 export { TEXT_ALIGN_ITEMS } from './textAlight';
 export { TEXT_FORMAT_ITEMS } from './textFormat';
 
+export { TASK_LIST_ITEMS } from './taskList';
+
 export {
   COLOR_ITEMS,
   BACKGROUND_COLOR_ITEMS,
@@ -20,4 +22,3 @@ export {
 // export { TAB_ITEMS } from './idents';
 // export { PLANT_ITEMS } from './plant';
 // export { FRAGMENT_ITEMS } from './fragment';
-// export { TASK_LIST_ITEMS } from './taskList';

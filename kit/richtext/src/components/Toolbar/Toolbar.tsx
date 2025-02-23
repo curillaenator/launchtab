@@ -19,7 +19,7 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
   // composition
   // } = useToolbarObserver({});
 
-  const { left } = DEFAULT_STRUCT.full;
+  const { left, right } = DEFAULT_STRUCT.full;
 
   const onSelectionUpdateHandlers = useRef<(() => void)[]>([]);
 
@@ -68,10 +68,16 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
       </div>
 
       <div className={cn(styles.toolbarBlock, styles[`_full`])}>
-        {/* {right.map((Component, i) => {
-          const key = UNIQUE_KEYS.right[i];
-          return <Component key={key} disabled={props.disabled} tocCfg={props.tocCfg} />;
-        })} */}
+        {right.map((Component) => {
+          return (
+            <Component
+              key={getKey()}
+              disabled={disabled}
+              editorContentRef={editorContentRef}
+              onSelectionUpdateHandlers={onSelectionUpdateHandlers}
+            />
+          );
+        })}
       </div>
     </div>
   );

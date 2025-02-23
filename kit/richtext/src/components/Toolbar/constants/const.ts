@@ -6,13 +6,13 @@ const TOOLBAR_MIN_SMALL_WIDTH = 450;
 // TODO: wrong naming, initially this assoc aimed to store real CSS properties.
 const DROPDOWN_PARAMS = {
   maxHeight: 360,
-  left: 268,
-  textAlign: 268,
-  textFormat: 268,
-  table: 268,
-  color: 230,
+  left: 220,
+  textAlign: 220,
+  textFormat: 220,
+  table: 220,
+  color: 220,
   blocksGrid: 336,
-  macros: 297,
+  macros: 220,
 } as const;
 
 export {

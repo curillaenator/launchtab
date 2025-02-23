@@ -1,25 +1,23 @@
 import React, { FC, useState, useCallback, useMemo, useEffect, memo } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
-import { noop, uniqueId } from 'lodash';
+import { noop } from 'lodash';
 
 import { Dropdown } from '../Dropdown';
 
 import { DEFAULT_CAPTIONS } from '../constants';
 import type { ControlCaption, ToolbarActiveComponentDropdownProps } from '../Toolbar/interfaces';
 
-const WATCH_IDS_FOR_ACTIVE_COMMAND = ['text-items-commands'];
+const WATCH_IDS_FOR_ACTIVE_COMMAND = [
+  'text-items-commands',
+  'text-align-commands',
+  'text-color-commands',
+  'text-background-commands',
+];
+
 const WATCH_IDS_FOR_FOCUSED_CONTENT = ['table-items-commands', 'macros-items-commands'];
 
 const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = memo((props) => {
-  const {
-    id,
-    items,
-    defaultValue,
-    editorContentRef,
-    onSelectionUpdateHandlers,
-    //
-    ...rest
-  } = props;
+  const { id, items, defaultValue, editorContentRef, onSelectionUpdateHandlers, ...rest } = props;
 
   const { editor } = useCurrentEditor();
 

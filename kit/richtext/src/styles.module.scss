@@ -155,7 +155,7 @@
 .dropableVars {
   --dd-pd: 8px 8px;
   --dd-bdw: 1px;
-  --dd-scrl-pd: 0 8px 0 0;
+  --dd-scrl-pd: 0;
   --dd-bdrs: 6px;
 
   --dd-bgc: var(--theme-backgrounds-lightest);
@@ -343,7 +343,7 @@
 
 .editor hr {
   height: 1px;
-  background-color: var(--theme-primary-500);
+  background-color: var(--theme-backgrounds-dark);
   border: none;
   margin: 16px 0;
 }

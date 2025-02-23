@@ -11,7 +11,7 @@ export const DropdownItem: FC<ToolbarItemProps> = (props) => {
   const { clickHandler } = useClickHandler(() => onClick?.(props), closeOnClick);
 
   return (
-    <ToolbarButton data-itemid={id} active={active} disabled={disabled} onClick={clickHandler}>
+    <ToolbarButton data-itemid={id} active={active} disabled={disabled} onClick={clickHandler} fullwidth>
       {Icon && <Icon />}
       <div className={styles.itemCaption}>{caption}</div>
     </ToolbarButton>

@@ -1,15 +1,16 @@
 .button {
+  width: fit-content;
   height: 32px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
   padding: 0;
   margin: 0;
 
-  font-family: 'SB Sans Text', sans-serif;
+  font-family: inherit;
   font-size: 14px;
   line-height: 24px;
 
@@ -17,32 +18,36 @@
   background-color: transparent;
 
   &:hover {
-    background-color: #2a72f81e;
+    background-color: var(--theme-primary-100);
   }
 
   &:active {
-    background-color: #3f81fd33;
+    background-color: var(--theme-primary-200);
   }
 
-  &.active:not(.disabled) {
-    background-color: #3f81fd33;
+  &_fullwidth {
+    width: 100%;
+  }
+
+  &_active:not(.disabled) {
+    background-color: var(--theme-primary-100);
 
     &:hover {
-      background-color: #3f81fd33;
+      background-color: var(--theme-primary-100);
     }
 
     &:active {
-      background-color: #3f81fd33;
+      background-color: var(--theme-primary-100);
     }
   }
-}
 
-.disabled {
-  pointer-events: none;
-  background-color: transparent;
-  color: var(--editor-disabled);
+  &_disabled {
+    pointer-events: none;
+    background-color: transparent;
+    color: var(--editor-disabled);
 
-  svg path {
-    stroke: var(--editor-disabled);
+    svg path {
+      stroke: var(--editor-disabled);
+    }
   }
 }

@@ -43,7 +43,7 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
       className={styles.content}
       style={{ minWidth, maxWidth, maxHeight, ...animationStyle }}
     >
-      <div className={styles.scroll} style={{ minWidth, maxWidth, maxHeight }}>
+      <div className={styles.scroll}>
         <DropableContext.Provider value={contextValue}>{children}</DropableContext.Provider>
       </div>
     </Component>

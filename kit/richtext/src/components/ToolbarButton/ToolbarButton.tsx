@@ -5,15 +5,16 @@ import type { ToolbarButtonProps } from './interfaces';
 import styles from './ToolbarButton.module.scss';
 
 export const ToolbarButton: FC<ToolbarButtonProps> = (props) => {
-  const { type = 'button', children, className, active = false, ...rest } = props;
+  const { type = 'button', children, className, active = false, fullwidth, ...rest } = props;
 
   return (
     <button
       {...rest}
       type={type}
       className={cns(styles.button, className, {
-        [styles.active]: active,
-        [styles.disabled]: props.disabled,
+        [styles.button_fullwidth]: fullwidth,
+        [styles.button_active]: active,
+        [styles.button_disabled]: props.disabled,
       })}
     >
       {children}

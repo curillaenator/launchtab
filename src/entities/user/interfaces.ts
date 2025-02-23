@@ -6,6 +6,7 @@ interface LaunchStoreUser {
   username: string | null;
   email: string | null;
   avatar: string | null;
+  spaces: string[];
 }
 
 interface LaunchUserData extends LaunchStoreUser {

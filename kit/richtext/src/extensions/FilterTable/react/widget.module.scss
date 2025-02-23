@@ -11,6 +11,16 @@
   :global(.tabulator-col-title-holder) {
     min-height: 100%;
   }
+
+  .toolbar {
+    opacity: 0;
+  }
+
+  &:hover {
+    .toolbar {
+      opacity: 1;
+    }
+  }
 }
 
 .toolbar {

@@ -44,7 +44,6 @@ const AsideRoutesList = styled.div`
   }
 `;
 
-//@ts-expect-error
 const RouteLinkStyled = styled(NavLink)`
   cursor: pointer;
   display: flex;

@@ -93,7 +93,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
         />
       ),
 
-      (props) => <ControlSection {...props} id='task-list-commands' items={TASK_LIST_ITEMS} />,
+      // (props) => <ControlSection {...props} id='task-list-commands' items={TASK_LIST_ITEMS} />,
     ],
 
     right: [
@@ -104,7 +104,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           {...props}
           id='macros-items-commands'
           icon={AddMacrosIcon}
-          items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS]]}
+          items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS]]}
           placement='bottom-end'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}

@@ -37,7 +37,7 @@ const Toolbar: FC = memo(() => {
                 key={id}
                 LeftIcon={Icon}
                 onClick={() => command?.(editor.chain())}
-                // disabled={shouldBeDisabled?.(editor)}
+                className={styles.button}
               />
             );
           },
@@ -54,6 +54,7 @@ const Toolbar: FC = memo(() => {
                 active={isBgcOpen}
                 LeftIcon={TableColorFill}
                 onClick={() => setTimeout(() => editor?.commands.focus(), 20)}
+                className={styles.button}
               />
             </div>
           }
@@ -69,7 +70,6 @@ const Toolbar: FC = memo(() => {
                     key={id}
                     height={32}
                     LeftIcon={Icon}
-                    // disabled={shouldBeDisabled?.(editor)}
                     // @ts-expect-error
                     title={DEFAULT_CAPTIONS[id]}
                     onClick={() => {

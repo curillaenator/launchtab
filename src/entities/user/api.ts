@@ -1,5 +1,6 @@
 import { signOut, signInWithPopup, GoogleAuthProvider, type User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { omit } from 'lodash';
 
 import { fsdb, auth } from '@src/api/firebase';
 
@@ -38,9 +39,22 @@ const getUserData = async (user: FirebaseUser | null) => {
   }
 
   const { uid, displayName, email, photoURL } = user;
-  const optimisticUserData: LaunchStoreUser = { uid, username: displayName, email, avatar: photoURL };
-  const optimisticDbData: LaunchUserData = { ...optimisticUserData, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
-  const localDbData: LaunchUserData = { ...optimisticUserData, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
+
+  const optimisticUserData: LaunchStoreUser = { uid, username: displayName, email, avatar: photoURL, spaces: [] };
+
+  const optimisticDbData: LaunchUserData = {
+    ...optimisticUserData,
+    pages: DEFAULT_PAGES,
+    settings: DEFAULT_SETTINGS,
+    spaces: [],
+  };
+
+  const localDbData: LaunchUserData = {
+    ...optimisticUserData,
+    pages: DEFAULT_PAGES,
+    settings: DEFAULT_SETTINGS,
+    spaces: [],
+  };
 
   setUser(optimisticUserData);
 
@@ -65,7 +79,7 @@ const getUserData = async (user: FirebaseUser | null) => {
 
   // optimistic update data if no db record presented (first login)
   if (!userSnap.exists()) {
-    setUser(optimisticUserData);
+    setUser(omit(optimisticUserData, 'settings', 'pages'));
     setSettings(optimisticDbData.settings);
     setTabsWithoutDbUpdate(optimisticDbData.pages);
     setAppLoading(false);
@@ -78,7 +92,7 @@ const getUserData = async (user: FirebaseUser | null) => {
   const dbUserData = userSnap.data() as LaunchUserData;
 
   // TODO: check for state update requred via localStorage data deep compare
-  setUser(dbUserData);
+  setUser(omit(dbUserData, 'settings', 'pages'));
   setSettings(dbUserData.settings);
   setTabsWithoutDbUpdate(dbUserData.pages);
   setAppLoading(false);

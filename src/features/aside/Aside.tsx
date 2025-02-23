@@ -1,12 +1,17 @@
 import React, { FC } from 'react';
-import type { NavLinkProps } from 'react-router-dom';
+
 import { useUnit as useEffectorUnit } from 'effector-react';
+import { useMatch } from 'react-router-dom';
 
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
+
+import { NotesSelector } from './NotesSelector';
 import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './aside.styled';
 
 import { $appStore } from '@src/entities/app';
+
+import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
 
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
@@ -18,8 +23,12 @@ import StarIcon from '@src/assets/svg/star.svg';
 export const Aside: FC = () => {
   const { isAsideOpen } = useEffectorUnit($appStore);
 
+  const { pageRef } = useThemeToCssv();
+
+  const notesRouteMatch = useMatch('/notes');
+
   return (
-    <AsideStyled isAsideOpen={isAsideOpen}>
+    <AsideStyled isAsideOpen={isAsideOpen} ref={pageRef}>
       <Corners borderRadius={24} corners={['tr', 'br']} />
 
       <AsideHeader>
@@ -49,10 +58,12 @@ export const Aside: FC = () => {
           </Typography>
         </RouteLinkStyled>
 
+        {notesRouteMatch && <NotesSelector />}
+
         <RouteLinkStyled
           to='https://google.com'
           target='_blank'
-          className={(({ isActive }) => (isActive ? 'active-route' : '')) as NavLinkProps['className']}
+          // className={(({ isActive }) => (isActive ? 'active-route' : '')) as NavLinkProps['className']}
         >
           <GoogleIcon />
 

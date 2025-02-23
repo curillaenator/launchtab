@@ -24,7 +24,7 @@ const useThemeToCssv = () => {
 
     cssv.current.forEach((cssvVal, cssvKey) => pageRef.current?.style.setProperty(cssvKey, cssvVal));
 
-    console.log('traverseTheme', cssv.current.entries());
+    // console.log('traverseTheme', cssv.current.entries());
   }, [theme]);
 
   return {

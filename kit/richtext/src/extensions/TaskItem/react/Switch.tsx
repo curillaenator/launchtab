@@ -83,7 +83,7 @@ export const Switch: FC<ITextInput> = (props) => {
       onClick={() => onChange(!value)}
       onMouseDown={(e) => e.preventDefault()}
     >
-      <Corners borderRadius={14} stroke={2} />
+      <Corners borderRadius={14} stroke={1} />
 
       <div className='switch-toggler'>
         <Shape className='switch-toggler-shape' borderRadius={20} />

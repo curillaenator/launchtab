@@ -2,6 +2,8 @@ export { TEXT_ITEMS as ITEMS } from './text';
 export { ADDITIONAL_TEXT_ITEMS as ADDITIONAL_ITEMS } from './additional';
 export { TABLE_ITEMS } from './table';
 export { DRAW_IO_ITEMS } from './drawio';
+export { TOC_ITEMS } from './toc';
+
 // export { TEXT_ALIGN_ITEMS } from './textAlight';
 // export { TEXT_FORMAT_ITEMS } from './textFormat';
 // export {
@@ -18,5 +20,4 @@ export { DRAW_IO_ITEMS } from './drawio';
 // export { PLANT_ITEMS } from './plant';
 // export { FRAGMENT_ITEMS } from './fragment';
 // export { INCLUDE_ITEMS } from './include';
-// export { TOC_ITEMS } from './toc';
 // export { TASK_LIST_ITEMS } from './taskList';

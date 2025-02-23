@@ -1,3 +1,0 @@
-const TOC_MAX_TITLE_LENGTH = 128;
-
-export { TOC_MAX_TITLE_LENGTH };

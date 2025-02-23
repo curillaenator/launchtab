@@ -7,7 +7,7 @@ import { debounce } from 'lodash';
 import { Toolbar } from './components/Toolbar';
 // import { TocAside, useAsideToc } from './components/TocAside';
 
-import { DEFAULT_TEST_ID, TOOLBAR_HEIGHT } from './constants';
+import { TOOLBAR_HEIGHT } from './constants';
 
 import type { RichtextContainerProps } from './interfaces';
 
@@ -15,8 +15,8 @@ import styles from './styles.module.scss';
 import 'highlight.js/styles/github.css';
 
 interface RichTextViewProps extends RichtextContainerProps {
-  internalScrollContainerId: string;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
+  internalScrollContainerId: string;
 }
 
 export const RichTextView: FC<RichTextViewProps> = (props) => {
@@ -24,12 +24,9 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
     internalScrollContainerId,
     editorContentRef,
 
-    dataTestId = DEFAULT_TEST_ID,
-
     disabled = false,
     editable = true,
 
-    // initialValue,
     placeholder,
 
     maxHeight = 'auto',
@@ -37,10 +34,6 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
 
     onEditorInstanceChange,
     onEditorContentWidthChange,
-
-    // onChange,
-
-    // toolStruct,
   } = props;
 
   const { editor } = useCurrentEditor();
@@ -86,7 +79,6 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
   return (
     <div
       id={richtextViewId}
-      data-testid={dataTestId}
       className={cn(styles.dropableVars, styles.editor, styles._theme_eds, styles.editor_toolbarTop, className, {
         [styles._disabled]: disabled,
         [styles.editor_isFocused]: editor?.isEditable && editor?.isFocused,

@@ -1,1 +1,1 @@
-export { TocNode } from './react/TocNode';
+export { TocNode as ToC } from './TocNode';

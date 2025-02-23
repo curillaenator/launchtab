@@ -6,7 +6,7 @@ import { ControlSection } from '../../ControlSection';
 import { GridSelector } from '../../GridSelector';
 
 import { DROPDOWN_PARAMS } from './const';
-import { ITEMS, ADDITIONAL_ITEMS, TABLE_ITEMS, DRAW_IO_ITEMS } from './items';
+import { ITEMS, ADDITIONAL_ITEMS, TABLE_ITEMS, DRAW_IO_ITEMS, TOC_ITEMS } from './items';
 
 import IconTableInsert from '../../../icons/IconTableInsert';
 import { AddMacrosIcon } from '../../../icons/AddMacrosIcon';
@@ -34,7 +34,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           {...props}
           id='macros-items-commands'
           icon={AddMacrosIcon}
-          items={[DRAW_IO_ITEMS]}
+          items={[TOC_ITEMS, DRAW_IO_ITEMS]}
           placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}

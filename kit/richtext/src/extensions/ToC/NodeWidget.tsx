@@ -8,17 +8,13 @@ import cn from 'classnames';
 import type { Transaction } from '@tiptap/pm/state';
 import type { ReplaceStep } from '@tiptap/pm/transform';
 
-import { ButtonAction } from '@launch-ui/button';
+import { ButtonGhost } from '@launch-ui/button';
 
-import { getHeadingScrollHash } from '../../Heading';
-
+import { getHeadingScrollHash } from '../Heading';
 import { DeleteIcon, CarretDownIcon, LinkIcon } from './icons';
 
 import { TOC_MAX_TITLE_LENGTH } from './constants';
-
-import type { TocReactNodeViewProps } from './interfaces';
-import type { TocNodeAttributes, TocNodeItem } from '../core/interfaces';
-
+import type { TocReactNodeViewProps, TocNodeAttributes, TocNodeItem } from './interfaces';
 import styles from './toc.module.scss';
 
 const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
@@ -36,16 +32,15 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
       const { maxLevel, minLevel } = nodeAttrs;
 
       ed.state.doc.descendants((descNode, descPos) => {
-        const isHeadingElement = descNode.type.name === 'heading' && !!descNode.attrs['id'];
+        // const isHeadingElement = descNode.type.name === 'heading' && !!descNode.attrs['id'];
+        const isHeadingElement = descNode.type.name === 'heading';
+
         if (!isHeadingElement) return;
 
         const isInRange = descNode.attrs['level'] >= minLevel && descNode.attrs['level'] <= maxLevel;
         if (!isInRange) return;
 
-        toc.push({
-          node: descNode,
-          pos: descPos,
-        });
+        toc.push({ node: descNode, pos: descPos });
       });
 
       setTocItems(toc);
@@ -93,15 +88,13 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
 
         {editor.isEditable && (
           <div className={styles.tocbar}>
-            <ButtonAction
+            <ButtonGhost
               LeftIcon={CarretDownIcon}
               onClick={() => setCollapsed((prev) => !prev)}
-              className={cn(styles.carretLeft, {
-                [styles.carretLeft_collapsed]: collapsed,
-              })}
+              className={cn(styles.carretLeft, { [styles.carretLeft_collapsed]: collapsed })}
             />
 
-            <ButtonAction LeftIcon={DeleteIcon} onClick={() => deleteNode()} />
+            <ButtonGhost LeftIcon={DeleteIcon} onClick={() => deleteNode()} />
           </div>
         )}
       </div>
@@ -136,9 +129,9 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
                 {headingContent}
               </span>
 
-              <ButtonAction
+              <ButtonGhost
                 LeftIcon={LinkIcon}
-                // className={cn(buttonStyles.button_secondary_alt, buttonStyles.button_size_24, styles.tocitemAction)}
+                height={24}
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();

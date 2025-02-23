@@ -24,14 +24,11 @@ interface RichTextExtensionsOptions {
 }
 
 interface RichTextExtensionsConfig {
-  dataTestId: string;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   internalScrollContainerId: string;
 }
 
 interface RichtextContainerProps {
-  dataTestId?: string;
-
   disabled?: boolean;
   editable?: boolean;
 

@@ -1,54 +1,26 @@
 import React, { FC, useId, useMemo, useRef } from 'react';
-import { setDefaultOptions } from 'date-fns';
-import { ru } from 'date-fns/locale';
-
 import { useEditor, EditorContext } from '@tiptap/react';
+import { setDefaultOptions } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
 import { RichTextView } from './RichTextView';
 
-// import { useCanUploadDrawIo, useEnableOnChageFn } from './hooks';
+import { useEnableOnChageFn } from './hooks';
 import { isContentSemiEmpty, parseJSONWithoutError } from './utils';
-
 import { getExtensions } from './getExtensions';
-// import { getStruct } from './getStruct';
 
 import type { RichtextContainerProps } from './interfaces';
-import { DEFAULT_TEST_ID } from './constants';
 
-setDefaultOptions({ locale: ru });
+setDefaultOptions({ locale: enUS });
 
 const RichTextContainer: FC<RichtextContainerProps> = (props) => {
-  const {
-    dataTestId = DEFAULT_TEST_ID,
-
-    // disabled = false,
-    editable = true,
-
-    initialValue,
-    // placeholder,
-
-    // maxHeight = 'auto',
-    // className,
-
-    // onEditorInstanceChange,
-    // onEditorContentWidthChange,
-
-    onChange,
-
-    // toolStruct,
-
-    extensionsOptions,
-  } = props;
+  const { extensionsOptions, editable = true, initialValue, onChange } = props;
 
   const editorContentRef = useRef<HTMLDivElement | null>(null);
 
   const internalScrollContainerId = useId();
 
-  // const tocNodeConfig = tocCfg?.scrollContainerId
-  //   ? { title: tocCfg?.title || '', scrollContainerId: tocCfg.scrollContainerId }
-  //   : { title: tocCfg?.title || '', scrollContainerId: internalScrollContainerId };
-
-  // const { isOnChangeEnabledRef, enableEditorOnChangeFn } = useEnableOnChageFn();
+  const { isOnChangeEnabledRef, enableEditorOnChangeFn } = useEnableOnChageFn();
 
   // const canUploadDrawIo = useCanUploadDrawIo(drawioCfg);
   // const canHandlePlantUml = useCanHandlePlantUml(plantUmlCfg);
@@ -58,19 +30,15 @@ const RichTextContainer: FC<RichtextContainerProps> = (props) => {
       editable,
 
       extensions: getExtensions({
+        enableEditorOnChangeFn,
         extensionsOptions,
-
-        config: {
-          dataTestId,
-          editorContentRef,
-          internalScrollContainerId,
-        },
+        config: { editorContentRef, internalScrollContainerId },
       }),
 
       content: parseJSONWithoutError(initialValue),
 
       onUpdate: (v) => {
-        // if (!isOnChangeEnabledRef.current) return;
+        if (!isOnChangeEnabledRef.current) return;
 
         const json = v.editor.getJSON();
 
@@ -81,16 +49,10 @@ const RichTextContainer: FC<RichtextContainerProps> = (props) => {
           // синтаксисом (например список через ввод символа * + space ). В момент преобразования вводимых символов в
           // элементы доукумента текстовый контент документа исчезает, но контент не пуст
           isSemiEmpty: isContentSemiEmpty(json),
-
-          // hasOnlyImage: isOnlyImageContent(json),
-
-          // hasText: !!v.editor.getText().trim().length,
-
-          // isEditable: editable,
         });
       },
     },
-    [editable, initialValue, onChange],
+    [editable, initialValue, onChange, enableEditorOnChangeFn],
   );
 
   const editorCTX = useMemo(() => ({ editor }), [editor]);

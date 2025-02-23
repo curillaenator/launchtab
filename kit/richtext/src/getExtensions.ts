@@ -34,6 +34,8 @@ import { OrderedList } from '@tiptap/extension-ordered-list';
 import { TaskList } from '@tiptap/extension-task-list';
 import { TaskItem } from '@tiptap/extension-task-item';
 
+import { UniqueId } from './extensions/UniqId/UniqueId';
+import { ToC } from './extensions/ToC';
 import { DrawIO, getDrawioEditorURL } from './extensions/DrawIO';
 import { BlocksGrid, BlocksGridColumn } from './extensions/BlocksGrid';
 import { Heading } from './extensions/Heading';
@@ -105,24 +107,22 @@ const CORE_EXTENSIONS = [
 
 interface GetExtensionsArgs {
   config: RichTextExtensionsConfig;
+  enableEditorOnChangeFn: (enabled?: boolean) => void;
   extensionsOptions?: RichTextExtensionsOptions;
 }
 
 function getExtensions(args: GetExtensionsArgs) {
-  const {
-    // extensionsOptions,
-    config,
-  } = args;
-  const {
-    dataTestId,
-    // internalScrollContainerId,
-    editorContentRef,
-  } = config;
+  const { enableEditorOnChangeFn } = args;
+  const { internalScrollContainerId, editorContentRef } = args.config;
 
   const extensions = [...CORE_EXTENSIONS];
 
-  extensions.push(BlocksGrid.configure({ dataTestId: `${dataTestId}.BlocksGrid` }));
-  extensions.push(BlocksGridColumn.configure({ dataTestId: `${dataTestId}.BlocksGridColumn`, editorContentRef }));
+  extensions.push(ToC.configure({ scrollContainerId: internalScrollContainerId }));
+
+  extensions.push(BlocksGrid.configure({ dataTestId: 'BlocksGrid' }));
+  extensions.push(BlocksGridColumn.configure({ dataTestId: 'BlocksGridColumn', editorContentRef }));
+
+  extensions.push(UniqueId.configure({ enableEditorOnChangeFn, types: ['heading', 'paragraph'] }));
 
   return extensions;
 }

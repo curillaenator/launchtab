@@ -27,6 +27,13 @@ const HeadingReactNode = Heading.extend<ReactHeadingConfig>({
 
       id: {
         default: null,
+        parseHTML: (element) => element.getAttribute('data-id'),
+        renderHTML: (attributes) => {
+          if (!attributes.id) {
+            return {};
+          }
+          return { id: attributes.id };
+        },
       },
     };
   },

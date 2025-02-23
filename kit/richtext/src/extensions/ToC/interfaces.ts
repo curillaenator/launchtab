@@ -1,4 +1,5 @@
-import type { Node as ProseMirrorNode } from '@tiptap/pm/model';
+import type { Node as ProseMirrorNode } from 'prosemirror-model';
+import type { Node as ExtensionNode, Editor as CoreEditor } from '@tiptap/core';
 
 interface TocNodeItem {
   /** ProseMirrorNode */
@@ -10,7 +11,6 @@ interface TocNodeItem {
 }
 
 interface TocNodeConfig {
-  dataTestId?: string;
   /** заголовок для обоих представлений ТоС - aside, proseMirror node */
   title?: string;
   /** id контейнера с прокручивающимся контентом, в котором должен произойти скролл при нажатии на элемент ТоС */
@@ -32,4 +32,18 @@ interface TocNodeAttributes {
   timestamp?: number;
 }
 
-export type { TocNodeConfig, TocNodeAttributes, TocNodeItem };
+interface ProseMirrorTocNode extends ProseMirrorNode {
+  attrs: TocNodeAttributes;
+}
+
+interface TocReactNodeViewProps {
+  extension: ExtensionNode<TocNodeConfig, {}>;
+  node: ProseMirrorTocNode;
+  editor: CoreEditor;
+  selected: boolean;
+  deleteNode: () => void;
+  updateAttributes: (attrs: TocNodeAttributes) => void;
+  getPos: () => number;
+}
+
+export type { TocNodeConfig, TocNodeAttributes, TocNodeItem, TocReactNodeViewProps };

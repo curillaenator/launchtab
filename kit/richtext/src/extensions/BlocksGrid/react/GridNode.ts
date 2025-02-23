@@ -19,7 +19,7 @@ const BlocksGrid = BlocksGridCore.extend({
       'section',
       {
         ...HTMLAttributes,
-        'data-type': EXTENSION_NAME,
+        'data-extension': EXTENSION_NAME,
         class: classNames(gridStyles.grid, { [gridStyles.overlap]: !disableOverlap }),
         style: `--blocksgrid-template: ${[...new Array(node.attrs['blocksCount'] || 1)]
           .map((_, i) => (i === node.attrs['fatBlockIdx'] ? 'minmax(0, 2fr)' : 'minmax(0, 1fr)'))
@@ -32,7 +32,7 @@ const BlocksGrid = BlocksGridCore.extend({
   addNodeView() {
     return (props) => {
       const { node, HTMLAttributes, extension } = props;
-      const { disableOverlap, dataTestId } = extension.options;
+      const { disableOverlap } = extension.options;
 
       const mainNode = document.createElement('section');
       mainNode.className = classNames(gridStyles.grid, { [gridStyles.overlap]: !disableOverlap });
@@ -44,12 +44,9 @@ const BlocksGrid = BlocksGridCore.extend({
           .join(' '),
       );
 
-      toPairs(
-        mergeAttributes(HTMLAttributes, {
-          'data-type': this.name,
-          'data-testid': `${dataTestId}.BlocksGrid.Container`,
-        }),
-      ).forEach(([attrKey, attrVal]) => mainNode.setAttribute(attrKey, attrVal));
+      toPairs(mergeAttributes(HTMLAttributes, { 'data-extension': this.name })).forEach(([attrKey, attrVal]) =>
+        mainNode.setAttribute(attrKey, attrVal),
+      );
 
       return {
         dom: mainNode,

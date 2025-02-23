@@ -12,7 +12,6 @@ interface ColumnToolbarButtonProps {
   icon?: SVGSVGElement;
   appearance?: 'secondary' | 'danger';
   className?: string;
-  dataTestId?: string;
 }
 
 interface ColumnToolbarProps {
@@ -21,7 +20,6 @@ interface ColumnToolbarProps {
   getPos: () => number;
   columnIdx: number;
   blocksGridNode: PmNode;
-  dataTestId?: string;
 
   submitButtonRef?: MutableRefObject<HTMLButtonElement | null>;
   editorContentRef?: React.MutableRefObject<HTMLDivElement | null>;
@@ -47,17 +45,13 @@ class ColumnToolbar {
 
     this.toolbar.classList.add(styles.toolbar);
     this.toolbar.setAttribute('contentEditable', 'false');
-    this.toolbar.dataset['testid'] = this.props.dataTestId;
 
     const icons = new ToolbarIcons();
     const toolbarElements: HTMLButtonElement[] = [];
 
     if (this.props.blocksGridNode.attrs['blocksCount'] > 1) {
       if (this.props.columnIdx !== 0) {
-        const shiftLeftButton = this.uiButton({
-          icon: icons.carretLeft,
-          dataTestId: `${this.props.dataTestId}.ShiftLeftBlock`,
-        });
+        const shiftLeftButton = this.uiButton({ icon: icons.carretLeft });
 
         shiftLeftButton.onclick = (e) => this.shiftBlock(e, true);
 
@@ -65,10 +59,7 @@ class ColumnToolbar {
       }
 
       if (this.props.columnIdx !== this.props.blocksGridNode.attrs['blocksCount'] - 1) {
-        const shiftRigthButton = this.uiButton({
-          icon: icons.carretRight,
-          dataTestId: `${this.props.dataTestId}.ShiftRightBlock`,
-        });
+        const shiftRigthButton = this.uiButton({ icon: icons.carretRight });
 
         shiftRigthButton.onclick = (e) => this.shiftBlock(e);
 
@@ -77,10 +68,7 @@ class ColumnToolbar {
 
       const isColFat = this.props.blocksGridNode.attrs['fatBlockIdx'] === this.props.columnIdx;
 
-      const fattenColumn = this.uiButton({
-        dataTestId: `${this.props.dataTestId}.FattenBlock`,
-        icon: isColFat ? icons.collapseIcon : icons.expandIcon,
-      });
+      const fattenColumn = this.uiButton({ icon: isColFat ? icons.collapseIcon : icons.expandIcon });
 
       fattenColumn.onclick = (e) => this.fattenBlock(e);
 
@@ -88,21 +76,14 @@ class ColumnToolbar {
     }
 
     if (this.props.blocksGridNode.attrs['blocksCount'] < 3) {
-      const addColumnButton = this.uiButton({
-        icon: icons.addIcon,
-        dataTestId: `${this.props.dataTestId}.AddBlock`,
-      });
+      const addColumnButton = this.uiButton({ icon: icons.addIcon });
 
       addColumnButton.onclick = (e) => this.createBlock(e);
 
       toolbarElements.push(addColumnButton);
     }
 
-    const removeColumnButton = this.uiButton({
-      dataTestId: `${this.props.dataTestId}.RemoveBlock`,
-      icon: icons.deleteIcon,
-      appearance: 'danger',
-    });
+    const removeColumnButton = this.uiButton({ icon: icons.deleteIcon, appearance: 'danger' });
 
     removeColumnButton.onclick = (e) => this.deleteBlock(e);
 
@@ -123,12 +104,11 @@ class ColumnToolbar {
   }
 
   private uiButton(props: ColumnToolbarButtonProps) {
-    const { icon, appearance = 'secondary', dataTestId, className } = props;
+    const { icon, appearance = 'secondary', className } = props;
 
     const buttonEl = document.createElement('button');
 
     buttonEl.setAttribute('type', 'button');
-    buttonEl.dataset['testid'] = dataTestId;
 
     buttonEl.classList.add(styles.button, styles[`button_${appearance}`]);
     if (className) buttonEl.classList.add(className);

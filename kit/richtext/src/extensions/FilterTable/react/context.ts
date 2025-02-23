@@ -3,8 +3,6 @@ import { createContext, useContext } from 'react';
 import type { FilterTableAtributes, TableInitData } from '../core/interfaces';
 import type { FilterControls } from './interfaces';
 
-import { DEFAULT_TABLE_TEST_ID } from './constants';
-
 interface FilterTableContext {
   nodeAttrs: FilterTableAtributes;
 

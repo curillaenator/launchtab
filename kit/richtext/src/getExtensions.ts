@@ -19,6 +19,7 @@ import { HardBreak } from '@tiptap/extension-hard-break';
 import { HorizontalRule } from '@tiptap/extension-horizontal-rule';
 import { Superscript } from '@tiptap/extension-superscript';
 import { Subscript } from '@tiptap/extension-subscript';
+import { Placeholder } from '@tiptap/extension-placeholder';
 
 import { FilterTable, TableHeader, TableCell } from './extensions/FilterTable';
 import { TableRow } from '@tiptap/extension-table-row';
@@ -45,12 +46,12 @@ import { BackspaceDeletePreventerPlugin } from './extensions/BackspaceDelete';
 
 import { all, createLowlight } from 'lowlight';
 
-import { RichTextExtensionsConfig, RichTextExtensionsOptions } from './interfaces';
+import { PLACEHOLDER_TEXT, DRAWIO_SERVICE_URL } from './constants';
+import type { RichTextExtensionsOptions } from './interfaces';
 
-// create a lowlight instance with all languages loaded
 const lowlight = createLowlight(all);
 
-const CORE_EXTENSIONS = [
+const STATIC_EXTS = [
   Document,
 
   Dropcursor,
@@ -70,6 +71,7 @@ const CORE_EXTENSIONS = [
 
   Superscript,
   Subscript,
+  Placeholder.configure({ placeholder: ({ editor }) => (!editor.getText().length ? PLACEHOLDER_TEXT : '') }),
 
   Bold,
   Italic,
@@ -99,32 +101,25 @@ const CORE_EXTENSIONS = [
 
   CodeBlockLowlight.configure({ lowlight }),
 
-  DrawIO.configure({ drawIoLink: getDrawioEditorURL('https://embed.diagrams.net') }),
+  DrawIO.configure({ drawIoLink: getDrawioEditorURL(DRAWIO_SERVICE_URL) }),
 
   BackspaceDeletePreventerPlugin,
   Draggable.configure({ types: ['fileLink'] }),
 ];
 
-interface GetExtensionsArgs {
-  config: RichTextExtensionsConfig;
-  enableEditorOnChangeFn: (enabled?: boolean) => void;
-  extensionsOptions?: RichTextExtensionsOptions;
-}
+function getExtensions(options: RichTextExtensionsOptions) {
+  const { internalScrollContainerId, editorContentRef, enableEditorOnChangeFn } = options;
 
-function getExtensions(args: GetExtensionsArgs) {
-  const { enableEditorOnChangeFn } = args;
-  const { internalScrollContainerId, editorContentRef } = args.config;
+  const exts = [...STATIC_EXTS];
 
-  const extensions = [...CORE_EXTENSIONS];
+  exts.push(ToC.configure({ scrollContainerId: internalScrollContainerId }));
 
-  extensions.push(ToC.configure({ scrollContainerId: internalScrollContainerId }));
+  exts.push(BlocksGrid);
+  exts.push(BlocksGridColumn.configure({ editorContentRef }));
 
-  extensions.push(BlocksGrid.configure({ dataTestId: 'BlocksGrid' }));
-  extensions.push(BlocksGridColumn.configure({ dataTestId: 'BlocksGridColumn', editorContentRef }));
+  exts.push(UniqueId.configure({ enableEditorOnChangeFn, types: ['heading', 'paragraph'] }));
 
-  extensions.push(UniqueId.configure({ enableEditorOnChangeFn, types: ['heading', 'paragraph'] }));
-
-  return extensions;
+  return exts;
 }
 
 export { getExtensions };

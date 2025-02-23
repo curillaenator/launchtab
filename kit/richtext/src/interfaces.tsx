@@ -4,28 +4,23 @@ import type { Editor } from '@tiptap/react';
 interface RichtextChangeEvent {
   value: JSONContent;
   isSemiEmpty: boolean;
-  // hasText: boolean;
-  // isEditable: boolean;
-  // hasOnlyImage: boolean;
 }
 
 interface RichTextExtensionsOptions {
   // toc?: {}; // TocConfig;
   // plantUml?: {}; // PlantUmlConfig;
-  // uniqueIdCfg?: {}; // UniqueIdConfig;
   // image?: {
   //   onAddImage?: (file: File) => void;
   //   onAddFile?: (file: File) => void;
   //   imageList?: unknown[]; // ImageListItem[];
   // };
-  // files?: {
-  //   filesList?: unknown[]; // FileListItem[];
-  // };
 }
 
-interface RichTextExtensionsConfig {
+interface RichTextExtensionsOptions {
+  extensionsOptions?: RichTextExtensionsOptions;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   internalScrollContainerId: string;
+  enableEditorOnChangeFn: (enabled?: boolean) => void;
 }
 
 interface RichtextContainerProps {
@@ -41,13 +36,11 @@ interface RichtextContainerProps {
   onEditorInstanceChange?: (editor: Editor) => void;
   onEditorContentWidthChange?: (widthHeigth: [number, number]) => void;
 
-  // tocCfg?: TocAsideConfig;
-  // autoscrollCfg?: { autoscroll: () => void };
-  // currentTocItem?: string | null;
-
   onChange?: (changeEvent: RichtextChangeEvent) => void;
 
   extensionsOptions?: RichTextExtensionsOptions;
+
+  // autoscrollCfg?: { autoscroll: () => void };
 }
 
-export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsConfig, RichTextExtensionsOptions };
+export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsOptions };

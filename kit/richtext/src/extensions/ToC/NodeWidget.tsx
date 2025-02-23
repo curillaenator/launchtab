@@ -50,8 +50,6 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
 
   useEffect(() => calcTocItems(editor, attrs), [editor, attrs, calcTocItems, timestamp]);
 
-  const dataTestId = 'TableOfContent';
-
   const scrollOpts = {
     smooth: true,
     containerId: extension.options.scrollContainerId,
@@ -73,7 +71,7 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
   }, [editor, attrs, updateAttributes]);
 
   return (
-    <NodeViewWrapper as='nav' data-testid={dataTestId} className={styles.toctainer}>
+    <NodeViewWrapper as='nav' className={styles.toctainer}>
       <div className={styles.tochead}>
         <input
           readOnly={!editor.isEditable}

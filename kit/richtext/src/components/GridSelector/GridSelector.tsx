@@ -14,7 +14,6 @@ import { BinIcon } from '../../icons/BinIcon';
 import { DryTwoIcon } from '../../icons/DryTwoIcon';
 
 import { DEFAULT_CAPTIONS } from '../constants';
-import { DEFAULT_TEST_ID } from '../../constants';
 import type { GridSelectorProps } from './interfaces';
 import styles from './gridselector.module.scss';
 
@@ -75,7 +74,6 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
       openNode={
         <div>
           <ToolbarButton
-            data-testid={rest.dataTestId ? `${rest.dataTestId}.Trigger` : `${DEFAULT_TEST_ID}.Dropdown.Trigger`}
             id={!!id ? `${id}-opennode` : undefined}
             active={isOpen}
             onClick={() => setTimeout(() => editor.commands.focus(), 20)}
@@ -104,9 +102,6 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
         disabled={!checkIsCarretInside(editor, ['blocksGrid'])}
         onMouseEnter={highlightFocusedBlocksGridWithCssv}
         onMouseLeave={clearBlocksGridCssv}
-        data-testid={
-          rest.dataTestId ? `${rest.dataTestId}.DeleteBlocksGrid` : `${DEFAULT_TEST_ID}.Dropdown.DeleteBlocksGrid`
-        }
         onClick={() => {
           editor.commands.deleteBlocksGrid(clearBlocksGridCssv);
           closeDropdown?.();

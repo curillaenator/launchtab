@@ -27,7 +27,6 @@ const ADDITIONAL_TEXT_ITEMS: ToolbarItemProps[] = [
   //   Icon: IconExpand,
   //   command: (chain) => chain.focus().setDetails().run(),
   //   isActive: () => false,
-  //   dataTestId: `${DEFAULT_TEST_ID}.Toolbar.Expand`,
   // },
 ];
 

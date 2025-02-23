@@ -39,7 +39,7 @@ const BlocksGrid = Node.create<BlocksGridOptions>({
   },
 
   parseHTML() {
-    return [{ tag: `section[data-type="${EXTENSION_NAME}"]` }];
+    return [{ tag: `section[data-extension="${EXTENSION_NAME}"]` }];
   },
 
   addCommands() {

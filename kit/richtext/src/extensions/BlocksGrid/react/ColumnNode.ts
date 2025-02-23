@@ -10,7 +10,7 @@ const BlocksGridColumn = BlocksGridColumnCore.extend({
   renderHTML({ HTMLAttributes }) {
     return [
       'div',
-      { ...HTMLAttributes, 'data-type': COLUMN_NODE_NAME, class: columnStyles.column },
+      { ...HTMLAttributes, 'data-extension': COLUMN_NODE_NAME, class: columnStyles.column },
       [
         'div',
         {
@@ -20,8 +20,9 @@ const BlocksGridColumn = BlocksGridColumnCore.extend({
       ],
     ];
   },
+
   addNodeView() {
-    return ({ editor, getPos, node, HTMLAttributes, extension }) => {
+    return ({ editor, getPos, node, HTMLAttributes }) => {
       const getPosition = typeof getPos === 'function' ? getPos : () => 1;
 
       const { node: blocksGridNode, pos: blocksGridPos } = getBlocksGridNodeByPos(editor.state, getPosition());
@@ -42,7 +43,6 @@ const BlocksGridColumn = BlocksGridColumnCore.extend({
 
       const attrs = mergeAttributes(HTMLAttributes, {
         'data-type': this.name,
-        'data-testid': `${extension.options.dataTestId}.BlocksGrid.Column`,
       });
 
       toPairs(attrs).forEach(([attrKey, attrVal]) => dom.setAttribute(attrKey, attrVal));
@@ -57,7 +57,6 @@ const BlocksGridColumn = BlocksGridColumnCore.extend({
             getPos,
             columnIdx,
             blocksGridNode,
-            dataTestId: `${extension.options.dataTestId}.BlocksGrid.Column.Toolbar`,
 
             submitButtonRef: this.options.submitButtonRef,
             editorContentRef: this.options.editorContentRef,

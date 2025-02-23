@@ -2,7 +2,6 @@ import React, { FC, useEffect, useId } from 'react';
 import cn from 'classnames';
 import { useCurrentEditor, EditorContent } from '@tiptap/react';
 import { debounce } from 'lodash';
-// import { v4 as getViewId } from 'uuid';
 
 import { Toolbar } from './components/Toolbar';
 // import { TocAside, useAsideToc } from './components/TocAside';

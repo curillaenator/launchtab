@@ -28,11 +28,11 @@ const BlocksGridColumn = Node.create<BlocksGridColumnConfig>({
   },
 
   parseHTML() {
-    return [{ tag: `div[data-type="${COLUMN_NODE_NAME}"]` }];
+    return [{ tag: `div[data-extension="${COLUMN_NODE_NAME}"]` }];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['div', { ...HTMLAttributes, 'data-type': COLUMN_NODE_NAME }, ['div', {}, 0]];
+    return ['div', { ...HTMLAttributes, 'data-extension': COLUMN_NODE_NAME }, ['div', {}, 0]];
   },
 
   addKeyboardShortcuts() {

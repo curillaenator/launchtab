@@ -30,9 +30,10 @@ const RichTextContainer: FC<RichtextContainerProps> = (props) => {
       editable,
 
       extensions: getExtensions({
-        enableEditorOnChangeFn,
         extensionsOptions,
-        config: { editorContentRef, internalScrollContainerId },
+        editorContentRef,
+        internalScrollContainerId,
+        enableEditorOnChangeFn,
       }),
 
       content: parseJSONWithoutError(initialValue),

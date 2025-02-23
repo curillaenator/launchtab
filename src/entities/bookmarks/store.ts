@@ -25,9 +25,9 @@ const reorderCards = createEvent<ReorderCardPayload>();
 
 const $bookmarksStore = createStore<BookmarksStore>(DEFAULT_CARDS_STORE);
 
-const updateDatabases = (uid: string | null, tabs: BookmarkTabProps[]) => {
-  localStorage.setItem('tabs', JSON.stringify(tabs));
-  if (!!uid) updateDoc(doc(collection(fsdb, 'users'), uid), { pages: tabs });
+const updateDatabases = (uid: string | null, bookmarks: BookmarkTabProps[]) => {
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  if (!!uid) updateDoc(doc(collection(fsdb, 'bookmarks'), uid), { bookmarks });
 };
 
 $bookmarksStore

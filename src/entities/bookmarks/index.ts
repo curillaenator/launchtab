@@ -10,4 +10,6 @@ export {
   createTab,
 } from './store';
 
+export { getBookmarksQuery } from './api';
+
 export type { BookmarkTabProps, BookmarkCardProps } from './interfaces';

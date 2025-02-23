@@ -14,7 +14,6 @@ import { $bookmarksStore, setCurrentTab, setTabsWithDbUpdate, removeTab } from '
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
 
-//@ts-expect-error
 const SortableListStyled = styled(SortableList)`
   display: flex;
   justify-content: center;

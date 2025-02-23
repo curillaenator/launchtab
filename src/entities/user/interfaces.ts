@@ -7,10 +7,10 @@ interface LaunchStoreUser {
   email: string | null;
   avatar: string | null;
   spaces: string[];
+  settings: SettingsStore;
 }
 
 interface LaunchUserData extends LaunchStoreUser {
-  settings: SettingsStore;
   pages: BookmarkTabProps[];
 }
 

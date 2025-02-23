@@ -24,6 +24,26 @@
     overflow-x: hidden;
     overflow-y: auto;
 
-    // padding: var(--dd-scrl-pd);
+    &::-webkit-scrollbar {
+      width: 4px;
+
+      &-thumb {
+        border-radius: 2px;
+        background-color: var(--theme-primary-500);
+
+        &:hover {
+          background-color: var(--theme-primary-400);
+        }
+
+        &:active {
+          background-color: var(--theme-primary-600);
+        }
+      }
+
+      &-track {
+        border-radius: 2px;
+        background-color: var(--theme-backgrounds-lightest);
+      }
+    }
   }
 }

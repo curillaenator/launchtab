@@ -20,7 +20,7 @@
   }
 }
 
-@each $composition, $gapX in ('full': 24px, 'medium': 18px, 'compact': 12px, 'small': 8px, 'minimal': 4px) {
+@each $composition, $gapX in ('full': 12px, 'medium': 12px, 'compact': 8px, 'small': 6px, 'minimal': 4px) {
   ._#{'' + $composition} {
     gap: #{$gapX};
   }

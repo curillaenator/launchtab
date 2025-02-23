@@ -36,10 +36,14 @@ import { TaskList } from '@tiptap/extension-task-list';
 import { TaskItem } from '@tiptap/extension-task-item';
 
 import { UniqueId } from './extensions/UniqId/UniqueId';
+
+import { Heading } from './extensions/Heading';
+
+import { Emoji } from './extensions/Emoji';
 import { ToC } from './extensions/ToC';
 import { DrawIO, getDrawioEditorURL } from './extensions/DrawIO';
 import { BlocksGrid, BlocksGridColumn } from './extensions/BlocksGrid';
-import { Heading } from './extensions/Heading';
+
 import { Draggable } from './extensions/Draggable';
 import { BackspaceDeletePreventerPlugin } from './extensions/BackspaceDelete';
 // import { Indent } from './extensions/Indent';
@@ -90,6 +94,7 @@ const STATIC_EXTS = [
 
   // Indent,
 
+  Emoji,
   Link.configure({ openOnClick: true, autolink: true }),
 
   FilterTable,

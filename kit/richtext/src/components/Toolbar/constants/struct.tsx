@@ -4,6 +4,7 @@ import { ToolbarComponentStruct } from '../interfaces';
 import { DropdownWithActiveCommand } from '../../DropdownWithActiveCommand';
 import { ControlSection } from '../../ControlSection';
 import { GridSelector } from '../../GridSelector';
+import { EmojiSelector } from '../../EmojiSelector';
 
 import { DROPDOWN_PARAMS } from './const';
 import {
@@ -79,6 +80,16 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.textAlign}
           maxWidth={DROPDOWN_PARAMS.textAlign}
+        />
+      ),
+
+      (props) => (
+        <EmojiSelector
+          {...props}
+          placement='bottom-start'
+          maxHeight={DROPDOWN_PARAMS.maxHeight}
+          minWidth={DROPDOWN_PARAMS.blocksGrid}
+          maxWidth={DROPDOWN_PARAMS.blocksGrid}
         />
       ),
     ],

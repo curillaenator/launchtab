@@ -17,7 +17,7 @@ const DEFAULT_CAPTIONS: Record<ControlCaption, string> = {
   blockquote: 'Blockquote',
   codeBlock: 'Code block',
   left: 'Left',
-  right: 'Rifth',
+  right: 'Rigth',
   center: 'Center',
   justify: 'Justify',
   code: 'Inline code',

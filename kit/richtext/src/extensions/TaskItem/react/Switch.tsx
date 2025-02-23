@@ -14,8 +14,9 @@ const SwitchStyled = styled.button<ISwitchStyled>`
   height: 40px;
   background-color: transparent;
   z-index: 100;
+  flex: 0 0 auto;
 
-  box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.light};
+  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.backgrounds.light};
   border-radius: calc(14px * 1.25 + 3px);
 
   svg[data-svg-corner='true'] {

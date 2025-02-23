@@ -1,6 +1,21 @@
 import type { Editor } from '@tiptap/core';
 
-import type { DrawIoConfig, DrawIoStorage, DrawIoAttributes } from '../core/interfaces';
+interface DrawIoAttributes {
+  // drawIoCode: string | null;
+  // drawIoName: string | null;
+  xmlpng: string | null;
+}
+
+interface DrawIoStorage {
+  // includedFiles: string[];
+}
+
+interface DrawIoConfig {
+  drawIoLink?: string | null;
+  // viewFile?: (fileId: string, version?: string) => Promise<string>;
+  // uploadFile?: (file: File) => Promise<DrawIoAttributes>;
+  // updateFile?: (attrs: DrawIoAttributes, file: File) => Promise<DrawIoAttributes>;
+}
 
 interface DrawIoPostPata {
   action: string;
@@ -45,4 +60,12 @@ interface UiWidgetProps {
   getPos: () => number;
 }
 
-export type { DrawIoPostPata, DrawIoEvent, DrawIoMessage, UiWidgetProps };
+export type {
+  DrawIoStorage,
+  DrawIoConfig,
+  DrawIoAttributes,
+  DrawIoPostPata,
+  DrawIoEvent,
+  DrawIoMessage,
+  UiWidgetProps,
+};

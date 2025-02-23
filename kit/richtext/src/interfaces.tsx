@@ -1,27 +1,5 @@
-// import type { ReactNode } from 'react';
-import type {
-  // AnyExtension,
-  JSONContent,
-} from '@tiptap/core';
+import type { JSONContent } from '@tiptap/core';
 import type { Editor } from '@tiptap/react';
-
-// import type {
-//   ControlCaption,
-//   OnAddImageReturnType,
-//   TableCommand,
-// ToolbarComponentStruct,
-//   ToolbarProps,
-// } from './components/Toolbar';
-
-import type { DrawIOConfig } from './extensions/DrawIO';
-import type { FilterTableConfig } from './extensions/FilterTable/core/interfaces';
-import type { ReactHeadingConfig } from './extensions/Heading';
-import type { BlocksGridConfig } from './extensions/BlocksGrid';
-// import type { PlantUmlConfig } from './extensions/PlantUML/core/interfaces';
-// import type { MentionLinkConfig } from './extensions/MentionLink/core/interfaces';
-// import type { TocNodeConfig } from './extensions/ToC/core/interfaces';
-// import type { TocAsideConfig } from './components/TocAside/interfaces';
-// import type { UniqueIdConfig } from './extensions/UniqueId';
 
 interface RichtextChangeEvent {
   value: JSONContent;
@@ -32,14 +10,8 @@ interface RichtextChangeEvent {
 }
 
 interface RichTextExtensionsOptions {
-  drawio?: DrawIOConfig;
-  blocksGrid?: BlocksGridConfig;
-  heading?: ReactHeadingConfig;
-  table?: FilterTableConfig;
-
   // toc?: {}; // TocConfig;
   // plantUml?: {}; // PlantUmlConfig;
-
   // uniqueIdCfg?: {}; // UniqueIdConfig;
   // image?: {
   //   onAddImage?: (file: File) => void;
@@ -77,8 +49,6 @@ interface RichtextContainerProps {
   // currentTocItem?: string | null;
 
   onChange?: (changeEvent: RichtextChangeEvent) => void;
-
-  toolStruct?: unknown;
 
   extensionsOptions?: RichTextExtensionsOptions;
 }

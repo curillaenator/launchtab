@@ -1,2 +1,2 @@
 export { Dropdown } from './Dropdown';
-export type { DropdownProps, DropdownItemProps, DropdownIdProp, DropdownIconComponent } from './interfaces';
+export type { DropdownProps, DropdownItemProps, DropdownIconComponent } from './interfaces';

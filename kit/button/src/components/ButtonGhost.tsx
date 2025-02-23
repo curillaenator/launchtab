@@ -27,7 +27,7 @@ const ButtonGhostStyled = styled.button<IButtonStyled>`
   }
 
   .common-title {
-    padding: 0 16px;
+    padding: 0 8px;
     user-select: none;
     white-space: nowrap;
   }
@@ -51,9 +51,7 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
   } = props;
 
   return (
-    //@ts-ignore
     <ButtonGhostStyled
-      //
       {...rest}
       data-ghost-button
       ref={ref}

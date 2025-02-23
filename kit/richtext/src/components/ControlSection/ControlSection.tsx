@@ -3,13 +3,13 @@ import { useCurrentEditor } from '@tiptap/react';
 
 import { ToolbarButton } from '../ToolbarButton';
 
-import type { DropdownItemProps } from '../Dropdown';
+import type { ToolbarItemProps } from '../Toolbar';
 
 import styles from './styles.module.scss';
 
 interface ControlSectionProps {
   id: string;
-  items: DropdownItemProps<string>[];
+  items: ToolbarItemProps[];
   disabled?: boolean;
   onSelectionUpdateHandlers: React.MutableRefObject<(() => void)[]>;
 }
@@ -26,10 +26,9 @@ const ControlSection: FC<ControlSectionProps> = memo((props) => {
 
   return (
     <div className={styles.toolbarSection}>
-      {items.map(({ id, Icon, command, isActive, shouldBeDisabled, disabled, dataTestId }) => (
+      {items.map(({ id, Icon, command, isActive, shouldBeDisabled, disabled }) => (
         <ToolbarButton
           key={id}
-          dataTestId={dataTestId}
           disabled={(editor && shouldBeDisabled?.(editor)) || disabled || sectionDisabled}
           active={(editor && (isActive?.(editor) ?? editor?.isActive(id))) ?? false}
           onClick={() => {

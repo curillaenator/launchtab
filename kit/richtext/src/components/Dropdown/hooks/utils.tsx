@@ -1,10 +1,7 @@
 import IconEllipsis from '../../../icons/IconEllipsis';
-import type { DropdownProps, DropdownItemProps, DropdownIdProp } from '../interfaces';
+import type { DropdownProps, DropdownItemProps } from '../interfaces';
 
-export const resolveOpenNodeIcon = (
-  props: DropdownProps<DropdownIdProp>,
-  selectedItem: DropdownItemProps<DropdownIdProp> | null,
-) => {
+export const resolveOpenNodeIcon = (props: DropdownProps, selectedItem: DropdownItemProps | null) => {
   const { value: selectedId, items, icon = null, selectedItems } = props;
 
   if (icon) return icon;

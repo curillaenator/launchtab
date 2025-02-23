@@ -1,5 +1,3 @@
-import { DRAWIO_FILE_TYPE } from '../constants';
-
 import styles from '../widget.module.scss';
 
 const resolveIFrameDomain = (link: string) => {
@@ -33,8 +31,4 @@ const createDrawIoEmbed = (drawIoEmbedLink: string) => {
   };
 };
 
-const prepareFile = (fileName: string, data: string) => {
-  return new File([new Blob([data])], fileName, { type: DRAWIO_FILE_TYPE });
-};
-
-export { createDrawIoEmbed, prepareFile };
+export { createDrawIoEmbed };

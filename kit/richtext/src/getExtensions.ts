@@ -34,10 +34,11 @@ import { OrderedList } from '@tiptap/extension-ordered-list';
 import { TaskList } from '@tiptap/extension-task-list';
 import { TaskItem } from '@tiptap/extension-task-item';
 
-import { DrawIO } from './extensions/DrawIO';
+import { DrawIO, getDrawioEditorURL } from './extensions/DrawIO';
 import { BlocksGrid, BlocksGridColumn } from './extensions/BlocksGrid';
 import { Heading } from './extensions/Heading';
 import { Draggable } from './extensions/Draggable';
+import { BackspaceDeletePreventerPlugin } from './extensions/BackspaceDelete';
 // import { Indent } from './extensions/Indent';
 
 import { all, createLowlight } from 'lowlight';
@@ -65,9 +66,6 @@ const CORE_EXTENSIONS = [
   OrderedList,
   ListItem,
 
-  Text,
-  Paragraph,
-
   Superscript,
   Subscript,
 
@@ -76,35 +74,32 @@ const CORE_EXTENSIONS = [
   Strike,
   Underline,
 
+  Text,
+  Heading,
+  Paragraph,
+  Color,
+  TextStyle,
+  TextAlign.configure({ types: ['heading', 'paragraph', 'taskList'], defaultAlignment: 'justify' }),
+
   TaskList,
   TaskItem,
 
   // Indent,
 
-  TextAlign.configure({
-    types: ['heading', 'paragraph', 'taskList'],
-    defaultAlignment: 'justify',
-  }),
+  Link.configure({ openOnClick: true, autolink: true }),
 
-  Link.configure({
-    openOnClick: true,
-    autolink: true,
-  }),
-
-  TextStyle,
-
+  FilterTable,
   TableRow,
   TableHeader,
   TableCell,
 
   Highlight.configure({ multicolor: true }),
 
-  CodeBlockLowlight.configure({
-    lowlight,
-  }),
+  CodeBlockLowlight.configure({ lowlight }),
 
-  Color,
+  DrawIO.configure({ drawIoLink: getDrawioEditorURL('https://embed.diagrams.net') }),
 
+  BackspaceDeletePreventerPlugin,
   Draggable.configure({ types: ['fileLink'] }),
 ];
 
@@ -114,8 +109,10 @@ interface GetExtensionsArgs {
 }
 
 function getExtensions(args: GetExtensionsArgs) {
-  const { extensionsOptions, config } = args;
-
+  const {
+    // extensionsOptions,
+    config,
+  } = args;
   const {
     dataTestId,
     // internalScrollContainerId,
@@ -124,12 +121,6 @@ function getExtensions(args: GetExtensionsArgs) {
 
   const extensions = [...CORE_EXTENSIONS];
 
-  if (extensionsOptions?.drawio) {
-    extensions.push(DrawIO.configure({ ...extensionsOptions.drawio, dataTestId: `${dataTestId}.DrawIO` }));
-  }
-
-  extensions.push(FilterTable.configure(extensionsOptions?.table));
-  extensions.push(Heading.configure(extensionsOptions?.heading));
   extensions.push(BlocksGrid.configure({ dataTestId: `${dataTestId}.BlocksGrid` }));
   extensions.push(BlocksGridColumn.configure({ dataTestId: `${dataTestId}.BlocksGridColumn`, editorContentRef }));
 

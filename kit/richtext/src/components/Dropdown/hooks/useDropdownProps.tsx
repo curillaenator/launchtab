@@ -1,11 +1,11 @@
 import { useControledDropdown, useAnimation, useCombineControledAnimated } from '@launch-ui/dropable';
 
 import { resolveOpenNodeIcon } from './utils';
-import type { DropdownProps, DropdownItemProps, DropdownIdProp } from '../interfaces';
+import type { DropdownProps, DropdownItemProps } from '../interfaces';
 
-export const useDropdownProps = (props: DropdownProps<DropdownIdProp>) => {
+export const useDropdownProps = (props: DropdownProps) => {
   const {
-    items = [] as DropdownItemProps<DropdownIdProp>[][],
+    items = [] as DropdownItemProps[][],
     value,
     selectedItems,
 

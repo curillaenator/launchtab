@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, CSSProperties } from 'react';
 import styled from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
@@ -6,13 +6,12 @@ import { Shape } from '@launch-ui/shape';
 
 import type { ButtonActionProps } from './interfaces';
 
-// TODO size variations
-
 interface IButtonStyled {
   active: boolean;
   danger: boolean;
   isLeftIcon: boolean;
   isRightIcon: boolean;
+  height?: CSSProperties['height'];
 }
 
 const ButtonActionStyled = styled.button<IButtonStyled>`
@@ -21,9 +20,8 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  height: 40px;
-  padding-left: ${({ isLeftIcon }) => (isLeftIcon ? '12px' : '16px')};
-  padding-right: ${({ isRightIcon }) => (isRightIcon ? '8px' : '16px')};
+  height: ${({ height }) => `${height}px`};
+  padding: 0 8px;
   background: transparent;
   border-radius: 16px;
   z-index: 20;
@@ -77,10 +75,10 @@ export const ButtonAction: FC<ButtonActionProps> = ({
   active = false,
   danger = false,
   type = 'button',
+  height = 40,
   ...rest
 }) => {
   return (
-    //@ts-ignore
     <ButtonActionStyled
       {...rest}
       data-action-button
@@ -89,6 +87,7 @@ export const ButtonAction: FC<ButtonActionProps> = ({
       active={active}
       danger={danger}
       type={type}
+      height={height}
     >
       <Shape borderRadius={12} />
 

@@ -8,10 +8,9 @@ import IconParagraph from '../../../../icons/IconParagraph';
 import IconBulletedList from '../../../../icons/IconListBulleted';
 import IconNumberedList from '../../../../icons/IconListNumbered';
 
-import type { DropdownItemProps } from '../../../Dropdown';
-import type { ParagraphCommand } from '../../interfaces';
+import type { ToolbarItemProps } from '../interfaces';
 
-const TEXT_ITEMS: DropdownItemProps<ParagraphCommand>[][] = [
+const TEXT_ITEMS: ToolbarItemProps[][] = [
   [
     {
       id: 'h1',

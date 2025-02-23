@@ -6,7 +6,6 @@ import { useWidget } from './hooks/useWidget';
 import { WithActions } from './components';
 import { $drawioContext as Context } from './context';
 
-// import type { DrawIoAttributes } from '../core/interfaces';
 import { WidgetDrawioIcon } from './icons/WidgetDrawioIcon';
 
 import type { UiWidgetProps } from './interfaces';
@@ -14,66 +13,27 @@ import styles from './widget.module.scss';
 import editorCssv from '../../../styles.module.scss';
 
 const UIWidget: FC<UiWidgetProps> = (props) => {
-  const { selected, editor, extension, node } = props;
+  const { extension, node } = props;
   const { attrs: widgetAttrs } = node;
-  const { options: editorOptions } = editor;
-  const { src, isSrcLoading, toggleDrawIo } = useWidget(props);
 
-  const widgetCn = cn(styles.widget, editorCssv._theme_eds, {
-    [styles.widget_editable]: editorOptions.editable,
-    [styles.widget_isSelected]: selected && editorOptions.editable,
-  });
+  const { toggleDrawIo } = useWidget(props);
 
-  const isDrawioEditorAvailable =
-    !!extension.options.drawIoLink && !!extension.options.uploadFile && !!extension.options.updateFile;
-
-  const dataTestId = extension.options.dataTestId || 'DrawIOExtension';
-
-  const contextValue = useMemo(
-    () => ({
-      ...props,
-      src,
-      toggleDrawIo,
-      dataTestId,
-    }),
-    [props, src, dataTestId, toggleDrawIo],
-  );
-
-  if (isSrcLoading)
-    return (
-      <Context.Provider value={contextValue}>
-        <NodeViewWrapper className={widgetCn}>
-          <span>Loading...</span>
-        </NodeViewWrapper>
-      </Context.Provider>
-    );
+  const ctx = useMemo(() => ({ ...props, toggleDrawIo }), [props, toggleDrawIo]);
 
   return (
-    <Context.Provider value={contextValue}>
-      {!src && (
-        <NodeViewWrapper className={cn(widgetCn, styles.widget_normal)}>
-          <WithActions isDrawioEditorAvailable={isDrawioEditorAvailable}>
-            <div className={styles.badge} data-fileid={widgetAttrs.drawIoCode} data-filename={widgetAttrs.drawIoName}>
+    <Context.Provider value={ctx}>
+      <NodeViewWrapper className={cn(styles.widget, editorCssv._theme_eds)}>
+        <WithActions isDrawioEditorAvailable={!!extension.options.drawIoLink} hasPreview={!!widgetAttrs.xmlpng}>
+          {widgetAttrs.xmlpng ? (
+            <img data-drawio-image src={widgetAttrs.xmlpng} className={styles.image} />
+          ) : (
+            <div className={styles.badge} is-drawio-xmlpng-empty>
               <WidgetDrawioIcon />
-              <span>Схема еще не опубликована</span>
+              <span>Unpablished drawio</span>
             </div>
-          </WithActions>
-        </NodeViewWrapper>
-      )}
-
-      {!!src && (
-        <NodeViewWrapper className={cn(widgetCn, styles.widget_normal)}>
-          <WithActions isSrcDownloadable hasPreview isDrawioEditorAvailable={isDrawioEditorAvailable}>
-            <img
-              data-filetype='xmlpng'
-              data-testid={`${dataTestId}.FilePNG`}
-              src={src as string}
-              className={styles.image}
-              alt={widgetAttrs.drawIoName as string}
-            />
-          </WithActions>
-        </NodeViewWrapper>
-      )}
+          )}
+        </WithActions>
+      </NodeViewWrapper>
     </Context.Provider>
   );
 };

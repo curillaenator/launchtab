@@ -24,30 +24,8 @@
   width: 100%;
   border-radius: 8px;
   padding: var(--drawio-widget-pd, 0);
-  box-shadow: inset 0 0 0 1px var(--drwaio-widget-bdc);
-  background-color: var(--drwaio-widget-bgc);
-
-  // &_editable:hover {
-  //   --drwaio-widget-bdc: var(--drwaio-widget-accented-bdc);
-  // }
-
-  &_normal {
-    --drwaio-widget-bgc: var(--editor-bgc);
-    --drwaio-widget-bdc: var(--editor-bdc);
-    --drwaio-widget-accented-bdc: var(--editor-primary);
-  }
-
-  &_warn {
-    --drwaio-widget-bgc: var(--editor-highlight-warning-bgc);
-    --drwaio-widget-bdc: var(--editor-warning-bdc);
-    --drwaio-widget-accented-bdc: var(--editor-warning-bdc);
-  }
-
-  &_error {
-    --drwaio-widget-bgc: var(--editor-highlight-error-bgc);
-    --drwaio-widget-bdc: var(--editor-error-bdc);
-    --drwaio-widget-accented-bdc: var(--editor-error-bdc);
-  }
+  box-shadow: inset 0 0 0 1px var(--editor-bdc);
+  background-color: var(--editor-bgc);
 }
 
 .image {
@@ -61,7 +39,7 @@
   align-items: center;
   gap: 8px;
 
-  font-family: 'SB Sans Text', sans-serif;
+  font-family: inherit;
   font-size: 14px;
   line-height: 16px;
   color: var(--editor-c);

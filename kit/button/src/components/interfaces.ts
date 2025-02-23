@@ -12,6 +12,7 @@ export interface ButtonActionProps extends ButtonHTMLAttributes<HTMLButtonElemen
   RightIcon?: FC<SVGAttributes<SVGElement>>;
   active?: boolean;
   danger?: boolean;
+  height?: CSSProperties['height'];
 }
 
 export interface ButtonGhostProps extends ButtonActionProps {

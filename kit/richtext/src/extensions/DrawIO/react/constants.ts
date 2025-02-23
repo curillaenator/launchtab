@@ -1,24 +1,33 @@
 import type { DrawIoMessage } from './interfaces';
 
-const DRAWIO_DUMMY_IMG = 'https://jobtech.jp/wp-content/uploads/draw-io.png';
+const DRAWIO_EXTENSION_NAME = 'drawio';
 
-const DRAWIO_FILE_TYPE = 'text/plain';
+// const DRAWIO_DUMMY_IMG = 'https://jobtech.jp/wp-content/uploads/draw-io.png';
+
+// const DRAWIO_FILE_TYPE = 'text/plain';
 const DRAWIO_EVENTS: DrawIoMessage['event'][] = ['init', 'save', 'export', 'exit', 'autosave', 'prompt'];
 
-const DEFAULT_FILE_NAME = 'Схема123';
+// const DEFAULT_FILE_NAME = 'Схема123';
 
-const AVIOD_FILENAME_SYMBOLS = /[!@#$%^&*\\|,.?{}\[\]:;]/; // ok symbols  ()_+-
+// const AVIOD_FILENAME_SYMBOLS = /[!@#$%^&*\\|,.?{}\[\]:;]/; // ok symbols  ()_+-
 
 const DICT = {
-  setFilename: 'Укажите название файла',
+  // setFilename: 'Укажите название файла',
 
-  avoidSymbols: 'Не используйте спец-символы в названиях',
-  emptyFilename: 'Название не может быть пустым',
-  somethingWrong: 'Что-то пошло не так при экспорте файла',
+  // avoidSymbols: 'Не используйте спец-символы в названиях',
+  // emptyFilename: 'Название не может быть пустым',
+  somethingWrong: 'Something went wrong... :(',
 
-  error: 'Ошибка',
-  ok: 'Понятно',
-  save: 'Сохранить',
+  error: 'Error',
+  ok: 'Ok',
+  save: 'Save',
 };
 
-export { DRAWIO_EVENTS, DEFAULT_FILE_NAME, DRAWIO_FILE_TYPE, AVIOD_FILENAME_SYMBOLS, DICT, DRAWIO_DUMMY_IMG };
+export {
+  DICT,
+  DRAWIO_EVENTS,
+  // AVIOD_FILENAME_SYMBOLS,
+  DRAWIO_EXTENSION_NAME,
+  // DRAWIO_FILE_TYPE,
+  // DRAWIO_DUMMY_IMG,
+};

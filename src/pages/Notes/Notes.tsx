@@ -30,11 +30,10 @@ const NotesStyled = styled.div`
   height: fit-content;
   border-radius: var(--form-bdrs);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 32px;
+  padding: 32px 32px 0;
 `;
 
-// @ts-expect-error
-export const Notes: FC<PropsWithChildren> = () => {
+const Notes: FC<PropsWithChildren> = () => {
   const { pageRef } = useThemeToCssv();
 
   const onRichTextChange = useCallback((e: RichtextChangeEvent) => {
@@ -53,3 +52,5 @@ export const Notes: FC<PropsWithChildren> = () => {
     </NotesStyled>
   );
 };
+
+export { Notes };

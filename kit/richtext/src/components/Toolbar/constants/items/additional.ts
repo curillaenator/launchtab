@@ -3,11 +3,9 @@ import IconTogglerCodeblock from '../../../../icons/IconTogglerCodeblock';
 import IconDivider from '../../../../icons/IconDivider';
 // import IconExpand from '../../../../icons/IconExpand';
 
-import type { DropdownItemProps } from '../../../Dropdown';
-import type { EditorCommand } from '../../interfaces';
-// import { DEFAULT_TEST_ID } from '../../../../constants';
+import type { ToolbarItemProps } from '../interfaces';
 
-const ADDITIONAL_TEXT_ITEMS: DropdownItemProps<EditorCommand>[] = [
+const ADDITIONAL_TEXT_ITEMS: ToolbarItemProps[] = [
   {
     id: 'hr',
     Icon: IconDivider,

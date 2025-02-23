@@ -1,10 +1,9 @@
 import IconTableDelete from '../../../../icons/IconTableDelete';
 import IconTableInsert from '../../../../icons/IconTableInsert';
 
-import type { DropdownItemProps } from '../../../Dropdown';
-import type { TableCommand } from '../../interfaces';
+import type { ToolbarItemProps } from '../interfaces';
 
-const TABLE_ITEMS: DropdownItemProps<TableCommand>[] = [
+const TABLE_ITEMS: ToolbarItemProps[] = [
   {
     id: 'tableInsert',
     Icon: IconTableInsert,

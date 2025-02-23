@@ -7,12 +7,12 @@ import { useDropdownProps } from './hooks/useDropdownProps';
 import { DropdownItem } from './DropdownItem';
 import { ToolbarButton } from '../ToolbarButton';
 
-import type { DropdownProps, DropdownIdProp } from './interfaces';
+import type { DropdownProps } from './interfaces';
 
 import IconSelect from '../../icons/IconSelect';
 import styles from './dropdown.module.scss';
 
-export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
+export const Dropdown = (props: DropdownProps) => {
   const { editor } = useCurrentEditor();
 
   const {
@@ -54,10 +54,9 @@ export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
           <Fragment key={group.map((el) => el.id).join('_')}>
             {groupIdx > 0 && <div className={styles.divider} />}
 
-            {group.map((item, itemIdx) => (
+            {group.map((item) => (
               <DropdownItem
                 {...item}
-                dataTestId={rest.dataTestId ? `${rest.dataTestId}.Group${groupIdx}.Item${itemIdx}` : undefined}
                 key={item.id}
                 active={selectedItems?.[item.id] || item.id === selectedItem?.id}
                 disabled={item.shouldBeDisabled?.(editor!) || item.disabled || disabled}
@@ -65,7 +64,6 @@ export const Dropdown = (props: DropdownProps<DropdownIdProp>) => {
                   if (!!editor) item.command?.(editor.chain());
                   onChange(item.id);
                 }}
-                // canTextOverflow={canTextOverflow}
               />
             ))}
           </Fragment>

@@ -7,14 +7,14 @@ import { Dropdown } from '../Dropdown';
 import { DEFAULT_CAPTIONS } from '../constants';
 import type { ControlCaption, ToolbarActiveComponentDropdownProps } from '../Toolbar/interfaces';
 
-const WATCH_IDS_FOR_ACTIVE_COMMAND = ['h1-h2-h3-h4-h5-h6-paragraph-bull'];
-const WATCH_IDS_FOR_FOCUSED_CONTENT = ['tableInsert-tableDelete'];
+const WATCH_IDS_FOR_ACTIVE_COMMAND = ['text-items-commands'];
+const WATCH_IDS_FOR_FOCUSED_CONTENT = ['table-items-commands', 'macros-items-commands'];
 
 const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = memo((props) => {
   const {
-    id = uniqueId('dd-with-comands'),
+    id,
     items,
-    defaultValue = 'paragraph',
+    defaultValue,
     editorContentRef,
     onSelectionUpdateHandlers,
     //
@@ -23,7 +23,7 @@ const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = memo(
 
   const { editor } = useCurrentEditor();
 
-  const [activeCommand, setActiveCommand] = useState<string | number>(defaultValue);
+  const [activeCommand, setActiveCommand] = useState<string | null>(defaultValue || null);
 
   const itemsWithCaptions = useMemo(
     () => items?.map((g) => g.map((v) => ({ ...v, caption: DEFAULT_CAPTIONS[v.id as ControlCaption] ?? '' }))),
@@ -31,17 +31,18 @@ const DropdownWithActiveCommand: FC<ToolbarActiveComponentDropdownProps> = memo(
   );
 
   const onUpdate = useCallback(() => {
-    if (!editor) return;
+    if (!editor || !id) return;
 
     if (WATCH_IDS_FOR_FOCUSED_CONTENT.includes(id)) {
-      setActiveCommand(Date.now());
+      setActiveCommand(`${Date.now()}`);
       return;
     }
 
     if (!WATCH_IDS_FOR_ACTIVE_COMMAND.includes(id)) return;
 
     const flatten = (items ?? []).flat().filter((v) => v.id !== 'paragraph');
-    const theActiveCommand = flatten.find((v) => v.isActive?.(editor) ?? editor?.isActive(v.id))?.id ?? defaultValue;
+    const theActiveCommand =
+      flatten.find((v) => v.isActive?.(editor) || editor?.isActive(v.id))?.id || defaultValue || null;
 
     setActiveCommand(theActiveCommand);
   }, [id, editor, items, defaultValue]);

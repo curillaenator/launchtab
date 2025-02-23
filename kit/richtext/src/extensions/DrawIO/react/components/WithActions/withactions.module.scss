@@ -10,8 +10,7 @@
 
   overflow: hidden;
 
-  &:has(img[data-filetype='xmlpng']),
-  &:has(img[data-filetype='png-pair-to-xml']) {
+  &:has(img[data-drawio-image]) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +47,7 @@
 
       color: var(--editor-c);
 
-      font-family: 'SB Sans Text', sans-serif;
+      font-family: inherit;
       font-size: 14px;
       font-style: normal;
       font-weight: 400;

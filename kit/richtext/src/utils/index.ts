@@ -6,4 +6,3 @@ export { isOnlyImageContent } from './isOnlyImageContent';
 export { isOnlyImageInParagraph } from './isOnlyImageInParagraph';
 export { parseJSONWithoutError } from './parseJSONWithoutError';
 export { remapObject } from './remapObject';
-export { getIdFromItems as getIdFromTollbarItems } from './getIdFromTollbarItems';

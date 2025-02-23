@@ -1,8 +1,6 @@
 export { DrawIO } from './react/Node';
-export { DRAWIO_EXTENSION_NAME } from './core/constants';
+export { DRAWIO_EXTENSION_NAME } from './react/constants';
 
-export type {
-  DrawIoAttributes,
-  DrawIoAttributes as DrawIoAtributes,
-  DrawIoConfig as DrawIOConfig,
-} from './core/interfaces';
+export { getDrawioEditorURL } from './react/getDrawioEditorURL';
+
+export type { DrawIoAttributes, DrawIoConfig } from './react/interfaces';

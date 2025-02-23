@@ -2,15 +2,17 @@ import { Extension, isAtEndOfNode, isAtStartOfNode } from '@tiptap/core';
 import { Plugin, PluginKey } from 'prosemirror-state';
 
 import { EXTENSION_NAME as BLOCKSGRID_EXT } from './BlocksGrid';
-// import { PLANT_UML_EXTENSION as PLANT_UML_EXT } from './PlantUML';
+import { TOC_EXTENSION_NAME as TOC_EXT } from './ToC';
 import { DRAWIO_EXTENSION_NAME as DRAWIO_EXT } from './DrawIO';
+// import { PLANT_UML_EXTENSION as PLANT_UML_EXT } from './PlantUML';
 
 // клавиши Backspace & Delete переопределены только для экстеншенов, указанных в массиве
 const checkExtensionName = (extensionName: string = 'wrong-extension-name') =>
   [
     BLOCKSGRID_EXT,
-    // PLANT_UML_EXT,
+    TOC_EXT,
     DRAWIO_EXT,
+    // PLANT_UML_EXT,
   ].includes(extensionName);
 
 // плагин отлавливает положения курсора "сразу до" и "сразу после" целевых узлов экстеншенов,

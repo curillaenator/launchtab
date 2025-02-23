@@ -144,7 +144,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
 
       {isFetching && (
         <div className='popup-iconsLoader'>
-          <Loader size='32px' />
+          <Loader iconSize='32px' />
         </div>
       )}
 

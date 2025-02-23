@@ -69,6 +69,7 @@ const Toolbar: FC = memo(() => {
                     key={id}
                     height={32}
                     LeftIcon={Icon}
+                    // disabled={shouldBeDisabled?.(editor)}
                     // @ts-expect-error
                     title={DEFAULT_CAPTIONS[id]}
                     onClick={() => {

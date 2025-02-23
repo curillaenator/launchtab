@@ -26,21 +26,27 @@ const DASH = keyframes`
 `;
 
 interface LoaderProps {
-  fullscreen?: boolean;
-  size?: CSSProperties['width'];
+  view?: 'fullscreen' | 'fit-parent' | 'fit-content';
+  iconSize?: CSSProperties['width'];
 }
 
-const LoaderStyled = styled.div<LoaderProps>`
+interface LoaderStyledProps {
+  width: CSSProperties['width'];
+  height: CSSProperties['height'];
+  iconSize: CSSProperties['width'];
+}
+
+const LoaderStyled = styled.div<LoaderStyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ fullscreen }) => (fullscreen ? '100vw' : 'fit-content')};
-  height: ${({ fullscreen }) => (fullscreen ? '100vh' : 'fit-content')};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 
   & > svg {
     transform-origin: center center;
-    width: ${({ size }) => size};
-    height: ${({ size }) => size};
+    width: ${({ iconSize }) => iconSize};
+    height: ${({ iconSize }) => iconSize};
 
     .animatedCircle {
       fill: none;
@@ -55,10 +61,20 @@ const LoaderStyled = styled.div<LoaderProps>`
   }
 `;
 
-export const Loader: FC<LoaderProps> = ({ fullscreen, size }) => (
-  <LoaderStyled fullscreen={fullscreen} size={size || '32px'}>
-    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <circle className='animatedCircle' cx='12' cy='12' r='8' />
-    </svg>
-  </LoaderStyled>
-);
+const getCssValue = (view: LoaderProps['view'], fsUnits: 'vw' | 'vh' = 'vw') => {
+  if (view === 'fit-parent') return '100%';
+  if (view === 'fullscreen') return '100'.concat(fsUnits);
+  return 'fit-content';
+};
+
+export const Loader: FC<LoaderProps> = (props) => {
+  const { view = 'fit-content', iconSize = '32px' } = props;
+
+  return (
+    <LoaderStyled width={getCssValue(view)} height={getCssValue(view, 'vh')} iconSize={iconSize}>
+      <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+        <circle className='animatedCircle' cx='12' cy='12' r='8' />
+      </svg>
+    </LoaderStyled>
+  );
+};

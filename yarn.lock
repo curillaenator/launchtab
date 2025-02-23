@@ -3662,7 +3662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@launch-ui/button@*, @launch-ui/button@workspace:kit/button":
+"@launch-ui/button@*, @launch-ui/button@1.0.0, @launch-ui/button@workspace:kit/button":
   version: 0.0.0-use.local
   resolution: "@launch-ui/button@workspace:kit/button"
   dependencies:
@@ -3709,7 +3709,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/dropable@*, @launch-ui/dropable@workspace:kit/dropable":
+"@launch-ui/dropable@*, @launch-ui/dropable@1.0.0, @launch-ui/dropable@workspace:kit/dropable":
   version: 0.0.0-use.local
   resolution: "@launch-ui/dropable@workspace:kit/dropable"
   dependencies:
@@ -3761,6 +3761,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/richtext@workspace:kit/richtext"
   dependencies:
+    "@launch-ui/button": 1.0.0
+    "@launch-ui/dropable": 1.0.0
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
     "@tiptap/core": 2.11.5
@@ -4463,6 +4465,24 @@ __metadata:
     "@svgr/plugin-jsx": 8.1.0
     "@svgr/plugin-svgo": 8.1.0
   checksum: c6eec5b0cf2fb2ecd3a7a362d272eda35330b17c76802a3481f499b5d07ff8f87b31d2571043bff399b051a1767b1e2e499dbf186104d1c06d76f9f1535fac01
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:5.66.4":
+  version: 5.66.4
+  resolution: "@tanstack/query-core@npm:5.66.4"
+  checksum: 947d89e844e46d8a13f2ba412227f534ab2d3c7a2f8c09ea3f00b5962ad0eadef94eeec67f61269990a0db23ce13d89df8f62de8bf98976ebda51e014ecbf811
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:5.66.9":
+  version: 5.66.9
+  resolution: "@tanstack/react-query@npm:5.66.9"
+  dependencies:
+    "@tanstack/query-core": 5.66.4
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: f81de05a362fc8e1d4d44353ff1c8abba0ca268f1c856b63eeaf50bcdba23c7a003045fdafe7540975d432c50f53af9041174d6eeb9fd8e2d8564591603533f4
   languageName: node
   linkType: hard
 
@@ -5201,12 +5221,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.18":
-  version: 18.2.18
-  resolution: "@types/react-dom@npm:18.2.18"
+"@types/react-dom@npm:18.2.0":
+  version: 18.2.0
+  resolution: "@types/react-dom@npm:18.2.0"
   dependencies:
     "@types/react": "*"
-  checksum: 8e3da404c980e2b2a76da3852f812ea6d8b9d0e7f5923fbaf3bfbbbfa1d59116ff91c129de8f68e9b7668a67ae34484fe9df74d5a7518cf8591ec07a0c4dad57
+  checksum: 9212b3793707a763f10e2c608f6ccb5f729029da6cb84204f333634d3d7baafbc1b20b7faf7cf788a8fd385050a1fb579902031f9462473ef10607116f33f33c
   languageName: node
   linkType: hard
 
@@ -5230,14 +5250,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.48":
-  version: 18.2.48
-  resolution: "@types/react@npm:18.2.48"
+"@types/react@npm:18.2.0":
+  version: 18.2.0
+  resolution: "@types/react@npm:18.2.0"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: c9ca43ed2995389b7e09492c24e6f911a8439bb8276dd17cc66a2fbebbf0b42daf7b2ad177043256533607c2ca644d7d928fdfce37a67af1f8646d2bac988900
+  checksum: db3d92b423150222a666329f7aa3023e3e942044700557b8a7d161530847e621aec9f56c9e7f71761b06dd164c8a7b17ad52355863efe80963dffa5537e8e5fd
   languageName: node
   linkType: hard
 
@@ -9469,11 +9489,12 @@ __metadata:
     "@launch-ui/typography": "*"
     "@launch-ui/utils": "*"
     "@svgr/webpack": 8.1.0
+    "@tanstack/react-query": 5.66.9
     "@types/lodash": 4.17.14
     "@types/node": 22.7.4
-    "@types/react": 18.2.48
+    "@types/react": 18.2.0
     "@types/react-animations": 1.0.0
-    "@types/react-dom": 18.2.18
+    "@types/react-dom": 18.2.0
     "@types/shortid": 0.0.29
     "@types/styled-components": 5.1.26
     "@typescript-eslint/eslint-plugin": 8.19.1

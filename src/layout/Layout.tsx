@@ -59,12 +59,10 @@ export const Layout: FC = () => {
   // }, []);
 
   return (
-    // @ts-expect-error
     <ThemeProvider theme={currentTheme}>
-      {/* @ts-expect-error */}
       <GlobalFonts />
 
-      {isLoading && <Loader fullscreen size='56px' />}
+      {isLoading && <Loader view='fullscreen' iconSize='56px' />}
 
       {!isLoading && (
         <LayoutStyled

@@ -1,7 +1,7 @@
 import React, { FC, useRef, useCallback } from 'react';
-import styled from 'styled-components';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { debounce } from 'lodash';
+import styled from 'styled-components';
 
 import { ThemeProvider } from 'styled-components';
 import { Outlet } from 'react-router-dom';

@@ -6,4 +6,14 @@ interface LaunchSpaceProps {
   units: string[];
 }
 
-export type { LaunchSpaceProps };
+interface LaunchUnitProps {
+  unitCode: string;
+  name: string;
+  createdAt: number;
+  updatedAt: number;
+  createdBy: string;
+  updatedBy: string;
+  body: string;
+}
+
+export type { LaunchSpaceProps, LaunchUnitProps };

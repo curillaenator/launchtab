@@ -1,1 +1,1 @@
-export { NotesSelector } from './NotesSelector';
+export { SpaceSelector } from './SpaceSelector';

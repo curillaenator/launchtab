@@ -6,10 +6,11 @@ import { useMatch } from 'react-router-dom';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import { NotesSelector } from '../AsideNotes';
+import { SpaceSelector } from '../AsideNotes';
 import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './aside.styled';
 
 import { $appStore } from '@src/entities/app';
+import { $userStore } from '@src/entities/user';
 
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
@@ -20,8 +21,11 @@ import StarIcon from '@src/assets/svg/star.svg';
 
 export const Aside: FC = memo(() => {
   const { isAsideOpen } = useEffectorUnit($appStore);
+  const { uid } = useEffectorUnit($userStore);
 
-  const notesRouteMatch = useMatch('/notes');
+  const notesRouteMatch = useMatch('/notes/:noteId?');
+
+  console.log('notesRouteMatch', notesRouteMatch?.params);
 
   return (
     <AsideStyled isAsideOpen={isAsideOpen}>
@@ -46,15 +50,19 @@ export const Aside: FC = memo(() => {
           </Typography>
         </RouteLinkStyled>
 
-        <RouteLinkStyled to='/notes'>
-          <StarIcon />
+        {!!uid && (
+          <>
+            <RouteLinkStyled to='/notes'>
+              <StarIcon />
 
-          <Typography as='span' type='RoundedBold20' className='typography'>
-            Notes
-          </Typography>
-        </RouteLinkStyled>
+              <Typography as='span' type='RoundedBold20' className='typography'>
+                Notes
+              </Typography>
+            </RouteLinkStyled>
 
-        {notesRouteMatch && <NotesSelector />}
+            {notesRouteMatch && <SpaceSelector />}
+          </>
+        )}
 
         <RouteLinkStyled
           to='https://google.com'

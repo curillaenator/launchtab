@@ -1,7 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { fsdb } from '@src/api/firebase';
 
-import type { LaunchSpaceProps } from './interfaces';
+import type { LaunchSpaceProps, LaunchUnitProps } from './interfaces';
 
 const getUserSpacesQuery = async (spaceIds: string[]) => {
   const userSpacesDto = await Promise.all(spaceIds.map((spaceId) => getDoc(doc(fsdb, 'spaces', spaceId))));
@@ -16,6 +16,17 @@ const getUserSpacesQuery = async (spaceIds: string[]) => {
   return userSpaces;
 };
 
-// const getSpaceNotes = async (spaceId: string) => {};
+const getSpaceUnitsQuery = async (unitIds: string[]) => {
+  const spaceUnitsDto = await Promise.all(unitIds.map((unitId) => getDoc(doc(fsdb, 'units', unitId))));
 
-export { getUserSpacesQuery };
+  const spaceUnits = await Promise.all(
+    spaceUnitsDto.map((snap) => {
+      if (!snap.exists()) return null;
+      return { ...snap.data(), unitCode: snap.id };
+    }),
+  ).then((resolved) => resolved.filter(Boolean) as LaunchUnitProps[]);
+
+  return spaceUnits;
+};
+
+export { getUserSpacesQuery, getSpaceUnitsQuery };

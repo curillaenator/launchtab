@@ -2,7 +2,7 @@ import React, { FC, useCallback, memo, useState, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { debounce } from 'lodash';
+import { debounce, throttle } from 'lodash';
 
 import { Corners } from '@launch-ui/shape';
 import { RichTextField, type RichtextChangeEvent } from '@launch-ui/richtext';
@@ -47,11 +47,16 @@ const Note: FC<NoteProps> = ({ maxHeight }) => {
     },
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const setHeaderMidComponentThrottled = useCallback(
+    throttle(() => setHeaderMidComponent(() => <Loader view='fit-parent' iconSize='56px' />), 5000),
+    [],
+  );
   const updateNoteBodyDebounced = useCallback(debounce(updateNoteBody, 5000), []); //eslint-disable-line react-hooks/exhaustive-deps
 
   const onRichTextChange = useCallback((richTextEvent: RichtextChangeEvent) => {
     console.log('onRichTextChange', richTextEvent.value);
-    setHeaderMidComponent(() => <Loader view='fit-parent' iconSize='56px' />);
+    setHeaderMidComponentThrottled();
     updateNoteBodyDebounced(richTextEvent);
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
 

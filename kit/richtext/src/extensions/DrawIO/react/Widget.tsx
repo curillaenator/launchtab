@@ -27,7 +27,7 @@ const UIWidget: FC<UiWidgetProps> = (props) => {
           {widgetAttrs.xmlpng ? (
             <img data-drawio-image src={widgetAttrs.xmlpng} className={styles.image} />
           ) : (
-            <div className={styles.badge} is-drawio-xmlpng-empty>
+            <div className={styles.badge} data-is-drawio-xmlpng-empty>
               <WidgetDrawioIcon />
               <span>Unpablished drawio</span>
             </div>

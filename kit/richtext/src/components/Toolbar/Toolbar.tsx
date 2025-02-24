@@ -28,8 +28,6 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
   }, []);
 
   useEffect(() => {
-    console.log('onSelectionUpdateHandlers', onSelectionUpdateHandlers);
-
     if (editor) {
       editor.on('selectionUpdate', onSelectionUpdate).on('update', onSelectionUpdate);
       onSelectionUpdate();

@@ -2,79 +2,22 @@ import React, { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery } from '@tanstack/react-query';
-import styled from 'styled-components';
+import cn from 'classnames';
 
 import { Dropable } from '@launch-ui/dropable';
 import { ButtonGhost, Button } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 
-import { Loader } from '@src/features/loader';
-
 import { getUserSpacesQuery, getSpaceUnitsQuery, LaunchSpaceProps } from '@src/entities/space';
 import { $userStore } from '@src/entities/user';
 
 import { useDropable } from '@src/hooks/useDropable';
-import classNames from 'classnames';
 
-const NotesSelectorStyled = styled.div`
-  --dd-pd: 8px 8px;
-  --dd-bdw: 1px;
-  --dd-scrl-pd: 0;
-  --dd-bdrs: 18px;
+import { Loader } from '@src/features/loader';
 
-  --dd-bgc: var(--theme-backgrounds-lightest);
-  --dd-bdc: var(--theme-backgrounds-dark);
-  --dd-drop-sh: 0 0 0 0 transparent;
+import { NotesSelectorStyled } from './selector.styled';
 
-  width: 100%;
-  min-height: 40px;
-  padding: 32px 0;
-
-  .open-spaces-button {
-    width: 100%;
-    justify-content: flex-start;
-
-    &_inactive {
-      --shp-bgc: var(--theme-backgrounds-lightest);
-    }
-  }
-
-  .unit-list {
-    margin-top: 32px;
-    width: 100%;
-    padding-left: 24px;
-  }
-
-  .selector-loader-dummy {
-    --shp-bgc: ${({ theme }) => theme.backgrounds.lightest};
-    --shp-bdc: transparent;
-
-    // for corners
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 56px;
-    border-radius: calc(24px * 1.25 + 3px);
-
-    background-color: ${({ theme }) => theme.backgrounds.lightest};
-  }
-
-  .unit-loader-dummy {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: 32px;
-    width: 100%;
-    height: 40px;
-  }
-`;
-
-const SpaceSelector: FC = () => {
+const AsideNotesElement: FC = () => {
   const { noteId: routerNoteId } = useParams<{ noteId?: string }>();
 
   const { uid, spaces: spaceIds = [] } = useEffectorUnit($userStore);
@@ -84,13 +27,13 @@ const SpaceSelector: FC = () => {
   const navigate = useNavigate();
 
   const { data: userSpaces, isLoading: isUserSpacesLoading } = useQuery({
-    queryKey: ['user-spaces-query', spaceIds.join('-') || null],
+    queryKey: ['user-spaces-query', uid, spaceIds.join('-') || null],
     queryFn: () => getUserSpacesQuery(spaceIds),
     enabled: !!uid && !!spaceIds.length,
   });
 
   const { data: spaceUnits, isLoading: isSpaceUnitsLoading } = useQuery({
-    queryKey: ['space-units-query', selectedSpace?.spaceCode || null],
+    queryKey: ['space-units-query', uid, selectedSpace?.spaceCode || null],
     queryFn: () => getSpaceUnitsQuery(selectedSpace!.units),
     enabled: !!uid && !!selectedSpace?.spaceCode && !!selectedSpace?.units?.length,
   });
@@ -106,7 +49,7 @@ const SpaceSelector: FC = () => {
   } = useDropable();
 
   return (
-    <NotesSelectorStyled>
+    <NotesSelectorStyled data-aside-notes-element>
       {isUserSpacesLoading ? (
         <div className='selector-loader-dummy'>
           <Corners borderRadius={24} />
@@ -123,7 +66,7 @@ const SpaceSelector: FC = () => {
             <Button
               title={userSpaces?.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name}
               active={isSpaceSelectorOpen}
-              className={classNames('open-spaces-button', {
+              className={cn('open-spaces-button', {
                 ['open-spaces-button_inactive']: !isSpaceSelectorOpen,
               })}
             />
@@ -148,7 +91,7 @@ const SpaceSelector: FC = () => {
           <Loader />
         </div>
       ) : spaceUnits?.length ? (
-        <div className='unit-list'>
+        <div className='unit-list' data-aside-notes-element-unit-list>
           {spaceUnits.map(({ unitCode, name: unitName }) => (
             <ButtonGhost
               key={unitCode}
@@ -165,4 +108,4 @@ const SpaceSelector: FC = () => {
   );
 };
 
-export { SpaceSelector };
+export { AsideNotesElement };

@@ -6,12 +6,13 @@ import { useMatch } from 'react-router-dom';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import { SpaceSelector } from '../AsideNotes';
+import { AsideNotesElement } from '../asideNotesElem';
 import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './aside.styled';
 
 import { $appStore } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 
+import { NOTES_ROUTE } from '@src/routes';
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
 //@ts-expect-error
@@ -23,9 +24,7 @@ export const Aside: FC = memo(() => {
   const { isAsideOpen } = useEffectorUnit($appStore);
   const { uid } = useEffectorUnit($userStore);
 
-  const notesRouteMatch = useMatch('/notes/:noteId?');
-
-  console.log('notesRouteMatch', notesRouteMatch?.params);
+  const notesRouteMatch = useMatch(NOTES_ROUTE);
 
   return (
     <AsideStyled isAsideOpen={isAsideOpen}>
@@ -60,7 +59,7 @@ export const Aside: FC = memo(() => {
               </Typography>
             </RouteLinkStyled>
 
-            {notesRouteMatch && <SpaceSelector />}
+            {notesRouteMatch && <AsideNotesElement />}
           </>
         )}
 

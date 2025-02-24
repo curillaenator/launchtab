@@ -7,23 +7,25 @@ import { Layout } from './layout';
 import { LaunchTabs, Notes } from './pages';
 import { Loader } from './features/loader';
 
+import { ROOT_ROUTE, NOTES_ROUTE } from './routes';
+
 import './index.css';
 
 const appContainer = document.querySelector('#root') as Element;
-const root = createRoot(appContainer);
+const reactRoot = createRoot(appContainer);
 
 const client = new QueryClient();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<Layout />}>
+    <Route path={ROOT_ROUTE} element={<Layout />}>
       <Route index element={<LaunchTabs />} />
-      <Route path='/notes/:noteId?' element={<Notes />} />
+      <Route path={NOTES_ROUTE} element={<Notes />} />
     </Route>,
   ),
 );
 
-root.render(
+reactRoot.render(
   <QueryClientProvider client={client}>
     <RouterProvider router={router} fallbackElement={<Loader view='fit-parent' iconSize='56px' />} />
   </QueryClientProvider>,

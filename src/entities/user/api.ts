@@ -1,6 +1,5 @@
 import { signOut, signInWithPopup, GoogleAuthProvider, type User as FirebaseUser } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { omit } from 'lodash';
 
 import { fsdb, auth } from '@src/api/firebase';
 
@@ -58,17 +57,12 @@ const getUserData = async (user: FirebaseUser | null) => {
     setAppLoading(false);
 
     setDoc(doc(fsdb, 'users', user.uid), optimisticUserData);
-
     return;
   }
 
   const dbUserData = userSnap.data() as LaunchStoreUser;
 
-  if ('pages' in dbUserData) {
-    setDoc(doc(fsdb, 'bookmarks', user.uid), { bookmarks: dbUserData['pages'] });
-  }
-
-  setUser(omit(dbUserData, 'pages'));
+  setUser(dbUserData);
   setSettings(dbUserData.settings);
 
   setAppLoading(false);

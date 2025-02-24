@@ -27,7 +27,6 @@ const appear = keyframes`
   }
 `;
 
-//@ts-expect-error
 const PopupStyled = styled(Popup)`
   &-overlay {
   }

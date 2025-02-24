@@ -1,0 +1,3 @@
+const NOTE_DEBOUNCE_TIME = 5000;
+
+export { NOTE_DEBOUNCE_TIME };

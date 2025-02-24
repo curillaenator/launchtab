@@ -12,7 +12,7 @@ const getNoteBodyQuery = async (noteId: string) => {
 async function updateNoteBodyMutation(noteId: string, noteBody: string) {
   let response = { routerNoteId: false };
 
-  setDoc(doc(fsdb, 'notes', noteId), { tiptap: noteBody }).then(() => (response.routerNoteId = true));
+  await setDoc(doc(fsdb, 'notes', noteId), { tiptap: noteBody }).then(() => (response.routerNoteId = true));
 
   return response;
 }

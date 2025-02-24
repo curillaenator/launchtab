@@ -8,14 +8,15 @@ import { Dropable } from '@launch-ui/dropable';
 import { ButtonGhost, Button } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 
-import { getUserSpacesQuery, getSpaceUnitsQuery, LaunchSpaceProps } from '@src/entities/space';
-import { $userStore } from '@src/entities/user';
-
 import { useDropable } from '@src/hooks/useDropable';
 
-import { Loader } from '@src/features/loader';
+import { getUserSpacesQuery, getSpaceUnitsQuery, LaunchSpaceProps, MAX_SPACES_PER_USER } from '@src/entities/space';
+import { $userStore } from '@src/entities/user';
 
+import { Loader } from '@src/features/loader';
 import { NotesSelectorStyled } from './selector.styled';
+
+// import FolderIcon from '@src/assets/svg/folder.svg';
 
 const AsideNotesElement: FC = () => {
   const { noteId: routerNoteId } = useParams<{ noteId?: string }>();
@@ -55,7 +56,7 @@ const AsideNotesElement: FC = () => {
           <Corners borderRadius={24} />
           <Loader />
         </div>
-      ) : (
+      ) : userSpaces?.length ? (
         <Dropable
           {...restSpaceSelector}
           maxHeight={320}
@@ -64,7 +65,7 @@ const AsideNotesElement: FC = () => {
           offset={[0, 16]}
           openNode={
             <Button
-              title={userSpaces?.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name}
+              title={userSpaces?.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name || 'No spaces created'}
               active={isSpaceSelectorOpen}
               className={cn('open-spaces-button', {
                 ['open-spaces-button_inactive']: !isSpaceSelectorOpen,
@@ -72,7 +73,7 @@ const AsideNotesElement: FC = () => {
             />
           }
         >
-          {(userSpaces || []).map((userSpace) => (
+          {userSpaces.map((userSpace) => (
             <ButtonGhost
               key={userSpace.spaceCode}
               height={32}
@@ -84,6 +85,15 @@ const AsideNotesElement: FC = () => {
             />
           ))}
         </Dropable>
+      ) : (
+        <Button
+          active
+          disabled={(userSpaces?.length || 0) >= MAX_SPACES_PER_USER}
+          className='create-space-button'
+          title={
+            (userSpaces?.length || 0) >= MAX_SPACES_PER_USER ? `${MAX_SPACES_PER_USER} spaces maximum` : 'Create space'
+          }
+        />
       )}
 
       {isSpaceUnitsLoading ? (
@@ -97,9 +107,7 @@ const AsideNotesElement: FC = () => {
               key={unitCode}
               title={unitName}
               active={routerNoteId === unitCode}
-              onClick={() => {
-                navigate(`/notes/${unitCode}`);
-              }}
+              onClick={() => navigate(`/notes/${unitCode}`)}
             />
           ))}
         </div>

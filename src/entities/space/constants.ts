@@ -1,0 +1,3 @@
+const MAX_SPACES_PER_USER = 5;
+
+export { MAX_SPACES_PER_USER };

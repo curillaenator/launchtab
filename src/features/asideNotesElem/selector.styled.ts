@@ -23,6 +23,10 @@ const NotesSelectorStyled = styled.div`
     }
   }
 
+  .create-space-button {
+    width: 100%;
+  }
+
   .unit-list {
     margin-top: 32px;
     width: 100%;

@@ -21,6 +21,7 @@ import { $settingsStore } from '@src/entities/settings';
 import { setHeaderShadowed } from '@src/entities/header';
 
 import { useDomStyles } from '@src/hooks/useDomStyles';
+import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
 
 import GlobalFonts from '@src/assets/fonts/fonts';
 import LayoutStyled from './styled';
@@ -31,7 +32,7 @@ import { MAIN_ELEMENT_ID } from './constants';
 
 const MainStyled = styled.main`
   width: 100%;
-  padding: 56px;
+  padding: 0 56px;
 `;
 
 export const Layout: FC = () => {
@@ -42,6 +43,7 @@ export const Layout: FC = () => {
   const mouseWatcher = useRef<((e: React.MouseEvent<Element, MouseEvent>) => void) | null>(null);
 
   const { currentTheme } = useDomStyles();
+  const { ref: layoutRef } = useThemeToCssv(currentTheme);
 
   useAuthState();
 
@@ -66,6 +68,7 @@ export const Layout: FC = () => {
 
       {!isLoading && (
         <LayoutStyled
+          ref={layoutRef}
           className='layout-container'
           data-description='layout-container'
           $isAsideOpen={isAsideOpen}

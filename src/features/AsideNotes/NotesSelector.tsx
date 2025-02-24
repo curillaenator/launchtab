@@ -19,7 +19,7 @@ const NotesSelectorStyled = styled.div`
   --dd-pd: 8px 8px;
   --dd-bdw: 1px;
   --dd-scrl-pd: 0;
-  --dd-bdrs: 24px;
+  --dd-bdrs: 18px;
 
   --dd-bgc: var(--theme-backgrounds-lightest);
   --dd-bdc: var(--theme-backgrounds-dark);

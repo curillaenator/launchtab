@@ -70,7 +70,6 @@ const getUserData = async (user: FirebaseUser | null) => {
 
   setUser(omit(dbUserData, 'pages'));
   setSettings(dbUserData.settings);
-  // setTabsWithoutDbUpdate(dbUserData.pages);
 
   setAppLoading(false);
 };

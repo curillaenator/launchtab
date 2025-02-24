@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useTheme } from 'styled-components';
 import { toPairs } from 'lodash';
+import { TTheme } from '@launch-ui/theme';
 
 const traverseTheme = (map: Map<string, string>, val: Record<string, unknown> | string, path: string[]) => {
   if (typeof val === 'string') return map.set('--'.concat(path.join('-')), val);
@@ -10,26 +10,20 @@ const traverseTheme = (map: Map<string, string>, val: Record<string, unknown> | 
   );
 };
 
-const useThemeToCssv = () => {
-  const pageRef = useRef<HTMLDivElement | null>(null);
+const useThemeToCssv = (theme: TTheme) => {
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const cssv = useRef(new Map<string, string>());
-
-  const theme = useTheme();
 
   useEffect(() => {
     cssv.current.clear();
 
     traverseTheme(cssv.current, theme, ['theme']);
 
-    cssv.current.forEach((cssvVal, cssvKey) => pageRef.current?.style.setProperty(cssvKey, cssvVal));
-
-    // console.log('traverseTheme', cssv.current.entries());
+    cssv.current.forEach((cssvVal, cssvKey) => ref.current?.style.setProperty(cssvKey, cssvVal));
   }, [theme]);
 
-  return {
-    pageRef,
-  };
+  return { ref };
 };
 
 export { useThemeToCssv };

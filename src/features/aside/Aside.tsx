@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useMatch } from 'react-router-dom';
@@ -6,12 +6,10 @@ import { useMatch } from 'react-router-dom';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import { NotesSelector } from './NotesSelector';
+import { NotesSelector } from '../AsideNotes';
 import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './aside.styled';
 
 import { $appStore } from '@src/entities/app';
-
-import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
 
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
@@ -20,15 +18,13 @@ import GoogleIcon from '@src/assets/svg/google.svg';
 //@ts-expect-error
 import StarIcon from '@src/assets/svg/star.svg';
 
-export const Aside: FC = () => {
+export const Aside: FC = memo(() => {
   const { isAsideOpen } = useEffectorUnit($appStore);
-
-  const { pageRef } = useThemeToCssv();
 
   const notesRouteMatch = useMatch('/notes');
 
   return (
-    <AsideStyled isAsideOpen={isAsideOpen} ref={pageRef}>
+    <AsideStyled isAsideOpen={isAsideOpen}>
       <Corners borderRadius={24} corners={['tr', 'br']} />
 
       <AsideHeader>
@@ -74,4 +70,4 @@ export const Aside: FC = () => {
       </AsideRoutesList>
     </AsideStyled>
   );
-};
+});

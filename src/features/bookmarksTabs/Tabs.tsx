@@ -19,7 +19,6 @@ const SortableListStyled = styled(SortableList)`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 3.5rem;
 `;
 
 export const Tabs: FC = () => {

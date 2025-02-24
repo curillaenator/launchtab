@@ -10,7 +10,7 @@ import { LookFeel } from './components';
 
 import { setRightDrawer } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
-import { $settingsStore, saveSettings } from '@src/entities/settings';
+import { $settingsStore, saveSettingsQuery } from '@src/entities/settings';
 
 import { SettingsStyled } from './styles';
 
@@ -57,7 +57,7 @@ export const Settings: FC = () => {
               LeftIcon={SaveIcon}
               title='Save settings'
               onClick={() => {
-                saveSettings({ uid, settings });
+                saveSettingsQuery({ uid, settings });
                 setRightDrawer(false);
               }}
             />

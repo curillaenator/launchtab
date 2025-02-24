@@ -1,1 +1,1 @@
-export { $headerStore, setHeaderShadowed } from './store';
+export * from './store';

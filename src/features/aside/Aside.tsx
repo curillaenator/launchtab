@@ -16,9 +16,8 @@ import { NOTES_ROUTE } from '@src/routes';
 //@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
 //@ts-expect-error
-import GoogleIcon from '@src/assets/svg/google.svg';
-//@ts-expect-error
 import StarIcon from '@src/assets/svg/star.svg';
+// import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const Aside: FC = memo(() => {
   const { isAsideOpen } = useEffectorUnit($appStore);
@@ -63,7 +62,7 @@ export const Aside: FC = memo(() => {
           </>
         )}
 
-        <RouteLinkStyled
+        {/* <RouteLinkStyled
           to='https://google.com'
           target='_blank'
           // className={(({ isActive }) => (isActive ? 'active-route' : '')) as NavLinkProps['className']}
@@ -73,7 +72,7 @@ export const Aside: FC = memo(() => {
           <Typography as='span' type='RoundedBold20' className='typography'>
             Google
           </Typography>
-        </RouteLinkStyled>
+        </RouteLinkStyled> */}
       </AsideRoutesList>
     </AsideStyled>
   );

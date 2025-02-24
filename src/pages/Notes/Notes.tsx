@@ -1,6 +1,6 @@
 import React, { FC, useCallback, memo, useState, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { debounce, throttle } from 'lodash';
 
 import { Corners } from '@launch-ui/shape';
@@ -13,17 +13,31 @@ import { setHeaderMidComponent } from '@src/entities/header';
 import { useNoteBodyData, useNoteBodyUpdate, NOTE_DEBOUNCE_TIME } from '@src/entities/note';
 
 import { Loader } from '@src/features/loader';
+
+import { CreateSpace } from '../CreateSpace';
+import { CreateNote } from '../CreateNote';
 import { NotesContainer, RichTextContainer } from './notes.styled';
 
 import 'tabulator-tables/dist/css/tabulator.min.css';
+
+type CreateParamType = 'space' | 'note';
+
+const CREATE_COMPONENTS_ASSOC: Record<CreateParamType, FC> = {
+  space: CreateSpace,
+  note: CreateNote,
+};
 
 const HeaderComponent: FC = () => <Loader view='fit-parent' iconSize='56px' />;
 const updateHeader = () => setHeaderMidComponent(HeaderComponent);
 
 const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
-  const { noteId: routerNoteId = null } = useParams<{ noteId?: string }>();
+  const { noteId: routerNoteId = null } = useParams<{
+    noteId?: string;
+    createPageType?: CreateParamType;
+  }>();
 
   const { uid } = useEffectorUnit($userStore);
+
   const payload = { uid, routerNoteId } as const;
 
   const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData(payload);
@@ -49,7 +63,12 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
 };
 
 const Notes: FC = memo(() => {
-  const { noteId: routerNoteId } = useParams<{ noteId?: string }>();
+  const { noteId: routerNoteId, createPageType } = useParams<{
+    noteId?: string;
+    createPageType?: CreateParamType;
+  }>();
+
+  const { uid } = useEffectorUnit($userStore);
 
   useEffect(() => {
     setAside(true);
@@ -65,6 +84,13 @@ const Notes: FC = memo(() => {
     window.addEventListener('resize', onWindowResize);
     return () => window.removeEventListener('resize', onWindowResize);
   }, [onWindowResize]);
+
+  if (!uid) return <Navigate to='/' replace />;
+
+  if (!!createPageType) {
+    const CreateMappedComponent = CREATE_COMPONENTS_ASSOC[createPageType];
+    return <CreateMappedComponent />;
+  }
 
   return (
     <NotesContainer data-notes-container height={pageOutletHeight}>

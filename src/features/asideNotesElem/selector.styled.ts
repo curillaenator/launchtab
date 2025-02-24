@@ -14,8 +14,14 @@ const NotesSelectorStyled = styled.div`
   min-height: 40px;
   padding: 32px 0;
 
-  .open-spaces-button {
+  .space-elements {
+    display: flex;
+    gap: 8px;
     width: 100%;
+  }
+
+  .open-spaces-button {
+    width: calc(100% - 64px);
     justify-content: flex-start;
 
     &_inactive {
@@ -25,6 +31,10 @@ const NotesSelectorStyled = styled.div`
 
   .create-space-button {
     width: 100%;
+
+    &_inactive {
+      --shp-bgc: var(--theme-backgrounds-lightest);
+    }
   }
 
   .unit-list {

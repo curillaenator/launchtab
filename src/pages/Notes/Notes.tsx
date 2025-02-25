@@ -1,6 +1,6 @@
 import React, { FC, useCallback, memo, useState, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { debounce, throttle } from 'lodash';
 
 import { Corners } from '@launch-ui/shape';
@@ -68,8 +68,6 @@ const Notes: FC = memo(() => {
     createPageType?: CreateParamType;
   }>();
 
-  const { uid } = useEffectorUnit($userStore);
-
   useEffect(() => {
     setAside(true);
   }, []);
@@ -85,7 +83,7 @@ const Notes: FC = memo(() => {
     return () => window.removeEventListener('resize', onWindowResize);
   }, [onWindowResize]);
 
-  if (!uid) return <Navigate to='/' replace />;
+  // if (!uid) return <Navigate to='/' replace />;
 
   if (!!createPageType) {
     const CreateMappedComponent = CREATE_COMPONENTS_ASSOC[createPageType];

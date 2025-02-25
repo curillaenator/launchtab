@@ -14,7 +14,7 @@ import { useCreateSpace, LaunchSpaceProps } from '@src/entities/space';
 
 import { CreateSpaceForm } from './createSpace.styled';
 
-import { USER_SPACES_QUERY } from '@src/shared/queryKeys';
+import { USER_QUERY } from '@src/shared/queryKeys';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 
@@ -41,10 +41,8 @@ const CreateSpace: FC = () => {
   const { mutate: createSpace } = useCreateSpace({
     uid,
     onSuccess: ({ createdSpaceCode }) => {
-      console.log('updatedSpaces', createdSpaceCode);
-
       if (!!createdSpaceCode) {
-        qc.invalidateQueries({ queryKey: [USER_SPACES_QUERY, uid] });
+        qc.invalidateQueries({ queryKey: [USER_QUERY, uid] });
         navigate('/notes');
       }
     },

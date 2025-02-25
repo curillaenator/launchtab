@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, memo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery } from '@tanstack/react-query';
@@ -32,33 +32,31 @@ type CreateParamType = 'space' | 'note';
 
 // import FolderIcon from '@src/assets/svg/folder.svg';
 
-const AsideNotesElement: FC = () => {
+const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
   const { noteId: routerNoteId, createPageType } = useParams<{
     noteId?: string;
     createPageType?: CreateParamType;
   }>();
 
-  const { uid, lastViewedSpace } = useEffectorUnit($userStore);
+  const { lastViewedSpace, spaces: spaceIdList = [] } = useEffectorUnit($userStore);
 
   const [selectedSpace, setSelectedSpace] = useState<LaunchSpaceProps | null>(null);
 
   const navigate = useNavigate();
 
   const { data: userSpaces, isLoading: isUserSpacesLoading } = useQuery({
-    queryKey: [USER_SPACES_QUERY, uid],
-    queryFn: () => getUserSpacesQuery(uid!),
-    enabled: !!uid,
+    queryKey: [USER_SPACES_QUERY, spaceIdList],
+    queryFn: () => getUserSpacesQuery(spaceIdList),
   });
 
   const { data: spaceUnits, isLoading: isSpaceUnitsLoading } = useQuery({
-    queryKey: [SPACE_UNITS_QUERY, uid, selectedSpace?.spaceCode || null],
+    queryKey: [SPACE_UNITS_QUERY, selectedSpace?.units || []],
     queryFn: () => getSpaceUnitsQuery(selectedSpace!.units),
-    enabled: !!uid && !!selectedSpace?.spaceCode,
+    enabled: !!selectedSpace?.units.length,
   });
 
   useEffect(() => {
-    if (!!userSpaces?.length)
-      setSelectedSpace(userSpaces.find((sp) => sp.spaceCode === lastViewedSpace) || userSpaces[0]);
+    setSelectedSpace(userSpaces?.find((sp) => sp.spaceCode === lastViewedSpace) || userSpaces?.[0] || null);
   }, [userSpaces, lastViewedSpace]);
 
   const {
@@ -69,12 +67,27 @@ const AsideNotesElement: FC = () => {
 
   return (
     <NotesSelectorStyled data-aside-notes-element>
-      {isUserSpacesLoading ? (
+      {isUserSpacesLoading && (
         <div className='selector-loader-dummy'>
           <Corners borderRadius={24} />
           <Loader />
         </div>
-      ) : !!userSpaces?.length ? (
+      )}
+
+      {!isUserSpacesLoading && !userSpaces && (
+        <Button
+          active={createPageType === 'space'}
+          disabled={!userSpaces}
+          IconLeft={() => <PlusIcon />}
+          title={!userSpaces ? 'Wait...' : 'Create LaunchSpace'}
+          onClick={() => navigate('/notes/create/space')}
+          className={cn('create-space-button', {
+            ['create-space-button_inactive']: createPageType !== 'space',
+          })}
+        />
+      )}
+
+      {!isUserSpacesLoading && !!userSpaces?.length && (
         <div className='space-elements'>
           <Dropable
             {...restSpaceSelector}
@@ -115,16 +128,6 @@ const AsideNotesElement: FC = () => {
             }}
           />
         </div>
-      ) : (
-        <Button
-          active={createPageType === 'space'}
-          IconLeft={() => <PlusIcon />}
-          title='Create LaunchSpace'
-          onClick={() => navigate('/notes/create/space')}
-          className={cn('create-space-button', {
-            ['create-space-button_inactive']: createPageType !== 'space',
-          })}
-        />
       )}
 
       {isSpaceUnitsLoading ? (
@@ -145,6 +148,6 @@ const AsideNotesElement: FC = () => {
       ) : null}
     </NotesSelectorStyled>
   );
-};
+});
 
 export { AsideNotesElement };

@@ -8,7 +8,7 @@ interface LaunchStoreUser {
   avatar: string | null;
   spaces?: string[];
   settings: SettingsStore;
-  lastViewedSpace?: string;
+  lastViewedSpace?: string | null;
 }
 
 interface LaunchUserData extends LaunchStoreUser {

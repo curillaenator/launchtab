@@ -28,6 +28,7 @@ const DASH = keyframes`
 interface LoaderProps {
   view?: 'fullscreen' | 'fit-parent' | 'fit-content';
   iconSize?: CSSProperties['width'];
+  color?: string;
 }
 
 interface LoaderStyledProps {
@@ -50,7 +51,7 @@ const LoaderStyled = styled.div<LoaderStyledProps>`
 
     .animatedCircle {
       fill: none;
-      stroke: ${({ theme }) => theme.primary[500]};
+      stroke: ${({ theme, color }) => color || theme.primary[500]};
       stroke-width: 1.8px;
       transform-origin: center;
       stroke-linecap: round;
@@ -68,10 +69,10 @@ const getCssValue = (view: LoaderProps['view'], fsUnits: 'vw' | 'vh' = 'vw') => 
 };
 
 export const Loader: FC<LoaderProps> = (props) => {
-  const { view = 'fit-content', iconSize = '32px' } = props;
+  const { view = 'fit-content', iconSize = '32px', color } = props;
 
   return (
-    <LoaderStyled width={getCssValue(view)} height={getCssValue(view, 'vh')} iconSize={iconSize}>
+    <LoaderStyled width={getCssValue(view)} height={getCssValue(view, 'vh')} iconSize={iconSize} color={color}>
       <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
         <circle className='animatedCircle' cx='12' cy='12' r='8' />
       </svg>

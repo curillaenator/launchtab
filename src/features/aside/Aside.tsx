@@ -56,7 +56,7 @@ export const Aside: FC = memo(() => {
               </Typography>
             </RouteLinkStyled>
 
-            {notesRouteMatch && <AsideNotesElement />}
+            {notesRouteMatch && <AsideNotesElement uid={uid} />}
           </>
         )}
 

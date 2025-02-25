@@ -1,9 +1,7 @@
-import { signOut, signInWithPopup, GoogleAuthProvider, type User as FirebaseUser } from 'firebase/auth';
+import { signOut, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-
 import { fsdb, auth } from '@src/api/firebase';
-
-import { setAppLoading } from '../app';
+import { pick } from 'lodash';
 
 import { setSettings } from '../settings';
 import { setTabsWithoutDbUpdate } from '../bookmarks';
@@ -18,54 +16,34 @@ import type { LaunchStoreUser } from './interfaces';
 const googleProvider = new GoogleAuthProvider();
 
 const login = () => {
-  setAppLoading(true);
   signInWithPopup(auth, googleProvider);
 };
 
 const logout = () => {
-  setAppLoading(true);
-  signOut(auth);
   setUser(NULL_USER);
   setSettings(DEFAULT_SETTINGS);
   setTabsWithoutDbUpdate(DEFAULT_PAGES);
   localStorage.clear();
+  signOut(auth);
 };
 
-const getUserData = async (user: FirebaseUser | null) => {
-  if (!user) {
-    setAppLoading(false);
-    return;
-  }
+const NO_DATA: Partial<LaunchStoreUser> = { spaces: [], settings: DEFAULT_SETTINGS, lastViewedSpace: null };
 
-  const { uid, displayName, email, photoURL } = user;
+async function getUserLaunchDataQuery(user: LaunchStoreUser) {
+  if (!user?.uid) return NO_DATA;
 
-  const optimisticUserData: LaunchStoreUser = {
-    uid,
-    username: displayName,
-    email,
-    avatar: photoURL,
-    settings: DEFAULT_SETTINGS,
-    spaces: [],
-  };
+  const { uid } = user;
 
   const userSnap = await getDoc(doc(fsdb, 'users', uid));
 
-  // optimistic update data if no db record presented (first login)
   if (!userSnap.exists()) {
-    setUser(optimisticUserData);
-    setSettings(optimisticUserData.settings);
-    setAppLoading(false);
-
-    setDoc(doc(fsdb, 'users', user.uid), optimisticUserData);
-    return;
+    await setDoc(doc(fsdb, 'users', uid), user);
+    return NO_DATA;
   }
 
-  const dbUserData = userSnap.data() as LaunchStoreUser;
+  const dbUser = userSnap.data() as LaunchStoreUser;
 
-  setUser(dbUserData);
-  setSettings(dbUserData.settings);
+  return pick(dbUser, ['spaces', 'lastViewedSpace', 'settings']) as Partial<LaunchStoreUser>;
+}
 
-  setAppLoading(false);
-};
-
-export { login, logout, getUserData };
+export { login, logout, getUserLaunchDataQuery };

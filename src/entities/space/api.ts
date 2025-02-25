@@ -19,17 +19,13 @@ const createSpaceQuery = async (uid: string, spaceFormData: LaunchSpaceProps) =>
   return { createdSpaceCode: docRef.id };
 };
 
-const getUserSpacesQuery = async (uid: string) => {
-  const spaceIds: string[] = await getDoc(doc(fsdb, 'users', uid)).then((snap) =>
-    snap.exists() ? snap.data()?.['spaces'] : [],
-  );
-
+const getUserSpacesQuery = async (spaceIds: string[]) => {
   const userSpacesDto = await Promise.all(spaceIds.map((spaceId) => getDoc(doc(fsdb, 'spaces', spaceId))));
 
   const userSpaces = await Promise.all(
-    userSpacesDto.map((snap) => {
-      if (!snap.exists()) return null;
-      return { ...snap.data(), spaceCode: snap.id };
+    userSpacesDto.map((spaceSnap) => {
+      if (!spaceSnap.exists()) return null;
+      return { ...spaceSnap.data(), spaceCode: spaceSnap.id };
     }),
   ).then((resolved) => resolved.filter(Boolean) as LaunchSpaceProps[]);
 
@@ -40,9 +36,9 @@ const getSpaceUnitsQuery = async (unitIds: string[]) => {
   const spaceUnitsDto = await Promise.all(unitIds.map((unitId) => getDoc(doc(fsdb, 'units', unitId))));
 
   const spaceUnits = await Promise.all(
-    spaceUnitsDto.map((snap) => {
-      if (!snap.exists()) return null;
-      return { ...snap.data(), unitCode: snap.id };
+    spaceUnitsDto.map((unitSnap) => {
+      if (!unitSnap.exists()) return null;
+      return { ...unitSnap.data(), unitCode: unitSnap.id };
     }),
   ).then((resolved) => resolved.filter(Boolean) as LaunchUnitProps[]);
 

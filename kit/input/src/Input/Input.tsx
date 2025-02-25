@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, useState, useRef } from 'react';
+import React, { forwardRef, useState, useRef, useImperativeHandle } from 'react';
 
 import { ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
@@ -6,7 +6,7 @@ import { Typography } from '@launch-ui/typography';
 import { InputStyled } from './input.styled';
 import { InputProps } from './interfaces';
 
-export const Input: FC<InputProps> = (props) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     state = 'normal',
     type = 'text',
@@ -24,6 +24,9 @@ export const Input: FC<InputProps> = (props) => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const inputButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  //@ts-expect-error
+  useImperativeHandle(ref, () => (ref = inputRef.current));
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -88,4 +91,6 @@ export const Input: FC<InputProps> = (props) => {
       )}
     </InputStyled>
   );
-};
+});
+
+export { Input };

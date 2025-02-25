@@ -25,7 +25,8 @@ import { Loader } from '@src/features/loader';
 import { USER_SPACES_QUERY, SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
 
 import { NotesSelectorStyled } from './selector.styled';
-import { PlusIcon } from './PlusIcon';
+
+import PlusIcon from '@src/assets/svg/plus.svg';
 
 type CreateParamType = 'space' | 'note';
 
@@ -106,7 +107,8 @@ const AsideNotesElement: FC = () => {
           </Dropable>
 
           <Button
-            IconLeft={PlusIcon}
+            active={createPageType === 'space'}
+            IconLeft={() => <PlusIcon />}
             onClick={() => {
               if ((userSpaces?.length || 0) < MAX_SPACES_PER_USER) return navigate('/notes/create/space');
               alert(`Space count is limited by ${MAX_SPACES_PER_USER}`);
@@ -116,6 +118,7 @@ const AsideNotesElement: FC = () => {
       ) : (
         <Button
           active={createPageType === 'space'}
+          IconLeft={() => <PlusIcon />}
           title='Create LaunchSpace'
           onClick={() => navigate('/notes/create/space')}
           className={cn('create-space-button', {

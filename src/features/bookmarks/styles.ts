@@ -1,7 +1,6 @@
 import SortableList from 'react-easy-sort';
 import styled from 'styled-components';
 
-//@ts-expect-error
 const SortableListStyled = styled(SortableList)`
   display: grid;
   grid-template-columns: 1fr;

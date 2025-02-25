@@ -10,9 +10,7 @@ import { CreateFormCTX } from './context';
 import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
 
-//@ts-expect-error
 import LinkIcon from '@src/assets/svg/link.svg';
-//@ts-expect-error
 import FolderIcon from '@src/assets/svg/folder.svg';
 
 const appear = keyframes`
@@ -90,7 +88,7 @@ export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) 
         position={['right center', 'left center']}
         trigger={(open: boolean) =>
           create === 'new-page' ? (
-            <Button active={open} IconLeft={FolderIcon} />
+            <Button active={open} IconLeft={() => <FolderIcon />} />
           ) : (
             <CreateBookmarkCard active={open}>
               <Corners borderRadius={24} stroke={3} />

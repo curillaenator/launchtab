@@ -16,12 +16,12 @@ const NotesSelectorStyled = styled.div`
 
   .space-elements {
     display: flex;
-    gap: 8px;
+    gap: 16px;
     width: 100%;
   }
 
   .open-spaces-button {
-    width: calc(100% - 64px);
+    width: 100%;
     justify-content: flex-start;
 
     &_inactive {

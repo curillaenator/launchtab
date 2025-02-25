@@ -1,18 +1,6 @@
 import React from 'react';
 
-import LableIcon from '@src/assets/svg/lable.svg';
-import LinkIcon from '@src/assets/svg/link2.svg';
-import SearchIcon from '@src/assets/svg/search.svg';
-import EmailIcon from '@src/assets/svg/email.svg';
-import KeyIcon from '@src/assets/svg/key.svg';
-
-export const inputIcons = {
-  label: <LableIcon className='input_icon' />,
-
-  link: <LinkIcon className='input_icon' />,
-
-  search: <SearchIcon className='input_icon' />,
-
+const inputIcons = {
   image: (
     <svg
       className='input_icon'
@@ -34,10 +22,6 @@ export const inputIcons = {
       />
     </svg>
   ),
-
-  email: <EmailIcon className='input_icon' />,
-
-  password: <KeyIcon className='input_icon' />,
 
   lock: (
     <svg
@@ -100,4 +84,4 @@ export const inputIcons = {
   ),
 };
 
-export type InputIconsType = keyof typeof inputIcons;
+export { inputIcons };

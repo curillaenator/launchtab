@@ -13,9 +13,7 @@ import { $appStore } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 
 import { NOTES_ROUTE } from '@src/routes';
-//@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
-//@ts-expect-error
 import StarIcon from '@src/assets/svg/star.svg';
 // import GoogleIcon from '@src/assets/svg/google.svg';
 

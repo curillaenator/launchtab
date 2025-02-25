@@ -16,6 +16,11 @@
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
   },
+  "dependencies": {
+    "@launch-ui/button": "1.0.0",
+    "@launch-ui/shape": "1.0.5",
+    "@launch-ui/typography": "1.0.0"
+  },
   "devDependencies": {
     "@launch-ui/types": "*"
   },

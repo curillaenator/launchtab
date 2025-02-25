@@ -5,7 +5,7 @@ import { createClient, PhotosWithTotalResults } from 'pexels';
 import { Select } from '@launch-ui/select';
 
 import { ButtonGhost } from '@launch-ui/button';
-import { TextInput, Switch, Titlewrap } from '@src/components/inputs';
+import { Switch, Input, Titlewrap } from '@launch-ui/input';
 import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
 import { themeNames } from '@launch-ui/theme';
@@ -20,10 +20,10 @@ import {
 } from '@src/entities/pexels';
 
 import { LookFeelStyled } from './styles';
-//@ts-expect-error
+
 import ShevronIcon from '@src/assets/svg/shevron.svg';
-//@ts-expect-error
 import UpdateIcon from '@src/assets/svg/update.svg';
+import SearchIcon from '@src/assets/svg/search.svg';
 
 const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
@@ -77,12 +77,16 @@ export const LookFeel: FC = () => {
       </Titlewrap>
 
       <Titlewrap title='Dark Mode'>
-        <Switch value={settingsState.darkMode} onChange={() => setSettings({ darkMode: !settingsState.darkMode })} />
+        <Switch
+          //
+          checked={settingsState.darkMode}
+          onChange={() => setSettings({ darkMode: !settingsState.darkMode })}
+        />
       </Titlewrap>
 
       <Titlewrap title='Dynamic wallpaper'>
         <Switch
-          value={settingsState.isDynamicWallpaper}
+          checked={settingsState.isDynamicWallpaper}
           onChange={() => setSettings({ isDynamicWallpaper: !settingsState.isDynamicWallpaper })}
         />
       </Titlewrap>
@@ -110,17 +114,17 @@ export const LookFeel: FC = () => {
           )}
 
           <Titlewrap title='Search wallpaper'>
-            <TextInput
-              iconName='search'
+            <Input
+              icon={() => <SearchIcon />}
               type='url'
               name='background'
               placeholder='Type any tag (example "nature")'
               value={pexelsQuery}
-              onChange={(query) => setPexelsQuery(query)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPexelsQuery(e.target.value)}
             />
 
             <ButtonGhost
-              LeftIcon={UpdateIcon}
+              LeftIcon={() => <UpdateIcon />}
               title='Clear wallpaper'
               style={{ width: 'fit-content' }}
               onClick={() => setSettings({ wallpaper: null })}

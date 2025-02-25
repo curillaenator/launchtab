@@ -3734,11 +3734,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/input@workspace:kit/input":
+"@launch-ui/input@*, @launch-ui/input@workspace:kit/input":
   version: 0.0.0-use.local
   resolution: "@launch-ui/input@workspace:kit/input"
   dependencies:
+    "@launch-ui/button": 1.0.0
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
+    "@launch-ui/typography": 1.0.0
   peerDependencies:
     react: "*"
     styled-components: "*"
@@ -9483,6 +9486,7 @@ __metadata:
     "@launch-ui/drawer": "*"
     "@launch-ui/dropable": "*"
     "@launch-ui/dynamic-bg": "*"
+    "@launch-ui/input": "*"
     "@launch-ui/modal": "*"
     "@launch-ui/richtext": "*"
     "@launch-ui/select": "*"

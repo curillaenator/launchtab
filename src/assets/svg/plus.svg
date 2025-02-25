@@ -1,6 +1,10 @@
-<svg width='48' height='48' fill='none' viewBox='0 0 48 48'>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path
-    fill='var(--icon-light, red)'
-    d='M28.67 25.331h-3.349v3.338c0 .738-.592 1.331-1.329 1.331s-1.33-.593-1.33-1.331v-3.338H19.33A1.351 1.351 0 0118 23.984c0-.354.144-.69.384-.946.257-.24.593-.385.945-.385h3.334v-3.322c0-.738.592-1.331 1.329-1.331s1.33.593 1.33 1.331v3.322h3.349c.736 0 1.329.593 1.329 1.331s-.593 1.33-1.33 1.347z'
+    d="M16.0044 10.0029V22.0029M22.0044 16.0029L10.0044 16.0029"
+    stroke="currentColor"
+    fill="none"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   />
 </svg>

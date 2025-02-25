@@ -14,9 +14,7 @@ import { $settingsStore, saveSettingsQuery } from '@src/entities/settings';
 
 import { SettingsStyled } from './styles';
 
-//@ts-expect-error
 import LogoutIcon from '@src/assets/svg/logout.svg';
-//@ts-expect-error
 import SaveIcon from '@src/assets/svg/save.svg';
 
 export const Settings: FC = () => {
@@ -45,7 +43,7 @@ export const Settings: FC = () => {
         <div className='form-block'>
           <div className='form-buttons'>
             <ButtonGhost
-              LeftIcon={LogoutIcon}
+              LeftIcon={() => <LogoutIcon />}
               title='Log Out'
               onClick={() => {
                 logout();
@@ -54,7 +52,7 @@ export const Settings: FC = () => {
             />
 
             <ButtonAction
-              LeftIcon={SaveIcon}
+              LeftIcon={() => <SaveIcon />}
               title='Save settings'
               onClick={() => {
                 saveSettingsQuery({ uid, settings });

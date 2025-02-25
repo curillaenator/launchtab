@@ -8,7 +8,6 @@ import { login } from '@src/entities/user';
 
 import { FormStyled } from './styles';
 
-//@ts-expect-error
 import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
@@ -44,7 +43,7 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           <Button
             type='button'
             title='Sign in with Google'
-            IconLeft={GoogleIcon}
+            IconLeft={() => <GoogleIcon />}
             onClick={() => {
               closePopup();
               login();

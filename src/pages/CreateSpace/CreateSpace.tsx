@@ -6,15 +6,17 @@ import { useUnit as useEffectorUnit } from 'effector-react';
 
 import { Corners } from '@launch-ui/shape';
 import { Button } from '@launch-ui/button';
+import { Input } from '@launch-ui/input';
 import { Typography } from '@launch-ui/typography';
 
-import { Input } from '@src/components/inputs';
 import { $userStore } from '@src/entities/user';
 import { useCreateSpace, LaunchSpaceProps } from '@src/entities/space';
 
 import { CreateSpaceForm } from './createSpace.styled';
 
 import { USER_SPACES_QUERY } from '@src/shared/queryKeys';
+
+import LabelIcon from '@src/assets/svg/lable.svg';
 
 const CreateSpace: FC = () => {
   const navigate = useNavigate();
@@ -79,6 +81,7 @@ const CreateSpace: FC = () => {
             render={({ field }) => (
               <Input
                 {...field}
+                icon={() => <LabelIcon />}
                 aria-required
                 state={errors.name ? 'error' : 'normal'}
                 description={errors.name ? errors.name.message : ''}
@@ -93,6 +96,7 @@ const CreateSpace: FC = () => {
 
       <div className='create-space-form-field-controls'>
         <Button type='submit' active title='Create LaunchSpace' className='submit-button' />
+        <Button type='button' title='Cancel' onClick={() => navigate('/notes')} />
       </div>
     </CreateSpaceForm>
   );

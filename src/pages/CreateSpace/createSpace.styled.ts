@@ -25,6 +25,7 @@ const CreateSpaceForm = styled.form`
   .create-space-form-field-controls {
     display: flex;
     align-items: center;
+    gap: 8px;
   }
 
   .submit-button {

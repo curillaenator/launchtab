@@ -11,7 +11,6 @@ import { Create } from '@src/components/create';
 import { $userStore } from '@src/entities/user';
 import { $bookmarksStore, setCurrentTab, setTabsWithDbUpdate, removeTab } from '@src/entities/bookmarks';
 
-//@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
 
 const SortableListStyled = styled(SortableList)`
@@ -41,7 +40,12 @@ export const Tabs: FC = () => {
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      <Button IconLeft={HomeIcon} title='Home' active={currentTab === 'Home'} onClick={() => setCurrentTab('Home')} />
+      <Button
+        IconLeft={() => <HomeIcon />}
+        title='Home'
+        active={currentTab === 'Home'}
+        onClick={() => setCurrentTab('Home')}
+      />
 
       {sortableTabs.map(({ name }, i) => (
         <SortableItem key={`${name}${i}`}>

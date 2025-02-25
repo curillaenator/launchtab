@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 import { CreateFormCTX } from '../context';
 
-import { TextInput } from '@src/components/inputs';
-import { ButtonAction, ButtonGhost } from '@launch-ui/button';
-import { Typography } from '@launch-ui/typography';
+import { Input } from '@launch-ui/input';
 import { Shape } from '@launch-ui/shape';
+import { Typography } from '@launch-ui/typography';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
+
+import LabelIcon from '@src/assets/svg/lable.svg';
 
 const PagePopupStyled = styled.form`
   width: 336px;
@@ -78,14 +80,14 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
         </div>
 
         <div className='popup-inputs'>
-          <TextInput
+          <Input
             type='text'
-            iconName='label'
+            icon={() => <LabelIcon />}
             name='new-page'
             placeholder='Title'
             limitSymbols={24}
             value={formState.name}
-            onChange={(pageName) => dispatchForm?.({ key: 'name', payload: pageName })}
+            onChange={(e) => dispatchForm?.({ key: 'name', payload: e.target.value })}
           />
         </div>
 

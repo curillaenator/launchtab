@@ -36,6 +36,7 @@
     "@launch-ui/drawer": "*",
     "@launch-ui/dropable": "*",
     "@launch-ui/dynamic-bg": "*",
+    "@launch-ui/input": "*",
     "@launch-ui/modal": "*",
     "@launch-ui/richtext": "*",
     "@launch-ui/select": "*",

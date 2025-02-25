@@ -1,17 +1,21 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-import { ButtonAction, ButtonGhost } from '@launch-ui/button';
+
 import { Shape } from '@launch-ui/shape';
+import { Input } from '@launch-ui/input';
 import { Typography } from '@launch-ui/typography';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 
 import { CreateFormCTX } from '../context';
 import { useCustomIcons } from '../hooks/useCustomIcons';
 
 import { Loader } from '@src/features/loader';
 
-import { TextInput } from '@src/components/inputs/TextInput';
 import { Scrollbars } from '@src/components/scrollbars';
 import { Card } from '@src/components/card';
+
+import LabelIcon from '@src/assets/svg/lable.svg';
+import LinkIcon from '@src/assets/svg/link.svg';
 
 const ICONS_IN_A_ROW = 4;
 
@@ -121,23 +125,23 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
       </div>
 
       <div className='popup-inputs'>
-        <TextInput
+        <Input
           type='text'
-          iconName='label'
+          icon={() => <LabelIcon />}
           name='new-bookmark'
           limitSymbols={24}
           value={formState.name}
-          onChange={(bmName) => dispatchForm?.({ key: 'name', payload: bmName })}
+          onChange={(e) => dispatchForm?.({ key: 'name', payload: e.target.value })}
           onFocusOut={fetchIcons}
           placeholder='Title'
         />
 
-        <TextInput
+        <Input
           type='text'
-          iconName='link'
+          icon={() => <LinkIcon />}
           name='new-link'
           value={formState.link}
-          onChange={(link) => dispatchForm?.({ key: 'link', payload: link })}
+          onChange={(e) => dispatchForm?.({ key: 'link', payload: e.target.value })}
           placeholder='Site link'
         />
       </div>

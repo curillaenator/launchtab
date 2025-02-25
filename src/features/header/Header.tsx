@@ -9,11 +9,8 @@ import { $headerStore } from '@src/entities/header';
 
 import { HeaderStyled } from './header.styled';
 
-//@ts-expect-error
 import SettingsIcon from '@src/assets/svg/settings.svg';
-//@ts-expect-error
 import MeatballsIcon from '@src/assets/svg/meatballs.svg';
-//@ts-expect-error
 import LoginIcon from '@src/assets/svg/login.svg';
 
 export const Header: FC = memo(() => {
@@ -23,12 +20,12 @@ export const Header: FC = memo(() => {
 
   return (
     <HeaderStyled isHeaderShadowed={isHeaderShadowed}>
-      <Button IconLeft={MeatballsIcon} onClick={() => setAside(!isAsideOpen)} />
+      <Button IconLeft={() => <MeatballsIcon />} onClick={() => setAside(!isAsideOpen)} />
 
       {MiddleComponent && <MiddleComponent />}
 
       <Button
-        IconLeft={!!user.uid ? SettingsIcon : LoginIcon}
+        IconLeft={() => (!!user.uid ? <SettingsIcon /> : <LoginIcon />)}
         onClick={() => {
           if (!!user.uid) {
             setRightDrawer(!isRightDrawerOpen);

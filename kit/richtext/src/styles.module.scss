@@ -14,7 +14,7 @@
 
   --editor-c: var(--theme-texts-base);
 
-  --editor-bdc: var(--theme-backgrounds-dark);
+  --editor-bdc: var(--theme-borders-base);
 
   --editor-warning-bdc: var(--editor-warning);
   --editor-error-bdc: var(--editor-error);
@@ -159,7 +159,7 @@
   --dd-bdrs: 6px;
 
   --dd-bgc: var(--theme-backgrounds-lightest);
-  --dd-bdc: var(--theme-backgrounds-dark);
+  --dd-bdc: var(--theme-borders-base);
   --dd-drop-sh: 0 0 0 0 transparent;
 }
 
@@ -325,14 +325,14 @@
   padding: 16px;
   border-radius: 8px;
   background-color: var(--theme-backgrounds-lightest);
-  box-shadow: inset 0 0 0 1px var(--theme-backgrounds-dark);
+  box-shadow: inset 0 0 0 1px var(--theme-borders-base);
 }
 
 .editor code[data-set='inline'] {
   padding: 2px 4px;
   border-radius: 6px;
   background-color: var(--theme-backgrounds-lightest);
-  box-shadow: inset 0 0 0 1px var(--theme-backgrounds-dark);
+  box-shadow: inset 0 0 0 1px var(--theme-borders-base);
 }
 
 .editor blockquote {
@@ -343,7 +343,7 @@
 
 .editor hr {
   height: 1px;
-  background-color: var(--theme-backgrounds-dark);
+  background-color: var(--theme-borders-base);
   border: none;
   margin: 16px 0;
 }

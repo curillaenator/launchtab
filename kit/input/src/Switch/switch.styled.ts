@@ -39,7 +39,7 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
     }
 
     &-title {
-      transition: 0.08s linear;
+      transition: 0.12s linear;
       color: ${({ theme, checked }) => (checked ? theme.white : theme.texts.base)};
     }
   }

@@ -3,7 +3,7 @@ import { useUnit as useEffectorUnit } from 'effector-react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 
-import { ThemeProvider } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import { Drawer } from '@launch-ui/drawer';
 import { Modal } from '@launch-ui/modal';
@@ -19,10 +19,7 @@ import { $userStore, useLauncUserData } from '@src/entities/user';
 import { $settingsStore } from '@src/entities/settings';
 import { setHeaderShadowed } from '@src/entities/header';
 
-import { useDomStyles } from '@src/hooks/useDomStyles';
 import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
-
-import GlobalFonts from '@src/assets/fonts/fonts';
 
 import { Loader } from '@src/features/loader';
 import LayoutStyled from './styled';
@@ -45,7 +42,7 @@ export const Layout: FC = () => {
 
   const mouseWatcher = useRef<((e: React.MouseEvent<Element, MouseEvent>) => void) | null>(null);
 
-  const { currentTheme } = useDomStyles();
+  const currentTheme = useTheme();
   const { ref: layoutRef } = useThemeToCssv(currentTheme);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,53 +54,49 @@ export const Layout: FC = () => {
     [],
   );
 
-  if (isLoading) return <Loader view='fullscreen' iconSize='56px' color='#1e1c1e' />;
+  if (isLoading) return <Loader view='fullscreen' iconSize='56px' color='#E4E3E4' />;
 
   return (
-    <ThemeProvider theme={currentTheme}>
-      <GlobalFonts />
-
-      <LayoutStyled
-        ref={layoutRef}
-        className='layout-container'
-        data-description='layout-container'
-        $isAsideOpen={isAsideOpen}
-        onMouseMove={(e) => {
-          if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
-          mouseWatcher.current(e);
+    <LayoutStyled
+      ref={layoutRef}
+      className='layout-container'
+      data-description='layout-container'
+      $isAsideOpen={isAsideOpen}
+      onMouseMove={(e) => {
+        if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
+        mouseWatcher.current(e);
+      }}
+    >
+      <Background
+        setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
+          if (!dynamicWallpaper) return;
+          mouseWatcher.current = watcher;
         }}
-      >
-        <Background
-          setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
-            if (!dynamicWallpaper) return;
-            mouseWatcher.current = watcher;
-          }}
-        />
+      />
 
-        <aside className='aside'>
-          <Aside />
-        </aside>
+      <aside className='aside'>
+        <Aside />
+      </aside>
 
-        <div className='viewport' onScroll={onViewportScroll}>
-          <Header />
+      <div className='viewport' onScroll={onViewportScroll}>
+        <Header />
 
-          <MainStyled id={MAIN_ELEMENT_ID}>
-            <Outlet />
-          </MainStyled>
-        </div>
+        <MainStyled id={MAIN_ELEMENT_ID}>
+          <Outlet />
+        </MainStyled>
+      </div>
 
-        {!!user.uid && (
-          <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
-            <Settings />
-          </Drawer>
-        )}
+      {!!user.uid && (
+        <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
+          <Settings />
+        </Drawer>
+      )}
 
-        {!user.uid && (
-          <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
-            <SignIn closePopup={() => setSignIn(false)} />
-          </Modal>
-        )}
-      </LayoutStyled>
-    </ThemeProvider>
+      {!user.uid && (
+        <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
+          <SignIn closePopup={() => setSignIn(false)} />
+        </Modal>
+      )}
+    </LayoutStyled>
   );
 };

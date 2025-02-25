@@ -1,4 +1,4 @@
-export { hexa } from './utils';
+export { hexa, invertColors } from './utils';
 export { themes, themeNames, type TThemeName } from './themes';
 export {
   colorsLib,
@@ -8,4 +8,4 @@ export {
   shadowsStaticDarkMode,
 } from './colors';
 
-export type { TTheme } from './interfaces';
+export type { TTheme, ColorKey, ColorSet } from './interfaces';

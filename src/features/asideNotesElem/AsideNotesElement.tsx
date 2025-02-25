@@ -58,8 +58,6 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    console.log('fires');
-
     if (!!userSpaces?.length) {
       setShowCreateSapceButtonLoader(false);
       setIsCreateSpaceButton(false);

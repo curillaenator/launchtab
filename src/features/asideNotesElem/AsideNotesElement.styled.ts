@@ -7,7 +7,7 @@ const AsideNotesElementStyled = styled.div`
   --dd-bdrs: 18px;
 
   --dd-bgc: var(--theme-backgrounds-lightest);
-  --dd-bdc: var(--theme-backgrounds-dark);
+  --dd-bdc: var(--theme-borders-base);
   --dd-drop-sh: 0 0 0 0 transparent;
 
   width: 100%;

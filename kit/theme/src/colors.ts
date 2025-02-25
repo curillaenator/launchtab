@@ -4,7 +4,7 @@ export const colorsLib = {
   white: '#FFFFFF',
   black: '#000000',
   electroviolet: {
-    50: '#F5EFFF',
+    // 50: '#F5EFFF',
     100: '#EBDEFF',
     200: '#D0B4FF',
     300: '#B181FF',
@@ -16,7 +16,7 @@ export const colorsLib = {
     900: '#2D115C',
   },
   phlox: {
-    50: '#fdecfd',
+    // 50: '#fdecfd',
     100: '#fadafb',
     200: '#f4a9f6',
     300: '#ed6fef',
@@ -28,7 +28,7 @@ export const colorsLib = {
     900: '#510653',
   },
   awesome: {
-    50: '#ffeef2',
+    // 50: '#ffeef2',
     100: '#fedde5',
     200: '#feb0c3',
     300: '#fd7b9a',
@@ -40,7 +40,7 @@ export const colorsLib = {
     900: '#5b0d20',
   },
   danger: {
-    50: '#feeceb',
+    // 50: '#feeceb',
     100: '#fcd9d7',
     200: '#f8a8a3',
     300: '#f36d65',
@@ -52,7 +52,7 @@ export const colorsLib = {
     900: '#550500',
   },
   orange: {
-    50: '#fff2ec',
+    // 50: '#fff2ec',
     100: '#ffe5da',
     200: '#ffc4aa',
     300: '#ff9c71',
@@ -64,7 +64,7 @@ export const colorsLib = {
     900: '#5c2107',
   },
   yellamerica: {
-    50: '#fefaeb',
+    // 50: '#fefaeb',
     100: '#fcf4d8',
     200: '#f8e6a4',
     300: '#f4d567',
@@ -76,7 +76,7 @@ export const colorsLib = {
     900: '#554301',
   },
   nika: {
-    50: '#f5fced',
+    // 50: '#f5fced',
     100: '#ecf9db',
     200: '#d3f2ab',
     300: '#b5e973',
@@ -88,7 +88,7 @@ export const colorsLib = {
     900: '#304f08',
   },
   malachite: {
-    50: '#EEFEF4',
+    // 50: '#EEFEF4',
     100: '#DDFDEA',
     200: '#B2FACE',
     300: '#7EF6AD',
@@ -100,7 +100,7 @@ export const colorsLib = {
     900: '#0F572B',
   },
   aquamarina: {
-    50: '#ecfcfc',
+    // 50: '#ecfcfc',
     100: '#d8f9f9',
     200: '#a6f1f1',
     300: '#6ae7e7',
@@ -112,7 +112,7 @@ export const colorsLib = {
     900: '#034e4e',
   },
   ultra: {
-    50: '#eff3fe',
+    // 50: '#eff3fe',
     100: '#dfe7fd',
     200: '#b6c9fa',
     300: '#85a4f6',
@@ -182,9 +182,13 @@ export const colorsStaticLightMode = {
     lightHover: colorsLib.liver[200],
   },
 
+  borders: {
+    base: colorsLib.liver[100],
+  },
+
   backgrounds: {
-    dark: colorsLib.liver[100],
     base: colorsLib.white,
+    dark: colorsLib.liver[200],
     light: colorsLib.liver[100],
     lightest: colorsLib.liver[50],
     base20: hexa(colorsLib.white, 0.2),
@@ -216,9 +220,13 @@ export const colorsStaticDarkMode = {
     lightHover: colorsLib.liver[100],
   },
 
+  borders: {
+    base: colorsLib.liver[500],
+  },
+
   backgrounds: {
-    dark: colorsLib.gray[900],
     base: colorsLib.liver[900],
+    dark: colorsLib.gray[900],
     light: colorsLib.liver[800],
     lightest: colorsLib.liver[700],
     base20: hexa(colorsLib.liver[900], 0.4),

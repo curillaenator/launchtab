@@ -35,7 +35,7 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
     }
 
     &-dark {
-      fill: ${({ theme }) => theme.primary[50]};
+      fill: ${({ theme }) => theme.primary[100]};
     }
   }
 

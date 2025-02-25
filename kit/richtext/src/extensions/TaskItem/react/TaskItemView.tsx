@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import { NodeViewContent, NodeViewProps, NodeViewWrapper } from '@tiptap/react';
-import { Switch } from './Switch';
+import { Switch } from '@launch-ui/input';
 
 import styles from './styles.module.scss';
 
@@ -11,7 +11,7 @@ const TaskItemView: React.FC<NodeViewProps> = ({ node, editor, updateAttributes 
       <div className={styles.container}>
         <Switch
           captions={{ checked: 'Done', unchecked: 'Open' }}
-          value={node.attrs.checked}
+          checked={node.attrs.checked}
           onChange={(checked) => {
             if (!editor.isEditable) return;
             updateAttributes({ checked });

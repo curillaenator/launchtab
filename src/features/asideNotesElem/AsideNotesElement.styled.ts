@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NotesSelectorStyled = styled.div`
+const AsideNotesElementStyled = styled.div`
   --dd-pd: 8px 8px;
   --dd-bdw: 1px;
   --dd-scrl-pd: 0;
@@ -31,6 +31,7 @@ const NotesSelectorStyled = styled.div`
 
   .create-space-button {
     width: 100%;
+    flex: 0 0 auto;
 
     &_inactive {
       --shp-bgc: var(--theme-backgrounds-lightest);
@@ -72,4 +73,4 @@ const NotesSelectorStyled = styled.div`
   }
 `;
 
-export { NotesSelectorStyled };
+export { AsideNotesElementStyled };

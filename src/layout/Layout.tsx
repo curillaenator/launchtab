@@ -1,4 +1,4 @@
-import React, { FC, useRef, useCallback } from 'react';
+import React, { FC, useRef, useCallback, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
@@ -23,6 +23,8 @@ import { useDomStyles } from '@src/hooks/useDomStyles';
 import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
 
 import GlobalFonts from '@src/assets/fonts/fonts';
+
+import { Loader } from '@src/features/loader';
 import LayoutStyled from './styled';
 
 import { MAIN_ELEMENT_ID } from './constants';
@@ -33,8 +35,10 @@ const MainStyled = styled.main`
 `;
 
 export const Layout: FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const user = useEffectorUnit($userStore);
-  useLauncUserData(user);
+  useLauncUserData(user, setIsLoading);
 
   const { isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
   const { dynamicWallpaper } = useEffectorUnit($settingsStore);
@@ -52,6 +56,8 @@ export const Layout: FC = () => {
     }, 400),
     [],
   );
+
+  if (isLoading) return <Loader view='fullscreen' iconSize='56px' color='#1e1c1e' />;
 
   return (
     <ThemeProvider theme={currentTheme}>

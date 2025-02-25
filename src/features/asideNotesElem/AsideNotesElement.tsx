@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, memo } from 'react';
+import React, { FC, useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery } from '@tanstack/react-query';
@@ -24,13 +24,13 @@ import { Loader } from '@src/features/loader';
 
 import { USER_SPACES_QUERY, SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
 
-import { NotesSelectorStyled } from './selector.styled';
+import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
 import PlusIcon from '@src/assets/svg/plus.svg';
 
 type CreateParamType = 'space' | 'note';
 
-// import FolderIcon from '@src/assets/svg/folder.svg';
+import FolderIcon from '@src/assets/svg/folder.svg';
 
 const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
   const { noteId: routerNoteId, createPageType } = useParams<{
@@ -40,14 +40,46 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
 
   const { lastViewedSpace, spaces: spaceIdList = [] } = useEffectorUnit($userStore);
 
+  const [showCreateSapceButtonLoader, setShowCreateSapceButtonLoader] = useState(false);
+  const [isCreateSpaceButton, setIsCreateSpaceButton] = useState<boolean>(false);
+
   const [selectedSpace, setSelectedSpace] = useState<LaunchSpaceProps | null>(null);
 
   const navigate = useNavigate();
 
-  const { data: userSpaces, isLoading: isUserSpacesLoading } = useQuery({
+  const {
+    data: userSpaces = [],
+    // isLoading: isUserSpacesLoading,
+  } = useQuery({
     queryKey: [USER_SPACES_QUERY, spaceIdList],
     queryFn: () => getUserSpacesQuery(spaceIdList),
   });
+
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    console.log('fires');
+
+    if (!!userSpaces?.length) {
+      setShowCreateSapceButtonLoader(false);
+      setIsCreateSpaceButton(false);
+
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
+        timeoutId.current = null;
+      }
+
+      return;
+    } else {
+      setShowCreateSapceButtonLoader(true);
+      setIsCreateSpaceButton(true);
+    }
+
+    timeoutId.current = setTimeout(() => {
+      setShowCreateSapceButtonLoader(false);
+      setIsCreateSpaceButton(true);
+    }, 4000);
+  }, [userSpaces]);
 
   const { data: spaceUnits, isLoading: isSpaceUnitsLoading } = useQuery({
     queryKey: [SPACE_UNITS_QUERY, selectedSpace?.units || []],
@@ -65,16 +97,18 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     ...restSpaceSelector
   } = useDropable();
 
+  // const isSpaceListLoading = showCreateSapceButtonLoader || isUserSpacesLoading;
+
   return (
-    <NotesSelectorStyled data-aside-notes-element>
-      {isUserSpacesLoading && (
+    <AsideNotesElementStyled data-aside-notes-element>
+      {showCreateSapceButtonLoader && (
         <div className='selector-loader-dummy'>
           <Corners borderRadius={24} />
           <Loader />
         </div>
       )}
 
-      {!isUserSpacesLoading && !userSpaces && (
+      {!showCreateSapceButtonLoader && !userSpaces.length && isCreateSpaceButton && (
         <Button
           active={createPageType === 'space'}
           disabled={!userSpaces}
@@ -87,7 +121,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
         />
       )}
 
-      {!isUserSpacesLoading && !!userSpaces?.length && (
+      {!showCreateSapceButtonLoader && !!userSpaces.length && (
         <div className='space-elements'>
           <Dropable
             {...restSpaceSelector}
@@ -97,6 +131,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             offset={[0, 16]}
             openNode={
               <Button
+                IconLeft={() => <FolderIcon />}
                 title={userSpaces.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name}
                 active={isSpaceSelectorOpen}
                 className={cn('open-spaces-button', {
@@ -107,6 +142,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           >
             {userSpaces.map((userSpace) => (
               <ButtonGhost
+                LeftIcon={() => <FolderIcon />}
                 key={userSpace.spaceCode}
                 height={32}
                 title={userSpace.name}
@@ -119,14 +155,13 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             ))}
           </Dropable>
 
-          <Button
-            active={createPageType === 'space'}
-            IconLeft={() => <PlusIcon />}
-            onClick={() => {
-              if ((userSpaces?.length || 0) < MAX_SPACES_PER_USER) return navigate('/notes/create/space');
-              alert(`Space count is limited by ${MAX_SPACES_PER_USER}`);
-            }}
-          />
+          {userSpaces.length < MAX_SPACES_PER_USER && (
+            <Button
+              active={createPageType === 'space'}
+              IconLeft={() => <PlusIcon />}
+              onClick={() => navigate('/notes/create/space')}
+            />
+          )}
         </div>
       )}
 
@@ -146,7 +181,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           ))}
         </div>
       ) : null}
-    </NotesSelectorStyled>
+    </AsideNotesElementStyled>
   );
 });
 

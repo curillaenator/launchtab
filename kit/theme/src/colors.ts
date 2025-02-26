@@ -168,6 +168,8 @@ export const colorsStaticLightMode = {
     sub: colorsLib.liver[400],
     disabled: colorsLib.liver[200],
 
+    codeblock: colorsLib.liver[100],
+
     error: colorsLib.danger[500],
     success: colorsLib.nika[500],
 
@@ -183,16 +185,19 @@ export const colorsStaticLightMode = {
   },
 
   borders: {
-    base: colorsLib.liver[100],
+    base: colorsLib.liver[200],
   },
 
   backgrounds: {
     base: colorsLib.white,
+    base20: hexa(colorsLib.white, 0.2),
+    base40: hexa(colorsLib.white, 0.4),
+
     dark: colorsLib.liver[200],
     light: colorsLib.liver[100],
     lightest: colorsLib.liver[50],
-    base20: hexa(colorsLib.white, 0.2),
-    base40: hexa(colorsLib.white, 0.4),
+
+    codeblock: colorsLib.liver[700],
   },
 
   modals: {
@@ -206,6 +211,9 @@ export const colorsStaticDarkMode = {
     inversedBase: colorsLib.liver[900],
     sub: colorsLib.liver[600],
     disabled: colorsLib.liver[800],
+
+    codeblock: colorsLib.liver[100],
+
     error: colorsLib.danger[500],
     success: colorsLib.nika[500],
 
@@ -221,16 +229,19 @@ export const colorsStaticDarkMode = {
   },
 
   borders: {
-    base: colorsLib.liver[500],
+    base: colorsLib.liver[400],
   },
 
   backgrounds: {
     base: colorsLib.liver[900],
+    base20: hexa(colorsLib.liver[900], 0.4),
+    base40: hexa(colorsLib.liver[900], 0.6),
+
     dark: colorsLib.gray[900],
     light: colorsLib.liver[800],
     lightest: colorsLib.liver[700],
-    base20: hexa(colorsLib.liver[900], 0.4),
-    base40: hexa(colorsLib.liver[900], 0.6),
+
+    codeblock: colorsLib.liver[700],
   },
 
   modals: {

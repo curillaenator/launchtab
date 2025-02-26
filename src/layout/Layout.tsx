@@ -54,7 +54,7 @@ export const Layout: FC = () => {
     [],
   );
 
-  if (isLoading) return <Loader view='fullscreen' iconSize='56px' color='#E4E3E4' />;
+  if (isLoading) return <Loader view='fullscreen' iconSize='56px' />;
 
   return (
     <LayoutStyled

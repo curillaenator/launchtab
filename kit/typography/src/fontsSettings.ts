@@ -17,8 +17,8 @@ export const fontStyles = {
       'GRAD' 400,
       'wght' 770;
     font-size: 56px;
-    line-height: 60px;
-    letter-spacing: -0.016em;
+    line-height: 64px;
+    /* letter-spacing: -0.016em; */
     font-feature-settings:
       'pnum' on,
       'lnum' on,
@@ -36,7 +36,7 @@ export const fontStyles = {
       'wght' 800;
     font-size: 52px;
     line-height: 64px;
-    letter-spacing: -0.026em;
+    /* letter-spacing: -0.026em; */
   `,
 
   RoundedHeavy48: css`
@@ -45,8 +45,8 @@ export const fontStyles = {
       'GRAD' 400,
       'wght' 800;
     font-size: 48px;
-    line-height: 60px;
-    letter-spacing: -0.021em;
+    line-height: 64px;
+    /* letter-spacing: -0.021em; */
   `,
   RoundedHeavy36: css`
     font-style: normal;
@@ -54,8 +54,8 @@ export const fontStyles = {
       'GRAD' 400,
       'wght' 800;
     font-size: 36px;
-    line-height: 43px;
-    letter-spacing: -0.021em;
+    line-height: 48px;
+    /* letter-spacing: -0.021em; */
   `,
 
   RoundedHeavy24: css`
@@ -65,7 +65,7 @@ export const fontStyles = {
       'wght' 720;
     font-size: 24px;
     line-height: 32px;
-    letter-spacing: -0.012em;
+    /* letter-spacing: -0.012em; */
   `,
 
   RoundedBold20: css`
@@ -75,7 +75,7 @@ export const fontStyles = {
       'wght' 640;
     font-size: 20px;
     line-height: 24px;
-    letter-spacing: -0.0054em;
+    /* letter-spacing: -0.0054em; */
   `,
 
   RoundedBold16: css`
@@ -84,24 +84,26 @@ export const fontStyles = {
       'GRAD' 400,
       'wght' 700;
     font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.03em;
+    line-height: 24px;
+    /* letter-spacing: 0.03em; */
   `,
+
   RoundedMedium16: css`
     font-style: normal;
     font-variation-settings:
       'GRAD' 400,
       'wght' 500;
     font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.025em;
+    line-height: 24px;
+    /* letter-spacing: 0.025em; */
   `,
+
   TextRegular16: css`
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
-    letter-spacing: -0.0011em;
+    /* letter-spacing: -0.0011em; */
   `,
 
   TextMedium16: css`
@@ -109,7 +111,7 @@ export const fontStyles = {
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    letter-spacing: -0.0011em;
+    /* letter-spacing: -0.0011em; */
   `,
 
   RoundedBold14: css`
@@ -118,15 +120,16 @@ export const fontStyles = {
       'GRAD' 400,
       'wght' 580;
     font-size: 14px;
-    line-height: 24px;
-    letter-spacing: 0.004em;
+    line-height: 22px;
+    /* letter-spacing: 0.004em; */
   `,
+
   TextRegular14: css`
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 22px;
-    letter-spacing: -0.006em;
+    /* letter-spacing: -0.006em; */
   `,
 
   TextSemiBold14: css`
@@ -134,35 +137,35 @@ export const fontStyles = {
     font-weight: 600;
     font-size: 14px;
     line-height: 22px;
-    letter-spacing: -0.006em;
+    /* letter-spacing: -0.006em; */
   `,
 
   TextBold12: css`
     font-style: normal;
     font-weight: bold;
     font-size: 12px;
-    line-height: 14px;
-    letter-spacing: -0.03em;
+    line-height: 16px;
+    /* letter-spacing: -0.03em; */
   `,
 
   TextRegular12: css`
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
-    line-height: 17px;
+    line-height: 16px;
   `,
 
   TextRegular11: css`
     font-style: normal;
     font-weight: normal;
     font-size: 11px;
-    line-height: 13px;
-    letter-spacing: 0.005em;
+    line-height: 16px;
+    /* letter-spacing: 0.005em; */
   `,
 };
 
 export const fonts = {
-  common: 'Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-  sfRounded: 'system-ui-rounded, ui-rounded, "SF Pro Rounded", "SanFrancisco", proxima-soft',
-  sfPro: 'system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text"',
+  // common: 'Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+  sfRounded: 'system-ui-rounded, ui-rounded, "SF Pro Rounded", "SanFrancisco", "Roboto", sans-serif',
+  // sfPro: 'system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text"',
 };

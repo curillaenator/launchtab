@@ -11,7 +11,7 @@ import { TOOLBAR_HEIGHT } from './constants';
 import type { RichtextContainerProps } from './interfaces';
 
 import styles from './styles.module.scss';
-import 'highlight.js/styles/github.css';
+import 'highlight.js/styles/base16/material-darker.min.css';
 
 interface RichTextViewProps extends RichtextContainerProps {
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;

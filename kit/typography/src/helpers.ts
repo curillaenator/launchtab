@@ -4,7 +4,8 @@ import type { TypeAs, ITypographyTypes } from './interfaces';
 // export const getFontFamily = (type: ITypographyTypes): string => {
 export const getFontFamily = (): string => {
   // const currentFont = type.includes('Rounded') ? fonts.sfRounded : fonts.sfPro;
-  return `font-family: ${fonts.sfRounded}, ${fonts.common};`;
+  return `font-family: ${fonts.sfRounded};`;
+  // return `font-family: ${fonts.sfRounded}, ${fonts.common};`;
 };
 
 export const generateTag = (type: ITypographyTypes): TypeAs => {

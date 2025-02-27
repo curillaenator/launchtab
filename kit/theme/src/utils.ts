@@ -8,7 +8,7 @@ const STEP = 0.125;
 const NEUTRALS_SPREAD_Q = 82;
 const COLORS_SPREAD_Q = 40;
 
-const TARGET_PRIMARY_COLOR_POS = 2;
+const TARGET_PRIMARY_COLOR_POS = 2; // 700
 const SHIFT = Math.pow(STEP * TARGET_PRIMARY_COLOR_POS, 2) * COLORS_SPREAD_Q;
 
 const colors = (hue: number, sat: number, light: number) =>
@@ -16,7 +16,13 @@ const colors = (hue: number, sat: number, light: number) =>
     COLOR_SET_DUMMY.map((_, colorIdx) => {
       const targetSat =
         colorIdx < TARGET_PRIMARY_COLOR_POS ? sat + (colorIdx * 10 - TARGET_PRIMARY_COLOR_POS * 10) : sat;
-      const targetLightness = Math.min(100, light - SHIFT + Math.pow(STEP * colorIdx, 2) * COLORS_SPREAD_Q);
+
+      const deligter = colorIdx < TARGET_PRIMARY_COLOR_POS ? colorIdx * 5 - TARGET_PRIMARY_COLOR_POS * 5 : 0;
+
+      console.log('deligter', deligter);
+
+      const targetLightness = Math.min(100, light + deligter - SHIFT + Math.pow(STEP * colorIdx, 2) * COLORS_SPREAD_Q);
+
       return [1000 - (colorIdx + 1) * 100, `hsl(${hue}, ${targetSat}%, ${Math.min(targetLightness, 100)}%)`];
     }),
   ) as ColorSet;

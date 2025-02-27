@@ -20,7 +20,7 @@ export const CloudsStyled = styled.div`
     }
 
     &_cloud1 {
-      fill: ${({ theme }) => theme.primary[700]};
+      fill: ${({ theme }) => theme.primary[600]};
     }
 
     &_cloud2 {
@@ -28,7 +28,7 @@ export const CloudsStyled = styled.div`
     }
 
     &_cloud3 {
-      fill: ${({ theme }) => theme.primary[500]};
+      fill: ${({ theme }) => theme.primary[700]};
     }
 
     &_cloud4 {

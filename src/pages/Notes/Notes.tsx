@@ -2,9 +2,10 @@ import React, { FC, useCallback, memo, useState, useEffect, CSSProperties } from
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Typography } from '@launch-ui/typography';
 import { setAside } from '@src/entities/app';
+
 import { Note, CreateSpace, CreateNote } from '@src/features/note';
+import { NotesDashboard } from '@src/features/notesDashboard';
 
 import 'tabulator-tables/dist/css/tabulator.min.css';
 
@@ -53,9 +54,9 @@ const Notes: FC = memo(() => {
 
   if (!routerNoteId)
     return (
-      <Typography as='span' type='RoundedHeavy36'>
-        Notes dashboard
-      </Typography>
+      <NotesContainer data-notes-container height={pageOutletHeight}>
+        <NotesDashboard maxHeight={pageOutletHeight} />
+      </NotesContainer>
     );
 
   return (

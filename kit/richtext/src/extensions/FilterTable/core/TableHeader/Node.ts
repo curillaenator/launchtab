@@ -31,7 +31,7 @@ const CoreTableHeader = TableHeader.extend<TableHeaderOptions>({
       },
 
       backgroundColor: {
-        default: 'var(--theme-backgrounds-lightest)',
+        default: 'var(--theme-backgrounds-light)',
 
         renderHTML: (attrs) => ({
           'data-bgc': attrs['backgroundColor'] || 'var(--editor-highlight-bgc)',

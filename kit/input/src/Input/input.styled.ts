@@ -14,7 +14,7 @@ const InputStyled = styled.div<InputStyledProps>`
     margin-bottom: 4px;
 
     & > svg {
-      color: ${({ theme, isFocused }) => (isFocused ? theme.primary[500] : theme.icons.dark)};
+      color: ${({ theme, isFocused }) => (isFocused ? theme.primary[700] : theme.texts.base)};
       margin-top: 4px;
       flex: 0 0 auto;
     }
@@ -44,11 +44,11 @@ const InputStyled = styled.div<InputStyledProps>`
         ${({ theme, isFocused, state }) => {
           switch (true) {
             case isFocused:
-              return theme.primary[200];
+              return theme.primary[700];
             case state === 'error':
               return theme.texts.error;
             default:
-              return theme.backgrounds.light;
+              return theme.borders.base;
           }
         }};
 

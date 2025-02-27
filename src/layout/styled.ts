@@ -40,7 +40,7 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.primary[500]};
+      background-color: ${({ theme }) => theme.primary[700]};
       border-radius: 2px;
     }
   }

@@ -11,7 +11,7 @@ export const SelectStyled = styled.div<SelectStyledProps>`
     --shp-bdc: ${({ theme }) => theme.backgrounds.light};
     --shp-bgc: ${({ theme }) => theme.backgrounds.base};
 
-    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.light};
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.backgrounds.light};
     border-radius: calc(20px * 1.25 + 3px);
 
     position: relative;
@@ -33,16 +33,16 @@ export const SelectStyled = styled.div<SelectStyledProps>`
     &-shevron {
       transform: ${({ open }) => (open ? 'rotate(-180deg)' : 'rotate(0)')};
       transition: 200ms linear;
-      fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.base)};
+      fill: ${({ theme, open }) => (open ? theme.primary[700] : theme.texts.base)};
     }
 
     &:hover {
       .dropdown-title-text {
-        color: ${({ theme }) => theme.primary[400]};
+        color: ${({ theme }) => theme.primary[600]};
       }
 
       .dropdown-title-shevron {
-        fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.primary[400])};
+        fill: ${({ theme, open }) => (open ? theme.primary[700] : theme.primary[600])};
       }
     }
   }
@@ -51,7 +51,7 @@ export const SelectStyled = styled.div<SelectStyledProps>`
     --shp-bdc: ${({ theme }) => theme.backgrounds.light};
     --shp-bgc: ${({ theme }) => theme.backgrounds.base};
 
-    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.backgrounds.light};
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.backgrounds.light};
     border-radius: calc(20px * 1.25 + 3px);
 
     position: absolute;

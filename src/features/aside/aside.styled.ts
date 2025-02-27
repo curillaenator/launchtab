@@ -29,7 +29,7 @@ const AsideHeader = styled.div`
   flex: 0 0 auto;
 
   .highlighted {
-    color: ${({ theme }) => theme.primary[500]};
+    color: ${({ theme }) => theme.primary[700]};
   }
 `;
 
@@ -40,7 +40,7 @@ const AsideRoutesList = styled.div`
   flex: 1 1 auto;
 
   .active {
-    color: ${({ theme }) => theme.primary[500]};
+    color: ${({ theme }) => theme.primary[700]};
   }
 `;
 
@@ -59,7 +59,7 @@ const RouteLinkStyled = styled(NavLink)`
   color: ${({ theme }) => theme.texts.base};
 
   &:hover {
-    color: ${({ theme }) => theme.primary[500]};
+    color: ${({ theme }) => theme.primary[700]};
   }
 `;
 

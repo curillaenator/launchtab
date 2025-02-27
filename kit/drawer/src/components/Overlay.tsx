@@ -23,7 +23,7 @@ export const Overlay = (props: DrawerProps) => {
     >
       <OverlayStyled
         ref={overlayRef}
-        disableBackgroundClick={disableBackgroundClick}
+        disableBackgroundClick={!!disableBackgroundClick}
         onClick={disableBackgroundClick ? undefined : onClose}
         className={overlayClassName}
       />

@@ -6,7 +6,7 @@ const AsideNotesElementStyled = styled.div`
   --dd-scrl-pd: 0;
   --dd-bdrs: 18px;
 
-  --dd-bgc: var(--theme-backgrounds-lightest);
+  --dd-bgc: var(--theme-backgrounds-light);
   --dd-bdc: var(--theme-borders-base);
   --dd-drop-sh: 0 0 0 0 transparent;
 
@@ -25,7 +25,7 @@ const AsideNotesElementStyled = styled.div`
     justify-content: flex-start;
 
     &_inactive {
-      --shp-bgc: var(--theme-backgrounds-lightest);
+      --shp-bgc: var(--theme-backgrounds-light);
     }
   }
 
@@ -34,7 +34,7 @@ const AsideNotesElementStyled = styled.div`
     flex: 0 0 auto;
 
     &_inactive {
-      --shp-bgc: var(--theme-backgrounds-lightest);
+      --shp-bgc: var(--theme-backgrounds-light);
     }
   }
 
@@ -45,7 +45,7 @@ const AsideNotesElementStyled = styled.div`
   }
 
   .selector-loader-dummy {
-    --shp-bgc: ${({ theme }) => theme.backgrounds.lightest};
+    --shp-bgc: ${({ theme }) => theme.backgrounds.light};
     --shp-bdc: transparent;
 
     // for corners
@@ -59,7 +59,7 @@ const AsideNotesElementStyled = styled.div`
     height: 56px;
     border-radius: calc(24px * 1.25 + 3px);
 
-    background-color: ${({ theme }) => theme.backgrounds.lightest};
+    background-color: ${({ theme }) => theme.backgrounds.light};
   }
 
   .unit-loader-dummy {

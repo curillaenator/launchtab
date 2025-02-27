@@ -1,5 +1,4 @@
 import { colorsLib, colorsStaticLightMode } from './colors';
-import { hexa } from './utils';
 
 type ColorKey = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type ColorSet = Record<ColorKey, string>;
@@ -15,6 +14,7 @@ interface ThemeType extends StaticForModeColors {
     header: string;
     card: string;
     primary: string;
+    drawer: string;
   };
 }
 
@@ -25,9 +25,10 @@ const themeTemplate = {
   primary: colorsLib.electroviolet as ColorSet,
   secondary: colorsLib.electroviolet as ColorSet,
   shadows: {
-    header: `0px 0px 12px ${hexa(colorsLib.liver[800], 0.8)}`,
-    card: `0px 0px 12px ${hexa(colorsLib.liver[800], 0.8)}`,
-    primary: `0px 6px 8px ${hexa(colorsLib.electroviolet[500], 0.8)}`,
+    header: ``,
+    card: ``,
+    primary: ``,
+    drawer: '',
   },
   ...colorsStaticLightMode,
 };

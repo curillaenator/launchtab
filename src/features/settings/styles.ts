@@ -37,7 +37,7 @@ const SettingsStyled = styled.div`
       margin-bottom: 40px;
 
       &-themed {
-        color: ${({ theme }) => theme.primary[500]};
+        color: ${({ theme }) => theme.primary[700]};
       }
     }
 

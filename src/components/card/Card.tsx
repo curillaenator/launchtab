@@ -67,7 +67,7 @@ const CardStyled = styled.a<ICardStyled>`
     filter: drop-shadow(${({ theme }) => theme.shadows.card});
 
     .card-title {
-      color: ${({ theme }) => theme.primary[500]};
+      color: ${({ theme }) => theme.primary[700]};
     }
   }
 

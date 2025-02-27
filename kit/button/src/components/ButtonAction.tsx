@@ -29,16 +29,6 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
 
   color: ${({ theme }) => theme.white};
 
-  .button-icon {
-    &-light {
-      fill: ${({ theme }) => theme.primary[300]};
-    }
-
-    &-dark {
-      fill: ${({ theme }) => theme.primary[100]};
-    }
-  }
-
   .btn_title {
     transition: 0.08s linear;
 
@@ -47,13 +37,13 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
 
   .rounded-shape {
     transition: 0.08s linear;
-    fill: ${({ theme }) => theme.primary[500]};
+    fill: ${({ theme }) => theme.primary[700]};
     filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
   }
 
   &:hover {
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[400]};
+      fill: ${({ theme }) => theme.primary[600]};
     }
   }
 
@@ -63,7 +53,7 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
     }
 
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[600]};
+      fill: ${({ theme }) => theme.primary[800]};
     }
   }
 `;

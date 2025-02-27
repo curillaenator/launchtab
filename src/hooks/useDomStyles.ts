@@ -9,8 +9,8 @@ const useDomStyles = () => {
     const html = document.querySelector('html');
 
     if (!!html) {
-      html.style.setProperty('background-color', currentTheme.backgrounds.light);
-      // html.style.setProperty('--scrollbar-thumb', currentTheme.primary[500]);
+      html.style.setProperty('background-color', currentTheme.backgrounds.base);
+      // html.style.setProperty('--scrollbar-thumb', currentTheme.primary[700]);
       // html.style.setProperty('--scrollbar-track', currentTheme.backgrounds.light);
 
       html.style.setProperty('--dwr-overlay-bgc', currentTheme.backgrounds.base40);

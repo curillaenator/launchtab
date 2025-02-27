@@ -1,4 +1,4 @@
-export { hexa, invertColors } from './utils';
+export { hexa } from './utils';
 export { themes, themeNames, type TThemeName } from './themes';
 export {
   colorsLib,

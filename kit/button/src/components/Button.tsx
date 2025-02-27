@@ -6,7 +6,7 @@ import { Typography } from '@launch-ui/typography';
 import type { BaseButtonProps } from './interfaces';
 
 export const ButtonStyled = styled.button<BaseButtonProps>`
-  --shp-bgc: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.base)};
+  --shp-bgc: ${({ theme, active }) => (active ? theme.primary[700] : theme.backgrounds.base)};
   --shp-bdc: transparent;
 
   will-change: filter;
@@ -42,7 +42,7 @@ export const ButtonStyled = styled.button<BaseButtonProps>`
   }
 
   &:hover {
-    color: ${({ theme, active }) => (active ? theme.white : theme.primary[500])};
+    color: ${({ theme, active }) => (active ? theme.white : theme.primary[700])};
   }
 `;
 

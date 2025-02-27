@@ -45,6 +45,8 @@ const HeadingReactNode = Heading.extend<ReactHeadingConfig>({
       const dom = document.createElement(tag);
       const contentDOM = document.createElement('span');
 
+      contentDOM.style.setProperty('min-width', '16px');
+
       toPairs(
         mergeAttributes(HTMLAttributes, {
           'data-level': level,

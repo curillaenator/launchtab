@@ -24,7 +24,7 @@ export const Select: FC<SelectProps> = (props) => {
   return (
     <SelectStyled open={open} bodyHeight={options.length * optionHeight}>
       <button className='dropdown-title' aria-hidden={!open} type='button' onClick={defferedOpen ? undefined : setOpen}>
-        <Corners borderRadius={20} stroke={2} />
+        <Corners borderRadius={20} stroke={1} />
 
         <Typography type='RoundedBold14' className='dropdown-title-text'>
           {triggerTitle || ''}
@@ -34,7 +34,7 @@ export const Select: FC<SelectProps> = (props) => {
       </button>
 
       <div className='dropdown-body' ref={menuRef}>
-        <Corners borderRadius={20} stroke={2} />
+        <Corners borderRadius={20} stroke={1} />
 
         {defferedOpen &&
           options

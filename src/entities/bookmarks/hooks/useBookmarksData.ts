@@ -7,7 +7,7 @@ import { setTabsWithoutDbUpdate } from '../store';
 import { getBookmarksQuery } from '../api';
 
 const useBookmarksData = (uid: string | null) => {
-  const { data: bookmarksData } = useQuery({
+  const { data: bookmarksData, isLoading: isBookmarksDataLoading } = useQuery({
     queryKey: ['bookmarks-query', uid],
     queryFn: () => getBookmarksQuery(uid!),
     enabled: !!uid,
@@ -28,6 +28,8 @@ const useBookmarksData = (uid: string | null) => {
       setTabsWithoutDbUpdate(bookmarksData.bookmarks);
     }
   }, [bookmarksData]);
+
+  return { isBookmarksDataLoading };
 };
 
 export { useBookmarksData };

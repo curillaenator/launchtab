@@ -33,16 +33,16 @@ export const SelectStyled = styled.div<SelectStyledProps>`
     &-shevron {
       transform: ${({ open }) => (open ? 'rotate(-180deg)' : 'rotate(0)')};
       transition: 200ms linear;
-      fill: ${({ theme, open }) => (open ? theme.primary[700] : theme.texts.base)};
+      fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.texts.base)};
     }
 
     &:hover {
       .dropdown-title-text {
-        color: ${({ theme }) => theme.primary[600]};
+        color: ${({ theme }) => theme.primary[500]};
       }
 
       .dropdown-title-shevron {
-        fill: ${({ theme, open }) => (open ? theme.primary[700] : theme.primary[600])};
+        fill: ${({ theme, open }) => (open ? theme.primary[500] : theme.primary[700])};
       }
     }
   }

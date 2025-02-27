@@ -12,10 +12,11 @@ import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './as
 import { $appStore } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 
-import { NOTES_ROUTE } from '@src/routes';
+import { NOTES_ROUTE, PALETTE_ROUTE } from '@src/routes';
+
 import HomeIcon from '@src/assets/svg/home.svg';
 import StarIcon from '@src/assets/svg/star.svg';
-// import GoogleIcon from '@src/assets/svg/google.svg';
+import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const Aside: FC = memo(() => {
   const { isAsideOpen } = useEffectorUnit($appStore);
@@ -60,17 +61,17 @@ export const Aside: FC = memo(() => {
           </>
         )}
 
-        {/* <RouteLinkStyled
-          to='https://google.com'
-          target='_blank'
+        <RouteLinkStyled
+          // to='https://google.com'
           // className={(({ isActive }) => (isActive ? 'active-route' : '')) as NavLinkProps['className']}
+          to={PALETTE_ROUTE}
         >
           <GoogleIcon />
 
           <Typography as='span' type='RoundedBold20' className='typography'>
-            Google
+            Palette
           </Typography>
-        </RouteLinkStyled> */}
+        </RouteLinkStyled>
       </AsideRoutesList>
     </AsideStyled>
   );

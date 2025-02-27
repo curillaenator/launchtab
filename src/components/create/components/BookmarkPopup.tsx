@@ -45,7 +45,7 @@ const BookmarkPopupStyled = styled.form`
     }
 
     &-themed {
-      color: ${({ theme }) => theme.primary[700]};
+      color: ${({ theme }) => theme.primary[500]};
     }
   }
 

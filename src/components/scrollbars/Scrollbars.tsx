@@ -47,7 +47,7 @@ const ScrollbarsStyled = styled.div<ScrollbarsProps>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.primary[700]};
+    background-color: ${({ theme }) => theme.primary[500]};
     border-radius: 0.25rem;
   }
 `;

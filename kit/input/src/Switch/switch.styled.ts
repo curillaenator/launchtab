@@ -35,7 +35,7 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
     filter: drop-shadow(${({ theme, checked }) => (checked ? theme.shadows.primary : 'none')});
 
     &-shape {
-      fill: ${({ theme, checked }) => (checked ? theme.primary[700] : theme.backgrounds.light)};
+      fill: ${({ theme, checked }) => (checked ? theme.primary[500] : theme.backgrounds.light)};
     }
 
     &-title {
@@ -47,11 +47,11 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
   &:hover {
     .switch-toggler {
       &-shape {
-        fill: ${({ theme, checked }) => (checked ? theme.primary[600] : theme.backgrounds.light)};
+        fill: ${({ theme, checked }) => (checked ? theme.primary[400] : theme.backgrounds.light)};
       }
 
       &-title {
-        color: ${({ theme, checked }) => (checked ? theme.white : theme.primary[600])};
+        color: ${({ theme, checked }) => (checked ? theme.white : theme.primary[500])};
       }
     }
   }

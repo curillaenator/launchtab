@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react';
+import React, { FC, useCallback, useRef } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useParams } from 'react-router-dom';
 import { debounce, throttle } from 'lodash';
@@ -43,12 +43,12 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
 
   const editorRef = useRef<RichTextEditor | null>(null);
 
-  useEffect(
-    () => () => {
-      if (editorRef.current) editorRef.current.commands.clearContent();
-    },
-    [],
-  );
+  // useEffect(
+  //   () => () => {
+  //     if (editorRef.current) editorRef.current.commands.clearContent();
+  //   },
+  //   [],
+  // );
 
   return (
     <NoteContainer height={maxHeight}>

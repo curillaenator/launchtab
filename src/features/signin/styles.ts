@@ -20,7 +20,7 @@ export const FormStyled = styled.form`
       margin-bottom: 32px;
 
       &-main {
-        color: ${({ theme }) => theme.primary[700]};
+        color: ${({ theme }) => theme.primary[500]};
         margin-bottom: 32px;
       }
 

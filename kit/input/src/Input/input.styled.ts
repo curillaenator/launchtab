@@ -14,7 +14,7 @@ const InputStyled = styled.div<InputStyledProps>`
     margin-bottom: 4px;
 
     & > svg {
-      color: ${({ theme, isFocused }) => (isFocused ? theme.primary[700] : theme.texts.base)};
+      color: ${({ theme, isFocused }) => (isFocused ? theme.primary[500] : theme.texts.base)};
       margin-top: 4px;
       flex: 0 0 auto;
     }

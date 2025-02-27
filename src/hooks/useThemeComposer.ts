@@ -16,7 +16,7 @@ export const useThemeComposer = (): TTheme => {
   const { themeName, darkMode } = useEffectorUnit($settingsStore);
 
   const colorsStatic = darkMode ? colorsStaticDarkMode : colorsStaticLightMode;
-  const primaryColor = themes[themeName].primary[700];
+  const primaryColor = themes[themeName].primary[500];
   const shadows = darkMode ? shadowsStaticDarkMode(primaryColor) : shadowsStaticLightMode(primaryColor);
 
   return {

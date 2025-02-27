@@ -6,6 +6,7 @@ import { $userStore } from '@src/entities/user';
 import { setHeaderMidComponent } from '@src/entities/header';
 import { useBookmarksData } from '@src/entities/bookmarks';
 
+import { Loader } from '@src/features/loader';
 import { BookmarksTabs } from '@src/features/bookmarksTabs';
 import { Bookmarks } from '@src/features/bookmarks';
 
@@ -16,7 +17,7 @@ const LaunchTabsContainer = styled.div`
 
 const LaunchTabs: FC = memo(() => {
   const { uid } = UseEffectoUnit($userStore);
-  useBookmarksData(uid);
+  const { isBookmarksDataLoading } = useBookmarksData(uid);
 
   useEffect(() => {
     setHeaderMidComponent(BookmarksTabs);
@@ -25,6 +26,13 @@ const LaunchTabs: FC = memo(() => {
       setHeaderMidComponent(null);
     };
   }, []);
+
+  if (isBookmarksDataLoading)
+    return (
+      <LaunchTabsContainer>
+        <Loader view='fit-parent' iconSize='56px' />
+      </LaunchTabsContainer>
+    );
 
   return (
     <LaunchTabsContainer>

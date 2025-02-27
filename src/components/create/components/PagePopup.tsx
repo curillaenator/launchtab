@@ -36,7 +36,7 @@ const PagePopupStyled = styled.form`
       color: ${({ theme }) => theme.texts.base};
 
       &-themed {
-        color: ${({ theme }) => theme.primary[700]};
+        color: ${({ theme }) => theme.primary[500]};
       }
     }
 

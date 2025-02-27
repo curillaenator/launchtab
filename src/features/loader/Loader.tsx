@@ -50,7 +50,7 @@ const LoaderStyled = styled.div<LoaderStyledProps>`
 
     .animatedCircle {
       fill: none;
-      stroke: ${({ theme }) => theme.primary[700] || '#524F54'};
+      stroke: ${({ theme }) => theme.primary[500] || '#524F54'};
       stroke-width: 1.8px;
       transform-origin: center;
       stroke-linecap: round;

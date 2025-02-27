@@ -37,13 +37,13 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
 
   .rounded-shape {
     transition: 0.08s linear;
-    fill: ${({ theme }) => theme.primary[700]};
+    fill: ${({ theme }) => theme.primary[500]};
     filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
   }
 
   &:hover {
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[600]};
+      fill: ${({ theme }) => theme.primary[400]};
     }
   }
 
@@ -53,7 +53,7 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
     }
 
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[800]};
+      fill: ${({ theme }) => theme.primary[700]};
     }
   }
 `;

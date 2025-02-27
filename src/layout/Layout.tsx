@@ -1,4 +1,4 @@
-import React, { FC, useRef, useCallback, useState } from 'react';
+import React, { FC, useRef, useCallback } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
@@ -32,10 +32,8 @@ const MainStyled = styled.main`
 `;
 
 export const Layout: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const user = useEffectorUnit($userStore);
-  useLauncUserData(user, setIsLoading);
+  const { isLoading } = useLauncUserData(user);
 
   const { isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
   const { dynamicWallpaper } = useEffectorUnit($settingsStore);

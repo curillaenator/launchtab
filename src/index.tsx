@@ -6,10 +6,10 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { AuthProvider, ThemeProvider } from './appProviders';
 
 import { Layout } from './layout';
-import { LaunchTabs, Notes } from './pages';
+import { LaunchTabs, Notes, Palette } from './pages';
 import { Loader } from './features/loader';
 
-import { ROOT_ROUTE, NOTES_ROUTE } from './routes';
+import { ROOT_ROUTE, NOTES_ROUTE, PALETTE_ROUTE } from './routes';
 
 import './index.css';
 
@@ -23,6 +23,7 @@ const router = createBrowserRouter(
     <Route path={ROOT_ROUTE} element={<Layout />}>
       <Route index element={<LaunchTabs />} />
       <Route path={NOTES_ROUTE} element={<Notes />} />
+      <Route path={PALETTE_ROUTE} element={<Palette />} />
     </Route>,
   ),
 );

@@ -18,11 +18,11 @@
   background-color: transparent;
 
   &:hover {
-    background-color: var(--theme-primary-100);
+    color: var(--theme-primary-500);
   }
 
   &:active {
-    background-color: var(--theme-primary-200);
+    color: var(--theme-primary-600);
   }
 
   &_fullwidth {
@@ -30,14 +30,15 @@
   }
 
   &_active:not(.disabled) {
-    background-color: var(--theme-primary-100);
+    color: var(--theme-white);
+    background-color: var(--theme-primary-500);
 
     &:hover {
-      background-color: var(--theme-primary-100);
+      background-color: var(--theme-primary-500);
     }
 
     &:active {
-      background-color: var(--theme-primary-100);
+      background-color: var(--theme-primary-500);
     }
   }
 

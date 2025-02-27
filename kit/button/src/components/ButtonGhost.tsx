@@ -35,6 +35,10 @@ const ButtonGhostStyled = styled.button<IButtonStyled>`
   &:hover {
     color: ${({ theme }) => theme.primary[500]};
   }
+
+  &:active {
+    color: ${({ theme }) => theme.primary[800]};
+  }
 `;
 
 export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((props, ref) => {

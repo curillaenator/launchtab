@@ -3,6 +3,8 @@ import { useCurrentEditor } from '@tiptap/react';
 import cn from 'classnames';
 import { v4 as getKey } from 'uuid';
 
+import { Corners } from '@launch-ui/shape';
+
 import type { ToolbarProps } from './interfaces';
 // import { useToolbarObserver } from './hooks/useToolbarObserver';
 
@@ -48,9 +50,11 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
         styles[`_full`],
       )}
     >
+      <Corners borderRadius={12} stroke={1} />
       <div
         className={cn(
           styles.toolbarBlock,
+          styles.toolbarBlock_left,
           // styles[`_${composition}`],
           styles[`_full`],
         )}
@@ -65,7 +69,7 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
         ))}
       </div>
 
-      <div className={cn(styles.toolbarBlock, styles[`_full`])}>
+      <div className={cn(styles.toolbarBlock, styles.toolbarBlock_right, styles[`_full`])}>
         {right.map((Component) => {
           return (
             <Component

@@ -27,8 +27,8 @@ export const colorsStaticLightMode = {
 
     codeblock: colorsLib.neutral[100],
 
-    error: colorsLib.danger[700],
-    success: colorsLib.nika[700],
+    error: colorsLib.danger[500],
+    success: colorsLib.nika[500],
 
     placeholder: colorsLib.neutral[500],
     inputColor: colorsLib.neutral[900],
@@ -70,8 +70,8 @@ export const colorsStaticDarkMode = {
 
     codeblock: colorsLib.neutral[100],
 
-    error: colorsLib.danger[700],
-    success: colorsLib.nika[700],
+    error: colorsLib.danger[500],
+    success: colorsLib.nika[500],
 
     placeholder: colorsLib.neutral[400],
     inputColor: colorsLib.neutral[100],

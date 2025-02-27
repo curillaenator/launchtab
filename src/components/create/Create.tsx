@@ -64,8 +64,8 @@ export const CreateBookmarkCard = styled.div<{ active: boolean }>`
         })
       : css({
           '&:hover': {
-            '--shp-bdc': theme.primary[400],
-            color: theme.primary[400],
+            '--shp-bdc': theme.primary[300],
+            color: theme.primary[300],
             'background-color': theme.backgrounds.base40,
           },
           '&:active': {

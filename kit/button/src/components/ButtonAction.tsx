@@ -43,7 +43,7 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
 
   &:hover {
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[400]};
+      fill: ${({ theme }) => theme.primary[300]};
     }
   }
 

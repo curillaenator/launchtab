@@ -9,13 +9,13 @@ const colors = (hue: number, sat: number, light: number) => {
 
   const steps = [
     lightUpper,
-    light + (lightUpper - light) * 0.75,
-    light + (lightUpper - light) * 0.5,
-    light + (lightUpper - light) * 0.25,
+    light + (lightUpper - light) * Math.pow(0.75, 2),
+    light + (lightUpper - light) * Math.pow(0.5, 2),
+    light + (lightUpper - light) * Math.pow(0.25, 2),
     light,
-    light - (light - lightLower) * 0.25,
-    light - (light - lightLower) * 0.5,
-    light - (light - lightLower) * 0.75,
+    light - (light - lightLower) * Math.pow(0.25, 2),
+    light - (light - lightLower) * Math.pow(0.5, 2),
+    light - (light - lightLower) * Math.pow(0.75, 2),
     lightLower,
   ];
 

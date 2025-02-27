@@ -42,7 +42,11 @@ export const ButtonStyled = styled.button<BaseButtonProps>`
   }
 
   &:hover {
-    color: ${({ theme, active }) => (active ? theme.white : theme.primary[500])};
+    color: ${({ theme, active }) => (active ? theme.white : theme.primary[300])};
+  }
+
+  &:active {
+    color: ${({ theme, active }) => (active ? theme.white : theme.primary[800])};
   }
 `;
 

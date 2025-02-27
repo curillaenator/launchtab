@@ -30,7 +30,7 @@ const CreateSpaceForm = styled.form`
 
   .submit-button {
     &:hover {
-      --shp-bgc: ${({ theme }) => theme.primary[400]};
+      --shp-bgc: ${({ theme }) => theme.primary[300]};
     }
     &:active {
       --shp-bgc: ${({ theme }) => theme.primary[700]};

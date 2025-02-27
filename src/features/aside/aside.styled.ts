@@ -59,7 +59,11 @@ const RouteLinkStyled = styled(NavLink)`
   color: ${({ theme }) => theme.texts.base};
 
   &:hover {
-    color: ${({ theme }) => theme.primary[400]};
+    color: ${({ theme }) => theme.primary[300]};
+  }
+
+  &:active {
+    color: ${({ theme }) => theme.primary[800]};
   }
 `;
 

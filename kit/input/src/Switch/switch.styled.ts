@@ -42,12 +42,22 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
       transition: 0.12s linear;
       color: ${({ theme, checked }) => (checked ? theme.white : theme.texts.base)};
     }
+
+    &:active {
+      .switch-toggler-shape {
+        fill: ${({ theme, checked }) => (checked ? theme.primary[700] : theme.backgrounds.light)};
+      }
+
+      .switch-toggler-title {
+        color: ${({ theme, checked }) => (checked ? theme.white : theme.primary[800])};
+      }
+    }
   }
 
   &:hover {
     .switch-toggler {
       &-shape {
-        fill: ${({ theme, checked }) => (checked ? theme.primary[400] : theme.backgrounds.light)};
+        fill: ${({ theme, checked }) => (checked ? theme.primary[300] : theme.backgrounds.light)};
       }
 
       &-title {

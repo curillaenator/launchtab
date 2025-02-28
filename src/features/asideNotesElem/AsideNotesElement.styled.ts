@@ -25,7 +25,7 @@ const AsideNotesElementStyled = styled.div`
     justify-content: flex-start;
 
     &_inactive {
-      --shp-bgc: var(--theme-accent-100);
+      --shp-bgc: var(--theme-backgrounds-light);
     }
   }
 

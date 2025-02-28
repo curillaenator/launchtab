@@ -1,10 +1,10 @@
-export { hexa, hsla } from './utils';
+export { hexa, hsla, neutrals as getNeutralSet } from './utils';
 export { themes, themeNames, type TThemeName } from './themes';
 
 export {
   colorsLib,
-  lightModeColors,
-  darkModeColors,
+  getLightModeColors,
+  getDarkModeColors,
   getLightModeShadows,
   getDarkModeShadows,
   getDarkModePrimarySet,

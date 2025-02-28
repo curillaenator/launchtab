@@ -16,7 +16,6 @@ const GRAY_HSL = [...new Array(9)].map((_, i) => {
   const colorKey = (1000 - (i + 1) * 100) as ColorKey;
 
   return {
-    neutral: colorsLib.neutral[colorKey],
     ultra: colorsLib.ultra[colorKey],
     phlox: colorsLib.phlox[colorKey],
     orange: colorsLib.orange[colorKey],
@@ -60,22 +59,19 @@ const Palette: FC = () => {
       <ButtonAction title='Init' onClick={() => setNoteLastInputTimestamp(Date.now() + 15000)} />
 
       <div style={{ display: 'flex', width: '100%' }}>
-        {GRAY_HSL.map(
-          ({ neutral, ultra, electroviolet, orange, danger, awesome, yellamerica, malachite, nika, phlox }) => (
-            <div key={neutral} style={{ width: '20%' }}>
-              <div style={{ width: '100%', height: 128, backgroundColor: neutral }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: ultra }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: electroviolet }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: orange }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: danger }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: awesome }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: yellamerica }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: malachite }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: nika }} />
-              <div style={{ width: '100%', height: 128, backgroundColor: phlox }} />
-            </div>
-          ),
-        )}
+        {GRAY_HSL.map(({ ultra, electroviolet, orange, danger, awesome, yellamerica, malachite, nika, phlox }) => (
+          <div key={ultra + electroviolet + malachite} style={{ width: '20%' }}>
+            <div style={{ width: '100%', height: 128, backgroundColor: ultra }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: electroviolet }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: orange }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: danger }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: awesome }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: yellamerica }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: malachite }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: nika }} />
+            <div style={{ width: '100%', height: 128, backgroundColor: phlox }} />
+          </div>
+        ))}
       </div>
     </PaletteContainer>
   );

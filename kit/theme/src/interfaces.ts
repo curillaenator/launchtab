@@ -56,6 +56,7 @@ interface LaunchTheme extends ModedSet {
   black: string;
   primary: ColorSet;
   accent: ColorSet;
+  neutral: ColorSet;
   secondary: ColorSet;
   shadows: ShadowsSet;
 }

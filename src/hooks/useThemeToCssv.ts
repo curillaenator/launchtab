@@ -20,7 +20,7 @@ const useThemeToCssv = (theme: TTheme) => {
 
     traverseTheme(cssv.current, theme, ['theme']);
 
-    // console.log('cssv.current', cssv.current);
+    console.log('cssv.current', cssv.current);
 
     cssv.current.forEach((cssvVal, cssvKey) => ref.current?.style.setProperty(cssvKey, cssvVal));
   }, [theme]);

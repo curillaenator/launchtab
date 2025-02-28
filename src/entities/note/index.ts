@@ -1,5 +1,10 @@
 export { NOTE_DEBOUNCE_TIME } from './constants';
 
+export { $noteStore, setNoteLastInputTimestamp, setSaveNoteHandler, setIsNoteSaving } from './store';
+
 export { getNoteBodyQuery, updateNoteBodyMutation } from './api';
+
 export { useNoteBodyData } from './hooks/useNoteBodyData';
 export { useNoteBodyUpdate } from './hooks/useNoteBodyUpdate';
+
+export type { NotesCreateParamType, NotesRouteParams } from './interfaces';

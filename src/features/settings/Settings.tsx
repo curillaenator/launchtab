@@ -30,7 +30,7 @@ export const Settings: FC = () => {
 
         <div className='form-block form-topBlock'>
           <div className='form-title'>
-            <Typography type='RoundedHeavy36' className='form-title-themed'>
+            <Typography as='h2' type='RoundedHeavy36' className='form-title-themed'>
               Settings
             </Typography>
           </div>

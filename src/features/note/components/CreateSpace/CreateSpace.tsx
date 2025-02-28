@@ -58,11 +58,11 @@ const CreateSpace: FC = () => {
       <Corners borderRadius={24} />
 
       <div className='create-space-form-title'>
-        <Typography as='span' type='RoundedHeavy36'>
+        <Typography as='h2' type='RoundedHeavy36'>
           {'Create new '}
         </Typography>
 
-        <Typography as='span' type='RoundedHeavy36' className='text-highlighted'>
+        <Typography as='h2' type='RoundedHeavy36' className='text-highlighted'>
           LaunchSpace
         </Typography>
       </div>

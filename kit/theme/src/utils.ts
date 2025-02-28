@@ -3,9 +3,19 @@ import type { ColorSet } from './interfaces';
 const COLOR_SET_DUMMY = [...new Array(9)];
 const STEP = 0.125;
 
+const MAX_PRIMARY_LIGHTNESS = 92;
+const MIN_PRIMARY_LIGHTNESS = 24;
+
+/**
+ * @description - Color set generation
+ * @param hue 0-360
+ * @param sat  0-100
+ * @param light range matters!!! - 24-92
+ * @returns ColorSet type
+ */
 const colors = (hue: number, sat: number, light: number) => {
-  const lightUpper = Math.max(light, 92);
-  const lightLower = Math.min(light, 20);
+  const lightUpper = Math.max(light, MAX_PRIMARY_LIGHTNESS);
+  const lightLower = Math.min(light, MIN_PRIMARY_LIGHTNESS);
 
   const steps = [
     lightUpper,
@@ -31,11 +41,17 @@ const colors = (hue: number, sat: number, light: number) => {
 // affect how "far" in terms of lightness colors will be spread among each other, less Q, closer colors generated
 const NEUTRALS_SPREAD_Q = 82;
 
-const neutrals = (hue: number) =>
+/**
+ *
+ * @param hue tint of neutrals, 0-360
+ * @param sat amount of tint, should not be above 3-4
+ * @returns ColorSet type
+ */
+const neutrals = (hue: number, sat: number = 3) =>
   Object.fromEntries(
     COLOR_SET_DUMMY.map((_, i) => [
       1000 - (i + 1) * 100,
-      `hsl(${hue}, 3%, ${10 + Math.pow(STEP * i, 2) * NEUTRALS_SPREAD_Q}%)`,
+      `hsl(${hue}, ${sat}%, ${10 + Math.pow(STEP * i, 2) * NEUTRALS_SPREAD_Q}%)`,
     ]),
   ) as ColorSet;
 

@@ -53,6 +53,7 @@ export const fontStyles = {
     font-variation-settings:
       'GRAD' 400,
       'wght' 800;
+    /* font-weight: 800; */
     font-size: 36px;
     line-height: 48px;
     /* letter-spacing: -0.021em; */

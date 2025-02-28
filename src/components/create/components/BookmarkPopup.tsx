@@ -117,9 +117,11 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
       <Shape borderRadius={24} className='popup-shape' />
 
       <div className='popup-title'>
-        <Typography type='RoundedHeavy24'>New</Typography>
+        <Typography as='h2' type='RoundedHeavy24'>
+          New
+        </Typography>
 
-        <Typography type='RoundedHeavy24' className='popup-title-themed'>
+        <Typography as='h2' type='RoundedHeavy24' className='popup-title-themed'>
           link
         </Typography>
       </div>

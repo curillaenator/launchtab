@@ -21,7 +21,7 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
   align-items: center;
   gap: 8px;
   height: ${({ height }) => `${height}px`};
-  padding: 0 8px;
+  padding: 0 12px;
   background: transparent;
   border-radius: 16px;
   z-index: 20;

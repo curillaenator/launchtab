@@ -1,9 +1,15 @@
 import React, { FC, useEffect, useCallback, useState } from 'react';
 
 import { Typography } from '@launch-ui/typography';
+import { ButtonAction } from '@launch-ui/button';
 import { ColorKey, colorsLib } from '@launch-ui/theme';
 
 import { Corners } from '@launch-ui/shape';
+
+import { setHeaderMidComponent } from '@src/entities/header';
+import { setNoteLastInputTimestamp } from '@src/entities/note';
+import { NoteHeader } from '@src/features/note/components/NoteHeader';
+
 import { PaletteContainer } from './palette.styled';
 
 const GRAY_HSL = [...new Array(9)].map((_, i) => {
@@ -29,6 +35,14 @@ const Palette: FC = () => {
   const onWindowResize = useCallback(() => setPageOutletHeight(window.innerHeight - 168 - 56), []);
 
   useEffect(() => {
+    setHeaderMidComponent(NoteHeader);
+
+    return () => {
+      setHeaderMidComponent(null);
+    };
+  }, []);
+
+  useEffect(() => {
     onWindowResize();
 
     window.addEventListener('resize', onWindowResize);
@@ -39,9 +53,11 @@ const Palette: FC = () => {
     <PaletteContainer height={pageOutletHeight}>
       <Corners borderRadius={24} />
 
-      <Typography as='span' type='RoundedHeavy36'>
+      <Typography as='h2' type='RoundedHeavy36'>
         Palette
       </Typography>
+
+      <ButtonAction title='Init' onClick={() => setNoteLastInputTimestamp(Date.now() + 15000)} />
 
       <div style={{ display: 'flex', width: '100%' }}>
         {GRAY_HSL.map(

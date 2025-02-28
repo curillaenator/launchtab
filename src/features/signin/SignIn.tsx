@@ -17,7 +17,7 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
         <Shape className='form-shape' borderRadius={24} />
 
         <div className='form-title'>
-          <Typography type='RoundedHeavy56' className='form-title-main'>
+          <Typography as='h2' type='RoundedHeavy56' className='form-title-main'>
             Sign In
           </Typography>
 

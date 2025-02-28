@@ -1,54 +1,92 @@
-import React, { FC, useCallback, useRef } from 'react';
+import React, { FC, useCallback, useRef, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useParams } from 'react-router-dom';
-import { debounce, throttle } from 'lodash';
 
 import { Corners } from '@launch-ui/shape';
 import { RichTextField, RichTextEditor, type RichtextChangeEvent } from '@launch-ui/richtext';
 
 import { $userStore } from '@src/entities/user';
 import { setHeaderMidComponent } from '@src/entities/header';
-import { useNoteBodyData, useNoteBodyUpdate, NOTE_DEBOUNCE_TIME } from '@src/entities/note';
+
+import {
+  // query hooks
+  useNoteBodyData,
+  useNoteBodyUpdate,
+  // store handlers
+  setIsNoteSaving,
+  setSaveNoteHandler,
+  setNoteLastInputTimestamp,
+  // misc
+  NOTE_DEBOUNCE_TIME,
+  type NotesRouteParams,
+} from '@src/entities/note';
 
 import { Loader } from '@src/features/loader';
+
+import { NoteHeader } from './components/NoteHeader';
 import { NoteContainer } from './note.styled';
 
 import 'tabulator-tables/dist/css/tabulator.min.css';
 
-type CreateParamType = 'space' | 'note';
-
-const HeaderComponent: FC = () => <Loader view='fit-parent' iconSize='56px' />;
-const updateHeader = () => setHeaderMidComponent(HeaderComponent);
-
 const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
-  const { noteId: routerNoteId = null } = useParams<{
-    noteId?: string;
-    createPageType?: CreateParamType;
-  }>();
+  const currentEditorRef = useRef<RichTextEditor | null>(null);
 
+  const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
   const { uid } = useEffectorUnit($userStore);
 
-  const payload = { uid, routerNoteId } as const;
+  const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData({ uid, routerNoteId });
 
-  const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData(payload);
-  const { mutate: updateNoteBody } = useNoteBodyUpdate({ ...payload, onSuccess: () => setHeaderMidComponent(null) });
+  const { mutate: updateNoteBody } = useNoteBodyUpdate({
+    uid,
+    routerNoteId,
+    onSuccess: () => setIsNoteSaving(false),
+  });
 
-  const onChangeStart = useCallback(throttle(updateHeader, NOTE_DEBOUNCE_TIME), []); //eslint-disable-line react-hooks/exhaustive-deps
-  const onChangeDebounced = useCallback(debounce(updateNoteBody, NOTE_DEBOUNCE_TIME), []); //eslint-disable-line react-hooks/exhaustive-deps
+  const saveDelayTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastRichTextEvent = useRef<RichtextChangeEvent | null>(null);
+
+  const updateNoteBodyImmidiate = useCallback(() => {
+    if (saveDelayTimer.current) {
+      clearTimeout(saveDelayTimer.current);
+      saveDelayTimer.current = null;
+    }
+
+    if (lastRichTextEvent.current) {
+      setIsNoteSaving(true);
+      updateNoteBody(lastRichTextEvent.current);
+    }
+  }, [updateNoteBody]);
+
+  const updateNoteBodyDebounced = useCallback(
+    (richTextEvent: RichtextChangeEvent) => {
+      if (saveDelayTimer.current) clearTimeout(saveDelayTimer.current);
+
+      saveDelayTimer.current = setTimeout(() => {
+        setIsNoteSaving(true);
+        updateNoteBody(richTextEvent);
+      }, NOTE_DEBOUNCE_TIME);
+    },
+    [updateNoteBody],
+  );
 
   const onRichTextChange = useCallback((richTextEvent: RichtextChangeEvent) => {
-    onChangeStart();
-    onChangeDebounced(richTextEvent);
+    lastRichTextEvent.current = richTextEvent;
+
+    setNoteLastInputTimestamp(Date.now() + NOTE_DEBOUNCE_TIME);
+    updateNoteBodyDebounced(richTextEvent);
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
-  const editorRef = useRef<RichTextEditor | null>(null);
+  // INJECT HEADER COMPONENT START
+  useEffect(() => {
+    setHeaderMidComponent(NoteHeader);
+    setSaveNoteHandler(updateNoteBodyImmidiate);
 
-  // useEffect(
-  //   () => () => {
-  //     if (editorRef.current) editorRef.current.commands.clearContent();
-  //   },
-  //   [],
-  // );
+    return () => {
+      setHeaderMidComponent(null);
+      setSaveNoteHandler(null);
+    };
+  }, [updateNoteBodyImmidiate]);
+  //INJECT HEADER COMPONENT END
 
   return (
     <NoteContainer height={maxHeight}>
@@ -58,7 +96,7 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         <Loader view='fit-parent' iconSize='56px' />
       ) : (
         <RichTextField
-          onEditorInstanceChange={(richTextEditor) => (editorRef.current = richTextEditor)}
+          onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
           maxHeight={maxHeight - 32}
           initialValue={noteBody || ''}
           onChange={onRichTextChange}

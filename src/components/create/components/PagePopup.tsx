@@ -72,9 +72,11 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
         <Shape className='popup-shape' borderRadius={24} />
 
         <div className='popup-title'>
-          <Typography type='RoundedHeavy24'>New</Typography>
+          <Typography as='h2' type='RoundedHeavy24'>
+            New
+          </Typography>
 
-          <Typography type='RoundedHeavy24' className='popup-title-themed'>
+          <Typography as='h2' type='RoundedHeavy24' className='popup-title-themed'>
             folder
           </Typography>
         </div>

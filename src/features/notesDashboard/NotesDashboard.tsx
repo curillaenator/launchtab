@@ -11,7 +11,7 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
     <NoteContainer height={maxHeight}>
       <Corners borderRadius={24} />
 
-      <Typography as='span' type='RoundedHeavy36'>
+      <Typography as='h2' type='RoundedHeavy36'>
         Notes dashboard
       </Typography>
     </NoteContainer>

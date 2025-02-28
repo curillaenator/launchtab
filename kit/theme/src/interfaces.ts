@@ -1,38 +1,63 @@
-import { colorsLib, colorsStaticLightMode } from './colors';
-
 type ColorKey = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type ColorSet = Record<ColorKey, string>;
 
-type StaticForModeColors = typeof colorsStaticLightMode;
+interface ModedSet {
+  texts: {
+    base: string;
+    inversedBase: string;
+    sub: string;
+    disabled: string;
 
-interface ThemeType extends StaticForModeColors {
-  white: string;
-  black: string;
-  primary: ColorSet;
-  secondary: ColorSet;
-  shadows: {
-    header: string;
-    card: string;
-    primary: string;
-    drawer: string;
+    codeblock: string;
+
+    error: string;
+    success: string;
+
+    placeholder: string;
+    inputColor: string;
+  };
+
+  icons: {
+    dark: string;
+    darkHover: string;
+    light: string;
+    lightHover: string;
+  };
+
+  borders: {
+    base: string;
+  };
+
+  backgrounds: {
+    base: string;
+    base20: string;
+    base40: string;
+
+    dark: string;
+    light: string;
+
+    codeblock: string;
+  };
+
+  modals: {
+    matte: string;
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const themeTemplate = {
-  white: colorsLib.white,
-  black: colorsLib.black,
-  primary: colorsLib.electroviolet as ColorSet,
-  secondary: colorsLib.electroviolet as ColorSet,
-  shadows: {
-    header: ``,
-    card: ``,
-    primary: ``,
-    drawer: '',
-  },
-  ...colorsStaticLightMode,
-};
+interface ShadowsSet {
+  header: string;
+  card: string;
+  primary: string;
+  drawer: string;
+}
 
-type TTheme = typeof themeTemplate;
+interface LaunchTheme extends ModedSet {
+  white: string;
+  black: string;
+  primary: ColorSet;
+  accent: ColorSet;
+  secondary: ColorSet;
+  shadows: ShadowsSet;
+}
 
-export type { TTheme, ColorSet, ColorKey, ThemeType };
+export type { LaunchTheme as TTheme, ColorSet, ColorKey, ModedSet, ShadowsSet };

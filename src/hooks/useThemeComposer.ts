@@ -15,15 +15,24 @@ import {
   type TThemeName,
 } from '@launch-ui/theme';
 
+//  hsl(223, 86%, 57%)
+//  hsl(4, 100%, 46%)
+//  hsl(263, 100%, 59%)
+//  hsl(86, 81%, 38%)
+//  hsl(143, 71%, 44%)
+//  hsl(18, 100%, 54%)
+//  hsl(346, 96%, 56%)
+//  hsl(299, 86%, 39%)
+
 const THEME_NAMES_TO_NEUTRAL_SAT: Record<TThemeName, number> = {
-  classicBlueTheme: 170,
-  dangerRed: 180,
-  defaultTheme: 140,
-  radioactiveGreenTheme: 270,
-  sunnyOrange: 220,
-  awesome: 170,
-  greenTheme: 270,
-  phlox: 150,
+  classicBlueTheme: 223,
+  dangerRed: 184,
+  defaultTheme: 263 - 180,
+  radioactiveGreenTheme: 86 + 180,
+  greenTheme: 143 + 180,
+  sunnyOrange: 198,
+  awesome: 346 - 180,
+  phlox: 299 - 180,
 };
 
 export const useThemeComposer = (): TTheme => {

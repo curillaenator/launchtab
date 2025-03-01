@@ -21,25 +21,52 @@ const AsideNotesElementStyled = styled.div`
   }
 
   .open-spaces-button {
+    --shp-bgc: var(--theme-backgrounds-light);
+
     width: 100%;
     justify-content: flex-start;
 
-    &_inactive {
-      --shp-bgc: var(--theme-backgrounds-light);
+    &_active {
+      --shp-bgc: var(--theme-primary-700);
     }
   }
 
   .create-space-button {
+    --shp-bgc: var(--theme-backgrounds-light);
+
     width: 100%;
     flex: 0 0 auto;
 
-    &_inactive {
+    &_active {
+      --shp-bgc: var(--theme-primary-700);
+    }
+  }
+
+  .hierarchy-create-space-button {
+    --shp-bgc: var(--theme-backgrounds-light);
+
+    &_active {
+      --shp-bgc: var(--theme-primary-700);
+    }
+  }
+
+  .hierarchy-create-note {
+    margin-top: 32px;
+    width: 100%;
+
+    &-button {
       --shp-bgc: var(--theme-backgrounds-light);
+
+      width: 100%;
+
+      &_active {
+        --shp-bgc: var(--theme-primary-700);
+      }
     }
   }
 
   .unit-list {
-    margin-top: 16px;
+    margin-top: 32px;
     width: 100%;
     padding-left: 12px;
   }

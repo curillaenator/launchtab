@@ -27,8 +27,6 @@ interface HierarchyServiceItem {
   isDrag: boolean;
   isExpanded: boolean;
   isPending: boolean;
-  isHovered: boolean;
-  isActive: boolean;
 }
 
 type AsyncItemLoadStatus = 'success' | 'error';

@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react';
 
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useMatch } from 'react-router-dom';
 
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
@@ -12,11 +11,6 @@ import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './as
 import { $appStore } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 
-import {
-  NOTES_ROUTE,
-  //  PALETTE_ROUTE
-} from '@src/routes';
-
 import HomeIcon from '@src/assets/svg/home.svg';
 import StarIcon from '@src/assets/svg/star.svg';
 // import GoogleIcon from '@src/assets/svg/google.svg';
@@ -24,8 +18,6 @@ import StarIcon from '@src/assets/svg/star.svg';
 export const Aside: FC = memo(() => {
   const { isAsideOpen } = useEffectorUnit($appStore);
   const { uid } = useEffectorUnit($userStore);
-
-  const notesRouteMatch = useMatch(NOTES_ROUTE);
 
   return (
     <AsideStyled isAsideOpen={isAsideOpen}>
@@ -60,7 +52,7 @@ export const Aside: FC = memo(() => {
               </Typography>
             </RouteLinkStyled>
 
-            {notesRouteMatch && <AsideNotesElement uid={uid} />}
+            <AsideNotesElement uid={uid} />
           </>
         )}
 

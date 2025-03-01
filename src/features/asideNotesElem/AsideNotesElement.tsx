@@ -29,6 +29,7 @@ import { USER_SPACES_QUERY, SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
 import PlusIcon from '@src/assets/svg/plus.svg';
+import AddIcon from '@src/assets/svg/add.svg';
 
 type CreateParamType = 'space' | 'note';
 
@@ -113,7 +114,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           title={!userSpaces ? 'Wait...' : 'Create LaunchSpace'}
           onClick={() => navigate('/notes/create/space')}
           className={cn('create-space-button', {
-            ['create-space-button_inactive']: createPageType !== 'space',
+            ['create-space-button_active']: createPageType === 'space',
           })}
         />
       )}
@@ -133,7 +134,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                   title={userSpaces.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name}
                   active={isSpaceSelectorOpen}
                   className={cn('open-spaces-button', {
-                    ['open-spaces-button_inactive']: !isSpaceSelectorOpen,
+                    ['open-spaces-button_active']: isSpaceSelectorOpen,
                   })}
                 />
               }
@@ -155,9 +156,12 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
 
             {userSpaces.length < MAX_SPACES_PER_USER && (
               <Button
-                active={createPageType === 'space'}
-                IconLeft={() => <PlusIcon />}
+                IconLeft={() => <AddIcon />}
                 onClick={() => navigate('/notes/create/space')}
+                active={createPageType === 'space'}
+                className={cn('hierarchy-create-space-button', {
+                  ['hierarchy-create-space-button_active']: createPageType === 'space',
+                })}
               />
             )}
           </div>
@@ -180,6 +184,20 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                   matchRoutePattern={() => `/notes/:noteId`}
                 />
               </div>
+
+              {!isRootItemsLoading && (
+                <div className='hierarchy-create-note'>
+                  <Button
+                    title='Create note'
+                    onClick={() => navigate('/notes/create/note')}
+                    active={createPageType === 'note'}
+                    IconLeft={() => <AddIcon />}
+                    className={cn('hierarchy-create-note-button', {
+                      ['hierarchy-create-note-button_active']: createPageType === 'note',
+                    })}
+                  />
+                </div>
+              )}
             </>
           )}
         </>

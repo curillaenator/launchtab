@@ -2,8 +2,7 @@ import { createEvent, createStore } from 'effector';
 import { omit } from 'lodash';
 
 import { getPathKey } from '../utils/getPathKey';
-
-import { HierarchyItem, HierarchyServiceItem, HierarchyState } from '../interfaces';
+import type { HierarchyItem, HierarchyServiceItem, HierarchyState } from '../interfaces';
 
 interface HierarchyServicePayload {
   path: string[];
@@ -17,11 +16,7 @@ const DEFAULT_ITEM_STATE: HierarchyServiceItem = {
   isDrag: false,
   isExpanded: false,
   isPending: false,
-  isHovered: false,
-  isActive: false,
 };
-
-// const
 
 const registerHierarchyItem = createEvent<HierarchyItem & { path: string[] }>();
 const updateHierarchy = createEvent<HierarchyServicePayload>();

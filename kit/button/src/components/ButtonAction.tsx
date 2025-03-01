@@ -37,13 +37,13 @@ const ButtonActionStyled = styled.button<IButtonStyled>`
 
   .rounded-shape {
     transition: 0.08s linear;
-    fill: ${({ theme }) => theme.primary[500]};
+    fill: ${({ theme, active }) => (active ? theme.primary[700] : theme.primary[500])};
     filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
   }
 
   &:hover {
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[300]};
+      fill: ${({ theme, active }) => (active ? theme.primary[700] : theme.primary[300])};
     }
   }
 

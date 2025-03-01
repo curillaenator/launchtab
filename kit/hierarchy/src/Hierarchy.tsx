@@ -1,10 +1,11 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo, CSSProperties } from 'react';
+import { useUnit as useEffectoUnit } from 'effector-react';
 import cn from 'classnames';
 
-// import { getHeight } from './utils/getHeight';
-// import { ITEM_HEIGHT } from './constants';
+import { getHeight } from './utils/getHeight';
+import { ITEM_HEIGHT } from './constants';
 
-import { registerHierarchyItem } from './service/store';
+import { $hierarchyStore, registerHierarchyItem } from './service/store';
 import { HierarchyContextProvider } from './context';
 import { levelToFoldableMap } from './utils/levelToFoldableMap';
 
@@ -15,11 +16,7 @@ import type { HierarchyProps } from './interfaces';
 import styles from './styles.module.scss';
 
 export const Hierarchy: FC<HierarchyProps> = (props) => {
-  const {
-    // onHeightChanged = () => {},
-    rootLevel,
-    loadTreeLevel,
-  } = props;
+  const { onHeightChanged = () => {}, rootLevel, loadTreeLevel } = props;
 
   useEffect(() => {
     loadTreeLevel(rootLevel).then((dtoItems) => {
@@ -27,19 +24,24 @@ export const Hierarchy: FC<HierarchyProps> = (props) => {
     });
   }, [rootLevel, loadTreeLevel]);
 
-  // const currentHeight = useMemo(() => {
-  //   return ITEM_HEIGHT * items.length + items.map((item) => getHeight(item, state)).reduce((a, b) => a + b, 0);
-  // }, [items, state]);
+  const store = useEffectoUnit($hierarchyStore);
 
-  // useEffect(() => {
-  //   onHeightChanged(currentHeight);
-  // }, [currentHeight, onHeightChanged]);
+  const currentHeight = useMemo(() => {
+    const items = levelToFoldableMap(rootLevel);
+    return (
+      ITEM_HEIGHT * items.length + items.map(([itemCode]) => getHeight([itemCode], store)).reduce((a, b) => a + b, 0)
+    );
+  }, [rootLevel, store]);
+
+  useEffect(() => {
+    onHeightChanged(currentHeight);
+  }, [currentHeight, onHeightChanged]);
 
   return (
     <HierarchyContextProvider value={props}>
       <ul
         className={cn(styles.container, styles.themeVars_light)}
-        // style={{ '--hchy-container-h': `${currentHeight}px` } as CSSProperties}
+        style={{ '--hchy-container-h': `${currentHeight}px` } as CSSProperties}
       >
         {levelToFoldableMap(rootLevel).map(([code]) => (
           <Foldable key={code} code={code} path={[code]} />

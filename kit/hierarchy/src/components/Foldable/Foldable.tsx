@@ -18,7 +18,7 @@ import { DocumentLink } from '../DocumentLink';
 import { CaretRightIcon } from './icons/CaretRightIcon';
 import { DotSmallIcon } from './icons/DotSmallIcon';
 
-// import { getHeight } from '../../utils/getHeight';
+import { getHeight, CACHE } from '../../utils/getHeight';
 
 import { HierarchyItem, HierarchyState } from '../../interfaces';
 
@@ -54,7 +54,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
 
   // const hasChildren = !!data?.hierarchy;
 
-  // const currentHeight = getHeight(props, state);
+  const currentHeight = getHeight(path, store);
 
   return (
     <li
@@ -63,6 +63,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
       className={styles.li}
     >
       <div
+        data-element='trigger'
         data-code={code}
         className={cn(styles.trigger, {
           // [styles.trigger_isDrag]: itemState.isDrag,
@@ -86,18 +87,20 @@ export const Foldable: FC<FoldableProps> = (props) => {
               const isChildrenLoaded = checkIfChildrenLoaded(keys(data.hierarchy), path, store);
 
               if (!!isChildrenLoaded) {
-                console.log('isChildrenLoaded', true, HIERARCHY_ITEMS_DATA);
+                // console.log('isChildrenLoaded', true, CACHE);
                 updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: !store[pathKey].isExpanded } });
               }
 
               if (!isChildrenLoaded && loadTreeLevel) {
-                console.log('isChildrenLoaded', false, HIERARCHY_ITEMS_DATA);
+                // console.log('isChildrenLoaded', false, HIERARCHY_ITEMS_DATA);
+                updateHierarchy({ path, serviceItem: { ...store[pathKey], isPending: true } });
+
                 loadTreeLevel(data.hierarchy!)
                   .then((loadedItems) => {
                     loadedItems.forEach((loaded) => registerHierarchyItem({ ...loaded, path }));
                   })
                   .then(() => {
-                    updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: true } });
+                    updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: true, isPending: false } });
                   });
               }
             }}
@@ -122,11 +125,12 @@ export const Foldable: FC<FoldableProps> = (props) => {
 
       <ul
         id={pathKey}
+        data-element={`child-list-${pathKey}`}
         className={cn(styles.ulList, {
           [styles.ulList_folded]: !isExpanded,
           // [styles.list_isDrag]: itemState.isDrag,
         })}
-        // style={{ '--list-foldable-mah': `${currentHeight}px` } as React.CSSProperties}
+        style={{ '--list-foldable-mah': `${currentHeight}px` } as React.CSSProperties}
       >
         {!!data?.hierarchy &&
           levelToFoldableMap(data.hierarchy).map(([code]) => (

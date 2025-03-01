@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 
 import { getPathKey } from '../utils/getPathKey';
 
-import { HierarchyItem, HierarchyServiceItem } from '../interfaces';
+import { HierarchyItem, HierarchyServiceItem, HierarchyState } from '../interfaces';
 
 interface HierarchyServicePayload {
   path: string[];
@@ -11,8 +11,6 @@ interface HierarchyServicePayload {
   targetPath?: string[];
   dtoItem?: HierarchyItem;
 }
-
-type HierarchyState = Record<string, HierarchyServiceItem>;
 
 const DEFAULT_ITEM_STATE: HierarchyServiceItem = {
   code: '',

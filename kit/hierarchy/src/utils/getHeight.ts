@@ -1,28 +1,42 @@
-// import type { HierarchyState } from '../state/interfaces';
-// import type { HierarchyItem } from '../interfaces';
-// import { DEFAULT_ITEM_STATE, ITEM_HEIGHT } from '../constants';
+import { getPathKey } from './getPathKey';
+import { HIERARCHY_ITEMS_DATA } from '../service/store';
+import type { HierarchyState, HierarchyItem } from '../interfaces';
+import { ITEM_HEIGHT } from '../constants';
+import { keys } from 'lodash';
 
-// const cache = new WeakMap();
+// const CACHE = new WeakMap();
+const CACHE = new WeakMap();
 
-// export const getHeight = (item: HierarchyItem, state: HierarchyState[string]): number => {
-//   if (!cache.has(state)) {
-//     cache.set(state, new WeakMap());
-//   }
-//   const cached = cache.get(state);
+const getHeight = (path: string[], state: HierarchyState): number => {
+  const pathKey = getPathKey(path);
+  const item = HIERARCHY_ITEMS_DATA.get(pathKey);
 
-//   if (cached.has(item)) {
-//     return cached.get(item);
-//   }
-//   const itemState = state[item.id] || DEFAULT_ITEM_STATE;
+  if (!item) return 0;
 
-//   let result = 0;
+  if (!CACHE.has(state)) {
+    CACHE.set(state, new WeakMap());
+  }
 
-//   if (item.childList && itemState.isExpanded) {
-//     result += ITEM_HEIGHT * item.childList.length;
-//     result += item.childList.map((item) => getHeight(item, state)).reduce((a, b) => a + b, 0);
-//   }
+  const cached = CACHE.get(state);
 
-//   cached.set(item, result);
+  if (cached.has(item)) {
+    return cached.get(item);
+  }
 
-//   return result;
-// };
+  const itemState = state[pathKey];
+
+  let result = 0;
+
+  if (item?.hierarchy && itemState.isExpanded) {
+    result += ITEM_HEIGHT * keys(item.hierarchy).length;
+    result += keys(item.hierarchy)
+      .map((code) => getHeight([...path, code], state))
+      .reduce((a, b) => a + b, 0);
+  }
+
+  cached.set(item, result);
+
+  return result;
+};
+
+export { CACHE, getHeight };

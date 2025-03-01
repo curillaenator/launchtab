@@ -2,7 +2,6 @@
 
 .li {
   width: 100%;
-  height: 32px;
   display: block;
   font-family: inherit;
 }
@@ -16,16 +15,12 @@
   background-color: transparent;
   font-family: inherit;
 
-  &_isActive {
-    color: var(--theme-primary-500);
-  }
+  // &_isActive {
+  //   color: var(--theme-primary-500);
+  // }
 
-  &_isDrag {
-    background-color: var(--theme-backgrounds-light);
-  }
-
-  // .pointer {
-  //   flex-shrink: 0;
+  // &_isDrag {
+  //   background-color: var(--theme-backgrounds-light);
   // }
 
   .carret {
@@ -51,7 +46,8 @@
 }
 
 .ulList {
-  // --list-foldable-mah: 0px;
+  --list-foldable-mah: 0px;
+
   font-family: inherit;
 
   position: relative;
@@ -62,9 +58,9 @@
   flex-direction: column;
   padding-left: 16px;
 
-  // transition: 0.2s ease;
-  // max-height: var(--list-foldable-mah);
-  // min-height: var(--list-foldable-mah);
+  transition: 0.2s ease;
+  max-height: var(--list-foldable-mah);
+  min-height: var(--list-foldable-mah);
 
   &_folded {
     height: 0px;

@@ -39,9 +39,9 @@ const AsideNotesElementStyled = styled.div`
   }
 
   .unit-list {
-    margin-top: 32px;
+    margin-top: 16px;
     width: 100%;
-    /* padding-left: 24px; */
+    padding-left: 12px;
   }
 
   .selector-loader-dummy {

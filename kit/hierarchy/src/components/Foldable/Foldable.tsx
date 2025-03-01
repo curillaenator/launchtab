@@ -1,26 +1,27 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useUnit as UseEffectorUnit } from 'effector-react';
+// import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { $hierarchyStore, registerHierarchyItem, updateHierarchy, HIERARCHY_ITEMS_DATA } from '../../service/store';
 import { useHierarchyContext } from '../../context';
 
 import { getPathKey } from '../../utils/getPathKey';
-import { levelToFoldableMap } from '../../utils/levelToFoldableMap';
 
 // import { Actions } from '../Actions';
 import { Spinner } from '../Spinner';
 import { DocumentLink } from '../DocumentLink';
 
 // import { useDragNDrop } from './hooks/useDragNDrop';
-// import { useActiveWatch } from './hooks/useActiveWatch';
+import { useActiveWatch } from './hooks/useActiveWatch';
 
 import { CaretRightIcon } from './icons/CaretRightIcon';
 import { DotSmallIcon } from './icons/DotSmallIcon';
 
-import { getHeight, CACHE } from '../../utils/getHeight';
+import { getHeight } from '../../utils/getHeight';
 
-import { HierarchyItem, HierarchyState } from '../../interfaces';
+import { HierarchyItem } from '../../interfaces';
 
 import styles from './styles.module.scss';
 import { keys } from 'lodash';
@@ -28,32 +29,43 @@ import { keys } from 'lodash';
 interface FoldableProps {
   code: string;
   path: string[];
+  data: HierarchyItem;
 }
 
-const checkIfChildrenLoaded = (ids: string[], path: string[], store: HierarchyState) =>
-  ids.every((id) => !!store[getPathKey([...path, id])]);
-
 export const Foldable: FC<FoldableProps> = (props) => {
-  const { code, path } = props;
-  const { loadTreeLevel } = useHierarchyContext();
+  const { code, path, data } = props;
 
   const pathKey = getPathKey(path);
-
-  const data = HIERARCHY_ITEMS_DATA.get(pathKey) as HierarchyItem;
   const store = UseEffectorUnit($hierarchyStore);
+  const { queryKey: ITEMS_QUERY_KEY, getItemsQuery, ItemLoader } = useHierarchyContext();
 
-  const { isPending, isExpanded } = store[pathKey] || {};
+  const { isExpanded } = store[pathKey] || {};
 
+  const [touched, setTouched] = useState<boolean>(false);
   // const [isActive, setActive] = useState(false);
-
   // const [isActionsOpened, setActionsOpened] = useState(false);
   // const [isHovered, setHovered] = useState(false);
 
+  const { data: childrenData, isLoading: isChildrenLoading } = useQuery({
+    queryKey: [ITEMS_QUERY_KEY, pathKey],
+    queryFn: () => getItemsQuery(keys(data?.hierarchy)),
+    enabled: !!data?.hierarchy && touched,
+  });
+
+  useEffect(() => {
+    if (!childrenData) return;
+    childrenData.forEach((child) => registerHierarchyItem({ ...child, path }));
+  }, [childrenData]);
+
   // const { liDropHandlers } = useDragNDrop(props);
-  // useActiveWatch(props, setActive);
+  // useActiveWatch(props, (activeState: boolean) =>
+  //   updateHierarchy({
+  //     path,
+  //     serviceItem: { ...store[pathKey], isActive: activeState },
+  //   }),
+  // );
 
-  // const hasChildren = !!data?.hierarchy;
-
+  const hasChildren = !!data?.hierarchy;
   const currentHeight = getHeight(path, store);
 
   return (
@@ -67,7 +79,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
         data-code={code}
         className={cn(styles.trigger, {
           // [styles.trigger_isDrag]: itemState.isDrag,
-          // [styles.trigger_isActive]: isActive,
+          // [styles.trigger_isActive]: noteId === data.code,
         })}
         // onMouseLeave={() => {
         // if (!isActionsOpened) {
@@ -75,34 +87,18 @@ export const Foldable: FC<FoldableProps> = (props) => {
         // }
         // }}
       >
-        {isPending && <Spinner />}
+        {isChildrenLoading && (ItemLoader ? <ItemLoader /> : <Spinner />)}
 
-        {!isPending && !data?.hierarchy && <DotSmallIcon />}
+        {!isChildrenLoading && !hasChildren && <DotSmallIcon />}
 
-        {!isPending && !!data?.hierarchy && (
+        {!isChildrenLoading && !!hasChildren && (
           <button
             type='button'
             className={styles.iconButton}
             onClick={() => {
-              const isChildrenLoaded = checkIfChildrenLoaded(keys(data.hierarchy), path, store);
-
-              if (!!isChildrenLoaded) {
-                // console.log('isChildrenLoaded', true, CACHE);
-                updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: !store[pathKey].isExpanded } });
-              }
-
-              if (!isChildrenLoaded && loadTreeLevel) {
-                // console.log('isChildrenLoaded', false, HIERARCHY_ITEMS_DATA);
-                updateHierarchy({ path, serviceItem: { ...store[pathKey], isPending: true } });
-
-                loadTreeLevel(data.hierarchy!)
-                  .then((loadedItems) => {
-                    loadedItems.forEach((loaded) => registerHierarchyItem({ ...loaded, path }));
-                  })
-                  .then(() => {
-                    updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: true, isPending: false } });
-                  });
-              }
+              console.log('isChildrenLoaded', HIERARCHY_ITEMS_DATA);
+              setTouched(true);
+              updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: !store[pathKey].isExpanded } });
             }}
           >
             <div className={cn(styles.carret, { [styles.carret_opened]: isExpanded })}>
@@ -132,10 +128,9 @@ export const Foldable: FC<FoldableProps> = (props) => {
         })}
         style={{ '--list-foldable-mah': `${currentHeight}px` } as React.CSSProperties}
       >
-        {!!data?.hierarchy &&
-          levelToFoldableMap(data.hierarchy).map(([code]) => (
-            <Foldable key={code} code={code} path={[...path, code]} />
-          ))}
+        {childrenData?.map((hItem) => (
+          <Foldable key={hItem.code} code={hItem.code} path={[...path, hItem.code]} data={hItem} />
+        ))}
       </ul>
     </li>
   );

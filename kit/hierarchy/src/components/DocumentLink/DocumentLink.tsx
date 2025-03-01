@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 // import { Hint } from '@sbt_swtr/kit-tracker.hint';
 import cn from 'classnames';
 
@@ -19,6 +20,10 @@ export const DocumentLink: FC<DocumentLinkProps> = (props) => {
   const { item } = props;
   const { linkPattern } = useHierarchyContext();
 
+  const { noteId } = useParams<{ noteId: string }>();
+
+  console.log('useParams', useParams<{ noteId: string }>());
+
   // const hasActions = !!actions?.length;
   // const isDisabled = (disableRestricted && restricted) || matchDisabledItem?.(item);
 
@@ -33,7 +38,7 @@ export const DocumentLink: FC<DocumentLinkProps> = (props) => {
   // });
 
   const classNames = cn(styles.button, {
-    // [styles.button_active]: isActive,
+    [styles.button_active]: item.code === noteId,
     // [styles.button_actioned]: hasActions && isHovered,
     // [styles.button_disabled]: isDisabled,
   });

@@ -13,11 +13,12 @@ interface HierarchyServicePayload {
 }
 
 const DEFAULT_ITEM_STATE: HierarchyServiceItem = {
-  code: '',
   path: [],
   isDrag: false,
   isExpanded: false,
   isPending: false,
+  isHovered: false,
+  isActive: false,
 };
 
 // const

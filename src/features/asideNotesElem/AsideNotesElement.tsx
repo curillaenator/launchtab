@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState, memo, useRef, useCallback } from 'react';
+import React, { FC, useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { keys } from 'lodash';
 import cn from 'classnames';
 
 import { Dropable } from '@launch-ui/dropable';
-import { Hierarchy, type HierarchyTree } from '@launch-ui/hierarchy';
+import { Hierarchy } from '@launch-ui/hierarchy';
 import { ButtonGhost, Button } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 
@@ -35,8 +35,6 @@ type CreateParamType = 'space' | 'note';
 import FolderIcon from '@src/assets/svg/folder.svg';
 
 const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
-  const qc = useQueryClient();
-
   const { createPageType } = useParams<{
     noteId?: string;
     createPageType?: CreateParamType;
@@ -80,17 +78,11 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     }, 4000);
   }, [userSpaces]);
 
-  const fetchHirarchyLevel = useCallback(
-    (tree: HierarchyTree) => {
-      const levelUnitIds = keys(tree).map((code) => code);
-
-      return qc.fetchQuery({
-        queryKey: [SPACE_UNITS_QUERY, levelUnitIds],
-        queryFn: () => getSpaceUnitsQuery(levelUnitIds),
-      });
-    },
-    [qc],
-  );
+  const { data: rootItems = [], isLoading: isRootItemsLoading } = useQuery({
+    queryKey: [SPACE_UNITS_QUERY, selectedSpace?.spaceCode || null],
+    queryFn: () => getSpaceUnitsQuery(keys(selectedSpace?.hierarchy)),
+    enabled: !!selectedSpace?.hierarchy,
+  });
 
   useEffect(() => {
     setSelectedSpace(userSpaces?.find((sp) => sp.spaceCode === lastViewedSpace) || userSpaces?.[0] || null);
@@ -170,38 +162,28 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             )}
           </div>
 
-          <div className='unit-list' data-aside-notes-element-unit-list>
-            {selectedSpace?.hierarchy && (
-              <Hierarchy
-                rootLevel={selectedSpace.hierarchy}
-                loadTreeLevel={fetchHirarchyLevel}
-                linkPattern={(item: { code: string }) => `/notes/${item.code}`}
-                matchRoutePattern={() => `/notes/:noteId`}
-              />
-            )}
+          {selectedSpace?.hierarchy && (
+            <>
+              <div className='unit-list' data-aside-notes-element-unit-list>
+                {isRootItemsLoading && (
+                  <div className='unit-loader-dummy'>
+                    <Loader />
+                  </div>
+                )}
 
-            {/*  */}
-          </div>
+                <Hierarchy
+                  queryKey={SPACE_UNITS_QUERY}
+                  rootItems={rootItems}
+                  ItemLoader={() => <Loader />}
+                  getItemsQuery={getSpaceUnitsQuery}
+                  linkPattern={(item: { code: string }) => `/notes/${item.code}`}
+                  matchRoutePattern={() => `/notes/:noteId`}
+                />
+              </div>
+            </>
+          )}
         </>
       )}
-
-      {/* {isSpaceUnitsLoading ? (
-        <div className='unit-loader-dummy'>
-          <Loader />
-        </div>
-      ) : spaceUnits?.length ? (
-        <div className='unit-list' data-aside-notes-element-unit-list>
-          {spaceUnits.map(({ unitCode, name: unitName }) => (
-            <ButtonGhost
-              key={unitCode}
-              title={unitName}
-              active={routerNoteId === unitCode}
-              onClick={() => navigate(`/notes/${unitCode}`)}
-            />
-          ))}
-        </div>
-        
-      ) : null} */}
     </AsideNotesElementStyled>
   );
 });

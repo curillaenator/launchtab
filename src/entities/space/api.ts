@@ -36,6 +36,8 @@ const getUserSpacesQuery = async (spaceIds: string[]) => {
 const getSpaceUnitsQuery = async (unitIds: string[]) => {
   const spaceUnitsDto = await Promise.all(unitIds.map((unitId) => getDoc(doc(fsdb, 'units', unitId))));
 
+  console.log('getSpaceUnitsQuery', unitIds.join('-'));
+
   const spaceUnits = await Promise.all(
     spaceUnitsDto.map((unitSnap) => {
       if (!unitSnap.exists()) return null;

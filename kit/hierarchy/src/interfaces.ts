@@ -1,8 +1,6 @@
-// import type { HierarchyItemAction } from './components/Actions';
+import type { FC } from 'react';
 
-// type HierarchyTree = {
-//   [unitId: string]: HierarchyTree | null;
-// };
+// import type { HierarchyItemAction } from './components/Actions';
 
 type HierarchyState = Record<string, HierarchyServiceItem>;
 
@@ -25,11 +23,12 @@ interface HierarchyItem {
 }
 
 interface HierarchyServiceItem {
-  code: string;
   path: string[];
   isDrag: boolean;
   isExpanded: boolean;
   isPending: boolean;
+  isHovered: boolean;
+  isActive: boolean;
 }
 
 type AsyncItemLoadStatus = 'success' | 'error';
@@ -44,10 +43,13 @@ interface HierarchyProps {
   // isDraggable?: boolean;
   // actions?: HierarchyItemAction[];
 
-  rootLevel: HierarchyTree;
-  loadTreeLevel: (level: HierarchyTree) => Promise<HierarchyItem[]>;
+  rootItems: HierarchyItem[];
 
-  // onAsyncLoad: (item: HierarchyItem | null) => Promise<HierarchyItem[]>;
+  queryKey: string;
+  getItemsQuery: (unitIds: string[]) => Promise<HierarchyItem[]>;
+
+  ItemLoader?: FC;
+
   linkPattern: (item: HierarchyItem) => string;
   matchRoutePattern?: (item: HierarchyItem) => string;
   onHeightChanged?: (height: number) => void;

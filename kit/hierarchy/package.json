@@ -28,9 +28,11 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "@launch-ui/types": "*"
+    "@launch-ui/types": "*",
+    "@tanstack/react-query": "5.66.9"
   },
   "peerDependencies": {
+    "@tanstack/react-query": "*",
     "@types/react-router-dom": "*",
     "react": "*"
   },

@@ -8,6 +8,8 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
   display: flex;
   width: 100%;
   min-width: 1440px;
+
+  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
   color: ${({ theme }) => theme.texts.base};
 
   .aside {

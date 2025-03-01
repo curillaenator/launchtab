@@ -3,23 +3,20 @@ import { Link } from 'react-router-dom';
 // import { Hint } from '@sbt_swtr/kit-tracker.hint';
 import cn from 'classnames';
 
-import { HIERARCHY_ITEMS_DATA } from '../../service/store';
 import { useHierarchyContext } from '../../context';
-import { getPathKey } from '../../utils/getPathKey';
 
 import type { HierarchyItem } from '../../interfaces';
 import styles from './DocumentLink.module.scss';
 
 interface DocumentLinkProps {
   item: HierarchyItem;
-  isHovered?: boolean;
-  isActive?: boolean;
-  setHovered: (data: boolean) => void;
+  // isHovered?: boolean;
+  // isActive?: boolean;
+  // setHovered: (data: boolean) => void;
 }
 
 export const DocumentLink: FC<DocumentLinkProps> = (props) => {
-  const { item, isHovered, isActive, setHovered } = props;
-
+  const { item } = props;
   const { linkPattern } = useHierarchyContext();
 
   // const hasActions = !!actions?.length;
@@ -36,7 +33,7 @@ export const DocumentLink: FC<DocumentLinkProps> = (props) => {
   // });
 
   const classNames = cn(styles.button, {
-    [styles.button_active]: isActive,
+    // [styles.button_active]: isActive,
     // [styles.button_actioned]: hasActions && isHovered,
     // [styles.button_disabled]: isDisabled,
   });
@@ -102,7 +99,12 @@ export const DocumentLink: FC<DocumentLinkProps> = (props) => {
   );
 
   return (
-    <Link className={classNames} type='button' to={linkPattern(item)} onMouseEnter={() => setHovered(true)}>
+    <Link
+      className={classNames}
+      type='button'
+      to={linkPattern(item)}
+      // onMouseEnter={() => setHovered(true)}
+    >
       {children}
     </Link>
   );

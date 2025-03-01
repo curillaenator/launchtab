@@ -6,13 +6,13 @@ import { getPathKey } from '../utils/getPathKey';
 import { HierarchyItem, HierarchyServiceItem } from '../interfaces';
 
 interface HierarchyServicePayload {
-  dtoItem: HierarchyItem;
-  serviceItem: HierarchyServiceItem;
   path: string[];
+  serviceItem: Partial<HierarchyServiceItem>;
   targetPath?: string[];
+  dtoItem?: HierarchyItem;
 }
 
-type HierarchyState = Record<string, HierarchyServiceItem>; // Record<full-hierarchy-path, HierarchiItem[]>
+type HierarchyState = Record<string, HierarchyServiceItem>;
 
 const DEFAULT_ITEM_STATE: HierarchyServiceItem = {
   code: '',
@@ -47,7 +47,17 @@ $hierarchyStore
 
     // hits on no drag actions
     // targetPath should be provided only on drag end action
-    if (!targetPath) return { ...prev, [getPathKey(path)]: serviceItem };
+    if (!targetPath || !dtoItem) {
+      const pathKey = getPathKey(path);
+
+      return {
+        ...prev,
+        [pathKey]: {
+          ...prev[pathKey],
+          ...serviceItem,
+        },
+      };
+    }
 
     // on drag upgates
     const targetPathKey = getPathKey(targetPath);
@@ -58,7 +68,13 @@ $hierarchyStore
     HIERARCHY_ITEMS_DATA.set(targetPathKey, dtoItem);
 
     // Update store
-    return { ...omit(prev, prevPathKey), [targetPathKey]: serviceItem };
+    return {
+      ...omit(prev, prevPathKey),
+      [targetPathKey]: {
+        ...prev[prevPathKey],
+        ...serviceItem,
+      },
+    };
   });
 
 export { $hierarchyStore, registerHierarchyItem, updateHierarchy, HIERARCHY_ITEMS_DATA, DEFAULT_ITEM_STATE };

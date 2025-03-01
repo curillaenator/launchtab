@@ -1,11 +1,27 @@
 // import type { HierarchyItemAction } from './components/Actions';
 
+// type HierarchyTree = {
+//   [unitId: string]: HierarchyTree | null;
+// };
+
+type HierarchyState = Record<string, HierarchyServiceItem>;
+
+type HierarchyTree = Record<string, number>; // <unitCode, order>
+
 interface HierarchyItem {
   code: string;
-  type: 'note';
   name: string;
-  order: number;
-  children?: HierarchyItem[];
+  spaceCode?: string;
+
+  path: string[];
+
+  createdAt: number;
+  createdBy: string;
+
+  updatedAt?: number;
+  updatedBy?: string;
+
+  hierarchy?: HierarchyTree;
 }
 
 interface HierarchyServiceItem {
@@ -25,23 +41,23 @@ interface FoldableItemAction {
 }
 
 interface HierarchyProps {
-  /** включение DragNDrop */
   // isDraggable?: boolean;
-  /** набор экшенов для каждого элемента */
   // actions?: HierarchyItemAction[];
-  /** колбек ленивой подгрузки элементов */
-  onAsyncLoad: (item: HierarchyItem | null) => Promise<HierarchyItem[]>;
-  /** функция генерации ссылок для элементов */
+
+  rootLevel: HierarchyTree;
+  loadTreeLevel: (level: HierarchyTree) => Promise<HierarchyItem[]>;
+
+  // onAsyncLoad: (item: HierarchyItem | null) => Promise<HierarchyItem[]>;
   linkPattern: (item: HierarchyItem) => string;
-  /** функция генерации matchRoute для элементов в фуллПейдж */
   matchRoutePattern?: (item: HierarchyItem) => string;
-  /** колбек для получения текущей высоты контейнера компонента в пкс */
   onHeightChanged?: (height: number) => void;
 }
 
 export type {
+  HierarchyState,
   HierarchyProps,
   HierarchyItem,
+  HierarchyTree,
   HierarchyServiceItem,
   //
   FoldableItemAction,

@@ -41,7 +41,7 @@ const AsideNotesElementStyled = styled.div`
   .unit-list {
     margin-top: 32px;
     width: 100%;
-    padding-left: 24px;
+    /* padding-left: 24px; */
   }
 
   .selector-loader-dummy {

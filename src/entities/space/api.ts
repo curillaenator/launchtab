@@ -1,7 +1,8 @@
 import { doc, getDoc, collection, addDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { fsdb } from '@src/api/firebase';
 
-import type { LaunchSpaceProps, LaunchUnitProps } from './interfaces';
+import type { HierarchyItem as LaunchUnitProps } from '@launch-ui/hierarchy';
+import type { LaunchSpaceProps } from './interfaces';
 
 const updateLastViewedSpace = async (uid: string, lastViewedSpace: string) => {
   await updateDoc(doc(fsdb, 'users', uid), { lastViewedSpace });
@@ -10,7 +11,7 @@ const updateLastViewedSpace = async (uid: string, lastViewedSpace: string) => {
 const createSpaceQuery = async (uid: string, spaceFormData: LaunchSpaceProps) => {
   const { name } = spaceFormData;
 
-  const space: Omit<LaunchSpaceProps, 'spaceCode'> = { name, createdAt: Date.now(), createdBy: uid, units: [] };
+  const space: Omit<LaunchSpaceProps, 'spaceCode'> = { name, createdAt: Date.now(), createdBy: uid };
 
   const docRef = await addDoc(collection(fsdb, 'spaces'), space);
 
@@ -38,7 +39,7 @@ const getSpaceUnitsQuery = async (unitIds: string[]) => {
   const spaceUnits = await Promise.all(
     spaceUnitsDto.map((unitSnap) => {
       if (!unitSnap.exists()) return null;
-      return { ...unitSnap.data(), unitCode: unitSnap.id };
+      return { ...unitSnap.data(), code: unitSnap.id };
     }),
   ).then((resolved) => resolved.filter(Boolean) as LaunchUnitProps[]);
 

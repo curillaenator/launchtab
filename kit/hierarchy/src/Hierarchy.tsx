@@ -1,41 +1,31 @@
 import React, { FC, useEffect } from 'react';
-import { useUnit as useEffectorUnit } from 'effector-react';
-import { toPairs } from 'lodash';
 import cn from 'classnames';
-
-import { $hierarchyStore } from './service/store';
 
 // import { getHeight } from './utils/getHeight';
 // import { ITEM_HEIGHT } from './constants';
 
 import { registerHierarchyItem } from './service/store';
 import { HierarchyContextProvider } from './context';
+import { levelToFoldableMap } from './utils/levelToFoldableMap';
+
+import { Foldable } from './components/Foldable';
 
 import type { HierarchyProps } from './interfaces';
 
-import { Foldable } from './components/Foldable';
 import styles from './styles.module.scss';
 
 export const Hierarchy: FC<HierarchyProps> = (props) => {
   const {
     // onHeightChanged = () => {},
-    onAsyncLoad,
+    rootLevel,
+    loadTreeLevel,
   } = props;
 
-  const serviceStore = useEffectorUnit($hierarchyStore);
-
   useEffect(() => {
-    onAsyncLoad?.(null).then((dtoItems) => {
-      const sortedDtoItems = dtoItems.toSorted((a, b) => a.order - b.order);
-      sortedDtoItems.forEach((dtoHirarcyItem) =>
-        registerHierarchyItem({ ...dtoHirarcyItem, path: [dtoHirarcyItem.code] }),
-      );
+    loadTreeLevel(rootLevel).then((dtoItems) => {
+      dtoItems.forEach((dtoHierItem) => registerHierarchyItem({ ...dtoHierItem, path: [] }));
     });
-  }, [onAsyncLoad]);
-
-  const rootServiceItems = toPairs(serviceStore)
-    .filter(([pathKey]) => pathKey.split('-').length === 1)
-    .map((el) => el[1]);
+  }, [rootLevel, loadTreeLevel]);
 
   // const currentHeight = useMemo(() => {
   //   return ITEM_HEIGHT * items.length + items.map((item) => getHeight(item, state)).reduce((a, b) => a + b, 0);
@@ -51,8 +41,8 @@ export const Hierarchy: FC<HierarchyProps> = (props) => {
         className={cn(styles.container, styles.themeVars_light)}
         // style={{ '--hchy-container-h': `${currentHeight}px` } as CSSProperties}
       >
-        {rootServiceItems.map((item) => (
-          <Foldable {...item} key={item.code} />
+        {levelToFoldableMap(rootLevel).map(([code]) => (
+          <Foldable key={code} code={code} path={[code]} />
         ))}
       </ul>
     </HierarchyContextProvider>

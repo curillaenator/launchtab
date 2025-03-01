@@ -1,19 +1,11 @@
+import { HierarchyTree } from '@launch-ui/hierarchy';
+
 interface LaunchSpaceProps {
   spaceCode: string;
   createdAt: number;
   createdBy: string;
   name: string;
-  units: string[];
+  hierarchy?: HierarchyTree;
 }
 
-interface LaunchUnitProps {
-  unitCode: string;
-  name: string;
-  createdAt: number;
-  updatedAt: number;
-  createdBy: string;
-  updatedBy: string;
-  body: string;
-}
-
-export type { LaunchSpaceProps, LaunchUnitProps };
+export type { LaunchSpaceProps };

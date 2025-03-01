@@ -4,6 +4,7 @@
   width: 100%;
   height: 32px;
   display: block;
+  font-family: inherit;
 }
 
 .trigger {
@@ -13,6 +14,7 @@
   width: 100%;
   color: var(--theme-texts-base);
   background-color: transparent;
+  font-family: inherit;
 
   &_isActive {
     color: var(--theme-primary-500);
@@ -50,6 +52,7 @@
 
 .ulList {
   // --list-foldable-mah: 0px;
+  font-family: inherit;
 
   position: relative;
   overflow: hidden;

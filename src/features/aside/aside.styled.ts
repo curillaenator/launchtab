@@ -53,7 +53,7 @@ const RouteLinkStyled = styled(NavLink)`
   width: 100%;
   height: 40px;
 
-  padding: 8px 16px;
+  padding: 8px 12px;
 
   text-decoration: none;
   color: ${({ theme }) => theme.texts.base};
@@ -67,4 +67,12 @@ const RouteLinkStyled = styled(NavLink)`
   }
 `;
 
-export { AsideStyled, AsideHeader, AsideRoutesList, RouteLinkStyled };
+const RouteDivider = styled.div`
+  flex: 0 0 auto;
+  margin: 16px 0;
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.borders.base};
+`;
+
+export { AsideStyled, AsideHeader, AsideRoutesList, RouteLinkStyled, RouteDivider };

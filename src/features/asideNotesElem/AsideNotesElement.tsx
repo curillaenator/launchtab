@@ -3,11 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery } from '@tanstack/react-query';
 import { keys } from 'lodash';
-import cn from 'classnames';
+// import cn from 'classnames';
 
 import { Dropable } from '@launch-ui/dropable';
 import { Hierarchy } from '@launch-ui/hierarchy';
-import { ButtonGhost, Button } from '@launch-ui/button';
+import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 
 import { useDropable } from '@src/hooks/useDropable';
@@ -29,7 +29,8 @@ import { USER_SPACES_QUERY, SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
 import PlusIcon from '@src/assets/svg/plus.svg';
-import AddIcon from '@src/assets/svg/add.svg';
+import AddFolderIcon from '@src/assets/svg/addFolder.svg';
+import AddDocumentIcon from '@src/assets/svg/addDocument.svg';
 
 type CreateParamType = 'space' | 'note';
 
@@ -101,21 +102,22 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     <AsideNotesElementStyled data-aside-notes-element>
       {showCreateSapceButtonLoader && (
         <div className='selector-loader-dummy'>
-          <Corners borderRadius={24} />
+          <Corners borderRadius={12} />
           <Loader />
         </div>
       )}
 
       {!showCreateSapceButtonLoader && !userSpaces.length && isCreateSpaceButton && (
-        <Button
+        <ButtonAction
           active={createPageType === 'space'}
+          appearance='secondary'
           disabled={!userSpaces}
-          IconLeft={() => <PlusIcon />}
+          LeftIcon={() => <PlusIcon />}
           title={!userSpaces ? 'Wait...' : 'Create LaunchSpace'}
           onClick={() => navigate('/notes/create/space')}
-          className={cn('create-space-button', {
-            ['create-space-button_active']: createPageType === 'space',
-          })}
+          // className={cn('create-space-button', {
+          //   ['create-space-button_active']: createPageType === 'space',
+          // })}
         />
       )}
 
@@ -127,15 +129,15 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               maxHeight={320}
               maxWidth={320}
               minWidth={320}
-              offset={[0, 16]}
+              offset={[0, 8]}
               openNode={
-                <Button
-                  IconLeft={() => <FolderIcon />}
+                <ButtonAction
+                  LeftIcon={() => <FolderIcon />}
                   title={userSpaces.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name}
                   active={isSpaceSelectorOpen}
-                  className={cn('open-spaces-button', {
-                    ['open-spaces-button_active']: isSpaceSelectorOpen,
-                  })}
+                  appearance='secondary'
+                  fullwidth
+                  className='open-spaces-button'
                 />
               }
             >
@@ -154,47 +156,43 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               ))}
             </Dropable>
 
-            {userSpaces.length < MAX_SPACES_PER_USER && (
-              <Button
-                IconLeft={() => <AddIcon />}
-                onClick={() => navigate('/notes/create/space')}
-                active={createPageType === 'space'}
-                className={cn('hierarchy-create-space-button', {
-                  ['hierarchy-create-space-button_active']: createPageType === 'space',
-                })}
-              />
-            )}
+            {/* {userSpaces.length < MAX_SPACES_PER_USER && ( */}
+            <ButtonAction
+              disabled={userSpaces.length >= MAX_SPACES_PER_USER}
+              LeftIcon={() => <AddFolderIcon />}
+              appearance='secondary'
+              onClick={() => navigate('/notes/create/space')}
+              active={createPageType === 'space'}
+            />
+            {/* )} */}
+
+            <ButtonAction
+              // fullwidth
+              // title='Create note'
+              // className='hierarchy-create-note-button'
+              disabled={isRootItemsLoading}
+              LeftIcon={() => <AddDocumentIcon />}
+              appearance='secondary'
+              onClick={() => navigate('/notes/create/note')}
+              active={createPageType === 'note'}
+            />
           </div>
 
           {selectedSpace?.hierarchy && (
             <>
-              <div className='unit-list' data-aside-notes-element-unit-list>
-                {isRootItemsLoading && (
-                  <div className='unit-loader-dummy'>
-                    <Loader />
-                  </div>
-                )}
-
-                <Hierarchy
-                  queryKey={SPACE_UNITS_QUERY}
-                  rootItems={rootItems}
-                  ItemLoader={() => <Loader />}
-                  getItemsQuery={getSpaceUnitsQuery}
-                  linkPattern={(item: { code: string }) => `/notes/${item.code}`}
-                  matchRoutePattern={() => `/notes/:noteId`}
-                />
-              </div>
-
-              {!isRootItemsLoading && (
-                <div className='hierarchy-create-note'>
-                  <Button
-                    title='Create note'
-                    onClick={() => navigate('/notes/create/note')}
-                    active={createPageType === 'note'}
-                    IconLeft={() => <AddIcon />}
-                    className={cn('hierarchy-create-note-button', {
-                      ['hierarchy-create-note-button_active']: createPageType === 'note',
-                    })}
+              {isRootItemsLoading ? (
+                <div className='unit-loader-dummy'>
+                  <Loader />
+                </div>
+              ) : (
+                <div className='unit-list' data-aside-notes-element-unit-list>
+                  <Hierarchy
+                    queryKey={SPACE_UNITS_QUERY}
+                    rootItems={rootItems}
+                    ItemLoader={() => <Loader />}
+                    getItemsQuery={getSpaceUnitsQuery}
+                    linkPattern={(item: { code: string }) => `/notes/${item.code}`}
+                    matchRoutePattern={() => `/notes/:noteId`}
                   />
                 </div>
               )}

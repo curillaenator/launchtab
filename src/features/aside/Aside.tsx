@@ -6,13 +6,13 @@ import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
 import { AsideNotesElement } from '../asideNotesElem';
-import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled } from './aside.styled';
+import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled, RouteDivider } from './aside.styled';
 
 import { $appStore } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 
 import HomeIcon from '@src/assets/svg/home.svg';
-import StarIcon from '@src/assets/svg/star.svg';
+import NotesIcon from '@src/assets/svg/document.svg';
 // import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const Aside: FC = memo(() => {
@@ -42,19 +42,23 @@ export const Aside: FC = memo(() => {
           </Typography>
         </RouteLinkStyled>
 
+        <RouteDivider />
+
         {!!uid && (
           <>
             <RouteLinkStyled to='/notes'>
-              <StarIcon />
+              <NotesIcon />
 
               <Typography as='span' type='RoundedBold20' className='typography'>
-                Notes
+                Launch Notes
               </Typography>
             </RouteLinkStyled>
 
             <AsideNotesElement uid={uid} />
           </>
         )}
+
+        <RouteDivider />
 
         {/* <RouteLinkStyled
           // to='https://google.com'

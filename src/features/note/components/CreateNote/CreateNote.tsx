@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // import { useUnit as useEffectorUnit } from 'effector-react';
 
 import { Corners } from '@launch-ui/shape';
-import { Button } from '@launch-ui/button';
+import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Input } from '@launch-ui/input';
 import { Typography } from '@launch-ui/typography';
 
@@ -79,8 +79,8 @@ const CreateNote: FC = () => {
       </div>
 
       <div className='create-note-form-field-controls'>
-        <Button type='submit' active title='Create LaunchSpace' className='submit-button' />
-        <Button type='button' title='Cancel' onClick={() => navigate('/notes')} />
+        <ButtonAction type='submit' title='Create LaunchSpace' />
+        <ButtonGhost type='button' title='Cancel' onClick={() => navigate('/notes')} />
       </div>
     </CreateNoteForm>
   );

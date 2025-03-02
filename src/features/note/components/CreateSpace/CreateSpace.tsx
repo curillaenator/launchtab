@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useUnit as useEffectorUnit } from 'effector-react';
 
 import { Corners } from '@launch-ui/shape';
-import { Button } from '@launch-ui/button';
+import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Input } from '@launch-ui/input';
 import { Typography } from '@launch-ui/typography';
 
@@ -58,12 +58,11 @@ const CreateSpace: FC = () => {
       <Corners borderRadius={24} />
 
       <div className='create-space-form-title'>
-        <Typography as='h2' type='RoundedHeavy36'>
-          {'Create new '}
+        <Typography as='span' type='RoundedHeavy36'>
+          {'Create Launch'}
         </Typography>
-
-        <Typography as='h2' type='RoundedHeavy36' className='text-highlighted'>
-          LaunchSpace
+        <Typography as='span' type='RoundedHeavy36' className='text-highlighted'>
+          Space
         </Typography>
       </div>
 
@@ -93,8 +92,8 @@ const CreateSpace: FC = () => {
       </div>
 
       <div className='create-space-form-field-controls'>
-        <Button type='submit' active title='Create LaunchSpace' className='submit-button' />
-        <Button type='button' title='Cancel' onClick={() => navigate('/notes')} />
+        <ButtonAction type='submit' title='Create LaunchSpace' />
+        <ButtonGhost type='button' title='Cancel' onClick={() => navigate('/notes')} />
       </div>
     </CreateSpaceForm>
   );

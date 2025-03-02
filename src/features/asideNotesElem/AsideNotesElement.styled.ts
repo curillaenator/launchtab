@@ -12,63 +12,24 @@ const AsideNotesElementStyled = styled.div`
 
   width: 100%;
   min-height: 40px;
-  padding: 32px 0;
+  padding: 8px 0;
 
   .space-elements {
     display: flex;
-    gap: 16px;
+    gap: 8px;
     width: 100%;
+    margin-bottom: 16px;
   }
 
   .open-spaces-button {
-    --shp-bgc: var(--theme-backgrounds-light);
-
-    width: 100%;
+    /* width: 100%; */
     justify-content: flex-start;
-
-    &_active {
-      --shp-bgc: var(--theme-primary-700);
-    }
-  }
-
-  .create-space-button {
-    --shp-bgc: var(--theme-backgrounds-light);
-
-    width: 100%;
-    flex: 0 0 auto;
-
-    &_active {
-      --shp-bgc: var(--theme-primary-700);
-    }
-  }
-
-  .hierarchy-create-space-button {
-    --shp-bgc: var(--theme-backgrounds-light);
-
-    &_active {
-      --shp-bgc: var(--theme-primary-700);
-    }
-  }
-
-  .hierarchy-create-note {
-    margin-top: 32px;
-    width: 100%;
-
-    &-button {
-      --shp-bgc: var(--theme-backgrounds-light);
-
-      width: 100%;
-
-      &_active {
-        --shp-bgc: var(--theme-primary-700);
-      }
-    }
+    max-width: calc(100% - 112px);
   }
 
   .unit-list {
-    margin-top: 32px;
     width: 100%;
-    padding-left: 12px;
+    padding-left: 8px;
   }
 
   .selector-loader-dummy {
@@ -83,14 +44,15 @@ const AsideNotesElementStyled = styled.div`
     justify-content: center;
 
     width: 100%;
-    height: 56px;
-    border-radius: calc(24px * 1.25 + 3px);
+    height: 40px;
+    border-radius: calc(12px * 1.25 + 3px);
 
     background-color: ${({ theme }) => theme.backgrounds.light};
   }
 
   .unit-loader-dummy {
-    margin-top: 16px;
+    padding: 0 8px;
+    margin-top: 8px;
     width: 100%;
   }
 `;

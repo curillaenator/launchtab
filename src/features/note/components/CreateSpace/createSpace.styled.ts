@@ -28,15 +28,6 @@ const CreateSpaceForm = styled.form`
     gap: 8px;
   }
 
-  .submit-button {
-    &:hover {
-      --shp-bgc: ${({ theme }) => theme.primary[300]};
-    }
-    &:active {
-      --shp-bgc: ${({ theme }) => theme.primary[700]};
-    }
-  }
-
   .text-highlighted {
     color: ${({ theme }) => theme.primary[500]};
   }

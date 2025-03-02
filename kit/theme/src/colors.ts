@@ -29,7 +29,7 @@ const getLightModeColors = (neutral: ColorSet): ModedSet => ({
     error: colorsLib.danger[500],
     success: colorsLib.nika[500],
 
-    placeholder: neutral[500],
+    placeholder: neutral[400],
     inputColor: neutral[900],
   },
 

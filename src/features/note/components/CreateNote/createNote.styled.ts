@@ -8,6 +8,7 @@ const CreateNoteForm = styled.form`
   position: relative;
 
   width: 100%;
+  height: 100%;
 
   border-radius: calc(24px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};

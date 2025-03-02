@@ -22,8 +22,6 @@ export const DocumentLink: FC<DocumentLinkProps> = (props) => {
 
   const { noteId } = useParams<{ noteId: string }>();
 
-  console.log('useParams', useParams<{ noteId: string }>());
-
   // const hasActions = !!actions?.length;
   // const isDisabled = (disableRestricted && restricted) || matchDisabledItem?.(item);
 

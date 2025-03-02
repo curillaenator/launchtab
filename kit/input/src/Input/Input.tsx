@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     name,
     description,
     value,
-    limitSymbols = 256,
+    limitSymbols,
     buttonTitle,
     withButton = false,
     onChange,
@@ -64,7 +64,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           autoComplete='off'
           value={value}
           onChange={(e) => {
-            if (e.target.value?.length >= limitSymbols) return;
+            if (e.target.value?.length >= (limitSymbols || Infinity)) return;
             onChange?.(e);
           }}
         />

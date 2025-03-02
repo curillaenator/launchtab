@@ -1,85 +1,72 @@
-import React, { FC } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import React, { FC, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 // import { useQueryClient } from '@tanstack/react-query';
 // import { useUnit as useEffectorUnit } from 'effector-react';
 
 import { Corners } from '@launch-ui/shape';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
-import { Input } from '@launch-ui/input';
-import { Typography } from '@launch-ui/typography';
+// import { Typography } from '@launch-ui/typography';
 
-// import { $userStore } from '@src/entities/user';
+import { setHeaderMidComponent } from '@src/entities/header';
 import type { LaunchNoteProps } from '@src/entities/note';
 
+import { CreateNoteHeader } from './CreateNoteHeader';
 import { CreateNoteForm } from './createNote.styled';
-
-// import { USER_QUERY } from '@src/shared/queryKeys';
-
-import LabelIcon from '@src/assets/svg/lable.svg';
 
 const CreateNote: FC = () => {
   const navigate = useNavigate();
 
   const {
-    control,
-    // register,
+    // control,
+    register,
     // reset,
     // setValue,
     // watch,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<LaunchNoteProps>({
-    defaultValues: {
-      name: '',
-    },
+    defaultValues: { name: '' },
   });
+
+  useEffect(() => {
+    setHeaderMidComponent(() => <CreateNoteHeader register={register} />);
+
+    return () => {
+      setHeaderMidComponent(null);
+    };
+  }, [register]);
 
   return (
     <CreateNoteForm
       data-create-note-form
-      onSubmit={handleSubmit((spaceData: LaunchNoteProps) => {
-        console.log('data-create-note-form', spaceData);
-      })}
+      onSubmit={(e) => e.preventDefault()}
+      // onSubmit={handleSubmit((spaceData: LaunchNoteProps) => {
+      //   console.log('data-create-note-form', spaceData);
+      // })}
     >
       <Corners borderRadius={24} />
 
-      <div className='create-note-form-title'>
+      {/* <div className='create-note-form-title'>
         <Typography as='span' type='RoundedHeavy36'>
           {'Create Launch'}
         </Typography>
         <Typography as='span' type='RoundedHeavy36' className='text-highlighted'>
           Note
         </Typography>
-      </div>
-
-      <div className='create-note-form-field-list'>
-        <div className='create-note-form-field'>
-          <Controller
-            name='name'
-            control={control}
-            rules={{
-              required: 'Set note name',
-              minLength: { value: 8, message: 'Space name must be at least 8 characters' },
-            }}
-            render={({ field }) => (
-              <Input
-                {...field}
-                icon={() => <LabelIcon />}
-                aria-required
-                state={errors.name ? 'error' : 'normal'}
-                description={errors.name ? errors.name.message : ''}
-                type='text'
-                placeholder='Note name'
-                limitSymbols={64}
-              />
-            )}
-          />
-        </div>
-      </div>
+      </div> */}
 
       <div className='create-note-form-field-controls'>
-        <ButtonAction type='submit' title='Create LaunchSpace' />
+        <ButtonAction
+          type='button'
+          title='Create LaunchSpace'
+          onClick={() =>
+            handleSubmit((spaceData: LaunchNoteProps) => {
+              console.log('data-create-note-form', spaceData);
+            })()
+          }
+        />
+
         <ButtonGhost type='button' title='Cancel' onClick={() => navigate('/notes')} />
       </div>
     </CreateNoteForm>

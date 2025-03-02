@@ -18,7 +18,7 @@ import { USER_QUERY } from '@src/shared/queryKeys';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 
-const CreateSpace: FC = () => {
+const CreateSpace: FC<{ maxHeight: number }> = () => {
   const navigate = useNavigate();
   const { uid } = useEffectorUnit($userStore);
 

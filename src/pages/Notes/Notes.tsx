@@ -16,7 +16,7 @@ const NotesContainer = styled.div<{ height: CSSProperties['height'] }>`
 
 type CreateParamType = 'space' | 'note';
 
-const CREATE_COMPONENTS_ASSOC: Record<CreateParamType, FC> = {
+const CREATE_COMPONENTS_ASSOC: Record<CreateParamType, FC<{ maxHeight: number }>> = {
   space: CreateSpace,
   note: CreateNote,
 };
@@ -47,7 +47,7 @@ const Notes: FC = memo(() => {
 
     return (
       <NotesContainer data-notes-container height={pageOutletHeight}>
-        <CreateMappedComponent />
+        <CreateMappedComponent maxHeight={pageOutletHeight} />
       </NotesContainer>
     );
   }

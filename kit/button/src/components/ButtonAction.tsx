@@ -1,4 +1,4 @@
-import React, { FC, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
@@ -18,6 +18,7 @@ const APPEARANCES = {
 
     --button-filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
   `,
+
   secondary: ({ active }: ButtonActionProps) => css`
     --button-text-c: ${({ theme }) => (active ? theme.white : theme.texts.base)};
     --button-text-c-h: ${({ theme }) => (active ? theme.white : theme.primary[300])};
@@ -29,10 +30,30 @@ const APPEARANCES = {
 
     --button-filter: none;
   `,
+
+  disabled: () => css`
+    --button-text-c: ${({ theme }) => theme.texts.disabled};
+    --button-text-c-h: ${({ theme }) => theme.texts.disabled};
+    --button-text-c-a: ${({ theme }) => theme.texts.disabled};
+
+    --button-shp-bgc: ${({ theme }) => theme.backgrounds.light};
+    --button-shp-bgc-h: ${({ theme }) => theme.backgrounds.light};
+    --button-shp-bgc-a: ${({ theme }) => theme.backgrounds.light};
+
+    --button-filter: none;
+  `,
 } as const;
 
 const ButtonActionStyled = styled.button<ButtonActionProps>`
-  ${(styledProps) => APPEARANCES[styledProps.appearance || 'primary']};
+  &:not(:disabled) {
+    ${(styledProps) => APPEARANCES[styledProps.appearance || 'primary'](styledProps)};
+  }
+
+  &:disabled {
+    cursor: default;
+
+    ${APPEARANCES.disabled}
+  }
 
   position: relative;
 

@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
 import { UseFormRegister as HookFormRegister } from 'react-hook-form';
+import styled from 'styled-components';
 import { Corners } from '@launch-ui/shape';
+import { Typography } from '@launch-ui/typography';
+import type { RichTextJsonContent } from '@launch-ui/richtext';
 
 import type { LaunchNoteProps } from '@src/entities/note';
+import { Loader } from '@src/features/loader';
 
-// import { Loader } from '@src/features/loader';
-
-import LabelIcon from '@src/assets/svg/lable.svg';
+import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
 
 const NoteHeaderStyled = styled.div`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
@@ -17,7 +18,6 @@ const NoteHeaderStyled = styled.div`
 
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
 
   gap: 16px;
   padding: 8px 16px;
@@ -32,7 +32,7 @@ const NoteHeaderStyled = styled.div`
     flex: 0 0 auto;
   }
 
-  .create-note-title {
+  .create-note-title-input {
     outline: none;
     border: none;
     background-color: transparent;
@@ -56,31 +56,35 @@ const NoteHeaderStyled = styled.div`
   }
 `;
 
-// const NoteHeaderBlockStyled = styled.div`
-//   display: flex;
-//   gap: 8px;
-//   flex: 0 0 auto;
-//   width: fit-content;
-// `;
+const NoteHeaderChildren = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+  width: fit-content;
+  min-height: 40px;
+  max-height: 40px;
+`;
 
 interface CreateNoteHeaderProps {
-  register: HookFormRegister<LaunchNoteProps>;
-  // errors: HookFormFieldErrors<LaunchNoteProps>;
+  register: HookFormRegister<LaunchNoteProps & { noteBody: RichTextJsonContent | string }>;
+  isSubmitting: boolean;
 }
 
-const CreateNoteHeader: FC<CreateNoteHeaderProps> = ({ register }) => {
+const CreateNoteHeader: FC<CreateNoteHeaderProps> = (props) => {
+  const { register, isSubmitting } = props;
+
   return (
-    <NoteHeaderStyled data-note-header>
+    <NoteHeaderStyled data-create-note-header>
       <Corners borderRadius={20} />
 
-      <LabelIcon />
+      <NoteTitleIcon />
 
-      {/* <NoteHeaderBlockStyled> */}
       <input
         autoComplete='off'
         type='text'
         placeholder='Type your note name'
-        className='create-note-title'
+        className='create-note-title-input'
         {...register('name', {
           required: 'Set note name',
           minLength: { value: 8, message: 'Please use at least 8 characters' },
@@ -88,30 +92,16 @@ const CreateNoteHeader: FC<CreateNoteHeaderProps> = ({ register }) => {
         })}
       />
 
-      {/* <HookFormController
-          name='name'
-          control={control}
-          rules={{
-            required: 'Set note name',
-            minLength: { value: 8, message: 'Space name must be at least 8 characters' },
-          }}
-          render={({ field }) => (
-            <Input
-              {...field}
-              icon={() => <LabelIcon />}
-              aria-required
-              state={errors.name ? 'error' : 'normal'}
-              description={errors.name ? errors.name.message : ''}
-              type='text'
-              placeholder='Type your note name'
-              limitSymbols={64}
-            />
-          )}
-        /> */}
-
-      {/* </NoteHeaderBlockStyled> */}
-
-      {/* <NoteHeaderBlockStyled></NoteHeaderBlockStyled> */}
+      <NoteHeaderChildren>
+        {isSubmitting && (
+          <>
+            <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
+              Saving
+            </Typography>
+            <Loader />
+          </>
+        )}
+      </NoteHeaderChildren>
     </NoteHeaderStyled>
   );
 };

@@ -5,13 +5,12 @@ import { Typography } from '@launch-ui/typography';
 
 import type { ButtonGhostProps } from './interfaces';
 
-interface IButtonStyled {
+interface ButtonGhostStyledProps {
   active: boolean;
-  danger: boolean;
   height: CSSProperties['height'];
 }
 
-const ButtonGhostStyled = styled.button<IButtonStyled>`
+const ButtonGhostStyled = styled.button<ButtonGhostStyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +46,6 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
     LeftIcon,
     RightIcon,
     active = false,
-    danger = false,
     height = 40,
     colorPreset = 'primary-colors',
     type = 'button',
@@ -55,15 +53,7 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
   } = props;
 
   return (
-    <ButtonGhostStyled
-      {...rest}
-      data-ghost-button
-      ref={ref}
-      type={type}
-      active={active}
-      danger={danger}
-      height={height}
-    >
+    <ButtonGhostStyled {...rest} data-ghost-button ref={ref} type={type} active={active} height={height}>
       {!!LeftIcon && <LeftIcon />}
 
       {title && (

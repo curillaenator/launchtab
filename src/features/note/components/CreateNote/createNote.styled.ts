@@ -8,7 +8,7 @@ const CreateNoteForm = styled.form`
   position: relative;
 
   width: 100%;
-  height: 100%;
+  max-height: 100%;
 
   border-radius: calc(24px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
@@ -27,6 +27,21 @@ const CreateNoteForm = styled.form`
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .create-note-form-errors {
+    padding: 0 32px;
+    height: 40px;
+
+    flex: 1 1 auto;
+    width: 100%;
+
+    color: ${({ theme }) => theme.texts.error};
+    line-height: 40px;
+
+    & > span {
+      line-height: 40px !important;
+    }
   }
 
   .text-highlighted {

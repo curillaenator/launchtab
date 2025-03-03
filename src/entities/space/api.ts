@@ -42,8 +42,6 @@ const getSpaceUnitsQuery = async (code: string, isRoot: boolean = false) => {
     snap.exists() ? keys((snap.data() as LaunchUnitProps).hierarchy) : [],
   );
 
-  console.log('getSpaceUnitsQuery', unitIds);
-
   const spaceUnitsDto = await Promise.all(unitIds.map((unitId) => getDoc(doc(fsdb, 'units', unitId))));
 
   const spaceUnits = await Promise.all(

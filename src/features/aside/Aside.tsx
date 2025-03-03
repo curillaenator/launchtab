@@ -42,10 +42,10 @@ export const Aside: FC = memo(() => {
           </Typography>
         </RouteLinkStyled>
 
-        <RouteDivider />
-
         {!!uid && (
           <>
+            <RouteDivider />
+
             <RouteLinkStyled to='/notes'>
               <NotesIcon />
 
@@ -55,10 +55,10 @@ export const Aside: FC = memo(() => {
             </RouteLinkStyled>
 
             <AsideNotesElement uid={uid} />
+
+            <RouteDivider />
           </>
         )}
-
-        <RouteDivider />
 
         {/* <RouteLinkStyled
           // to='https://google.com'

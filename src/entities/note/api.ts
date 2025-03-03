@@ -47,6 +47,14 @@ const getNoteBodyQuery = async (noteId: string) => {
   return bodySnap.data()['tiptap'] as string;
 };
 
+const getNoteUnitQuery = async (unitId: string) => {
+  const unitSnap = await getDoc(doc(fsdb, 'units', unitId));
+
+  if (!unitSnap.exists()) return null;
+
+  return { ...unitSnap.data(), code: unitSnap.id } as LaunchNoteProps;
+};
+
 async function updateNoteBodyMutation(uid: string, noteId: string, noteBody: string) {
   let response = { routerNoteId: false };
 
@@ -59,4 +67,10 @@ async function updateNoteBodyMutation(uid: string, noteId: string, noteBody: str
   return response;
 }
 
-export { getNoteBodyQuery, updateNoteBodyMutation, createNoteMutationQuery, type CreateNoteMutationQueryPayload };
+export {
+  getNoteBodyQuery,
+  getNoteUnitQuery,
+  updateNoteBodyMutation,
+  createNoteMutationQuery,
+  type CreateNoteMutationQueryPayload,
+};

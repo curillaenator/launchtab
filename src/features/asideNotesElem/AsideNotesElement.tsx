@@ -27,7 +27,6 @@ import { USER_SPACES_QUERY, SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
 
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
-import PlusIcon from '@src/assets/svg/plus.svg';
 import AddFolderIcon from '@src/assets/svg/addFolder.svg';
 import AddDocumentIcon from '@src/assets/svg/addDocument.svg';
 
@@ -107,7 +106,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     <AsideNotesElementStyled data-aside-notes-element>
       {showCreateSapceButtonLoader && (
         <div className='selector-loader-dummy'>
-          <Corners borderRadius={12} />
+          <Corners borderRadius={10} />
           <Loader />
         </div>
       )}
@@ -117,12 +116,11 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           active={createPageType === 'space'}
           appearance='secondary'
           disabled={!userSpaces}
-          LeftIcon={() => <PlusIcon />}
+          LeftIcon={() => <AddFolderIcon />}
           title={!userSpaces ? 'Wait...' : 'Create LaunchSpace'}
           onClick={() => navigate('/notes/create/space')}
-          // className={cn('create-space-button', {
-          //   ['create-space-button_active']: createPageType === 'space',
-          // })}
+          fullwidth
+          className='create-space-button'
         />
       )}
 
@@ -184,25 +182,27 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             />
           </div>
 
-          {selectedSpace?.hierarchy && (
-            <>
-              {isRootItemsLoading ? (
-                <div className='unit-loader-dummy'>
-                  <Loader />
-                </div>
+          {isRootItemsLoading ? (
+            <div className='unit-loader-dummy'>
+              <Loader />
+            </div>
+          ) : (
+            <div className='unit-list' data-aside-notes-element-unit-list>
+              {!!rootItems.length ? (
+                <Hierarchy
+                  queryKey={SPACE_UNITS_QUERY}
+                  rootItems={rootItems}
+                  ItemLoader={() => <Loader />}
+                  getItemsQuery={getSpaceUnitsQuery}
+                  linkPattern={(item: { code: string }) => `/notes/${item.code}`}
+                  matchRoutePattern={() => `/notes/:noteId`}
+                />
               ) : (
-                <div className='unit-list' data-aside-notes-element-unit-list>
-                  <Hierarchy
-                    queryKey={SPACE_UNITS_QUERY}
-                    rootItems={rootItems}
-                    ItemLoader={() => <Loader />}
-                    getItemsQuery={getSpaceUnitsQuery}
-                    linkPattern={(item: { code: string }) => `/notes/${item.code}`}
-                    matchRoutePattern={() => `/notes/:noteId`}
-                  />
+                <div className='unit-list_empty'>
+                  <span>No notes yet</span>
                 </div>
               )}
-            </>
+            </div>
           )}
         </>
       )}

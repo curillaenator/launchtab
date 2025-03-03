@@ -1,19 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import LZString from 'lz-string';
-import { getNoteBodyQuery } from '../api';
+import { getNoteBodyQuery, getNoteUnitQuery } from '../api';
 
-interface UseNoteBodyDataProps {
-  uid: string | null;
+import { UNIT_NOTE_BODY_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
+
+interface UseNoteDataProps {
+  // uid: string | null;
   routerNoteId: string | null;
 }
 
-const useNoteBodyData = ({ uid, routerNoteId }: UseNoteBodyDataProps) =>
+const useNoteBodyData = ({ routerNoteId }: UseNoteDataProps) =>
   useQuery({
-    queryKey: ['unit-note-body-query', uid, routerNoteId],
+    queryKey: [UNIT_NOTE_BODY_QUERY, routerNoteId],
     queryFn: () => getNoteBodyQuery(routerNoteId!),
-    enabled: !!uid && !!routerNoteId,
+    enabled: !!routerNoteId,
     staleTime: 0,
     select: (data) => (data ? LZString.decompressFromBase64(data) : null),
   });
 
-export { useNoteBodyData };
+const useNoteUnitData = ({ routerNoteId }: UseNoteDataProps) =>
+  useQuery({
+    queryKey: [UNIT_NOTE_UNIT_QUERY, routerNoteId],
+    queryFn: () => getNoteUnitQuery(routerNoteId!),
+    enabled: !!routerNoteId,
+    staleTime: 0,
+  });
+
+export { useNoteBodyData, useNoteUnitData };

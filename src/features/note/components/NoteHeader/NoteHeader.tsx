@@ -1,13 +1,15 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ButtonAction } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import { $noteStore } from '@src/entities/note';
+import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
 
+import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
 import { Loader } from '@src/features/loader';
 
 const NoteHeaderStyled = styled.div`
@@ -28,14 +30,18 @@ const NoteHeaderStyled = styled.div`
   margin: 0 32px;
 
   .note-header-title {
+    font-family: inherit;
     height: 40px;
+    font-size: 36px;
     line-height: 40px;
+    font-weight: 600;
   }
 `;
 
 const NoteHeaderBlockStyled = styled.div`
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 16px;
   flex: 0 0 auto;
   width: fit-content;
 `;
@@ -57,6 +63,10 @@ const SaveNotification = styled.div`
 `;
 
 export const NoteHeader: FC = () => {
+  const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
+
+  const { data: noteUnit, isLoading: isNoteUnitLoading } = useNoteUnitData({ routerNoteId });
+
   const { isNoteSaving, lastInputTimestamp, saveNoteHandler } = useEffectorUnit($noteStore);
   const [secondsUntilSave, setSecondsUntilSave] = useState<number | null>(null);
 
@@ -84,9 +94,13 @@ export const NoteHeader: FC = () => {
       <Corners borderRadius={20} />
 
       <NoteHeaderBlockStyled>
-        <Typography as='h2' type='RoundedHeavy36' className='note-header-title'>
-          Note title
-        </Typography>
+        <NoteTitleIcon />
+
+        {isNoteUnitLoading ? (
+          <Loader iconSize='40px' />
+        ) : (
+          <span className='note-header-title'>{noteUnit?.name || ''}</span>
+        )}
       </NoteHeaderBlockStyled>
 
       <NoteHeaderBlockStyled>

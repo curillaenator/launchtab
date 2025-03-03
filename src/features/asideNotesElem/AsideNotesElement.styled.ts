@@ -21,8 +21,11 @@ const AsideNotesElementStyled = styled.div`
     margin-bottom: 16px;
   }
 
+  .create-space-button {
+    justify-content: flex-start;
+  }
+
   .open-spaces-button {
-    /* width: 100%; */
     justify-content: flex-start;
     max-width: calc(100% - 112px);
   }
@@ -30,6 +33,18 @@ const AsideNotesElementStyled = styled.div`
   .unit-list {
     width: 100%;
     padding-left: 8px;
+
+    &_empty {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 40px;
+      color: ${({ theme }) => theme.texts.placeholder};
+
+      & > span {
+        line-height: 40px;
+      }
+    }
   }
 
   .selector-loader-dummy {
@@ -41,17 +56,18 @@ const AsideNotesElementStyled = styled.div`
 
     display: flex;
     align-items: center;
-    justify-content: center;
 
     width: 100%;
     height: 40px;
     border-radius: calc(12px * 1.25 + 3px);
+    padding-left: 8px;
 
     background-color: ${({ theme }) => theme.backgrounds.light};
   }
 
   .unit-loader-dummy {
-    padding: 0 8px;
+    padding: 4px 8px;
+    height: 40px;
     margin-top: 8px;
     width: 100%;
   }

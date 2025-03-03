@@ -34,7 +34,7 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
   const { uid } = useEffectorUnit($userStore);
 
-  const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData({ uid, routerNoteId });
+  const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData({ routerNoteId });
 
   const { mutate: updateNoteBody } = useNoteBodyUpdate({
     uid,

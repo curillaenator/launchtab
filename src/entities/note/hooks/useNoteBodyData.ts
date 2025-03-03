@@ -23,7 +23,6 @@ const useNoteUnitData = ({ routerNoteId }: UseNoteDataProps) =>
     queryKey: [UNIT_NOTE_UNIT_QUERY, routerNoteId],
     queryFn: () => getNoteUnitQuery(routerNoteId!),
     enabled: !!routerNoteId,
-    staleTime: 0,
   });
 
 export { useNoteBodyData, useNoteUnitData };

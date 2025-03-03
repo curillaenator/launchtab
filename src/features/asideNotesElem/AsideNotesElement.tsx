@@ -11,19 +11,14 @@ import { Corners } from '@launch-ui/shape';
 import { useDropable } from '@src/hooks/useDropable';
 import { useLayoutContext } from '@src/hooks/useLayoutContext';
 
-import {
-  getUserSpacesQuery,
-  getSpaceUnitsQuery,
-  updateLastViewedSpace,
-  LaunchSpaceProps,
-  MAX_SPACES_PER_USER,
-} from '@src/entities/space';
+import { getUserSpacesQuery, updateLastViewedSpace, LaunchSpaceProps, MAX_SPACES_PER_USER } from '@src/entities/space';
 
 import { $userStore } from '@src/entities/user';
+import { getNoteUnitQuery } from '@src/entities/note';
 
 import { Loader } from '@src/features/loader';
 
-import { USER_SPACES_QUERY, SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
+import { USER_SPACES_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
@@ -40,9 +35,12 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     createPageType?: CreateParamType;
   }>();
 
-  const { setCurrentSpaceId } = useLayoutContext();
+  const { currentSpaceRef, setCurrentSpaceRef } = useLayoutContext();
 
-  const { lastViewedSpace, spaces: spaceIdList = [] } = useEffectorUnit($userStore);
+  const {
+    // lastViewedSpace,
+    spaces: spaceIdList = [],
+  } = useEffectorUnit($userStore);
 
   const [showCreateSapceButtonLoader, setShowCreateSapceButtonLoader] = useState(false);
   const [isCreateSpaceButton, setIsCreateSpaceButton] = useState<boolean>(false);
@@ -80,19 +78,19 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     }, 4000);
   }, [userSpaces]);
 
-  const { data: rootItems = [], isLoading: isRootItemsLoading } = useQuery({
-    queryKey: [SPACE_UNITS_QUERY, selectedSpace?.spaceCode || null],
-    queryFn: () => getSpaceUnitsQuery(selectedSpace!.spaceCode, true),
-    enabled: !!selectedSpace?.spaceCode,
-  });
-
   useEffect(() => {
     const existinglastViewedSpace =
-      userSpaces?.find((sp) => sp.spaceCode === lastViewedSpace) || userSpaces?.[0] || null;
+      userSpaces?.find(
+        (sp) => sp.spaceCode === currentSpaceRef.current?.spaceCode, // || sp.spaceCode === lastViewedSpace,
+      ) ||
+      userSpaces?.[0] ||
+      null;
 
-    if (!!existinglastViewedSpace?.spaceCode) setCurrentSpaceId(existinglastViewedSpace.spaceCode);
-    setSelectedSpace(existinglastViewedSpace);
-  }, [userSpaces, lastViewedSpace, setCurrentSpaceId]);
+    if (!!existinglastViewedSpace?.spaceCode) {
+      setCurrentSpaceRef(existinglastViewedSpace);
+      setSelectedSpace(existinglastViewedSpace);
+    }
+  }, [userSpaces, setCurrentSpaceRef, currentSpaceRef]);
 
   const {
     isOpen: isSpaceSelectorOpen = false,
@@ -152,7 +150,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                   title={userSpace.name}
                   onClick={() => {
                     setSelectedSpace(userSpace);
-                    setCurrentSpaceId(userSpace.spaceCode);
+                    setCurrentSpaceRef(userSpace);
                     updateLastViewedSpace(uid!, userSpace.spaceCode);
                     closeSpaceSelector?.();
                   }}
@@ -174,7 +172,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               // fullwidth
               // title='Create note'
               // className='hierarchy-create-note-button'
-              disabled={isRootItemsLoading}
+              // disabled={isRootItemsLoading}
               LeftIcon={() => <AddDocumentIcon />}
               appearance='secondary'
               onClick={() => navigate('/notes/create/note')}
@@ -182,7 +180,22 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             />
           </div>
 
-          {isRootItemsLoading ? (
+          {!!selectedSpace?.hierarchy ? (
+            <Hierarchy
+              queryKey={UNIT_NOTE_UNIT_QUERY}
+              rootItemsIds={selectedSpace.hierarchy}
+              ItemLoader={() => <Loader />}
+              getItemQuery={getNoteUnitQuery}
+              linkPattern={(item: { code: string }) => `/notes/${item.code}`}
+              matchRoutePattern={() => `/notes/:noteId`}
+            />
+          ) : (
+            <div className='unit-list_empty'>
+              <span>No notes yet</span>
+            </div>
+          )}
+
+          {/* {isRootItemsLoading ? (
             <div className='unit-loader-dummy'>
               <Loader />
             </div>
@@ -203,7 +216,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </>
       )}
     </AsideNotesElementStyled>

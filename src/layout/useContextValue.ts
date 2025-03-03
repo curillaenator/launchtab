@@ -1,13 +1,15 @@
 import { useCallback, useRef } from 'react';
 import type { LauyotContext } from './context';
 
+import { LaunchSpaceProps } from '@src/entities/space';
+
 const useContextValue = (): LauyotContext => {
-  const currentSpaceId = useRef<string>('');
-  const setCurrentSpaceId = useCallback((space: string) => {
-    currentSpaceId.current = space;
+  const currentSpaceRef = useRef<LaunchSpaceProps | null>(null);
+  const setCurrentSpaceRef = useCallback((space: LaunchSpaceProps) => {
+    currentSpaceRef.current = space;
   }, []);
 
-  return { currentSpaceId, setCurrentSpaceId };
+  return { currentSpaceRef, setCurrentSpaceRef };
 };
 
 export { useContextValue };

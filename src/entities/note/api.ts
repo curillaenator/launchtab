@@ -1,11 +1,11 @@
 import { doc, getDoc, setDoc, updateDoc, collection, addDoc } from 'firebase/firestore';
 import { fsdb } from '@src/api/firebase';
 
-import type { LaunchNoteProps } from './interfaces';
+import type { LaunchUnitProps } from './interfaces';
 
 interface CreateNoteMutationQueryPayload {
   uid: string;
-  formData: Partial<LaunchNoteProps> & { noteBody: string };
+  formData: Partial<LaunchUnitProps> & { noteBody: string };
   parentUnitId: string;
   parentSpaceId?: string;
 }
@@ -13,7 +13,7 @@ interface CreateNoteMutationQueryPayload {
 const createNoteMutationQuery = async (payload: CreateNoteMutationQueryPayload) => {
   const { uid, formData, parentSpaceId, parentUnitId } = payload;
 
-  const newUnit: Omit<LaunchNoteProps, 'code'> = {
+  const newUnit: Omit<LaunchUnitProps, 'code'> = {
     path: [],
     name: formData.name || '',
     // hierarchy: {},
@@ -52,7 +52,7 @@ const getNoteUnitQuery = async (unitId: string) => {
 
   if (!unitSnap.exists()) return null;
 
-  return { ...unitSnap.data(), code: unitSnap.id } as LaunchNoteProps;
+  return { ...unitSnap.data(), code: unitSnap.id } as LaunchUnitProps;
 };
 
 const updateUnitMutation = async (unitCode: string, unitName: string) => {

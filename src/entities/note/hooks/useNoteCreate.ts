@@ -3,10 +3,10 @@ import type { RichTextJsonContent } from '@launch-ui/richtext';
 import LZString from 'lz-string';
 import { createNoteMutationQuery } from '../api';
 
-import type { LaunchNoteProps } from '../interfaces';
+import type { LaunchUnitProps } from '../interfaces';
 
 interface CreateNoteMutationPayload {
-  formData: Partial<LaunchNoteProps> & { noteBody: RichTextJsonContent | string };
+  formData: Partial<LaunchUnitProps> & { noteBody: RichTextJsonContent | string };
 }
 
 interface UseNoteCreateOptions {

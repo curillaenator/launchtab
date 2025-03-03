@@ -5,7 +5,7 @@ import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 import type { RichTextJsonContent } from '@launch-ui/richtext';
 
-import type { LaunchNoteProps } from '@src/entities/note';
+import type { LaunchUnitProps } from '@src/entities/note';
 import { Loader } from '@src/features/loader';
 
 import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
@@ -68,7 +68,7 @@ const NoteHeaderChildren = styled.div`
 `;
 
 interface CreateNoteHeaderProps {
-  register: HookFormRegister<LaunchNoteProps & { noteBody: RichTextJsonContent | string }>;
+  register: HookFormRegister<LaunchUnitProps & { noteBody: RichTextJsonContent | string }>;
   isSubmitting: boolean;
 }
 

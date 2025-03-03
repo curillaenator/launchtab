@@ -1,6 +1,6 @@
 type NotesCreateParamType = 'space' | 'note';
 
-interface LaunchNoteProps {
+interface LaunchUnitProps {
   code: string;
   name: string;
 
@@ -12,7 +12,7 @@ interface LaunchNoteProps {
   updatedAt?: number;
   updatedBy?: string;
 
-  hierarchy?: Record<string, number | null>;
+  hierarchy?: Record<string, number>;
 }
 
 interface NotesRouteParams extends Record<string, string | undefined> {
@@ -20,4 +20,4 @@ interface NotesRouteParams extends Record<string, string | undefined> {
   createPageType?: NotesCreateParamType;
 }
 
-export type { NotesCreateParamType, NotesRouteParams, LaunchNoteProps };
+export type { NotesCreateParamType, NotesRouteParams, LaunchUnitProps };

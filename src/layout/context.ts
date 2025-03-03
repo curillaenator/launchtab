@@ -1,8 +1,10 @@
 import { createContext, MutableRefObject } from 'react';
 
+import { LaunchSpaceProps } from '@src/entities/space';
+
 interface LauyotContext {
-  currentSpaceId: MutableRefObject<string>;
-  setCurrentSpaceId: (currentSpace: string) => void;
+  currentSpaceRef: MutableRefObject<LaunchSpaceProps | null>;
+  setCurrentSpaceRef: (currentSpace: LaunchSpaceProps) => void;
 }
 
 //@ts-expect-error

@@ -41,10 +41,10 @@ interface HierarchyProps {
   // isDraggable?: boolean;
   // actions?: HierarchyItemAction[];
 
-  rootItems: HierarchyItem[];
+  rootItemsIds: HierarchyTree;
 
   queryKey: string;
-  getItemsQuery: (code: string) => Promise<HierarchyItem[]>;
+  getItemQuery: (code: string) => Promise<HierarchyItem | null>;
 
   ItemLoader?: FC;
 

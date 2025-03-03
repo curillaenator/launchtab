@@ -12,31 +12,31 @@ import { Typography } from '@launch-ui/typography';
 
 import { $userStore } from '@src/entities/user';
 import { setHeaderMidComponent } from '@src/entities/header';
-import { type LaunchNoteProps, useNoteCreate } from '@src/entities/note';
+import { type LaunchUnitProps, useNoteCreate } from '@src/entities/note';
 
 import { useLayoutContext } from '@src/hooks/useLayoutContext';
 
 import { CreateNoteHeader } from './CreateNoteHeader';
 import { CreateNoteForm } from './createNote.styled';
 
-import { SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
+import { USER_SPACES_QUERY } from '@src/shared/queryKeys';
 
-type NoteFormFields = LaunchNoteProps & { noteBody: RichTextJsonContent | string };
+type NoteFormFields = LaunchUnitProps & { noteBody: RichTextJsonContent | string };
 
 const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const qc = useQueryClient();
   const navigate = useNavigate();
 
-  const { uid } = UseEffectorUnit($userStore);
-  const { currentSpaceId } = useLayoutContext();
+  const { uid, spaces: spaceIdList } = UseEffectorUnit($userStore);
+  const { currentSpaceRef } = useLayoutContext();
 
   const { mutate: submitNote, isPending: isNoteSubmitting } = useNoteCreate({
     uid: uid!,
     parentUnitId: '',
-    parentSpaceId: currentSpaceId.current,
+    // TODO: add nested notes
+    parentSpaceId: currentSpaceRef.current?.spaceCode,
     onSuccess: ({ createdUnitId }) => {
-      console.log('onSuccess space', currentSpaceId.current, 'onSuccess id', createdUnitId);
-      qc.invalidateQueries({ queryKey: [SPACE_UNITS_QUERY, currentSpaceId.current] });
+      qc.invalidateQueries({ queryKey: [USER_SPACES_QUERY, spaceIdList] });
       navigate(`/notes/${createdUnitId}`);
     },
   });

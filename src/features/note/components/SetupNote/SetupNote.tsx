@@ -9,10 +9,9 @@ import { Typography } from '@launch-ui/typography';
 import { Corners } from '@launch-ui/shape';
 import { Input } from '@launch-ui/input';
 
-import { useUnitUpdate, type LaunchNoteProps } from '@src/entities/note';
+import { useUnitUpdate, type LaunchUnitProps } from '@src/entities/note';
 
-import { SPACE_UNITS_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
-import { useLayoutContext } from '@src/hooks/useLayoutContext';
+import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
 import { Loader } from '@src/features/loader';
 
@@ -47,7 +46,7 @@ const SetupNoteStyled = styled.form`
 
 interface SetupNoteProps {
   closePopup: () => void;
-  unit: LaunchNoteProps;
+  unit: LaunchUnitProps;
 }
 
 interface SetupNoteFormFields {
@@ -60,7 +59,6 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
   const [isRevalidating, setIsRevalidating] = useState<boolean>(false);
 
   const qc = useQueryClient();
-  const { currentSpaceId } = useLayoutContext();
 
   const {
     control,
@@ -72,17 +70,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
   const { mutate: updateUnit, isPending: isUnitUpdating } = useUnitUpdate({
     unitCode: unit.code,
     onSuccess: async () => {
-      let unitParentCode = '';
-
-      if (unit.path.length) {
-        unitParentCode = unit.path[unit.path.length - 1];
-      } else {
-        unitParentCode = currentSpaceId.current;
-      }
-
       setIsRevalidating(true);
-      // TODO: fix hierarchy comp to get rid of SPACE_UNITS_QUERY reval
-      await qc.invalidateQueries({ queryKey: [SPACE_UNITS_QUERY, unitParentCode] });
       await qc.invalidateQueries({ queryKey: [UNIT_NOTE_UNIT_QUERY, unit.code] });
       setIsRevalidating(false);
 

@@ -1,47 +1,64 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useUnit as UseEffectorUnit } from 'effector-react';
 import { debounce, keys, toPairs } from 'lodash';
-// import { useQueryClient } from '@tanstack/react-query';
-// import { useUnit as useEffectorUnit } from 'effector-react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { Corners } from '@launch-ui/shape';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { RichTextField, type RichtextChangeEvent, type RichTextJsonContent } from '@launch-ui/richtext';
 import { Typography } from '@launch-ui/typography';
 
+import { $userStore } from '@src/entities/user';
 import { setHeaderMidComponent } from '@src/entities/header';
-import type { LaunchNoteProps } from '@src/entities/note';
+import { type LaunchNoteProps, useNoteCreate } from '@src/entities/note';
+
+import { useLayoutContext } from '@src/hooks/useLayoutContext';
 
 import { CreateNoteHeader } from './CreateNoteHeader';
 import { CreateNoteForm } from './createNote.styled';
 
+import { SPACE_UNITS_QUERY } from '@src/shared/queryKeys';
+
+type NoteFormFields = LaunchNoteProps & { noteBody: RichTextJsonContent | string };
+
 const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
+  const qc = useQueryClient();
   const navigate = useNavigate();
 
-  const isSubmitting = true;
+  const { uid } = UseEffectorUnit($userStore);
+  const { currentSpaceId } = useLayoutContext();
+
+  const { mutate: submitNote, isPending: isNoteSubmitting } = useNoteCreate({
+    uid: uid!,
+    parentUnitId: '',
+    parentSpaceId: currentSpaceId.current,
+    onSuccess: ({ createdUnitId }) => {
+      console.log('onSuccess space', currentSpaceId.current, 'onSuccess id', createdUnitId);
+      qc.invalidateQueries({ queryKey: [SPACE_UNITS_QUERY, currentSpaceId.current] });
+      navigate(`/notes/${createdUnitId}`);
+    },
+  });
 
   const {
     // control,
     register,
-
     // reset,
     setValue,
-    getValues,
+    // getValues,
     // watch,
     handleSubmit,
     formState: { errors, dirtyFields },
-  } = useForm<LaunchNoteProps & { noteBody: RichTextJsonContent | string }>({
-    defaultValues: { name: '', noteBody: '' },
-  });
+  } = useForm<NoteFormFields>({ defaultValues: { name: '', noteBody: '' } });
 
   useEffect(() => {
-    setHeaderMidComponent(() => <CreateNoteHeader register={register} isSubmitting={isSubmitting} />);
+    setHeaderMidComponent(() => <CreateNoteHeader register={register} isSubmitting={isNoteSubmitting} />);
 
     return () => {
       setHeaderMidComponent(null);
     };
-  }, [register, isSubmitting]);
+  }, [register, isNoteSubmitting]);
 
   //eslint-disable-next-line react-hooks/exhaustive-deps
   const setFormValueDebounced = useCallback(
@@ -61,9 +78,7 @@ const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   return (
     <CreateNoteForm
       data-create-note-form
-      onSubmit={handleSubmit((spaceData: LaunchNoteProps) => {
-        console.log('data-create-note-form', spaceData, getValues('noteBody'));
-      })}
+      onSubmit={handleSubmit((formData: NoteFormFields) => submitNote({ formData }))}
     >
       <Corners borderRadius={24} />
 
@@ -75,14 +90,19 @@ const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
       />
 
       <div className='create-note-form-field-controls'>
-        <ButtonAction disabled={!keys(dirtyFields).length} type='submit' title='Create note' />
+        <ButtonAction
+          disabled={isNoteSubmitting || !keys(dirtyFields).length || !!keys(errors).length}
+          type='submit'
+          title='Create note'
+        />
+
         <ButtonGhost type='button' title='Cancel' onClick={() => navigate('/notes')} />
 
         {!!keys(errors).length && (
           <span className='create-note-form-errors'>
             {toPairs(errors).map(([fieldName, { message }]) => (
-              <Typography type='TextRegular12' key={`${fieldName}-${message}`}>
-                {message || ''}
+              <Typography type='RoundedMedium16' key={`${fieldName}-${message}`}>
+                {(message as string) || ''}
               </Typography>
             ))}
           </span>

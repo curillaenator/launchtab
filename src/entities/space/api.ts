@@ -3,6 +3,7 @@ import { fsdb } from '@src/api/firebase';
 
 import type { HierarchyItem as LaunchUnitProps } from '@launch-ui/hierarchy';
 import type { LaunchSpaceProps } from './interfaces';
+import { keys } from 'lodash';
 
 const updateLastViewedSpace = async (uid: string, lastViewedSpace: string) => {
   await updateDoc(doc(fsdb, 'users', uid), { lastViewedSpace });
@@ -33,10 +34,17 @@ const getUserSpacesQuery = async (spaceIds: string[]) => {
   return userSpaces;
 };
 
-const getSpaceUnitsQuery = async (unitIds: string[]) => {
-  const spaceUnitsDto = await Promise.all(unitIds.map((unitId) => getDoc(doc(fsdb, 'units', unitId))));
+// const getSpaceUnitsQuery = async (unitIds: string[]) => {
+const getSpaceUnitsQuery = async (code: string, isRoot: boolean = false) => {
+  const dbPath = isRoot ? 'spaces' : 'units';
 
-  console.log('getSpaceUnitsQuery', unitIds.join('-'));
+  const unitIds = await getDoc(doc(fsdb, dbPath, code)).then((snap) =>
+    snap.exists() ? keys((snap.data() as LaunchUnitProps).hierarchy) : [],
+  );
+
+  console.log('getSpaceUnitsQuery', unitIds);
+
+  const spaceUnitsDto = await Promise.all(unitIds.map((unitId) => getDoc(doc(fsdb, 'units', unitId))));
 
   const spaceUnits = await Promise.all(
     spaceUnitsDto.map((unitSnap) => {

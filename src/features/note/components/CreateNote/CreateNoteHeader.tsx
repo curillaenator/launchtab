@@ -45,13 +45,14 @@ const NoteHeaderStyled = styled.div`
     font-family: inherit;
     font-size: 36px;
     line-height: 40px;
-    font-weight: 800;
+    font-weight: 600;
 
     &::placeholder {
       color: ${({ theme }) => theme.texts.placeholder};
       font-family: inherit;
       font-size: 36px;
-      font-weight: 800;
+      line-height: 40px;
+      font-weight: 600;
     }
   }
 `;
@@ -83,12 +84,12 @@ const CreateNoteHeader: FC<CreateNoteHeaderProps> = (props) => {
       <input
         autoComplete='off'
         type='text'
-        placeholder='Type your note name'
+        placeholder='Note title...'
         className='create-note-title-input'
         {...register('name', {
-          required: 'Set note name',
-          minLength: { value: 8, message: 'Please use at least 8 characters' },
-          maxLength: { value: 64, message: 'Please dont exceed 64 characters' },
+          required: 'Set note title',
+          minLength: { value: 8, message: 'Please use at least 8 chars' },
+          maxLength: { value: 64, message: 'Please do not go above 64 chars' },
         })}
       />
 

@@ -14,7 +14,6 @@ import { Spinner } from '../Spinner';
 import { DocumentLink } from '../DocumentLink';
 
 // import { useDragNDrop } from './hooks/useDragNDrop';
-import { useActiveWatch } from './hooks/useActiveWatch';
 
 import { CaretRightIcon } from './icons/CaretRightIcon';
 import { DotSmallIcon } from './icons/DotSmallIcon';
@@ -48,7 +47,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
 
   const { data: childrenData, isLoading: isChildrenLoading } = useQuery({
     queryKey: [ITEMS_QUERY_KEY, pathKey],
-    queryFn: () => getItemsQuery(keys(data?.hierarchy)),
+    queryFn: () => getItemsQuery(data.code),
     enabled: !!data?.hierarchy && touched,
   });
 

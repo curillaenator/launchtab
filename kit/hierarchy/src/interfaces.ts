@@ -44,7 +44,7 @@ interface HierarchyProps {
   rootItems: HierarchyItem[];
 
   queryKey: string;
-  getItemsQuery: (unitIds: string[]) => Promise<HierarchyItem[]>;
+  getItemsQuery: (code: string) => Promise<HierarchyItem[]>;
 
   ItemLoader?: FC;
 

@@ -2,8 +2,6 @@ import React, { FC, useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery } from '@tanstack/react-query';
-import { keys } from 'lodash';
-// import cn from 'classnames';
 
 import { Dropable } from '@launch-ui/dropable';
 import { Hierarchy } from '@launch-ui/hierarchy';
@@ -11,6 +9,7 @@ import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 
 import { useDropable } from '@src/hooks/useDropable';
+import { useLayoutContext } from '@src/hooks/useLayoutContext';
 
 import {
   getUserSpacesQuery,
@@ -41,6 +40,8 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     noteId?: string;
     createPageType?: CreateParamType;
   }>();
+
+  const { setCurrentSpaceId } = useLayoutContext();
 
   const { lastViewedSpace, spaces: spaceIdList = [] } = useEffectorUnit($userStore);
 
@@ -82,13 +83,17 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
 
   const { data: rootItems = [], isLoading: isRootItemsLoading } = useQuery({
     queryKey: [SPACE_UNITS_QUERY, selectedSpace?.spaceCode || null],
-    queryFn: () => getSpaceUnitsQuery(keys(selectedSpace?.hierarchy)),
-    enabled: !!selectedSpace?.hierarchy,
+    queryFn: () => getSpaceUnitsQuery(selectedSpace!.spaceCode, true),
+    enabled: !!selectedSpace?.spaceCode,
   });
 
   useEffect(() => {
-    setSelectedSpace(userSpaces?.find((sp) => sp.spaceCode === lastViewedSpace) || userSpaces?.[0] || null);
-  }, [userSpaces, lastViewedSpace]);
+    const existinglastViewedSpace =
+      userSpaces?.find((sp) => sp.spaceCode === lastViewedSpace) || userSpaces?.[0] || null;
+
+    if (!!existinglastViewedSpace?.spaceCode) setCurrentSpaceId(existinglastViewedSpace.spaceCode);
+    setSelectedSpace(existinglastViewedSpace);
+  }, [userSpaces, lastViewedSpace, setCurrentSpaceId]);
 
   const {
     isOpen: isSpaceSelectorOpen = false,
@@ -149,6 +154,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                   title={userSpace.name}
                   onClick={() => {
                     setSelectedSpace(userSpace);
+                    setCurrentSpaceId(userSpace.spaceCode);
                     updateLastViewedSpace(uid!, userSpace.spaceCode);
                     closeSpaceSelector?.();
                   }}

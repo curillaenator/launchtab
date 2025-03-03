@@ -13,7 +13,7 @@ const useNoteBodyUpdate = ({ uid, routerNoteId, onSuccess }: UseNoteBodyUpdatePr
   useMutation({
     mutationFn: async (noteBodyEvent: RichtextChangeEvent) => {
       if (!uid || !routerNoteId) return { routerNoteId: false };
-      return updateNoteBodyMutation(routerNoteId, LZString.compressToBase64(JSON.stringify(noteBodyEvent.value)));
+      return updateNoteBodyMutation(uid, routerNoteId, LZString.compressToBase64(JSON.stringify(noteBodyEvent.value)));
     },
 
     onSuccess: () => {

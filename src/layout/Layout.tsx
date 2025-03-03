@@ -20,6 +20,8 @@ import { $settingsStore } from '@src/entities/settings';
 import { setHeaderShadowed } from '@src/entities/header';
 
 import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
+import { useContextValue } from './useContextValue';
+import { $layoutContex as LayoutCTX } from './context';
 
 import { Loader } from '@src/features/loader';
 import LayoutStyled from './styled';
@@ -52,49 +54,53 @@ export const Layout: FC = () => {
     [],
   );
 
+  const ctxValue = useContextValue();
+
   if (isLoading) return <Loader view='fullscreen' iconSize='56px' />;
 
   return (
-    <LayoutStyled
-      ref={layoutRef}
-      className='layout-container'
-      data-description='layout-container'
-      $isAsideOpen={isAsideOpen}
-      onMouseMove={(e) => {
-        if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
-        mouseWatcher.current(e);
-      }}
-    >
-      <Background
-        setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
-          if (!dynamicWallpaper) return;
-          mouseWatcher.current = watcher;
+    <LayoutCTX.Provider value={ctxValue}>
+      <LayoutStyled
+        ref={layoutRef}
+        className='layout-container'
+        data-description='layout-container'
+        $isAsideOpen={isAsideOpen}
+        onMouseMove={(e) => {
+          if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
+          mouseWatcher.current(e);
         }}
-      />
+      >
+        <Background
+          setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
+            if (!dynamicWallpaper) return;
+            mouseWatcher.current = watcher;
+          }}
+        />
 
-      <aside className='aside'>
-        <Aside />
-      </aside>
+        <aside className='aside'>
+          <Aside />
+        </aside>
 
-      <div className='viewport' onScroll={onViewportScroll}>
-        <Header />
+        <div className='viewport' onScroll={onViewportScroll}>
+          <Header />
 
-        <MainStyled id={MAIN_ELEMENT_ID}>
-          <Outlet />
-        </MainStyled>
-      </div>
+          <MainStyled id={MAIN_ELEMENT_ID}>
+            <Outlet />
+          </MainStyled>
+        </div>
 
-      {!!user.uid && (
-        <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
-          <Settings />
-        </Drawer>
-      )}
+        {!!user.uid && (
+          <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
+            <Settings />
+          </Drawer>
+        )}
 
-      {!user.uid && (
-        <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
-          <SignIn closePopup={() => setSignIn(false)} />
-        </Modal>
-      )}
-    </LayoutStyled>
+        {!user.uid && (
+          <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
+            <SignIn closePopup={() => setSignIn(false)} />
+          </Modal>
+        )}
+      </LayoutStyled>
+    </LayoutCTX.Provider>
   );
 };

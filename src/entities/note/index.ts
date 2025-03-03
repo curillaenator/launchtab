@@ -5,7 +5,7 @@ export { $noteStore, setNoteLastInputTimestamp, setSaveNoteHandler, setIsNoteSav
 export { getNoteBodyQuery, updateNoteBodyMutation } from './api';
 
 export { useNoteBodyData, useNoteUnitData } from './hooks/useNoteBodyData';
-
+export { useUnitUpdate } from './hooks/useUnitUpdate';
 export { useNoteBodyUpdate } from './hooks/useNoteBodyUpdate';
 export { useNoteCreate } from './hooks/useNoteCreate';
 

@@ -10,6 +10,7 @@ import { setHeaderMidComponent } from '@src/entities/header';
 
 import {
   // query hooks
+  useNoteUnitData,
   useNoteBodyData,
   useNoteBodyUpdate,
   // store handlers
@@ -21,6 +22,7 @@ import {
   type NotesRouteParams,
 } from '@src/entities/note';
 
+import { useICan } from '@src/hooks/useICan';
 import { Loader } from '@src/features/loader';
 
 import { NoteHeader } from './components/NoteHeader';
@@ -33,6 +35,9 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
 
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
   const { uid } = useEffectorUnit($userStore);
+
+  const { data: noteUnit } = useNoteUnitData({ routerNoteId });
+  const iCan = useICan();
 
   const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData({ routerNoteId });
 
@@ -96,6 +101,8 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         <Loader view='fit-parent' iconSize='56px' />
       ) : (
         <RichTextField
+          editable={iCan.edit(noteUnit)}
+          // editable={false}
           onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
           maxHeight={maxHeight - 32}
           initialValue={noteBody || ''}

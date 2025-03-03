@@ -55,7 +55,12 @@ const getNoteUnitQuery = async (unitId: string) => {
   return { ...unitSnap.data(), code: unitSnap.id } as LaunchNoteProps;
 };
 
-async function updateNoteBodyMutation(uid: string, noteId: string, noteBody: string) {
+const updateUnitMutation = async (unitCode: string, unitName: string) => {
+  await updateDoc(doc(fsdb, 'units', unitCode), { name: unitName });
+  return { updatedUnitName: unitName };
+};
+
+const updateNoteBodyMutation = async (uid: string, noteId: string, noteBody: string) => {
   let response = { routerNoteId: false };
 
   await setDoc(doc(fsdb, 'notes', noteId), {
@@ -65,11 +70,12 @@ async function updateNoteBodyMutation(uid: string, noteId: string, noteBody: str
   }).then(() => (response.routerNoteId = true));
 
   return response;
-}
+};
 
 export {
   getNoteBodyQuery,
   getNoteUnitQuery,
+  updateUnitMutation,
   updateNoteBodyMutation,
   createNoteMutationQuery,
   type CreateNoteMutationQueryPayload,

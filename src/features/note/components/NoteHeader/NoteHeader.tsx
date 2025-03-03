@@ -1,71 +1,31 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
-import { ButtonAction } from '@launch-ui/button';
+import { Modal } from '@launch-ui/modal';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
+import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 
 import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
 
-import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
+import { useICan } from '@src/hooks/useICan';
+
 import { Loader } from '@src/features/loader';
+import { SetupNote } from '../SetupNote';
+import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
 
-const NoteHeaderStyled = styled.div`
-  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
-  --shp-bdc: transparent;
-  // for corners
-  position: relative;
-
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 8px 16px;
-
-  width: 100%;
-  height: 56px;
-  border-radius: calc(20px * 1.25 + 3px);
-  background-color: ${({ theme }) => theme.backgrounds.base};
-  margin: 0 32px;
-
-  .note-header-title {
-    font-family: inherit;
-    height: 40px;
-    font-size: 36px;
-    line-height: 40px;
-    font-weight: 600;
-  }
-`;
-
-const NoteHeaderBlockStyled = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex: 0 0 auto;
-  width: fit-content;
-`;
-
-const SaveNotification = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  width: fit-content;
-  height: 100%;
-
-  .save-notification-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 0 0 auto;
-  }
-`;
+import SwitchesIcon from '@src/assets/svg/switches.svg';
+import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
 
 export const NoteHeader: FC = () => {
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
 
   const { data: noteUnit, isLoading: isNoteUnitLoading } = useNoteUnitData({ routerNoteId });
+
+  const iCan = useICan();
+  const iCanEdit = iCan.edit(noteUnit);
+  const [editOpen, setEditOpen] = useState<boolean>(false);
 
   const { isNoteSaving, lastInputTimestamp, saveNoteHandler } = useEffectorUnit($noteStore);
   const [secondsUntilSave, setSecondsUntilSave] = useState<number | null>(null);
@@ -90,59 +50,69 @@ export const NoteHeader: FC = () => {
   }, [lastInputTimestamp]);
 
   return (
-    <NoteHeaderStyled data-note-header>
-      <Corners borderRadius={20} />
+    <>
+      <NoteHeaderStyled data-note-header>
+        <Corners borderRadius={20} />
 
-      <NoteHeaderBlockStyled>
-        <NoteTitleIcon />
+        <NoteHeaderBlockStyled>
+          <NoteTitleIcon />
 
-        {isNoteUnitLoading ? (
-          <Loader iconSize='40px' />
-        ) : (
-          <span className='note-header-title'>{noteUnit?.name || ''}</span>
-        )}
-      </NoteHeaderBlockStyled>
-
-      <NoteHeaderBlockStyled>
-        {isNoteSaving && (
-          <SaveNotification data-note-header-save-notification>
-            <div className='save-notification-message'>
-              <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
-                Saving
-              </Typography>
-              <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
-                Please wait...
-              </Typography>
-            </div>
-
+          {isNoteUnitLoading ? (
             <Loader iconSize='40px' />
-          </SaveNotification>
-        )}
+          ) : (
+            <span className='note-header-title'>{noteUnit?.name || ''}</span>
+          )}
+        </NoteHeaderBlockStyled>
 
-        {!!secondsUntilSave && (
-          <SaveNotification data-note-header-save-notification>
-            <ButtonAction
-              title='Save'
-              onClick={() => {
-                if (intervalRef.current) clearInterval(intervalRef.current);
-                setSecondsUntilSave(null);
-                saveNoteHandler?.();
-              }}
-            />
+        <NoteHeaderBlockStyled>
+          {isNoteSaving && (
+            <SaveNotification data-note-header-save-notification>
+              <div className='save-notification-message'>
+                <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
+                  Saving
+                </Typography>
+                <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
+                  Please wait...
+                </Typography>
+              </div>
 
-            <div className='save-notification-message'>
-              <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
-                Autosave in
-              </Typography>
-              <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
-                {secondsUntilSave}
-              </Typography>
-            </div>
-          </SaveNotification>
-        )}
+              <Loader iconSize='40px' />
+            </SaveNotification>
+          )}
 
-        {/* <ButtonAction title='Edit' /> */}
-      </NoteHeaderBlockStyled>
-    </NoteHeaderStyled>
+          {!!secondsUntilSave && (
+            <SaveNotification data-note-header-save-notification>
+              <ButtonAction
+                title='Save'
+                onClick={() => {
+                  if (intervalRef.current) clearInterval(intervalRef.current);
+                  setSecondsUntilSave(null);
+                  saveNoteHandler?.();
+                }}
+              />
+
+              <div className='save-notification-message'>
+                <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
+                  Autosave in
+                </Typography>
+                <Typography type='TextRegular12' color='var(--theme-texts-placeholder)'>
+                  {secondsUntilSave}
+                </Typography>
+              </div>
+            </SaveNotification>
+          )}
+
+          {iCanEdit && (
+            <ButtonGhost RightIcon={() => <SwitchesIcon />} title='Setup' onClick={() => setEditOpen(true)} />
+          )}
+        </NoteHeaderBlockStyled>
+      </NoteHeaderStyled>
+
+      {noteUnit && iCanEdit && (
+        <Modal open={editOpen} onClose={() => setEditOpen(false)}>
+          <SetupNote closePopup={() => setEditOpen(false)} unit={noteUnit} />
+        </Modal>
+      )}
+    </>
   );
 };

@@ -14,7 +14,7 @@ const useNoteBodyData = ({ routerNoteId }: UseNoteDataProps) =>
     queryKey: [UNIT_NOTE_BODY_QUERY, routerNoteId],
     queryFn: () => getNoteBodyQuery(routerNoteId!),
     enabled: !!routerNoteId,
-    staleTime: 0,
+    // staleTime: 0,
     select: (data) => (data ? LZString.decompressFromBase64(data) : null),
   });
 

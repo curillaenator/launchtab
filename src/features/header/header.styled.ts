@@ -5,7 +5,7 @@ interface HeaderStyledProps {
 }
 
 const HeaderStyled = styled.header<HeaderStyledProps>`
-  z-index: 1000;
+  z-index: 900;
   display: flex;
   justify-content: space-between;
 

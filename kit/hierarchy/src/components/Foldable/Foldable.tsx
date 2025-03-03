@@ -46,7 +46,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
   // const [isHovered, setHovered] = useState(false);
 
   const { data: childrenData, isLoading: isChildrenLoading } = useQuery({
-    queryKey: [ITEMS_QUERY_KEY, pathKey],
+    queryKey: [ITEMS_QUERY_KEY, data.code],
     queryFn: () => getItemsQuery(data.code),
     enabled: !!data?.hierarchy && touched,
   });

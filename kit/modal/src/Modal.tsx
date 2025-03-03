@@ -20,6 +20,7 @@ const PopupStyled = styled(Popup)`
     padding: 0 1rem;
     background-color: ${({ theme }) => theme.backgrounds.base40};
     animation: ${appear} 0.12s linear;
+    backdrop-filter: blur(5px);
   }
 
   &-content {
@@ -29,6 +30,7 @@ const PopupStyled = styled(Popup)`
     width: 100%;
     background-color: transparent;
     color: ${({ theme }) => theme.texts.base};
+    filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
   }
 `;
 

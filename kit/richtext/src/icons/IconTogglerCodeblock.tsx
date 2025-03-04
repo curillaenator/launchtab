@@ -5,7 +5,7 @@ const IconTogglerCodeblock: FC = () => (
     <path
       d='M19.999 12.2896L23.999 16.2896L19.999 20.2896M11.999 20.2896L7.99902 16.2896L11.999 12.2896M17.7133 10.0039L14.2847 22.5753'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

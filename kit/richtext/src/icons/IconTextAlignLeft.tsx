@@ -6,7 +6,7 @@ const IconTextAlignLeft: FC = () => (
       id='vector'
       d='M7.75 10.75H24.25M7.75 16H16M7.75 21.25H24.25'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

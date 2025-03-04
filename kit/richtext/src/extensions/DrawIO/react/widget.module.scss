@@ -6,7 +6,8 @@
   max-height: initial;
   border: none;
 
-  background-color: #101416cc;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
   padding: 4vw;
 }
 
@@ -24,8 +25,8 @@
   width: 100%;
   border-radius: 8px;
   padding: var(--drawio-widget-pd, 0);
-  box-shadow: inset 0 0 0 1px var(--editor-bdc);
-  background-color: var(--editor-bgc);
+  box-shadow: inset 0 0 0 1px var(--theme-backgrounds-light);
+  background-color: transparent;
 }
 
 .image {

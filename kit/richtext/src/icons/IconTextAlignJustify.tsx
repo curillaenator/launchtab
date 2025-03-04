@@ -5,7 +5,7 @@ const IconTextAlignJustify: FC = () => (
     <path
       d='M7.75 10.75H24.25M7.75 16H24.1221M7.75 21.25H24.25'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

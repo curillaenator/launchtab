@@ -6,7 +6,7 @@ export const IconSelect: FC = () => (
       d='M20 20L16 24L12 20'
       stroke='currentColor'
       fill='none'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -14,7 +14,7 @@ export const IconSelect: FC = () => (
       d='M20 12L16 8L12 12'
       stroke='currentColor'
       fill='none'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

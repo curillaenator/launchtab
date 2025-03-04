@@ -22,7 +22,7 @@ export const TocIcon: FC = () => (
       <path
         d='M10.9941 13H20.9941M10.9941 16.5H15.9941M10.9941 20H20.9941'
         stroke='white'
-        strokeWidth='2'
+        strokeWidth='1.4'
         strokeLinecap='round'
         strokeLinejoin='round'
       />

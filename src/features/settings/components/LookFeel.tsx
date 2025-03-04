@@ -113,12 +113,12 @@ export const LookFeel: FC = () => {
         />
       </Titlewrap>
 
-      <Titlewrap title='Dynamic wallpaper'>
+      {/* <Titlewrap title='Dynamic wallpaper'>
         <Switch
           checked={settingsState.isDynamicWallpaper}
           onChange={() => setSettings({ isDynamicWallpaper: !settingsState.isDynamicWallpaper })}
         />
-      </Titlewrap>
+      </Titlewrap> */}
 
       {/* {settingsState.isDynamicWallpaper && (
         <Titlewrap title='Select dynamic wallpaper'>

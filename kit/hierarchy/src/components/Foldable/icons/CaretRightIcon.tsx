@@ -6,7 +6,7 @@ const CaretRightIcon = () => (
       d='M13.0015 10.0078L19.0015 16.0078L13.0015 22.0078'
       stroke='currentColor'
       fill='none'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

@@ -5,7 +5,7 @@ const IconNumberedList: FC = () => (
     <path
       d='M12.9922 10.5913H24.9922M12.9922 15.8413H24.9922M12.9922 21.0913H24.9922'
       stroke='currentColor'
-      strokeWidth='2'
+      strokeWidth='1.4'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

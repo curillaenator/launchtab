@@ -1,14 +1,7 @@
 @use '../CssButton/cssButton' as button;
 
 .actions {
-  --dd-pd: 0;
-  --dd-bdw: 0;
-  --dd-scrl-pd: 0;
-  --dd-bdrs: 8px;
-
-  --dd-bgc: var(--hchy-actions-dd-bgc);
-  --dd-bdc: var(--hchy-actions-dd-bdc);
-  --dd-drop-sh: var(--hchy-actions-dd-drop-sh);
+  --dropable-content-pd: 0;
 
   width: fit-content;
 

@@ -115,16 +115,7 @@
 }
 
 .dropable {
-  --dd-bgc: var(--editor-bgc, #ffffff);
-  --dd-bdc: trasparent;
-  --dd-drop-sh: 0 0 0 0 trasparent;
-
-  --dd-pd: 8px 0;
-  --dd-bdw: 0px;
-  --dd-scrl-pd: 0;
-  --dd-bdrs: 8px;
-
-  border: 1px solid var(--editor-bdc, #f0f1f1);
+  --dropable-content-pd: 8px 0;
 }
 
 .dropableOpenNode {

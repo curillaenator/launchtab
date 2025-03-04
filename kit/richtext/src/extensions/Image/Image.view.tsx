@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useRef } from 'react';
 import { NodeViewWrapper, type NodeViewProps } from '@tiptap/react';
 import resizeImage from 'image-resize';
+import { isEqual } from 'lodash';
 import cn from 'classnames';
 
 import { ButtonGhost } from '@launch-ui/button';
@@ -25,10 +26,12 @@ const ImageView: FC<NodeViewProps> = (props) => {
     ({ x, y, scale }: { x?: number; y?: number; scale?: number }) => {
       if (!attrs.src) return;
 
-      console.log('attrs', attrs);
+      const newAttrs = { ...attrs };
 
-      if (x !== undefined && y !== undefined) updateAttributes({ ...attrs, pos: [x, y] });
-      if (scale !== undefined) updateAttributes({ ...attrs, scale });
+      if (x !== undefined && y !== undefined) attrs.pos = [x, y];
+      if (scale !== undefined) attrs.scale = scale;
+
+      if (!isEqual(attrs, newAttrs)) updateAttributes(newAttrs);
     },
     [attrs, updateAttributes],
   );
@@ -120,7 +123,17 @@ const ImageView: FC<NodeViewProps> = (props) => {
             maxWidth={128}
             minWidth={128}
             offset={[0, 4]}
-            openNode={<ButtonGhost title={`${height}px`} active={isHeightOpen} appearance='secondary' />}
+            openNode={
+              <ButtonGhost
+                title={`${height}px`}
+                active={isHeightOpen}
+                appearance='secondary'
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              />
+            }
           >
             {[320, 512, 768, 1024].map((selH) => (
               <ButtonGhost

@@ -1,6 +1,8 @@
 import React, { ElementType, FC, useMemo } from 'react';
 import { animated } from 'react-spring';
 
+import { Corners } from '@launch-ui/shape';
+
 import { DropableContext } from './context';
 import { VERSION } from './version';
 import { DEFAULT_TEST_ID } from './constants';
@@ -20,6 +22,7 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
     animationStyle,
     closeOnItemClick = false,
     closeDropdown,
+    corners = { borderRadius: 12, stroke: 1 },
     children,
   } = props;
 
@@ -41,8 +44,17 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
       data-analytics={DEFAULT_TEST_ID}
       data-version={VERSION}
       className={styles.content}
-      style={{ minWidth, maxWidth, maxHeight, ...animationStyle }}
+      style={{
+        '--dropable-content-bdrs': `${corners.borderRadius}px`,
+        ...animationStyle,
+        //
+        minWidth,
+        maxWidth,
+        maxHeight,
+      }}
     >
+      <Corners {...corners} />
+
       <div className={styles.scroll}>
         <DropableContext.Provider value={contextValue}>{children}</DropableContext.Provider>
       </div>

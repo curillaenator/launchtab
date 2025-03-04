@@ -3713,6 +3713,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/dropable@workspace:kit/dropable"
   dependencies:
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
     "@tippyjs/react": 4.2.5
     classnames: 2.5.1

@@ -1,6 +1,7 @@
 import type { ReactNode, CSSProperties } from 'react';
 import type { Instance, Placement } from 'tippy.js';
 import type { TippyProps } from '@tippyjs/react';
+import type { CornerProps } from '@launch-ui/shape';
 import { config } from 'react-spring';
 
 type Config = keyof typeof config;
@@ -25,6 +26,7 @@ export interface _BaseMenuProps {
   closeOnItemClick?: boolean;
   animationStyle?: CSSProperties;
   closeDropdown?: () => void;
+  corners?: CornerProps;
   children: ReactNode;
 }
 

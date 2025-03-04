@@ -19,6 +19,8 @@ export const Dropable: FC<DropableProps> = (props) => {
     closeOnItemClick,
     closeDropdown,
 
+    corners,
+
     // Reason: guard tippy props from getting into DOM
     // @ts-expect-error
     mounted, // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -37,6 +39,7 @@ export const Dropable: FC<DropableProps> = (props) => {
       render={(attrs, _content, instance) => (
         <DropableMenu
           attrs={attrs}
+          corners={corners}
           dataTestId={dataTestId}
           instance={instance as Instance}
           closeDropdown={closeDropdown}

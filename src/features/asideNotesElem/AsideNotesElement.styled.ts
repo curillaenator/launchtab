@@ -1,15 +1,6 @@
 import styled from 'styled-components';
 
 const AsideNotesElementStyled = styled.div`
-  --dd-pd: 8px 8px;
-  --dd-bdw: 1px;
-  --dd-scrl-pd: 0;
-  --dd-bdrs: 18px;
-
-  --dd-bgc: var(--theme-backgrounds-light);
-  --dd-bdc: var(--theme-borders-base);
-  --dd-drop-sh: 0 0 0 0 transparent;
-
   width: 100%;
   min-height: 40px;
   padding: 8px 0;

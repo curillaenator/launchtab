@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { toPairs } from 'lodash';
 import { TTheme } from '@launch-ui/theme';
 
+import { DRAWER_PORTAL_ID } from '../layout/constants';
+
 const traverseTheme = (map: Map<string, string>, val: Record<string, unknown> | string, path: string[]) => {
   if (typeof val === 'string') return map.set('--'.concat(path.join('-')), val);
 
@@ -11,21 +13,26 @@ const traverseTheme = (map: Map<string, string>, val: Record<string, unknown> | 
 };
 
 const useThemeToCssv = (theme: TTheme) => {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const layoutRef = useRef<HTMLDivElement | null>(null);
 
   const cssv = useRef(new Map<string, string>());
 
   useEffect(() => {
     cssv.current.clear();
 
+    // @ts-expect-error
     traverseTheme(cssv.current, theme, ['theme']);
 
-    // console.log('cssv.current', cssv.current);
+    cssv.current.forEach((cssvVal, cssvKey) => layoutRef.current?.style.setProperty(cssvKey, cssvVal));
 
-    cssv.current.forEach((cssvVal, cssvKey) => ref.current?.style.setProperty(cssvKey, cssvVal));
+    const drawerContainer = document.getElementById(DRAWER_PORTAL_ID);
+
+    if (!!drawerContainer) {
+      cssv.current.forEach((cssvVal, cssvKey) => drawerContainer.style.setProperty(cssvKey, cssvVal));
+    }
   }, [theme]);
 
-  return { ref };
+  return { layoutRef };
 };
 
 export { useThemeToCssv };

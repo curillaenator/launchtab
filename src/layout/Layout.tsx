@@ -26,7 +26,7 @@ import { $layoutContex as LayoutCTX } from './context';
 import { Loader } from '@src/features/loader';
 import LayoutStyled from './styled';
 
-import { MAIN_ELEMENT_ID } from './constants';
+import { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID } from './constants';
 
 const MainStyled = styled.main`
   width: 100%;
@@ -43,7 +43,7 @@ export const Layout: FC = () => {
   const mouseWatcher = useRef<((e: React.MouseEvent<Element, MouseEvent>) => void) | null>(null);
 
   const currentTheme = useTheme();
-  const { ref: layoutRef } = useThemeToCssv(currentTheme);
+  const { layoutRef } = useThemeToCssv(currentTheme);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onViewportScroll = useCallback(
@@ -90,7 +90,7 @@ export const Layout: FC = () => {
         </div>
 
         {!!user.uid && (
-          <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
+          <Drawer portalId={DRAWER_PORTAL_ID} open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
             <Settings />
           </Drawer>
         )}

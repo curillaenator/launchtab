@@ -1,16 +1,16 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { createClient, PhotosWithTotalResults } from 'pexels';
-
-import { Select } from '@launch-ui/select';
-
-import { ButtonGhost } from '@launch-ui/button';
-import { Switch, Input, Titlewrap } from '@launch-ui/input';
-import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
+import { createClient as createPexelsClient, PhotosWithTotalResults as PexelsPhotosWithTotalResults } from 'pexels';
 
 import { themeNames } from '@launch-ui/theme';
+import { Dropable } from '@launch-ui/dropable';
+import { ButtonGhost, ButtonAction } from '@launch-ui/button';
+import { Switch, Input, Titlewrap } from '@launch-ui/input';
+
+import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
 
 import { $settingsStore, setSettings } from '@src/entities/settings';
+import { useDropable } from '@src/hooks/useDropable';
 
 import {
   $pexelsStore,
@@ -21,11 +21,17 @@ import {
 
 import { LookFeelStyled } from './styles';
 
-import ShevronIcon from '@src/assets/svg/shevron.svg';
+// import ShevronIcon from '@src/assets/svg/shevron.svg';
 import UpdateIcon from '@src/assets/svg/update.svg';
 import SearchIcon from '@src/assets/svg/search.svg';
 
-const client = createClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
+const client = createPexelsClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
+
+const DotSmallIcon = () => (
+  <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <circle cx='12' cy='12' r='3' fill='currentColor' />
+  </svg>
+);
 
 export const LookFeel: FC = () => {
   const settingsState = useEffectorUnit($settingsStore);
@@ -54,7 +60,7 @@ export const LookFeel: FC = () => {
       client.photos
         .search({ query: pexelsQuery, per_page: 30, page: 1 })
         .then((res) => {
-          setPexels(res as PhotosWithTotalResults);
+          setPexels(res as PexelsPhotosWithTotalResults);
         })
         .catch(() => {
           alert('Image service unfurtunatelly failed =(');
@@ -62,18 +68,41 @@ export const LookFeel: FC = () => {
     }, 2000);
   }, [pexelsQuery]);
 
+  const { isOpen: isThemeOpen = false, closeDropdown: closeTheme, ...restTheme } = useDropable();
+
   return (
     <LookFeelStyled>
       <Titlewrap title='Theme'>
-        <Select
-          shevronIcon={<ShevronIcon className='svg_icon dropdown-title-shevron' />}
-          selected={settingsState.themeName}
-          options={themeOptions}
-          onChange={(themeName) =>
-            //@ts-expect-error
-            setSettings({ themeName })
+        <Dropable
+          {...restTheme}
+          maxWidth={340}
+          minWidth={340}
+          offset={[0, 4]}
+          openNode={
+            <ButtonAction
+              title={themeOptions.find(({ value }) => settingsState.themeName === value)?.title || 'Not selected'}
+              active={isThemeOpen}
+              appearance='secondary'
+              fullwidth
+              className='open-spaces-button'
+            />
           }
-        />
+        >
+          {themeOptions.map(({ title, value }) => (
+            <ButtonGhost
+              key={value}
+              height={32}
+              title={title}
+              active={value === settingsState.themeName}
+              onClick={() => {
+                //@ts-expect-error
+                setSettings({ themeName: value });
+                closeTheme?.();
+              }}
+              LeftIcon={DotSmallIcon}
+            />
+          ))}
+        </Dropable>
       </Titlewrap>
 
       <Titlewrap title='Dark Mode'>
@@ -91,7 +120,7 @@ export const LookFeel: FC = () => {
         />
       </Titlewrap>
 
-      {settingsState.isDynamicWallpaper && (
+      {/* {settingsState.isDynamicWallpaper && (
         <Titlewrap title='Select dynamic wallpaper'>
           <Select
             shevronIcon={<ShevronIcon className='svg_icon dropdown-title-shevron' />}
@@ -103,7 +132,7 @@ export const LookFeel: FC = () => {
             onChange={(dynWallpaper) => setSettings({ dynamicWallpaper: dynWallpaper as 'beach' | 'clouds' })}
           />
         </Titlewrap>
-      )}
+      )} */}
 
       {!settingsState.isDynamicWallpaper && (
         <>

@@ -181,14 +181,16 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           </div>
 
           {!!selectedSpace?.hierarchy ? (
-            <Hierarchy
-              queryKey={UNIT_NOTE_UNIT_QUERY}
-              rootItemsIds={selectedSpace.hierarchy}
-              ItemLoader={() => <Loader />}
-              getItemQuery={getNoteUnitQuery}
-              linkPattern={(item: { code: string }) => `/notes/${item.code}`}
-              matchRoutePattern={() => `/notes/:noteId`}
-            />
+            <div className='unit-list'>
+              <Hierarchy
+                queryKey={UNIT_NOTE_UNIT_QUERY}
+                rootItemsIds={selectedSpace.hierarchy}
+                ItemLoader={() => <Loader />}
+                getItemQuery={getNoteUnitQuery}
+                linkPattern={(item: { code: string }) => `/notes/${item.code}`}
+                matchRoutePattern={() => `/notes/:noteId`}
+              />
+            </div>
           ) : (
             <div className='unit-list_empty'>
               <span>No notes yet</span>

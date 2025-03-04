@@ -29,7 +29,7 @@ export const Titlewrap: FC<ITitlewrap> = (props) => {
 
   return (
     <TitlewrapStyled className={className || 'titlewrap'}>
-      <Typography type={titleType} className='titlewrap-title'>
+      <Typography as='h2' type={titleType} className='titlewrap-title'>
         {title}
       </Typography>
 

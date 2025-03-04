@@ -1,3 +1,5 @@
 const MAIN_ELEMENT_ID = 'app-pages-viewport';
 
-export { MAIN_ELEMENT_ID };
+const DRAWER_PORTAL_ID = 'launch-tabs-drawer';
+
+export { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID };

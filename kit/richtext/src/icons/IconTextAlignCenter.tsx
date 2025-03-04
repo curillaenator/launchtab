@@ -5,7 +5,7 @@ const IconTextAlignCenter: FC = () => (
     <path
       d='M7.75 10.75H24.25M11.5342 16H19.7842M7.75 21.25H24.25'
       stroke='currentColor'
-      strokeWidth='1.4'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

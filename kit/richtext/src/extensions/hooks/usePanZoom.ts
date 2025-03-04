@@ -11,16 +11,16 @@ interface PanZoomProps {
   close?: () => void;
   prefix?: string;
   init?: ScalePanStore;
-  updateAttributes?: (attrs: Record<string, any>) => void;
+  onPanZoomEnd?: (attrs: Record<string, any>) => void;
 }
 
-const SCALE_STEP = 0.12;
+const SCALE_STEP = 0.1;
 const MIN_SCALE = 0.2;
 const MAX_SCALE = 10;
 const SCALE_PAN_INIT: ScalePanStore = { scale: 1, xPos: 0, yPos: 0 };
 
 export const usePanZoom = (props?: PanZoomProps) => {
-  const { enabled, close, prefix = 'panzoom', init, updateAttributes } = props || {};
+  const { enabled, close, prefix = 'panzoom', init, onPanZoomEnd } = props || {};
 
   const startPos = useRef([0, 0]);
   const lastPos = useRef(init ? [init.xPos, init.yPos] : [0, 0]);
@@ -45,17 +45,22 @@ export const usePanZoom = (props?: PanZoomProps) => {
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-offset-y`, `${yPos}px`);
   }, [enabled, panZoomStore, prefix]);
 
-  const onPan = useCallback((e: MouseEvent) => {
-    const { pageX, pageY } = e;
-    const [startX, startY] = startPos.current;
-    const [lastX, lastY] = lastPos.current;
+  const onPan = useCallback(
+    (e: MouseEvent) => {
+      if (!enabled) return;
 
-    setPanZoomStore((prev) => ({
-      ...prev,
-      xPos: -startX + pageX + lastX,
-      yPos: -startY + pageY + lastY,
-    }));
-  }, []);
+      const { pageX, pageY } = e;
+      const [startX, startY] = startPos.current;
+      const [lastX, lastY] = lastPos.current;
+
+      setPanZoomStore((prev) => ({
+        ...prev,
+        xPos: -startX + pageX + lastX,
+        yPos: -startY + pageY + lastY,
+      }));
+    },
+    [enabled],
+  );
 
   const onPanZoomReset = useCallback(() => {
     setPanZoomStore(SCALE_PAN_INIT);
@@ -73,11 +78,13 @@ export const usePanZoom = (props?: PanZoomProps) => {
       e.preventDefault();
       e.stopPropagation();
 
+      if (!enabled) return;
+
       startPos.current = [e.pageX, e.pageY];
 
       imageContainerRef.current?.addEventListener('mousemove', onPan);
     },
-    [panZoomStore, onPan], // eslint-disable-line react-hooks/exhaustive-deps
+    [enabled, panZoomStore, onPan], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const onPanEnd = useCallback(
@@ -85,15 +92,17 @@ export const usePanZoom = (props?: PanZoomProps) => {
       e.preventDefault();
       e.stopPropagation();
 
+      if (!enabled) return;
+
       const { xPos, yPos } = panZoomStore;
 
       lastPos.current = [xPos, yPos];
 
-      updateAttributes?.({ x: xPos, y: yPos });
+      onPanZoomEnd?.({ x: xPos, y: yPos });
 
       imageContainerRef.current?.removeEventListener('mousemove', onPan);
     },
-    [panZoomStore, onPan, updateAttributes],
+    [enabled, panZoomStore, onPan, onPanZoomEnd],
   );
 
   const onZoomByWheel = useCallback(
@@ -125,11 +134,11 @@ export const usePanZoom = (props?: PanZoomProps) => {
         const nextScaleV = prev.scale + SCALE_STEP;
         const nextCalcedScale = nextScaleV > MAX_SCALE ? MAX_SCALE : nextScaleV;
 
-        updateAttributes?.({ scale: nextCalcedScale });
+        onPanZoomEnd?.({ scale: nextCalcedScale });
 
         return { ...prev, scale: nextCalcedScale };
       }),
-    [updateAttributes],
+    [onPanZoomEnd],
   );
 
   const zoomOut = useCallback(
@@ -138,7 +147,7 @@ export const usePanZoom = (props?: PanZoomProps) => {
         const nextScaleV = prev.scale - SCALE_STEP;
         const nextCalcedScale = nextScaleV < MIN_SCALE ? MIN_SCALE : nextScaleV;
 
-        updateAttributes?.({ scale: nextCalcedScale });
+        onPanZoomEnd?.({ scale: nextCalcedScale });
         return { ...prev, scale: nextCalcedScale };
       }),
     [],

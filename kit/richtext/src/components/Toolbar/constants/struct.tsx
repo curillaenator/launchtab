@@ -17,8 +17,9 @@ import {
   TEXT_FORMAT_ITEMS,
   COLOR_ITEMS,
   TEXT_COLOR_CLEAR,
-  BACKGROUND_COLOR_ITEMS,
-  TEXT_HIGHLIGHT_CLEAR,
+  IMAGE_ITEMS,
+  // BACKGROUND_COLOR_ITEMS,
+  // TEXT_HIGHLIGHT_CLEAR,
   TASK_LIST_ITEMS,
 } from './items';
 
@@ -57,18 +58,18 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
         />
       ),
 
-      (props) => (
-        <DropdownWithActiveCommand
-          {...props}
-          id='text-background-commands'
-          defaultValue='blackColorBackground'
-          items={[[...BACKGROUND_COLOR_ITEMS, TEXT_HIGHLIGHT_CLEAR]]}
-          placement='bottom-start'
-          maxHeight={DROPDOWN_PARAMS.maxHeight}
-          minWidth={DROPDOWN_PARAMS.color}
-          maxWidth={DROPDOWN_PARAMS.color}
-        />
-      ),
+      // (props) => (
+      //   <DropdownWithActiveCommand
+      //     {...props}
+      //     id='text-background-commands'
+      //     defaultValue='blackColorBackground'
+      //     items={[[...BACKGROUND_COLOR_ITEMS, TEXT_HIGHLIGHT_CLEAR]]}
+      //     placement='bottom-start'
+      //     maxHeight={DROPDOWN_PARAMS.maxHeight}
+      //     minWidth={DROPDOWN_PARAMS.color}
+      //     maxWidth={DROPDOWN_PARAMS.color}
+      //   />
+      // ),
 
       (props) => (
         <DropdownWithActiveCommand
@@ -84,6 +85,16 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
       ),
 
       (props) => (
+        <GridSelector
+          {...props}
+          placement='bottom-start'
+          maxHeight={DROPDOWN_PARAMS.maxHeight}
+          minWidth={DROPDOWN_PARAMS.blocksGrid}
+          maxWidth={DROPDOWN_PARAMS.blocksGrid}
+        />
+      ),
+
+      (props) => (
         <EmojiSelector
           {...props}
           placement='bottom-start'
@@ -93,7 +104,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
         />
       ),
 
-      // (props) => <ControlSection {...props} id='task-list-commands' items={TASK_LIST_ITEMS} />,
+      (props) => <ControlSection {...props} id='image-commands' items={IMAGE_ITEMS} />,
     ],
 
     right: [
@@ -109,16 +120,6 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}
           maxWidth={DROPDOWN_PARAMS.macros}
-        />
-      ),
-
-      (props) => (
-        <GridSelector
-          {...props}
-          placement='bottom-end'
-          maxHeight={DROPDOWN_PARAMS.maxHeight}
-          minWidth={DROPDOWN_PARAMS.blocksGrid}
-          maxWidth={DROPDOWN_PARAMS.blocksGrid}
         />
       ),
 

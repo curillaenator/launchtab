@@ -3,16 +3,19 @@ import { mergeAttributes } from '@tiptap/core';
 import { Node as PMNode } from '@tiptap/pm/model';
 import { toPairs } from 'lodash';
 
-import { getLinkIcon, getHeadingScrollHash } from './utils';
+import {
+  // getLinkIcon,
+  getHeadingScrollHash,
+} from './utils';
 
 import type { ReactHeadingConfig, HeadingObsRef } from './interfaces';
 import styles from './headings.module.scss';
 
-const onItemClick = (node: PMNode) => {
-  const url = new URL(window.location.href);
-  url.hash = getHeadingScrollHash(node.textContent, node.attrs['id']);
-  navigator.clipboard.writeText(url.href);
-};
+// const onItemClick = (node: PMNode) => {
+//   const url = new URL(window.location.href);
+//   url.hash = getHeadingScrollHash(node.textContent, node.attrs['id']);
+//   navigator.clipboard.writeText(url.href);
+// };
 
 const HeadingReactNode = Heading.extend<ReactHeadingConfig>({
   addOptions() {
@@ -60,19 +63,20 @@ const HeadingReactNode = Heading.extend<ReactHeadingConfig>({
         styles[`heading_${node.attrs['textAlign'] || 'left'}`],
       );
 
-      const icon = getLinkIcon();
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.classList.add(styles.copylink);
-      button.setAttribute('contentEditable', 'false');
-      button.append(icon);
-      button.onclick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        onItemClick(node);
-      };
+      // const icon = getLinkIcon();
+      // const button = document.createElement('button');
+      // button.type = 'button';
+      // button.classList.add(styles.copylink);
+      // button.setAttribute('contentEditable', 'false');
+      // button.append(icon);
+      // button.onclick = (e) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   onItemClick(node);
+      // };
 
-      dom.append(contentDOM, button);
+      // dom.append(contentDOM, button);
+      dom.append(contentDOM);
 
       (extension.options['headingObsRef'] as HeadingObsRef)?.current?.observe(dom);
 

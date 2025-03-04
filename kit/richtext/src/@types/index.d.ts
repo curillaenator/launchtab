@@ -28,7 +28,7 @@ declare module '@tiptap/core' {
     };
 
     image: {
-      setImage: (options: { src: string }) => ReturnType;
+      setImage: (options: { src: string | null }) => ReturnType;
     };
 
     // fileLink: {

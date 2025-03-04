@@ -12,7 +12,7 @@ const CarretUpIcon: FC = () => (
     <path
       d='M11.5586 14L16.003 18.4444L20.4475 14'
       stroke='currentColor'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -24,7 +24,7 @@ const CarretDownIcon: FC = () => (
     <path
       d='M11.5586 14L16.003 18.4444L20.4475 14'
       stroke='currentColor'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

@@ -5,7 +5,7 @@ const IconTogglerInline: FC = () => (
     <path
       d='M19.999 12.291L23.999 16.291L19.999 20.291M11.999 20.291L7.99902 16.291L11.999 12.291'
       stroke='currentColor'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

@@ -7,7 +7,7 @@ const IconSplitCell: FC = () => (
     <path
       d='M8 24.0098V19.6461M8 24.0098H12.3636M8 24.0098L13.0909 18.9189M24 8.00977L19.6364 8.00977M24 8.00977V12.3734M24 8.00977L18.9091 13.1007'
       stroke='currentColor'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

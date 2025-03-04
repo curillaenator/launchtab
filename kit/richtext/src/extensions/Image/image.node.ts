@@ -3,7 +3,7 @@ import { Node, mergeAttributes, nodeInputRule } from '@tiptap/core';
 
 import { ImageView } from './Image.view';
 
-import { ImageConfig } from './interfaces';
+import { ImageConfig, ImageAttributes } from './interfaces';
 
 import styles from './image.module.scss';
 
@@ -44,14 +44,29 @@ const Image = Node.create<ImageConfig>({
   },
 
   parseHTML() {
-    return [{ tag: `nav[data-extension="${this.name}"]` }];
+    return [{ tag: `section[data-extension="${this.name}"]` }];
   },
 
   renderHTML({ node, HTMLAttributes }) {
+    const { pos, scale, src, height } = node.attrs as ImageAttributes;
+
     return [
-      'div',
-      mergeAttributes(HTMLAttributes, { class: styles.imageContainer, 'data-extension': this.name }),
-      ['img', { src: node.attrs['src'], alt: node.attrs['src'], title: node.attrs['src'] }],
+      'section',
+      mergeAttributes(HTMLAttributes, {
+        style: `height: ${height}px`,
+        class: styles.container,
+        'data-extension': this.name,
+      }),
+
+      [
+        'img',
+        {
+          src,
+          alt: src,
+          title: src,
+          style: `transform: translate(${pos[0]}px, ${pos[1]}px) scale(${scale})`,
+        },
+      ],
     ];
   },
 

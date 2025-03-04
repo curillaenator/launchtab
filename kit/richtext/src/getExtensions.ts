@@ -42,11 +42,22 @@ import { UniqueId } from './extensions/UniqId/UniqueId';
 import { Heading } from './extensions/Heading';
 
 import { Emoji } from './extensions/Emoji';
-import { ToC, TOC_EXTENSION_NAME } from './extensions/ToC';
-import { DrawIO, getDrawioEditorURL, DRAWIO_EXTENSION_NAME } from './extensions/DrawIO';
-import { BlocksGrid, BlocksGridColumn, EXTENSION_NAME as GRIDS_EXTENSION_NAME } from './extensions/BlocksGrid';
+import {
+  ToC,
+  // TOC_EXTENSION_NAME
+} from './extensions/ToC';
+import {
+  DrawIO,
+  getDrawioEditorURL,
+  // DRAWIO_EXTENSION_NAME
+} from './extensions/DrawIO';
+import {
+  BlocksGrid,
+  BlocksGridColumn,
+  // EXTENSION_NAME as GRIDS_EXTENSION_NAME
+} from './extensions/BlocksGrid';
 
-import { Draggable } from './extensions/Draggable';
+// import { Draggable } from './extensions/Draggable';
 import { BackspaceDeletePreventerPlugin } from './extensions/BackspaceDelete';
 // import { Indent } from './extensions/Indent';
 
@@ -113,7 +124,7 @@ const STATIC_EXTS = [
   DrawIO.configure({ drawIoLink: getDrawioEditorURL(DRAWIO_SERVICE_URL) }),
 
   BackspaceDeletePreventerPlugin,
-  Draggable.configure({ types: [DRAWIO_EXTENSION_NAME, GRIDS_EXTENSION_NAME, TOC_EXTENSION_NAME] }),
+  // Draggable.configure({ types: [DRAWIO_EXTENSION_NAME, GRIDS_EXTENSION_NAME, TOC_EXTENSION_NAME] }),
 ];
 
 function getExtensions(options: RichTextExtensionsOptions) {

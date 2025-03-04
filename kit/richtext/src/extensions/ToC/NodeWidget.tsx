@@ -10,8 +10,12 @@ import type { ReplaceStep } from '@tiptap/pm/transform';
 
 import { ButtonGhost } from '@launch-ui/button';
 
-import { getHeadingScrollHash } from '../Heading';
-import { DeleteIcon, CarretDownIcon, LinkIcon } from './icons';
+// import { getHeadingScrollHash } from '../Heading';
+import {
+  DeleteIcon,
+  CarretDownIcon,
+  // LinkIcon
+} from './icons';
 
 import { TOC_MAX_TITLE_LENGTH } from './constants';
 import type { TocReactNodeViewProps, TocNodeAttributes, TocNodeItem } from './interfaces';
@@ -127,7 +131,7 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
                 {headingContent}
               </span>
 
-              <ButtonGhost
+              {/* <ButtonGhost
                 LeftIcon={LinkIcon}
                 height={24}
                 onClick={(e) => {
@@ -138,7 +142,7 @@ const TocNodeWidget: FC<TocReactNodeViewProps> = (props) => {
                   url.hash = getHeadingScrollHash(headingContent, headingAttrs['id']);
                   navigator.clipboard.writeText(url.href);
                 }}
-              />
+              /> */}
             </li>
           ))}
         </ul>

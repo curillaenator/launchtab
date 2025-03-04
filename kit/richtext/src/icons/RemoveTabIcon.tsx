@@ -5,7 +5,7 @@ const RemoveTab: FC = () => (
     <path
       d='M11.9314 12.9344H7.99695M15.6035 17.6557H7.99695M15.6035 22.377H7.99695M23.9969 12.9344H15.0789M15.0789 12.9344L19.0133 9M15.0789 12.9344L19.0133 16.8689'
       stroke='currentColor'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

@@ -5,7 +5,7 @@ const AddTab: FC = () => (
     <path
       d='M20.0686 12.9344H24.0031M16.3965 17.6557H24.0031M16.3965 22.377H24.0031M8.00305 12.9344H16.9211M16.9211 12.9344L12.9867 9M16.9211 12.9344L12.9867 16.8689'
       stroke='currentColor'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

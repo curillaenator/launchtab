@@ -6,7 +6,7 @@ const PlusIcon = () => (
       d='M16.0044 10.0029V22.0029M22.0044 16.0029L10.0044 16.0029'
       stroke='currentColor'
       fill='none'
-      strokeWidth='1.2'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

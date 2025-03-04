@@ -3833,6 +3833,7 @@ __metadata:
     classnames: 2.5.1
     date-fns: 3.2.0
     highlight.js: 11.11.1
+    image-resize: 1.4.1
     lodash: 4.17.21
     lowlight: 3.3.0
     react-scroll: 1.9.2
@@ -8794,6 +8795,13 @@ __metadata:
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
   checksum: 2acfd32a573260ea522ea0bfeff880af426d68f6831f973129e2ba7363f422923cf53aab62f8369cbf4667c7b25b6f8a3761b34ecdb284ea18e87a5262a865be
+  languageName: node
+  linkType: hard
+
+"image-resize@npm:1.4.1":
+  version: 1.4.1
+  resolution: "image-resize@npm:1.4.1"
+  checksum: 7677dc79b36e871cb35f2e560f4dff65c84952ebc484041cf18ed61918c830cf63fe957af94993397ab79c38f2e0b14f87d19a026c620012a3715b946cee8dac
   languageName: node
   linkType: hard
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { fromPairs, toPairs } from 'lodash';
 
-import { ButtonAction, ButtonGhost } from '@launch-ui/button';
+import { ButtonGhost } from '@launch-ui/button';
 
 import { usePanZoom } from '../../../../hooks/usePanZoom';
 import { useDrawioContext } from '../../context';
@@ -57,11 +57,7 @@ export const WithActions: FC<WithActionsProps> = (props) => {
 
         <div className={styles.actions}>
           {editor.options.editable && (
-            <ButtonAction
-              LeftIcon={WidgetIconEdit}
-              onClick={() => toggleDrawIo()}
-              disabled={!isDrawioEditorAvailable}
-            />
+            <ButtonGhost LeftIcon={WidgetIconEdit} onClick={() => toggleDrawIo()} disabled={!isDrawioEditorAvailable} />
           )}
 
           {hasPreview && (

@@ -7,6 +7,7 @@ import type { ButtonGhostProps } from './interfaces';
 
 interface ButtonGhostStyledProps {
   active: boolean;
+  onlyIcon: boolean;
   height: CSSProperties['height'];
 }
 
@@ -16,6 +17,7 @@ const ButtonGhostStyled = styled.button<ButtonGhostStyledProps>`
   align-items: center;
   height: ${({ height }) => `${height}px`};
   background: transparent;
+  padding: ${({ onlyIcon }) => (onlyIcon ? '0 4px' : 0)};
   z-index: 20;
 
   transition: color 0.08s ease-in-out;
@@ -53,7 +55,15 @@ export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((prop
   } = props;
 
   return (
-    <ButtonGhostStyled {...rest} data-ghost-button ref={ref} type={type} active={active} height={height}>
+    <ButtonGhostStyled
+      {...rest}
+      data-ghost-button
+      onlyIcon={!title && (!!LeftIcon || !!RightIcon)}
+      ref={ref}
+      type={type}
+      active={active}
+      height={height}
+    >
       {!!LeftIcon && <LeftIcon />}
 
       {title && (

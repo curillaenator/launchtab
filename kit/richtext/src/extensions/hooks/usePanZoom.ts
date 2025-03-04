@@ -1,29 +1,31 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 
-interface PanZoomProps {
-  enabled?: boolean;
-  close?: () => void;
-  prefix?: string;
-}
-
 interface ScalePanStore {
   scale: number;
   xPos: number;
   yPos: number;
 }
 
+interface PanZoomProps {
+  enabled?: boolean;
+  close?: () => void;
+  prefix?: string;
+  init?: ScalePanStore;
+  updateAttributes?: (attrs: Record<string, any>) => void;
+}
+
 const SCALE_STEP = 0.12;
-const MIN_SCALE = 0.5;
+const MIN_SCALE = 0.2;
 const MAX_SCALE = 10;
 const SCALE_PAN_INIT: ScalePanStore = { scale: 1, xPos: 0, yPos: 0 };
 
 export const usePanZoom = (props?: PanZoomProps) => {
-  const { enabled, close, prefix = 'panzoom' } = props || {};
+  const { enabled, close, prefix = 'panzoom', init, updateAttributes } = props || {};
 
   const startPos = useRef([0, 0]);
-  const lastPos = useRef([0, 0]);
+  const lastPos = useRef(init ? [init.xPos, init.yPos] : [0, 0]);
 
-  const [panZoomStore, setPanZoomStore] = useState<ScalePanStore>(SCALE_PAN_INIT);
+  const [panZoomStore, setPanZoomStore] = useState<ScalePanStore>(init || SCALE_PAN_INIT);
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
@@ -87,9 +89,11 @@ export const usePanZoom = (props?: PanZoomProps) => {
 
       lastPos.current = [xPos, yPos];
 
+      updateAttributes?.({ x: xPos, y: yPos });
+
       imageContainerRef.current?.removeEventListener('mousemove', onPan);
     },
-    [panZoomStore, onPan],
+    [panZoomStore, onPan, updateAttributes],
   );
 
   const onZoomByWheel = useCallback(
@@ -118,19 +122,24 @@ export const usePanZoom = (props?: PanZoomProps) => {
   const zoomIn = useCallback(
     () =>
       setPanZoomStore((prev) => {
-        const nextScaleV = prev.scale + SCALE_STEP * 3;
-        if (nextScaleV > MAX_SCALE) return { ...prev, scale: MAX_SCALE };
-        return { ...prev, scale: nextScaleV };
+        const nextScaleV = prev.scale + SCALE_STEP;
+        const nextCalcedScale = nextScaleV > MAX_SCALE ? MAX_SCALE : nextScaleV;
+
+        updateAttributes?.({ scale: nextCalcedScale });
+
+        return { ...prev, scale: nextCalcedScale };
       }),
-    [],
+    [updateAttributes],
   );
 
   const zoomOut = useCallback(
     () =>
       setPanZoomStore((prev) => {
-        const nextScaleV = prev.scale - SCALE_STEP * 3;
-        if (nextScaleV < MIN_SCALE) return { ...prev, scale: MIN_SCALE };
-        return { ...prev, scale: nextScaleV };
+        const nextScaleV = prev.scale - SCALE_STEP;
+        const nextCalcedScale = nextScaleV < MIN_SCALE ? MIN_SCALE : nextScaleV;
+
+        updateAttributes?.({ scale: nextCalcedScale });
+        return { ...prev, scale: nextCalcedScale };
       }),
     [],
   );

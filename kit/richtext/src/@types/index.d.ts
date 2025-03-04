@@ -27,6 +27,10 @@ declare module '@tiptap/core' {
       setEmoji: (emojiAttrs: { shortName: string }) => ReturnType;
     };
 
+    image: {
+      setImage: (options: { src: string }) => ReturnType;
+    };
+
     // fileLink: {
     //   insertFileLink: (attrs: FileListItem) => ReturnType;
     //   updateFileLinkSize: (size: 'small' | 'medium' | 'large') => ReturnType;

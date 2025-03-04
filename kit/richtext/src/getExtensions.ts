@@ -31,9 +31,11 @@ import { Color } from '@tiptap/extension-color';
 import { BulletList } from '@tiptap/extension-bullet-list';
 import { ListItem } from '@tiptap/extension-list-item';
 import { OrderedList } from '@tiptap/extension-ordered-list';
-import { TaskItem } from './extensions/TaskItem';
 
 import { TaskList } from '@tiptap/extension-task-list';
+import { TaskItem } from './extensions/TaskItem';
+
+import { Image } from './extensions/Image';
 
 import { UniqueId } from './extensions/UniqId/UniqueId';
 
@@ -91,6 +93,8 @@ const STATIC_EXTS = [
 
   TaskList,
   TaskItem,
+
+  Image,
 
   // Indent,
 

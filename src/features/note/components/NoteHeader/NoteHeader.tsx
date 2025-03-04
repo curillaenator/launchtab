@@ -80,7 +80,7 @@ export const NoteHeader: FC = () => {
             </SaveNotification>
           )}
 
-          {!!secondsUntilSave && (
+          {!isNoteSaving && !!secondsUntilSave && (
             <SaveNotification data-note-header-save-notification>
               <ButtonAction
                 title='Save'
@@ -102,7 +102,7 @@ export const NoteHeader: FC = () => {
             </SaveNotification>
           )}
 
-          {iCanEdit && (
+          {iCanEdit && !isNoteSaving && !secondsUntilSave && (
             <ButtonGhost RightIcon={() => <SwitchesIcon />} title='Setup' onClick={() => setEditOpen(true)} />
           )}
         </NoteHeaderBlockStyled>

@@ -11,8 +11,8 @@
     "type": "module",
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "scripts": {
     "build": "npx rimraf build && npx yarn build:ts && npx yarn build:scss && npx yarn build:fix",
     "build:ts": "npx tsc -p tsconfig.json",

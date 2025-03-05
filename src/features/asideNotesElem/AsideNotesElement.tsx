@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useQuery } from '@tanstack/react-query';
+import { keys } from 'lodash';
 
 import { Dropable } from '@launch-ui/dropable';
 import { Hierarchy } from '@launch-ui/hierarchy';
@@ -12,11 +13,12 @@ import { Loader } from '@launch-ui/loader';
 import { useDropable } from '@src/hooks/useDropable';
 import { useLayoutContext } from '@src/hooks/useLayoutContext';
 
-import { getUserSpacesQuery, updateLastViewedSpace, LaunchSpaceProps, MAX_SPACES_PER_USER } from '@src/entities/space';
+import { getUserSpacesQuery, updateLastViewedSpace, LaunchSpaceProps } from '@src/entities/space';
 
 import { $userStore } from '@src/entities/user';
 import { getNoteUnitQuery } from '@src/entities/note';
 
+import { MAX_SPACES_PER_USER, MAX_UNITS_PER_SPACE } from '@src/shared/appConfig';
 import { USER_SPACES_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
@@ -157,7 +159,6 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               ))}
             </Dropable>
 
-            {/* {userSpaces.length < MAX_SPACES_PER_USER && ( */}
             <ButtonAction
               disabled={userSpaces.length >= MAX_SPACES_PER_USER}
               LeftIcon={() => <AddFolderIcon />}
@@ -165,13 +166,9 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               onClick={() => navigate('/notes/create/space')}
               active={createPageType === 'space'}
             />
-            {/* )} */}
 
             <ButtonAction
-              // fullwidth
-              // title='Create note'
-              // className='hierarchy-create-note-button'
-              // disabled={isRootItemsLoading}
+              disabled={keys(selectedSpace?.hierarchy).length >= MAX_UNITS_PER_SPACE}
               LeftIcon={() => <AddDocumentIcon />}
               appearance='secondary'
               onClick={() => navigate('/notes/create/note')}
@@ -195,29 +192,6 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               <span>No notes yet</span>
             </div>
           )}
-
-          {/* {isRootItemsLoading ? (
-            <div className='unit-loader-dummy'>
-              <Loader />
-            </div>
-          ) : (
-            <div className='unit-list' data-aside-notes-element-unit-list>
-              {!!rootItems.length ? (
-                <Hierarchy
-                  queryKey={SPACE_UNITS_QUERY}
-                  rootItems={rootItems}
-                  ItemLoader={() => <Loader />}
-                  getItemsQuery={getSpaceUnitsQuery}
-                  linkPattern={(item: { code: string }) => `/notes/${item.code}`}
-                  matchRoutePattern={() => `/notes/:noteId`}
-                />
-              ) : (
-                <div className='unit-list_empty'>
-                  <span>No notes yet</span>
-                </div>
-              )}
-            </div>
-          )} */}
         </>
       )}
     </AsideNotesElementStyled>

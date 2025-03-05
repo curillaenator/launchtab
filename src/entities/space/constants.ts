@@ -1,3 +1,0 @@
-const MAX_SPACES_PER_USER = 4;
-
-export { MAX_SPACES_PER_USER };

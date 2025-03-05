@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { keys } from 'lodash';
 
 import { Modal } from '@launch-ui/modal';
 import { Corners } from '@launch-ui/shape';
@@ -15,8 +16,9 @@ import { useICan } from '@src/hooks/useICan';
 import { SetupNote } from '../SetupNote';
 import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
 
+import { MAX_UNITS_PER_UNIT } from '@src/shared/appConfig';
+
 import SwitchesIcon from '@src/assets/svg/switches.svg';
-import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
 import AddDocumentIcon from '@src/assets/svg/addDocument.svg';
 
 export const NoteHeader: FC = () => {
@@ -56,9 +58,7 @@ export const NoteHeader: FC = () => {
       <NoteHeaderStyled data-note-header>
         <Corners borderRadius={20} />
 
-        <NoteHeaderBlockStyled>
-          <NoteTitleIcon />
-
+        <NoteHeaderBlockStyled data-flex-shrinked-block>
           {isNoteUnitLoading ? (
             <Loader iconSize='40px' />
           ) : (
@@ -107,6 +107,7 @@ export const NoteHeader: FC = () => {
           {iCanEdit && !isNoteSaving && !secondsUntilSave && (
             <>
               <ButtonGhost
+                disabled={keys(noteUnit?.hierarchy).length >= MAX_UNITS_PER_UNIT}
                 RightIcon={() => <AddDocumentIcon />}
                 title='Insert note'
                 onClick={(e) => {

@@ -10,12 +10,25 @@ const NoteHeaderStyled = styled.div`
   justify-content: space-between;
   gap: 16px;
   padding: 8px 16px;
+  flex: 0 0 auto;
 
-  width: 100%;
+  width: calc(100% - (72px * 2) - 32px);
   height: 56px;
   border-radius: calc(20px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
   margin: 0 32px;
+`;
+
+const NoteHeaderBlockStyled = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+
+  &[data-flex-shrinked-block] {
+    width: calc(100% - 238px);
+    flex: 0 1 auto;
+  }
 
   .note-header-title {
     font-family: inherit;
@@ -23,15 +36,12 @@ const NoteHeaderStyled = styled.div`
     font-size: 36px;
     line-height: 40px;
     font-weight: 600;
-  }
-`;
+    max-width: 100%;
 
-const NoteHeaderBlockStyled = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex: 0 0 auto;
-  width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;
 
 const SaveNotification = styled.div`

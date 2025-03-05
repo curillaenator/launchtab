@@ -1,6 +1,6 @@
 import React, { FC, useRef, useCallback } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import { debounce } from 'lodash';
 
@@ -23,14 +23,9 @@ import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
 import { useContextValue } from './useContextValue';
 import { $layoutContex as LayoutCTX } from './context';
 
-import LayoutStyled from './styled';
+import { LayoutStyled, MainStyled } from './layout.styled';
 
 import { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID } from './constants';
-
-const MainStyled = styled.main`
-  width: 100%;
-  padding: 0 56px;
-`;
 
 export const Layout: FC = () => {
   const user = useEffectorUnit($userStore);

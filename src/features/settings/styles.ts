@@ -17,13 +17,13 @@ const SettingsStyled = styled.div`
     gap: 32px;
     width: 100%;
     height: 100%;
-    padding: 32px 0;
+    padding: 28px 0;
     border-radius: var(--form-bdrs) 0 0 var(--form-bdrs);
     background-color: ${({ theme }) => theme.backgrounds.base};
 
     &-block {
       width: 100%;
-      padding: 0 24px 0 32px;
+      padding: 0 20px 0 28px;
     }
 
     &-topBlock {

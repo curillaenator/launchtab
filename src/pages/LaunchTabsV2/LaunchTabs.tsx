@@ -13,7 +13,11 @@ import { Bookmarks } from '@src/features/bookmarks';
 
 const LaunchTabsContainer = styled.div`
   width: 100%;
-  padding: 56px 0;
+  padding: calc(var(--layout-pd) * 2) var(--layout-pd);
+
+  @media (min-width: 1920px) {
+    --layout-pd: 56px;
+  }
 `;
 
 const LaunchTabs: FC = memo(() => {

@@ -16,7 +16,7 @@ const NoteContainer = styled.div<{ height: CSSProperties['height'] }>`
   height: ${({ height }) => `${height}px` || 'fit-content'};
   border-radius: calc(24px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 32px;
+  padding: 28px;
 `;
 
 export { NoteContainer };

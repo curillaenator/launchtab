@@ -16,7 +16,7 @@ const DashboardContainer = styled.div<{ height: CSSProperties['height'] }>`
   flex: 1 1 auto;
   border-radius: calc(24px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 32px;
+  padding: 28px;
 `;
 
 export { DashboardContainer as NoteContainer };

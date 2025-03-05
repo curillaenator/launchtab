@@ -8,7 +8,7 @@ export const FormStyled = styled.form`
   .form {
     position: relative;
     width: 100%;
-    padding: 32px;
+    padding: 28px;
     z-index: 20;
 
     &-shape {

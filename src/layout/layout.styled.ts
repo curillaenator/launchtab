@@ -3,6 +3,16 @@ import styled from 'styled-components';
 const ASIDE_WIDTH = '384px';
 
 const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
+  --layout-pd: 28px;
+
+  /* @media (min-width: 1920px) {
+    --layout-pd: 48px;
+  } */
+
+  /* @media (min-width: 2560px) {
+    --layout-pd: 48px;
+  } */
+
   position: relative;
 
   display: flex;
@@ -48,4 +58,9 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
   }
 `;
 
-export default LayoutStyled;
+const MainStyled = styled.main`
+  width: 100%;
+  padding: 0 var(--layout-pd);
+`;
+
+export { LayoutStyled, MainStyled };

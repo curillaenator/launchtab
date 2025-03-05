@@ -28,15 +28,15 @@ const SetupNoteStyled = styled.form`
 
   border-radius: calc(24px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 32px;
+  padding: 28px;
 
   .form-fields {
     width: 100%;
-    margin-top: 32px;
+    margin-top: 28px;
   }
 
   .form-control {
-    margin-top: 32px;
+    margin-top: 28px;
     display: flex;
     align-items: center;
     gap: 8px;

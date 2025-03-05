@@ -26,7 +26,7 @@ export const Bookmarks: FC = () => {
   };
 
   return (
-    <SortableListStyled onSortEnd={onSortEnd}>
+    <SortableListStyled data-bookmarks-container onSortEnd={onSortEnd}>
       {cards.map((card, cardIdx) => (
         <SortableItem key={`${card.name}${cardIdx}`}>
           <HoverWrapper>

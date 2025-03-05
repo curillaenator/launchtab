@@ -33,7 +33,16 @@ const Notes: FC = memo(() => {
 
   const [pageOutletHeight, setPageOutletHeight] = useState<number>(0);
 
-  const onWindowResize = useCallback(() => setPageOutletHeight(window.innerHeight - 168 - 56), []);
+  const onWindowResize = useCallback(() => {
+    let layoutPd = 28;
+
+    // if (window.innerWidth <= 2560) layoutPd = 48;
+    // if (window.innerWidth <= 1920) layoutPd = 32;
+
+    console.log('layoutPd', window.innerHeight, layoutPd);
+
+    setPageOutletHeight(window.innerHeight - 3 * layoutPd - 56);
+  }, []);
 
   useEffect(() => {
     onWindowResize();

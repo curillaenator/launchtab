@@ -24,7 +24,7 @@ const AsideStyled = styled.div<{ isAsideOpen: boolean }>`
 
 const AsideHeader = styled.div`
   width: 100%;
-  padding: 32px;
+  padding: 28px;
   color: ${({ theme }) => theme.texts.base};
   flex: 0 0 auto;
 
@@ -36,7 +36,7 @@ const AsideHeader = styled.div`
 const AsideRoutesList = styled.div`
   width: 100%;
   height: 100%;
-  padding: 32px;
+  padding: 28px;
   flex: 1 1 auto;
 
   .active {

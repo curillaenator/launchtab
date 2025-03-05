@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useUnit as UseEffectorUnit } from 'effector-react';
-import { keys } from 'lodash';
+import { toPairs } from 'lodash';
 import cn from 'classnames';
 
 import { $hierarchyStore, registerHierarchyItem, updateHierarchy } from '../../service/store';
@@ -126,11 +126,11 @@ export const Foldable: FC<FoldableProps> = (props) => {
           } as React.CSSProperties
         }
       >
-        {touched &&
+        {(touched || isExpanded) &&
           unitData?.hierarchy &&
-          keys(unitData.hierarchy).map((childCode) => (
-            <Foldable key={childCode} code={childCode} path={[...path, foldableCode]} />
-          ))}
+          toPairs(unitData.hierarchy)
+            .toSorted(([_a, orderA], [_b, orderB]) => orderA - orderB) // eslint-disable-line @typescript-eslint/no-unused-vars
+            .map(([childCode]) => <Foldable key={childCode} code={childCode} path={[...path, foldableCode]} />)}
       </ul>
     </li>
   );

@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { keys } from 'lodash';
 
 import { Dropable } from '@launch-ui/dropable';
-import { Hierarchy } from '@launch-ui/hierarchy';
+import { Hierarchy, type HierarchyState } from '@launch-ui/hierarchy';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 import { Loader } from '@launch-ui/loader';
@@ -35,6 +35,8 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     noteId?: string;
     createPageType?: CreateParamType;
   }>();
+
+  const spacesLastHierarchyStores = useRef<Record<string, HierarchyState>>({});
 
   const { currentSpaceRef, setCurrentSpaceRef } = useLayoutContext();
 
@@ -180,11 +182,14 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             <div className='unit-list'>
               <Hierarchy
                 queryKey={UNIT_NOTE_UNIT_QUERY}
+                storeStatesCache={spacesLastHierarchyStores}
+                rootId={selectedSpace.spaceCode}
                 rootItemsIds={selectedSpace.hierarchy}
-                ItemLoader={() => <Loader iconSize='24px' iconPadding='4px' />}
-                getItemQuery={getNoteUnitQuery}
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}
+                getItemQuery={getNoteUnitQuery}
+                onRootIdsChange={(rootId, store) => (spacesLastHierarchyStores.current[rootId] = store)}
+                ItemLoader={() => <Loader iconSize='24px' iconPadding='4px' />}
               />
             </div>
           ) : (

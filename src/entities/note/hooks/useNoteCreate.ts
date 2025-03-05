@@ -13,12 +13,13 @@ interface UseNoteCreateOptions {
   uid: string;
   path: string[];
   parentUnitId: string | null;
-  parentSpaceId: string | null;
+  parentSpace: { spaceCode: string | null; hierarchy?: Record<string, number> } | null;
+  createUnitIdx: number;
   onSuccess?: (data: { createdUnitId: string | null }) => void;
 }
 
 const useNoteCreate = (options: UseNoteCreateOptions) => {
-  const { uid, path, parentUnitId, parentSpaceId, onSuccess } = options;
+  const { uid, path, parentUnitId, parentSpace, onSuccess, createUnitIdx } = options;
 
   return useMutation({
     mutationFn: async (payload: CreateNoteMutationPayload) => {
@@ -29,7 +30,8 @@ const useNoteCreate = (options: UseNoteCreateOptions) => {
         uid,
         path,
         parentUnitId,
-        parentSpaceId,
+        parentSpace,
+        createUnitIdx,
         formData: { ...formData, noteBody: zippedBody },
       });
     },

@@ -20,15 +20,12 @@ const DEFAULT_ITEM_STATE: HierarchyServiceItem = {
 
 const registerHierarchyItem = createEvent<HierarchyItem & { path: string[] }>();
 const updateHierarchy = createEvent<HierarchyServicePayload>();
-const resetHierarchyStore = createEvent();
+const setHierarchyStore = createEvent<HierarchyState | null>();
 
 const $hierarchyStore = createStore<HierarchyState>({});
 
 $hierarchyStore
-  .on(resetHierarchyStore, () => {
-    console.log('RESET FIRES');
-    return {};
-  })
+  .on(setHierarchyStore, (_, fullStore) => fullStore || {})
   .on(registerHierarchyItem, (prev, dtoItem) => {
     const itemPath = [...dtoItem.path, dtoItem.code];
     const pathKey = getPathKey(itemPath);
@@ -61,4 +58,4 @@ $hierarchyStore
     };
   });
 
-export { $hierarchyStore, registerHierarchyItem, updateHierarchy, resetHierarchyStore, DEFAULT_ITEM_STATE };
+export { $hierarchyStore, registerHierarchyItem, updateHierarchy, setHierarchyStore, DEFAULT_ITEM_STATE };

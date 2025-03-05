@@ -38,7 +38,8 @@ const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
     uid: uid!,
     path: !!parentUnitId && !!parentUnitData?.path ? [...parentUnitData.path, parentUnitId] : [],
     parentUnitId: parentUnitId,
-    parentSpaceId: parentUnitId ? null : currentSpaceRef.current?.spaceCode || null,
+    parentSpace: parentUnitId ? null : currentSpaceRef.current || null,
+    createUnitIdx: keys(parentUnitId ? parentUnitData?.hierarchy : currentSpaceRef.current?.hierarchy).length || 0,
     onSuccess: async ({ createdUnitId }) => {
       if (!createdUnitId) {
         alert(`bad ID: ${createdUnitId}`);

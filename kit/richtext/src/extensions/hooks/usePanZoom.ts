@@ -11,7 +11,8 @@ interface PanZoomProps {
   close?: () => void;
   prefix?: string;
   init?: ScalePanStore;
-  onPanZoomEnd?: (attrs: Record<string, any>) => void;
+  onPanEnd?: (attrs: { x: number; y: number }) => void;
+  onZoomEnd?: (attrs: { scale: number }) => void;
 }
 
 const SCALE_STEP = 0.1;
@@ -20,7 +21,7 @@ const MAX_SCALE = 10;
 const SCALE_PAN_INIT: ScalePanStore = { scale: 1, xPos: 0, yPos: 0 };
 
 export const usePanZoom = (props?: PanZoomProps) => {
-  const { enabled, close, prefix = 'panzoom', init, onPanZoomEnd } = props || {};
+  const { enabled, close, prefix = 'panzoom', init, onPanEnd: onPanEndExt, onZoomEnd } = props || {};
 
   const startPos = useRef([0, 0]);
   const lastPos = useRef(init ? [init.xPos, init.yPos] : [0, 0]);
@@ -98,11 +99,11 @@ export const usePanZoom = (props?: PanZoomProps) => {
 
       lastPos.current = [xPos, yPos];
 
-      onPanZoomEnd?.({ x: xPos, y: yPos });
+      onPanEndExt?.({ x: xPos, y: yPos });
 
       imageContainerRef.current?.removeEventListener('mousemove', onPan);
     },
-    [enabled, panZoomStore, onPan, onPanZoomEnd],
+    [enabled, panZoomStore, onPan, onPanEndExt],
   );
 
   const onZoomByWheel = useCallback(
@@ -134,11 +135,11 @@ export const usePanZoom = (props?: PanZoomProps) => {
         const nextScaleV = prev.scale + SCALE_STEP;
         const nextCalcedScale = nextScaleV > MAX_SCALE ? MAX_SCALE : nextScaleV;
 
-        onPanZoomEnd?.({ scale: nextCalcedScale });
+        onZoomEnd?.({ scale: nextCalcedScale });
 
         return { ...prev, scale: nextCalcedScale };
       }),
-    [onPanZoomEnd],
+    [onZoomEnd],
   );
 
   const zoomOut = useCallback(
@@ -147,10 +148,10 @@ export const usePanZoom = (props?: PanZoomProps) => {
         const nextScaleV = prev.scale - SCALE_STEP;
         const nextCalcedScale = nextScaleV < MIN_SCALE ? MIN_SCALE : nextScaleV;
 
-        onPanZoomEnd?.({ scale: nextCalcedScale });
+        onZoomEnd?.({ scale: nextCalcedScale });
         return { ...prev, scale: nextCalcedScale };
       }),
-    [],
+    [onZoomEnd],
   );
 
   return {

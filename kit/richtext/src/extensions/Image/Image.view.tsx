@@ -33,15 +33,21 @@ const ImageView: FC<NodeViewProps> = (props) => {
 
   const { isOpen: isHeightOpen, closeDropdown: closeHeight, ...restHeight } = useDropable();
 
-  const onPanZoomEnd = useCallback(
-    ({ x, y, scale }: { x?: number; y?: number; scale?: number }) => {
+  const onPanEndCb = useCallback(
+    ({ x, y }: { x: number; y: number }) => {
       if (!attrs.src) return;
-
       const newAttrs = { ...attrs };
+      newAttrs.pos = [x, y];
+      if (!isEqual(attrs, newAttrs)) updateAttributes(newAttrs);
+    },
+    [attrs, updateAttributes],
+  );
 
-      if (x !== undefined && y !== undefined) attrs.pos = [x, y];
-      if (scale !== undefined) attrs.scale = scale;
-
+  const onZoomEnd = useCallback(
+    ({ scale }: { scale: number }) => {
+      if (!attrs.src) return;
+      const newAttrs = { ...attrs };
+      newAttrs.scale = scale;
       if (!isEqual(attrs, newAttrs)) updateAttributes(newAttrs);
     },
     [attrs, updateAttributes],
@@ -58,7 +64,8 @@ const ImageView: FC<NodeViewProps> = (props) => {
   } = usePanZoom({
     enabled: editor.isEditable && !!src,
     init: { scale, xPos: pos[0], yPos: pos[1] },
-    onPanZoomEnd,
+    onPanEnd: onPanEndCb,
+    onZoomEnd,
   });
 
   const loadImageInputRef = useRef<HTMLInputElement | null>(null);

@@ -76,10 +76,13 @@ const ImageView: FC<NodeViewProps> = (props) => {
     <NodeViewWrapper
       as='div'
       ref={imageContainerRef}
+      style={{ height }}
       onMouseDown={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onPanStart(e)}
       onMouseUp={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onPanEnd(e)}
-      className={cn(styles.container, { [styles.container_withToolbar]: editor.isEditable })}
-      style={{ height }}
+      className={cn(styles.container, {
+        [styles.container_withToolbar]: editor.isEditable,
+        [styles.container_withLocalSrc]: !!src && !/^https?:\/\/.*/.test(src),
+      })}
     >
       <img contentEditable={false} src={src || undefined} />
 

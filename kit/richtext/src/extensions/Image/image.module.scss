@@ -7,10 +7,12 @@
   border: 1px solid var(--theme-backgrounds-light);
   overflow: hidden;
 
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  &_withLocalSrc {
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
   &_withToolbar {

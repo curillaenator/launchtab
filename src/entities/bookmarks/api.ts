@@ -7,7 +7,10 @@ const getBookmarksQuery = async (uid: string) => {
   const bookmarksSnap = await getDoc(doc(fsdb, 'bookmarks', uid));
   if (!bookmarksSnap.exists()) return null;
 
-  return bookmarksSnap.data() as { bookmarks: BookmarkTabProps[] };
+  const snapData = bookmarksSnap.data() as { bookmarks: BookmarkTabProps[] };
+
+  localStorage.setItem('bookmarks', JSON.stringify(snapData.bookmarks));
+  return snapData;
 };
 
 const updateBookmarksQuery = (uid: string | null, bookmarks: BookmarkTabProps[]) => {

@@ -43,6 +43,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   return (
     <InputStyled
+      data-input-container
       state={state}
       isIcon={!!Icon}
       tabIndex={0}

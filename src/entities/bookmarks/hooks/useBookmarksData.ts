@@ -14,9 +14,10 @@ const useBookmarksData = (uid: string | null) => {
     staleTime: 0,
   });
 
-  useEffect(() => {
-    const bookmarksLs = localStorage.getItem('bookmarks');
+  // should not be in deps of next useEffect
+  const bookmarksLs = localStorage.getItem('bookmarks');
 
+  useEffect(() => {
     let bookmarksParse: BookmarkTabProps[] = [];
 
     if (bookmarksLs) {
@@ -27,9 +28,9 @@ const useBookmarksData = (uid: string | null) => {
     if (bookmarksData?.bookmarks.length && !isEqual(bookmarksData.bookmarks, bookmarksParse)) {
       setTabsWithoutDbUpdate(bookmarksData.bookmarks);
     }
-  }, [bookmarksData]);
+  }, [bookmarksData]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { isBookmarksDataLoading };
+  return { isBookmarksDataLoading: !bookmarksLs && isBookmarksDataLoading };
 };
 
 export { useBookmarksData };

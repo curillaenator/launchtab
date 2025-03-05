@@ -11,13 +11,14 @@ interface CreateNoteMutationPayload {
 
 interface UseNoteCreateOptions {
   uid: string;
-  parentUnitId: string;
-  parentSpaceId?: string;
-  onSuccess?: (data: { createdUnitId: string }) => void;
+  path: string[];
+  parentUnitId: string | null;
+  parentSpaceId: string | null;
+  onSuccess?: (data: { createdUnitId: string | null }) => void;
 }
 
 const useNoteCreate = (options: UseNoteCreateOptions) => {
-  const { uid, parentUnitId, parentSpaceId, onSuccess } = options;
+  const { uid, path, parentUnitId, parentSpaceId, onSuccess } = options;
 
   return useMutation({
     mutationFn: async (payload: CreateNoteMutationPayload) => {
@@ -26,6 +27,7 @@ const useNoteCreate = (options: UseNoteCreateOptions) => {
 
       return createNoteMutationQuery({
         uid,
+        path,
         parentUnitId,
         parentSpaceId,
         formData: { ...formData, noteBody: zippedBody },

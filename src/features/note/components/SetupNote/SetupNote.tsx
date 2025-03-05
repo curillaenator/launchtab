@@ -8,7 +8,7 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
-import { Input } from '@launch-ui/input';
+import { Input, Titlewrap } from '@launch-ui/input';
 
 import { useUnitUpdate, type LaunchUnitProps } from '@src/entities/note';
 
@@ -30,7 +30,7 @@ const SetupNoteStyled = styled.form`
   background-color: ${({ theme }) => theme.backgrounds.base};
   padding: 32px;
 
-  .form-field {
+  .form-fields {
     width: 100%;
     margin-top: 32px;
   }
@@ -88,30 +88,32 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
       <Corners borderRadius={24} />
 
       <Typography as='h2' type='RoundedHeavy36'>
-        Setup
+        Note attributes
       </Typography>
 
-      <div className='form-field'>
-        <Controller
-          name='name'
-          control={control}
-          rules={{
-            required: 'Set note name',
-            minLength: { value: 8, message: 'Space name must be at least 8 characters' },
-            maxLength: { value: 64, message: 'Please do not go above 64 chars' },
-          }}
-          render={({ field }) => (
-            <Input
-              {...field}
-              icon={() => <LabelIcon />}
-              aria-required
-              state={errors.name ? 'error' : 'normal'}
-              description={errors.name ? errors.name.message : ''}
-              type='text'
-              placeholder='Space name'
-            />
-          )}
-        />
+      <div className='form-fields'>
+        <Titlewrap title='Note title'>
+          <Controller
+            name='name'
+            control={control}
+            rules={{
+              required: 'Set note name',
+              minLength: { value: 8, message: 'Space name must be at least 8 characters' },
+              maxLength: { value: 64, message: 'Please do not go above 64 chars' },
+            }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                icon={() => <LabelIcon />}
+                aria-required
+                state={errors.name ? 'error' : 'normal'}
+                description={errors.name ? errors.name.message : ''}
+                type='text'
+                placeholder='Space name'
+              />
+            )}
+          />
+        </Titlewrap>
       </div>
 
       <div className='form-control'>

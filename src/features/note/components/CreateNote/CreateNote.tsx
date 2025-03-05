@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useUnit as UseEffectorUnit } from 'effector-react';
 import { debounce, keys, toPairs } from 'lodash';
 import { useQueryClient } from '@tanstack/react-query';
@@ -19,24 +19,38 @@ import { useLayoutContext } from '@src/hooks/useLayoutContext';
 import { CreateNoteHeader } from './CreateNoteHeader';
 import { CreateNoteForm } from './createNote.styled';
 
-import { USER_SPACES_QUERY } from '@src/shared/queryKeys';
+import { USER_SPACES_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
 type NoteFormFields = LaunchUnitProps & { noteBody: RichTextJsonContent | string };
 
 const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const qc = useQueryClient();
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   const { uid, spaces: spaceIdList } = UseEffectorUnit($userStore);
   const { currentSpaceRef } = useLayoutContext();
 
+  const parentUnitId = new URLSearchParams(search).get('parent');
+  const parentUnitData = qc.getQueryData<LaunchUnitProps>([UNIT_NOTE_UNIT_QUERY, parentUnitId]);
+
   const { mutate: submitNote, isPending: isNoteSubmitting } = useNoteCreate({
     uid: uid!,
-    parentUnitId: '',
-    // TODO: add nested notes
-    parentSpaceId: currentSpaceRef.current?.spaceCode,
-    onSuccess: ({ createdUnitId }) => {
-      qc.invalidateQueries({ queryKey: [USER_SPACES_QUERY, spaceIdList] });
+    path: !!parentUnitId && !!parentUnitData?.path ? [...parentUnitData.path, parentUnitId] : [],
+    parentUnitId: parentUnitId,
+    parentSpaceId: parentUnitId ? null : currentSpaceRef.current?.spaceCode || null,
+    onSuccess: async ({ createdUnitId }) => {
+      if (!createdUnitId) {
+        alert(`bad ID: ${createdUnitId}`);
+        return;
+      }
+
+      if (parentUnitId) {
+        qc.invalidateQueries({ queryKey: [UNIT_NOTE_UNIT_QUERY, parentUnitId] });
+      } else {
+        qc.invalidateQueries({ queryKey: [USER_SPACES_QUERY, spaceIdList] });
+      }
+
       navigate(`/notes/${createdUnitId}`);
     },
   });

@@ -5,18 +5,18 @@ import type { LaunchUnitProps } from './interfaces';
 
 interface CreateNoteMutationQueryPayload {
   uid: string;
+  path: string[];
   formData: Partial<LaunchUnitProps> & { noteBody: string };
-  parentUnitId: string;
-  parentSpaceId?: string;
+  parentUnitId: string | null;
+  parentSpaceId: string | null;
 }
 
 const createNoteMutationQuery = async (payload: CreateNoteMutationQueryPayload) => {
-  const { uid, formData, parentSpaceId, parentUnitId } = payload;
+  const { uid, path, formData, parentSpaceId, parentUnitId } = payload;
 
   const newUnit: Omit<LaunchUnitProps, 'code'> = {
-    path: [],
+    path,
     name: formData.name || '',
-    // hierarchy: {},
     createdBy: uid,
     createdAt: Date.now(),
   };
@@ -29,7 +29,9 @@ const createNoteMutationQuery = async (payload: CreateNoteMutationQueryPayload) 
     });
 
     const dbPath = parentSpaceId ? 'spaces' : 'units';
-    const dbEntityId = parentSpaceId ? parentSpaceId : parentUnitId;
+    const dbEntityId = parentUnitId || parentSpaceId;
+
+    if (!dbEntityId) return null;
 
     await updateDoc(doc(fsdb, dbPath, dbEntityId), { [`hierarchy.${id}`]: 0 });
 

@@ -21,7 +21,7 @@ const DEFAULT_ITEM_STATE: HierarchyServiceItem = {
 const registerHierarchyItem = createEvent<HierarchyItem & { path: string[] }>();
 const updateHierarchy = createEvent<HierarchyServicePayload>();
 
-const HIERARCHY_ITEMS_DATA = new Map<string, HierarchyItem>();
+// const HIERARCHY_ITEMS_DATA = new Map<string, HierarchyItem>();
 
 const $hierarchyStore = createStore<HierarchyState>({});
 
@@ -32,7 +32,7 @@ $hierarchyStore
 
     if (!!prev[pathKey]) return prev;
 
-    HIERARCHY_ITEMS_DATA.set(pathKey, dtoItem);
+    // HIERARCHY_ITEMS_DATA.set(pathKey, dtoItem);
 
     return { ...prev, [pathKey]: { ...DEFAULT_ITEM_STATE, path: itemPath } };
   })
@@ -58,8 +58,8 @@ $hierarchyStore
     const prevPathKey = getPathKey(path);
 
     // Update items data cache
-    HIERARCHY_ITEMS_DATA.delete(prevPathKey);
-    HIERARCHY_ITEMS_DATA.set(targetPathKey, dtoItem);
+    // HIERARCHY_ITEMS_DATA.delete(prevPathKey);
+    // HIERARCHY_ITEMS_DATA.set(targetPathKey, dtoItem);
 
     // Update store
     return {
@@ -71,4 +71,4 @@ $hierarchyStore
     };
   });
 
-export { $hierarchyStore, registerHierarchyItem, updateHierarchy, HIERARCHY_ITEMS_DATA, DEFAULT_ITEM_STATE };
+export { $hierarchyStore, registerHierarchyItem, updateHierarchy, DEFAULT_ITEM_STATE };

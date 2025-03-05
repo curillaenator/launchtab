@@ -1,19 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useUnit as UseEffectorUnit } from 'effector-react';
-// import { useParams } from 'react-router-dom';
 import { keys } from 'lodash';
 import cn from 'classnames';
 
-import { $hierarchyStore, registerHierarchyItem, updateHierarchy, HIERARCHY_ITEMS_DATA } from '../../service/store';
+import { $hierarchyStore, registerHierarchyItem, updateHierarchy } from '../../service/store';
 import { useHierarchyContext } from '../../context';
 
 import { getPathKey } from '../../utils/getPathKey';
 
-// import { Actions } from '../Actions';
 import { Spinner } from '../Spinner';
 import { DocumentLink } from '../DocumentLink';
 
+// import { Actions } from '../Actions';
 // import { useDragNDrop } from './hooks/useDragNDrop';
 
 import { CaretRightIcon } from './icons/CaretRightIcon';
@@ -29,13 +28,16 @@ interface FoldableProps {
 }
 
 export const Foldable: FC<FoldableProps> = (props) => {
-  const { code, path } = props;
+  const { code: foldableCode, path } = props;
 
-  const pathKey = getPathKey(path);
+  const qc = useQueryClient();
+
+  const pathKey = getPathKey([...path, foldableCode]);
   const store = UseEffectorUnit($hierarchyStore);
   const { queryKey: ITEMS_QUERY_KEY, getItemQuery, ItemLoader } = useHierarchyContext();
 
-  const { isExpanded } = store[pathKey] || {};
+  const foldableElementStore = store[pathKey] || { isExpanded: false };
+  const { isExpanded } = foldableElementStore;
 
   const [touched, setTouched] = useState<boolean>(false);
 
@@ -44,26 +46,18 @@ export const Foldable: FC<FoldableProps> = (props) => {
   // const [isHovered, setHovered] = useState(false);
 
   const { data: unitData, isLoading: isUnitLoading } = useQuery({
-    queryKey: [ITEMS_QUERY_KEY, code],
-    queryFn: () => getItemQuery(code),
-    enabled: !!code,
+    queryKey: [ITEMS_QUERY_KEY, foldableCode],
+    queryFn: () => getItemQuery(foldableCode),
+    enabled: !!foldableCode,
   });
 
   useEffect(() => {
     if (!!unitData) registerHierarchyItem({ ...unitData, path });
-    // childrenData.forEach((child) => registerHierarchyItem({ ...child, path }));
   }, [unitData]);
 
   // const { liDropHandlers } = useDragNDrop(props);
-  // useActiveWatch(props, (activeState: boolean) =>
-  //   updateHierarchy({
-  //     path,
-  //     serviceItem: { ...store[pathKey], isActive: activeState },
-  //   }),
-  // );
 
   const hasChildren = !!unitData?.hierarchy;
-  const currentHeight = getHeight(path, store);
 
   return (
     <li
@@ -73,7 +67,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
     >
       <div
         data-element='trigger'
-        data-code={code}
+        data-code={foldableCode}
         className={cn(styles.trigger, {
           // [styles.trigger_isDrag]: itemState.isDrag,
           // [styles.trigger_isActive]: noteId === data.code,
@@ -94,7 +88,10 @@ export const Foldable: FC<FoldableProps> = (props) => {
             className={styles.iconButton}
             onClick={() => {
               setTouched(true);
-              updateHierarchy({ path, serviceItem: { ...store[pathKey], isExpanded: !store[pathKey].isExpanded } });
+              updateHierarchy({
+                path: [...path, foldableCode],
+                serviceItem: { ...foldableElementStore, isExpanded: !foldableElementStore.isExpanded },
+              });
             }}
           >
             <div className={cn(styles.carret, { [styles.carret_opened]: isExpanded })}>
@@ -122,12 +119,17 @@ export const Foldable: FC<FoldableProps> = (props) => {
           [styles.ulList_folded]: !isExpanded,
           // [styles.list_isDrag]: itemState.isDrag,
         })}
-        style={{ '--list-foldable-mah': `${currentHeight}px` } as React.CSSProperties}
+        style={
+          {
+            '--list-foldable-mah':
+              unitData && isExpanded ? `${getHeight({ qc, ITEMS_QUERY_KEY, code: foldableCode, path })}px` : 0,
+          } as React.CSSProperties
+        }
       >
         {touched &&
           unitData?.hierarchy &&
           keys(unitData.hierarchy).map((childCode) => (
-            <Foldable key={childCode} code={childCode} path={[...path, childCode]} />
+            <Foldable key={childCode} code={childCode} path={[...path, foldableCode]} />
           ))}
       </ul>
     </li>

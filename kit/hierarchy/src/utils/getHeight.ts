@@ -1,42 +1,38 @@
-import { getPathKey } from './getPathKey';
-import { HIERARCHY_ITEMS_DATA } from '../service/store';
-import type { HierarchyState, HierarchyItem } from '../interfaces';
-import { ITEM_HEIGHT } from '../constants';
+import { QueryClient } from '@tanstack/react-query';
 import { keys } from 'lodash';
 
-// const CACHE = new WeakMap();
-const CACHE = new WeakMap();
+import { $hierarchyStore } from '../service/store';
+import { getPathKey } from './getPathKey';
 
-const getHeight = (path: string[], state: HierarchyState): number => {
-  const pathKey = getPathKey(path);
-  const item = HIERARCHY_ITEMS_DATA.get(pathKey);
+import { ITEM_HEIGHT } from '../constants';
+import type { HierarchyItem } from '../interfaces';
 
-  if (!item) return 0;
+interface GetItemsOptions {
+  code: string;
+  path: string[];
+  qc: QueryClient;
+  ITEMS_QUERY_KEY: string;
+}
 
-  if (!CACHE.has(state)) {
-    CACHE.set(state, new WeakMap());
-  }
+const getHeight = (opts: GetItemsOptions): number => {
+  const { code, path, ITEMS_QUERY_KEY, qc } = opts;
 
-  const cached = CACHE.get(state);
-
-  if (cached.has(item)) {
-    return cached.get(item);
-  }
-
-  const itemState = state[pathKey];
+  const itemStorePath = [...path, code];
+  const itemStorePathKey = getPathKey(itemStorePath);
+  const itemState = $hierarchyStore.getState()[itemStorePathKey];
+  const itemData = qc.getQueryData([ITEMS_QUERY_KEY, code]) as HierarchyItem;
 
   let result = 0;
 
-  if (item?.hierarchy && itemState.isExpanded) {
-    result += ITEM_HEIGHT * keys(item.hierarchy).length;
-    result += keys(item.hierarchy)
-      .map((code) => getHeight([...path, code], state))
+  if (!!keys(itemData?.hierarchy).length && itemState?.isExpanded) {
+    result += ITEM_HEIGHT * keys(itemData.hierarchy).length;
+
+    result += keys(itemData.hierarchy)
+      .map((hCode) => getHeight({ qc, ITEMS_QUERY_KEY, code: hCode, path: itemStorePath }))
       .reduce((a, b) => a + b, 0);
   }
-
-  cached.set(item, result);
 
   return result;
 };
 
-export { CACHE, getHeight };
+export { getHeight };

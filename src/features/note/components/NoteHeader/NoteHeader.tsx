@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { Modal } from '@launch-ui/modal';
 import { Corners } from '@launch-ui/shape';
@@ -17,9 +17,11 @@ import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './not
 
 import SwitchesIcon from '@src/assets/svg/switches.svg';
 import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
+import AddDocumentIcon from '@src/assets/svg/addDocument.svg';
 
 export const NoteHeader: FC = () => {
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
+  const navigate = useNavigate();
 
   const { data: noteUnit, isLoading: isNoteUnitLoading } = useNoteUnitData({ routerNoteId });
 
@@ -103,7 +105,23 @@ export const NoteHeader: FC = () => {
           )}
 
           {iCanEdit && !isNoteSaving && !secondsUntilSave && (
-            <ButtonGhost RightIcon={() => <SwitchesIcon />} title='Setup' onClick={() => setEditOpen(true)} />
+            <>
+              <ButtonGhost
+                RightIcon={() => <AddDocumentIcon />}
+                title='Insert note'
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(`/notes/create/note?parent=${routerNoteId}`);
+                }}
+              />
+              <ButtonGhost
+                RightIcon={() => <SwitchesIcon />}
+                title='Note attrs'
+                onClick={() => {
+                  setEditOpen(true);
+                }}
+              />
+            </>
           )}
         </NoteHeaderBlockStyled>
       </NoteHeaderStyled>

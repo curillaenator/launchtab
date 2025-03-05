@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { Modal } from '@launch-ui/modal';
 import { Corners } from '@launch-ui/shape';
+import { Loader } from '@launch-ui/loader';
 import { Typography } from '@launch-ui/typography';
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 
@@ -11,7 +12,6 @@ import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entitie
 
 import { useICan } from '@src/hooks/useICan';
 
-import { Loader } from '@src/features/loader';
 import { SetupNote } from '../SetupNote';
 import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
 

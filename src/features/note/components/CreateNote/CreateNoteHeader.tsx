@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { UseFormRegister as HookFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
+
+import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 import type { RichTextJsonContent } from '@launch-ui/richtext';
-
 import type { LaunchUnitProps } from '@src/entities/note';
-import { Loader } from '@src/features/loader';
 
 import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
 

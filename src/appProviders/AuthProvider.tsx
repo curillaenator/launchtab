@@ -1,8 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
+import { Loader } from '@launch-ui/loader';
 
 import { useAuthState } from '../hooks/useAuthState';
-
-import { Loader } from '../features/loader';
 
 const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { appLoading } = useAuthState();

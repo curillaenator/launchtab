@@ -2,11 +2,12 @@ import React, { FC, memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useUnit as UseEffectoUnit } from 'effector-react';
 
+import { Loader } from '@launch-ui/loader';
+
 import { $userStore } from '@src/entities/user';
 import { setHeaderMidComponent } from '@src/entities/header';
 import { useBookmarksData } from '@src/entities/bookmarks';
 
-import { Loader } from '@src/features/loader';
 import { BookmarksTabs } from '@src/features/bookmarksTabs';
 import { Bookmarks } from '@src/features/bookmarks';
 

@@ -9,7 +9,7 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { CreateFormCTX } from '../context';
 import { useCustomIcons } from '../hooks/useCustomIcons';
 
-import { Loader } from '@src/features/loader';
+import { Loader } from '@launch-ui/loader';
 
 import { Scrollbars } from '@src/components/scrollbars';
 import { Card } from '@src/components/card';

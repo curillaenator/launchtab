@@ -7,6 +7,7 @@ import { Dropable } from '@launch-ui/dropable';
 import { Hierarchy } from '@launch-ui/hierarchy';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
+import { Loader } from '@launch-ui/loader';
 
 import { useDropable } from '@src/hooks/useDropable';
 import { useLayoutContext } from '@src/hooks/useLayoutContext';
@@ -15,8 +16,6 @@ import { getUserSpacesQuery, updateLastViewedSpace, LaunchSpaceProps, MAX_SPACES
 
 import { $userStore } from '@src/entities/user';
 import { getNoteUnitQuery } from '@src/entities/note';
-
-import { Loader } from '@src/features/loader';
 
 import { USER_SPACES_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
@@ -105,7 +104,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
       {showCreateSapceButtonLoader && (
         <div className='selector-loader-dummy'>
           <Corners borderRadius={10} />
-          <Loader />
+          <Loader iconSize='24px' />
         </div>
       )}
 
@@ -185,7 +184,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               <Hierarchy
                 queryKey={UNIT_NOTE_UNIT_QUERY}
                 rootItemsIds={selectedSpace.hierarchy}
-                ItemLoader={() => <Loader />}
+                ItemLoader={() => <Loader iconSize='24px' iconPadding='4px' />}
                 getItemQuery={getNoteUnitQuery}
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}

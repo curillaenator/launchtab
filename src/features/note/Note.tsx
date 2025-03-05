@@ -3,6 +3,7 @@ import { useUnit as useEffectorUnit } from 'effector-react';
 import { useParams } from 'react-router-dom';
 
 import { Corners } from '@launch-ui/shape';
+import { Loader } from '@launch-ui/loader';
 import { RichTextField, RichTextEditor, type RichtextChangeEvent } from '@launch-ui/richtext';
 
 import { $userStore } from '@src/entities/user';
@@ -23,7 +24,6 @@ import {
 } from '@src/entities/note';
 
 import { useICan } from '@src/hooks/useICan';
-import { Loader } from '@src/features/loader';
 
 import { NoteHeader } from './components/NoteHeader';
 import { NoteContainer } from './note.styled';

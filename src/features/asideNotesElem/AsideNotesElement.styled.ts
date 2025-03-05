@@ -51,7 +51,7 @@ const AsideNotesElementStyled = styled.div`
     width: 100%;
     height: 40px;
     border-radius: calc(12px * 1.25 + 3px);
-    padding-left: 8px;
+    padding-left: 12px;
 
     background-color: ${({ theme }) => theme.backgrounds.light};
   }

@@ -6,14 +6,13 @@ import { keys } from 'lodash';
 
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
+import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
 import { Input } from '@launch-ui/input';
 
 import { useUnitUpdate, type LaunchUnitProps } from '@src/entities/note';
 
 import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
-
-import { Loader } from '@src/features/loader';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import SaveIcon from '@src/assets/svg/save.svg';

@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useRef } from 'react';
 import { NodeViewWrapper, type NodeViewProps } from '@tiptap/react';
-import resizeImage from 'image-resize';
+import resizeImage, { type typeOptions as ResizeImageOptions } from 'image-resize';
 import { isEqual } from 'lodash';
 import cn from 'classnames';
 
@@ -14,6 +14,17 @@ import { DeleteIcon, ZoomOutIcon, ZoomInIcon, ImageLoad } from './icons';
 
 import type { ImageAttributes } from './interfaces';
 import styles from './image.module.scss';
+
+/**
+ * @description resizeImage https://github.com/kode-team/image-resize
+ */
+const IMAGE_RESIZE_SETUP: ResizeImageOptions = {
+  format: 'jpg',
+  height: 720,
+  quality: 0.7,
+  sharpen: 0.9,
+  reSample: 3,
+};
 
 const ImageView: FC<NodeViewProps> = (props) => {
   const { editor, node, deleteNode, updateAttributes } = props;
@@ -54,15 +65,7 @@ const ImageView: FC<NodeViewProps> = (props) => {
 
   const updateSrcAttribute = useCallback(
     async (imageFile: File) => {
-      /**
-       * @description resizeImage https://github.com/kode-team/image-resize
-       */
-      const resizedImageFile = (await resizeImage(imageFile, {
-        format: 'jpg',
-        width: 800,
-        quality: 0.85,
-        sharpen: 1,
-      })) as string;
+      const resizedImageFile = (await resizeImage(imageFile, IMAGE_RESIZE_SETUP)) as string;
 
       updateAttributes({ ...attrs, src: resizedImageFile });
     },

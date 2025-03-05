@@ -3768,6 +3768,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@launch-ui/loader@*, @launch-ui/loader@workspace:kit/loader":
+  version: 0.0.0-use.local
+  resolution: "@launch-ui/loader@workspace:kit/loader"
+  dependencies:
+    "@launch-ui/types": "*"
+  peerDependencies:
+    react: "*"
+    styled-components: "*"
+  languageName: unknown
+  linkType: soft
+
 "@launch-ui/modal@*, @launch-ui/modal@workspace:kit/modal":
   version: 0.0.0-use.local
   resolution: "@launch-ui/modal@workspace:kit/modal"
@@ -3840,20 +3851,6 @@ __metadata:
     react-scroll: 1.9.2
     tabulator-tables: 6.2.5
     uuid: 11.0.4
-  peerDependencies:
-    react: "*"
-    styled-components: "*"
-  languageName: unknown
-  linkType: soft
-
-"@launch-ui/select@*, @launch-ui/select@workspace:kit/select":
-  version: 0.0.0-use.local
-  resolution: "@launch-ui/select@workspace:kit/select"
-  dependencies:
-    "@launch-ui/shape": 1.0.5
-    "@launch-ui/types": "*"
-    "@launch-ui/typography": 1.0.0
-    "@launch-ui/utils": 1.0.1
   peerDependencies:
     react: "*"
     styled-components: "*"
@@ -9517,9 +9514,9 @@ __metadata:
     "@launch-ui/dynamic-bg": "*"
     "@launch-ui/hierarchy": "*"
     "@launch-ui/input": "*"
+    "@launch-ui/loader": "*"
     "@launch-ui/modal": "*"
     "@launch-ui/richtext": "*"
-    "@launch-ui/select": "*"
     "@launch-ui/shape": "*"
     "@launch-ui/theme": "*"
     "@launch-ui/typography": "*"

@@ -2,12 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import { Loader } from '@launch-ui/loader';
 
 import { AuthProvider, ThemeProvider } from './appProviders';
 
 import { Layout } from './layout';
 import { LaunchTabs, Notes, Palette } from './pages';
-import { Loader } from './features/loader';
 
 import { ROOT_ROUTE, NOTES_ROUTE, PALETTE_ROUTE } from './routes';
 

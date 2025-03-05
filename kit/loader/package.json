@@ -1,7 +1,7 @@
 {
-  "name": "@launch-ui/select",
+  "name": "@launch-ui/loader",
   "version": "1.0.0",
-  "description": "Select component",
+  "description": "Loader component",
   "license": "ISC",
   "author": "curillaenator@gmail.com",
   "publishConfig": {
@@ -15,11 +15,6 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -p tsconfig.json"
-  },
-  "dependencies": {
-    "@launch-ui/shape": "1.0.5",
-    "@launch-ui/typography": "1.0.0",
-    "@launch-ui/utils": "1.0.1"
   },
   "devDependencies": {
     "@launch-ui/types": "*"

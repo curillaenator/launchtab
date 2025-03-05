@@ -1,10 +1,10 @@
 import React, { FC, useRef, useCallback } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { debounce } from 'lodash';
-import styled from 'styled-components';
-
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { debounce } from 'lodash';
+
+import { Loader } from '@launch-ui/loader';
 import { Drawer } from '@launch-ui/drawer';
 import { Modal } from '@launch-ui/modal';
 
@@ -23,7 +23,6 @@ import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
 import { useContextValue } from './useContextValue';
 import { $layoutContex as LayoutCTX } from './context';
 
-import { Loader } from '@src/features/loader';
 import LayoutStyled from './styled';
 
 import { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID } from './constants';

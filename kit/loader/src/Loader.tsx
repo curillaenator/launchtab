@@ -28,12 +28,14 @@ const DASH = keyframes`
 interface LoaderProps {
   view?: 'fullscreen' | 'fit-parent' | 'fit-content';
   iconSize?: CSSProperties['width'];
+  iconPadding?: CSSProperties['padding'];
 }
 
 interface LoaderStyledProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
   iconSize: CSSProperties['width'];
+  iconPadding?: CSSProperties['padding'];
 }
 
 const LoaderStyled = styled.div<LoaderStyledProps>`
@@ -42,6 +44,7 @@ const LoaderStyled = styled.div<LoaderStyledProps>`
   justify-content: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  padding: ${({ iconPadding }) => iconPadding || 0};
 
   & > svg {
     transform-origin: center center;
@@ -51,7 +54,7 @@ const LoaderStyled = styled.div<LoaderStyledProps>`
     .animatedCircle {
       fill: none;
       stroke: ${({ theme }) => theme.primary[500] || '#524F54'};
-      stroke-width: 1.8px;
+      stroke-width: 2px;
       transform-origin: center;
       stroke-linecap: round;
       animation:
@@ -68,10 +71,15 @@ const getCssValue = (view: LoaderProps['view'], fsUnits: 'vw' | 'vh' = 'vw') => 
 };
 
 export const Loader: FC<LoaderProps> = (props) => {
-  const { view = 'fit-content', iconSize = '32px' } = props;
+  const { view = 'fit-content', iconSize = '32px', iconPadding = 0 } = props;
 
   return (
-    <LoaderStyled width={getCssValue(view)} height={getCssValue(view, 'vh')} iconSize={iconSize}>
+    <LoaderStyled
+      width={getCssValue(view)}
+      height={getCssValue(view, 'vh')}
+      iconSize={iconSize}
+      iconPadding={iconPadding}
+    >
       <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
         <circle className='animatedCircle' cx='12' cy='12' r='8' />
       </svg>

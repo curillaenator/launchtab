@@ -2,7 +2,7 @@ const TOC_MAX_TITLE_LENGTH = 128;
 
 const TOC_EXTENSION_NAME = 'tableOfContent';
 
-const SCROLL_DEFAULT_OFFSET = -96 - 8;
+const SCROLL_DEFAULT_OFFSET = -24;
 const SCROLL_DEFAULT_DURATION = 300;
 
 const DEFAULT_RANGE: Record<'minLevel' | 'maxLevel', number> = {

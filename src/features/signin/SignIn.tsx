@@ -18,17 +18,20 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
         <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
         <div className='form-title'>
-          <Typography as='h2' type='RoundedHeavy56' className='form-title-main'>
+          <Typography as='h2' type='RoundedHeavy36' className='form-title-main'>
             Sign In
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            Why? App won't save your changes unless you signed in
+            App won't save your changes unless you signed in. Also there is no chance to use built-in Notes app
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            Enter via your Google account so it'll be easy to use your saved links/tabs and customized view on any
-            device under your account
+            Entering via Google account lets you save links/tabs, use Notes app, customize app view by theming
+          </Typography>
+
+          <Typography as='p' type='TextRegular14' className='form-title-add'>
+            Saved data/app config are accessible on any device under your account
           </Typography>
         </div>
 

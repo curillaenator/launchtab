@@ -100,13 +100,12 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
       <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       {isNoteBodyLoading ? (
-        <Loader view='fit-parent' iconSize='56px' />
+        <Loader view='fit-parent' iconSize='40px' />
       ) : (
         <RichTextField
           editable={iCan.edit(noteUnit)}
-          // editable={false}
           onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
-          maxHeight={maxHeight - 32}
+          maxHeight={maxHeight - 24}
           initialValue={noteBody || ''}
           onChange={onRichTextChange}
         />

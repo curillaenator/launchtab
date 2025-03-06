@@ -19,6 +19,7 @@ const NoteContainer = styled.div<{ height: CSSProperties['height'] }>`
   border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
   padding: var(--layout-pd);
+  padding-bottom: 0;
 `;
 
 export { NoteContainer };

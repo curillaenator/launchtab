@@ -5,7 +5,6 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 export const FormStyled = styled.form`
   width: 100%;
   background-color: transparent;
-  border-radius: 24px;
   width: 474px;
 
   .form {
@@ -23,11 +22,11 @@ export const FormStyled = styled.form`
     filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
 
     &-title {
-      margin-bottom: 32px;
+      margin-bottom: 24px;
 
       &-main {
         color: ${({ theme }) => theme.primary[500]};
-        margin-bottom: 32px;
+        margin-bottom: 24px;
       }
 
       &-add {
@@ -41,14 +40,14 @@ export const FormStyled = styled.form`
       flex-direction: column;
       gap: 8px;
       width: 100%;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     &-buttons {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 32px;
+      gap: 24px;
     }
   }
 `;

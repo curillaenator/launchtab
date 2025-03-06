@@ -130,9 +130,9 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           <div className='space-elements'>
             <Dropable
               {...restSpaceSelector}
-              maxWidth={328}
-              minWidth={328}
-              offset={[0, 4]}
+              maxWidth={336}
+              minWidth={336}
+              offset={[0, 8]}
               openNode={
                 <ButtonAction
                   LeftIcon={() => <FolderIcon />}

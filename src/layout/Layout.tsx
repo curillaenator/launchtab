@@ -84,7 +84,12 @@ export const Layout: FC = () => {
         </div>
 
         {!!user.uid && (
-          <Drawer portalId={DRAWER_PORTAL_ID} open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
+          <Drawer
+            contentClassName='drawer-layout-cssv'
+            portalId={DRAWER_PORTAL_ID}
+            open={isRightDrawerOpen}
+            onClose={() => setRightDrawer(false)}
+          >
             <Settings />
           </Drawer>
         )}

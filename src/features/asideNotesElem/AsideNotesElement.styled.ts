@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const AsideNotesElementStyled = styled.div`
   width: 100%;
   min-height: 40px;
-  padding: 8px 0;
+  padding: 16px var(--layout-pd) 8px;
 
   .space-elements {
     display: flex;

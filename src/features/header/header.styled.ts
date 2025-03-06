@@ -15,6 +15,7 @@ const HeaderStyled = styled.header<HeaderStyledProps>`
   width: calc(100% - var(--layout-pd) * 2 - 32px);
   padding: var(--layout-pd) 0;
   margin: 0 calc(var(--layout-pd) + 16px);
+
   transition: filter 300ms ease;
   will-change: filter;
   filter: drop-shadow(

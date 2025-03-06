@@ -16,7 +16,7 @@ const LaunchTabsContainer = styled.div`
   padding: calc(var(--layout-pd) * 2) var(--layout-pd);
 
   @media (min-width: 1920px) {
-    --layout-pd: 56px;
+    --layout-pd: 72px;
   }
 `;
 

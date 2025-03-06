@@ -1,18 +1,19 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 
-import { Shape } from '@launch-ui/shape';
+import { Corners } from '@launch-ui/shape';
 import { Input } from '@launch-ui/input';
 import { Typography } from '@launch-ui/typography';
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
+import { Loader } from '@launch-ui/loader';
 
 import { CreateFormCTX } from '../context';
 import { useCustomIcons } from '../hooks/useCustomIcons';
 
-import { Loader } from '@launch-ui/loader';
-
 import { Scrollbars } from '@src/components/scrollbars';
 import { Card } from '@src/components/card';
+
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import LinkIcon from '@src/assets/svg/link.svg';
@@ -20,23 +21,22 @@ import LinkIcon from '@src/assets/svg/link.svg';
 const ICONS_IN_A_ROW = 4;
 
 const BookmarkPopupStyled = styled.form`
-  position: relative;
-  width: calc(80px * ${ICONS_IN_A_ROW} + 8px * (${ICONS_IN_A_ROW} - 1) + 2 * 32px + 16px);
-  padding: 32px;
-  background-color: transparent;
+  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
+  --shp-bdc: transparent;
 
-  .popup-shape {
-    overflow: visible;
-    fill: ${({ theme }) => theme.backgrounds.base};
-    filter: drop-shadow(${({ theme }) => theme.shadows.card});
-    z-index: 0;
-    pointer-events: none;
-  }
+  position: relative;
+
+  width: calc(80px * ${ICONS_IN_A_ROW} + 8px * (${ICONS_IN_A_ROW} - 1) + 2 * 32px + 16px);
+  padding: var(--layout-pd);
+
+  background-color: var(--shp-bgc);
+  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
+  filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
 
   .popup-title {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
     margin-bottom: 24px;
     color: ${({ theme }) => theme.texts.base};
 
@@ -54,17 +54,27 @@ const BookmarkPopupStyled = styled.form`
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px;
-  }
 
-  .popup-iconsLoader {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    &_withButton {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .popup-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
     width: 100%;
     margin-bottom: 24px;
+
+    &-loader {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
 
     &-array {
       display: grid;
@@ -114,7 +124,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
       onMouseDown={(e) => e.stopPropagation()}
     >
       {/* Испольтзован Shape чтобы отбросить красивую тень */}
-      <Shape borderRadius={24} className='popup-shape' />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       <div className='popup-title'>
         <Typography as='h2' type='RoundedHeavy24'>
@@ -134,7 +144,7 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
           limitSymbols={24}
           value={formState.name}
           onChange={(e) => dispatchForm?.({ key: 'name', payload: e.target.value })}
-          onFocusOut={fetchIcons}
+          // onFocusOut={fetchIcons}
           placeholder='Title'
         />
 
@@ -148,14 +158,21 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
         />
       </div>
 
-      {isFetching && (
-        <div className='popup-iconsLoader'>
-          <Loader iconSize='32px' />
-        </div>
-      )}
+      <div className='popup-icons'>
+        <ButtonAction
+          disabled={!formState.name}
+          appearance='secondary'
+          title='Get icons by title'
+          onClick={fetchIcons}
+        />
 
-      {!!iconsWithGoodLinks.length && !isFetching && (
-        <div className='popup-icons'>
+        {isFetching && (
+          <div className='popup-icons-loader'>
+            <Loader iconSize='32px' />
+          </div>
+        )}
+
+        {!!iconsWithGoodLinks.length && !isFetching && (
           <Scrollbars height='168px'>
             <div className='popup-icons-array'>
               {iconsWithGoodLinks.map((icon) => (
@@ -170,8 +187,8 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
               ))}
             </div>
           </Scrollbars>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className='popup-preview'>
         <Card

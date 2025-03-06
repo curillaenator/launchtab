@@ -11,6 +11,8 @@ import { AsideHeader, AsideRoutesList, AsideStyled, RouteLinkStyled, RouteDivide
 import { $appStore } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 import HomeIcon from '@src/assets/svg/home.svg';
 import NotesIcon from '@src/assets/svg/document.svg';
 // import GoogleIcon from '@src/assets/svg/google.svg';
@@ -21,7 +23,7 @@ export const Aside: FC = memo(() => {
 
   return (
     <AsideStyled isAsideOpen={isAsideOpen}>
-      <Corners borderRadius={24} corners={['tr', 'br']} />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS} corners={['tr', 'br']} />
 
       <AsideHeader>
         <Typography as='span' type='RoundedHeavy36'>
@@ -42,10 +44,10 @@ export const Aside: FC = memo(() => {
           </Typography>
         </RouteLinkStyled>
 
+        <RouteDivider />
+
         {!!uid && (
           <>
-            <RouteDivider />
-
             <RouteLinkStyled to='/notes'>
               <NotesIcon />
 
@@ -55,8 +57,6 @@ export const Aside: FC = memo(() => {
             </RouteLinkStyled>
 
             <AsideNotesElement uid={uid} />
-
-            <RouteDivider />
           </>
         )}
 

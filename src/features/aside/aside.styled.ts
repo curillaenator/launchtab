@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 const AsideStyled = styled.div<{ isAsideOpen: boolean }>`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
-  --form-bdrs: calc(24px * 1.25 + 3px);
-  /* --form-bdrs: 24px; */
+
+  --aside-bdrs: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
 
   position: relative;
 
@@ -14,7 +16,7 @@ const AsideStyled = styled.div<{ isAsideOpen: boolean }>`
 
   width: 384px;
   height: 100%;
-  border-radius: 0 var(--form-bdrs) var(--form-bdrs) 0;
+  border-radius: 0 var(--aside-bdrs) var(--aside-bdrs) 0;
   background-color: ${({ theme }) => theme.backgrounds.base};
 
   will-change: transform;
@@ -24,9 +26,10 @@ const AsideStyled = styled.div<{ isAsideOpen: boolean }>`
 
 const AsideHeader = styled.div`
   width: 100%;
-  padding: 28px;
+  padding: var(--layout-pd);
   color: ${({ theme }) => theme.texts.base};
   flex: 0 0 auto;
+  border-bottom: 1px solid ${({ theme }) => theme.borders.base};
 
   .highlighted {
     color: ${({ theme }) => theme.primary[500]};
@@ -36,7 +39,7 @@ const AsideHeader = styled.div`
 const AsideRoutesList = styled.div`
   width: 100%;
   height: 100%;
-  padding: 28px;
+  padding: var(--layout-pd) 0;
   flex: 1 1 auto;
 
   .active {
@@ -53,7 +56,7 @@ const RouteLinkStyled = styled(NavLink)`
   width: 100%;
   height: 40px;
 
-  padding: 8px 12px;
+  padding: 8px var(--layout-pd);
 
   text-decoration: none;
   color: ${({ theme }) => theme.texts.base};
@@ -69,7 +72,7 @@ const RouteLinkStyled = styled(NavLink)`
 
 const RouteDivider = styled.div`
   flex: 0 0 auto;
-  margin: 16px 0;
+  margin: var(--layout-pd) 0;
   width: 100%;
   height: 1px;
   background-color: ${({ theme }) => theme.borders.base};

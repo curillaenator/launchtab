@@ -72,8 +72,8 @@ export const LookFeel: FC = () => {
       <Titlewrap title='Theme'>
         <Dropable
           {...restTheme}
-          maxWidth={348}
-          minWidth={348}
+          maxWidth={356}
+          minWidth={356}
           offset={[0, 4]}
           openNode={
             <ButtonAction
@@ -120,8 +120,8 @@ export const LookFeel: FC = () => {
         <Titlewrap title='Select dynamic wallpaper'>
           <Dropable
             {...restDynamicWp}
-            maxWidth={348}
-            minWidth={348}
+            maxWidth={356}
+            minWidth={356}
             offset={[0, 4]}
             openNode={
               <ButtonAction

@@ -8,7 +8,7 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
-import { Input, Titlewrap } from '@launch-ui/input';
+import { Input, Titlewrap, Switch } from '@launch-ui/input';
 
 import { useUnitUpdate, type LaunchUnitProps } from '@src/entities/note';
 
@@ -32,6 +32,10 @@ const SetupNoteStyled = styled.form`
   padding: var(--layout-pd);
 
   .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     width: 100%;
     margin-top: 24px;
   }
@@ -51,6 +55,7 @@ interface SetupNoteProps {
 
 interface SetupNoteFormFields {
   name: string;
+  locked: boolean;
 }
 
 const SetupNote: FC<SetupNoteProps> = (props) => {
@@ -65,7 +70,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
     reset,
     handleSubmit,
     formState: { errors, dirtyFields },
-  } = useForm<SetupNoteFormFields>({ defaultValues: { name: unit.name } });
+  } = useForm<SetupNoteFormFields>({ defaultValues: { name: unit.name, locked: !!unit.locked } });
 
   const { mutate: updateUnit, isPending: isUnitUpdating } = useUnitUpdate({
     unitCode: unit.code,
@@ -82,7 +87,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
   return (
     <SetupNoteStyled
       onSubmit={handleSubmit((formData) => {
-        console.log('formData', formData);
+        // console.log('formData', formData);
         updateUnit(formData);
       })}
     >
@@ -112,6 +117,16 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
                 type='text'
                 placeholder='Space name'
               />
+            )}
+          />
+        </Titlewrap>
+
+        <Titlewrap title='Note lock'>
+          <Controller
+            name='locked'
+            control={control}
+            render={({ field }) => (
+              <Switch checked={field.value} onChange={(checked) => field.onChange({ target: { value: checked } })} />
             )}
           />
         </Titlewrap>

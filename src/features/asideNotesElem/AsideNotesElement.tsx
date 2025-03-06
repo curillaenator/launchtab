@@ -16,6 +16,7 @@ import { useLayoutContext } from '@src/hooks/useLayoutContext';
 import { getUserSpacesQuery, updateLastViewedSpace, LaunchSpaceProps } from '@src/entities/space';
 
 import { $userStore } from '@src/entities/user';
+import { $appStore } from '@src/entities/app';
 import { getNoteUnitQuery } from '@src/entities/note';
 
 import { MAX_SPACES_PER_USER, MAX_UNITS_PER_SPACE } from '@src/shared/appConfig';
@@ -31,30 +32,27 @@ type CreateParamType = 'space' | 'note';
 import FolderIcon from '@src/assets/svg/folder.svg';
 
 const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
+  const navigate = useNavigate();
   const { createPageType } = useParams<{
     noteId?: string;
     createPageType?: CreateParamType;
   }>();
 
-  const spacesLastHierarchyStores = useRef<Record<string, HierarchyState>>({});
-
   const { currentSpaceRef, setCurrentSpaceRef } = useLayoutContext();
+  const { isAsideOpen } = useEffectorUnit($appStore);
+  const { spaces: spaceIdList = [] } = useEffectorUnit($userStore);
 
-  const {
-    // lastViewedSpace,
-    spaces: spaceIdList = [],
-  } = useEffectorUnit($userStore);
+  const spacesLastHierarchyStores = useRef<Record<string, HierarchyState>>({});
 
   const [showCreateSapceButtonLoader, setShowCreateSapceButtonLoader] = useState(false);
   const [isCreateSpaceButton, setIsCreateSpaceButton] = useState<boolean>(false);
 
   const [selectedSpace, setSelectedSpace] = useState<LaunchSpaceProps | null>(null);
 
-  const navigate = useNavigate();
-
   const { data: userSpaces = [] } = useQuery({
     queryKey: [USER_SPACES_QUERY, spaceIdList],
     queryFn: () => getUserSpacesQuery(spaceIdList),
+    enabled: !!isAsideOpen,
   });
 
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);

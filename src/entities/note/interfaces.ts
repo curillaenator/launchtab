@@ -6,6 +6,8 @@ interface LaunchUnitProps {
 
   path: string[];
 
+  locked?: boolean;
+
   createdAt: number;
   createdBy: string;
 

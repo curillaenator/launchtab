@@ -27,18 +27,14 @@ const logout = () => {
   signOut(auth);
 };
 
-const NO_DATA: Partial<LaunchStoreUser> = { spaces: [], settings: DEFAULT_SETTINGS, lastViewedSpace: null };
-
 async function getUserLaunchDataQuery(user: LaunchStoreUser) {
-  if (!user?.uid) return NO_DATA;
+  if (!user?.uid) return null;
 
-  const { uid } = user;
-
-  const userSnap = await getDoc(doc(fsdb, 'users', uid));
+  const userSnap = await getDoc(doc(fsdb, 'users', user.uid));
 
   if (!userSnap.exists()) {
-    await setDoc(doc(fsdb, 'users', uid), user);
-    return NO_DATA;
+    await setDoc(doc(fsdb, 'users', user.uid), user);
+    return null;
   }
 
   const dbUser = userSnap.data() as LaunchStoreUser;

@@ -103,7 +103,7 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         <Loader view='fit-parent' iconSize='40px' />
       ) : (
         <RichTextField
-          editable={iCan.edit(noteUnit)}
+          editable={iCan.edit(noteUnit) && !noteUnit?.locked}
           onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
           maxHeight={maxHeight - 24}
           initialValue={noteBody || ''}

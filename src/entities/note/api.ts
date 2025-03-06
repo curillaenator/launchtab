@@ -60,8 +60,15 @@ const getNoteUnitQuery = async (unitId: string) => {
   return { ...unitSnap.data(), code: unitSnap.id } as LaunchUnitProps;
 };
 
-const updateUnitMutation = async (unitCode: string, unitName: string) => {
-  await updateDoc(doc(fsdb, 'units', unitCode), { name: unitName });
+interface UpdateUnitPayload {
+  unitName: string;
+  locked: boolean;
+}
+
+const updateUnitMutation = async (unitCode: string, payload: UpdateUnitPayload) => {
+  const { unitName, locked } = payload;
+
+  await updateDoc(doc(fsdb, 'units', unitCode), { name: unitName, locked });
   return { updatedUnitName: unitName };
 };
 

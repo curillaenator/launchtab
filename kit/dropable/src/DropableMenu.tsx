@@ -22,7 +22,7 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
     animationStyle,
     closeOnItemClick = false,
     closeDropdown,
-    corners = { borderRadius: 12, stroke: 1 },
+    corners = { borderRadius: 14, stroke: 1 },
     children,
   } = props;
 

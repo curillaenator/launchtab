@@ -2,13 +2,12 @@ import React, { FC } from 'react';
 import { UseFormRegister as HookFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
 
+import type { RichTextJsonContent } from '@launch-ui/richtext';
 import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
-import type { RichTextJsonContent } from '@launch-ui/richtext';
-import type { LaunchUnitProps } from '@src/entities/note';
 
-import NoteTitleIcon from '@src/assets/svg/bookmark.svg';
+import type { LaunchUnitProps } from '@src/entities/note';
 
 const NoteHeaderStyled = styled.div`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
@@ -20,13 +19,13 @@ const NoteHeaderStyled = styled.div`
   align-items: center;
 
   gap: 16px;
-  padding: 8px 16px;
+  padding: 4px 12px;
 
   width: 100%;
-  height: 56px;
-  border-radius: calc(20px * 1.25 + 3px);
+  height: 48px;
+  border-radius: calc(16.8px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  margin: 0 32px;
+  margin: 0 24px;
 
   & > svg {
     flex: 0 0 auto;
@@ -43,14 +42,14 @@ const NoteHeaderStyled = styled.div`
 
     color: ${({ theme }) => theme.texts.base};
     font-family: inherit;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 40px;
     font-weight: 600;
 
     &::placeholder {
       color: ${({ theme }) => theme.texts.placeholder};
       font-family: inherit;
-      font-size: 36px;
+      font-size: 32px;
       line-height: 40px;
       font-weight: 600;
     }
@@ -77,9 +76,7 @@ const CreateNoteHeader: FC<CreateNoteHeaderProps> = (props) => {
 
   return (
     <NoteHeaderStyled data-create-note-header>
-      <Corners borderRadius={20} />
-
-      <NoteTitleIcon />
+      <Corners borderRadius={16.8} />
 
       <input
         autoComplete='off'

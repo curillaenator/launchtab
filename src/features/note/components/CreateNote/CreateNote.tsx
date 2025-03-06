@@ -20,6 +20,7 @@ import { CreateNoteHeader } from './CreateNoteHeader';
 import { CreateNoteForm } from './createNote.styled';
 
 import { USER_SPACES_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 type NoteFormFields = LaunchUnitProps & { noteBody: RichTextJsonContent | string };
 
@@ -95,11 +96,11 @@ const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
       data-create-note-form
       onSubmit={handleSubmit((formData: NoteFormFields) => submitNote({ formData }))}
     >
-      <Corners borderRadius={24} />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       <RichTextField
         // onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
-        maxHeight={maxHeight - 64 - 40}
+        maxHeight={maxHeight - 48 - 40}
         initialValue={''}
         onChange={onRichTextChange}
       />

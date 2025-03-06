@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 const CreateNoteForm = styled.form`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
@@ -10,9 +12,9 @@ const CreateNoteForm = styled.form`
   width: 100%;
   max-height: 100%;
 
-  border-radius: calc(24px * 1.25 + 3px);
+  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 32px;
+  padding: var(--layout-pd);
 
   .create-note-form-field-list {
     display: flex;

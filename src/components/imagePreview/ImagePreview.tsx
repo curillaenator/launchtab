@@ -33,7 +33,7 @@ const ImagePreviewStyled = styled.div<ImagePreviewProps>`
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
+    border-radius: calc(${LAUNCH_PAPER_BDRS + 2}px * 1.25 + 3px);
     user-select: none;
 
     &_active {
@@ -46,7 +46,7 @@ export const ImagePreview: FC<ImagePreviewProps> = (props) => {
 
   return (
     <ImagePreviewStyled active={active} clickable={clickable} avgColor={avgColor} onClick={onClick}>
-      <Corners borderRadius={LAUNCH_PAPER_BDRS} stroke={4} />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS + 2} stroke={6} />
 
       {src && <img {...rest} className='preview-image' src={src} alt={alt} draggable={false} />}
     </ImagePreviewStyled>

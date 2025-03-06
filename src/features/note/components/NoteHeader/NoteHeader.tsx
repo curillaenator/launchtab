@@ -56,7 +56,7 @@ export const NoteHeader: FC = () => {
   return (
     <>
       <NoteHeaderStyled data-note-header>
-        <Corners borderRadius={20} />
+        <Corners borderRadius={16.8} />
 
         <NoteHeaderBlockStyled data-flex-shrinked-block>
           {isNoteUnitLoading ? (

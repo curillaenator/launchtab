@@ -1,6 +1,8 @@
 import { CSSProperties } from 'react';
 import styled from 'styled-components';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 const DashboardContainer = styled.div<{ height: CSSProperties['height'] }>`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
@@ -14,7 +16,7 @@ const DashboardContainer = styled.div<{ height: CSSProperties['height'] }>`
   width: 100%;
   min-height: 100%;
   flex: 1 1 auto;
-  border-radius: calc(24px * 1.25 + 3px);
+  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
   padding: 28px;
 `;

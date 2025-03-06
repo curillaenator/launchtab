@@ -13,6 +13,7 @@ import { $userStore } from '@src/entities/user';
 import { useCreateSpace, LaunchSpaceProps } from '@src/entities/space';
 
 import { CreateSpaceForm } from './createSpace.styled';
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { USER_QUERY } from '@src/shared/queryKeys';
 
@@ -55,7 +56,7 @@ const CreateSpace: FC<{ maxHeight: number }> = () => {
         createSpace(spaceData);
       })}
     >
-      <Corners borderRadius={24} />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       <div className='create-space-form-title'>
         <Typography as='span' type='RoundedHeavy36'>

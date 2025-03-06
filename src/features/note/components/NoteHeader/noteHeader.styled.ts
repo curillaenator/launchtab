@@ -9,14 +9,14 @@ const NoteHeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 8px 16px;
+  padding: 4px 12px;
   flex: 0 0 auto;
 
-  width: calc(100% - (72px * 2) - 32px);
-  height: 56px;
-  border-radius: calc(20px * 1.25 + 3px);
+  width: calc(100% - (var(--layout-pd) + 16px) * 2 - 64px);
+  height: 48px;
+  border-radius: calc(16.8px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  margin: 0 32px;
+  margin: 0 24px;
 `;
 
 const NoteHeaderBlockStyled = styled.div`
@@ -33,7 +33,7 @@ const NoteHeaderBlockStyled = styled.div`
   .note-header-title {
     font-family: inherit;
     height: 40px;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 40px;
     font-weight: 600;
     max-width: 100%;

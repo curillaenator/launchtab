@@ -6,6 +6,8 @@ import { Shape } from '@launch-ui/shape';
 
 import type { ButtonActionProps } from './interfaces';
 
+const BORDER_RADIUS = 14;
+
 const APPEARANCES = {
   primary: ({ active }: ButtonActionProps) => css`
     --button-text-c: ${({ theme }) => theme.white};
@@ -67,7 +69,7 @@ const ButtonActionStyled = styled.button<ButtonActionProps>`
   width: ${({ fullwidth }) => (fullwidth ? '100%' : 'fit-content')};
   padding: 0 12px;
   background: transparent;
-  border-radius: 16px;
+  border-radius: calc(${BORDER_RADIUS}px * 1.25 + 3px);
   z-index: 20;
 
   will-change: color;
@@ -135,7 +137,7 @@ export const ButtonAction = forwardRef<HTMLButtonElement, ButtonActionProps>((pr
       type={type}
       height={height}
     >
-      <Shape borderRadius={12} />
+      <Shape borderRadius={BORDER_RADIUS} />
 
       {LeftIcon && <LeftIcon />}
 

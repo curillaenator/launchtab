@@ -25,6 +25,8 @@ import {
 
 import { useICan } from '@src/hooks/useICan';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 import { NoteHeader } from './components/NoteHeader';
 import { NoteContainer } from './note.styled';
 
@@ -95,7 +97,7 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
 
   return (
     <NoteContainer height={maxHeight}>
-      <Corners borderRadius={24} />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       {isNoteBodyLoading ? (
         <Loader view='fit-parent' iconSize='56px' />

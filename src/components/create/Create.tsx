@@ -10,6 +10,8 @@ import { CreateFormCTX } from './context';
 import { PagePopup } from './components/PagePopup';
 import { BookmarkPopup } from './components/BookmarkPopup';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 import LinkIcon from '@src/assets/svg/link.svg';
 import FolderIcon from '@src/assets/svg/folder.svg';
 
@@ -40,7 +42,7 @@ export const CreateBookmarkCard = styled.div<{ active: boolean }>`
   --shp-bdc: ${({ theme }) => theme.backgrounds.base};
 
   color: ${({ theme }) => theme.backgrounds.base};
-  border-radius: calc(19px * 1.25 + 3px);
+  border-radius: calc(${LAUNCH_PAPER_BDRS + 2}px * 1.25 + 3px);
   position: relative;
   display: flex;
   align-items: center;
@@ -91,7 +93,7 @@ export const Create: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) 
             <Button active={open} IconLeft={() => <FolderIcon />} />
           ) : (
             <CreateBookmarkCard active={open}>
-              <Corners borderRadius={24} stroke={3} />
+              <Corners borderRadius={LAUNCH_PAPER_BDRS + 2} stroke={6} />
               <LinkIcon width={32} height={32} viewBox='0 0 24 24' fill='none' />
             </CreateBookmarkCard>
           )

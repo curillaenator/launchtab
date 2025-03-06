@@ -13,6 +13,7 @@ import { Input, Titlewrap } from '@launch-ui/input';
 import { useUnitUpdate, type LaunchUnitProps } from '@src/entities/note';
 
 import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import SaveIcon from '@src/assets/svg/save.svg';
@@ -26,17 +27,17 @@ const SetupNoteStyled = styled.form`
 
   width: 768px;
 
-  border-radius: calc(24px * 1.25 + 3px);
+  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 28px;
+  padding: var(--layout-pd);
 
   .form-fields {
     width: 100%;
-    margin-top: 28px;
+    margin-top: 24px;
   }
 
   .form-control {
-    margin-top: 28px;
+    margin-top: 24px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -85,7 +86,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
         updateUnit(formData);
       })}
     >
-      <Corners borderRadius={24} />
+      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       <Typography as='h2' type='RoundedHeavy36'>
         Note attributes

@@ -51,6 +51,7 @@ const Toolbar: FC<ToolbarProps> = memo((props) => {
       )}
     >
       <Corners borderRadius={12} stroke={1} />
+
       <div
         className={cn(
           styles.toolbarBlock,

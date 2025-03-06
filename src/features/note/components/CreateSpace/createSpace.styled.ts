@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 const CreateSpaceForm = styled.form`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
@@ -9,9 +11,9 @@ const CreateSpaceForm = styled.form`
 
   width: 100%;
 
-  border-radius: calc(24px * 1.25 + 3px);
+  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 32px;
+  padding: var(--layout-pd);
 
   .create-space-form-field-list {
     display: flex;
@@ -19,7 +21,7 @@ const CreateSpaceForm = styled.form`
     gap: 8px;
 
     width: 100%;
-    padding: 32px 0;
+    padding: var(--layout-pd) 0;
   }
 
   .create-space-form-field-controls {

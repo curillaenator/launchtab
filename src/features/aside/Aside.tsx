@@ -40,7 +40,7 @@ export const Aside: FC = memo(() => {
           <HomeIcon />
 
           <Typography as='span' type='RoundedBold20' className='typography'>
-            LaunchTabs
+            Tabs
           </Typography>
         </RouteLinkStyled>
 
@@ -52,7 +52,7 @@ export const Aside: FC = memo(() => {
               <NotesIcon />
 
               <Typography as='span' type='RoundedBold20' className='typography'>
-                Launch Notes
+                Notes
               </Typography>
             </RouteLinkStyled>
 

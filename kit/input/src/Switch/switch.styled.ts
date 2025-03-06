@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+const SWITCH_BDRS = 13.6;
+
 const SwitchStyled = styled.button<{ checked?: boolean }>`
   position: relative;
   width: 108px;
@@ -9,7 +11,7 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
   flex: 0 0 auto;
 
   box-shadow: inset 0 0 0 1px ${({ theme }) => theme.backgrounds.light};
-  border-radius: calc(14px * 1.25 + 3px);
+  border-radius: calc(${SWITCH_BDRS}px * 1.25 + 3px);
 
   svg[data-svg-corner='true'] {
     --shp-bgc: ${({ theme }) => theme.backgrounds.base};
@@ -29,7 +31,7 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
     height: 40px;
     z-index: 50;
     background-color: transparent;
-    border-radius: calc(14px * 1.25 + 3px);
+    border-radius: calc(${SWITCH_BDRS}px * 1.25 + 3px);
     transition: 0.12s ease-in-out;
     transform: ${({ checked }) => (checked ? 'translateX(100%)' : 'translateX(0)')};
     filter: drop-shadow(${({ theme, checked }) => (checked ? theme.shadows.primary : 'none')});
@@ -67,4 +69,4 @@ const SwitchStyled = styled.button<{ checked?: boolean }>`
   }
 `;
 
-export { SwitchStyled };
+export { SwitchStyled, SWITCH_BDRS };

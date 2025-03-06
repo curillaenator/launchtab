@@ -9,6 +9,8 @@ import { Typography } from '@launch-ui/typography';
 
 import type { LaunchUnitProps } from '@src/entities/note';
 
+import { LAUNCH_HEADER_BDRS } from '@src/shared/appConfig';
+
 const NoteHeaderStyled = styled.div`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
@@ -23,7 +25,7 @@ const NoteHeaderStyled = styled.div`
 
   width: 100%;
   height: 48px;
-  border-radius: calc(16.8px * 1.25 + 3px);
+  border-radius: calc(${LAUNCH_HEADER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
   margin: 0 24px;
 
@@ -76,7 +78,7 @@ const CreateNoteHeader: FC<CreateNoteHeaderProps> = (props) => {
 
   return (
     <NoteHeaderStyled data-create-note-header>
-      <Corners borderRadius={16.8} />
+      <Corners borderRadius={LAUNCH_HEADER_BDRS} />
 
       <input
         autoComplete='off'

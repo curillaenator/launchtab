@@ -12,7 +12,7 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 
-const PagePopupStyled = styled.form`
+const PopupForm = styled.form`
   width: 336px;
 
   .popup {
@@ -58,11 +58,11 @@ const PagePopupStyled = styled.form`
   }
 `;
 
-export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
+const TabsGroupPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
   const { formState, dispatchForm, handleCreate } = useContext(CreateFormCTX);
 
   return (
-    <PagePopupStyled
+    <PopupForm
       onMouseDown={(e) => e.stopPropagation()}
       onSubmit={(e) => {
         e.preventDefault();
@@ -77,9 +77,11 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           <Typography as='h2' type='RoundedHeavy24'>
             New
           </Typography>
-
           <Typography as='h2' type='RoundedHeavy24' className='popup-title-themed'>
-            folder
+            Tabs
+          </Typography>
+          <Typography as='h2' type='RoundedHeavy24'>
+            group
           </Typography>
         </div>
 
@@ -100,6 +102,8 @@ export const PagePopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           <ButtonGhost title='Cancel' type='button' onClick={() => closePopup()} />
         </div>
       </div>
-    </PagePopupStyled>
+    </PopupForm>
   );
 };
+
+export { TabsGroupPopup };

@@ -12,6 +12,7 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
 
 import { useICan } from '@src/hooks/useICan';
+import { LAUNCH_HEADER_BDRS } from '@src/shared/appConfig';
 
 import { SetupNote } from '../SetupNote';
 import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
@@ -56,7 +57,7 @@ export const NoteHeader: FC = () => {
   return (
     <>
       <NoteHeaderStyled data-note-header>
-        <Corners borderRadius={16.8} />
+        <Corners borderRadius={LAUNCH_HEADER_BDRS} />
 
         <NoteHeaderBlockStyled data-flex-shrinked-block>
           {isNoteUnitLoading ? (

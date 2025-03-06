@@ -6,7 +6,8 @@ import { arrayMoveImmutable } from 'array-move';
 
 import { Button } from '@launch-ui/button';
 import { ContextMenu } from '@launch-ui/context-menu';
-import { Create } from '@src/components/create';
+
+import { CreateTabs } from '@src/features/createTabs';
 
 import { $userStore } from '@src/entities/user';
 import { $bookmarksStore, setCurrentTab, setTabsWithDbUpdate, removeTab } from '@src/entities/bookmarks';
@@ -68,7 +69,7 @@ export const Tabs: FC = () => {
         </SortableItem>
       ))}
 
-      <Create create='new-page' />
+      <CreateTabs create='new-page' />
     </SortableListStyled>
   );
 };

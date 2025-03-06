@@ -6,7 +6,7 @@ import { Shape } from '@launch-ui/shape';
 
 import type { ButtonActionProps } from './interfaces';
 
-const BORDER_RADIUS = 14;
+const BORDER_RADIUS = 16;
 
 const APPEARANCES = {
   primary: ({ active }: ButtonActionProps) => css`

@@ -6,8 +6,9 @@ import { arrayMoveImmutable } from 'array-move';
 import { $bookmarksStore, reorderCards, BookmarkTabProps, removeCard } from '@src/entities/bookmarks';
 import { $userStore } from '@src/entities/user';
 
+import { CreateTabs } from '@src/features/createTabs';
+
 import { ContextMenu } from '@launch-ui/context-menu';
-import { Create } from '@src/components/create';
 import { Card } from '@src/components/card/Card';
 import { SortableListStyled, HoverWrapper } from './styles';
 
@@ -48,7 +49,7 @@ export const Bookmarks: FC = () => {
         </SortableItem>
       ))}
 
-      <Create create='new-bookmark' />
+      <CreateTabs create='new-bookmark' />
     </SortableListStyled>
   );
 };

@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { Shape, Corners } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
-import { SwitchStyled } from './switch.styled';
+import { SwitchStyled, SWITCH_BDRS } from './switch.styled';
 import { SwitchProps } from './interfaces';
 
 const Switch: FC<SwitchProps> = (props) => {
@@ -22,10 +22,10 @@ const Switch: FC<SwitchProps> = (props) => {
         onClick?.(e);
       }}
     >
-      <Corners borderRadius={14} stroke={1} />
+      <Corners borderRadius={SWITCH_BDRS} stroke={1} />
 
       <div className='switch-toggler'>
-        <Shape className='switch-toggler-shape' borderRadius={16.4} />
+        <Shape className='switch-toggler-shape' borderRadius={16} />
 
         <Typography type='RoundedBold14' className='switch-toggler-title'>
           {checked ? checkedVal : uncheckedVal}

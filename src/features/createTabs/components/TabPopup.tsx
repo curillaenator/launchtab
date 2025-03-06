@@ -20,7 +20,7 @@ import LinkIcon from '@src/assets/svg/link.svg';
 
 const ICONS_IN_A_ROW = 4;
 
-const BookmarkPopupStyled = styled.form`
+const NewTabForm = styled.form`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
 
@@ -109,13 +109,13 @@ const BookmarkPopupStyled = styled.form`
   }
 `;
 
-export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
+const TabPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
   const { formState, dispatchForm, handleCreate } = useContext(CreateFormCTX);
 
   const { iconsWithGoodLinks, isFetching, fetchIcons } = useCustomIcons(formState.name);
 
   return (
-    <BookmarkPopupStyled
+    <NewTabForm
       onSubmit={(e) => {
         e.preventDefault();
         handleCreate?.();
@@ -207,6 +207,8 @@ export const BookmarkPopup: FC<{ closePopup: () => void }> = ({ closePopup }) =>
         <ButtonAction title='Create' type='submit' />
         <ButtonGhost title='Cancel' type='button' onClick={() => closePopup()} />
       </div>
-    </BookmarkPopupStyled>
+    </NewTabForm>
   );
 };
+
+export { TabPopup };

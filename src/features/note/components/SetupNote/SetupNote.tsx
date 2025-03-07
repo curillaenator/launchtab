@@ -111,7 +111,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
             control={control}
             rules={{
               required: 'Set note name',
-              minLength: { value: 8, message: 'Space name must be at least 8 characters' },
+              minLength: { value: 3, message: 'Space name must be at least 3 characters' },
               maxLength: { value: 64, message: 'Please do not go above 64 chars' },
             }}
             render={({ field }) => (

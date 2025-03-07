@@ -83,6 +83,13 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
     updateNoteBodyDebounced(richTextEvent);
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(
+    () => () => {
+      updateNoteBodyImmidiate();
+    },
+    [updateNoteBodyImmidiate],
+  );
+
   // INJECT HEADER COMPONENT START
   useEffect(() => {
     setHeaderMidComponent(NoteHeader);

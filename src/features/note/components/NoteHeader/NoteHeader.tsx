@@ -9,7 +9,7 @@ import { Loader } from '@launch-ui/loader';
 import { Typography } from '@launch-ui/typography';
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 
-import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
+import { $noteStore, useNoteUnitData, setNoteLastInputTimestamp, type NotesRouteParams } from '@src/entities/note';
 
 import { useICan } from '@src/hooks/useICan';
 import { LAUNCH_HEADER_BDRS, MAX_UNITS_PER_UNIT, MAX_UNITS_DEPTH } from '@src/shared/appConfig';
@@ -37,6 +37,15 @@ export const NoteHeader: FC = () => {
   const [secondsUntilSave, setSecondsUntilSave] = useState<number | null>(null);
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      setNoteLastInputTimestamp(Date.now());
+      setSecondsUntilSave(null);
+    },
+    [routerNoteId],
+  );
 
   useEffect(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);

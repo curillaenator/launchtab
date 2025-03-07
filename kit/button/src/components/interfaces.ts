@@ -14,7 +14,7 @@ interface ButtonActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   fullwidth?: boolean;
   height?: CSSProperties['height'];
-  appearance?: 'primary' | 'secondary';
+  appearance?: 'primary' | 'secondary' | 'danger';
 }
 
 type ButtonGhostProps = ButtonActionProps;

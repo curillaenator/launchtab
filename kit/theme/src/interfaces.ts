@@ -36,6 +36,15 @@ interface ModedSet {
     dark: string;
     light: string;
 
+    danger: string;
+    'danger-h': string;
+    'danger-a': string;
+
+    error: string;
+    succes: string;
+    warn: string;
+    info: string;
+
     codeblock: string;
   };
 
@@ -45,6 +54,7 @@ interface ModedSet {
 }
 
 interface ShadowsSet {
+  danger: string;
   header: string;
   card: string;
   primary: string;

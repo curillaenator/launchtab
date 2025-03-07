@@ -33,6 +33,18 @@ const APPEARANCES = {
     --button-filter: none;
   `,
 
+  danger: () => css`
+    --button-text-c: ${({ theme }) => theme.white};
+    --button-text-c-h: ${({ theme }) => theme.white};
+    --button-text-c-a: ${({ theme }) => theme.white};
+
+    --button-shp-bgc: ${({ theme }) => theme.backgrounds.danger};
+    --button-shp-bgc-h: ${({ theme }) => theme.backgrounds['danger-h']};
+    --button-shp-bgc-a: ${({ theme }) => theme.backgrounds['danger-a']};
+
+    --button-filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.danger});
+  `,
+
   disabled: () => css`
     --button-text-c: ${({ theme }) => theme.texts.disabled};
     --button-text-c-h: ${({ theme }) => theme.texts.disabled};

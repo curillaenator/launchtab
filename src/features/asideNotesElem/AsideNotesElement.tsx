@@ -53,6 +53,10 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
     enabled: !!isAsideOpen,
   });
 
+  // useEffect(() => {
+  //   console.log('userSpaces', userSpaces[2]?.hierarchy);
+  // }, [userSpaces]);
+
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -166,12 +170,13 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             />
           </div>
 
-          {!!selectedSpace?.hierarchy ? (
+          {!!selectedSpace &&
+          !!keys(userSpaces.find(({ spaceCode }) => selectedSpace.spaceCode === spaceCode)?.hierarchy).length ? (
             <div className='unit-list'>
               <Hierarchy
                 queryKey={UNIT_NOTE_UNIT_QUERY}
                 rootId={selectedSpace.spaceCode}
-                rootItemsIds={selectedSpace.hierarchy}
+                rootItemsIds={userSpaces.find(({ spaceCode }) => selectedSpace.spaceCode === spaceCode)?.hierarchy}
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}
                 getItemQuery={getNoteUnitQuery}

@@ -87,7 +87,7 @@ const CreateNoteHeader: FC<CreateNoteHeaderProps> = (props) => {
         className='create-note-title-input'
         {...register('name', {
           required: 'Set note title',
-          minLength: { value: 8, message: 'Please use at least 8 chars' },
+          minLength: { value: 3, message: 'Please use at least 3 chars' },
           maxLength: { value: 64, message: 'Please do not go above 64 chars' },
         })}
       />

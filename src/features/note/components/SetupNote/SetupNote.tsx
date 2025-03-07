@@ -10,13 +10,14 @@ import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
 import { Input, Titlewrap, Switch } from '@launch-ui/input';
 
-import { useUnitUpdate, type LaunchUnitProps } from '@src/entities/note';
+import { useUnitUpdate, useUnitDelete, type LaunchUnitProps } from '@src/entities/note';
 
 import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import SaveIcon from '@src/assets/svg/save.svg';
+import BinIcon from '@src/assets/svg/trash.svg';
 
 const SetupNoteStyled = styled.form`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
@@ -37,6 +38,10 @@ const SetupNoteStyled = styled.form`
     gap: 16px;
 
     width: 100%;
+    margin-top: 24px;
+  }
+
+  .form-danger-zone {
     margin-top: 24px;
   }
 
@@ -61,9 +66,9 @@ interface SetupNoteFormFields {
 const SetupNote: FC<SetupNoteProps> = (props) => {
   const { closePopup, unit } = props;
 
-  const [isRevalidating, setIsRevalidating] = useState<boolean>(false);
-
   const qc = useQueryClient();
+
+  const [isRevalidating, setIsRevalidating] = useState<boolean>(false);
 
   const {
     control,
@@ -71,6 +76,8 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
     handleSubmit,
     formState: { errors, dirtyFields },
   } = useForm<SetupNoteFormFields>({ defaultValues: { name: unit.name, locked: !!unit.locked } });
+
+  const { mutate: deleteUnit, isPending: isUnitDeleting } = useUnitDelete(unit.code);
 
   const { mutate: updateUnit, isPending: isUnitUpdating } = useUnitUpdate({
     unitCode: unit.code,
@@ -130,11 +137,27 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
             )}
           />
         </Titlewrap>
+
+        <Titlewrap title='Delete note'>
+          <ButtonAction
+            LeftIcon={() => <BinIcon />}
+            appearance='danger'
+            title='Delete note'
+            type='button'
+            onClick={(e) => {
+              e.preventDefault();
+
+              if (confirm(`Are you sure to delete ${unit.name}?`)) deleteUnit();
+            }}
+          />
+        </Titlewrap>
       </div>
 
       <div className='form-control'>
         <ButtonAction
-          disabled={isUnitUpdating || isRevalidating || !keys(dirtyFields).length || !!keys(errors).length}
+          disabled={
+            isUnitDeleting || isUnitUpdating || isRevalidating || !keys(dirtyFields).length || !!keys(errors).length
+          }
           type='submit'
           title='Save'
           LeftIcon={() => <SaveIcon />}
@@ -149,7 +172,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
           }}
         />
 
-        {(isUnitUpdating || isRevalidating) && <Loader />}
+        {(isUnitDeleting || isUnitUpdating || isRevalidating) && <Loader />}
       </div>
     </SetupNoteStyled>
   );

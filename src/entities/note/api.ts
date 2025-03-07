@@ -1,14 +1,56 @@
-import { doc, getDoc, setDoc, updateDoc, collection, addDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, collection, addDoc, deleteDoc } from 'firebase/firestore';
 import { fsdb } from '@src/api/firebase';
+import { omit, keys, mapValues } from 'lodash';
 
 import type { LaunchUnitProps } from './interfaces';
+import type { LaunchSpaceProps } from '../space';
+
+interface DeleteNoteMutationQueryPayload {
+  unit: LaunchUnitProps;
+  currentSpace: LaunchSpaceProps | null;
+}
+
+const deleteNoteMutationQuery = async (payload: DeleteNoteMutationQueryPayload) => {
+  const { unit, currentSpace } = payload;
+  const { code: unitCode, path: unitPath, hierarchy: unitHierarchy } = unit;
+
+  const isParentUnit = !!unitPath.length;
+  const parentId = isParentUnit ? unitPath[unitPath.length - 1] : currentSpace?.spaceCode || null;
+  const dbPath = isParentUnit ? 'units' : 'spaces';
+
+  const { hierarchy: parentHierarchy = {} } = await getDoc(doc(fsdb, dbPath, parentId as string)).then((snap) => {
+    if (!snap.exists()) return { hierarchy: {} };
+    return snap.data() as { hierarchy: LaunchUnitProps['hierarchy'] };
+  });
+
+  const clearedParentHierarchy = mapValues(omit(parentHierarchy, unitCode), (order) =>
+    order <= parentHierarchy[unitCode] ? order : order - 1,
+  );
+
+  console.log('clearedParentHierarchy', clearedParentHierarchy);
+
+  // перенос детей удаляемого юнита в родителя юнита
+  if (!!keys(unitHierarchy).length) {
+    await updateDoc(doc(fsdb, dbPath, parentId as string), {
+      hierarchy: {
+        ...clearedParentHierarchy,
+        ...mapValues(unitHierarchy, (order) => order + keys(clearedParentHierarchy).length),
+      },
+    });
+  } else {
+    await updateDoc(doc(fsdb, dbPath, parentId as string), { hierarchy: clearedParentHierarchy });
+  }
+
+  await deleteDoc(doc(fsdb, 'notes', unitCode));
+  await deleteDoc(doc(fsdb, 'units', unitCode));
+};
 
 interface CreateNoteMutationQueryPayload {
   uid: string;
   path: string[];
   formData: Partial<LaunchUnitProps> & { noteBody: string };
   parentUnitId: string | null;
-  parentSpace: { spaceCode: string | null; hierarchy?: Record<string, number> } | null;
+  parentSpace: LaunchSpaceProps | null;
   createUnitIdx: number;
 }
 
@@ -90,5 +132,6 @@ export {
   updateUnitMutation,
   updateNoteBodyMutation,
   createNoteMutationQuery,
+  deleteNoteMutationQuery,
   type CreateNoteMutationQueryPayload,
 };

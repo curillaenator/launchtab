@@ -8,5 +8,6 @@ export { useNoteBodyData, useNoteUnitData } from './hooks/useNoteBodyData';
 export { useUnitUpdate } from './hooks/useUnitUpdate';
 export { useNoteBodyUpdate } from './hooks/useNoteBodyUpdate';
 export { useNoteCreate } from './hooks/useNoteCreate';
+export { useUnitDelete } from './hooks/useUnitDelete';
 
 export type { NotesCreateParamType, NotesRouteParams, LaunchUnitProps } from './interfaces';

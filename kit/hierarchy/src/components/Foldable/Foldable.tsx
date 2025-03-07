@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useUnit as UseEffectorUnit } from 'effector-react';
-import { toPairs } from 'lodash';
+import { toPairs, keys } from 'lodash';
 import cn from 'classnames';
 
 import { $hierarchyStore, registerHierarchyItem, updateHierarchy } from '../../service/store';
@@ -57,7 +57,7 @@ export const Foldable: FC<FoldableProps> = (props) => {
 
   // const { liDropHandlers } = useDragNDrop(props);
 
-  const hasChildren = !!unitData?.hierarchy;
+  const hasChildren = !!keys(unitData?.hierarchy).length;
 
   return (
     <li

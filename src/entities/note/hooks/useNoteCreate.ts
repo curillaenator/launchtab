@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useUnit as UseEffectorUnit } from 'effector-react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import type { RichTextJsonContent } from '@launch-ui/richtext';
@@ -25,8 +25,8 @@ const useNoteCreate = () => {
   const { search } = useLocation();
   const parentUnitId = new URLSearchParams(search).get('parent');
 
-  const { uid, spaces: spaceIdList } = UseEffectorUnit($userStore);
-  const { space: currentSpace = null } = UseEffectorUnit($spaceStore);
+  const { uid, spaces: spaceIdList } = useEffectorUnit($userStore);
+  const { space: currentSpace = null } = useEffectorUnit($spaceStore);
 
   const parentUnitData = qc.getQueryData<LaunchUnitProps>([UNIT_NOTE_UNIT_QUERY, parentUnitId]);
 

@@ -52,6 +52,15 @@ const getLightModeColors = (neutral: ColorSet): ModedSet => ({
     dark: neutral[100],
     light: neutral[100],
 
+    danger: colorsLib.danger[500],
+    'danger-h': colorsLib.danger[700],
+    'danger-a': colorsLib.danger[300],
+
+    error: colorsLib.danger[100],
+    succes: colorsLib.nika[100],
+    warn: colorsLib.orange[100],
+    info: colorsLib.ultra[100],
+
     codeblock: neutral[700],
   },
 
@@ -95,6 +104,15 @@ const getDarkModeColors = (neutral: ColorSet): ModedSet => ({
     dark: neutral[800],
     light: neutral[600],
 
+    danger: colorsLib.danger[500],
+    'danger-h': colorsLib.danger[700],
+    'danger-a': colorsLib.danger[300],
+
+    error: colorsLib.danger[900],
+    succes: colorsLib.nika[900],
+    warn: colorsLib.orange[900],
+    info: colorsLib.ultra[900],
+
     codeblock: neutral[700],
   },
 
@@ -117,6 +135,7 @@ const getLightModeShadows = (primarySet: ColorSet, neutralSet: ColorSet): Shadow
   card: `0px 0px 8px ${hsla(primarySet[500], 0.15)}`,
   drawer: `0px 0px 8px ${hsla(neutralSet[900], 0.15)}`,
   primary: `0px 2px 6px ${hsla(primarySet[500], 0.8)}`,
+  danger: `0px 2px 6px ${hsla(colorsLib.danger[500], 0.8)}`,
 });
 
 const getDarkModeShadows = (primarySet: ColorSet, neutralSet: ColorSet): ShadowsSet => ({
@@ -124,6 +143,7 @@ const getDarkModeShadows = (primarySet: ColorSet, neutralSet: ColorSet): Shadows
   card: `0px 0px 8px ${hsla(neutralSet[700], 0.5)}`,
   drawer: `0px 0px 8px ${hsla(neutralSet[700], 0.5)}`,
   primary: `0px 2px 6px ${hsla(primarySet[500], 0.8)}`,
+  danger: `0px 2px 6px ${hsla(colorsLib.danger[500], 0.8)}`,
 });
 
 export {

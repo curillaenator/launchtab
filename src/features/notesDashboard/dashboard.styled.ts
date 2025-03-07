@@ -18,7 +18,20 @@ const DashboardContainer = styled.div<{ height: CSSProperties['height'] }>`
   flex: 1 1 auto;
   border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: 28px;
+
+  .dashboard-block {
+    padding: var(--layout-pd);
+
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+  }
+
+  .highlighted {
+    color: ${({ theme }) => theme.primary[500]};
+  }
 `;
 
 export { DashboardContainer as NoteContainer };

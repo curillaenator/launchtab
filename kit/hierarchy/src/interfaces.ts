@@ -1,6 +1,4 @@
-import type { FC, MutableRefObject } from 'react';
-
-// import type { HierarchyItemAction } from './components/Actions';
+import type { FC } from 'react';
 
 type HierarchyState = Record<string, HierarchyServiceItem>;
 
@@ -43,9 +41,6 @@ interface HierarchyProps {
 
   rootId: string;
   rootItemsIds: HierarchyTree;
-  onRootIdsChange?: (rootId: string, hierarchyStore: HierarchyState) => void;
-
-  storeStatesCache?: MutableRefObject<Record<string, HierarchyState>>;
 
   queryKey: string;
   getItemQuery: (code: string) => Promise<HierarchyItem | null>;

@@ -5,18 +5,18 @@ import { useQuery } from '@tanstack/react-query';
 import { keys } from 'lodash';
 
 import { Dropable } from '@launch-ui/dropable';
-import { Hierarchy, type HierarchyState } from '@launch-ui/hierarchy';
+import { Hierarchy } from '@launch-ui/hierarchy';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Corners } from '@launch-ui/shape';
 import { Loader } from '@launch-ui/loader';
 
 import { useDropable } from '@src/hooks/useDropable';
-import { useLayoutContext } from '@src/hooks/useLayoutContext';
 
-import { getUserSpacesQuery, updateLastViewedSpace, LaunchSpaceProps } from '@src/entities/space';
+import { getUserSpacesQuery, updateLastViewedSpace } from '@src/entities/space';
 
 import { $userStore } from '@src/entities/user';
 import { $appStore } from '@src/entities/app';
+import { $spaceStore, setSelectedSpace } from '@src/entities/space';
 import { getNoteUnitQuery } from '@src/entities/note';
 
 import { MAX_SPACES_PER_USER, MAX_UNITS_PER_SPACE } from '@src/shared/appConfig';
@@ -31,23 +31,21 @@ type CreateParamType = 'space' | 'note';
 
 import FolderIcon from '@src/assets/svg/folder.svg';
 
+type RouteParams = {
+  noteId?: string;
+  createPageType?: CreateParamType;
+};
+
 const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
   const navigate = useNavigate();
-  const { createPageType } = useParams<{
-    noteId?: string;
-    createPageType?: CreateParamType;
-  }>();
+  const { createPageType } = useParams<RouteParams>();
 
-  const { currentSpaceRef, setCurrentSpaceRef } = useLayoutContext();
+  const { spaces: spaceIdList = [], lastViewedSpace } = useEffectorUnit($userStore);
+  const { space: selectedSpace } = useEffectorUnit($spaceStore);
   const { isAsideOpen } = useEffectorUnit($appStore);
-  const { spaces: spaceIdList = [] } = useEffectorUnit($userStore);
-
-  const spacesLastHierarchyStores = useRef<Record<string, HierarchyState>>({});
 
   const [showCreateSapceButtonLoader, setShowCreateSapceButtonLoader] = useState(false);
   const [isCreateSpaceButton, setIsCreateSpaceButton] = useState<boolean>(false);
-
-  const [selectedSpace, setSelectedSpace] = useState<LaunchSpaceProps | null>(null);
 
   const { data: userSpaces = [] } = useQuery({
     queryKey: [USER_SPACES_QUERY, spaceIdList],
@@ -80,18 +78,12 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
   }, [userSpaces]);
 
   useEffect(() => {
-    const existinglastViewedSpace =
-      userSpaces?.find(
-        (sp) => sp.spaceCode === currentSpaceRef.current?.spaceCode, // || sp.spaceCode === lastViewedSpace,
-      ) ||
-      userSpaces?.[0] ||
-      null;
+    const targetLastViwedSpace = !!selectedSpace ? selectedSpace.spaceCode : lastViewedSpace;
 
-    if (!!existinglastViewedSpace?.spaceCode) {
-      setCurrentSpaceRef(existinglastViewedSpace);
-      setSelectedSpace(existinglastViewedSpace);
-    }
-  }, [userSpaces, setCurrentSpaceRef, currentSpaceRef]);
+    const spaceToSet = userSpaces?.find((sp) => sp.spaceCode === targetLastViwedSpace) || userSpaces?.[0] || null;
+
+    if (!!spaceToSet?.spaceCode && targetLastViwedSpace !== selectedSpace?.spaceCode) setSelectedSpace(spaceToSet);
+  }, [selectedSpace, userSpaces, lastViewedSpace]);
 
   const {
     isOpen: isSpaceSelectorOpen = false,
@@ -150,7 +142,6 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                   title={userSpace.name}
                   onClick={() => {
                     setSelectedSpace(userSpace);
-                    setCurrentSpaceRef(userSpace);
                     updateLastViewedSpace(uid!, userSpace.spaceCode);
                     closeSpaceSelector?.();
                   }}
@@ -179,13 +170,11 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             <div className='unit-list'>
               <Hierarchy
                 queryKey={UNIT_NOTE_UNIT_QUERY}
-                storeStatesCache={spacesLastHierarchyStores}
                 rootId={selectedSpace.spaceCode}
                 rootItemsIds={selectedSpace.hierarchy}
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}
                 getItemQuery={getNoteUnitQuery}
-                onRootIdsChange={(rootId, store) => (spacesLastHierarchyStores.current[rootId] = store)}
                 ItemLoader={() => <Loader iconSize='24px' iconPadding='4px' />}
               />
             </div>

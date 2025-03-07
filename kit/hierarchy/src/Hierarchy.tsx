@@ -10,14 +10,15 @@ import type { HierarchyProps } from './interfaces';
 import styles from './styles.module.scss';
 
 export const Hierarchy: FC<HierarchyProps> = (props) => {
-  const { rootId, rootItemsIds, onRootIdsChange, storeStatesCache } = props;
+  const { rootId, rootItemsIds } = props;
 
   // rootId should not be in deps
   useEffect(() => {
-    if (!!storeStatesCache?.current[rootId]) setHierarchyStore(storeStatesCache.current[rootId]);
+    const rootPrestate = sessionStorage.getItem(rootId);
+    if (!!rootPrestate) setHierarchyStore(JSON.parse(rootPrestate));
 
     return () => {
-      onRootIdsChange?.(rootId, $hierarchyStore.getState());
+      sessionStorage.setItem(rootId, JSON.stringify($hierarchyStore.getState()));
       setHierarchyStore(null);
     };
   }, [rootItemsIds]); // eslint-disable-line react-hooks/exhaustive-deps

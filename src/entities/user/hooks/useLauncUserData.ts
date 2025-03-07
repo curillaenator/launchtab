@@ -30,7 +30,7 @@ const useLauncUserData = (user: LaunchStoreUser) => {
     if (userLaunchData) {
       setUser(pick(userLaunchData, ['lastViewedSpace', 'spaces']));
 
-      const isLocalSameAsIncoming = isEqual(userLaunchData.settings, JSON.parse(localSettings || ''));
+      const isLocalSameAsIncoming = isEqual(userLaunchData.settings, JSON.parse(localSettings || '{}'));
 
       if (!isLocalSameAsIncoming) {
         setSettings(userLaunchData.settings as SettingsStore);

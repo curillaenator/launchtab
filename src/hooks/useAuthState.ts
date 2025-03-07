@@ -7,6 +7,7 @@ const useAuthState = () => {
   const [appLoading, setAppLoading] = useState(false);
 
   useEffect(() => {
+    sessionStorage.clear();
     setAppLoading(true);
 
     const unsubAuth = onAuthStateChanged(auth, async (user) => {

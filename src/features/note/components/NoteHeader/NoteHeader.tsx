@@ -12,12 +12,10 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
 
 import { useICan } from '@src/hooks/useICan';
-import { LAUNCH_HEADER_BDRS } from '@src/shared/appConfig';
+import { LAUNCH_HEADER_BDRS, MAX_UNITS_PER_UNIT, MAX_UNITS_DEPTH } from '@src/shared/appConfig';
 
 import { SetupNote } from '../SetupNote';
 import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
-
-import { MAX_UNITS_PER_UNIT } from '@src/shared/appConfig';
 
 import SwitchesIcon from '@src/assets/svg/switches.svg';
 import AddDocumentIcon from '@src/assets/svg/addDocument.svg';
@@ -30,6 +28,9 @@ export const NoteHeader: FC = () => {
 
   const iCan = useICan();
   const iCanEdit = iCan.edit(noteUnit);
+  const iCanInsert =
+    keys(noteUnit?.hierarchy).length < MAX_UNITS_PER_UNIT && (noteUnit?.path.length || 0) < MAX_UNITS_DEPTH;
+
   const [editOpen, setEditOpen] = useState<boolean>(false);
 
   const { isNoteSaving, lastInputTimestamp, saveNoteHandler } = useEffectorUnit($noteStore);
@@ -108,7 +109,7 @@ export const NoteHeader: FC = () => {
           {iCanEdit && !isNoteSaving && !secondsUntilSave && (
             <>
               <ButtonGhost
-                disabled={keys(noteUnit?.hierarchy).length >= MAX_UNITS_PER_UNIT}
+                disabled={!iCanInsert}
                 RightIcon={() => <AddDocumentIcon />}
                 title='Insert note'
                 onClick={(e) => {

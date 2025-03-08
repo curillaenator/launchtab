@@ -1,8 +1,7 @@
 import React, { FC, useEffect, useState, memo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useQuery } from '@tanstack/react-query';
-import { keys } from 'lodash';
+import { keys, isEqual } from 'lodash';
 
 import { Dropable } from '@launch-ui/dropable';
 import { Hierarchy } from '@launch-ui/hierarchy';
@@ -12,15 +11,13 @@ import { Loader } from '@launch-ui/loader';
 
 import { useDropable } from '@src/hooks/useDropable';
 
-import { getUserSpacesQuery, updateLastViewedSpace } from '@src/entities/space';
-
 import { $userStore } from '@src/entities/user';
 import { $appStore } from '@src/entities/app';
-import { $spaceStore, setSelectedSpace } from '@src/entities/space';
 import { getNoteUnitQuery } from '@src/entities/note';
+import { $spaceStore, setSelectedSpace, useSpaces, updateLastViewedSpace } from '@src/entities/space';
 
-import { MAX_SPACES_PER_USER, MAX_UNITS_PER_SPACE } from '@src/shared/appConfig';
-import { USER_SPACES_QUERY, UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
+import { MAX_SPACES_PER_USER, MAX_UNITS_PER_SPACE, COMMON_USERS_DOCS_SPACE } from '@src/shared/appConfig';
+import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
@@ -47,15 +44,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
   const [showCreateSapceButtonLoader, setShowCreateSapceButtonLoader] = useState(false);
   const [isCreateSpaceButton, setIsCreateSpaceButton] = useState<boolean>(false);
 
-  const { data: userSpaces = [] } = useQuery({
-    queryKey: [USER_SPACES_QUERY, spaceIdList],
-    queryFn: () => getUserSpacesQuery(spaceIdList),
-    enabled: !!isAsideOpen,
-  });
-
-  // useEffect(() => {
-  //   console.log('userSpaces', userSpaces[2]?.hierarchy);
-  // }, [userSpaces]);
+  const { data: userSpaces = [] } = useSpaces(spaceIdList, { enabled: isAsideOpen });
 
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -83,10 +72,9 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
 
   useEffect(() => {
     const targetLastViwedSpace = !!selectedSpace ? selectedSpace.spaceCode : lastViewedSpace;
-
     const spaceToSet = userSpaces?.find((sp) => sp.spaceCode === targetLastViwedSpace) || userSpaces?.[0] || null;
 
-    if (!!spaceToSet?.spaceCode && targetLastViwedSpace !== selectedSpace?.spaceCode) setSelectedSpace(spaceToSet);
+    if (!isEqual(spaceToSet, selectedSpace)) setSelectedSpace(spaceToSet);
   }, [selectedSpace, userSpaces, lastViewedSpace]);
 
   const {
@@ -162,7 +150,10 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             />
 
             <ButtonAction
-              disabled={keys(selectedSpace?.hierarchy).length >= MAX_UNITS_PER_SPACE}
+              disabled={
+                selectedSpace?.spaceCode === COMMON_USERS_DOCS_SPACE ||
+                keys(selectedSpace?.hierarchy).length >= MAX_UNITS_PER_SPACE
+              }
               LeftIcon={() => <AddDocumentIcon />}
               appearance='secondary'
               onClick={() => navigate('/notes/create/note')}
@@ -176,7 +167,9 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               <Hierarchy
                 queryKey={UNIT_NOTE_UNIT_QUERY}
                 rootId={selectedSpace.spaceCode}
-                rootItemsIds={userSpaces.find(({ spaceCode }) => selectedSpace.spaceCode === spaceCode)?.hierarchy}
+                rootItemsIds={
+                  userSpaces.find(({ spaceCode }) => selectedSpace.spaceCode === spaceCode)?.hierarchy || {}
+                }
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}
                 getItemQuery={getNoteUnitQuery}

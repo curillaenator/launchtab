@@ -19,17 +19,18 @@ const TitlewrapStyled = styled.div`
 
 interface ITitlewrap extends PropsWithChildren {
   title: string;
+  titleColor?: string;
   titleType?: ITypographyTypes;
   noOffset?: boolean;
   className?: string;
 }
 
 export const Titlewrap: FC<ITitlewrap> = (props) => {
-  const { title, titleType = 'RoundedBold20', children, noOffset = false, className } = props;
+  const { title, titleType = 'RoundedBold20', children, noOffset = false, titleColor, className } = props;
 
   return (
     <TitlewrapStyled className={className || 'titlewrap'}>
-      <Typography as='h2' type={titleType} className='titlewrap-title'>
+      <Typography as='h2' type={titleType} className='titlewrap-title' color={titleColor || 'inherit'}>
         {title}
       </Typography>
 

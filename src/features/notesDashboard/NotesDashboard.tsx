@@ -1,19 +1,17 @@
 import React, { FC, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useQuery } from '@tanstack/react-query';
 
 import { Typography } from '@launch-ui/typography';
 import { Corners } from '@launch-ui/shape';
 import { Modal } from '@launch-ui/modal';
 
 import { $userStore } from '@src/entities/user';
-import { getUserSpacesQuery, LaunchSpaceProps } from '@src/entities/space';
+import { LaunchSpaceProps, useSpaces } from '@src/entities/space';
 
-import { USER_SPACES_QUERY } from '@src/shared/queryKeys';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
-import { DashCard } from './DashCard';
-import { SetupSpace } from './SetupSpace';
+import { DashCard } from './components/DashCard/DashCard';
+import { SetupSpace } from './components/SetupSpace/SetupSpace';
 import { NoteContainer } from './dashboard.styled';
 
 const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
@@ -22,12 +20,7 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const [spaceSetupOpen, setSpaceSetupOpen] = useState<boolean>(false);
   const [setupSpace, setSetupSpace] = useState<LaunchSpaceProps | null>(null);
 
-  const { data: userSpaces = [] } = useQuery({
-    queryKey: [USER_SPACES_QUERY, spaceIdList],
-    queryFn: () => getUserSpacesQuery(spaceIdList),
-  });
-
-  console.log('userSpaces', userSpaces);
+  const { data: userSpaces = [] } = useSpaces(spaceIdList);
 
   return (
     <>
@@ -49,7 +42,8 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
               key={userSpace.spaceCode}
               title={userSpace.name}
               hierarchy={userSpace.hierarchy}
-              onClick={() => {
+              createdBy={userSpace.createdBy}
+              onSetup={() => {
                 setSetupSpace(userSpace);
                 setSpaceSetupOpen(true);
               }}

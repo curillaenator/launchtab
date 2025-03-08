@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
+import { useUnit as useEffectorUnit } from 'effector-react';
 import { useForm, Controller } from 'react-hook-form';
-// import { useQueryClient } from '@tanstack/react-query';
-import styled from 'styled-components';
+import { useQueryClient } from '@tanstack/react-query';
+import { useTheme } from 'styled-components';
 import { keys } from 'lodash';
 
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
@@ -10,80 +11,81 @@ import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
 import { Input, Titlewrap } from '@launch-ui/input';
 
-import { type LaunchSpaceProps } from '@src/entities/space';
+import { $userStore } from '@src/entities/user';
+import {
+  // $spaceStore,
+  useUpdateSpace,
+  useDeleteSpace,
+  // setSelectedSpace,
+  type LaunchSpaceProps,
+} from '@src/entities/space';
 
-// import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
+import { USER_SPACES_QUERY, USER_QUERY } from '@src/shared/queryKeys';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
+import { SetupSpaceStyled } from './setupspace.styled';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import SaveIcon from '@src/assets/svg/save.svg';
-// import BinIcon from '@src/assets/svg/trash.svg';
-
-const SetupSpaceStyled = styled.form`
-  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
-  --shp-bdc: transparent;
-
-  // for corners
-  position: relative;
-
-  width: 768px;
-
-  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
-  background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: var(--layout-pd);
-
-  .form-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    width: 100%;
-    margin-top: 24px;
-  }
-
-  .form-danger-zone {
-    margin-top: 24px;
-  }
-
-  .form-control {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-`;
+import BinIcon from '@src/assets/svg/trash.svg';
 
 interface SetupSpaceProps {
   closePopup: () => void;
   space: LaunchSpaceProps;
 }
 
-interface SetupSpaceFormFields {
-  name: string;
-}
-
 const SetupSpace: FC<SetupSpaceProps> = (props) => {
   const { closePopup, space } = props;
 
-  // const qc = useQueryClient();
+  const { uid, spaces: spaceIdList } = useEffectorUnit($userStore);
+  // const { space: selectedSpace } = useEffectorUnit($spaceStore);
 
-  const [
-    isRevalidating,
-    // setIsRevalidating
-  ] = useState<boolean>(false);
+  const qc = useQueryClient();
+  const theme = useTheme();
+
+  const [isRevalidating, setIsRevalidating] = useState<boolean>(false);
 
   const {
     control,
     reset,
     handleSubmit,
     formState: { errors, dirtyFields },
-  } = useForm<SetupSpaceFormFields>({ defaultValues: { name: space.name } });
+  } = useForm<{ name: string }>({ defaultValues: { name: space.name } });
+
+  const { mutate: updateSpace, isPending: isSpaceUpdating } = useUpdateSpace(space.spaceCode, uid!, {
+    onSuccess: async (updatedSpaceCode) => {
+      if (!updatedSpaceCode) {
+        alert('oops... something went wrong, please reload');
+        return;
+      }
+
+      setIsRevalidating(true);
+      await qc.invalidateQueries({ queryKey: [USER_SPACES_QUERY, spaceIdList] });
+      setIsRevalidating(false);
+
+      reset();
+      closePopup();
+    },
+  });
+
+  const { mutate: deleteSpace, isPending: isSpaceDeleting } = useDeleteSpace(space, {
+    onSuccess: async () => {
+      setIsRevalidating(true);
+      await qc.invalidateQueries({ queryKey: [USER_QUERY, uid] });
+      setIsRevalidating(false);
+
+      reset();
+      closePopup();
+    },
+  });
+
+  const showLoader = isSpaceDeleting || isSpaceUpdating || isRevalidating;
 
   return (
     <SetupSpaceStyled
       onSubmit={handleSubmit((formData) => {
         console.log('formData', formData);
-        // updateUnit(formData);
+        updateSpace(formData);
       })}
     >
       <Corners borderRadius={LAUNCH_PAPER_BDRS} />
@@ -105,6 +107,8 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
             render={({ field }) => (
               <Input
                 {...field}
+                //@ts-expect-error
+                disabled={showLoader}
                 icon={() => <LabelIcon />}
                 aria-required
                 state={errors.name ? 'error' : 'normal'}
@@ -116,24 +120,28 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
           />
         </Titlewrap>
 
-        {/* <Titlewrap title='Delete note'>
+        <div style={{ height: 24 }} />
+        <Titlewrap title='Danger zone' titleColor={theme.texts.error}>
           <ButtonAction
             LeftIcon={() => <BinIcon />}
             appearance='danger'
-            title='Delete note'
+            title='Delete space'
             type='button'
             onClick={(e) => {
               e.preventDefault();
 
-              // if (confirm(`Are you sure to delete ${unit.name}?`)) deleteUnit();
+              if (confirm(`Are you sure to delete space ${space.name}?`)) {
+                deleteSpace();
+              }
             }}
           />
-        </Titlewrap> */}
+        </Titlewrap>
+        <div style={{ height: 24 }} />
       </div>
 
       <div className='form-control'>
         <ButtonAction
-          disabled={isRevalidating || !keys(dirtyFields).length || !!keys(errors).length}
+          disabled={showLoader || !keys(dirtyFields).length || !!keys(errors).length}
           type='submit'
           title='Save'
           LeftIcon={() => <SaveIcon />}
@@ -142,13 +150,14 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
         <ButtonGhost
           type='button'
           title='Cancel'
+          disabled={showLoader}
           onClick={() => {
             reset();
             closePopup();
           }}
         />
 
-        {isRevalidating && <Loader />}
+        {showLoader && <Loader />}
       </div>
     </SetupSpaceStyled>
   );

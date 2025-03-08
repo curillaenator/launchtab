@@ -3,6 +3,8 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { fsdb, auth } from '@src/api/firebase';
 import { pick } from 'lodash';
 
+import { COMMON_USERS_DOCS_SPACE } from '@src/shared/appConfig';
+
 import { setSettings } from '../settings';
 import { setTabsWithoutDbUpdate } from '../bookmarks';
 import { setUser } from './store';
@@ -33,7 +35,7 @@ async function getUserLaunchDataQuery(user: LaunchStoreUser) {
   const userSnap = await getDoc(doc(fsdb, 'users', user.uid));
 
   if (!userSnap.exists()) {
-    await setDoc(doc(fsdb, 'users', user.uid), user);
+    await setDoc(doc(fsdb, 'users', user.uid), { ...user, spaces: [COMMON_USERS_DOCS_SPACE] });
     return null;
   }
 

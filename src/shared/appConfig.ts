@@ -7,6 +7,8 @@ const LAUNCH_HEADER_BDRS = 16.8; // max for 48 height (16.8 * 1.25 + 3), see Cor
 const LAUNCH_PAPER_BDRS = 32;
 const LAUNCH_CARD_BDRS = 24;
 
+const COMMON_USERS_DOCS_SPACE = 'launch-documents';
+
 export {
   MAX_SPACES_PER_USER,
   MAX_UNITS_PER_SPACE,
@@ -16,4 +18,5 @@ export {
   LAUNCH_PAPER_BDRS,
   LAUNCH_HEADER_BDRS,
   LAUNCH_CARD_BDRS,
+  COMMON_USERS_DOCS_SPACE,
 };

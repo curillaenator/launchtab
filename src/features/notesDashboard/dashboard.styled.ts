@@ -26,6 +26,7 @@ const DashboardContainer = styled.div<{ height: CSSProperties['height'] }>`
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
+      padding: 0 var(--layout-pd);
     }
   }
 

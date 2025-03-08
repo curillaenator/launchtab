@@ -35,8 +35,14 @@ async function getUserLaunchDataQuery(user: LaunchStoreUser) {
   const userSnap = await getDoc(doc(fsdb, 'users', user.uid));
 
   if (!userSnap.exists()) {
-    await setDoc(doc(fsdb, 'users', user.uid), { ...user, spaces: [COMMON_USERS_DOCS_SPACE] });
-    return null;
+    const defaultUserData: Partial<LaunchStoreUser> = {
+      spaces: [COMMON_USERS_DOCS_SPACE],
+      lastViewedSpace: COMMON_USERS_DOCS_SPACE,
+    };
+
+    await setDoc(doc(fsdb, 'users', user.uid), { ...user, ...defaultUserData });
+
+    return defaultUserData;
   }
 
   const dbUser = userSnap.data() as LaunchStoreUser;

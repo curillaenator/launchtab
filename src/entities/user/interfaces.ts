@@ -2,6 +2,7 @@ import { BookmarkTabProps } from '@src/entities/bookmarks';
 import { SettingsStore } from '@src/entities/settings';
 
 interface LaunchStoreUser {
+  admin?: boolean;
   uid: string | null;
   username: string | null;
   email: string | null;

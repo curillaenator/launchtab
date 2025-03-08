@@ -51,14 +51,14 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
           ))}
         </div>
 
-        <div className='dashboard-block'>
+        {/* <div className='dashboard-block'>
           <Typography as='span' type='RoundedHeavy24'>
             {'Last viewed '}
           </Typography>
           <Typography as='span' type='RoundedHeavy24' className='highlighted'>
             Notes
           </Typography>
-        </div>
+        </div> */}
       </NoteContainer>
 
       {!!setupSpace && (

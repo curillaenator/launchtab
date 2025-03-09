@@ -47,7 +47,7 @@ async function getUserLaunchDataQuery(user: LaunchStoreUser) {
 
   const dbUser = userSnap.data() as LaunchStoreUser;
 
-  return pick(dbUser, ['spaces', 'lastViewedSpace', 'settings']) as Partial<LaunchStoreUser>;
+  return pick(dbUser, ['spaces', 'lastViewedSpace', 'settings', 'admin']) as Partial<LaunchStoreUser>;
 }
 
 export { login, logout, getUserLaunchDataQuery };

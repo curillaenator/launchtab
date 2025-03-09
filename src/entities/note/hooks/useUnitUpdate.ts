@@ -1,5 +1,8 @@
-import { updateUnitMutation } from '../api';
 import { useMutation } from '@tanstack/react-query';
+import { useUnit as useEffectorUnit } from 'effector-react';
+
+import { $userStore } from '../../user';
+import { updateUnitMutation } from '../api';
 
 interface UseUnitUpdateProps {
   unitCode: string;
@@ -11,10 +14,12 @@ interface SetupFormData {
   locked: boolean;
 }
 
-const useUnitUpdate = ({ unitCode, onSuccess }: UseUnitUpdateProps) =>
-  useMutation({
+const useUnitUpdate = ({ unitCode, onSuccess }: UseUnitUpdateProps) => {
+  const { uid } = useEffectorUnit($userStore);
+
+  return useMutation({
     mutationFn: async (setupFormData: SetupFormData) =>
-      updateUnitMutation(unitCode, {
+      updateUnitMutation(uid!, unitCode, {
         unitName: setupFormData.name,
         locked: setupFormData.locked,
       }),
@@ -23,5 +28,6 @@ const useUnitUpdate = ({ unitCode, onSuccess }: UseUnitUpdateProps) =>
       onSuccess?.();
     },
   });
+};
 
 export { useUnitUpdate };

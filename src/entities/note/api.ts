@@ -66,9 +66,9 @@ const createNoteMutationQuery = async (payload: CreateNoteMutationQueryPayload) 
 
   const createdUnitId = await addDoc(collection(fsdb, 'units'), newUnit).then(async ({ id }) => {
     await setDoc(doc(fsdb, 'notes', id), {
+      createdBy: uid,
+      createdAt: Date.now(),
       tiptap: formData.noteBody,
-      updatedBy: uid,
-      updatedAt: Date.now(),
     });
 
     const dbPath = !!parentSpace?.spaceCode ? 'spaces' : 'units';
@@ -107,10 +107,16 @@ interface UpdateUnitPayload {
   locked: boolean;
 }
 
-const updateUnitMutation = async (unitCode: string, payload: UpdateUnitPayload) => {
-  const { unitName, locked } = payload;
+const updateUnitMutation = async (uid: string, unitCode: string, payload: UpdateUnitPayload) => {
+  const { unitName, locked = false } = payload;
 
-  await updateDoc(doc(fsdb, 'units', unitCode), { name: unitName, locked });
+  await updateDoc(doc(fsdb, 'units', unitCode), {
+    name: unitName,
+    locked,
+    updatedBy: uid,
+    updatedAt: Date.now(),
+  });
+
   return { updatedUnitName: unitName };
 };
 

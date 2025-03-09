@@ -79,7 +79,7 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
     },
   });
 
-  const showLoader = isSpaceDeleting || isSpaceUpdating || isRevalidating;
+  const isButtonsDisabled = isSpaceDeleting || isSpaceUpdating || isRevalidating;
 
   return (
     <SetupSpaceStyled
@@ -108,7 +108,7 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
               <Input
                 {...field}
                 //@ts-expect-error
-                disabled={showLoader}
+                disabled={isButtonsDisabled}
                 icon={() => <LabelIcon />}
                 aria-required
                 state={errors.name ? 'error' : 'normal'}
@@ -124,6 +124,8 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
         <Titlewrap title='Danger zone' titleColor={theme.texts.error}>
           <ButtonAction
             LeftIcon={() => <BinIcon />}
+            disabled={isButtonsDisabled}
+            loading={isSpaceDeleting}
             appearance='danger'
             title='Delete space'
             type='button'
@@ -141,7 +143,8 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
 
       <div className='form-control'>
         <ButtonAction
-          disabled={showLoader || !keys(dirtyFields).length || !!keys(errors).length}
+          loading={isSpaceUpdating}
+          disabled={isButtonsDisabled || !keys(dirtyFields).length || !!keys(errors).length}
           type='submit'
           title='Save'
           LeftIcon={() => <SaveIcon />}
@@ -150,14 +153,14 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
         <ButtonGhost
           type='button'
           title='Cancel'
-          disabled={showLoader}
+          disabled={isButtonsDisabled}
           onClick={() => {
             reset();
             closePopup();
           }}
         />
 
-        {showLoader && <Loader />}
+        {isRevalidating && <Loader />}
       </div>
     </SetupSpaceStyled>
   );

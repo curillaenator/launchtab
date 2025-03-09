@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { keys } from 'lodash';
 
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
@@ -67,6 +67,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
   const { closePopup, unit } = props;
 
   const qc = useQueryClient();
+  const theme = useTheme();
 
   const [isRevalidating, setIsRevalidating] = useState<boolean>(false);
 
@@ -90,6 +91,8 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
       closePopup();
     },
   });
+
+  const disabledButton = isUnitDeleting || isUnitUpdating || isRevalidating;
 
   return (
     <SetupNoteStyled
@@ -138,9 +141,12 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
           />
         </Titlewrap>
 
-        <Titlewrap title='Delete note'>
+        <div style={{ height: 24 }} />
+        <Titlewrap title='Danger zone' titleColor={theme.texts.error}>
           <ButtonAction
             LeftIcon={() => <BinIcon />}
+            loading={isUnitDeleting}
+            disabled={disabledButton}
             appearance='danger'
             title='Delete note'
             type='button'
@@ -151,13 +157,13 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
             }}
           />
         </Titlewrap>
+        <div style={{ height: 24 }} />
       </div>
 
       <div className='form-control'>
         <ButtonAction
-          disabled={
-            isUnitDeleting || isUnitUpdating || isRevalidating || !keys(dirtyFields).length || !!keys(errors).length
-          }
+          loading={isUnitUpdating}
+          disabled={disabledButton || !keys(dirtyFields).length || !!keys(errors).length}
           type='submit'
           title='Save'
           LeftIcon={() => <SaveIcon />}
@@ -166,13 +172,14 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
         <ButtonGhost
           type='button'
           title='Cancel'
+          disabled={disabledButton}
           onClick={() => {
             reset();
             closePopup();
           }}
         />
 
-        {(isUnitDeleting || isUnitUpdating || isRevalidating) && <Loader />}
+        {isRevalidating && <Loader />}
       </div>
     </SetupNoteStyled>
   );

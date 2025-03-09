@@ -3666,6 +3666,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/button@workspace:kit/button"
   dependencies:
+    "@launch-ui/loader": 1.0.0
     "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
@@ -3768,7 +3769,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@launch-ui/loader@*, @launch-ui/loader@workspace:kit/loader":
+"@launch-ui/loader@*, @launch-ui/loader@1.0.0, @launch-ui/loader@workspace:kit/loader":
   version: 0.0.0-use.local
   resolution: "@launch-ui/loader@workspace:kit/loader"
   dependencies:

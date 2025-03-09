@@ -16,6 +16,8 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 import { CreateNoteHeader } from './CreateNoteHeader';
 import { CreateNoteForm } from './createNote.styled';
 
+import CreateNoteIcon from '@src/assets/svg/addDocument.svg';
+
 type NoteFormFields = LaunchUnitProps & { noteBody: RichTextJsonContent | string };
 
 const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
@@ -64,9 +66,11 @@ const CreateNote: FC<{ maxHeight: number }> = ({ maxHeight }) => {
 
       <div className='create-note-form-field-controls'>
         <ButtonAction
+          loading={isNoteSubmitting}
           disabled={isNoteSubmitting || !keys(dirtyFields).length || !!keys(errors).length}
           type='submit'
           title='Create note'
+          LeftIcon={() => <CreateNoteIcon />}
         />
 
         <ButtonGhost type='button' title='Cancel' onClick={() => navigate('/notes')} />

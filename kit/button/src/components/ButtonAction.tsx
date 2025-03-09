@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
+import { Loader } from '@launch-ui/loader';
 
 import type { ButtonActionProps } from './interfaces';
 
@@ -124,7 +125,11 @@ const ButtonActionStyled = styled.button<ButtonActionProps>`
 
 export const ButtonAction = forwardRef<HTMLButtonElement, ButtonActionProps>((props, ref) => {
   const {
+    type = 'button',
+    height = 40,
+
     title,
+
     LeftIcon,
     RightIcon,
 
@@ -132,26 +137,27 @@ export const ButtonAction = forwardRef<HTMLButtonElement, ButtonActionProps>((pr
 
     fullwidth = false,
     active = false,
-    // danger = false,
-    type = 'button',
-    height = 40,
+    loading = false,
+    disabled = false,
+
     ...rest
   } = props;
 
   return (
     <ButtonActionStyled
+      data-action-button
       {...rest}
       ref={ref}
-      data-action-button
       appearance={appearance}
       active={active}
+      disabled={loading || disabled}
       fullwidth={fullwidth}
       type={type}
       height={height}
     >
       <Shape borderRadius={BORDER_RADIUS} />
 
-      {LeftIcon && <LeftIcon />}
+      {LeftIcon && (loading ? <Loader iconSize='24px' /> : <LeftIcon />)}
 
       {title && (
         <Typography type='RoundedBold14' className='btn_title'>
@@ -159,7 +165,7 @@ export const ButtonAction = forwardRef<HTMLButtonElement, ButtonActionProps>((pr
         </Typography>
       )}
 
-      {RightIcon && <RightIcon />}
+      {RightIcon && (loading ? <Loader iconSize='24px' /> : <RightIcon />)}
     </ButtonActionStyled>
   );
 });

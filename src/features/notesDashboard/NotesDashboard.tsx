@@ -8,10 +8,11 @@ import { Modal } from '@launch-ui/modal';
 import { $userStore } from '@src/entities/user';
 import { LaunchSpaceProps, useSpaces } from '@src/entities/space';
 
+import { SetupSpace } from '@src/features/space';
+
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
-import { DashCard } from './components/DashCard/DashCard';
-import { SetupSpace } from './components/SetupSpace/SetupSpace';
+import { DashCard } from './DashCard';
 import { NoteContainer } from './dashboard.styled';
 
 const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {

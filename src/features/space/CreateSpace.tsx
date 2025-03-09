@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useUnit as useEffectorUnit } from 'effector-react';
+import { keys } from 'lodash';
 
 import { Corners } from '@launch-ui/shape';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
@@ -18,6 +19,7 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 import { USER_QUERY } from '@src/shared/queryKeys';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
+import CreateSpaceIcon from '@src/assets/svg/addFolder.svg';
 
 const CreateSpace: FC<{ maxHeight: number }> = () => {
   const navigate = useNavigate();
@@ -27,19 +29,11 @@ const CreateSpace: FC<{ maxHeight: number }> = () => {
 
   const {
     control,
-    // register,
-    // reset,
-    // setValue,
-    // watch,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LaunchSpaceProps>({
-    defaultValues: {
-      name: '',
-    },
-  });
+    formState: { errors, dirtyFields },
+  } = useForm<LaunchSpaceProps>({ defaultValues: { name: '' } });
 
-  const { mutate: createSpace } = useCreateSpace({
+  const { mutate: createSpace, isPending: isSpaceCreating } = useCreateSpace({
     uid,
     onSuccess: ({ createdSpaceCode }) => {
       if (!!createdSpaceCode) {
@@ -62,6 +56,7 @@ const CreateSpace: FC<{ maxHeight: number }> = () => {
         <Typography as='span' type='RoundedHeavy36'>
           {'Create Launch'}
         </Typography>
+
         <Typography as='span' type='RoundedHeavy36' className='text-highlighted'>
           Space
         </Typography>
@@ -93,8 +88,21 @@ const CreateSpace: FC<{ maxHeight: number }> = () => {
       </div>
 
       <div className='create-space-form-field-controls'>
-        <ButtonAction type='submit' title='Create LaunchSpace' />
-        <ButtonGhost type='button' title='Cancel' onClick={() => navigate('/notes')} />
+        <ButtonAction
+          loading={isSpaceCreating}
+          disabled={isSpaceCreating || !keys(dirtyFields).length || !!keys(errors).length}
+          type='submit'
+          title='Create LaunchSpace'
+          LeftIcon={() => <CreateSpaceIcon />}
+        />
+
+        <ButtonGhost
+          //
+          disabled={isSpaceCreating}
+          type='button'
+          title='Cancel'
+          onClick={() => navigate('/notes')}
+        />
       </div>
     </CreateSpaceForm>
   );

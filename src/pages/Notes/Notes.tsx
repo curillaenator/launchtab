@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 import { setAside } from '@src/entities/app';
 
-import { Note, CreateSpace, CreateNote } from '@src/features/note';
 import { NotesDashboard } from '@src/features/notesDashboard';
+import { CreateSpace } from '@src/features/space';
+import { Note, CreateNote } from '@src/features/note';
 
 import 'tabulator-tables/dist/css/tabulator.min.css';
 

@@ -123,7 +123,7 @@ const updateUnitMutation = async (uid: string, unitCode: string, payload: Update
 const updateNoteBodyMutation = async (uid: string, noteId: string, noteBody: string) => {
   let response = { routerNoteId: false };
 
-  await setDoc(doc(fsdb, 'notes', noteId), {
+  await updateDoc(doc(fsdb, 'notes', noteId), {
     tiptap: noteBody,
     updatedBy: uid,
     updatedAt: Date.now(),

@@ -13,11 +13,12 @@ const getDrawioEditorURL = (drawioEmberUrl: string) => {
   const drawioUrl = parseUrlWithoutError(drawioEmberUrl);
 
   if (drawioUrl instanceof URL) {
+    drawioUrl.searchParams.append('lang', 'en');
     drawioUrl.searchParams.append('embed', '1');
     drawioUrl.searchParams.append('spin', '1');
+    drawioUrl.searchParams.append('mode', 'browser');
     drawioUrl.searchParams.append('modified', 'unsavedChanges');
     drawioUrl.searchParams.append('proto', 'json');
-    // drawioUrl.searchParams.append('ui', 'atlas');
   }
 
   return drawioUrl?.toString() || null;

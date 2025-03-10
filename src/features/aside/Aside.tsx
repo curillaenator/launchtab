@@ -29,9 +29,8 @@ export const Aside: FC = memo(() => {
         <Typography as='span' type='RoundedHeavy36'>
           Launch
         </Typography>
-
         <Typography as='span' type='RoundedHeavy36' className='highlighted'>
-          Tabs
+          App
         </Typography>
       </AsideHeader>
 

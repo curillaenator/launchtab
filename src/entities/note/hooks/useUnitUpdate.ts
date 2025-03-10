@@ -3,22 +3,18 @@ import { useUnit as useEffectorUnit } from 'effector-react';
 
 import { $userStore } from '../../user';
 import { updateUnitMutation } from '../api';
+import type { SetupNoteFormData } from '../interfaces';
 
 interface UseUnitUpdateProps {
   unitCode: string;
   onSuccess?: () => void;
 }
 
-interface SetupFormData {
-  name: string;
-  locked: boolean;
-}
-
 const useUnitUpdate = ({ unitCode, onSuccess }: UseUnitUpdateProps) => {
   const { uid } = useEffectorUnit($userStore);
 
   return useMutation({
-    mutationFn: async (setupFormData: SetupFormData) =>
+    mutationFn: async (setupFormData: SetupNoteFormData) =>
       updateUnitMutation(uid!, unitCode, {
         unitName: setupFormData.name,
         locked: setupFormData.locked,

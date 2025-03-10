@@ -68,7 +68,7 @@ export const useWidget = (props: UiWidgetProps) => {
             const onLoadData: DrawIoPostPata = {
               action: 'load',
               autosave: 0,
-              title: 'Wiki DrawIO',
+              title: 'DrawIO',
               xmlpng: attrs.xmlpng,
             };
 

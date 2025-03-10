@@ -50,7 +50,7 @@ export const Layout: FC = () => {
 
   const ctxValue = useContextValue();
 
-  if (isLoading) return <Loader view='fullscreen' iconSize='56px' />;
+  if (isLoading) return <Loader view='fullscreen' iconSize='40px' />;
 
   return (
     <LayoutCTX.Provider value={ctxValue}>

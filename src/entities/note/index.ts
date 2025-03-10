@@ -10,4 +10,4 @@ export { useNoteBodyUpdate } from './hooks/useNoteBodyUpdate';
 export { useNoteCreate } from './hooks/useNoteCreate';
 export { useUnitDelete } from './hooks/useUnitDelete';
 
-export type { NotesCreateParamType, NotesRouteParams, LaunchUnitProps } from './interfaces';
+export type { NotesCreateParamType, NotesRouteParams, LaunchUnitProps, SetupNoteFormData } from './interfaces';

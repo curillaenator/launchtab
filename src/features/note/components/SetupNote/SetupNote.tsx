@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { keys } from 'lodash';
 
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
@@ -10,57 +10,20 @@ import { Loader } from '@launch-ui/loader';
 import { Corners } from '@launch-ui/shape';
 import { Input, Titlewrap, Switch } from '@launch-ui/input';
 
-import { useUnitUpdate, useUnitDelete, type LaunchUnitProps } from '@src/entities/note';
+import { useUnitUpdate, useUnitDelete, type LaunchUnitProps, type SetupNoteFormData } from '@src/entities/note';
 
-import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
+import { UNIT_NOTE_UNIT_QUERY, UNIT_NOTE_BODY_QUERY } from '@src/shared/queryKeys';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
+import { SetupNoteStyled } from './setupnote.styled';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import SaveIcon from '@src/assets/svg/save.svg';
 import BinIcon from '@src/assets/svg/trash.svg';
 
-const SetupNoteStyled = styled.form`
-  --shp-bgc: ${({ theme }) => theme.backgrounds.base};
-  --shp-bdc: transparent;
-
-  // for corners
-  position: relative;
-
-  width: 768px;
-
-  border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
-  background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: var(--layout-pd);
-
-  .form-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    width: 100%;
-    margin-top: 24px;
-  }
-
-  .form-danger-zone {
-    margin-top: 24px;
-  }
-
-  .form-control {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-`;
-
 interface SetupNoteProps {
   closePopup: () => void;
   unit: LaunchUnitProps;
-}
-
-interface SetupNoteFormFields {
-  name: string;
-  locked: boolean;
 }
 
 const SetupNote: FC<SetupNoteProps> = (props) => {
@@ -76,7 +39,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
     reset,
     handleSubmit,
     formState: { errors, dirtyFields },
-  } = useForm<SetupNoteFormFields>({ defaultValues: { name: unit.name, locked: !!unit.locked } });
+  } = useForm<SetupNoteFormData>({ defaultValues: { name: unit.name, locked: !!unit.locked } });
 
   const { mutate: deleteUnit, isPending: isUnitDeleting } = useUnitDelete(unit.code);
 
@@ -85,6 +48,7 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
     onSuccess: async () => {
       setIsRevalidating(true);
       await qc.invalidateQueries({ queryKey: [UNIT_NOTE_UNIT_QUERY, unit.code] });
+      await qc.invalidateQueries({ queryKey: [UNIT_NOTE_BODY_QUERY, unit.code] });
       setIsRevalidating(false);
 
       reset();

@@ -22,4 +22,9 @@ interface NotesRouteParams extends Record<string, string | undefined> {
   createPageType?: NotesCreateParamType;
 }
 
-export type { NotesCreateParamType, NotesRouteParams, LaunchUnitProps };
+interface SetupNoteFormData {
+  name: string;
+  locked: boolean;
+}
+
+export type { NotesCreateParamType, NotesRouteParams, LaunchUnitProps, SetupNoteFormData };

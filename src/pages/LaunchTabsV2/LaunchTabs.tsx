@@ -35,7 +35,7 @@ const LaunchTabs: FC = memo(() => {
   if (isBookmarksDataLoading)
     return (
       <LaunchTabsContainer>
-        <Loader view='fit-parent' iconSize='56px' />
+        <Loader view='fit-parent' iconSize='40px' />
       </LaunchTabsContainer>
     );
 

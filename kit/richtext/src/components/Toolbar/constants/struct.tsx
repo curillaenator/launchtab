@@ -15,8 +15,8 @@ import {
   TOC_ITEMS,
   TEXT_ALIGN_ITEMS,
   TEXT_FORMAT_ITEMS,
-  COLOR_ITEMS,
-  TEXT_COLOR_CLEAR,
+  // COLOR_ITEMS,
+  // TEXT_COLOR_CLEAR,
   IMAGE_ITEMS,
   // BACKGROUND_COLOR_ITEMS,
   // TEXT_HIGHLIGHT_CLEAR,
@@ -45,18 +45,18 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
 
       (props) => <ControlSection {...props} id='text-formats-commands' items={TEXT_FORMAT_ITEMS} />,
 
-      (props) => (
-        <DropdownWithActiveCommand
-          {...props}
-          id='text-color-commands'
-          defaultValue='defaultColor'
-          items={[[...COLOR_ITEMS, TEXT_COLOR_CLEAR]]}
-          placement='bottom-start'
-          maxHeight={DROPDOWN_PARAMS.maxHeight}
-          minWidth={DROPDOWN_PARAMS.color}
-          maxWidth={DROPDOWN_PARAMS.color}
-        />
-      ),
+      // (props) => (
+      //   <DropdownWithActiveCommand
+      //     {...props}
+      //     id='text-color-commands'
+      //     defaultValue='defaultColor'
+      //     items={[[...COLOR_ITEMS, TEXT_COLOR_CLEAR]]}
+      //     placement='bottom-start'
+      //     maxHeight={DROPDOWN_PARAMS.maxHeight}
+      //     minWidth={DROPDOWN_PARAMS.color}
+      //     maxWidth={DROPDOWN_PARAMS.color}
+      //   />
+      // ),
 
       // (props) => (
       //   <DropdownWithActiveCommand

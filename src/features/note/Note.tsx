@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useRef, useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import { useParams } from 'react-router-dom';
 
@@ -25,6 +26,7 @@ import {
 
 import { useICan } from '@src/hooks/useICan';
 
+import { UNIT_NOTE_BODY_QUERY } from '@src/shared/queryKeys';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { NoteHeader } from './components/NoteHeader';
@@ -34,6 +36,8 @@ import 'tabulator-tables/dist/css/tabulator.min.css';
 
 const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const currentEditorRef = useRef<RichTextEditor | null>(null);
+
+  const qc = useQueryClient();
 
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
   const { uid } = useEffectorUnit($userStore);
@@ -50,6 +54,8 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
     uid,
     routerNoteId,
     onSuccess: () => {
+      if (!!routerNoteId) qc.invalidateQueries({ queryKey: [UNIT_NOTE_BODY_QUERY, routerNoteId] });
+
       lastRichTextEvent.current = null;
 
       if (saveDelayTimer.current) {

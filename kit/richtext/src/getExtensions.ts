@@ -24,7 +24,7 @@ import { Placeholder } from '@tiptap/extension-placeholder';
 import { FilterTable, TableHeader, TableCell } from './extensions/FilterTable';
 import { TableRow } from '@tiptap/extension-table-row';
 
-import { Link } from '@tiptap/extension-link';
+import { Link } from './extensions/Link';
 import { Highlight } from '@tiptap/extension-highlight';
 import { Color } from '@tiptap/extension-color';
 

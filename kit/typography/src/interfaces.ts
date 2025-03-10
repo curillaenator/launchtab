@@ -8,4 +8,5 @@ export interface TypographyProps {
   as?: TypeAs;
   children: string | number;
   className?: string;
+  color?: string;
 }

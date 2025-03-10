@@ -2,33 +2,36 @@ import React, { FC } from 'react';
 
 import { Button } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
-import { Shape } from '@launch-ui/shape';
+import { Corners } from '@launch-ui/shape';
 
 import { login } from '@src/entities/user';
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { FormStyled } from './styles';
 
-//@ts-expect-error
 import GoogleIcon from '@src/assets/svg/google.svg';
 
 export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
   return (
     <FormStyled onSubmit={() => login()}>
       <div className='form'>
-        <Shape className='form-shape' borderRadius={24} />
+        <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
         <div className='form-title'>
-          <Typography type='RoundedHeavy56' className='form-title-main'>
+          <Typography as='h2' type='RoundedHeavy36' className='form-title-main'>
             Sign In
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            Why? App won't save your changes unless you signed in
+            App won't save your changes unless you signed in. Also there is no chance to use built-in Notes app
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            Enter via your Google account so it'll be easy to use your saved links/tabs and customized view on any
-            device under your account
+            Entering via Google account lets you save links/tabs, use Notes app, customize app view by theming
+          </Typography>
+
+          <Typography as='p' type='TextRegular14' className='form-title-add'>
+            Saved data/app config are accessible on any device under your account
           </Typography>
         </div>
 
@@ -44,7 +47,7 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           <Button
             type='button'
             title='Sign in with Google'
-            IconLeft={GoogleIcon}
+            IconLeft={() => <GoogleIcon />}
             onClick={() => {
               closePopup();
               login();

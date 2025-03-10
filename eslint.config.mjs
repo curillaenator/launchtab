@@ -47,6 +47,8 @@ export default [
       'src/**/*.ts',
       'src/**/*.jsx',
       'src/**/*.tsx',
+      'kit/**/src/*.ts',
+      'kit/**/src/*.tsx',
     ],
 
     rules: {
@@ -68,7 +70,7 @@ export default [
       '.husky/*',
       '.yarn/*',
       '**/node_modules/*',
-      'build/*',
+      '**/build/*',
       '**/*.config.js',
     ],
   },

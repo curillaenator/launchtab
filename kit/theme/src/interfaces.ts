@@ -1,16 +1,74 @@
-import { colorsLib, colorsStaticLightMode } from './colors';
-import { hexa } from './utils';
+type ColorKey = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+type ColorSet = Record<ColorKey, string>;
 
-const themeTemplate = {
-  white: colorsLib.white,
-  black: colorsLib.black,
-  primary: colorsLib.electroviolet,
-  secondary: colorsLib.electroviolet,
-  shadows: {
-    card: `0px 0px 12px ${hexa(colorsLib.liver[800], 0.8)}`,
-    primary: `0px 6px 8px ${hexa(colorsLib.electroviolet[500], 0.8)}`,
-  },
-  ...colorsStaticLightMode,
-};
+interface ModedSet {
+  texts: {
+    base: string;
+    inversedBase: string;
+    sub: string;
+    disabled: string;
 
-export type TTheme = typeof themeTemplate;
+    codeblock: string;
+
+    error: string;
+    success: string;
+
+    placeholder: string;
+    inputColor: string;
+  };
+
+  icons: {
+    dark: string;
+    darkHover: string;
+    light: string;
+    lightHover: string;
+  };
+
+  borders: {
+    base: string;
+  };
+
+  backgrounds: {
+    base: string;
+    base20: string;
+    base40: string;
+
+    dark: string;
+    light: string;
+
+    danger: string;
+    'danger-h': string;
+    'danger-a': string;
+
+    error: string;
+    succes: string;
+    warn: string;
+    info: string;
+
+    codeblock: string;
+  };
+
+  modals: {
+    matte: string;
+  };
+}
+
+interface ShadowsSet {
+  danger: string;
+  header: string;
+  card: string;
+  primary: string;
+  drawer: string;
+}
+
+interface LaunchTheme extends ModedSet {
+  white: string;
+  black: string;
+  primary: ColorSet;
+  accent: ColorSet;
+  neutral: ColorSet;
+  secondary: ColorSet;
+  shadows: ShadowsSet;
+}
+
+export type { LaunchTheme as TTheme, ColorSet, ColorKey, ModedSet, ShadowsSet };

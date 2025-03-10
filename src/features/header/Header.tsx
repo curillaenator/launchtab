@@ -1,55 +1,31 @@
-import React, { FC, useEffect, useCallback, useState } from 'react';
+import React, { FC, memo } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 
-import styled from 'styled-components';
 import { Button } from '@launch-ui/button';
 
 import { $appStore, setAside, setRightDrawer, setSignIn } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
+import { $headerStore } from '@src/entities/header';
 
-import { SearchField } from './components/SearchField';
+import { HeaderStyled } from './header.styled';
 
-//@ts-expect-error
 import SettingsIcon from '@src/assets/svg/settings.svg';
-//@ts-expect-error
 import MeatballsIcon from '@src/assets/svg/meatballs.svg';
-//@ts-expect-error
 import LoginIcon from '@src/assets/svg/login.svg';
 
-const HeaderStyled = styled.header<{ shadowed: boolean }>`
-  z-index: 1000;
-  display: flex;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  padding: 56px 56px 0;
-  filter: drop-shadow(${({ theme, shadowed }) => (shadowed ? theme.shadows.card : '0 0 0 0 transparent')});
-  transition: filter 300ms ease;
-`;
-
-export const Header: FC = () => {
+export const Header: FC = memo(() => {
   const user = useEffectorUnit($userStore);
   const { isAsideOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
-
-  const [shadowed, setShadowed] = useState<boolean>(false);
-
-  const hanleShadowed = useCallback(() => {
-    setShadowed(window.scrollY > 56 * 2);
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener('scroll', hanleShadowed);
-    return () => document.removeEventListener('scroll', hanleShadowed);
-  }, [hanleShadowed]);
+  const { isHeaderShadowed, midComponent: MiddleComponent } = useEffectorUnit($headerStore);
 
   return (
-    <HeaderStyled shadowed={shadowed}>
-      <Button IconLeft={MeatballsIcon} onClick={() => setAside(!isAsideOpen)} />
+    <HeaderStyled isHeaderShadowed={isHeaderShadowed}>
+      <Button IconLeft={() => <MeatballsIcon />} onClick={() => setAside(!isAsideOpen)} />
 
-      <SearchField />
+      {MiddleComponent && <MiddleComponent />}
 
       <Button
-        IconLeft={!!user.uid ? SettingsIcon : LoginIcon}
+        IconLeft={() => (!!user.uid ? <SettingsIcon /> : <LoginIcon />)}
         onClick={() => {
           if (!!user.uid) {
             setRightDrawer(!isRightDrawerOpen);
@@ -60,4 +36,4 @@ export const Header: FC = () => {
       />
     </HeaderStyled>
   );
-};
+});

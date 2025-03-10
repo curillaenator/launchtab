@@ -1,59 +1,101 @@
-import React, { forwardRef } from 'react';
-import styled from 'styled-components';
+import React, { CSSProperties, forwardRef } from 'react';
+import styled, { css } from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
 
 import type { ButtonGhostProps } from './interfaces';
 
-interface IButtonStyled {
+interface ButtonGhostStyledProps {
   active: boolean;
-  danger: boolean;
+  onlyIcon: boolean;
+  height: CSSProperties['height'];
+  appearance?: 'primary' | 'secondary' | 'disabled';
 }
 
-const ButtonGhostStyled = styled.button<IButtonStyled>`
+const APPEARANCES = {
+  primary: ({ active }: ButtonGhostStyledProps) => css`
+    --button-text-c: ${({ theme }) => (active ? theme.primary[800] : theme.texts.base)};
+    --button-text-c-h: ${({ theme }) => (active ? theme.primary[800] : theme.primary[500])};
+    --button-text-c-a: ${({ theme }) => theme.primary[800]};
+  `,
+
+  secondary: ({ active }: ButtonGhostStyledProps) => css`
+    --button-text-c: ${({ theme }) => (active ? theme.white : theme.texts.base)};
+    --button-text-c-h: ${({ theme }) => (active ? theme.white : theme.primary[300])};
+    --button-text-c-a: ${({ theme }) => (active ? theme.white : theme.primary[700])};
+  `,
+
+  disabled: () => css`
+    --button-text-c: ${({ theme }) => theme.texts.disabled};
+    --button-text-c-h: ${({ theme }) => theme.texts.disabled};
+    --button-text-c-a: ${({ theme }) => theme.texts.disabled};
+  `,
+} as const;
+
+const ButtonGhostStyled = styled.button<ButtonGhostStyledProps>`
+  &:not(:disabled) {
+    ${(styledProps) => APPEARANCES[styledProps.appearance || 'primary'](styledProps)};
+  }
+
+  &:disabled {
+    cursor: default;
+
+    ${APPEARANCES.disabled}
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: ${({ height }) => `${height}px`};
   background: transparent;
+  padding: ${({ onlyIcon }) => (onlyIcon ? '0 4px' : 0)};
   z-index: 20;
 
   transition: color 0.08s ease-in-out;
-  color: ${({ theme, active }) => (active ? theme.primary[500] : theme.texts.base)};
-
-  &:disabled {
-    cursor: default !important;
-  }
+  color: var(--button-text-c);
 
   .common-title {
-    padding: 0 16px;
+    padding: 0 8px;
     user-select: none;
     white-space: nowrap;
   }
 
   &:hover {
-    color: ${({ theme }) => theme.primary[500]};
+    color: var(--button-text-c-h);
+  }
+
+  &:active {
+    color: var(--button-text-c-a);
   }
 `;
 
 export const ButtonGhost = forwardRef<HTMLButtonElement, ButtonGhostProps>((props, ref) => {
   const {
+    appearance = 'primary',
     title,
     LeftIcon,
     RightIcon,
     active = false,
-    danger = false,
-    colorPreset = 'primary-colors',
+    height = 40,
     type = 'button',
     ...rest
   } = props;
 
   return (
-    <ButtonGhostStyled {...rest} ref={ref} type={type} active={active} danger={danger}>
+    <ButtonGhostStyled
+      {...rest}
+      data-ghost-button
+      ref={ref}
+      type={type}
+      active={active}
+      height={height}
+      appearance={appearance}
+      onlyIcon={!title && (!!LeftIcon || !!RightIcon)}
+    >
       {!!LeftIcon && <LeftIcon />}
 
       {title && (
-        <Typography type='RoundedBold14' className={`${colorPreset} common-title`}>
+        <Typography type='RoundedBold14' className='common-title'>
           {title}
         </Typography>
       )}

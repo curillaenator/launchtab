@@ -40,15 +40,19 @@ const ScrollbarsStyled = styled.div<ScrollbarsProps>`
   position: relative;
 
   &::-webkit-scrollbar {
-    width: 0.25rem;
-    margin-left: 0.25rem;
-    border-radius: 0.25rem;
+    width: 4px;
+    margin-left: 4px;
+    border-radius: 2px;
     background-color: ${({ theme }) => theme.backgrounds.base};
-  }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.primary[500]};
-    border-radius: 0.25rem;
+    &-thumb {
+      background-color: ${({ theme }) => theme.primary[500]};
+      border-radius: 2px;
+    }
+
+    &-track {
+      margin: 4px 0;
+    }
   }
 `;
 

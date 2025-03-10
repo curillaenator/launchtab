@@ -57,26 +57,33 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(scss|css|sass)$/i,
-        exclude: /node_modules/,
+        test: /\.module\.(scss|css)$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              modules: { localIdentName: '[local]_[hash:base64:12]' },
+              modules: {
+                localIdentName: '[local]_[hash:base64:12]',
+                exportOnlyLocals: false,
+              },
             },
           },
+          'sass-loader',
         ],
       },
       {
+        test: /\.(scss|css)$/i,
+        exclude: /\.module\.(scss|css)$/i, // Исключаем CSS-модули
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      ,
+      {
         test: /\.(png|jpg|jpeg|gif)$/i,
-        exclude: /node_modules/,
         type: 'asset/resource',
       },
       {
         test: /\.svg$/i,
-        exclude: /node_modules/,
         use: ['@svgr/webpack'],
       },
       {

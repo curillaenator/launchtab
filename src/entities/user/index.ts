@@ -1,4 +1,8 @@
 export { $userStore, setUser } from './store';
-export type { LaunchUserData } from './interfaces';
-export { useAuthState } from './hooks/useAuthState';
-export { login, logout, getUserData } from './api';
+export type { LaunchUserData, LaunchStoreUser } from './interfaces';
+
+export { useLauncUserData } from './hooks/useLauncUserData';
+
+export { login, logout } from './api';
+
+export { NULL_USER } from './contants';

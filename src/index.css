@@ -10,6 +10,20 @@
   border-radius: 4px;
 }
 
+html {
+  --layout-pd: 24px;
+
+  /* @media (min-width: 1920px) {
+    --layout-pd: 48px;
+    } */
+
+  /* @media (min-width: 2560px) {
+      --layout-pd: 48px;
+      } */
+
+  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+}
+
 *,
 *::after,
 *::before {
@@ -19,13 +33,16 @@
 }
 
 button {
+  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
   outline: none;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-input {
+input,
+textarea {
+  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
   outline: none;
   border: none;
 }

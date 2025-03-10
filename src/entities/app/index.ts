@@ -1,1 +1,1 @@
-export { $appStore, setAppLoading, setSignIn, setAside, setRightDrawer } from './store';
+export { $appStore, setSignIn, setAside, setRightDrawer, setHeaderShadowed } from './store';

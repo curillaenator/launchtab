@@ -10,7 +10,6 @@ import type { DrawerProps } from './interfaces';
 
 import { TransitionStyled, ContentStyled } from './drawer.styled';
 
-// @ts-expect-error
 const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
   const { open, portalId, transitionClassName, contentClassName, children, openWidth = '420px' } = props;
 
@@ -34,7 +33,6 @@ const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
       </TransitionStyled>
 
       <ContentStyled closed={!open} openWidth={openWidth} className={cn(contentClassName, transitionClassName)}>
-        {/* @ts-expect-error */}
         {children}
       </ContentStyled>
     </ModalContext.Provider>,

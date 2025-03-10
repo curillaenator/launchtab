@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { pagesIcons } from '@src/assets/pagesIcons';
-
-import type { BookmarkCardProps } from '@src/types';
+import type { BookmarkCardProps } from '@src/entities/bookmarks';
 
 const CardImageStyled = styled.div`
   display: flex;
@@ -12,7 +11,7 @@ const CardImageStyled = styled.div`
   height: 142px;
   border-radius: var(--card-bdrs) var(--card-bdrs) 0px 0px;
   overflow: hidden;
-  padding: 4px 4px 0 4px;
+  padding: 6px 6px 0 6px;
 
   .card-image {
     width: 100%;

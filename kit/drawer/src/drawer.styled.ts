@@ -7,7 +7,7 @@ interface ContentStyledProps {
 }
 
 export const ContentStyled = styled.div<ContentStyledProps>`
-  will-change: transform;
+  will-change: transform, filter;
   z-index: 1300;
 
   position: fixed;
@@ -18,8 +18,8 @@ export const ContentStyled = styled.div<ContentStyledProps>`
   height: 100vh;
   min-height: 100vh;
 
+  filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
   background-color: transparent;
-  /* filter: drop-shadow(${({ theme }) => theme.shadows.card}); */
   color: ${({ theme }) => theme.texts.base};
 
   transform: translateX(${({ closed, openWidth }) => (closed ? openWidth : '0px')});

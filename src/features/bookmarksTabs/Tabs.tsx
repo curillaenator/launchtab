@@ -6,21 +6,19 @@ import { arrayMoveImmutable } from 'array-move';
 
 import { Button } from '@launch-ui/button';
 import { ContextMenu } from '@launch-ui/context-menu';
-import { Create } from '@src/components/create';
+
+import { CreateTabs } from '@src/features/createTabs';
 
 import { $userStore } from '@src/entities/user';
 import { $bookmarksStore, setCurrentTab, setTabsWithDbUpdate, removeTab } from '@src/entities/bookmarks';
 
-//@ts-expect-error
 import HomeIcon from '@src/assets/svg/home.svg';
 
-//@ts-expect-error
 const SortableListStyled = styled(SortableList)`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 3.5rem;
 `;
 
 export const Tabs: FC = () => {
@@ -43,7 +41,12 @@ export const Tabs: FC = () => {
 
   return (
     <SortableListStyled onSortEnd={onSortEnd}>
-      <Button IconLeft={HomeIcon} title='Home' active={currentTab === 'Home'} onClick={() => setCurrentTab('Home')} />
+      <Button
+        IconLeft={() => <HomeIcon />}
+        title='Home'
+        active={currentTab === 'Home'}
+        onClick={() => setCurrentTab('Home')}
+      />
 
       {sortableTabs.map(({ name }, i) => (
         <SortableItem key={`${name}${i}`}>
@@ -66,7 +69,7 @@ export const Tabs: FC = () => {
         </SortableItem>
       ))}
 
-      <Create create='new-page' />
+      <CreateTabs create='new-page' />
     </SortableListStyled>
   );
 };

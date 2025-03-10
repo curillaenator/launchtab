@@ -1,87 +1,53 @@
-import { signOut, signInWithPopup, GoogleAuthProvider, type User as FirebaseUser } from 'firebase/auth';
+import { signOut, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-
 import { fsdb, auth } from '@src/api/firebase';
+import { pick } from 'lodash';
 
-import { setAppLoading } from '../app';
+import { COMMON_USERS_DOCS_SPACE } from '@src/shared/appConfig';
 
-import { setSettings, SettingsStore } from '../settings';
-import { setTabsWithoutDbUpdate, BookmarkTabProps } from '../bookmarks';
+import { setSettings } from '../settings';
+import { setTabsWithoutDbUpdate } from '../bookmarks';
 import { setUser } from './store';
 
 import { NULL_USER } from './contants';
 import { DEFAULT_PAGES } from '../bookmarks/constants';
 import { DEFAULT_SETTINGS } from '../settings/constants';
 
-import type { LaunchUserData, LaunchStoreUser } from './interfaces';
+import type { LaunchStoreUser } from './interfaces';
 
 const googleProvider = new GoogleAuthProvider();
 
 const login = () => {
-  setAppLoading(true);
   signInWithPopup(auth, googleProvider);
 };
 
 const logout = () => {
-  setAppLoading(true);
-  signOut(auth);
   setUser(NULL_USER);
   setSettings(DEFAULT_SETTINGS);
   setTabsWithoutDbUpdate(DEFAULT_PAGES);
   localStorage.clear();
+  signOut(auth);
 };
 
-const getUserData = async (user: FirebaseUser | null) => {
-  if (!user) {
-    setAppLoading(false);
-    return;
-  }
+async function getUserLaunchDataQuery(user: LaunchStoreUser) {
+  if (!user?.uid) return null;
 
-  const { uid, displayName, email, photoURL } = user;
-  const optimisticUserData: LaunchStoreUser = { uid, username: displayName, email, avatar: photoURL };
-  const optimisticDbData: LaunchUserData = { ...optimisticUserData, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
-  const localDbData: LaunchUserData = { ...optimisticUserData, pages: DEFAULT_PAGES, settings: DEFAULT_SETTINGS };
+  const userSnap = await getDoc(doc(fsdb, 'users', user.uid));
 
-  setUser(optimisticUserData);
-
-  const localSettings = localStorage.getItem('settings');
-  const localTabs = localStorage.getItem('tabs');
-
-  if (localSettings) {
-    const lsSettings = JSON.parse(localSettings) as SettingsStore;
-    setSettings(lsSettings);
-    localDbData.settings = lsSettings;
-  }
-
-  if (localTabs) {
-    const lsTabs = JSON.parse(localTabs) as BookmarkTabProps[];
-    setTabsWithoutDbUpdate(lsTabs);
-    localDbData.pages = lsTabs;
-  }
-
-  if (localSettings && localTabs) setAppLoading(false); // will show app with user data from localStorage
-
-  const userSnap = await getDoc(doc(fsdb, 'users', uid)); // check latest data
-
-  // optimistic update data if no db record presented (first login)
   if (!userSnap.exists()) {
-    setUser(optimisticUserData);
-    setSettings(optimisticDbData.settings);
-    setTabsWithoutDbUpdate(optimisticDbData.pages);
-    setAppLoading(false);
+    const defaultUserData: Partial<LaunchStoreUser> = {
+      spaces: [COMMON_USERS_DOCS_SPACE],
+      lastViewedSpace: COMMON_USERS_DOCS_SPACE,
+    };
 
-    setDoc(doc(fsdb, 'users', user.uid), optimisticDbData);
+    await setDoc(doc(fsdb, 'users', user.uid), { ...user, ...defaultUserData });
 
-    return;
+    return defaultUserData;
   }
 
-  const dbUserData = userSnap.data() as LaunchUserData;
+  const dbUser = userSnap.data() as LaunchStoreUser;
 
-  // TODO: check for state update requred via localStorage data deep compare
-  setUser(dbUserData);
-  setSettings(dbUserData.settings);
-  setTabsWithoutDbUpdate(dbUserData.pages);
-  setAppLoading(false);
-};
+  return pick(dbUser, ['spaces', 'lastViewedSpace', 'settings', 'admin']) as Partial<LaunchStoreUser>;
+}
 
-export { login, logout, getUserData };
+export { login, logout, getUserLaunchDataQuery };

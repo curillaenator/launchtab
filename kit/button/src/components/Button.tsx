@@ -5,6 +5,8 @@ import { Typography } from '@launch-ui/typography';
 
 import type { BaseButtonProps } from './interfaces';
 
+const BORDER_RADIUS = 16.8;
+
 export const ButtonStyled = styled.button<BaseButtonProps>`
   --shp-bgc: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.base)};
   --shp-bdc: transparent;
@@ -15,11 +17,11 @@ export const ButtonStyled = styled.button<BaseButtonProps>`
   gap: 0;
   justify-content: center;
   align-items: center;
-  height: 56px;
-  padding: 0 16px;
+  height: 48px;
+  padding: 0 12px;
 
   background-color: var(--shp-bgc);
-  border-radius: calc(20px * 1.25 + 3px);
+  border-radius: calc(${BORDER_RADIUS}px * 1.25 + 3px);
 
   color: ${({ active, theme }) => (active ? theme.white : theme.texts.base)};
 
@@ -42,7 +44,11 @@ export const ButtonStyled = styled.button<BaseButtonProps>`
   }
 
   &:hover {
-    color: ${({ theme, active }) => (active ? theme.white : theme.primary[500])};
+    color: ${({ theme, active }) => (active ? theme.white : theme.primary[300])};
+  }
+
+  &:active {
+    color: ${({ theme, active }) => (active ? theme.white : theme.primary[800])};
   }
 `;
 
@@ -50,8 +56,9 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref
   const { title, IconLeft, IconRight, ...rest } = props;
 
   return (
-    <ButtonStyled {...rest} ref={ref}>
-      <Corners borderRadius={20} />
+    //@ts-ignore
+    <ButtonStyled {...rest} ref={ref} data-primary-button>
+      <Corners borderRadius={BORDER_RADIUS} />
 
       {IconLeft && <IconLeft />}
 

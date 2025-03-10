@@ -1,7 +1,6 @@
 import { createStore, createEvent } from 'effector';
-import { collection, doc, updateDoc } from 'firebase/firestore';
-import { fsdb } from '@src/api/firebase';
 
+import { updateBookmarksQuery } from './api';
 import { DEFAULT_CARDS_STORE } from './constants';
 
 import type {
@@ -25,22 +24,17 @@ const reorderCards = createEvent<ReorderCardPayload>();
 
 const $bookmarksStore = createStore<BookmarksStore>(DEFAULT_CARDS_STORE);
 
-const updateDatabases = (uid: string | null, tabs: BookmarkTabProps[]) => {
-  localStorage.setItem('tabs', JSON.stringify(tabs));
-  if (!!uid) updateDoc(doc(collection(fsdb, 'users'), uid), { pages: tabs });
-};
-
 $bookmarksStore
   .on(setCurrentTab, (prevState, currentTab) => ({ ...prevState, currentTab }))
   //
   .on(setTabsWithDbUpdate, (prevState, { uid, tabs }) => {
-    updateDatabases(uid, tabs);
+    updateBookmarksQuery(uid, tabs);
     return { ...prevState, tabs };
   })
   .on(setTabsWithoutDbUpdate, (prevState, tabs) => ({ ...prevState, tabs }))
   .on(createTab, (prevState, { uid, tabs, tabName }) => {
     const newFullTabs = [...tabs, { name: tabName, pages: [] }];
-    updateDatabases(uid, newFullTabs);
+    updateBookmarksQuery(uid, newFullTabs);
     return { ...prevState, tabs: newFullTabs };
   })
   .on(removeTab, (prevState, { uid, tabs, tabName }) => {
@@ -51,7 +45,7 @@ $bookmarksStore
 
     newFullTabs.splice(removeTabIdx, 1);
 
-    updateDatabases(uid, newFullTabs);
+    updateBookmarksQuery(uid, newFullTabs);
 
     const isSelectedTabRemove = prevState.currentTab === tabName;
 
@@ -69,7 +63,7 @@ $bookmarksStore
 
     newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: [...tabs[updatedTabIdx].pages, card] });
 
-    updateDatabases(uid, newFullTabs);
+    updateBookmarksQuery(uid, newFullTabs);
 
     return { ...prevState, tabs: newFullTabs };
   })
@@ -84,7 +78,7 @@ $bookmarksStore
 
     newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: updatedCards });
 
-    updateDatabases(uid, newFullTabs);
+    updateBookmarksQuery(uid, newFullTabs);
     return { ...prevState, tabs: newFullTabs };
   })
   .on(reorderCards, (prevState, { uid, tabs, tabName, reorderedCards }) => {
@@ -95,21 +89,17 @@ $bookmarksStore
 
     newFullTabs.splice(updatedTabIdx, 1, { name: tabName, pages: reorderedCards });
 
-    updateDatabases(uid, newFullTabs);
+    updateBookmarksQuery(uid, newFullTabs);
     return { ...prevState, tabs: newFullTabs };
   });
 
 export {
   $bookmarksStore,
-  //
   setCurrentTab,
-  //
   setTabsWithDbUpdate,
   setTabsWithoutDbUpdate,
-  //
   createTab,
   removeTab,
-  //
   createCard,
   removeCard,
   reorderCards,

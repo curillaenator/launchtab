@@ -1,3 +1,5 @@
 export { $settingsStore, setSettings } from './store';
-export { saveSettings } from './api';
+export { saveSettingsQuery } from './api';
 export type { SettingsStore } from './interfaces';
+
+export { DEFAULT_SETTINGS } from './constants';

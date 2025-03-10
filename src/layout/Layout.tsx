@@ -1,91 +1,105 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useCallback } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-
-import { ThemeProvider } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { debounce } from 'lodash';
+
+import { Loader } from '@launch-ui/loader';
 import { Drawer } from '@launch-ui/drawer';
 import { Modal } from '@launch-ui/modal';
 
 import { Header } from '@src/features/header';
 import { Aside } from '@src/features/aside';
 import { Background } from '@src/features/background';
-import { Loader } from '@src/features/loader';
 import { Settings } from '@src/features/settings';
 import { SignIn } from '@src/features/signin';
 
 import { $appStore, setSignIn, setRightDrawer } from '@src/entities/app';
-import { $userStore, useAuthState } from '@src/entities/user';
+import { $userStore, useLauncUserData } from '@src/entities/user';
 import { $settingsStore } from '@src/entities/settings';
+import { setHeaderShadowed } from '@src/entities/header';
 
-import { useDomStyles } from '@src/hooks/useDomStyles';
+import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
+import { useContextValue } from './useContextValue';
+import { $layoutContex as LayoutCTX } from './context';
 
-import GlobalFonts from '@src/assets/fonts/fonts';
-import LayoutStyled from './styled';
+import { LayoutStyled, MainStyled } from './layout.styled';
 
-// import { restoreMe } from '@src/entities/mock';
+import { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID } from './constants';
 
 export const Layout: FC = () => {
-  const { isLoading, isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
-  const { uid } = useEffectorUnit($userStore);
+  const user = useEffectorUnit($userStore);
+  const { isLoading } = useLauncUserData(user);
+
+  const { isAsideOpen, isSignInOpen, isRightDrawerOpen } = useEffectorUnit($appStore);
   const { dynamicWallpaper } = useEffectorUnit($settingsStore);
 
   const mouseWatcher = useRef<((e: React.MouseEvent<Element, MouseEvent>) => void) | null>(null);
 
-  const { currentTheme } = useDomStyles();
+  const currentTheme = useTheme();
+  const { layoutRef } = useThemeToCssv(currentTheme);
 
-  useAuthState();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onViewportScroll = useCallback(
+    debounce((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+      //@ts-expect-error
+      setHeaderShadowed(e.nativeEvent.target?.scrollTop > 56 * 2);
+    }, 400),
+    [],
+  );
 
-  // useEffect(() => {
-  //   restoreMe();
-  // }, []);
+  const ctxValue = useContextValue();
+
+  if (isLoading) return <Loader view='fullscreen' iconSize='40px' />;
 
   return (
-    // @ts-expect-error
-    <ThemeProvider theme={currentTheme}>
-      {/* @ts-expect-error */}
-      <GlobalFonts />
-
-      {isLoading && <Loader fullscreen size='56px' />}
-
-      {!isLoading && (
-        <LayoutStyled
-          className='layout-container'
-          data-description='layout-container'
-          $isAsideOpen={isAsideOpen}
-          onMouseMove={(e) => {
-            if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
-            mouseWatcher.current(e);
+    <LayoutCTX.Provider value={ctxValue}>
+      <LayoutStyled
+        ref={layoutRef}
+        className='layout-container'
+        data-description='layout-container'
+        $isAsideOpen={isAsideOpen}
+        onMouseMove={(e) => {
+          if (!dynamicWallpaper || isRightDrawerOpen || !mouseWatcher.current) return;
+          mouseWatcher.current(e);
+        }}
+      >
+        <Background
+          setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
+            if (!dynamicWallpaper) return;
+            mouseWatcher.current = watcher;
           }}
-        >
-          <Background
-            setMouseWatcher={(watcher: (e: React.MouseEvent<Element, MouseEvent>) => void) => {
-              if (!dynamicWallpaper) return;
-              mouseWatcher.current = watcher;
-            }}
-          />
+        />
 
-          <aside className='aside'>
-            <Aside />
-          </aside>
+        <aside className='aside'>
+          <Aside />
+        </aside>
 
-          <div className='viewport'>
-            <Header />
+        <div className='viewport' onScroll={onViewportScroll}>
+          <Header />
+
+          <MainStyled id={MAIN_ELEMENT_ID}>
             <Outlet />
-          </div>
+          </MainStyled>
+        </div>
 
-          {!!uid && (
-            <Drawer portalId='launch-tabs-drawer' open={isRightDrawerOpen} onClose={() => setRightDrawer(false)}>
-              <Settings />
-            </Drawer>
-          )}
+        {!!user.uid && (
+          <Drawer
+            contentClassName='drawer-layout-cssv'
+            portalId={DRAWER_PORTAL_ID}
+            open={isRightDrawerOpen}
+            onClose={() => setRightDrawer(false)}
+          >
+            <Settings />
+          </Drawer>
+        )}
 
-          {!uid && (
-            <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
-              <SignIn closePopup={() => setSignIn(false)} />
-            </Modal>
-          )}
-        </LayoutStyled>
-      )}
-    </ThemeProvider>
+        {!user.uid && (
+          <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
+            <SignIn closePopup={() => setSignIn(false)} />
+          </Modal>
+        )}
+      </LayoutStyled>
+    </LayoutCTX.Provider>
   );
 };

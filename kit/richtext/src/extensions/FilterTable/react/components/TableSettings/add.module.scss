@@ -1,0 +1,123 @@
+@for $i from 1 through 100 {
+  .addGrid-#{$i} {
+    grid-template-columns: repeat($i, auto);
+  }
+}
+
+.addGrid {
+  width: fit-content;
+  display: grid;
+
+  border-radius: 8px;
+
+  box-shadow: inset 0 0 0 1px var(--editor-bdc);
+  background-color: var(--editor-highlight-bgc);
+}
+
+.column {
+  width: fit-content;
+  border-right: 1px solid var(--editor-bdc);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &_name {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px;
+
+    font-family: 'SB Sans Text', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.64px;
+
+    color: var(--editor-c);
+    border-bottom: 1px solid var(--editor-bdc);
+  }
+
+  &_input {
+    min-height: 48px;
+    width: 220px;
+    padding: 8px;
+
+    border-bottom: 1px solid var(--editor-bdc);
+
+    & > input {
+      font-family: 'SB Sans Text', sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+
+      width: 100%;
+      border: none;
+      box-shadow: 0 0 0 1px var(--editor-bdc);
+      background-color: var(--editor-bgc);
+
+      border-radius: 6px;
+      padding: 7px 8px;
+      margin: 0;
+      outline: none;
+
+      color: var(--editor-c);
+
+      &:hover {
+        box-shadow: 0 0 0 1px var(--editor-primary);
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 1px var(--editor-primary);
+      }
+    }
+  }
+
+  &_operator {
+    min-width: 128px;
+    width: 100%;
+    padding: 8px;
+  }
+
+  &_selector {
+    min-width: 128px;
+    padding: 8px;
+
+    & > button {
+      --btn-pd: 0 !important;
+    }
+  }
+}
+
+.buttonWhite {
+  --btn_pm-s_bgc: #ffffff !important;
+  --btn_pm-s_bgc-h: #ffffff !important;
+  --btn_pm-s_bgc-a: #2969e3 !important;
+  --btn_pm-s_bgc-p: #ffffff !important;
+  --btn_pm-s_bgc-ss: #ffffff !important;
+  --btn_pm-s_bgc-er: #ffffff !important;
+  --btn_pm-s_bgc-l: #ffffff !important;
+  --btn_pm-s_bgc-db: #ffffff !important;
+
+  --btn-mh: 32px !important;
+  --btn-mw: 32px !important;
+  --btn-gp: 0px !important;
+  --btn-bdrs-ro: 6px !important;
+  --btn-bd-sh: inset 0 0 0 1px var(--editor-bdc);
+}
+
+.dropableTrigger {
+  --btn-pd: 0 0 0 4px !important;
+}
+
+.dropable {
+  --dropable-content-pd: 8px 0;
+}
+
+.dropableOpenNode {
+  width: 100% !important;
+}

@@ -1,96 +1,163 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
+import React, { forwardRef } from 'react';
+import styled, { css } from 'styled-components';
 
 import { Typography } from '@launch-ui/typography';
 import { Shape } from '@launch-ui/shape';
+import { Loader } from '@launch-ui/loader';
 
 import type { ButtonActionProps } from './interfaces';
 
-// TODO size variations
+const BORDER_RADIUS = 16;
 
-interface IButtonStyled {
-  active: boolean;
-  danger: boolean;
-  isLeftIcon: boolean;
-  isRightIcon: boolean;
-}
+const APPEARANCES = {
+  primary: ({ active }: ButtonActionProps) => css`
+    --button-text-c: ${({ theme }) => theme.white};
+    --button-text-c-h: ${({ theme }) => theme.white};
+    --button-text-c-a: ${({ theme }) => theme.white};
 
-const ButtonActionStyled = styled.button<IButtonStyled>`
+    --button-shp-bgc: ${({ theme }) => (active ? theme.primary[700] : theme.primary[500])};
+    --button-shp-bgc-h: ${({ theme }) => (active ? theme.primary[700] : theme.primary[300])};
+    --button-shp-bgc-a: ${({ theme }) => (active ? theme.primary[700] : theme.primary[700])};
+
+    --button-filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
+  `,
+
+  secondary: ({ active }: ButtonActionProps) => css`
+    --button-text-c: ${({ theme }) => (active ? theme.white : theme.texts.base)};
+    --button-text-c-h: ${({ theme }) => (active ? theme.white : theme.primary[300])};
+    --button-text-c-a: ${({ theme }) => (active ? theme.white : theme.primary[700])};
+
+    --button-shp-bgc: ${({ theme }) => (active ? theme.primary[700] : theme.backgrounds.light)};
+    --button-shp-bgc-h: ${({ theme }) => (active ? theme.primary[700] : theme.backgrounds.light)};
+    --button-shp-bgc-a: ${({ theme }) => (active ? theme.primary[700] : theme.accent[100])};
+
+    --button-filter: none;
+  `,
+
+  danger: () => css`
+    --button-text-c: ${({ theme }) => theme.white};
+    --button-text-c-h: ${({ theme }) => theme.white};
+    --button-text-c-a: ${({ theme }) => theme.white};
+
+    --button-shp-bgc: ${({ theme }) => theme.backgrounds.danger};
+    --button-shp-bgc-h: ${({ theme }) => theme.backgrounds['danger-h']};
+    --button-shp-bgc-a: ${({ theme }) => theme.backgrounds['danger-a']};
+
+    --button-filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.danger});
+  `,
+
+  disabled: () => css`
+    --button-text-c: ${({ theme }) => theme.texts.disabled};
+    --button-text-c-h: ${({ theme }) => theme.texts.disabled};
+    --button-text-c-a: ${({ theme }) => theme.texts.disabled};
+
+    --button-shp-bgc: ${({ theme }) => theme.backgrounds.light};
+    --button-shp-bgc-h: ${({ theme }) => theme.backgrounds.light};
+    --button-shp-bgc-a: ${({ theme }) => theme.backgrounds.light};
+
+    --button-filter: none;
+  `,
+} as const;
+
+const ButtonActionStyled = styled.button<ButtonActionProps>`
+  &:not(:disabled) {
+    ${(styledProps) => APPEARANCES[styledProps.appearance || 'primary'](styledProps)};
+  }
+
+  &:disabled {
+    cursor: default;
+
+    ${APPEARANCES.disabled}
+  }
+
   position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: ${({ fullwidth }) => (fullwidth ? '1 1 auto' : '0 0 auto')};
+
   gap: 8px;
-  height: 40px;
-  padding-left: ${({ isLeftIcon }) => (isLeftIcon ? '12px' : '16px')};
-  padding-right: ${({ isRightIcon }) => (isRightIcon ? '8px' : '16px')};
+  height: ${({ height }) => `${height}px`};
+  width: ${({ fullwidth }) => (fullwidth ? '100%' : 'fit-content')};
+  padding: 0 12px;
   background: transparent;
-  border-radius: 16px;
+  border-radius: calc(${BORDER_RADIUS}px * 1.25 + 3px);
   z-index: 20;
-  transition: 0.08s linear;
 
-  color: ${({ theme }) => theme.white};
+  will-change: color;
+  color: var(--button-text-c);
 
-  .button-icon {
-    &-light {
-      fill: ${({ theme }) => theme.primary[300]};
-    }
-
-    &-dark {
-      fill: ${({ theme }) => theme.primary[50]};
-    }
+  & > svg {
+    flex: 0 0 auto;
   }
 
   .btn_title {
-    transition: 0.08s linear;
+    display: block;
 
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .rounded-shape {
-    transition: 0.08s linear;
-    fill: ${({ theme }) => theme.primary[500]};
-    filter: contrast(1.3) drop-shadow(${({ theme }) => theme.shadows.primary});
+    will-change: fill;
+    fill: var(--button-shp-bgc);
+    filter: var(--button-filter);
   }
 
   &:hover {
+    color: var(--button-text-c-h);
+
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[400]};
+      fill: var(--button-shp-bgc-h);
     }
   }
 
   &:active {
-    .btn_title {
-      opacity: 0.75;
-    }
+    color: var(--button-text-c-a);
 
     .rounded-shape {
-      fill: ${({ theme }) => theme.primary[600]};
+      fill: var(--button-shp-bgc-a);
     }
   }
 `;
 
-export const ButtonAction: FC<ButtonActionProps> = ({
-  title,
-  LeftIcon,
-  RightIcon,
-  active = false,
-  danger = false,
-  type = 'button',
-  ...rest
-}) => {
+export const ButtonAction = forwardRef<HTMLButtonElement, ButtonActionProps>((props, ref) => {
+  const {
+    type = 'button',
+    height = 40,
+
+    title,
+
+    LeftIcon,
+    RightIcon,
+
+    appearance = 'primary',
+
+    fullwidth = false,
+    active = false,
+    loading = false,
+    disabled = false,
+
+    ...rest
+  } = props;
+
   return (
     <ButtonActionStyled
+      data-action-button
       {...rest}
-      isLeftIcon={!!LeftIcon}
-      isRightIcon={!!RightIcon}
+      ref={ref}
+      appearance={appearance}
       active={active}
-      danger={danger}
+      disabled={loading || disabled}
+      fullwidth={fullwidth}
       type={type}
+      height={height}
     >
-      <Shape borderRadius={12} />
+      <Shape borderRadius={BORDER_RADIUS} />
 
-      {LeftIcon && <LeftIcon />}
+      {LeftIcon && (loading ? <Loader iconSize='24px' /> : <LeftIcon />)}
 
       {title && (
         <Typography type='RoundedBold14' className='btn_title'>
@@ -98,7 +165,7 @@ export const ButtonAction: FC<ButtonActionProps> = ({
         </Typography>
       )}
 
-      {RightIcon && <RightIcon />}
+      {RightIcon && (loading ? <Loader iconSize='24px' /> : <RightIcon />)}
     </ButtonActionStyled>
   );
-};
+});

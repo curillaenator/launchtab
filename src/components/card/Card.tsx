@@ -7,6 +7,7 @@ import { Typography } from '@launch-ui/typography';
 import { Corners } from '@launch-ui/shape';
 
 import { $settingsStore } from '@src/entities/settings';
+import { LAUNCH_CARD_BDRS } from '@src/shared/appConfig';
 
 import { CardImage } from './CardImage';
 
@@ -24,7 +25,6 @@ interface ICardStyled {
 const CardStyled = styled.a<ICardStyled>`
   --card-animation-time: 150ms;
   --card-animation-method: ease-in-out;
-  --card-bdrs: 30px;
 
   --shp-bgc: transparent;
   --shp-bdc: ${({ theme }) => theme.backgrounds.base};
@@ -38,7 +38,7 @@ const CardStyled = styled.a<ICardStyled>`
   width: 100%;
   height: 100%;
   text-decoration: none;
-  border-radius: var(--card-bdrs);
+  border-radius: calc(${LAUNCH_CARD_BDRS}px * 1.25 + 3px);
 
   opacity: ${({ isDeleted }) => (isDeleted ? 0 : 1)};
 
@@ -111,7 +111,7 @@ export const Card: FC<CardProps> = (props) => {
       onClick={() => setNoAnimation(true)}
       data-card='true'
     >
-      <Corners borderRadius={24} stroke={4} />
+      <Corners borderRadius={LAUNCH_CARD_BDRS} stroke={6} />
 
       <CardImage {...bookmark} />
 

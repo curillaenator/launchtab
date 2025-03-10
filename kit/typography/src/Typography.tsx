@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, CSSProperties } from 'react';
 import styled, { FlattenSimpleInterpolation } from 'styled-components';
 
 import { fontStyles } from './fontsSettings';
@@ -9,29 +9,31 @@ import { TypographyProps } from './interfaces';
 interface ITypographyStyled {
   fontFamily: string;
   fontStyles: FlattenSimpleInterpolation;
+  color?: CSSProperties['color'];
 }
 
-const TypographyStyled = styled.div<ITypographyStyled>`
+const TypographyStyled = styled.span<ITypographyStyled>`
   ${({ fontFamily }) => fontFamily};
   ${({ fontStyles }) => fontStyles};
+
+  color: ${({ color }) => color || 'inherit'};
 `;
 
-const TypographyJSX = forwardRef<HTMLDivElement, TypographyProps>((props, ref) => {
-  const { type = 'TextRegular16', as, children, className } = props;
+const Typography = forwardRef<HTMLDivElement, TypographyProps>((props, ref) => {
+  const { type = 'TextRegular16', as = 'span', children, className, color } = props;
 
   return (
     <TypographyStyled
       ref={ref}
-      fontFamily={getFontFamily(type)}
+      fontFamily={getFontFamily()}
       fontStyles={fontStyles[type]}
       as={as || generateTag(type)}
       className={className || type}
+      color={color}
     >
       {children}
     </TypographyStyled>
   );
 });
 
-TypographyJSX.displayName = 'TypographyJSX';
-
-export const Typography = React.memo(TypographyJSX);
+export { Typography };

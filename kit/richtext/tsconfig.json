@@ -1,0 +1,9 @@
+{
+  "extends": "@launch-ui/config/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./src",
+    "baseUrl": "./src"
+  },
+  "include": ["src/**/*"]
+}

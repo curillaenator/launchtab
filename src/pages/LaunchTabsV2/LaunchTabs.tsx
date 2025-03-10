@@ -1,20 +1,49 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import styled from 'styled-components';
+import { useUnit as UseEffectoUnit } from 'effector-react';
+
+import { Loader } from '@launch-ui/loader';
+
+import { $userStore } from '@src/entities/user';
+import { setHeaderMidComponent } from '@src/entities/header';
+import { useBookmarksData } from '@src/entities/bookmarks';
 
 import { BookmarksTabs } from '@src/features/bookmarksTabs';
 import { Bookmarks } from '@src/features/bookmarks';
 
-const LaunchTabsStyled = styled.main`
+const LaunchTabsContainer = styled.div`
   width: 100%;
-  padding: 56px;
-  padding-top: 96px;
+  padding: calc(var(--layout-pd) * 2) var(--layout-pd);
+
+  @media (min-width: 1920px) {
+    --layout-pd: 72px;
+  }
 `;
 
-export const LaunchTabs: FC = () => {
+const LaunchTabs: FC = memo(() => {
+  const { uid } = UseEffectoUnit($userStore);
+  const { isBookmarksDataLoading } = useBookmarksData(uid);
+
+  useEffect(() => {
+    setHeaderMidComponent(BookmarksTabs);
+
+    return () => {
+      setHeaderMidComponent(null);
+    };
+  }, []);
+
+  if (isBookmarksDataLoading)
+    return (
+      <LaunchTabsContainer>
+        <Loader view='fit-parent' iconSize='40px' />
+      </LaunchTabsContainer>
+    );
+
   return (
-    <LaunchTabsStyled id='launch-app-container' className='launch-app-container'>
-      <BookmarksTabs />
+    <LaunchTabsContainer>
       <Bookmarks />
-    </LaunchTabsStyled>
+    </LaunchTabsContainer>
   );
-};
+});
+
+export { LaunchTabs };

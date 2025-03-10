@@ -1,0 +1,54 @@
+.button {
+  width: fit-content;
+  height: 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 24px;
+
+  color: var(--editor-c);
+  background-color: transparent;
+
+  &:hover {
+    color: var(--theme-primary-500);
+  }
+
+  &:active {
+    color: var(--theme-primary-600);
+  }
+
+  &_fullwidth {
+    width: 100%;
+  }
+
+  &_active:not(.disabled) {
+    color: var(--theme-white);
+    background-color: var(--theme-primary-500);
+
+    &:hover {
+      background-color: var(--theme-primary-500);
+    }
+
+    &:active {
+      background-color: var(--theme-primary-500);
+    }
+  }
+
+  &_disabled {
+    pointer-events: none;
+    background-color: transparent;
+    color: var(--editor-disabled);
+
+    svg path {
+      stroke: var(--editor-disabled);
+    }
+  }
+}

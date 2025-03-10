@@ -31,7 +31,7 @@ export const usePanZoom = (props?: PanZoomProps) => {
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!enabled || !imageContainerRef.current) return;
+    if (!imageContainerRef.current) return;
 
     imageContainerRef.current.querySelector('img')?.style.setProperty(
       'transform',
@@ -44,7 +44,7 @@ export const usePanZoom = (props?: PanZoomProps) => {
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-scale`, `${scale.toFixed(1)}`);
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-offset-x`, `${xPos}px`);
     imageContainerRef.current.style.setProperty(`--${prefix}-viewer-offset-y`, `${yPos}px`);
-  }, [enabled, panZoomStore, prefix]);
+  }, [panZoomStore, prefix]);
 
   const onPan = useCallback(
     (e: MouseEvent) => {

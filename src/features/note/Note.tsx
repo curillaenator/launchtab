@@ -43,14 +43,36 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
 
   const { data: noteBody, isLoading: isNoteBodyLoading } = useNoteBodyData({ routerNoteId });
 
+  const saveDelayTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastRichTextEvent = useRef<RichtextChangeEvent | null>(null);
+
   const { mutate: updateNoteBody } = useNoteBodyUpdate({
     uid,
     routerNoteId,
-    onSuccess: () => setIsNoteSaving(false),
+    onSuccess: () => {
+      lastRichTextEvent.current = null;
+
+      if (saveDelayTimer.current) {
+        clearTimeout(saveDelayTimer.current);
+        saveDelayTimer.current = null;
+      }
+
+      setIsNoteSaving(false);
+    },
   });
 
-  const saveDelayTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const lastRichTextEvent = useRef<RichtextChangeEvent | null>(null);
+  useEffect(
+    () => () => {
+      lastRichTextEvent.current = null;
+
+      if (saveDelayTimer.current) {
+        clearTimeout(saveDelayTimer.current);
+        setNoteLastInputTimestamp(Date.now());
+        saveDelayTimer.current = null;
+      }
+    },
+    [routerNoteId],
+  );
 
   const updateNoteBodyImmidiate = useCallback(() => {
     if (saveDelayTimer.current) {
@@ -82,13 +104,6 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
     setNoteLastInputTimestamp(Date.now() + NOTE_DEBOUNCE_TIME);
     updateNoteBodyDebounced(richTextEvent);
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(
-    () => () => {
-      updateNoteBodyImmidiate();
-    },
-    [updateNoteBodyImmidiate],
-  );
 
   // INJECT HEADER COMPONENT START
   useEffect(() => {

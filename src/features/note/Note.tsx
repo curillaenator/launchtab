@@ -117,17 +117,19 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   }, [updateNoteBodyImmidiate]);
   //INJECT HEADER COMPONENT END
 
+  const isNoteEditable = iCan.edit(noteUnit) && !noteUnit?.locked;
+
   return (
-    <NoteContainer height={maxHeight}>
+    <NoteContainer height={maxHeight} data-note editable={isNoteEditable}>
       <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       {isNoteBodyLoading ? (
         <Loader view='fit-parent' iconSize='48px' />
       ) : (
         <RichTextField
-          editable={iCan.edit(noteUnit) && !noteUnit?.locked}
+          editable={isNoteEditable}
           onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
-          maxHeight={maxHeight - 24}
+          maxHeight={maxHeight - (isNoteEditable ? 24 : 0)}
           initialValue={noteBody || ''}
           onChange={onRichTextChange}
         />

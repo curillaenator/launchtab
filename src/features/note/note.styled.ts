@@ -3,7 +3,12 @@ import styled from 'styled-components';
 
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
-const NoteContainer = styled.div<{ height: CSSProperties['height'] }>`
+interface NoteContainerProps {
+  editable: boolean;
+  height: CSSProperties['height'];
+}
+
+const NoteContainer = styled.div<NoteContainerProps>`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
 
@@ -18,8 +23,7 @@ const NoteContainer = styled.div<{ height: CSSProperties['height'] }>`
   height: ${({ height }) => `${height}px` || 'fit-content'};
   border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: var(--layout-pd);
-  padding-bottom: 0;
+  padding-top: ${({ editable }) => (editable ? 'var(--layout-pd)' : '0')};
 `;
 
 export { NoteContainer };

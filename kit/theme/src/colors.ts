@@ -58,7 +58,7 @@ const getLightModeColors = (neutral: ColorSet): ModedSet => ({
 
     error: colorsLib.danger[100],
     succes: colorsLib.nika[100],
-    warn: colorsLib.orange[100],
+    warn: colorsLib.yellamerica[100],
     info: colorsLib.ultra[100],
 
     codeblock: neutral[700],
@@ -110,7 +110,7 @@ const getDarkModeColors = (neutral: ColorSet): ModedSet => ({
 
     error: colorsLib.danger[900],
     succes: colorsLib.nika[900],
-    warn: colorsLib.orange[900],
+    warn: colorsLib.yellamerica[900],
     info: colorsLib.ultra[900],
 
     codeblock: neutral[700],

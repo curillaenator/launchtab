@@ -41,6 +41,7 @@ import { UniqueId } from './extensions/UniqId/UniqueId';
 
 import { Heading } from './extensions/Heading';
 
+import { Info } from './extensions/Info';
 import { Emoji } from './extensions/Emoji';
 import {
   ToC,
@@ -109,6 +110,7 @@ const STATIC_EXTS = [
 
   // Indent,
 
+  Info,
   Emoji,
   Link.configure({ openOnClick: true, autolink: true }),
 

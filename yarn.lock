@@ -3800,6 +3800,7 @@ __metadata:
     "@launch-ui/dropable": 1.0.0
     "@launch-ui/input": 1.0.0
     "@launch-ui/shape": 1.0.5
+    "@launch-ui/theme": 1.1.0
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
     "@tiptap/core": 2.11.5

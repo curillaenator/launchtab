@@ -22,10 +22,6 @@
   --editor-bgc: var(--theme-backgrounds-base);
 
   --editor-highlight-bgc: var(--eds-bgc-secondary);
-  --editor-highlight-warning-bgc: var(--eds-bgc-card-warning);
-  --editor-highlight-error-bgc: var(--eds-bgc-card-error);
-  --editor-highlight-info-bgc: var(--eds-bgc-card-info);
-  --editor-highlight-success-bgc: var(--eds-bgc-card-success);
 
   --editor-scroll-thumb: var(--theme-primary-500);
   --editor-scroll-thumb-h: var(--theme-primary-400);
@@ -146,7 +142,7 @@
     }
 
     .ProseMirror {
-      padding: var(--editor-pd);
+      padding: calc(var(--editor-pd) / 2) var(--editor-pd);
     }
   }
 }

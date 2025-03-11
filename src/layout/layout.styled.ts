@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ASIDE_WIDTH = '384px';
-
 const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
+  --layout-aside-w: ${({ $isAsideOpen }) => ($isAsideOpen ? '384px' : '0px')};
+
   position: relative;
 
   display: flex;
@@ -16,17 +16,19 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
     position: sticky;
     top: 0;
     flex: 0 0 auto;
-    width: ${({ $isAsideOpen }) => ($isAsideOpen ? ASIDE_WIDTH : '0px')};
+    width: var(--layout-aside-w);
     min-height: 100vh;
     max-height: 100vh;
 
     will-change: width;
-    transition: width 160ms ease;
+    transition: width 180ms ease;
   }
 
   .viewport {
-    width: 100%;
     flex: 1 1 auto;
+    width: calc(100% - var(--layout-aside-w));
+
+    will-change: width;
 
     min-height: 100vh;
     max-height: 100vh;

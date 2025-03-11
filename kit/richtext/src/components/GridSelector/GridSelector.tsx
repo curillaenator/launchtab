@@ -53,7 +53,7 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
       [0, 1, 2].forEach((num) =>
         editorContentRef.current?.style.setProperty(
           `--blocksgrid-${targetNode.attrs['blocksGridId']}-${num}-bdc`,
-          'var(--editor-error)',
+          'var(--theme-backgrounds-danger)',
         ),
       );
     }

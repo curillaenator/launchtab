@@ -1,27 +1,15 @@
-@use './styleTokens/tokens.scss' as tokens;
-
-._theme_eds {
-  @include tokens.edsCssv;
-
+._cssv {
   --editor-primary: var(--theme-primary-500);
   --editor-primary-h: var(--theme-primary-400);
   --editor-primary-a: var(--theme-primary-600);
-
-  --editor-warning: var(--eds-fore-warning);
-  --editor-error: var(--theme-texts-error);
-  --editor-positive: var(--theme-texts-success);
-  --editor-disabled: var(--theme-texts-disabled);
 
   --editor-c: var(--theme-texts-base);
 
   --editor-bdc: var(--theme-borders-base);
 
-  --editor-warning-bdc: var(--editor-warning);
-  --editor-error-bdc: var(--editor-error);
-
   --editor-bgc: var(--theme-backgrounds-base);
 
-  --editor-highlight-bgc: var(--eds-bgc-secondary);
+  --editor-highlight-bgc: var(--theme-backgrounds-light);
 
   --editor-scroll-thumb: var(--theme-primary-500);
   --editor-scroll-thumb-h: var(--theme-primary-400);
@@ -180,60 +168,6 @@
 // }
 // sticky TOC END
 
-// .content h1 {
-//   font-size: 32px;
-//   margin-bottom: 16px;
-// }
-
-// .content * + h1 {
-//   margin-top: 32px;
-// }
-
-// .content h2 {
-//   font-size: 24px;
-//   margin-bottom: 16px;
-// }
-
-// .content * + h2 {
-//   margin-top: 32px;
-// }
-
-// .content h3 {
-//   font-size: 22px;
-//   margin-bottom: 16px;
-// }
-
-// .content * + h3 {
-//   margin-top: 32px;
-// }
-
-// .content h4 {
-//   font-size: 20px;
-//   margin-bottom: 16px;
-// }
-
-// .content * + h4 {
-//   margin-top: 32px;
-// }
-
-// .content h5 {
-//   font-size: 16px;
-//   margin-bottom: 8px;
-// }
-
-// .content * + h5 {
-//   margin-top: 12px;
-// }
-
-// .content h6 {
-//   font-size: 14px;
-//   margin-bottom: 8px;
-// }
-
-// .content * + h6 {
-//   margin-top: 12px;
-// }
-
 .content ul,
 .content ol {
   list-style: none;
@@ -245,7 +179,6 @@
 /*
   BEGIN OF HACK BLOCK
 */
-
 .content ul > li > p::before {
   content: '';
   position: absolute;

@@ -45,10 +45,10 @@
   &_disabled {
     pointer-events: none;
     background-color: transparent;
-    color: var(--editor-disabled);
+    color: var(--theme-texts-disabled);
 
     svg path {
-      stroke: var(--editor-disabled);
+      stroke: var(--theme-texts-disabled);
     }
   }
 }

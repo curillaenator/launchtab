@@ -78,10 +78,17 @@ export const RichTextView: FC<RichTextViewProps> = (props) => {
   return (
     <div
       id={richtextViewId}
-      className={cn(styles.dropableVars, styles.editor, styles._theme_eds, styles.editor_toolbarTop, className, {
-        [styles._disabled]: disabled,
-        [styles.editor_isFocused]: editor?.isEditable && editor?.isFocused,
-      })}
+      className={cn(
+        //
+        styles._cssv,
+        styles.editor,
+        styles.editor_toolbarTop,
+        className,
+        {
+          [styles._disabled]: disabled,
+          [styles.editor_isFocused]: editor?.isEditable && editor?.isFocused,
+        },
+      )}
     >
       <div
         id={internalScrollContainerId}

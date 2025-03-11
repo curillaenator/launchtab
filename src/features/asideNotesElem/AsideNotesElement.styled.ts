@@ -23,7 +23,7 @@ const AsideNotesElementStyled = styled.div`
 
   .unit-list {
     width: 100%;
-    padding-left: 8px;
+    padding-left: 12px;
 
     &_empty {
       display: flex;

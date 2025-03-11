@@ -43,14 +43,14 @@ export const Layout: FC = () => {
   const onViewportScroll = useCallback(
     debounce((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
       //@ts-expect-error
-      setHeaderShadowed(e.nativeEvent.target?.scrollTop > 56 * 2);
+      setHeaderShadowed(e.nativeEvent.target?.scrollTop > 72);
     }, 400),
     [],
   );
 
   const ctxValue = useContextValue();
 
-  if (isLoading) return <Loader view='fullscreen' iconSize='40px' />;
+  if (isLoading) return <Loader view='fullscreen' iconSize='48px' />;
 
   return (
     <LayoutCTX.Provider value={ctxValue}>

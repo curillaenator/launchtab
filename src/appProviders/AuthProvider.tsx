@@ -7,7 +7,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const { appLoading } = useAuthState();
 
   if (appLoading) {
-    return <Loader view='fullscreen' iconSize='40px' />;
+    return <Loader view='fullscreen' iconSize='48px' />;
   }
 
   return <>{children}</>;

@@ -21,7 +21,7 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const [spaceSetupOpen, setSpaceSetupOpen] = useState<boolean>(false);
   const [setupSpace, setSetupSpace] = useState<LaunchSpaceProps | null>(null);
 
-  const { data: userSpaces = [] } = useSpaces(spaceIdList);
+  const { data: userSpaces = [], isLoading: isUserSpacesLoading } = useSpaces(spaceIdList);
 
   return (
     <>
@@ -38,18 +38,22 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         </div>
 
         <div className='dashboard-block dashboard-block-grid'>
-          {userSpaces.map((userSpace) => (
-            <DashCard
-              key={userSpace.spaceCode}
-              title={userSpace.name}
-              hierarchy={userSpace.hierarchy}
-              createdBy={userSpace.createdBy}
-              onSetup={() => {
-                setSetupSpace(userSpace);
-                setSpaceSetupOpen(true);
-              }}
-            />
-          ))}
+          {isUserSpacesLoading ? (
+            <DashCard loading />
+          ) : (
+            userSpaces.map((userSpace) => (
+              <DashCard
+                key={userSpace.spaceCode}
+                title={userSpace.name}
+                hierarchy={userSpace.hierarchy}
+                createdBy={userSpace.createdBy}
+                onSetup={() => {
+                  setSetupSpace(userSpace);
+                  setSpaceSetupOpen(true);
+                }}
+              />
+            ))
+          )}
         </div>
 
         {/* <div className='dashboard-block'>

@@ -9,18 +9,7 @@
   --hchy-btn-bgc-h: transparent;
   --hchy-btn-bgc-a: transparent;
 
-  // --hchy-list-drag-bgc: #2969e333;
-
   --hchy-spinner-stroke-c: var(--theme-primary-500);
-
-  // --hchy-actions-dd-bgc: #ffffff;
-  // --hchy-actions-dd-bdc: transparent;
-  // --hchy-actions-dd-drop-sh: 0 0 8px 0 #2a72f81e;
-
-  // --hchy-hint-dd-c: #0a0a0a;
-  // --hchy-hint-dd-bgc: transparent;
-  // --hchy-hint-dd-bdc: transparent;
-  // --hchy-hint-dd-drop-sh: 0 0 8px 0 #2a72f81e;
 }
 
 .container {
@@ -28,7 +17,4 @@
   margin: 0;
   padding: 0;
   width: 100%;
-
-  // height: var(--hchy-container-h, 0);
-  transition: height 200ms ease;
 }

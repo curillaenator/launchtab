@@ -173,7 +173,11 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}
                 getItemQuery={getNoteUnitQuery}
-                ItemLoader={() => <Loader iconSize='24px' iconPadding='4px' />}
+                ItemLoader={() => (
+                  <div style={{ height: '32px', padding: '4px 0' }}>
+                    <Loader iconSize='24px' />
+                  </div>
+                )}
               />
             </div>
           ) : (

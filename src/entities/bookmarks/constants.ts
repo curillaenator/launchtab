@@ -7,41 +7,85 @@ const DEFAULT_PAGES: BookmarkTabProps[] = [
       {
         id: 'app_default_1',
         name: 'About app',
-        link: 'https://launchtab-81b06.web.app/notes/jtG8WhhR5KHtpBxqtUs5',
+        link: '/notes/jtG8WhhR5KHtpBxqtUs5',
         iconURL: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/firebase.svg',
       },
       {
         id: 'app_default_2',
         name: 'Tabs Guide',
-        link: 'https://launchtab-81b06.web.app/notes/m4fCGpakK6eDhqsDZfCB',
+        link: '/notes/m4fCGpakK6eDhqsDZfCB',
         iconURL: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/firebase.svg',
       },
       {
         id: 'app_default_3',
         name: 'Notes Guide',
-        link: 'https://launchtab-81b06.web.app/notes/Wa3oXR4V2vCuFBhfydJZ',
+        link: '/notes/Wa3oXR4V2vCuFBhfydJZ',
         iconURL: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/firebase.svg',
       },
-      { id: 'home_default_1', name: 'Whatsapp', link: 'web.whatsapp.com' },
-      { id: 'home_default_2', name: 'Facebook', link: 'facebook.com' },
-      { id: 'home_default_3', name: 'Instagram', link: 'instagram.com' },
-      { id: 'home_default_4', name: 'Gmail', link: 'gmail.com' },
+    ],
+  },
+  {
+    name: 'Social',
+    pages: [
+      {
+        id: 'home_default_1',
+        name: 'Whatsapp',
+        link: 'https://web.whatsapp.com',
+        iconURL: 'https://www.vectorlogo.zone/logos/whatsapp/whatsapp-icon.svg',
+      },
+      {
+        id: 'home_default_2',
+        name: 'Facebook',
+        link: 'https://facebook.com',
+        iconURL: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/facebook.svg',
+      },
+      {
+        id: 'home_default_3',
+        name: 'Instagram',
+        link: 'https://instagram.com',
+        iconURL: 'https://brandeps.com/logo-download/I/Instagram-Icon-logo-vector-01.svg',
+      },
+      {
+        id: 'home_default_4',
+        name: 'Gmail',
+        link: 'https://gmail.com',
+        iconURL: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/gmail.svg',
+      },
     ],
   },
   {
     name: 'Video',
     pages: [
-      { id: 'video_default_1', name: 'YouTube', link: 'youtube.com' },
-      { id: 'video_default_3', name: 'Twitch', link: 'twitch.tv' },
-      { id: 'video_default_4', name: 'Apple TV+', link: 'tv.apple.com' },
-      { id: 'video_default_5', name: 'Netflix', link: 'netflix.com' },
+      {
+        id: 'video_default_1',
+        name: 'YouTube',
+        link: 'https://youtube.com',
+        iconURL: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/youtube-icon.svg',
+      },
+      {
+        id: 'video_default_3',
+        name: 'Twitch',
+        link: 'https://twitch.tv',
+        iconURL: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/twitch.svg',
+      },
     ],
   },
   {
     name: 'Music',
     pages: [
-      { id: 'music_default_1', name: 'Spotify', link: 'spotify.com' },
-      { id: 'music_default_2', name: 'Soundcloud', link: 'soundcloud.com' },
+      {
+        id: 'music_default_1',
+        name: 'Spotify',
+        link: 'https://spotify.com',
+        iconURL: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/spotify-icon.svg',
+      },
+      {
+        id: 'music_default_2',
+        name: 'Soundcloud',
+        link: 'https://soundcloud.com',
+        iconURL:
+          'https://raw.githubusercontent.com/uditkumar489/Icon-pack/master/Social media/Flat - circular/svg/soundcloud.svg',
+      },
     ],
   },
 ];

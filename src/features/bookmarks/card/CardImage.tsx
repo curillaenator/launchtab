@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { pagesIcons } from '@src/assets/pagesIcons';
+import { getValidatedHref } from './utils';
 import type { BookmarkCardProps } from '@src/entities/bookmarks';
 
 const CardImageStyled = styled.div`
@@ -46,11 +46,12 @@ const CardImageStyled = styled.div`
   }
 `;
 
-export const CardImage: FC<BookmarkCardProps> = ({ name, link, imageURL, iconURL }) => {
-  const previewLink = link.match(/^https?:\/\//) ? link : `https://${link}`;
+// const IMAGE_THUM_IO = 'https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/640/crop/1200/viewportWidth/1520/noanimate/maxAge/48/';
+const IMAGE_THUM_IO = 'https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/320/noanimate';
+const NOTES_ROUTE_RE = /^\/notes\/([A-Za-z0-9]+)$/;
 
-  const generatedSitePreview = `https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/640/crop/1200/viewportWidth/1520/noanimate/maxAge/48/${previewLink}`;
-  const isInBookmarkIcons = link in pagesIcons;
+export const CardImage: FC<BookmarkCardProps> = ({ name, link, iconURL }) => {
+  const validLink = getValidatedHref(link);
 
   if (iconURL)
     return (
@@ -59,19 +60,12 @@ export const CardImage: FC<BookmarkCardProps> = ({ name, link, imageURL, iconURL
       </CardImageStyled>
     );
 
-  if (imageURL)
+  if (!NOTES_ROUTE_RE.test(validLink) && !!link.length)
     return (
       <CardImageStyled>
-        <img className='card-image' src={imageURL} alt={name} draggable={false} />
-      </CardImageStyled>
-    );
+        {/* <img className='card-icon' src={`${GOOGLE_FAVICON}${link}`} alt={name} draggable={false} /> */}
 
-  if (link)
-    return (
-      <CardImageStyled>
-        {isInBookmarkIcons && <div className='card-icon'>{pagesIcons[link]}</div>}
-
-        {!isInBookmarkIcons && <img className='card-image' src={generatedSitePreview} alt={name} draggable={false} />}
+        <img className='card-image' src={`${IMAGE_THUM_IO}/${validLink}`} alt={name} draggable={false} />
       </CardImageStyled>
     );
 

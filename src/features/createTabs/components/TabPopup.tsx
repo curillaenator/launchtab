@@ -11,7 +11,7 @@ import { CreateFormCTX } from '../context';
 import { useCustomIcons } from '../hooks/useCustomIcons';
 
 import { Scrollbars } from '@src/components/scrollbars';
-import { Card } from '@src/components/card';
+import { BookmarkCard } from '@src/features/bookmarks/card';
 
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
@@ -191,9 +191,8 @@ const TabPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
       </div>
 
       <div className='popup-preview'>
-        <Card
-          as='div'
-          hasBorder
+        <BookmarkCard
+          disabled
           bookmark={{
             name: formState.name || 'Title',
             link: formState.link,

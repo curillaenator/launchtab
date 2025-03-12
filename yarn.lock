@@ -5240,13 +5240,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-animations@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@types/react-animations@npm:1.0.0"
-  checksum: 06c3b8a1eee3d1bde8132bf5f1f166fa57a61aeb5fb9dedccd5743959be78dfa515eb7252fcf75072f11be309888149c60dc3ee009567eaca18d9da2d7b3bc42
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:18.2.0":
   version: 18.2.0
   resolution: "@types/react-dom@npm:18.2.0"
@@ -9528,7 +9521,6 @@ __metadata:
     "@types/lodash": 4.17.14
     "@types/node": 22.7.4
     "@types/react": 18.2.0
-    "@types/react-animations": 1.0.0
     "@types/react-dom": 18.2.0
     "@types/shortid": 0.0.29
     "@types/styled-components": 5.1.26
@@ -9560,7 +9552,6 @@ __metadata:
     pexels: 1.4.0
     prettier: 3.4.2
     react: 18.2.0
-    react-animations: 1.0.0
     react-dom: 18.2.0
     react-easy-sort: 1.3.1
     react-hook-form: 7.54.2
@@ -11281,13 +11272,6 @@ __metadata:
     iconv-lite: 0.4.24
     unpipe: 1.0.0
   checksum: ba1583c8d8a48e8fbb7a873fdbb2df66ea4ff83775421bfe21ee120140949ab048200668c47d9ae3880012f6e217052690628cf679ddfbd82c9fc9358d574676
-  languageName: node
-  linkType: hard
-
-"react-animations@npm:1.0.0":
-  version: 1.0.0
-  resolution: "react-animations@npm:1.0.0"
-  checksum: dc4425628fe33bf3a49c7128167f765ee16089902535285db1b377136f422ae9463dcb0df0532a82dfaf4c378ae18909409d6b66606c460962c361ec5a951ba1
   languageName: node
   linkType: hard
 

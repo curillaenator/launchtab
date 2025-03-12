@@ -1,11 +1,17 @@
 import React, { useState, useRef, useEffect, FC, type MouseEventHandler } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { fadeIn } from 'react-animations';
 import { ButtonGhost } from '@launch-ui/button';
 import { compose } from './utils';
 import type { ContextMenuProps } from './interfaces';
 
-const fade = keyframes`${fadeIn}`;
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const MenuStyled = styled.div`
   display: flex;
@@ -14,7 +20,7 @@ const MenuStyled = styled.div`
   padding: 0 0.5rem;
   background-color: ${({ theme }) => theme.backgrounds.base};
   border-radius: 16px;
-  animation: ${fade} 0.12s;
+  animation: ${fadeIn} 2ms;
   z-index: 500;
   filter: drop-shadow(${({ theme }) => theme.shadows.card});
 

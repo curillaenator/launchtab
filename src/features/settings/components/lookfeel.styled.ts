@@ -1,7 +1,13 @@
 import styled, { keyframes } from 'styled-components';
-import { fadeIn } from 'react-animations';
 
-const animation = keyframes`${fadeIn}`;
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const LookFeelStyled = styled.div`
   display: flex;
@@ -11,8 +17,7 @@ const LookFeelStyled = styled.div`
 
   padding: var(--layout-pd) 0;
   min-height: 320px;
-  animation: ${animation} 0.2s linear;
-  /* padding-right: 16px; */
+  animation: ${fadeIn} 200ms ease;
 
   .search-pexels-wallpaper-controls {
     display: flex;

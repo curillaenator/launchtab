@@ -47,7 +47,7 @@ const CardImageStyled = styled.div`
 `;
 
 // const IMAGE_THUM_IO = 'https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/640/crop/1200/viewportWidth/1520/noanimate/maxAge/48/';
-const IMAGE_THUM_IO = 'https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/320/noanimate';
+const IMAGE_THUM_IO = 'https://image.thum.io/get/auth/53623-screenshot/allowJPG/width/320/noanimate/maxAge/48';
 const NOTES_ROUTE_RE = /^\/notes\/([A-Za-z0-9]+)$/;
 
 export const CardImage: FC<BookmarkCardProps> = ({ name, link, iconURL }) => {
@@ -63,8 +63,6 @@ export const CardImage: FC<BookmarkCardProps> = ({ name, link, iconURL }) => {
   if (!NOTES_ROUTE_RE.test(validLink) && !!link.length)
     return (
       <CardImageStyled>
-        {/* <img className='card-icon' src={`${GOOGLE_FAVICON}${link}`} alt={name} draggable={false} /> */}
-
         <img className='card-image' src={`${IMAGE_THUM_IO}/${validLink}`} alt={name} draggable={false} />
       </CardImageStyled>
     );

@@ -10,7 +10,7 @@ import { Loader } from '@launch-ui/loader';
 import { CreateFormCTX } from '../context';
 import { useCustomIcons } from '../hooks/useCustomIcons';
 
-import { Scrollbars } from '@src/components/scrollbars';
+import { Scrollbars } from '@src/features/scrollbars';
 import { BookmarkCard } from '@src/features/bookmarks/card';
 
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';

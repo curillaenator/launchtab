@@ -8,13 +8,12 @@ import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Switch, Input, Titlewrap } from '@launch-ui/input';
 import { Loader } from '@launch-ui/loader';
 
-import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
-
 import { $settingsStore, setSettings } from '@src/entities/settings';
 import { useDropable } from '@src/hooks/useDropable';
 
 import { $pexelsStore, setPexels, setPexelsLoading, setPexelsQuery } from '@src/entities/pexels';
 
+import { ImagePreview } from './ImagePreview';
 import { LookFeelStyled } from './lookfeel.styled';
 
 import DotIcon from '@src/assets/svg/dot.svg';

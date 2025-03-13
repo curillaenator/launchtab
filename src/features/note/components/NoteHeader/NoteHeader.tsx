@@ -12,7 +12,8 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
 
 import { useICan } from '@src/hooks/useICan';
-import { LAUNCH_HEADER_BDRS, MAX_UNITS_PER_UNIT, MAX_UNITS_DEPTH } from '@src/shared/appConfig';
+import { MODAL_PORTAL_ID } from '@src/shared/appContainers';
+import { LAUNCH_PAPER_BDRS, LAUNCH_HEADER_BDRS, MAX_UNITS_PER_UNIT, MAX_UNITS_DEPTH } from '@src/shared/appConfig';
 
 import { SetupNote } from '../SetupNote';
 import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
@@ -138,7 +139,12 @@ export const NoteHeader: FC = () => {
       </NoteHeaderStyled>
 
       {noteUnit && iCanEdit && (
-        <Modal open={editOpen} onClose={() => setEditOpen(false)}>
+        <Modal
+          portalId={MODAL_PORTAL_ID}
+          open={editOpen}
+          onClose={() => setEditOpen(false)}
+          borderRadius={LAUNCH_PAPER_BDRS}
+        >
           <SetupNote closePopup={() => setEditOpen(false)} unit={noteUnit} />
         </Modal>
       )}

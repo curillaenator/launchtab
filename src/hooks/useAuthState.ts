@@ -4,7 +4,7 @@ import { auth } from '@src/api';
 import { setUser } from '@src/entities/user';
 
 const useAuthState = () => {
-  const [appLoading, setAppLoading] = useState(false);
+  const [appLoading, setAppLoading] = useState(true);
 
   useEffect(() => {
     sessionStorage.clear();

@@ -3703,7 +3703,6 @@ __metadata:
     "@headlessui/react": 1.5.0
     "@launch-ui/types": "*"
     "@launch-ui/utils": 1.0.1
-    classnames: 2.5.1
   peerDependencies:
     react: "*"
     styled-components: "*"
@@ -3784,8 +3783,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/modal@workspace:kit/modal"
   dependencies:
+    "@headlessui/react": 1.5.0
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
-    reactjs-popup: 2.0.5
+    "@launch-ui/utils": 1.0.1
   peerDependencies:
     react: "*"
     styled-components: "*"

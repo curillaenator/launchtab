@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "@headlessui/react": "1.5.0",
-    "@launch-ui/utils": "1.0.1",
-    "classnames": "2.5.1"
+    "@launch-ui/utils": "1.0.1"
   },
   "devDependencies": {
     "@launch-ui/types": "*"

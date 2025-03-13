@@ -10,6 +10,7 @@ import { LaunchSpaceProps, useSpaces } from '@src/entities/space';
 
 import { SetupSpace } from '@src/features/space';
 
+import { MODAL_PORTAL_ID } from '@src/shared/appContainers';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { DashCard } from './DashCard';
@@ -66,14 +67,16 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         </div> */}
       </NoteContainer>
 
-      {!!setupSpace && (
-        <Modal
-          open={spaceSetupOpen}
-          onClose={() => {
-            setSetupSpace(null);
-            setSpaceSetupOpen(false);
-          }}
-        >
+      <Modal
+        borderRadius={LAUNCH_PAPER_BDRS}
+        portalId={MODAL_PORTAL_ID}
+        open={spaceSetupOpen}
+        onClose={() => {
+          setSetupSpace(null);
+          setSpaceSetupOpen(false);
+        }}
+      >
+        {!!setupSpace && (
           <SetupSpace
             closePopup={() => {
               setSetupSpace(null);
@@ -81,8 +84,8 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
             }}
             space={setupSpace}
           />
-        </Modal>
-      )}
+        )}
+      </Modal>
     </>
   );
 };

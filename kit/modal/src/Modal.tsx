@@ -1,52 +1,36 @@
-import React, { FC } from 'react';
-import Popup from 'reactjs-popup';
-import styled, { keyframes } from 'styled-components';
+import React, { FC, PropsWithChildren } from 'react';
+import ReactDOM from 'react-dom';
+
+import { Corners } from '@launch-ui/shape';
+import { usePortal } from '@launch-ui/utils';
+
+import { ModalOverlay } from './Overlay';
+import { ModalContainer, ModalContent } from './modal.styled';
+
+import { getAnimationCns } from './utils';
 
 import type { ModalProps } from './interfaces';
+import { Transition } from '@headlessui/react';
 
-const appear = keyframes`
-  from {
-    opacity: 0;
-  }
+const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
+  const { portalId, open, children, borderRadius = 32 } = props;
 
-  to {
-    opacity: 1;
-  }
-`;
+  const portal = usePortal(portalId);
 
-const PopupStyled = styled(Popup)`
-  &-overlay {
-    min-width: 320px;
-    padding: 0 1rem;
-    background-color: ${({ theme }) => theme.backgrounds.base40};
-    animation: ${appear} 0.12s linear;
-    backdrop-filter: blur(5px);
-  }
+  return ReactDOM.createPortal(
+    <ModalContainer show={open} appear unmount>
+      <ModalOverlay {...props} />
 
-  &-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: transparent;
-    color: ${({ theme }) => theme.texts.base};
-    filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
-  }
-`;
+      <Transition.Child {...getAnimationCns('overlay')}>
+        <ModalContent borderRadius={borderRadius}>
+          <Corners borderRadius={borderRadius} />
 
-export const Modal: FC<ModalProps> = (props) => {
-  const { trigger, open, children, onClose } = props;
-
-  return (
-    <PopupStyled
-      modal
-      position='center center'
-      arrow={false}
-      open={open}
-      onClose={onClose}
-      trigger={open === undefined ? () => <div>{trigger}</div> : undefined}
-    >
-      {children}
-    </PopupStyled>
+          {children}
+        </ModalContent>
+      </Transition.Child>
+    </ModalContainer>,
+    portal,
   );
 };
+
+export { Modal };

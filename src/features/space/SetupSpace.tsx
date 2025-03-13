@@ -8,20 +8,12 @@ import { keys } from 'lodash';
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Loader } from '@launch-ui/loader';
-import { Corners } from '@launch-ui/shape';
 import { Input, Titlewrap } from '@launch-ui/input';
 
 import { $userStore } from '@src/entities/user';
-import {
-  // $spaceStore,
-  useUpdateSpace,
-  useDeleteSpace,
-  // setSelectedSpace,
-  type LaunchSpaceProps,
-} from '@src/entities/space';
+import { useUpdateSpace, useDeleteSpace, type LaunchSpaceProps } from '@src/entities/space';
 
 import { USER_SPACES_QUERY, USER_QUERY } from '@src/shared/queryKeys';
-import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { SetupSpaceStyled } from './setupspace.styled';
 
@@ -38,7 +30,6 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
   const { closePopup, space } = props;
 
   const { uid, spaces: spaceIdList } = useEffectorUnit($userStore);
-  // const { space: selectedSpace } = useEffectorUnit($spaceStore);
 
   const qc = useQueryClient();
   const theme = useTheme();
@@ -88,8 +79,6 @@ const SetupSpace: FC<SetupSpaceProps> = (props) => {
         updateSpace(formData);
       })}
     >
-      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
-
       <Typography as='h2' type='RoundedHeavy36'>
         Space setup
       </Typography>

@@ -7,13 +7,11 @@ import { keys } from 'lodash';
 import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
 import { Loader } from '@launch-ui/loader';
-import { Corners } from '@launch-ui/shape';
 import { Input, Titlewrap, Switch } from '@launch-ui/input';
 
 import { useUnitUpdate, useUnitDelete, type LaunchUnitProps, type SetupNoteFormData } from '@src/entities/note';
 
 import { UNIT_NOTE_UNIT_QUERY, UNIT_NOTE_BODY_QUERY } from '@src/shared/queryKeys';
-import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { SetupNoteStyled } from './setupnote.styled';
 
@@ -65,8 +63,6 @@ const SetupNote: FC<SetupNoteProps> = (props) => {
         updateUnit(formData);
       })}
     >
-      <Corners borderRadius={LAUNCH_PAPER_BDRS} />
-
       <Typography as='h2' type='RoundedHeavy36'>
         Note attributes
       </Typography>

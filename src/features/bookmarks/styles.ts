@@ -3,12 +3,8 @@ import styled from 'styled-components';
 
 const SortableListStyled = styled(SortableList)`
   display: grid;
-  grid-template-columns: repeat(4, 3fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-
-  @media (min-width: 1440px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
 
   @media (min-width: 1520px) {
     grid-template-columns: repeat(5, 1fr);
@@ -20,10 +16,6 @@ const SortableListStyled = styled(SortableList)`
 
   @media (min-width: 2560px) {
     grid-template-columns: repeat(8, 1fr);
-  }
-
-  @media (min-width: 3840px) {
-    grid-template-columns: repeat(10, 1fr);
   }
 `;
 

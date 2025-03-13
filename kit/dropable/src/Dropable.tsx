@@ -4,12 +4,11 @@ import { Instance } from 'tippy.js';
 
 import { useBaseDropdownProps } from './hooks/useBaseDropdownProps';
 import { DropableMenu } from './DropableMenu';
-import { DEFAULT_TEST_ID, PLUGINS } from './constants';
+import { PLUGINS } from './constants';
 import { DropableProps } from './interfaces';
 
 export const Dropable: FC<DropableProps> = (props) => {
   const {
-    dataTestId = DEFAULT_TEST_ID,
     openNode,
     children,
     maxWidth = 256,
@@ -20,6 +19,7 @@ export const Dropable: FC<DropableProps> = (props) => {
     closeDropdown,
 
     corners,
+    headless,
 
     // Reason: guard tippy props from getting into DOM
     // @ts-expect-error
@@ -40,7 +40,7 @@ export const Dropable: FC<DropableProps> = (props) => {
         <DropableMenu
           attrs={attrs}
           corners={corners}
-          dataTestId={dataTestId}
+          headless={headless}
           instance={instance as Instance}
           closeDropdown={closeDropdown}
           maxWidth={maxWidth}

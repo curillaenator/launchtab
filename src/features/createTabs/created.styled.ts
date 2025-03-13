@@ -1,30 +1,6 @@
-import Popup from 'reactjs-popup';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { LAUNCH_CARD_BDRS } from '@src/shared/appConfig';
-
-const appear = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-
-const PopupStyled = styled(Popup)`
-  &-overlay {
-  }
-
-  &-content {
-    width: fit-content;
-    background-color: transparent;
-    animation: ${appear} 0.2s ease-out;
-  }
-`;
 
 const CreateTabButton = styled.div<{ active: boolean }>`
   --shp-bdc: ${({ theme }) => theme.backgrounds.base};
@@ -65,4 +41,4 @@ const CreateTabButton = styled.div<{ active: boolean }>`
         })}
 `;
 
-export { PopupStyled, CreateTabButton };
+export { CreateTabButton };

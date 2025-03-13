@@ -58,7 +58,7 @@ const PopupForm = styled.form`
   }
 `;
 
-const TabPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
+const TabPopup: FC<{ closePopup?: () => void }> = ({ closePopup }) => {
   const { formState, dispatchForm, handleCreate } = useContext(CreateFormCTX);
 
   return (
@@ -67,7 +67,7 @@ const TabPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
       onSubmit={(e) => {
         e.preventDefault();
         handleCreate?.();
-        closePopup();
+        closePopup?.();
       }}
     >
       <div className='popup'>
@@ -96,7 +96,7 @@ const TabPopup: FC<{ closePopup: () => void }> = ({ closePopup }) => {
 
         <div className='popup-buttons'>
           <ButtonAction title='Create' type='submit' />
-          <ButtonGhost title='Cancel' type='button' onClick={() => closePopup()} />
+          <ButtonGhost title='Cancel' type='button' onClick={() => closePopup?.()} />
         </div>
       </div>
     </PopupForm>

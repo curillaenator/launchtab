@@ -18,7 +18,6 @@ export interface _BaseMenuProps {
     'data-reference-hidden'?: string;
     'data-escaped'?: string;
   };
-  dataTestId: string;
   instance: Instance;
   maxWidth: string | number;
   minWidth: string | number;
@@ -26,7 +25,10 @@ export interface _BaseMenuProps {
   closeOnItemClick?: boolean;
   animationStyle?: CSSProperties;
   closeDropdown?: () => void;
+
   corners?: CornerProps;
+  headless?: boolean;
+
   children: ReactNode;
 }
 

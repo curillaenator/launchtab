@@ -21,7 +21,7 @@ const DrawerContainer = styled(Transition)`
 
   .overlay-enter {
     will-change: opacity;
-    transition: opacity 200ms linear;
+    transition: opacity 200ms ease;
 
     &From {
       opacity: 0;
@@ -34,7 +34,7 @@ const DrawerContainer = styled(Transition)`
 
   .overlay-leave {
     will-change: opacity;
-    transition: opacity 200ms linear;
+    transition: opacity 200ms ease;
 
     &From {
       opacity: 1;
@@ -46,44 +46,27 @@ const DrawerContainer = styled(Transition)`
   }
 
   .content-enter {
-    will-change: opacity, transform;
-
-    position: fixed;
-    top: 0;
-    right: 0;
-
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s linear;
+    will-change: transform;
+    transition: transform 0.2s ease;
 
     &From {
-      opacity: 0;
       transform: translateX(${DRAWER_W});
     }
 
     &To {
-      opacity: 1;
       transform: translateX(0);
     }
   }
 
   .content-leave {
-    will-change: opacity, transform;
-    position: fixed;
-    top: 0;
-    right: 0;
-
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s linear;
+    will-change: transform;
+    transition: transform 0.2s ease;
 
     &From {
-      opacity: 1;
       transform: translateX(0);
     }
 
     &To {
-      opacity: 0;
       transform: translateX(${DRAWER_W});
     }
   }

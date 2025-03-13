@@ -138,16 +138,14 @@ export const NoteHeader: FC = () => {
         </NoteHeaderBlockStyled>
       </NoteHeaderStyled>
 
-      {noteUnit && iCanEdit && (
-        <Modal
-          portalId={MODAL_PORTAL_ID}
-          open={editOpen}
-          onClose={() => setEditOpen(false)}
-          borderRadius={LAUNCH_PAPER_BDRS}
-        >
-          <SetupNote closePopup={() => setEditOpen(false)} unit={noteUnit} />
-        </Modal>
-      )}
+      <Modal
+        portalId={MODAL_PORTAL_ID}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        borderRadius={LAUNCH_PAPER_BDRS}
+      >
+        {noteUnit && iCanEdit && <SetupNote closePopup={() => setEditOpen(false)} unit={noteUnit} />}
+      </Modal>
     </>
   );
 };

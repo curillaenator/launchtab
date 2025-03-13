@@ -18,6 +18,7 @@ const ModalContainer = styled(Transition)`
   z-index: 1300;
 
   .overlay-enter {
+    will-change: opacity;
     transition: opacity 200ms ease;
 
     &From {
@@ -45,17 +46,23 @@ const ModalContainer = styled(Transition)`
 const ModalContent = styled.div<{ borderRadius: number }>`
   --shp-bgc: ${({ theme }) => theme.backgrounds.base};
   --shp-bdc: transparent;
+
+  --modal-content-bdrs: calc(${({ borderRadius }) => borderRadius}px * 1.25 + 3px);
+  --modal-content-min-size: calc(var(--modal-content-bdrs) * 2);
   // for corners
   position: relative;
 
-  border-radius: calc(${({ borderRadius }) => borderRadius}px * 1.25 + 3px);
+  min-width: var(--modal-content-min-size);
+  min-height: var(--modal-content-min-size);
+
+  border-radius: var(--modal-content-bdrs);
   background-color: ${({ theme }) => theme.backgrounds.base};
   color: ${({ theme }) => theme.texts.base};
 
   filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
 `;
 
-const MadolOverlay = styled.div`
+const ModalOverlay = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -66,4 +73,4 @@ const MadolOverlay = styled.div`
   backdrop-filter: blur(5px);
 `;
 
-export { ModalContainer, ModalContent, MadolOverlay };
+export { ModalContainer, ModalContent, ModalOverlay };

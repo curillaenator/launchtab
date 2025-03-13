@@ -1,18 +1,24 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
 import styled from 'styled-components';
 import SortableList, { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
 
-import { Button } from '@launch-ui/button';
-import { ContextMenu } from '@launch-ui/context-menu';
+import { Button, ButtonAction, ButtonGhost } from '@launch-ui/button';
+import { Typography } from '@launch-ui/typography';
+import { Modal } from '@launch-ui/modal';
 
 import { CreateTabs } from '@src/features/createTabs';
 
 import { $userStore } from '@src/entities/user';
 import { $bookmarksStore, setCurrentTab, setTabsWithDbUpdate, removeTab } from '@src/entities/bookmarks';
 
+import { MODAL_PORTAL_ID } from '@src/shared/appContainers';
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+
 import HomeIcon from '@src/assets/svg/home.svg';
+import TabsSetupIcon from '@src/assets/svg/switches.svg';
+import BinIcon from '@src/assets/svg/trash.svg';
 
 const SortableListStyled = styled(SortableList)`
   display: flex;
@@ -21,8 +27,30 @@ const SortableListStyled = styled(SortableList)`
   gap: 1rem;
 `;
 
+const TabsSetupStyled = styled.div`
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 24px;
+
+  padding: 24px;
+
+  & > ul {
+    list-style: none;
+
+    li:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+`;
+
 export const Tabs: FC = () => {
   const { uid } = useEffectorUnit($userStore);
+
+  const [isSetupOpen, setIsSetupOpen] = useState<boolean>(false);
+
   const { tabs = [], currentTab } = useEffectorUnit($bookmarksStore);
 
   const sortableTabs = useMemo(() => tabs.filter((...[, i]) => i !== 0), [tabs]);
@@ -40,36 +68,57 @@ export const Tabs: FC = () => {
   if (!tabs.length) return null;
 
   return (
-    <SortableListStyled onSortEnd={onSortEnd}>
-      <Button
-        IconLeft={() => <HomeIcon />}
-        title='Home'
-        active={currentTab === 'Home'}
-        onClick={() => setCurrentTab('Home')}
-      />
+    <>
+      <SortableListStyled onSortEnd={onSortEnd}>
+        <Button
+          IconLeft={() => <HomeIcon />}
+          title='Home'
+          active={currentTab === 'Home'}
+          onClick={() => setCurrentTab('Home')}
+        />
 
-      {sortableTabs.map(({ name }, i) => (
-        <SortableItem key={`${name}${i}`}>
-          <div>
-            <ContextMenu
-              items={[
-                {
-                  title: 'Delete',
-                  danger: true,
-                  handler: () => {
-                    if (!uid) return;
-                    removeTab({ uid, tabs, tabName: name });
-                  },
-                },
-              ]}
-            >
-              <Button title={name} active={name === currentTab} onClick={() => setCurrentTab(name)} />
-            </ContextMenu>
-          </div>
-        </SortableItem>
-      ))}
+        {sortableTabs.map(({ name }, i) => (
+          <SortableItem key={`${name}${i}`}>
+            <Button title={name} active={name === currentTab} onClick={() => setCurrentTab(name)} />
+          </SortableItem>
+        ))}
 
-      <CreateTabs create='new-page' />
-    </SortableListStyled>
+        {uid && <Button IconLeft={() => <TabsSetupIcon />} onClick={() => setIsSetupOpen(true)} />}
+
+        {uid && sortableTabs.length < 5 && <CreateTabs create='new-page' />}
+      </SortableListStyled>
+
+      {uid && (
+        <Modal
+          portalId={MODAL_PORTAL_ID}
+          open={isSetupOpen}
+          onClose={() => setIsSetupOpen(false)}
+          borderRadius={LAUNCH_PAPER_BDRS}
+        >
+          <TabsSetupStyled>
+            <Typography type='RoundedHeavy36'>Tabs Setup</Typography>
+
+            <ul>
+              {sortableTabs.map(({ name }) => (
+                <li key={name}>
+                  <ButtonAction
+                    LeftIcon={() => <BinIcon />}
+                    title={`Delete ${name} tab`}
+                    appearance='danger'
+                    onClick={() => {
+                      if (!confirm(`Are you sure to remove tab ${name}`)) return;
+                      removeTab({ uid, tabs, tabName: name });
+                      setIsSetupOpen(false);
+                    }}
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <ButtonGhost title='Cancel' onClick={() => setIsSetupOpen(false)} />
+          </TabsSetupStyled>
+        </Modal>
+      )}
+    </>
   );
 };

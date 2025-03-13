@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const FormStyled = styled.form`
   width: 100%;
   background-color: transparent;
-  width: 474px;
+  width: 420px;
 
   .form {
     width: 100%;

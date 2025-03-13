@@ -19,7 +19,7 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            App won't save your changes unless you signed in. Also there is no chance to use built-in Notes app
+            App won't save your changes unless you signed in
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
@@ -27,7 +27,7 @@ export const SignIn: FC<{ closePopup: () => void }> = ({ closePopup }) => {
           </Typography>
 
           <Typography as='p' type='TextRegular14' className='form-title-add'>
-            Saved data/app config are accessible on any device under your account
+            Saved data is available on any device under your account
           </Typography>
         </div>
 

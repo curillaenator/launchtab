@@ -3467,13 +3467,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@headlessui/react@npm:1.5.0"
+"@headlessui/react@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@headlessui/react@npm:1.7.0"
   peerDependencies:
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
-  checksum: e3373dfb73936950d659a87718fb9fdedc599b344b30cb0d8b1ef0a2ec13d6f405c653fa51284236788658840ece82c6a8538a5a5931e595274e9590b2020079
+  checksum: 8635e10d5ffaef63792010da26e782693ad6b271293151f53fdeedc8f64fa7efd2b990fe7247d9294de04f2da1879cb56653d93e38c38a89ba1ea6796b6a5292
   languageName: node
   linkType: hard
 
@@ -3700,7 +3700,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/drawer@workspace:kit/drawer"
   dependencies:
-    "@headlessui/react": 1.5.0
+    "@headlessui/react": 1.7.0
     "@launch-ui/types": "*"
     "@launch-ui/utils": 1.0.1
   peerDependencies:
@@ -3783,7 +3783,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/modal@workspace:kit/modal"
   dependencies:
-    "@headlessui/react": 1.5.0
+    "@headlessui/react": 1.7.0
     "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
     "@launch-ui/utils": 1.0.1

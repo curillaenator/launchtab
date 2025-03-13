@@ -6,13 +6,13 @@ import { useCreateForm } from './hooks/useCreateForm';
 import { CreateFormCTX } from './context';
 import { PopupStyled, CreateTabButton } from './created.styled';
 
-import { TabsGroupPopup as CreateTabsGroupPopup } from './components/TabsGroupPopup';
-import { TabPopup as CreateTabPopup } from './components/TabPopup';
+import { TabPopup } from './components/TabPopup';
+import { LinkPopup } from './components/LinkPopup';
 
 import { LAUNCH_CARD_BDRS } from '@src/shared/appConfig';
 
 import LinkIcon from '@src/assets/svg/link.svg';
-import FolderIcon from '@src/assets/svg/folder.svg';
+import AddTabIcon from '@src/assets/svg/addFolder.svg';
 
 const CreateTabs: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => {
   const { formContextValue, resetFormState } = useCreateForm(create);
@@ -27,7 +27,7 @@ const CreateTabs: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => 
         position={['right center', 'left center']}
         trigger={(open: boolean) =>
           create === 'new-page' ? (
-            <Button active={open} IconLeft={() => <FolderIcon />} />
+            <Button active={open} IconLeft={() => <AddTabIcon />} />
           ) : (
             <CreateTabButton active={open}>
               <Corners borderRadius={LAUNCH_CARD_BDRS} stroke={6} />
@@ -39,9 +39,9 @@ const CreateTabs: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => 
         {
           ((close: () => void) =>
             create === 'new-page' ? (
-              <CreateTabsGroupPopup closePopup={close} />
+              <TabPopup closePopup={close} />
             ) : (
-              <CreateTabPopup closePopup={close} />
+              <LinkPopup closePopup={close} />
             )) as unknown as ReactNode
         }
       </PopupStyled>

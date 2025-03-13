@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, Fragment } from 'react';
 import { Transition } from '@headlessui/react';
 import { useDisabledScroll, usePreventEvent } from '@launch-ui/utils';
 import type { DrawerProps } from './interfaces';
@@ -14,7 +14,7 @@ const Overlay = (props: DrawerProps) => {
   usePreventEvent([overlayRef], 'touchmove');
 
   return (
-    <Transition.Child {...getAnimationCns('overlay')}>
+    <Transition.Child as={Fragment} {...getAnimationCns('overlay')}>
       <DrawerOverlay ref={overlayRef} onClick={onClose} />
     </Transition.Child>
   );

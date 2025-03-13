@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Transition } from '@headlessui/react';
 import { usePortal } from '@launch-ui/utils';
@@ -22,7 +22,7 @@ const Drawer: FC<PropsWithChildren<DrawerProps>> = (props) => {
     <DrawerContainer appear show={open} unmount>
       <DrawerOverlay {...props} />
 
-      <Transition.Child {...getAnimationCns('content')}>
+      <Transition.Child as={Fragment} {...getAnimationCns('content')}>
         <DrawerContent className={contentClassName}>{children}</DrawerContent>
       </Transition.Child>
     </DrawerContainer>,

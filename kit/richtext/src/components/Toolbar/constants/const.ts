@@ -11,7 +11,7 @@ const DROPDOWN_PARAMS = {
   textFormat: 220,
   table: 220,
   color: 220,
-  blocksGrid: 336,
+  blocksGrid: 16 + 8 * 32,
   macros: 220,
 } as const;
 

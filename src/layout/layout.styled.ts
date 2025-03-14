@@ -37,15 +37,16 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-      width: 4px;
+      display: none;
+      /* width: 4px; */
       /* margin-left: 0.25rem; */
-      border-radius: 2px;
-      background-color: ${({ theme }) => theme.backgrounds.base};
-    }
+      /* border-radius: 2px;
+      background-color: ${({ theme }) => theme.backgrounds.base}; */
 
-    &::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.primary[500]};
-      border-radius: 2px;
+      /* &-thumb {
+        background-color: ${({ theme }) => theme.primary[500]};
+        border-radius: 2px;
+      } */
     }
   }
 `;

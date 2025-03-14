@@ -9,7 +9,7 @@ import { ToolbarButton } from '../ToolbarButton';
 
 import type { DropdownProps } from './interfaces';
 
-import IconSelect from '../../icons/IconSelect';
+import IconSelect from '../../svg/select.svg';
 import styles from './dropdown.module.scss';
 
 export const Dropdown = (props: DropdownProps) => {

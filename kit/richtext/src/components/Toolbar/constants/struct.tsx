@@ -15,17 +15,12 @@ import {
   TOC_ITEMS,
   TEXT_ALIGN_ITEMS,
   TEXT_FORMAT_ITEMS,
-  // COLOR_ITEMS,
-  // TEXT_COLOR_CLEAR,
   IMAGE_ITEMS,
-  // BACKGROUND_COLOR_ITEMS,
-  // TEXT_HIGHLIGHT_CLEAR,
   TASK_LIST_ITEMS,
 } from './items';
 
-import IconTableInsert from '../../../icons/IconTableInsert';
-import { AddMacrosIcon } from '../../../icons/AddMacrosIcon';
-// import IconEdit from '../../../icons/IconEdit';
+import IconTableInsert from '../../../svg/table-add.svg';
+import AddMacrosIcon from '../../../svg/macroses.svg';
 
 const DEFAULT_STRUCT: ToolbarComponentStruct = {
   full: {

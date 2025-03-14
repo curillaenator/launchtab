@@ -1,8 +1,8 @@
-import IconTogglerInline from '../../../../icons/IconTogglerInline';
-import IconBold from '../../../../icons/IconMarkBold';
-import IconItalic from '../../../../icons/IconMarkItalic';
-import IconStrikeThrough from '../../../../icons/IconMarkStrikeThrough';
-import IconUnderline from '../../../../icons/IconMarkUnderline';
+import IconTogglerInline from '../../../../svg/inline-code.svg';
+import IconBold from '../../../../svg/text-bold.svg';
+import IconItalic from '../../../../svg/text-italic.svg';
+import IconStrikeThrough from '../../../../svg/text-strikethrough.svg';
+import IconUnderline from '../../../../svg/text-underline.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

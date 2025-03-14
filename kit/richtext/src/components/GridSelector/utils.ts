@@ -2,14 +2,14 @@ import type { FC } from 'react';
 import type { SingleCommands, Editor as CoreEditor } from '@tiptap/core';
 import type { ToolbarButtonProps } from '../ToolbarButton';
 
-import { DryThreeIcon } from '../../icons/DryThreeIcon';
-import { DryTwoIcon } from '../../icons/DryTwoIcon';
-import { DryOneIcon } from '../../icons/DryOneIcon';
-import { FattenTwoLeftIcon } from '../../icons/FattenTwoLeftIcon';
-import { FattenTwoRightIcon } from '../../icons/FattenTwoRightIcon';
-import { FattenThreeLeftIcon } from '../../icons/FattenThreeLeftIcon';
-import { FattenThreeMiddleIcon } from '../../icons/FattenThreeMiddleIcon';
-import { FattenThreeRightIcon } from '../../icons/FattenThreeRightIcon';
+import { DryThreeIcon } from './icons/DryThreeIcon';
+import { DryTwoIcon } from './icons/DryTwoIcon';
+import { DryOneIcon } from './icons/DryOneIcon';
+import { FattenTwoLeftIcon } from './icons/FattenTwoLeftIcon';
+import { FattenTwoRightIcon } from './icons/FattenTwoRightIcon';
+import { FattenThreeLeftIcon } from './icons/FattenThreeLeftIcon';
+import { FattenThreeMiddleIcon } from './icons/FattenThreeMiddleIcon';
+import { FattenThreeRightIcon } from './icons/FattenThreeRightIcon';
 
 export const getInsertBlocksGridVariants: (commands: SingleCommands) => (ToolbarButtonProps & { icon: FC })[] = (
   commands,

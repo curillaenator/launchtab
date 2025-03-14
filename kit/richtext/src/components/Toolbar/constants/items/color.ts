@@ -8,7 +8,7 @@ import {
   DarkOrangeCharIcon,
   LightOrangeCharIcon,
   PurpleCharIcon,
-} from '../../../../icons/CharIcon';
+} from '../icons/CharIcon';
 
 import {
   BlackIcon,
@@ -20,10 +20,9 @@ import {
   DarkOrangeIcon,
   LightOrangeIcon,
   PurpleIcon,
-} from '../../../../icons/CharHighlightIcon';
+} from '../icons/CharHighlightIcon';
 
 import type { ToolbarItemProps } from '../interfaces';
-import type { TextColorAndHighlightClear, TextColorCommand } from '../../interfaces';
 
 enum WYSIWYG_COLORS {
   RED = '#DE350B',

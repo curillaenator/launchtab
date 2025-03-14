@@ -203,7 +203,7 @@ const LinkPopup: FC<{ closePopup?: () => void }> = ({ closePopup }) => {
       </div>
 
       <div className='popup-buttons'>
-        <ButtonAction LeftIcon={() => <LinkIcon />} title='Create' type='submit' />
+        <ButtonAction LeftIcon={() => <LinkIcon />} title='Add' type='submit' />
         <ButtonGhost title='Cancel' type='button' onClick={() => closePopup?.()} />
       </div>
     </NewTabForm>

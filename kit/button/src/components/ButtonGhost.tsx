@@ -9,7 +9,7 @@ interface ButtonGhostStyledProps {
   active: boolean;
   onlyIcon: boolean;
   height: CSSProperties['height'];
-  appearance?: 'primary' | 'secondary' | 'disabled';
+  appearance?: 'primary' | 'secondary' | 'disabled' | 'danger';
 }
 
 const APPEARANCES = {
@@ -20,9 +20,15 @@ const APPEARANCES = {
   `,
 
   secondary: ({ active }: ButtonGhostStyledProps) => css`
-    --button-text-c: ${({ theme }) => (active ? theme.white : theme.texts.base)};
-    --button-text-c-h: ${({ theme }) => (active ? theme.white : theme.primary[300])};
-    --button-text-c-a: ${({ theme }) => (active ? theme.white : theme.primary[700])};
+    --button-text-c: ${({ theme }) => (active ? theme.primary[800] : theme.texts.base)};
+    --button-text-c-h: ${({ theme }) => (active ? theme.primary[800] : theme.primary[500])};
+    --button-text-c-a: ${({ theme }) => theme.primary[800]};
+  `,
+
+  danger: () => css`
+    --button-text-c: ${({ theme }) => theme.texts.error};
+    --button-text-c-h: ${({ theme }) => theme.texts.error};
+    --button-text-c-a: ${({ theme }) => theme.texts.error};
   `,
 
   disabled: () => css`

@@ -2,15 +2,13 @@ import React, { FC, memo, Fragment } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
 import { ButtonGhost } from '@launch-ui/button';
 import { Dropable } from '@launch-ui/dropable';
-import type { Editor } from '@tiptap/core';
 
-import { useSelect } from '../../hooks/useSelect';
+import { useSelect } from '../hooks/useSelect';
 import { TABLE_EDIT_ITEMS, TABLE_COLOR_ITEMS } from './table.edit';
 
-import TableColorFill from '../../../../../icons/TableColorFill';
+import TableColorFill from '../svg/TableColorFill';
 
-import { DEFAULT_CAPTIONS } from '../../../../../components/constants';
-
+import { DEFAULT_CAPTIONS } from '../../../../components/constants';
 import styles from './toolbar.module.scss';
 
 const Toolbar: FC = memo(() => {

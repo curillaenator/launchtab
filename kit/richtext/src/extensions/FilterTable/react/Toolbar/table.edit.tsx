@@ -1,18 +1,20 @@
 import React from 'react';
 import type { ToolbarItemProps } from './interfaces';
 
-import IconSplitCell from '../../../../../icons/IconSplitCell';
-import IconColumnHeader from '../../../../../icons/IconColumnHeader';
-import IconRowHeader from '../../../../../icons/IconRowHeader';
-import IconMergeCells from '../../../../../icons/IconMergeCells';
-import IconRowDelete from '../../../../../icons/IconRowDelete';
-import IconAddRowAfter from '../../../../../icons/IconAddRowAfter';
-import IconAddRowBefore from '../../../../../icons/IconAddRowBefore';
-import IconColumnDelete from '../../../../../icons/IconColumnDelete';
-import IconAddColumnAfter from '../../../../../icons/IconAddColumnAfter';
-import IconAddColumnBefore from '../../../../../icons/IconAddColumnBefore';
-import TableColorFillSquareIcon from '../../../../../icons/TableColorFillSquareIcon';
-import TableColorFillNoFillIcon from '../../../../../icons/TableColorFillNoFillIcon';
+import IconSplitCell from '../svg/split.svg';
+import IconMergeCells from '../svg/merge.svg';
+
+import IconColumnHeader from '../svg/header-col.svg';
+import IconRowHeader from '../svg/header-row.svg';
+
+import IconRowDelete from '../svg/delete-row.svg';
+import IconAddRowAfter from '../svg/add-row.svg';
+
+import IconColumnDelete from '../svg/delete-column.svg';
+import IconAddColumnAfter from '../svg/add-column.svg';
+
+import TableColorFillSquareIcon from '../svg/TableColorFillSquareIcon';
+import TableColorFillNoFillIcon from '../svg/TableColorFillNoFillIcon';
 
 const enum TABLE_COLOR_FILL {
   LIGHT_GREEN = '#ABF5D1',
@@ -39,12 +41,12 @@ const isRowsCountAtMaxOrTableNotActive: ToolbarItemProps['shouldBeDisabled'] = (
 };
 
 const TABLE_EDIT_ITEMS: ToolbarItemProps[] = [
-  {
-    id: 'addColumnBefore',
-    Icon: IconAddColumnBefore,
-    command: (chain) => chain.focus().addColumnBefore().run(),
-    shouldBeDisabled: (editor) => !editor.isActive('table'),
-  },
+  // {
+  //   id: 'addColumnBefore',
+  //   Icon: IconAddColumnBefore,
+  //   command: (chain) => chain.focus().addColumnBefore().run(),
+  //   shouldBeDisabled: (editor) => !editor.isActive('table'),
+  // },
   {
     id: 'addColumnAfter',
     Icon: IconAddColumnAfter,
@@ -60,12 +62,12 @@ const TABLE_EDIT_ITEMS: ToolbarItemProps[] = [
   {
     id: 'splitter-1',
   },
-  {
-    id: 'addRowBefore',
-    Icon: IconAddRowBefore,
-    command: (chain) => chain.focus().addRowBefore().run(),
-    shouldBeDisabled: isRowsCountAtMaxOrTableNotActive,
-  },
+  // {
+  //   id: 'addRowBefore',
+  //   Icon: IconAddRowBefore,
+  //   command: (chain) => chain.focus().addRowBefore().run(),
+  //   shouldBeDisabled: isRowsCountAtMaxOrTableNotActive,
+  // },
   {
     id: 'addRowAfter',
     Icon: IconAddRowAfter,

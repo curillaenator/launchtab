@@ -13,11 +13,6 @@ const TEXT_FORMAT_ITEMS: ToolbarItemProps[] = [
     command: (chain) => chain.focus().toggleBold().run(),
   },
   {
-    id: 'code',
-    Icon: IconTogglerInline,
-    command: (chain) => chain.focus().toggleCode().run(),
-  },
-  {
     id: 'italic',
     Icon: IconItalic,
     command: (chain) => chain.focus().toggleItalic().run(),
@@ -31,6 +26,11 @@ const TEXT_FORMAT_ITEMS: ToolbarItemProps[] = [
     id: 'underline',
     Icon: IconUnderline,
     command: (chain) => chain.focus().toggleUnderline().run(),
+  },
+  {
+    id: 'code',
+    Icon: IconTogglerInline,
+    command: (chain) => chain.focus().toggleCode().run(),
   },
 ];
 

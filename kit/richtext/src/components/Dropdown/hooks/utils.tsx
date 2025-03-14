@@ -1,4 +1,4 @@
-import IconEllipsis from '../../../svg/ellipsis.svg';
+import IconEllipsis from '../svg/ellipsis.svg';
 import type { DropdownProps, DropdownItemProps } from '../interfaces';
 
 export const resolveOpenNodeIcon = (props: DropdownProps, selectedItem: DropdownItemProps | null) => {

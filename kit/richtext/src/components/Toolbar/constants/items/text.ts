@@ -1,12 +1,12 @@
-import IconH1 from '../../../../svg/h1.svg';
-import IconH2 from '../../../../svg/h2.svg';
-import IconH3 from '../../../../svg/h3.svg';
-import IconH4 from '../../../../svg/h4.svg';
-import IconH5 from '../../../../svg/h5.svg';
-import IconH6 from '../../../../svg/h6.svg';
-import IconParagraph from '../../../../svg/text.svg';
-import IconBulletedList from '../../../../svg/list-ul.svg';
-import IconNumberedList from '../../../../svg/list-ol.svg';
+import IconH1 from '../svg/h1.svg';
+import IconH2 from '../svg/h2.svg';
+import IconH3 from '../svg/h3.svg';
+import IconH4 from '../svg/h4.svg';
+import IconH5 from '../svg/h5.svg';
+import IconH6 from '../svg/h6.svg';
+import IconParagraph from '../svg/text.svg';
+import IconBulletedList from '../svg/list-ul.svg';
+import IconNumberedList from '../svg/list-ol.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

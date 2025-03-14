@@ -1,6 +1,6 @@
-import DividerIcon from '../../../../svg/section-break.svg';
-import QuoteIcon from '../../../../svg/quote.svg';
-import CodeBlockIcon from '../../../../svg/codeblock.svg';
+import DividerIcon from '../svg/section-break.svg';
+import QuoteIcon from '../svg/quote.svg';
+import CodeBlockIcon from '../svg/codeblock.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

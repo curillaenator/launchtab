@@ -1,4 +1,4 @@
-import TasklistIcon from '../../../../svg/tasklist.svg';
+import TasklistIcon from '../svg/tasklist.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

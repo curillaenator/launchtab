@@ -17,9 +17,3 @@ export {
   TEXT_COLOR_CLEAR,
   TEXT_HIGHLIGHT_CLEAR,
 } from './color';
-
-// export { COMMENT_ITEMS, getCommentItems } from './inlineComments';
-// export { HISTORY_ITEMS } from './history';
-// export { TAB_ITEMS } from './idents';
-// export { PLANT_ITEMS } from './plant';
-// export { FRAGMENT_ITEMS } from './fragment';

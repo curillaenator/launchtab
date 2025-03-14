@@ -8,7 +8,7 @@ import {
   DarkOrangeCharIcon,
   LightOrangeCharIcon,
   PurpleCharIcon,
-} from '../icons/CharIcon';
+} from '../svg/CharIcon';
 
 import {
   BlackIcon,
@@ -20,7 +20,7 @@ import {
   DarkOrangeIcon,
   LightOrangeIcon,
   PurpleIcon,
-} from '../icons/CharHighlightIcon';
+} from '../svg/CharHighlightIcon';
 
 import type { ToolbarItemProps } from '../interfaces';
 

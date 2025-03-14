@@ -11,7 +11,7 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
-import CreateIcon from '@src/assets/svg/addFolder.svg';
+import CreateIcon from '@src/assets/svg/addTab.svg';
 
 const PopupForm = styled.form`
   width: 336px;
@@ -96,7 +96,7 @@ const TabPopup: FC<{ closePopup?: () => void }> = ({ closePopup }) => {
         </div>
 
         <div className='popup-buttons'>
-          <ButtonAction LeftIcon={() => <CreateIcon />} title='Create' type='submit' />
+          <ButtonAction LeftIcon={() => <CreateIcon />} title='Add' type='submit' />
           <ButtonGhost title='Cancel' type='button' onClick={() => closePopup?.()} />
         </div>
       </div>

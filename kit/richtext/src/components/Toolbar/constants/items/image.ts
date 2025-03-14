@@ -1,4 +1,4 @@
-import ImageIcon from '../../../../svg/image.svg';
+import ImageIcon from '../svg/image.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

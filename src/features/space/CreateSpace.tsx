@@ -19,7 +19,7 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 import { USER_QUERY } from '@src/shared/queryKeys';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
-import CreateSpaceIcon from '@src/assets/svg/addFolder.svg';
+import CreateSpaceIcon from '@src/assets/svg/addSpace.svg';
 
 const CreateSpace: FC<{ maxHeight: number }> = () => {
   const navigate = useNavigate();

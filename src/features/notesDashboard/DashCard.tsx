@@ -16,7 +16,7 @@ import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 import { LAUNCH_CARD_BDRS } from '@src/shared/appConfig';
 
 import SetupIcon from '@src/assets/svg/switches.svg';
-import SpaceIcon from '@src/assets/svg/folder.svg';
+import SpaceIcon from '@src/assets/svg/space.svg';
 
 const Card = styled.div`
   --shp-bgc: ${({ theme }) => theme.backgrounds.light};

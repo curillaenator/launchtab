@@ -9,8 +9,8 @@ import { EXTENSION_NAME as BLOCKS_GRID_NODE_NAME } from '../../extensions/Blocks
 import { getInsertBlocksGridVariants, checkIsCarretInside } from './utils';
 import { useDropdown } from './hooks/useDropdown';
 
-import TrashIcon from '../../svg/trash.svg';
-import DryTwoIcon from '../../svg/blocksgrid.svg';
+import TrashIcon from './icons/trash.svg';
+import BlocksgridIcon from './icons/blocksgrid.svg';
 
 import { DEFAULT_CAPTIONS } from '../constants';
 import type { GridSelectorProps } from './interfaces';
@@ -77,7 +77,7 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
             active={isOpen}
             onClick={() => setTimeout(() => editor.commands.focus(), 20)}
           >
-            <DryTwoIcon />
+            <BlocksgridIcon />
           </ToolbarButton>
         </div>
       }

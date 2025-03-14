@@ -14,7 +14,7 @@ import { useDropable } from '@src/hooks/useDropable';
 import { LAUNCH_CARD_BDRS } from '@src/shared/appConfig';
 
 import LinkIcon from '@src/assets/svg/link.svg';
-import AddTabIcon from '@src/assets/svg/addFolder.svg';
+import AddTabIcon from '@src/assets/svg/addTab.svg';
 
 const CreateTabs: FC<{ create: 'new-page' | 'new-bookmark' }> = ({ create }) => {
   const { formContextValue, resetFormState } = useCreateForm(create);

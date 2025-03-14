@@ -1,4 +1,4 @@
-import TocIcon from '../../../../svg/toc.svg';
+import TocIcon from '../svg/toc.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

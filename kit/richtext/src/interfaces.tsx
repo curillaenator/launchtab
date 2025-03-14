@@ -6,15 +6,7 @@ interface RichtextChangeEvent {
   isSemiEmpty: boolean;
 }
 
-interface RichTextExtensionsOptions {
-  // toc?: {}; // TocConfig;
-  // plantUml?: {}; // PlantUmlConfig;
-  // image?: {
-  //   onAddImage?: (file: File) => void;
-  //   onAddFile?: (file: File) => void;
-  //   imageList?: unknown[]; // ImageListItem[];
-  // };
-}
+interface RichTextExtensionsOptions {}
 
 interface RichTextExtensionsOptions {
   extensionsOptions?: RichTextExtensionsOptions;
@@ -39,8 +31,6 @@ interface RichtextContainerProps {
   onChange?: (changeEvent: RichtextChangeEvent) => void;
 
   extensionsOptions?: RichTextExtensionsOptions;
-
-  // autoscrollCfg?: { autoscroll: () => void };
 }
 
 export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsOptions };

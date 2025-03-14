@@ -19,8 +19,8 @@ import {
   TASK_LIST_ITEMS,
 } from './items';
 
-import IconTableInsert from '../../../svg/table-add.svg';
-import AddMacrosIcon from '../../../svg/macroses.svg';
+import IconTableInsert from './svg/table-add.svg';
+import AddMacrosIcon from './svg/macroses.svg';
 
 const DEFAULT_STRUCT: ToolbarComponentStruct = {
   full: {
@@ -100,9 +100,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
       ),
 
       (props) => <ControlSection {...props} id='image-commands' items={IMAGE_ITEMS} />,
-    ],
 
-    right: [
       (props) => <ControlSection {...props} id='additional-items-commands' items={ADDITIONAL_ITEMS} />,
 
       (props) => (
@@ -111,7 +109,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           id='macros-items-commands'
           icon={AddMacrosIcon}
           items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS]]}
-          placement='bottom-end'
+          placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}
           maxWidth={DROPDOWN_PARAMS.macros}
@@ -124,13 +122,15 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           id='table-items-commands'
           icon={IconTableInsert}
           items={[TABLE_ITEMS]}
-          placement='bottom-end'
+          placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.table}
           maxWidth={DROPDOWN_PARAMS.table}
         />
       ),
     ],
+
+    right: [],
   },
   medium: {
     left: [],

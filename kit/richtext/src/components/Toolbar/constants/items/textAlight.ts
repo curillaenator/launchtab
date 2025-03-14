@@ -1,7 +1,7 @@
-import IconTextAlignLeft from '../../../../svg/align-left.svg';
-import IconTextAlignCenter from '../../../../svg/align-center.svg';
-import IconTextAlignJustify from '../../../../svg/align-justify.svg';
-import IconTextAlignRight from '../../../../svg/align-right.svg';
+import IconTextAlignLeft from '../svg/align-left.svg';
+import IconTextAlignCenter from '../svg/align-center.svg';
+import IconTextAlignJustify from '../svg/align-justify.svg';
+import IconTextAlignRight from '../svg/align-right.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

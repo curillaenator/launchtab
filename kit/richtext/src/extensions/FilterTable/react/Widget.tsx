@@ -8,7 +8,7 @@ import { useResizers } from './hooks/useResizers';
 import { Toolbar } from './Toolbar';
 
 import { TABLE_WIDTH_CSSV } from './constants';
-import type { UiWidgetProps, FilterControls } from './interfaces';
+import type { UiWidgetProps } from './interfaces';
 
 import styles from './widget.module.scss';
 
@@ -37,6 +37,8 @@ export const ReactNodeViewWidget: FC<UiWidgetProps> = (props) => {
       editor.off('selectionUpdate', setToolbarCanBeShown);
     };
   }, []);
+
+  if (!colgroup) return null;
 
   return (
     <NodeViewWrapper as='section' className={cn(styles.nodeViewWrapper)}>

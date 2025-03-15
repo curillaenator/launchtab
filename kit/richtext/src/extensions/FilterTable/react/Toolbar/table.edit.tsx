@@ -4,8 +4,8 @@ import type { ToolbarItemProps } from './interfaces';
 import IconSplitCell from '../svg/split.svg';
 import IconMergeCells from '../svg/merge.svg';
 
-import IconColumnHeader from '../svg/header-col.svg';
-import IconRowHeader from '../svg/header-row.svg';
+// import IconColumnHeader from '../svg/header-col.svg';
+// import IconRowHeader from '../svg/header-row.svg';
 
 import IconRowDelete from '../svg/delete-row.svg';
 import IconAddRowAfter from '../svg/add-row.svg';
@@ -24,7 +24,7 @@ const enum TABLE_COLOR_FILL {
   LIGHT_BLUE = '#B3D4FF',
   MODERATE_GRAY = '#C1C7D0',
   LIGHT_GRAY = '#F4F5F7',
-  NO_FILL = '#FFF',
+  NO_FILL = 'transparent',
 }
 
 const TABLE_MAX_ROWS = 5000;
@@ -95,21 +95,21 @@ const TABLE_EDIT_ITEMS: ToolbarItemProps[] = [
     command: (chain) => chain.focus().splitCell().run(),
     shouldBeDisabled: (editor) => !editor.isActive('table'),
   },
-  {
-    id: 'splitter-3',
-  },
-  {
-    id: 'toggleHeaderColumn',
-    Icon: IconColumnHeader,
-    command: (chain) => chain.focus().toggleHeaderColumn().run(),
-    shouldBeDisabled: (editor) => !editor.isActive('table'),
-  },
-  {
-    id: 'toggleHeaderRow',
-    Icon: IconRowHeader,
-    command: (chain) => chain.focus().toggleHeaderRow().run(),
-    shouldBeDisabled: (editor) => !editor.isActive('table'),
-  },
+  // {
+  //   id: 'splitter-3',
+  // },
+  // {
+  //   id: 'toggleHeaderColumn',
+  //   Icon: IconColumnHeader,
+  //   command: (chain) => chain.focus().toggleHeaderColumn().run(),
+  //   shouldBeDisabled: (editor) => !editor.isActive('table'),
+  // },
+  // {
+  //   id: 'toggleHeaderRow',
+  //   Icon: IconRowHeader,
+  //   command: (chain) => chain.focus().toggleHeaderRow().run(),
+  //   shouldBeDisabled: (editor) => !editor.isActive('table'),
+  // },
 ];
 
 const TABLE_COLOR_ITEMS: ToolbarItemProps[] = [

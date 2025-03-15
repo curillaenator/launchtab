@@ -6,7 +6,7 @@ import { Dropable } from '@launch-ui/dropable';
 import { useSelect } from '../hooks/useSelect';
 import { TABLE_EDIT_ITEMS, TABLE_COLOR_ITEMS } from './table.edit';
 
-import TableColorFill from '../svg/TableColorFill';
+import TableColorFill from '../svg/color-palette.svg';
 
 import { DEFAULT_CAPTIONS } from '../../../../components/constants';
 import styles from './toolbar.module.scss';

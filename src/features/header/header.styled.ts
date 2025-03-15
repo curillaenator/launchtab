@@ -19,7 +19,7 @@ const HeaderStyled = styled.header<HeaderStyledProps>`
   transition: filter 300ms ease;
   will-change: filter;
   filter: drop-shadow(
-    ${({ theme, isHeaderShadowed }) => (isHeaderShadowed ? theme.shadows.header : '0 0 0 0 transparent')}
+    ${({ theme, isHeaderShadowed }) => (isHeaderShadowed ? theme.shadows.primary : '0 0 0 0 transparent')}
   );
 `;
 

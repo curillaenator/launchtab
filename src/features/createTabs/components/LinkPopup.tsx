@@ -31,7 +31,7 @@ const NewTabForm = styled.form`
 
   background-color: var(--shp-bgc);
   border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
-  filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
+  filter: drop-shadow(${({ theme }) => theme.shadows.base});
 
   .popup-title {
     display: flex;

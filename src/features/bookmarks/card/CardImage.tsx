@@ -36,11 +36,11 @@ const CardImageStyled = styled.div`
       height: 100%;
 
       &-light {
-        fill: ${({ theme }) => theme.icons.light};
+        fill: ${({ theme }) => theme.neutral[100]};
       }
 
       &-dark {
-        fill: ${({ theme }) => theme.icons.dark};
+        fill: ${({ theme }) => theme.neutral[500]};
       }
     }
   }

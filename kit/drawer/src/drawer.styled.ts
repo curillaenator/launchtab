@@ -92,7 +92,7 @@ const DrawerContent = styled.div`
   height: 100vh;
   min-height: 100vh;
 
-  filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
+  filter: drop-shadow(${({ theme }) => theme.shadows.base});
   background-color: transparent;
   color: ${({ theme }) => theme.texts.base};
 `;

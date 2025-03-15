@@ -41,7 +41,7 @@ const CardStyled = styled(Link)`
 
   &:hover {
     transform: scale(1.015);
-    filter: drop-shadow(${({ theme }) => theme.shadows.card});
+    filter: drop-shadow(${({ theme }) => theme.shadows.base});
 
     .card-title {
       color: ${({ theme }) => theme.primary[500]};

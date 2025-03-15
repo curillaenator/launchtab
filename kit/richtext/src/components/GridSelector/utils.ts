@@ -2,14 +2,14 @@ import type { FC } from 'react';
 import type { SingleCommands, Editor as CoreEditor } from '@tiptap/core';
 import type { ToolbarButtonProps } from '../ToolbarButton';
 
-import { DryThreeIcon } from './icons/DryThreeIcon';
-import { DryTwoIcon } from './icons/DryTwoIcon';
-import { DryOneIcon } from './icons/DryOneIcon';
-import { FattenTwoLeftIcon } from './icons/FattenTwoLeftIcon';
-import { FattenTwoRightIcon } from './icons/FattenTwoRightIcon';
-import { FattenThreeLeftIcon } from './icons/FattenThreeLeftIcon';
-import { FattenThreeMiddleIcon } from './icons/FattenThreeMiddleIcon';
-import { FattenThreeRightIcon } from './icons/FattenThreeRightIcon';
+import DryThreeIcon from './svg/drythree.svg';
+import DryTwoIcon from './svg/drytwo.svg';
+import DryOneIcon from './svg/dryone.svg';
+import FattenTwoLeftIcon from './svg/fatTwoLeft.svg';
+import FattenTwoRightIcon from './svg/fatTwoRight.svg';
+import FattenThreeLeftIcon from './svg/fatThreeLeft.svg';
+import FattenThreeMiddleIcon from './svg/fatThreeMiddle.svg';
+import FattenThreeRightIcon from './svg/fatThreeRight.svg';
 
 export const getInsertBlocksGridVariants: (commands: SingleCommands) => (ToolbarButtonProps & { icon: FC })[] = (
   commands,

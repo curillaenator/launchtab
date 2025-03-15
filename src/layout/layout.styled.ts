@@ -9,7 +9,7 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
   width: 100%;
   min-width: 1440px;
 
-  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+  font-family: var(--layout-ff);
   color: ${({ theme }) => theme.texts.base};
 
   .aside {

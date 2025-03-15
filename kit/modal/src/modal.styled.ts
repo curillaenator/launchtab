@@ -59,7 +59,7 @@ const ModalContent = styled.div<{ borderRadius: number }>`
   background-color: ${({ theme }) => theme.backgrounds.base};
   color: ${({ theme }) => theme.texts.base};
 
-  filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
+  filter: drop-shadow(${({ theme }) => theme.shadows.base});
 `;
 
 const ModalOverlay = styled.div`

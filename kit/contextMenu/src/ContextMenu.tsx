@@ -22,7 +22,7 @@ const MenuStyled = styled.div`
   border-radius: 16px;
   animation: ${fadeIn} 2ms;
   z-index: 500;
-  filter: drop-shadow(${({ theme }) => theme.shadows.card});
+  filter: drop-shadow(${({ theme }) => theme.shadows.base});
 
   .menuitem {
     display: flex;

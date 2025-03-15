@@ -3,9 +3,10 @@
 }
 
 html {
-  --layout-pd: 24px;
+  --layout-ff: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
 
-  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+  font-family: var(--layout-ff);
+  background-color: var(--layout-bgc, #fff);
 }
 
 *,
@@ -17,7 +18,7 @@ html {
 }
 
 button {
-  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+  font-family: var(--layout-ff);
   outline: none;
   background-color: transparent;
   border: none;

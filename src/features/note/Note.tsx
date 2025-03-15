@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useRef, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { Corners } from '@launch-ui/shape';
 import { Loader } from '@launch-ui/loader';
@@ -32,6 +32,7 @@ import { NoteContainer } from './note.styled';
 
 const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const currentEditorRef = useRef<RichTextEditor | null>(null);
+  const navigate = useNavigate();
 
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
   const { uid } = useEffectorUnit($userStore);
@@ -130,6 +131,14 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
           maxHeight={maxHeight - (isNoteEditable ? 24 : 0)}
           initialValue={noteBody || ''}
           onChange={onRichTextChange}
+          extensionsOptions={{
+            linkRoute: {
+              navTo: (to) => {
+                console.log('linkRoute cfg', to);
+                navigate(to);
+              },
+            },
+          }}
         />
       )}
     </NoteContainer>

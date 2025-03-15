@@ -6,9 +6,13 @@ interface RichtextChangeEvent {
   isSemiEmpty: boolean;
 }
 
-interface RichTextExtensionsOptions {}
-
 interface RichTextExtensionsOptions {
+  linkRoute?: {
+    navTo: (to: string) => void;
+  };
+}
+
+interface GetRichTextExtensionsOptions {
   extensionsOptions?: RichTextExtensionsOptions;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   internalScrollContainerId: string;
@@ -33,4 +37,4 @@ interface RichtextContainerProps {
   extensionsOptions?: RichTextExtensionsOptions;
 }
 
-export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsOptions };
+export type { GetRichTextExtensionsOptions, RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsOptions };

@@ -7,6 +7,7 @@ import type { InfoAttributes } from './interfaces';
 import styles from './info.module.scss';
 
 const INFO_EXTENSION = 'info';
+const INPUT_RE = /!(info|warn|success|error)\[([^\]]+)\]\s$/; // seacrhes for `[title][url] ` with \s in the end
 
 const Info = Node.create({
   name: INFO_EXTENSION,
@@ -56,7 +57,7 @@ const Info = Node.create({
       ...(this.parent?.() || []),
 
       new InputRule({
-        find: /!(info|warn|success|error)\[([^\]]+)\]\s$/, // seacrhes for `[title][url] ` with \s in the end
+        find: INPUT_RE,
 
         handler: ({ range, match, commands }) => {
           const [, infoType, content] = match;

@@ -1,6 +1,8 @@
 import { Link as LinkCore, type LinkOptions } from '@tiptap/extension-link';
 import { InputRule } from '@tiptap/core';
 
+const INPUT_RE = /!url\[([^\]]+)\]\[([^\]]+)\]\s$/; // seacrhes for `[title][url] ` with \s in the end
+
 const Link = LinkCore.extend<LinkOptions & { navigave?: () => void }>({
   addOptions() {
     return {
@@ -13,7 +15,7 @@ const Link = LinkCore.extend<LinkOptions & { navigave?: () => void }>({
       ...(this.parent?.() || []),
 
       new InputRule({
-        find: /\[([^\]]+)\]\[([^\]]+)\]\s$/, // seacrhes for `[title][url] ` with \s in the end
+        find: INPUT_RE,
 
         handler: ({ range, match, commands }) => {
           const [, text, href] = match;

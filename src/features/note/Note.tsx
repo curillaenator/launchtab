@@ -30,8 +30,6 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 import { NoteHeader } from './components/NoteHeader';
 import { NoteContainer } from './note.styled';
 
-import 'tabulator-tables/dist/css/tabulator.min.css';
-
 const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const currentEditorRef = useRef<RichTextEditor | null>(null);
 

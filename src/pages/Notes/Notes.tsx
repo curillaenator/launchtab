@@ -6,8 +6,6 @@ import { NotesDashboard } from '@src/features/notesDashboard';
 import { CreateSpace } from '@src/features/space';
 import { Note, CreateNote } from '@src/features/note';
 
-import 'tabulator-tables/dist/css/tabulator.min.css';
-
 const NotesContainer = styled.div<{ height: CSSProperties['height'] }>`
   width: 100%;
   height: ${({ height }) => `${height}px` || 'fit-content'};

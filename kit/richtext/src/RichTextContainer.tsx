@@ -22,9 +22,6 @@ const RichTextContainer: FC<RichtextContainerProps> = (props) => {
 
   const { isOnChangeEnabledRef, enableEditorOnChangeFn } = useEnableOnChageFn();
 
-  // const canUploadDrawIo = useCanUploadDrawIo(drawioCfg);
-  // const canHandlePlantUml = useCanHandlePlantUml(plantUmlCfg);
-
   const editor = useEditor(
     {
       editable,
@@ -40,17 +37,8 @@ const RichTextContainer: FC<RichtextContainerProps> = (props) => {
 
       onUpdate: (v) => {
         if (!isOnChangeEnabledRef.current) return;
-
         const json = v.editor.getJSON();
-
-        onChange?.({
-          value: json,
-
-          // когда редактор пуст и пользователь сразу создает элементы документа
-          // синтаксисом (например список через ввод символа * + space ). В момент преобразования вводимых символов в
-          // элементы доукумента текстовый контент документа исчезает, но контент не пуст
-          isSemiEmpty: isContentSemiEmpty(json),
-        });
+        onChange?.({ value: json, isSemiEmpty: isContentSemiEmpty(json) });
       },
     },
     [editable, initialValue, onChange, enableEditorOnChangeFn],

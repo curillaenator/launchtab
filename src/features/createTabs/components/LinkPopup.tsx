@@ -17,6 +17,7 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import LabelIcon from '@src/assets/svg/lable.svg';
 import LinkIcon from '@src/assets/svg/link.svg';
+import AddLinkIcon from '@src/assets/svg/addLink.svg';
 
 const ICONS_IN_A_ROW = 4;
 
@@ -203,7 +204,7 @@ const LinkPopup: FC<{ closePopup?: () => void }> = ({ closePopup }) => {
       </div>
 
       <div className='popup-buttons'>
-        <ButtonAction LeftIcon={() => <LinkIcon />} title='Add' type='submit' />
+        <ButtonAction LeftIcon={() => <AddLinkIcon />} title='Add' type='submit' />
         <ButtonGhost title='Cancel' type='button' onClick={() => closePopup?.()} />
       </div>
     </NewTabForm>

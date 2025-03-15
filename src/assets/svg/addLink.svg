@@ -1,11 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
   <mask id="cutMask">
-    <g fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-      <rect width="6.5" height="6.5" x="3.75" y="13.75" rx="2" />
-      <rect width="6.5" height="6.5" x="13.75" y="13.75" rx="2" />
-      <rect width="6.5" height="6.5" x="3.75" y="3.75" rx="2" />
-      <rect width="6.5" height="6.5" x="13.75" y="3.75" rx="2" />
-    </g>
+    <path
+      fill="none"
+      stroke="white"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+      d="m9.172 14.829l5.657-5.657M7.05 11.293l-1.414 1.414a4 4 0 1 0 5.657 5.657l1.412-1.414m-1.413-9.9l1.414-1.414a4 4 0 1 1 5.657 5.657l-1.414 1.414"
+    />
     <circle cx="18" cy="18" r="7" fill="black" />
   </mask>
 

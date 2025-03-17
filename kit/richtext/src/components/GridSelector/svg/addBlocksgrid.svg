@@ -14,7 +14,7 @@
       stroke-linecap="round"
       stroke-linejoin="round"
     />
-    <circle cx="18" cy="18" r="7" fill="black" />
+    <circle cx="17.3" cy="17.7" r="7" fill="black" />
   </mask>
 
   <g mask="url(#cutMask)">

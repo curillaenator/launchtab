@@ -6,7 +6,7 @@ import { Corners } from '@launch-ui/shape';
 import styles from './route.module.scss';
 
 import type { LinkRouteOptions, LinkRouteAttributes } from './interfaces';
-import StarIcon from './star.svg';
+import DocumentIcon from './document.svg';
 
 const LINK_ROUTE_EXT_NAME = 'routeLink';
 const INPUT_RE = /!to\[([^\]]+)\]\[([^\]]+)\]\s$/; // seacrhes for `[title][to] ` with \s in the end
@@ -90,7 +90,7 @@ const LinkRoute = Node.create<LinkRouteOptions>({
             }}
           >
             <Corners borderRadius={13.6} />
-            <StarIcon />
+            <DocumentIcon />
           </NodeViewWrapper>
         );
       },

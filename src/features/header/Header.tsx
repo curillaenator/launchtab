@@ -11,8 +11,9 @@ import { HeaderStyled } from './header.styled';
 
 import SettingsIcon from '@src/assets/svg/settings.svg';
 import LoginIcon from '@src/assets/svg/login.svg';
-import MeatballsIcon from '@src/assets/svg/meatballs.svg';
-import CarretLeftIcon from '@src/assets/svg/carretLeft.svg';
+
+import ExpandIcon from '@src/assets/svg/sidebar-expand.svg';
+import CollapseIcon from '@src/assets/svg/sidebar-collapse.svg';
 
 export const Header: FC = memo(() => {
   const user = useEffectorUnit($userStore);
@@ -22,7 +23,7 @@ export const Header: FC = memo(() => {
   return (
     <HeaderStyled isHeaderShadowed={isHeaderShadowed}>
       <Button
-        IconLeft={() => (isAsideOpen ? <CarretLeftIcon /> : <MeatballsIcon />)}
+        IconLeft={() => (isAsideOpen ? <CollapseIcon /> : <ExpandIcon />)}
         onClick={() => setAside(!isAsideOpen)}
       />
 

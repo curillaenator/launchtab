@@ -23,7 +23,7 @@ const WYSIWYG_COLORS = {
   SECONDARY: 'var(--theme-neutral-300)',
   POSITIVE: colorsLib.nika[600],
   WARN: colorsLib.orange[300],
-  ACCENT: colorsLib.electroviolet[300],
+  ACCENT: 'var(--theme-primary-300)',
   WHITE: '#FFFFFF',
   DEFAULT: 'inherit',
 } as const;
@@ -32,7 +32,7 @@ const WYSIWYG_COLORS = {
 const COLOR_ITEMS: ToolbarItemProps[] = [
   {
     id: 'defaultColor',
-    Icon: () => <CharIcon color='currentColor' />,
+    Icon: () => <CharIcon color='var(--theme-texts-base)' />,
     command: (chain) => chain.focus().setColor(WYSIWYG_COLORS.DEFAULT).run(),
     isActive: (editor) => editor.isActive('textStyle', { color: WYSIWYG_COLORS.DEFAULT }),
   },

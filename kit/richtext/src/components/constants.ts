@@ -68,14 +68,14 @@ const DEFAULT_CAPTIONS: Record<ControlCaption, string> = {
   undo: 'Undo',
   redo: 'Redo',
   colorFill: 'Fill table cell',
-  colorFillLightGreen: 'Light-green',
-  colorFillLightYellow: 'Light-yellow',
-  colorFillLightRed: 'Light-red',
+  colorFillLightGreen: 'Positive',
+  colorFillLightYellow: 'Attention',
+  colorFillLightRed: 'Negative',
   colorFillLightTurquoise: 'Light-turquoise',
-  colorFillLightBlue: 'Light-blue',
-  colorFillModerateGray: 'Moderate-grey',
-  colorFillLightGray: 'СLight-grey',
-  colorFillNoFill: 'No cell fill',
+  colorFillLightBlue: 'Informative',
+  colorFillModerateGray: 'Dark neutral',
+  colorFillLightGray: 'Light neutral',
+  colorFillNoFill: 'No fill',
 };
 
 export { DEFAULT_CAPTIONS };

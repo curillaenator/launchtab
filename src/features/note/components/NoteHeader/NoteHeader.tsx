@@ -28,9 +28,14 @@ export const NoteHeader: FC = () => {
   const { data: noteUnit, isLoading: isNoteUnitLoading } = useNoteUnitData({ routerNoteId });
 
   const iCan = useICan();
-  const iCanEdit = iCan.edit(noteUnit);
   const iCanInsert =
     keys(noteUnit?.hierarchy).length < MAX_UNITS_PER_UNIT && (noteUnit?.path.length || 0) < MAX_UNITS_DEPTH;
+
+  const [iCanEdit, setICanEdit] = useState<boolean>(false);
+
+  useEffect(() => {
+    setICanEdit(iCan.edit(noteUnit));
+  }, [noteUnit, iCan]);
 
   const [editOpen, setEditOpen] = useState<boolean>(false);
 

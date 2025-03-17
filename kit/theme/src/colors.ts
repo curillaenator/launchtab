@@ -44,7 +44,7 @@ const getLightModeColors = (neutral: ColorSet): ModedSet => ({
     base20: hsla(colorsLib.white, 0.2),
     base40: hsla(colorsLib.white, 0.4),
 
-    dark: neutral[100],
+    dark: neutral[200],
     light: neutral[100],
 
     danger: colorsLib.danger[500],

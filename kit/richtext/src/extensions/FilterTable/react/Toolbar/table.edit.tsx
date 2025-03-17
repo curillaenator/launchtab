@@ -13,17 +13,15 @@ import IconAddRowAfter from '../svg/add-row.svg';
 import IconColumnDelete from '../svg/delete-column.svg';
 import IconAddColumnAfter from '../svg/add-column.svg';
 
-import TableColorFillSquareIcon from '../svg/TableColorFillSquareIcon';
-import TableColorFillNoFillIcon from '../svg/TableColorFillNoFillIcon';
+import { TableCellFillIcon } from '../svg/TableColorFillSquareIcon';
 
 const enum TABLE_COLOR_FILL {
-  LIGHT_GREEN = '#ABF5D1',
-  LIGHT_YELLOW = '#FFF0B3',
-  LIGHT_RED = '#FFBDAD',
-  LIGHT_TURQUOISE = '#B3F5FF',
-  LIGHT_BLUE = '#B3D4FF',
-  MODERATE_GRAY = '#C1C7D0',
-  LIGHT_GRAY = '#F4F5F7',
+  LIGHT_GREEN = 'var(--theme-backgrounds-succes)',
+  LIGHT_YELLOW = 'var(--theme-backgrounds-warn)',
+  LIGHT_RED = 'var(--theme-backgrounds-error)',
+  LIGHT_BLUE = 'var(--theme-backgrounds-info)',
+  MODERATE_GRAY = 'var(--theme-backgrounds-dark)',
+  LIGHT_GRAY = 'var(--theme-backgrounds-light)',
   NO_FILL = 'transparent',
 }
 
@@ -115,49 +113,43 @@ const TABLE_EDIT_ITEMS: ToolbarItemProps[] = [
 const TABLE_COLOR_ITEMS: ToolbarItemProps[] = [
   {
     id: 'colorFillLightGreen',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.LIGHT_GREEN }} />,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.LIGHT_GREEN} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.LIGHT_GREEN).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.LIGHT_GREEN),
   },
   {
     id: 'colorFillLightYellow',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.LIGHT_YELLOW }} />,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.LIGHT_YELLOW} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.LIGHT_YELLOW).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.LIGHT_YELLOW),
   },
   {
     id: 'colorFillLightRed',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.LIGHT_RED }} />,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.LIGHT_RED} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.LIGHT_RED).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.LIGHT_RED),
   },
   {
-    id: 'colorFillLightTurquoise',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.LIGHT_TURQUOISE }} />,
-    command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.LIGHT_TURQUOISE).run(),
-    shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.LIGHT_TURQUOISE),
-  },
-  {
     id: 'colorFillLightBlue',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.LIGHT_BLUE }} />,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.LIGHT_BLUE} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.LIGHT_BLUE).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.LIGHT_BLUE),
   },
   {
     id: 'colorFillModerateGray',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.MODERATE_GRAY }} />,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.MODERATE_GRAY} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.MODERATE_GRAY).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.MODERATE_GRAY),
   },
   {
     id: 'colorFillLightGray',
-    Icon: () => <TableColorFillSquareIcon style={{ color: TABLE_COLOR_FILL.LIGHT_GRAY }} />,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.LIGHT_GRAY} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.LIGHT_GRAY).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.LIGHT_GRAY),
   },
   {
     id: 'colorFillNoFill',
-    Icon: TableColorFillNoFillIcon,
+    Icon: () => <TableCellFillIcon color={TABLE_COLOR_FILL.NO_FILL} />,
     command: (chain) => chain.focus().colorFill(TABLE_COLOR_FILL.NO_FILL).run(),
     shouldBeDisabled: (editor) => !editor.can().colorFill(TABLE_COLOR_FILL.NO_FILL),
   },

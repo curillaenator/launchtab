@@ -71,7 +71,10 @@ const Toolbar: FC = memo(() => {
                     // @ts-expect-error
                     title={DEFAULT_CAPTIONS[id]}
                     onClick={() => {
-                      if (!!editor) command?.(editor.chain());
+                      if (!!editor) {
+                        command?.(editor.chain());
+                        closeBgc?.();
+                      }
                     }}
                   />
                 ))}

@@ -17,7 +17,6 @@ import {
   TEXT_FORMAT_ITEMS,
   IMAGE_ITEMS,
   TASK_LIST_ITEMS,
-  TEXT_COLOR_CLEAR,
   COLOR_ITEMS,
 } from './items';
 
@@ -47,7 +46,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           {...props}
           id='text-color-commands'
           defaultValue='defaultColor'
-          items={[[...COLOR_ITEMS, TEXT_COLOR_CLEAR]]}
+          items={[COLOR_ITEMS]}
           placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.color}

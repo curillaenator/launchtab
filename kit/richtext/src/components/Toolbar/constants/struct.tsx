@@ -18,6 +18,7 @@ import {
   IMAGE_ITEMS,
   TASK_LIST_ITEMS,
   TEXT_COLOR_CLEAR,
+  COLOR_ITEMS,
 } from './items';
 
 import IconTableInsert from './svg/table-add.svg';
@@ -41,18 +42,18 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
 
       (props) => <ControlSection {...props} id='text-formats-commands' items={TEXT_FORMAT_ITEMS} />,
 
-      // (props) => (
-      //   <DropdownWithActiveCommand
-      //     {...props}
-      //     id='text-color-commands'
-      //     defaultValue='defaultColor'
-      //     items={[[...COLOR_ITEMS, TEXT_COLOR_CLEAR]]}
-      //     placement='bottom-start'
-      //     maxHeight={DROPDOWN_PARAMS.maxHeight}
-      //     minWidth={DROPDOWN_PARAMS.color}
-      //     maxWidth={DROPDOWN_PARAMS.color}
-      //   />
-      // ),
+      (props) => (
+        <DropdownWithActiveCommand
+          {...props}
+          id='text-color-commands'
+          defaultValue='defaultColor'
+          items={[[...COLOR_ITEMS, TEXT_COLOR_CLEAR]]}
+          placement='bottom-start'
+          maxHeight={DROPDOWN_PARAMS.maxHeight}
+          minWidth={DROPDOWN_PARAMS.color}
+          maxWidth={DROPDOWN_PARAMS.color}
+        />
+      ),
 
       // (props) => (
       //   <DropdownWithActiveCommand
@@ -109,7 +110,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           {...props}
           id='macros-items-commands'
           icon={AddMacrosIcon}
-          items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS], [TEXT_COLOR_CLEAR]]}
+          items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS]]}
           placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}

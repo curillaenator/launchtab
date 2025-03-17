@@ -99,7 +99,7 @@ const getDarkModeColors = (neutral: ColorSet): ModedSet => ({
     warn: colorsLib.yellamerica[900],
     info: colorsLib.ultra[900],
 
-    codeblock: neutral[700],
+    codeblock: neutral[600],
   },
 });
 

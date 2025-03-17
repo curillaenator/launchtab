@@ -22,6 +22,8 @@ import {
   PurpleIcon,
 } from '../svg/CharHighlightIcon';
 
+import ResetIcon from '../svg/reset.svg';
+
 import type { ToolbarItemProps } from '../interfaces';
 
 enum WYSIWYG_COLORS {
@@ -164,7 +166,7 @@ const BACKGROUND_COLOR_ITEMS: ToolbarItemProps[] = [
 
 const TEXT_COLOR_CLEAR: ToolbarItemProps = {
   id: 'textColorClear',
-  Icon: BlackCharIcon,
+  Icon: ResetIcon,
   command: (chain) => chain.focus().unsetColor().run(),
 };
 

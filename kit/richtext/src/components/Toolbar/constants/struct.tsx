@@ -17,6 +17,7 @@ import {
   TEXT_FORMAT_ITEMS,
   IMAGE_ITEMS,
   TASK_LIST_ITEMS,
+  TEXT_COLOR_CLEAR,
 } from './items';
 
 import IconTableInsert from './svg/table-add.svg';
@@ -108,7 +109,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           {...props}
           id='macros-items-commands'
           icon={AddMacrosIcon}
-          items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS]]}
+          items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS], [TEXT_COLOR_CLEAR]]}
           placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}

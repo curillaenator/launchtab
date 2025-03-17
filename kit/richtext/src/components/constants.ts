@@ -57,7 +57,7 @@ const DEFAULT_CAPTIONS: Record<ControlCaption, string> = {
   lightOrangeColorBackground: 'Light-orange hightlight',
   purpleColorBackground: 'Purple hightlight',
   defaultColor: 'Black',
-  textColorClear: 'Use default color',
+  textColorClear: 'Reset text color styles',
   textHighlightClear: 'Use default hightlight',
   textColorAndHighlightClear: 'Use default color/hightlight',
   chooseAttachment: 'Вложение',

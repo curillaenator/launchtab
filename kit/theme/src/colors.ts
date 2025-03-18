@@ -5,13 +5,13 @@ const colorsLib = {
   white: 'hsl(0, 0%, 100%)',
   black: 'hsl(0, 0%, 0%)',
 
-  electroviolet: colors(263, 100, 59), //  hsl(263, 100%, 59%)
+  electroviolet: colors(263, 75, 56), //  hsl(263, 100%, 59%)
   awesome: colors(346, 96, 56), //  hsl(346, 96%, 56%)
   danger: colors(4, 100, 46), //  hsl(4, 100%, 46%)
-  ultra: colors(223, 86, 57), //  hsl(223, 86%, 57%)
+  ultra: colors(220, 92, 57), //  hsl(223, 86%, 57%)
   orange: colors(18, 100, 54), //  hsl(18, 100%, 54%)
-  nika: colors(86, 81, 38), //  hsl(86, 81%, 38%)
-  yellow: colors(44, 97, 47),
+  nika: colors(94, 92, 40), //  hsl(86, 81%, 38%)
+  yellow: colors(44, 97, 43),
   mint: colors(161, 62, 46),
   wine: colors(332, 76, 34),
 };

@@ -51,11 +51,19 @@
         a {
           cursor: pointer;
           text-decoration: none;
-          color: var(--theme-primary-300);
+          color: var(--theme-primary-500);
 
-          &:visited {
-            color: var(--theme-primary-500);
+          &:hover {
+            color: var(--theme-primary-300);
           }
+
+          &:active {
+            color: var(--theme-primary-700);
+          }
+
+          // &:visited {
+          //   color: var(--theme-primary-600);
+          // }
         }
 
         p.is-editor-empty:first-child::before {

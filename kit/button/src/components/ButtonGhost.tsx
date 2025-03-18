@@ -14,15 +14,15 @@ interface ButtonGhostStyledProps {
 
 const APPEARANCES = {
   primary: ({ active }: ButtonGhostStyledProps) => css`
-    --button-text-c: ${({ theme }) => (active ? theme.primary[800] : theme.texts.base)};
-    --button-text-c-h: ${({ theme }) => (active ? theme.primary[800] : theme.primary[500])};
-    --button-text-c-a: ${({ theme }) => theme.primary[800]};
+    --button-text-c: ${({ theme }) => (active ? theme.primary[500] : theme.texts.base)};
+    --button-text-c-h: ${({ theme }) => (active ? theme.primary[500] : theme.primary[300])};
+    --button-text-c-a: ${({ theme }) => theme.primary[500]};
   `,
 
   secondary: ({ active }: ButtonGhostStyledProps) => css`
-    --button-text-c: ${({ theme }) => (active ? theme.primary[800] : theme.texts.base)};
-    --button-text-c-h: ${({ theme }) => (active ? theme.primary[800] : theme.primary[500])};
-    --button-text-c-a: ${({ theme }) => theme.primary[800]};
+    --button-text-c: ${({ theme }) => (active ? theme.primary[500] : theme.texts.base)};
+    --button-text-c-h: ${({ theme }) => (active ? theme.primary[500] : theme.primary[300])};
+    --button-text-c-a: ${({ theme }) => theme.primary[500]};
   `,
 
   danger: () => css`

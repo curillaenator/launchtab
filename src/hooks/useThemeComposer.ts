@@ -16,8 +16,8 @@ import {
 } from '@launch-ui/theme';
 
 const THEME_NAMES_TO_NEUTRAL_SAT: Record<LaunchThemeID, number> = {
-  classic: 223,
-  violet: 263,
+  classic: 223 - 180,
+  violet: 263 - 180,
   radioactive: 86 + 180,
   sunset: 198,
   awesome: 346 - 180,
@@ -31,7 +31,7 @@ export const useThemeComposer = (): LaunchColors => {
 
   const accent = darkMode ? getDarkModePrimarySet(THEME_SET[themeName].primary) : THEME_SET[themeName].primary;
 
-  const neutral = getNeutralSet(THEME_NAMES_TO_NEUTRAL_SAT[themeName], 10);
+  const neutral = getNeutralSet(THEME_NAMES_TO_NEUTRAL_SAT[themeName], 6);
 
   const modedColors = darkMode ? getDarkModeColors(neutral) : getLightModeColors(neutral);
 

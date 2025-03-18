@@ -12,10 +12,10 @@
   color: var(--theme-texts-base);
 
   &:hover {
-    --hchy-btn-c: var(--theme-primary-700);
+    color: var(--theme-primary-300);
   }
 
   &:active {
-    --hchy-btn-c: var(--theme-primary-300);
+    color: var(--theme-primary-700);
   }
 }

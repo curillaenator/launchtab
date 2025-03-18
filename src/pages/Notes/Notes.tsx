@@ -2,13 +2,9 @@ import React, { FC, useCallback, memo, useState, useEffect, CSSProperties } from
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { setAside } from '@src/entities/app';
-
 import { NotesDashboard } from '@src/features/notesDashboard';
 import { CreateSpace } from '@src/features/space';
 import { Note, CreateNote } from '@src/features/note';
-
-import 'tabulator-tables/dist/css/tabulator.min.css';
 
 const NotesContainer = styled.div<{ height: CSSProperties['height'] }>`
   width: 100%;
@@ -27,10 +23,6 @@ const Notes: FC = memo(() => {
     noteId?: string;
     createPageType?: CreateParamType;
   }>();
-
-  useEffect(() => {
-    setAside(true);
-  }, []);
 
   const [pageOutletHeight, setPageOutletHeight] = useState<number>(0);
 

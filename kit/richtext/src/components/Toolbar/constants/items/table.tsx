@@ -1,5 +1,5 @@
-import IconTableDelete from '../../../../icons/IconTableDelete';
-import IconTableInsert from '../../../../icons/IconTableInsert';
+import IconTableDelete from '../svg/table-remove.svg';
+import IconTableInsert from '../svg/table-add.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

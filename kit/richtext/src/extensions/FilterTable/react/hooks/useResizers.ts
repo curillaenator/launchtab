@@ -7,7 +7,7 @@ import { MIN_CELL_WIDTH, TABLE_WIDTH_CSSV, TABLE_COL_CSSV_PREFIX } from '../../r
 interface UseResizersOptions {
   resizersTableId: string;
   attrs: FilterTableAtributes;
-  colgroup: { colWidthCssv: string }[];
+  colgroup: { colWidthCssv: string }[] | null;
   editor: Editor;
   updateAttributes: (attrs: FilterTableAtributes) => void;
 }
@@ -39,7 +39,7 @@ const useResizers = (options: UseResizersOptions) => {
 
   const onColumnResize = useCallback(
     (event: MouseEvent) => {
-      if (!resizersDomRef.current) return;
+      if (!colgroup || !resizersDomRef.current) return;
 
       const cell = (event.target as HTMLElement).closest<HTMLTableCellElement>('th, td');
       if (!cell) return;
@@ -94,7 +94,7 @@ const useResizers = (options: UseResizersOptions) => {
   }, [resizersTableId, onColumnResize]);
 
   useEffect(() => {
-    if (!resizersDomRef.current) return;
+    if (!colgroup || !resizersDomRef.current) return;
     updateTableWidthsCssv(colgroup.map((_, colIdx) => attrs.columnWidths[colIdx] || MIN_CELL_WIDTH * 2));
   }, [attrs, colgroup, updateTableWidthsCssv]);
 

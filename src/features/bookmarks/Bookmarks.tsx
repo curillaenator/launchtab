@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
+
 import { SortableItem } from 'react-easy-sort';
 import { arrayMoveImmutable } from 'array-move';
+
+import { ContextMenu } from '@launch-ui/context-menu';
 
 import { $bookmarksStore, reorderCards, BookmarkTabProps, removeCard } from '@src/entities/bookmarks';
 import { $userStore } from '@src/entities/user';
 
 import { CreateTabs } from '@src/features/createTabs';
 
-import { ContextMenu } from '@launch-ui/context-menu';
-import { Card } from '@src/components/card/Card';
+import { BookmarkCard } from './card';
 import { SortableListStyled, HoverWrapper } from './styles';
 
 const FALLBACK_PAGES: BookmarkTabProps = { name: 'Home', pages: [] };
@@ -43,7 +45,7 @@ export const Bookmarks: FC = () => {
                 },
               ]}
             >
-              <Card bookmark={card} />
+              <BookmarkCard bookmark={card} />
             </ContextMenu>
           </HoverWrapper>
         </SortableItem>

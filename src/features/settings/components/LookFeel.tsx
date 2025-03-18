@@ -1,27 +1,25 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { createClient as createPexelsClient, PhotosWithTotalResults as PexelsPhotosWithTotalResults } from 'pexels';
+import { keys } from 'lodash';
 
-import { themeNames } from '@launch-ui/theme';
+import { THEME_NAMES, type LaunchThemeID } from '@launch-ui/theme';
 import { Dropable } from '@launch-ui/dropable';
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Switch, Input, Titlewrap } from '@launch-ui/input';
 import { Loader } from '@launch-ui/loader';
 
-import { ImagePreview } from '@src/components/imagePreview/ImagePreview';
-
 import { $settingsStore, setSettings } from '@src/entities/settings';
 import { useDropable } from '@src/hooks/useDropable';
+import { usePexels } from '@src/hooks/usePexels';
 
-import { $pexelsStore, setPexels, setPexelsLoading, setPexelsQuery } from '@src/entities/pexels';
+import { setPexelsQuery } from '@src/entities/pexels';
 
+import { ImagePreview } from './ImagePreview';
 import { LookFeelStyled } from './lookfeel.styled';
 
 import DotIcon from '@src/assets/svg/dot.svg';
 import UpdateIcon from '@src/assets/svg/update.svg';
 import SearchIcon from '@src/assets/svg/search.svg';
-
-const client = createPexelsClient('C4n9S5rIWDpuE2YVHwTmyZy7CMuHjehR6lsquBxJq2NTIoIatAWR5AT5');
 
 const DYNAMIC_WP_OPTIONS = [
   { title: 'Flowy Clouds', value: 'clouds' },
@@ -31,38 +29,12 @@ const DYNAMIC_WP_OPTIONS = [
 export const LookFeel: FC = () => {
   const settingsState = useEffectorUnit($settingsStore);
 
-  const { pexels, pexelsLoading, pexelsQuery } = useEffectorUnit($pexelsStore);
+  const { data: pexels, isLoading: pexelsLoading, queryString } = usePexels();
 
-  const themeOptions = Object.keys(themeNames).map((themeKey) => ({
-    title: themeNames[themeKey],
+  const themeOptions = keys(THEME_NAMES).map((themeKey: LaunchThemeID) => ({
+    title: THEME_NAMES[themeKey],
     value: themeKey,
   }));
-
-  const pexelsTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (!pexelsQuery) {
-      return;
-    }
-
-    if (pexelsTimer.current) clearTimeout(pexelsTimer.current);
-
-    pexelsTimer.current = setTimeout(() => {
-      setPexelsLoading(true);
-
-      client.photos
-        .search({ query: pexelsQuery, per_page: 50, page: 1 })
-        .then((res) => {
-          setPexels(res as PexelsPhotosWithTotalResults);
-        })
-        .catch(() => {
-          alert('Image service unfurtunatelly failed =(');
-        })
-        .finally(() => {
-          setPexelsLoading(false);
-        });
-    }, 5000);
-  }, [pexelsQuery]);
 
   const { isOpen: isThemeOpen = false, closeDropdown: closeTheme, ...restTheme } = useDropable();
   const { isOpen: isDynamicWpOpen = false, closeDropdown: closeDynamicWp, ...restDynamicWp } = useDropable();
@@ -80,6 +52,7 @@ export const LookFeel: FC = () => {
               title={themeOptions.find(({ value }) => settingsState.themeName === value)?.title || 'Not selected'}
               active={isThemeOpen}
               appearance='secondary'
+              className='dd-open-node'
               fullwidth
             />
           }
@@ -91,7 +64,6 @@ export const LookFeel: FC = () => {
               title={title}
               active={value === settingsState.themeName}
               onClick={() => {
-                //@ts-expect-error
                 setSettings({ themeName: value });
                 closeTheme?.();
               }}
@@ -132,6 +104,7 @@ export const LookFeel: FC = () => {
                 active={isDynamicWpOpen}
                 appearance='secondary'
                 fullwidth
+                className='dd-open-node'
               />
             }
           >
@@ -169,7 +142,7 @@ export const LookFeel: FC = () => {
               type='url'
               name='background'
               placeholder='Type any tag (example "nature")'
-              value={pexelsQuery}
+              value={queryString}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPexelsQuery(e.target.value)}
             />
 

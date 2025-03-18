@@ -7,6 +7,7 @@ import { COMMON_USERS_DOCS_SPACE } from '@src/shared/appConfig';
 
 import { setSettings } from '../settings';
 import { setTabsWithoutDbUpdate } from '../bookmarks';
+import { setAside } from '../app';
 import { setUser } from './store';
 
 import { NULL_USER } from './contants';
@@ -26,6 +27,7 @@ const logout = () => {
   setSettings(DEFAULT_SETTINGS);
   setTabsWithoutDbUpdate(DEFAULT_PAGES);
   localStorage.clear();
+  setAside(false);
   signOut(auth);
 };
 

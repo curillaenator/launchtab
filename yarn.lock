@@ -3467,13 +3467,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@headlessui/react@npm:1.5.0"
+"@headlessui/react@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@headlessui/react@npm:1.7.0"
   peerDependencies:
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
-  checksum: e3373dfb73936950d659a87718fb9fdedc599b344b30cb0d8b1ef0a2ec13d6f405c653fa51284236788658840ece82c6a8538a5a5931e595274e9590b2020079
+  checksum: 8635e10d5ffaef63792010da26e782693ad6b271293151f53fdeedc8f64fa7efd2b990fe7247d9294de04f2da1879cb56653d93e38c38a89ba1ea6796b6a5292
   languageName: node
   linkType: hard
 
@@ -3700,10 +3700,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/drawer@workspace:kit/drawer"
   dependencies:
-    "@headlessui/react": 1.5.0
+    "@headlessui/react": 1.7.0
     "@launch-ui/types": "*"
     "@launch-ui/utils": 1.0.1
-    classnames: 2.5.1
   peerDependencies:
     react: "*"
     styled-components: "*"
@@ -3784,8 +3783,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@launch-ui/modal@workspace:kit/modal"
   dependencies:
+    "@headlessui/react": 1.7.0
+    "@launch-ui/shape": 1.0.5
     "@launch-ui/types": "*"
-    reactjs-popup: 2.0.5
+    "@launch-ui/utils": 1.0.1
   peerDependencies:
     react: "*"
     styled-components: "*"
@@ -3800,6 +3801,7 @@ __metadata:
     "@launch-ui/dropable": 1.0.0
     "@launch-ui/input": 1.0.0
     "@launch-ui/shape": 1.0.5
+    "@launch-ui/theme": 1.1.0
     "@launch-ui/types": "*"
     "@launch-ui/typography": 1.0.0
     "@tiptap/core": 2.11.5
@@ -3842,7 +3844,6 @@ __metadata:
     "@tiptap/react": 2.11.5
     "@tiptap/suggestion": 2.11.5
     "@types/react-scroll": 1.8.10
-    "@types/tabulator-tables": 6.2.3
     classnames: 2.5.1
     date-fns: 3.2.0
     highlight.js: 11.11.1
@@ -3850,7 +3851,6 @@ __metadata:
     lodash: 4.17.21
     lowlight: 3.3.0
     react-scroll: 1.9.2
-    tabulator-tables: 6.2.5
     uuid: 11.0.4
   peerDependencies:
     react: "*"
@@ -5239,13 +5239,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-animations@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@types/react-animations@npm:1.0.0"
-  checksum: 06c3b8a1eee3d1bde8132bf5f1f166fa57a61aeb5fb9dedccd5743959be78dfa515eb7252fcf75072f11be309888149c60dc3ee009567eaca18d9da2d7b3bc42
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:18.2.0":
   version: 18.2.0
   resolution: "@types/react-dom@npm:18.2.0"
@@ -5354,13 +5347,6 @@ __metadata:
     "@types/react": "*"
     csstype: ^3.0.2
   checksum: 84f53b3101739b20d1731554fb7735bc2f3f5d050a8b392e9845403c8c8bbd729737d033978649f9195a97b557875b010d46e35a4538564a2d0dbcce661dbf76
-  languageName: node
-  linkType: hard
-
-"@types/tabulator-tables@npm:6.2.3":
-  version: 6.2.3
-  resolution: "@types/tabulator-tables@npm:6.2.3"
-  checksum: dcfbd8ec870ddb9ea4e79275afa61b0741d5dd353f0691d83fcf9508c7fa44b81d91d4f2b967eb7abc006c734bb6ff1cc052fe6133a0a66971b0465785216299
   languageName: node
   linkType: hard
 
@@ -9527,7 +9513,6 @@ __metadata:
     "@types/lodash": 4.17.14
     "@types/node": 22.7.4
     "@types/react": 18.2.0
-    "@types/react-animations": 1.0.0
     "@types/react-dom": 18.2.0
     "@types/shortid": 0.0.29
     "@types/styled-components": 5.1.26
@@ -9559,12 +9544,10 @@ __metadata:
     pexels: 1.4.0
     prettier: 3.4.2
     react: 18.2.0
-    react-animations: 1.0.0
     react-dom: 18.2.0
     react-easy-sort: 1.3.1
     react-hook-form: 7.54.2
     react-router-dom: 6.22.1
-    reactjs-popup: 2.0.5
     rimraf: 5.0.5
     sass: 1.84.0
     sass-loader: 16.0.5
@@ -11283,13 +11266,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-animations@npm:1.0.0":
-  version: 1.0.0
-  resolution: "react-animations@npm:1.0.0"
-  checksum: dc4425628fe33bf3a49c7128167f765ee16089902535285db1b377136f422ae9463dcb0df0532a82dfaf4c378ae18909409d6b66606c460962c361ec5a951ba1
-  languageName: node
-  linkType: hard
-
 "react-dom@npm:18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
@@ -11388,16 +11364,6 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: 88e38092da8839b830cda6feef2e8505dec8ace60579e46aa5490fc3dc9bba0bd50336507dc166f43e3afc1c42939c09fe33b25fae889d6f402721dcd78fca1b
-  languageName: node
-  linkType: hard
-
-"reactjs-popup@npm:2.0.5":
-  version: 2.0.5
-  resolution: "reactjs-popup@npm:2.0.5"
-  peerDependencies:
-    react: ">=16"
-    react-dom: ">=16"
-  checksum: 7b9ebd49e66fb936e85cd4e7a3713cdf903e95f802e5783963f1f9c000d2f8bdb7e4b9967756677238b2fcd9c07637282f2a037403374931ba42865ffffe60e6
   languageName: node
   linkType: hard
 
@@ -12628,13 +12594,6 @@ __metadata:
   bin:
     svgo: ./bin/svgo
   checksum: 42168748a5586d85d447bec2867bc19814a4897f973ff023e6aad4ff19ba7408be37cf3736e982bb78e3f1e52df8785da5dca77a8ebc64c0ebd6fcf9915d2895
-  languageName: node
-  linkType: hard
-
-"tabulator-tables@npm:6.2.5":
-  version: 6.2.5
-  resolution: "tabulator-tables@npm:6.2.5"
-  checksum: 09e3ca20f12cb777e89482d36683980177c5848b27f1b8c10ff2b9acc6b92f14ca6e014ea0018b6b6457c7f80923a2988463a8d4c5f7d05edddb5911e7bed790
   languageName: node
   linkType: hard
 

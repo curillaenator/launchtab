@@ -2,7 +2,7 @@ import type { Editor } from '@tiptap/core';
 import type { Selection } from 'prosemirror-state';
 import { findParentNode } from '@tiptap/core';
 
-import DrawIoIcon from '../../../../icons/DrawIoIcon';
+import DrawIoIcon from '../svg/bar-chart.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 

@@ -92,7 +92,7 @@ class ColumnToolbar {
 
       this.props.editorContentRef.current.style.setProperty(
         `--blocksgrid-${this.props.node.attrs['blocksGridId']}-${this.props.columnIdx}-bdc`,
-        'var(--editor-error)',
+        'var(--theme-backgrounds-danger)',
       );
     };
 

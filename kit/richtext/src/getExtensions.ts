@@ -24,7 +24,8 @@ import { Placeholder } from '@tiptap/extension-placeholder';
 import { FilterTable, TableHeader, TableCell } from './extensions/FilterTable';
 import { TableRow } from '@tiptap/extension-table-row';
 
-import { Link } from '@tiptap/extension-link';
+import { Link } from './extensions/Link';
+import { LinkRoute } from './extensions/LinkRoute';
 import { Highlight } from '@tiptap/extension-highlight';
 import { Color } from '@tiptap/extension-color';
 
@@ -41,6 +42,7 @@ import { UniqueId } from './extensions/UniqId/UniqueId';
 
 import { Heading } from './extensions/Heading';
 
+import { Info } from './extensions/Info';
 import { Emoji } from './extensions/Emoji';
 import {
   ToC,
@@ -64,7 +66,7 @@ import { BackspaceDeletePreventerPlugin } from './extensions/BackspaceDelete';
 import { all, createLowlight } from 'lowlight';
 
 import { PLACEHOLDER_TEXT, DRAWIO_SERVICE_URL } from './constants';
-import type { RichTextExtensionsOptions } from './interfaces';
+import type { GetRichTextExtensionsOptions } from './interfaces';
 
 const lowlight = createLowlight(all);
 
@@ -107,9 +109,9 @@ const STATIC_EXTS = [
 
   Image,
 
-  // Indent,
-
+  Info,
   Emoji,
+
   Link.configure({ openOnClick: true, autolink: true }),
 
   FilterTable,
@@ -127,10 +129,12 @@ const STATIC_EXTS = [
   // Draggable.configure({ types: [DRAWIO_EXTENSION_NAME, GRIDS_EXTENSION_NAME, TOC_EXTENSION_NAME] }),
 ];
 
-function getExtensions(options: RichTextExtensionsOptions) {
-  const { internalScrollContainerId, editorContentRef, enableEditorOnChangeFn } = options;
+function getExtensions(options: GetRichTextExtensionsOptions) {
+  const { internalScrollContainerId, editorContentRef, enableEditorOnChangeFn, extensionsOptions } = options;
 
   const exts = [...STATIC_EXTS];
+
+  exts.push(LinkRoute.configure(extensionsOptions?.linkRoute));
 
   exts.push(ToC.configure({ scrollContainerId: internalScrollContainerId }));
 

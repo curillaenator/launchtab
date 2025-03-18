@@ -6,7 +6,7 @@ export const CrossIcon: FC = () => (
       d='M10 22L22 10M10 10L22 22'
       stroke='currentColor'
       fill='none'
-      strokeWidth='1.4'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

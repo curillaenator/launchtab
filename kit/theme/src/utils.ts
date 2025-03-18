@@ -4,13 +4,13 @@ const COLOR_SET_DUMMY = [...new Array(9)];
 const STEP = 0.125;
 
 const MAX_PRIMARY_LIGHTNESS = 92;
-const MIN_PRIMARY_LIGHTNESS = 24;
+const MIN_PRIMARY_LIGHTNESS = 20;
 
 /**
  * @description - Color set generation
  * @param hue 0-360
  * @param sat  0-100
- * @param light range matters!!! - 24-92
+ * @param light range matters!!! - 20-92
  * @returns ColorSet type
  */
 const colors = (hue: number, sat: number, light: number) => {

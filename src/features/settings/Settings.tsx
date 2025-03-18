@@ -5,13 +5,13 @@ import { logout } from '@src/entities/user';
 
 import { ButtonGhost, ButtonAction } from '@launch-ui/button';
 import { Typography } from '@launch-ui/typography';
-import { Scrollbars } from '@src/components/scrollbars/Scrollbars';
 import { LookFeel } from './components';
 
 import { setRightDrawer } from '@src/entities/app';
 import { $userStore } from '@src/entities/user';
 import { $settingsStore, saveSettingsQuery } from '@src/entities/settings';
 
+import { Scrollbars } from '@src/features/scrollbars';
 import { SettingsStyled } from './settings.styled';
 
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';

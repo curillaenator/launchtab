@@ -3,34 +3,18 @@ import styled from 'styled-components';
 
 const SortableListStyled = styled(SortableList)`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 
-  @media (min-width: 481px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 769px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1153px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 1441px) {
+  @media (min-width: 1520px) {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  @media (min-width: 1681px) {
+  @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
   }
 
-  @media (min-width: 1921px) {
-    grid-template-columns: repeat(7, 1fr);
-  }
-
-  @media (min-width: 2561px) {
+  @media (min-width: 2560px) {
     grid-template-columns: repeat(8, 1fr);
   }
 `;

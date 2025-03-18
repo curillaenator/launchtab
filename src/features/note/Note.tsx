@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useRef, useEffect } from 'react';
 import { useUnit as useEffectorUnit } from 'effector-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { Corners } from '@launch-ui/shape';
 import { Loader } from '@launch-ui/loader';
@@ -30,10 +30,9 @@ import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 import { NoteHeader } from './components/NoteHeader';
 import { NoteContainer } from './note.styled';
 
-import 'tabulator-tables/dist/css/tabulator.min.css';
-
 const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const currentEditorRef = useRef<RichTextEditor | null>(null);
+  const navigate = useNavigate();
 
   const { noteId: routerNoteId = null } = useParams<NotesRouteParams>();
   const { uid } = useEffectorUnit($userStore);
@@ -117,19 +116,29 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   }, [updateNoteBodyImmidiate]);
   //INJECT HEADER COMPONENT END
 
+  const isNoteEditable = iCan.edit(noteUnit) && !noteUnit?.locked;
+
   return (
-    <NoteContainer height={maxHeight}>
+    <NoteContainer height={maxHeight} data-note editable={isNoteEditable}>
       <Corners borderRadius={LAUNCH_PAPER_BDRS} />
 
       {isNoteBodyLoading ? (
-        <Loader view='fit-parent' iconSize='40px' />
+        <Loader view='fit-parent' iconSize='48px' />
       ) : (
         <RichTextField
-          editable={iCan.edit(noteUnit) && !noteUnit?.locked}
+          editable={isNoteEditable}
           onEditorInstanceChange={(richTextEditor) => (currentEditorRef.current = richTextEditor)}
-          maxHeight={maxHeight - 24}
+          maxHeight={maxHeight - (isNoteEditable ? 24 : 0)}
           initialValue={noteBody || ''}
           onChange={onRichTextChange}
+          extensionsOptions={{
+            linkRoute: {
+              navTo: (to) => {
+                console.log('linkRoute cfg', to);
+                navigate(to);
+              },
+            },
+          }}
         />
       )}
     </NoteContainer>

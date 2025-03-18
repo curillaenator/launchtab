@@ -1,11 +1,10 @@
 import React, { ElementType, FC, useMemo } from 'react';
 import { animated } from 'react-spring';
+import cn from 'classnames';
 
 import { Corners } from '@launch-ui/shape';
 
 import { DropableContext } from './context';
-import { VERSION } from './version';
-import { DEFAULT_TEST_ID } from './constants';
 import { _BaseMenuProps } from './interfaces';
 
 //@ts-expect-error
@@ -15,7 +14,6 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
   const {
     attrs,
     instance,
-    dataTestId,
     maxWidth,
     minWidth,
     maxHeight,
@@ -23,6 +21,7 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
     closeOnItemClick = false,
     closeDropdown,
     corners = { borderRadius: 14, stroke: 1 },
+    headless,
     children,
   } = props;
 
@@ -40,10 +39,9 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
   return (
     <Component
       {...attrs}
-      data-testid={dataTestId}
-      data-analytics={DEFAULT_TEST_ID}
-      data-version={VERSION}
-      className={styles.content}
+      className={cn(styles.content, {
+        [styles.content_styled]: !headless,
+      })}
       style={{
         '--dropable-content-bdrs': `${corners.borderRadius}px`,
         ...animationStyle,
@@ -53,11 +51,9 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
         maxHeight,
       }}
     >
-      <Corners {...corners} />
+      {!headless && <Corners {...corners} />}
 
-      <div className={styles.scroll}>
-        <DropableContext.Provider value={contextValue}>{children}</DropableContext.Provider>
-      </div>
+      <DropableContext.Provider value={contextValue}>{children}</DropableContext.Provider>
     </Component>
   );
 };

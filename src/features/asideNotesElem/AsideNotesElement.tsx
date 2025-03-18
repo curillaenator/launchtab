@@ -21,12 +21,11 @@ import { UNIT_NOTE_UNIT_QUERY } from '@src/shared/queryKeys';
 
 import { AsideNotesElementStyled } from './AsideNotesElement.styled';
 
-import AddFolderIcon from '@src/assets/svg/addFolder.svg';
+import SpaceIcon from '@src/assets/svg/space.svg';
+import AddSpaceIcon from '@src/assets/svg/addSpace.svg';
 import AddDocumentIcon from '@src/assets/svg/addDocument.svg';
 
 type CreateParamType = 'space' | 'note';
-
-import FolderIcon from '@src/assets/svg/folder.svg';
 
 type RouteParams = {
   noteId?: string;
@@ -99,7 +98,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
           active={createPageType === 'space'}
           appearance='secondary'
           disabled={!userSpaces}
-          LeftIcon={() => <AddFolderIcon />}
+          LeftIcon={() => <AddSpaceIcon />}
           title={!userSpaces ? 'Wait...' : 'Create LaunchSpace'}
           onClick={() => navigate('/notes/create/space')}
           fullwidth
@@ -117,7 +116,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
               offset={[0, 8]}
               openNode={
                 <ButtonAction
-                  LeftIcon={() => <FolderIcon />}
+                  LeftIcon={() => <SpaceIcon />}
                   title={userSpaces.find((sps) => sps.spaceCode === selectedSpace?.spaceCode)?.name}
                   active={isSpaceSelectorOpen}
                   appearance='secondary'
@@ -128,7 +127,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
             >
               {userSpaces.map((userSpace) => (
                 <ButtonGhost
-                  LeftIcon={() => <FolderIcon />}
+                  LeftIcon={() => <SpaceIcon />}
                   key={userSpace.spaceCode}
                   height={32}
                   title={userSpace.name}
@@ -143,7 +142,7 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
 
             <ButtonAction
               disabled={userSpaces.length >= MAX_SPACES_PER_USER}
-              LeftIcon={() => <AddFolderIcon />}
+              LeftIcon={() => <AddSpaceIcon />}
               appearance='secondary'
               onClick={() => navigate('/notes/create/space')}
               active={createPageType === 'space'}
@@ -173,7 +172,11 @@ const AsideNotesElement: FC<{ uid: string }> = memo(({ uid }) => {
                 linkPattern={(item: { code: string }) => `/notes/${item.code}`}
                 matchRoutePattern={() => `/notes/:noteId`}
                 getItemQuery={getNoteUnitQuery}
-                ItemLoader={() => <Loader iconSize='24px' iconPadding='4px' />}
+                ItemLoader={() => (
+                  <div style={{ height: '32px', padding: '4px 0' }}>
+                    <Loader iconSize='24px' />
+                  </div>
+                )}
               />
             </div>
           ) : (

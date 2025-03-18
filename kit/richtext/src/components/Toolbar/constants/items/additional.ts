@@ -1,25 +1,24 @@
-import IconTogglerBlockquote from '../../../../icons/IconTogglerBlockquote';
-import IconTogglerCodeblock from '../../../../icons/IconTogglerCodeblock';
-import IconDivider from '../../../../icons/IconDivider';
-// import IconExpand from '../../../../icons/IconExpand';
+import DividerIcon from '../svg/section-break.svg';
+import QuoteIcon from '../svg/quote.svg';
+import CodeBlockIcon from '../svg/codeblock.svg';
 
 import type { ToolbarItemProps } from '../interfaces';
 
 const ADDITIONAL_TEXT_ITEMS: ToolbarItemProps[] = [
   {
     id: 'hr',
-    Icon: IconDivider,
+    Icon: DividerIcon,
     command: (chain) => chain.focus().setHorizontalRule().run(),
     isActive: () => false,
   },
   {
     id: 'blockquote',
-    Icon: IconTogglerBlockquote,
+    Icon: QuoteIcon,
     command: (chain) => chain.focus().toggleBlockquote().run(),
   },
   {
     id: 'codeBlock',
-    Icon: IconTogglerCodeblock,
+    Icon: CodeBlockIcon,
     command: (chain) => chain.focus().toggleCodeBlock().run(),
   },
   // {

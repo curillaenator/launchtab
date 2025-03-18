@@ -5,27 +5,22 @@ interface ModedSet {
   texts: {
     base: string;
     inversedBase: string;
-    sub: string;
     disabled: string;
 
     codeblock: string;
 
-    error: string;
+    info: string;
+    warn: string;
     success: string;
+    error: string;
 
     placeholder: string;
     inputColor: string;
   };
 
-  icons: {
-    dark: string;
-    darkHover: string;
-    light: string;
-    lightHover: string;
-  };
-
   borders: {
     base: string;
+    light: string;
   };
 
   backgrounds: {
@@ -47,21 +42,15 @@ interface ModedSet {
 
     codeblock: string;
   };
-
-  modals: {
-    matte: string;
-  };
 }
 
 interface ShadowsSet {
+  base: string;
   danger: string;
-  header: string;
-  card: string;
   primary: string;
-  drawer: string;
 }
 
-interface LaunchTheme extends ModedSet {
+interface LaunchColors extends ModedSet {
   white: string;
   black: string;
   primary: ColorSet;
@@ -71,4 +60,6 @@ interface LaunchTheme extends ModedSet {
   shadows: ShadowsSet;
 }
 
-export type { LaunchTheme as TTheme, ColorSet, ColorKey, ModedSet, ShadowsSet };
+type LaunchThemeID = 'classic' | 'awesome' | 'wine' | 'violet' | 'radioactive' | 'sunset' | 'mint' | 'yellow';
+
+export type { LaunchColors, LaunchThemeID, ColorSet, ColorKey, ModedSet, ShadowsSet };

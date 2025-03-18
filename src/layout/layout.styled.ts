@@ -1,32 +1,34 @@
 import styled from 'styled-components';
 
-const ASIDE_WIDTH = '384px';
-
 const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
+  --layout-aside-w: ${({ $isAsideOpen }) => ($isAsideOpen ? '384px' : '0px')};
+
   position: relative;
 
   display: flex;
   width: 100%;
   min-width: 1440px;
 
-  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+  font-family: var(--layout-ff);
   color: ${({ theme }) => theme.texts.base};
 
   .aside {
     position: sticky;
     top: 0;
     flex: 0 0 auto;
-    width: ${({ $isAsideOpen }) => ($isAsideOpen ? ASIDE_WIDTH : '0px')};
+    width: var(--layout-aside-w);
     min-height: 100vh;
     max-height: 100vh;
 
     will-change: width;
-    transition: width 160ms ease;
+    transition: width 180ms ease;
   }
 
   .viewport {
-    width: 100%;
     flex: 1 1 auto;
+    width: calc(100% - var(--layout-aside-w));
+
+    will-change: width;
 
     min-height: 100vh;
     max-height: 100vh;
@@ -35,15 +37,16 @@ const LayoutStyled = styled.div<{ $isAsideOpen: boolean }>`
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-      width: 4px;
+      display: none;
+      /* width: 4px; */
       /* margin-left: 0.25rem; */
-      border-radius: 2px;
-      background-color: ${({ theme }) => theme.backgrounds.base};
-    }
+      /* border-radius: 2px;
+      background-color: ${({ theme }) => theme.backgrounds.base}; */
 
-    &::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.primary[500]};
-      border-radius: 2px;
+      /* &-thumb {
+        background-color: ${({ theme }) => theme.primary[500]};
+        border-radius: 2px;
+      } */
     }
   }
 `;

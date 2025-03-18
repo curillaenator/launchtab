@@ -6,7 +6,7 @@ export const CarretIcon: FC = () => (
       d='M20 20L16 24L12 20'
       stroke='currentColor'
       fill='none'
-      strokeWidth='1.4'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
@@ -14,7 +14,7 @@ export const CarretIcon: FC = () => (
       d='M20 12L16 8L12 12'
       stroke='currentColor'
       fill='none'
-      strokeWidth='1.4'
+      strokeWidth='1.5'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

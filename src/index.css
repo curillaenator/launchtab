@@ -1,27 +1,12 @@
 :root::-webkit-scrollbar {
-  width: 4px;
-  margin-left: 4px;
-  border-radius: 4px;
-  background-color: var(--scrollbar-track, white);
-}
-
-:root::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb, blue);
-  border-radius: 4px;
+  display: none;
 }
 
 html {
-  --layout-pd: 24px;
+  --layout-ff: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
 
-  /* @media (min-width: 1920px) {
-    --layout-pd: 48px;
-    } */
-
-  /* @media (min-width: 2560px) {
-      --layout-pd: 48px;
-      } */
-
-  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+  font-family: var(--layout-ff);
+  background-color: var(--layout-bgc, #fff);
 }
 
 *,
@@ -33,7 +18,7 @@ html {
 }
 
 button {
-  font-family: system-ui-rounded, ui-rounded, 'SF Pro Rounded', 'SanFrancisco', 'Roboto', sans-serif;
+  font-family: var(--layout-ff);
   outline: none;
   background-color: transparent;
   border: none;

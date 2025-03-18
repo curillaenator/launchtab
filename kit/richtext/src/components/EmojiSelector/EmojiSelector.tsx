@@ -41,7 +41,7 @@ export const EmojiSelector: FC<EmojiSelectorProps> = (props) => {
       openNode={
         <div>
           <ToolbarButton active={isOpen} onClick={() => setTimeout(() => editor.commands.focus(), 20)}>
-            <span style={{ width: '32px', textAlign: 'center' }}>{namesToEmoji['smile']}</span>
+            <span style={{ width: '24px', textAlign: 'center' }}>{namesToEmoji['smile']}</span>
           </ToolbarButton>
         </div>
       }

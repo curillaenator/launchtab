@@ -1,5 +1,5 @@
 export { hexa, hsla, neutrals as getNeutralSet } from './utils';
-export { themes, themeNames, type TThemeName } from './themes';
+export { THEME_SET, THEME_NAMES } from './themes';
 
 export {
   colorsLib,
@@ -10,4 +10,4 @@ export {
   getDarkModePrimarySet,
 } from './colors';
 
-export type { TTheme, ColorKey, ColorSet } from './interfaces';
+export type { LaunchColors, LaunchThemeID, ColorKey, ColorSet } from './interfaces';

@@ -10,6 +10,7 @@ import { LaunchSpaceProps, useSpaces } from '@src/entities/space';
 
 import { SetupSpace } from '@src/features/space';
 
+import { MODAL_PORTAL_ID } from '@src/shared/appContainers';
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
 import { DashCard } from './DashCard';
@@ -21,7 +22,7 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
   const [spaceSetupOpen, setSpaceSetupOpen] = useState<boolean>(false);
   const [setupSpace, setSetupSpace] = useState<LaunchSpaceProps | null>(null);
 
-  const { data: userSpaces = [] } = useSpaces(spaceIdList);
+  const { data: userSpaces = [], isLoading: isUserSpacesLoading } = useSpaces(spaceIdList);
 
   return (
     <>
@@ -38,18 +39,22 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         </div>
 
         <div className='dashboard-block dashboard-block-grid'>
-          {userSpaces.map((userSpace) => (
-            <DashCard
-              key={userSpace.spaceCode}
-              title={userSpace.name}
-              hierarchy={userSpace.hierarchy}
-              createdBy={userSpace.createdBy}
-              onSetup={() => {
-                setSetupSpace(userSpace);
-                setSpaceSetupOpen(true);
-              }}
-            />
-          ))}
+          {isUserSpacesLoading ? (
+            <DashCard loading />
+          ) : (
+            userSpaces.map((userSpace) => (
+              <DashCard
+                key={userSpace.spaceCode}
+                title={userSpace.name}
+                hierarchy={userSpace.hierarchy}
+                createdBy={userSpace.createdBy}
+                onSetup={() => {
+                  setSetupSpace(userSpace);
+                  setSpaceSetupOpen(true);
+                }}
+              />
+            ))
+          )}
         </div>
 
         {/* <div className='dashboard-block'>
@@ -62,14 +67,16 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
         </div> */}
       </NoteContainer>
 
-      {!!setupSpace && (
-        <Modal
-          open={spaceSetupOpen}
-          onClose={() => {
-            setSetupSpace(null);
-            setSpaceSetupOpen(false);
-          }}
-        >
+      <Modal
+        borderRadius={LAUNCH_PAPER_BDRS}
+        portalId={MODAL_PORTAL_ID}
+        open={spaceSetupOpen}
+        onClose={() => {
+          setSetupSpace(null);
+          setSpaceSetupOpen(false);
+        }}
+      >
+        {!!setupSpace && (
           <SetupSpace
             closePopup={() => {
               setSetupSpace(null);
@@ -77,8 +84,8 @@ const NotesDashboard: FC<{ maxHeight: number }> = ({ maxHeight }) => {
             }}
             space={setupSpace}
           />
-        </Modal>
-      )}
+        )}
+      </Modal>
     </>
   );
 };

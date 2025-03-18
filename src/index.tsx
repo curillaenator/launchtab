@@ -32,7 +32,7 @@ reactRoot.render(
   <QueryClientProvider client={client}>
     <ThemeProvider>
       <AuthProvider>
-        <RouterProvider router={router} fallbackElement={<Loader view='fullscreen' iconSize='40px' />} />
+        <RouterProvider router={router} fallbackElement={<Loader view='fullscreen' iconSize='48px' />} />
       </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>,

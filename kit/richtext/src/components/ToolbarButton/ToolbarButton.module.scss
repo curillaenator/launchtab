@@ -1,13 +1,14 @@
 .button {
   width: fit-content;
   height: 32px;
+
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  border-radius: 6px;
-  border: none;
+  justify-content: flex-start;
+  gap: 4px;
+
   cursor: pointer;
-  padding: 0;
+  padding: 0 4px;
   margin: 0;
 
   font-family: inherit;
@@ -15,14 +16,13 @@
   line-height: 24px;
 
   color: var(--editor-c);
-  background-color: transparent;
 
   &:hover {
-    color: var(--theme-primary-500);
+    color: var(--theme-primary-300);
   }
 
   &:active {
-    color: var(--theme-primary-600);
+    color: var(--theme-primary-700);
   }
 
   &_fullwidth {
@@ -30,25 +30,16 @@
   }
 
   &_active:not(.disabled) {
-    color: var(--theme-white);
-    background-color: var(--theme-primary-500);
-
-    &:hover {
-      background-color: var(--theme-primary-500);
-    }
-
-    &:active {
-      background-color: var(--theme-primary-500);
-    }
+    color: var(--theme-primary-700);
   }
 
   &_disabled {
     pointer-events: none;
     background-color: transparent;
-    color: var(--editor-disabled);
+    color: var(--theme-texts-disabled);
 
     svg path {
-      stroke: var(--editor-disabled);
+      stroke: var(--theme-texts-disabled);
     }
   }
 }

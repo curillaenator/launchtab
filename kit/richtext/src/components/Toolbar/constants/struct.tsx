@@ -15,17 +15,13 @@ import {
   TOC_ITEMS,
   TEXT_ALIGN_ITEMS,
   TEXT_FORMAT_ITEMS,
-  COLOR_ITEMS,
-  TEXT_COLOR_CLEAR,
   IMAGE_ITEMS,
-  // BACKGROUND_COLOR_ITEMS,
-  // TEXT_HIGHLIGHT_CLEAR,
   TASK_LIST_ITEMS,
+  COLOR_ITEMS,
 } from './items';
 
-import IconTableInsert from '../../../icons/IconTableInsert';
-import { AddMacrosIcon } from '../../../icons/AddMacrosIcon';
-// import IconEdit from '../../../icons/IconEdit';
+import IconTableInsert from './svg/table-add.svg';
+import AddMacrosIcon from './svg/macroses.svg';
 
 const DEFAULT_STRUCT: ToolbarComponentStruct = {
   full: {
@@ -50,7 +46,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           {...props}
           id='text-color-commands'
           defaultValue='defaultColor'
-          items={[[...COLOR_ITEMS, TEXT_COLOR_CLEAR]]}
+          items={[COLOR_ITEMS]}
           placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.color}
@@ -105,9 +101,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
       ),
 
       (props) => <ControlSection {...props} id='image-commands' items={IMAGE_ITEMS} />,
-    ],
 
-    right: [
       (props) => <ControlSection {...props} id='additional-items-commands' items={ADDITIONAL_ITEMS} />,
 
       (props) => (
@@ -116,7 +110,7 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           id='macros-items-commands'
           icon={AddMacrosIcon}
           items={[[...TOC_ITEMS, ...DRAW_IO_ITEMS, ...TASK_LIST_ITEMS]]}
-          placement='bottom-end'
+          placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.macros}
           maxWidth={DROPDOWN_PARAMS.macros}
@@ -129,13 +123,15 @@ const DEFAULT_STRUCT: ToolbarComponentStruct = {
           id='table-items-commands'
           icon={IconTableInsert}
           items={[TABLE_ITEMS]}
-          placement='bottom-end'
+          placement='bottom-start'
           maxHeight={DROPDOWN_PARAMS.maxHeight}
           minWidth={DROPDOWN_PARAMS.table}
           maxWidth={DROPDOWN_PARAMS.table}
         />
       ),
     ],
+
+    right: [],
   },
   medium: {
     left: [],

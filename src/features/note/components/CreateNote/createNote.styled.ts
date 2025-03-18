@@ -14,7 +14,7 @@ const CreateNoteForm = styled.form`
 
   border-radius: calc(${LAUNCH_PAPER_BDRS}px * 1.25 + 3px);
   background-color: ${({ theme }) => theme.backgrounds.base};
-  padding: var(--layout-pd);
+  padding-top: var(--layout-pd);
 
   .create-note-form-field-list {
     display: flex;
@@ -29,6 +29,8 @@ const CreateNoteForm = styled.form`
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: var(--layout-pd);
+    border-top: 1px solid ${({ theme }) => theme.borders.base};
   }
 
   .create-note-form-errors {

@@ -15,8 +15,8 @@ const LaunchTabsContainer = styled.div`
   width: 100%;
   padding: calc(var(--layout-pd) * 2) var(--layout-pd);
 
-  @media (min-width: 1920px) {
-    --layout-pd: 72px;
+  @media (min-width: 1921px) {
+    padding: calc(var(--layout-pd) * 6);
   }
 `;
 
@@ -35,7 +35,7 @@ const LaunchTabs: FC = memo(() => {
   if (isBookmarksDataLoading)
     return (
       <LaunchTabsContainer>
-        <Loader view='fit-parent' iconSize='40px' />
+        <Loader view='fit-parent' iconSize='48px' />
       </LaunchTabsContainer>
     );
 

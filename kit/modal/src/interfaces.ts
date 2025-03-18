@@ -1,7 +1,10 @@
-import { PropsWithChildren } from 'react';
+import type { CornerProps } from '@launch-ui/shape';
 
-export interface ModalProps extends PropsWithChildren {
-  trigger?: JSX.Element;
-  open?: boolean;
-  onClose?: () => void;
+interface ModalProps {
+  portalId: string;
+  open: boolean;
+  onClose: () => void;
+  borderRadius?: CornerProps['borderRadius'];
 }
+
+export type { ModalProps };

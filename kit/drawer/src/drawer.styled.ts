@@ -1,34 +1,9 @@
 import { Transition } from '@headlessui/react';
 import styled from 'styled-components';
 
-interface ContentStyledProps {
-  closed?: boolean;
-  openWidth?: string;
-}
+const DRAWER_W = '420px';
 
-export const ContentStyled = styled.div<ContentStyledProps>`
-  will-change: transform, filter;
-  z-index: 1300;
-
-  position: fixed;
-  top: 0;
-  right: 0;
-
-  width: 420px;
-  height: 100vh;
-  min-height: 100vh;
-
-  filter: drop-shadow(${({ theme }) => theme.shadows.drawer});
-  background-color: transparent;
-  color: ${({ theme }) => theme.texts.base};
-
-  transform: translateX(${({ closed, openWidth }) => (closed ? openWidth : '0px')});
-  transition: transform 0.2s ease;
-
-  overflow: hidden;
-`;
-
-export const TransitionStyled = styled(Transition)`
+const DrawerContainer = styled(Transition)`
   position: fixed;
   top: 0;
   right: 0;
@@ -44,27 +19,82 @@ export const TransitionStyled = styled(Transition)`
 
   z-index: 1300;
 
-  .overlay_enter {
-    transition: opacity 0.2s ease;
+  .overlay-enter {
+    will-change: opacity;
+    transition: opacity 200ms ease;
 
-    &_from {
+    &From {
       opacity: 0;
     }
 
-    &_to {
+    &To {
       opacity: 1;
     }
   }
 
-  .overlay_leave {
-    transition: opacity 0.2s ease;
+  .overlay-leave {
+    will-change: opacity;
+    transition: opacity 200ms ease;
 
-    &_from {
+    &From {
       opacity: 1;
     }
 
-    &_to {
+    &To {
       opacity: 0;
+    }
+  }
+
+  .content-enter {
+    will-change: transform;
+    transition: transform 0.2s ease;
+
+    &From {
+      transform: translateX(${DRAWER_W});
+    }
+
+    &To {
+      transform: translateX(0);
+    }
+  }
+
+  .content-leave {
+    will-change: transform;
+    transition: transform 0.2s ease;
+
+    &From {
+      transform: translateX(0);
+    }
+
+    &To {
+      transform: translateX(${DRAWER_W});
     }
   }
 `;
+
+const DrawerOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: ${({ theme }) => theme.backgrounds.base40};
+  z-index: -1;
+  backdrop-filter: blur(5px);
+`;
+
+const DrawerContent = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: ${DRAWER_W};
+  height: 100vh;
+  min-height: 100vh;
+
+  filter: drop-shadow(${({ theme }) => theme.shadows.base});
+  background-color: transparent;
+  color: ${({ theme }) => theme.texts.base};
+`;
+
+export { DrawerContainer, DrawerContent, DrawerOverlay };

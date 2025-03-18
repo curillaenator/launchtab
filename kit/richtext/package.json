@@ -24,6 +24,7 @@
     "@launch-ui/dropable": "1.0.0",
     "@launch-ui/input": "1.0.0",
     "@launch-ui/shape": "1.0.5",
+    "@launch-ui/theme": "1.1.0",
     "@launch-ui/typography": "1.0.0",
     "@tiptap/core": "2.11.5",
     "@tiptap/extension-blockquote": "2.11.5",
@@ -71,13 +72,11 @@
     "lodash": "4.17.21",
     "lowlight": "3.3.0",
     "react-scroll": "1.9.2",
-    "tabulator-tables": "6.2.5",
     "uuid": "11.0.4"
   },
   "devDependencies": {
     "@launch-ui/types": "*",
-    "@types/react-scroll": "1.8.10",
-    "@types/tabulator-tables": "6.2.3"
+    "@types/react-scroll": "1.8.10"
   },
   "peerDependencies": {
     "react": "*",

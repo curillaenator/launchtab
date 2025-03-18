@@ -1,8 +1,8 @@
 import 'styled-components';
-import type { TTheme } from '@launch-ui/theme';
+import type { LaunchColors } from '@launch-ui/theme';
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends TTheme {} // eslint-disable-line @typescript-eslint/no-empty-interface
+  export interface DefaultTheme extends LaunchColors {} // eslint-disable-line @typescript-eslint/no-empty-interface
 }
 
 declare module '*.module.css' {

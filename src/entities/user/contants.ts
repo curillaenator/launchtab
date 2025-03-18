@@ -10,6 +10,7 @@ const NULL_USER: LaunchStoreUser = {
   settings: DEFAULT_SETTINGS,
   spaces: [],
   lastViewedSpace: null,
+  admin: false,
 };
 
 export { NULL_USER };

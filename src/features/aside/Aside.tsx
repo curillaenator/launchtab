@@ -13,7 +13,7 @@ import { $userStore } from '@src/entities/user';
 
 import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
 
-import HomeIcon from '@src/assets/svg/home.svg';
+import GridIcon from '@src/assets/svg/grid.svg';
 import NotesIcon from '@src/assets/svg/document.svg';
 // import GoogleIcon from '@src/assets/svg/google.svg';
 
@@ -36,7 +36,7 @@ export const Aside: FC = memo(() => {
 
       <AsideRoutesList>
         <RouteLinkStyled to='/' end>
-          <HomeIcon />
+          <GridIcon />
 
           <Typography as='span' type='RoundedBold20' className='typography'>
             Tabs

@@ -12,7 +12,8 @@ import { ButtonAction, ButtonGhost } from '@launch-ui/button';
 import { $noteStore, useNoteUnitData, type NotesRouteParams } from '@src/entities/note';
 
 import { useICan } from '@src/hooks/useICan';
-import { LAUNCH_HEADER_BDRS, MAX_UNITS_PER_UNIT, MAX_UNITS_DEPTH } from '@src/shared/appConfig';
+import { MODAL_PORTAL_ID } from '@src/shared/appContainers';
+import { LAUNCH_PAPER_BDRS, LAUNCH_HEADER_BDRS, MAX_UNITS_PER_UNIT, MAX_UNITS_DEPTH } from '@src/shared/appConfig';
 
 import { SetupNote } from '../SetupNote';
 import { NoteHeaderBlockStyled, NoteHeaderStyled, SaveNotification } from './noteHeader.styled';
@@ -27,9 +28,14 @@ export const NoteHeader: FC = () => {
   const { data: noteUnit, isLoading: isNoteUnitLoading } = useNoteUnitData({ routerNoteId });
 
   const iCan = useICan();
-  const iCanEdit = iCan.edit(noteUnit);
   const iCanInsert =
     keys(noteUnit?.hierarchy).length < MAX_UNITS_PER_UNIT && (noteUnit?.path.length || 0) < MAX_UNITS_DEPTH;
+
+  const [iCanEdit, setICanEdit] = useState<boolean>(false);
+
+  useEffect(() => {
+    setICanEdit(iCan.edit(noteUnit));
+  }, [noteUnit, iCan]);
 
   const [editOpen, setEditOpen] = useState<boolean>(false);
 
@@ -137,11 +143,14 @@ export const NoteHeader: FC = () => {
         </NoteHeaderBlockStyled>
       </NoteHeaderStyled>
 
-      {noteUnit && iCanEdit && (
-        <Modal open={editOpen} onClose={() => setEditOpen(false)}>
-          <SetupNote closePopup={() => setEditOpen(false)} unit={noteUnit} />
-        </Modal>
-      )}
+      <Modal
+        portalId={MODAL_PORTAL_ID}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        borderRadius={LAUNCH_PAPER_BDRS}
+      >
+        {noteUnit && iCanEdit && <SetupNote closePopup={() => setEditOpen(false)} unit={noteUnit} />}
+      </Modal>
     </>
   );
 };

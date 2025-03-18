@@ -7,16 +7,12 @@ interface RichtextChangeEvent {
 }
 
 interface RichTextExtensionsOptions {
-  // toc?: {}; // TocConfig;
-  // plantUml?: {}; // PlantUmlConfig;
-  // image?: {
-  //   onAddImage?: (file: File) => void;
-  //   onAddFile?: (file: File) => void;
-  //   imageList?: unknown[]; // ImageListItem[];
-  // };
+  linkRoute?: {
+    navTo: (to: string) => void;
+  };
 }
 
-interface RichTextExtensionsOptions {
+interface GetRichTextExtensionsOptions {
   extensionsOptions?: RichTextExtensionsOptions;
   editorContentRef: React.MutableRefObject<HTMLDivElement | null>;
   internalScrollContainerId: string;
@@ -39,8 +35,6 @@ interface RichtextContainerProps {
   onChange?: (changeEvent: RichtextChangeEvent) => void;
 
   extensionsOptions?: RichTextExtensionsOptions;
-
-  // autoscrollCfg?: { autoscroll: () => void };
 }
 
-export type { RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsOptions };
+export type { GetRichTextExtensionsOptions, RichtextContainerProps, RichtextChangeEvent, RichTextExtensionsOptions };

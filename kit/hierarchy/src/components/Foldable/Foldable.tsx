@@ -15,8 +15,8 @@ import { DocumentLink } from '../DocumentLink';
 // import { Actions } from '../Actions';
 // import { useDragNDrop } from './hooks/useDragNDrop';
 
-import { CaretRightIcon } from './icons/CaretRightIcon';
-import { DotSmallIcon } from './icons/DotSmallIcon';
+import CaretRightIcon from '../../assets/carretRight.svg';
+import DotSmallIcon from '../../assets/dot.svg';
 
 import { getHeight } from '../../utils/getHeight';
 

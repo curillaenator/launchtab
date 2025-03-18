@@ -20,12 +20,14 @@ import { $settingsStore } from '@src/entities/settings';
 import { setHeaderShadowed } from '@src/entities/header';
 
 import { useThemeToCssv } from '@src/hooks/useThemeToCssv';
+
+import { LAUNCH_PAPER_BDRS } from '@src/shared/appConfig';
+import { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID, MODAL_PORTAL_ID } from '@src/shared/appContainers';
+
 import { useContextValue } from './useContextValue';
 import { $layoutContex as LayoutCTX } from './context';
 
 import { LayoutStyled, MainStyled } from './layout.styled';
-
-import { MAIN_ELEMENT_ID, DRAWER_PORTAL_ID } from './constants';
 
 export const Layout: FC = () => {
   const user = useEffectorUnit($userStore);
@@ -43,14 +45,14 @@ export const Layout: FC = () => {
   const onViewportScroll = useCallback(
     debounce((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
       //@ts-expect-error
-      setHeaderShadowed(e.nativeEvent.target?.scrollTop > 56 * 2);
+      setHeaderShadowed(e.nativeEvent.target?.scrollTop > 72);
     }, 400),
     [],
   );
 
   const ctxValue = useContextValue();
 
-  if (isLoading) return <Loader view='fullscreen' iconSize='40px' />;
+  if (isLoading) return <Loader view='fullscreen' iconSize='48px' />;
 
   return (
     <LayoutCTX.Provider value={ctxValue}>
@@ -85,17 +87,22 @@ export const Layout: FC = () => {
 
         {!!user.uid && (
           <Drawer
-            contentClassName='drawer-layout-cssv'
             portalId={DRAWER_PORTAL_ID}
             open={isRightDrawerOpen}
             onClose={() => setRightDrawer(false)}
+            //
           >
             <Settings />
           </Drawer>
         )}
 
         {!user.uid && (
-          <Modal open={isSignInOpen} onClose={() => setSignIn(false)}>
+          <Modal
+            portalId={MODAL_PORTAL_ID}
+            open={isSignInOpen}
+            onClose={() => setSignIn(false)}
+            borderRadius={LAUNCH_PAPER_BDRS}
+          >
             <SignIn closePopup={() => setSignIn(false)} />
           </Modal>
         )}

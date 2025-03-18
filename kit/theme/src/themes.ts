@@ -1,49 +1,57 @@
 import { colorsLib } from './colors';
+import type { LaunchThemeID, ColorSet } from './interfaces';
 
-export const themeNames: { [title: string]: string } = {
-  defaultTheme: 'Default Violet',
-  dangerRed: 'Danger Red',
-  awesome: 'Awesome Pinkish',
-  phlox: 'Phlox ultra',
-  classicBlueTheme: 'Classic Blue',
-  greenTheme: 'Light green',
-  radioactiveGreenTheme: 'Radioactive Green',
-  sunnyOrange: 'Sunset Orange',
+const THEME_NAMES: Record<LaunchThemeID, string> = {
+  classic: 'Classic',
+  wine: 'Wine',
+  yellow: 'Sunflower',
+  radioactive: 'Green',
+  awesome: 'Awesome',
+  violet: 'Violet',
+  sunset: 'Sunset',
+  mint: 'Mint',
 };
 
-export const themes = {
-  defaultTheme: {
+const THEME_SET: Record<LaunchThemeID, { primary: ColorSet; secondary: ColorSet }> = {
+  classic: {
+    primary: colorsLib.ultra,
+    secondary: colorsLib.ultra,
+  },
+
+  wine: {
+    primary: colorsLib.wine,
+    secondary: colorsLib.wine,
+  },
+
+  violet: {
     primary: colorsLib.electroviolet,
     secondary: colorsLib.electroviolet,
   },
+
   awesome: {
     primary: colorsLib.awesome,
     secondary: colorsLib.awesome,
   },
-  classicBlueTheme: {
-    primary: colorsLib.ultra,
-    secondary: colorsLib.ultra,
-  },
-  dangerRed: {
-    primary: colorsLib.danger,
-    secondary: colorsLib.danger,
-  },
-  greenTheme: {
-    primary: colorsLib.malachite,
-    secondary: colorsLib.malachite,
-  },
-  radioactiveGreenTheme: {
+
+  radioactive: {
     primary: colorsLib.nika,
     secondary: colorsLib.nika,
   },
-  sunnyOrange: {
+
+  sunset: {
     primary: colorsLib.orange,
     secondary: colorsLib.orange,
   },
-  phlox: {
-    primary: colorsLib.phlox,
-    secondary: colorsLib.phlox,
+
+  mint: {
+    primary: colorsLib.mint,
+    secondary: colorsLib.mint,
+  },
+
+  yellow: {
+    primary: colorsLib.yellow,
+    secondary: colorsLib.yellow,
   },
 };
 
-export type TThemeName = keyof typeof themes;
+export { THEME_NAMES, THEME_SET };

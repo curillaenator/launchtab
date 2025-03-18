@@ -1,6 +1,5 @@
 import React, { FC, useCallback } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
-// import cn from 'classnames';
 
 import { Dropable } from '@launch-ui/dropable';
 import { ToolbarButton } from '../ToolbarButton';
@@ -10,8 +9,8 @@ import { EXTENSION_NAME as BLOCKS_GRID_NODE_NAME } from '../../extensions/Blocks
 import { getInsertBlocksGridVariants, checkIsCarretInside } from './utils';
 import { useDropdown } from './hooks/useDropdown';
 
-import { BinIcon } from '../../icons/BinIcon';
-import { DryTwoIcon } from '../../icons/DryTwoIcon';
+import TrashIcon from './svg/trash.svg';
+import BlocksgridIcon from './svg/addBlocksgrid.svg';
 
 import { DEFAULT_CAPTIONS } from '../constants';
 import type { GridSelectorProps } from './interfaces';
@@ -53,7 +52,7 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
       [0, 1, 2].forEach((num) =>
         editorContentRef.current?.style.setProperty(
           `--blocksgrid-${targetNode.attrs['blocksGridId']}-${num}-bdc`,
-          'var(--editor-error)',
+          'var(--theme-backgrounds-danger)',
         ),
       );
     }
@@ -78,7 +77,7 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
             active={isOpen}
             onClick={() => setTimeout(() => editor.commands.focus(), 20)}
           >
-            <DryTwoIcon />
+            <BlocksgridIcon />
           </ToolbarButton>
         </div>
       }
@@ -107,7 +106,7 @@ export const GridSelector: FC<GridSelectorProps> = (props) => {
           closeDropdown?.();
         }}
       >
-        <BinIcon />
+        <TrashIcon />
         {DEFAULT_CAPTIONS.deleteBlocksGrid}
       </ToolbarButton>
     </Dropable>

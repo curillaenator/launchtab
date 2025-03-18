@@ -85,7 +85,7 @@ export const Tabs: FC = () => {
 
         {uid && <Button IconLeft={() => <TabsSetupIcon />} onClick={() => setIsSetupOpen(true)} />}
 
-        {uid && sortableTabs.length < 5 && <CreateTabs create='new-page' />}
+        {sortableTabs.length < 5 && <CreateTabs create='new-page' />}
       </SortableListStyled>
 
       {uid && (

@@ -50,7 +50,7 @@ interface ShadowsSet {
   primary: string;
 }
 
-interface LaunchTheme extends ModedSet {
+interface LaunchColors extends ModedSet {
   white: string;
   black: string;
   primary: ColorSet;
@@ -60,4 +60,6 @@ interface LaunchTheme extends ModedSet {
   shadows: ShadowsSet;
 }
 
-export type { LaunchTheme as TTheme, ColorSet, ColorKey, ModedSet, ShadowsSet };
+type LaunchThemeID = 'classic' | 'awesome' | 'wine' | 'violet' | 'radioactive' | 'sunset' | 'mint' | 'yellow';
+
+export type { LaunchColors, LaunchThemeID, ColorSet, ColorKey, ModedSet, ShadowsSet };

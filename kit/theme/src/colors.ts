@@ -6,15 +6,14 @@ const colorsLib = {
   black: 'hsl(0, 0%, 0%)',
 
   electroviolet: colors(263, 100, 59), //  hsl(263, 100%, 59%)
-  phlox: colors(299, 86, 39), //  hsl(299, 86%, 39%)
   awesome: colors(346, 96, 56), //  hsl(346, 96%, 56%)
   danger: colors(4, 100, 46), //  hsl(4, 100%, 46%)
   ultra: colors(223, 86, 57), //  hsl(223, 86%, 57%)
   orange: colors(18, 100, 54), //  hsl(18, 100%, 54%)
   nika: colors(86, 81, 38), //  hsl(86, 81%, 38%)
-  malachite: colors(143, 71, 44), //  hsl(143, 71%, 44%)
-  aquamarina: colors(180, 92, 44), //  hsl(180, 92%, 44%)
-  yellamerica: colors(47, 97, 47), //  hsl(47, 97%, 47%)
+  yellow: colors(44, 97, 47),
+  mint: colors(161, 62, 46),
+  wine: colors(332, 76, 34),
 };
 
 const getLightModeColors = (neutral: ColorSet): ModedSet => ({
@@ -53,7 +52,7 @@ const getLightModeColors = (neutral: ColorSet): ModedSet => ({
 
     error: colorsLib.danger[100],
     succes: colorsLib.nika[100],
-    warn: colorsLib.yellamerica[100],
+    warn: colorsLib.yellow[100],
     info: colorsLib.ultra[100],
 
     codeblock: neutral[700],
@@ -96,7 +95,7 @@ const getDarkModeColors = (neutral: ColorSet): ModedSet => ({
 
     error: colorsLib.danger[900],
     succes: colorsLib.nika[900],
-    warn: colorsLib.yellamerica[900],
+    warn: colorsLib.yellow[900],
     info: colorsLib.ultra[900],
 
     codeblock: neutral[600],

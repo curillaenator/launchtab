@@ -16,7 +16,7 @@ export const CloudsStyled = styled.div`
     height: 128%;
 
     .fill {
-      fill: ${({ theme }) => theme.backgrounds.dark};
+      fill: ${({ theme }) => theme.backgrounds.light};
     }
 
     &_cloud1 {

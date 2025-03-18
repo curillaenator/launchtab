@@ -24,6 +24,10 @@ const LookFeelStyled = styled.div`
     align-items: center;
     gap: 8px;
   }
+
+  .dd-open-node {
+    justify-content: flex-start;
+  }
 `;
 
 export { LookFeelStyled };

@@ -1,7 +1,7 @@
 {
-  "name": "launchtab",
-  "version": "1.5.0",
-  "description": "Launchtabs starting pages",
+  "name": "launchapp",
+  "version": "2.0.0",
+  "description": "LaunchApp start page",
   "main": "index.tsx",
   "keywords": [
     "react",
@@ -24,7 +24,7 @@
     "lint:fix": "npx eslint ./src --fix --quiet",
     "deploy": "firebase deploy --only hosting"
   },
-  "author": "KirilArt",
+  "author": "KirillArturov(https://github.com/curillaenator)",
   "license": "ISC",
   "repository": {
     "type": "git"

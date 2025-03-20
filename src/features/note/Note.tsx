@@ -134,7 +134,7 @@ const Note: FC<{ maxHeight: number }> = ({ maxHeight }) => {
           extensionsOptions={{
             linkRoute: {
               navTo: (to) => {
-                console.log('linkRoute cfg', to);
+                // console.log('linkRoute cfg', to);
                 navigate(to);
               },
             },

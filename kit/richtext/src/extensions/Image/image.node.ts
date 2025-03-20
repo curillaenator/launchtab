@@ -96,7 +96,7 @@ const Image = Node.create<ImageConfig>({
         getAttributes: (match) => {
           // const [, , alt, src, title] = match;
 
-          console.log('Fires', match[1]);
+          // console.log('Fires', match[1]);
 
           return { src: match[1] };
         },

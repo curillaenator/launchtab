@@ -30,8 +30,9 @@ export const Emoji = Node.create({
     return [
       'span',
       mergeAttributes(HTMLAttributes, { 'data-extension': this.name }),
+
       //@ts-expect-error
-      `${namesToEmoji[node.attrs.shortName.replace(/:/g, '')] ?? node.attrs.shortName}`,
+      `${node.attrs.shortName ? namesToEmoji[String(node.attrs.shortName).replace(/:/g, '')] : node.attrs.shortName}`,
     ];
   },
 

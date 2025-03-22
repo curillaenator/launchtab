@@ -1,5 +1,7 @@
 import type { HTMLAttributes } from 'react';
 
+export type BDRSVal = 12 | 16 | 20 | 24 | 32 | 48 | 64;
+
 export interface ShapeProps extends HTMLAttributes<HTMLDivElement> {
   borderRadius?: number;
   fixedHeight?: number;

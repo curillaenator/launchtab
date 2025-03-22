@@ -25,7 +25,7 @@ const Switch: FC<SwitchProps> = (props) => {
       <Corners borderRadius={SWITCH_BDRS} stroke={1} />
 
       <div className='switch-toggler'>
-        <Shape className='switch-toggler-shape' borderRadius={16} />
+        <Shape className='switch-toggler-shape' borderRadius={13.3} />
 
         <Typography type='RoundedBold14' className='switch-toggler-title'>
           {checked ? checkedVal : uncheckedVal}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Node, InputRule } from '@tiptap/core';
 import { ReactNodeViewRenderer, useReactNodeView, mergeAttributes, NodeViewWrapper } from '@tiptap/react';
-import { Corners } from '@launch-ui/shape';
+import { Corners, BDRS } from '@launch-ui/shape';
 
 import styles from './route.module.scss';
 
@@ -89,7 +89,7 @@ const LinkRoute = Node.create<LinkRouteOptions>({
               navTo?.(to);
             }}
           >
-            <Corners borderRadius={13.6} />
+            <Corners borderRadius={BDRS[16]} />
             <DocumentIcon />
           </NodeViewWrapper>
         );

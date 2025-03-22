@@ -2,7 +2,7 @@ import React, { ElementType, FC, useMemo } from 'react';
 import { animated } from 'react-spring';
 import cn from 'classnames';
 
-import { Corners } from '@launch-ui/shape';
+import { Corners, BDRS } from '@launch-ui/shape';
 
 import { DropableContext } from './context';
 import { _BaseMenuProps } from './interfaces';
@@ -20,7 +20,7 @@ export const DropableMenu: FC<_BaseMenuProps> = (props) => {
     animationStyle,
     closeOnItemClick = false,
     closeDropdown,
-    corners = { borderRadius: 14, stroke: 1 },
+    corners = { borderRadius: BDRS[16], stroke: 1 },
     headless,
     children,
   } = props;

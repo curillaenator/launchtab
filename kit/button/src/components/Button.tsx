@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-import { Corners } from '@launch-ui/shape';
+import { Corners, BDRS } from '@launch-ui/shape';
 import { Typography } from '@launch-ui/typography';
 
 import type { BaseButtonProps } from './interfaces';
 
-const BORDER_RADIUS = 16.8;
+const BORDER_RADIUS = BDRS[20];
 
 export const ButtonStyled = styled.button<BaseButtonProps>`
   --shp-bgc: ${({ theme, active }) => (active ? theme.primary[500] : theme.backgrounds.base)};

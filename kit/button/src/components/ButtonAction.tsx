@@ -7,7 +7,8 @@ import { Loader } from '@launch-ui/loader';
 
 import type { ButtonActionProps } from './interfaces';
 
-const BORDER_RADIUS = 16;
+// TODO: maybe change Shape to Corners?
+const BORDER_RADIUS = 13.3;
 
 const APPEARANCES = {
   primary: ({ active }: ButtonActionProps) => css`

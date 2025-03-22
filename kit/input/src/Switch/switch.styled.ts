@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { BDRS } from '@launch-ui/shape';
 
-const SWITCH_BDRS = 13.6;
+const SWITCH_BDRS = BDRS[16];
 
 const SwitchStyled = styled.button<{ checked?: boolean }>`
   position: relative;

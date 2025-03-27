@@ -72,7 +72,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
         {withButton && (
           <div className='input-button'>
-            <ButtonGhost ref={inputButtonRef} title={buttonTitle || ''} colorPreset='secondary-colors' />
+            <ButtonGhost ref={inputButtonRef} title={buttonTitle || ''} />
           </div>
         )}
       </div>

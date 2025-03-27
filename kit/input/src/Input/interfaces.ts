@@ -12,6 +12,7 @@ interface InputProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChage'> {
   limitSymbols?: number;
   buttonTitle?: string;
   withButton?: boolean;
+  disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocusOut?: () => void;
 }

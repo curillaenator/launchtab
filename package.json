@@ -15,19 +15,22 @@
     "launch",
     "firebase"
   ],
+  "author": {
+    "name": "Kirill Art",
+    "url": "https://github.com/curillaenator"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/curillaenator/launchtab.git"
+  },
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack --mode production",
     "devbuild": "webpack",
-    "prepare": "husky",
     "prettier:fix": "npx prettier ./src --write",
     "lint:fix": "npx eslint ./src --fix --quiet",
     "deploy": "firebase deploy --only hosting"
-  },
-  "author": "KirillArturov(https://github.com/curillaenator)",
-  "license": "ISC",
-  "repository": {
-    "type": "git"
   },
   "dependencies": {
     "@launch-ui/button": "*",

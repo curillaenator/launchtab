@@ -1,26 +1,23 @@
 # LaunchApp 2.0
 
-SPA, Starting/New tab page for browsers
+[Watch deployed app / Посмотреть развёрнутое приложение](https://launchtab-81b06.web.app/?auth=demo)
 
-[Deployed LaunchApp](https://launchtab-81b06.web.app/?auth=demo)
+## Description / Описание
 
-## Description
+LaunchApp is customizible starting/new tab browser's pages allowing manage user's go-to websites and sharable wiki-like notes with built-in richtext editor
 
-LaunchApp is customizible starting/new tab browser's pages allowing manage user's go-to websites and sharable wiki-like documentation with built-in richtext editor.
+Прилоежние LaunchApp предоставляет настраиваемую стартовую страницу вкладок браузера для управления посещаемыми пользователем веб-сайтами, а так же сервис хранения и публикации личных заметок (Notion-like документы)
 
-[About LaunchTabs + Docs](https://launchtab-81b06.web.app/notes/jtG8WhhR5KHtpBxqtUs5)
-
-## Auth
-
-LaunchApp uses Firebase Google Auth and persists signed users
+[About LaunchApp + Docs](https://launchtab-81b06.web.app/notes/jtG8WhhR5KHtpBxqtUs5)
 
 ## Stack
 
-- React/Typescript/Effector
-- @tanstack/react-query
-- Firebase
-- Sass + Styled-components
-- Webpack
+```bash
+React/Typescript/Effector/@tanstack-react-query
+Firebase
+Styled-components
+Webpack
+```
 
 ## Screenshots
 

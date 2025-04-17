@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { isEqual } from 'lodash';
 
+import { parseJSONWithoutError } from '@src/shared/parseJSONWithoutError';
+
 import { BookmarkTabProps } from '../interfaces';
 import { setTabsWithoutDbUpdate } from '../store';
 import { getBookmarksQuery } from '../api';
@@ -15,22 +17,18 @@ const useBookmarksData = (uid: string | null) => {
   });
 
   // should not be in deps of next useEffect
-  const bookmarksLs = localStorage.getItem('bookmarks');
+  // const bookmarksLs = localStorage.getItem('bookmarks');
+  const localBookmarks = parseJSONWithoutError<BookmarkTabProps[]>(localStorage.getItem('bookmarks'));
 
   useEffect(() => {
-    let bookmarksParse: BookmarkTabProps[] = [];
+    if (localBookmarks) setTabsWithoutDbUpdate(localBookmarks);
 
-    if (bookmarksLs) {
-      bookmarksParse = JSON.parse(bookmarksLs) as BookmarkTabProps[];
-      setTabsWithoutDbUpdate(bookmarksParse);
-    }
+    const shouldUpdate = !isEqual(bookmarksData?.bookmarks, localBookmarks);
 
-    if (bookmarksData?.bookmarks.length && !isEqual(bookmarksData.bookmarks, bookmarksParse)) {
-      setTabsWithoutDbUpdate(bookmarksData.bookmarks);
-    }
+    if (shouldUpdate && bookmarksData?.bookmarks.length) setTabsWithoutDbUpdate(bookmarksData.bookmarks);
   }, [bookmarksData]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { isBookmarksDataLoading: !bookmarksLs && isBookmarksDataLoading };
+  return { isBookmarksDataLoading: !localBookmarks && isBookmarksDataLoading };
 };
 
 export { useBookmarksData };

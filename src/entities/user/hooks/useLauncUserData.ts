@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { pick, isEqual } from 'lodash';
+
+import { parseJSONWithoutError } from '@src/shared/parseJSONWithoutError';
 
 import { getUserLaunchDataQuery } from '../api';
 import { setUser } from '../store';
 import { LaunchStoreUser } from '../interfaces';
 
 import { USER_QUERY } from '@src/shared/queryKeys';
-import { useEffect, useState } from 'react';
 import { setSettings, type SettingsStore } from '../../settings';
 
 const useLauncUserData = (user: LaunchStoreUser) => {
@@ -19,18 +21,18 @@ const useLauncUserData = (user: LaunchStoreUser) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const localSettings = localStorage.getItem('settings');
+    const localSettings = parseJSONWithoutError<SettingsStore>(localStorage.getItem('settings'));
 
     if (!!localSettings) {
-      setSettings(JSON.parse(localSettings) as SettingsStore);
-
+      // setSettings(JSON.parse(localSettings) as SettingsStore);
+      setSettings(localSettings);
       setIsLoading(false);
     }
 
     if (!!userLaunchData) {
       setUser(pick(userLaunchData, ['lastViewedSpace', 'spaces', 'admin']));
 
-      const isLocalSameAsIncoming = isEqual(userLaunchData.settings, JSON.parse(localSettings || '{}'));
+      const isLocalSameAsIncoming = isEqual(userLaunchData.settings, localSettings);
 
       if (!isLocalSameAsIncoming && !!userLaunchData.settings) {
         setSettings(userLaunchData.settings as SettingsStore);
